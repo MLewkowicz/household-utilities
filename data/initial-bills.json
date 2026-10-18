@@ -1,53 +1,5 @@
 [
   {
-    "id": "wifi:2026-08-01:2026-08-31",
-    "utility": "wifi",
-    "start_date": "2026-08-01",
-    "end_date": "2026-08-31",
-    "charges": [
-      {
-        "kind": "recurring",
-        "amount_cents": 5094,
-        "label": "Service and applicable taxes"
-      }
-    ],
-    "source_hash": "a29665ea24f025165e9412b80af56ab139dbb6c68ac47b40093c7dd9d3232599",
-    "note": "",
-    "opening_before": null
-  },
-  {
-    "id": "wifi:2026-10-01:2026-10-31",
-    "utility": "wifi",
-    "start_date": "2026-10-01",
-    "end_date": "2026-10-31",
-    "charges": [
-      {
-        "kind": "recurring",
-        "amount_cents": 5094,
-        "label": "Service and applicable taxes"
-      }
-    ],
-    "source_hash": "7a0e7b6fcd51fbe6ac08df5631524cb462fcc1797fed5880174b8891e67ce555",
-    "note": "",
-    "opening_before": null
-  },
-  {
-    "id": "wifi:2026-09-01:2026-09-30",
-    "utility": "wifi",
-    "start_date": "2026-09-01",
-    "end_date": "2026-09-30",
-    "charges": [
-      {
-        "kind": "recurring",
-        "amount_cents": 5094,
-        "label": "Service and applicable taxes"
-      }
-    ],
-    "source_hash": "dfd944ee006790e14a9fba4fec9b0f6e26716f8c133a40c298bffd79357fb1d2",
-    "note": "",
-    "opening_before": null
-  },
-  {
     "id": "electricity:2026-08-21:2026-09-17",
     "utility": "electricity",
     "start_date": "2026-08-21",
@@ -80,35 +32,83 @@
     "opening_before": null
   },
   {
-    "id": "opening-electricity",
-    "utility": "electricity",
-    "start_date": null,
-    "end_date": null,
+    "id": "wifi:2026-08-01:2026-08-31",
+    "utility": "wifi",
+    "start_date": "2026-08-01",
+    "end_date": "2026-08-31",
     "charges": [
       {
-        "kind": "opening",
+        "kind": "recurring",
+        "amount_cents": 5094,
+        "label": "Service and applicable taxes"
+      }
+    ],
+    "source_hash": "a29665ea24f025165e9412b80af56ab139dbb6c68ac47b40093c7dd9d3232599",
+    "note": "",
+    "opening_before": null
+  },
+  {
+    "id": "wifi:2026-09-01:2026-09-30",
+    "utility": "wifi",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "charges": [
+      {
+        "kind": "recurring",
+        "amount_cents": 5094,
+        "label": "Service and applicable taxes"
+      }
+    ],
+    "source_hash": "dfd944ee006790e14a9fba4fec9b0f6e26716f8c133a40c298bffd79357fb1d2",
+    "note": "",
+    "opening_before": null
+  },
+  {
+    "id": "wifi:2026-10-01:2026-10-31",
+    "utility": "wifi",
+    "start_date": "2026-10-01",
+    "end_date": "2026-10-31",
+    "charges": [
+      {
+        "kind": "recurring",
+        "amount_cents": 5094,
+        "label": "Service and applicable taxes"
+      }
+    ],
+    "source_hash": "7a0e7b6fcd51fbe6ac08df5631524cb462fcc1797fed5880174b8891e67ce555",
+    "note": "",
+    "opening_before": null
+  },
+  {
+    "id": "electricity:2026-08-01:2026-08-20",
+    "utility": "electricity",
+    "start_date": "2026-08-01",
+    "end_date": "2026-08-20",
+    "charges": [
+      {
+        "kind": "recurring",
         "amount_cents": 10054,
-        "label": "Pre-September opening charge"
+        "label": "Service and applicable taxes"
       }
     ],
     "source_hash": "3193bb4e4c33f477c1240971ce8d1cb5577e06ac108a6af0edf3c6463313bde5",
-    "note": "Prior balance; exact service dates unavailable.",
-    "opening_before": "2026-08-21"
+    "note": "Service dates confirmed by household; amount carried forward on the next statement.",
+    "opening_before": null
   },
   {
-    "id": "opening-gas",
+    "id": "gas:2026-08-01:2026-08-20",
     "utility": "gas",
-    "start_date": null,
-    "end_date": null,
+    "start_date": "2026-08-01",
+    "end_date": "2026-08-20",
     "charges": [
       {
-        "kind": "opening",
+        "kind": "recurring",
         "amount_cents": 3098,
-        "label": "Pre-September opening charge"
+        "label": "Service and applicable taxes"
       }
     ],
     "source_hash": "5170bd6ff5e267dac6293844237a7c1d169922a39e5b5da559c0798d37363231",
-    "note": "Prior balance; exact service dates unavailable.",
-    "opening_before": "2026-08-21"
+    "note": "Service dates confirmed by household; amount carried forward on the next statement.",
+    "opening_before": null
   }
 ]

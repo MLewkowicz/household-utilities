@@ -46,6 +46,12 @@ class ImportTests(unittest.TestCase):
         initial=[r for r in records if r['bill']['start_date'] in ('2026-08-01','2026-09-01','2026-10-01','2026-08-21')]
         for r in initial:
             self.assertEqual(sum(c["amount_cents"] for c in r["bill"]["charges"]),expected[r["bill"]["utility"]])
-        self.assertEqual(sum(c['charges'][0]['amount_cents'] for c in module.initial_openings(initial)),13152)
+        earlier=module.initial_august_bills(initial)
+        self.assertEqual(sum(c['charges'][0]['amount_cents'] for c in earlier),13152)
+        self.assertEqual(len(earlier),2)
+        for b in earlier:
+            self.assertEqual((b['start_date'],b['end_date']),('2026-08-01','2026-08-20'))
+            self.assertIsNone(b['opening_before'])
+            self.assertEqual(b['charges'][0]['kind'],'recurring')
 
 if __name__ == '__main__': unittest.main()

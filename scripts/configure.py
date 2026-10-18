@@ -50,7 +50,7 @@ def main():
     with os.fdopen(fd, "w") as out:
         out.write(f"SUPABASE_SECRET_KEY={key}\n")
     print("Importer configured in .env.local (excluded from Git).")
-    print("Next: ./import-bills.sh --initial-openings")
+    print("Next: ./import-bills.sh --initial-august")
 
 if __name__ == "__main__":
     try:

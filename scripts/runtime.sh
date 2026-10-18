@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
-UTILITIES_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+if [[ -n "${BASH_VERSION:-}" ]]; then
+  UTILITIES_RUNTIME_SOURCE="${BASH_SOURCE[0]}"
+elif [[ -n "${ZSH_VERSION:-}" ]]; then
+  UTILITIES_RUNTIME_SOURCE="${(%):-%x}"
+else
+  echo 'Use bash or zsh to load scripts/runtime.sh.' >&2
+  return 1
+fi
+UTILITIES_ROOT="$(cd -- "$(dirname -- "$UTILITIES_RUNTIME_SOURCE")/.." && pwd)"
 cd "$UTILITIES_ROOT"
 if [[ -x "$UTILITIES_ROOT/.tools/node/bin/node" ]]; then
   export PATH="$UTILITIES_ROOT/.tools/node/bin:$PATH"

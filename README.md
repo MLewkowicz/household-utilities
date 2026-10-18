@@ -14,7 +14,7 @@ The four cards show current balances. Michal’s card shows remaining reimbursem
 
 ## Import and organize PDFs
 
-Drop new PDFs in this folder or `inbox/`, then run:
+Drop new PDFs in this folder or `inbox/`, with **any filename**—there is no need to rename them first—then run:
 
 ```bash
 ./import-bills.sh
@@ -66,7 +66,7 @@ For a statement that needs correction or manual classification, create an **igno
 
 Run `./import-bills.sh statement.pdf --overrides .local/overrides.json`. Amounts are integer cents; credits are negative. Use neutral labels without personal or account details. To change a statement’s dates, include its existing `id` so it becomes a revision instead of a second overlapping bill. Previously published values are shown before confirmation.
 
-Earlier gas/electricity statements must explicitly replace the opening charge they cover. Add `"replaces_opening": [{"id": "opening-gas", "expected_version": 1}]` inside that bill’s override after checking the full opening amount is accounted for. This replaces the whole opening charge; if it covers multiple earlier bills, import all of them together. The old opening record remains in the history. Overlapping service periods are rejected.
+If an unknown-date opening charge is ever added, its original statement must explicitly replace it when imported. Add `"replaces_opening": [{"id": "opening-gas", "expected_version": 1}]` inside that bill’s override after checking the full opening amount is accounted for. This replaces the whole opening charge; if it covers multiple earlier bills, import all of them together. The old opening record remains in the history. Overlapping service periods are rejected.
 
 ## Billing rules
 
@@ -75,7 +75,7 @@ Earlier gas/electricity statements must explicitly replace the opening charge th
 - Recurring charges, taxes, and fees are spread uniformly over the statement’s inclusive service days. Original statements remain the source for service dates; the parser checks printed day counts.
 - One-time installation/equipment charges split among all four, allocated to the service-start month. Review and classify unusual charges manually.
 - Calculate person/month shares before rounding. Largest-remainder allocation conserves every statement’s cents; ties use month, then Michal, Rina, Ohm, Rohil. Tiny differences in otherwise equal balances are expected.
-- The five initial statements contribute $296.01 in new charges. The approved opening electricity ($100.54) and gas ($30.98) balances add $131.52, for **$427.53** total. Opening service dates remain unknown.
+- The five initial statements contribute $296.01 in new charges. The earlier electricity ($100.54) and gas ($30.98) charges cover **August 1–20, 2026**, as confirmed by the household. They add $131.52, for **$427.53** total, and appear in August’s breakdown. The next cycle begins August 21, so there is no overlap. The previous unknown-date records remain only in the correction history.
 - August’s $25 Xfinity EFT is a provider payment, not an expense or roommate reimbursement. August Wi-Fi costs $50.94 and splits into three shares of $16.98.
 
 ## Setup and development
@@ -113,7 +113,7 @@ Initial setup:
 
 ```bash
 ./configure.sh
-./import-bills.sh --initial-openings
+./import-bills.sh --initial-august
 ./publish.sh
 ```
 

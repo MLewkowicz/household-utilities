@@ -1,6 +1,6 @@
 """Extract bills locally, publish approved fields, and archive PDFs privately."""
 import argparse
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from decimal import Decimal
 import hashlib
 import json
@@ -175,7 +175,7 @@ def write_json(path, data):
     temp.write_text(json.dumps(data, indent=2) + "\n")
     temp.replace(path)
 
-def initial_openings(records):
+def initial_august_bills(records):
     results = []
     for r in records:
         b = r["bill"]
@@ -184,19 +184,20 @@ def initial_openings(records):
         expected = {"electricity": 10054, "gas": 3098}[b["utility"]]
         if r["prior_balance_cents"] != expected:
             raise ValueError("Opening charge differs from the approved initial statement. Review it manually.")
-        results.append({"id": "opening-" + b["utility"], "utility": b["utility"], "start_date": None, "end_date": None,
-            "charges": [{"kind": "opening", "amount_cents": expected, "label": "Pre-September opening charge"}],
-            "source_hash": b["source_hash"], "note": "Prior balance; exact service dates unavailable.", "opening_before": "2026-08-21"})
+        start, end = "2026-08-01", (date.fromisoformat(b["start_date"]) - timedelta(days=1)).isoformat()
+        results.append({"id": f'{b["utility"]}:{start}:{end}', "utility": b["utility"], "start_date": start, "end_date": end,
+            "charges": [{"kind": "recurring", "amount_cents": expected, "label": "Service and applicable taxes"}],
+            "source_hash": b["source_hash"], "note": "Service dates confirmed by household; amount carried forward on the next statement.", "opening_before": None})
     return results
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("paths", nargs="*", type=Path, help="PDF files or directories; default scans root, inbox/, and bills/.")
+    parser.add_argument("paths", nargs="*", type=Path, help="PDF files or directories; default scans root and inbox/.")
     parser.add_argument("--dry-run", action="store_true", help="Preview without writing or contacting the database.")
     parser.add_argument("--organize-only", action="store_true", help="Organize locally without publishing charges.")
     parser.add_argument("--local", action="store_true", help="Import into the local preview database.")
     parser.add_argument("--yes", action="store_true", help="Accept the displayed import without prompting.")
-    parser.add_argument("--initial-openings", action="store_true", help="Add the two approved initial pre-September opening charges once.")
+    parser.add_argument("--initial-august", "--initial-openings", dest="initial_august", action="store_true", help="Include the approved August 1–20 gas and electricity charges; the old flag remains an alias.")
     parser.add_argument("--include-archive", action="store_true", help="Also scan already organized PDFs (normally skipped to preserve revisions).")
     parser.add_argument("--overrides", type=Path, help="Private JSON with reviewed classifications for unfamiliar PDFs.")
     parser.add_argument("--export", action="store_true", help="Back up the entire live ledger locally and refresh the sanitized snapshot.")
@@ -211,7 +212,7 @@ def main():
     overrides = json.loads(args.overrides.read_text()) if args.overrides else {}
     paths = []
     default_paths = [ROOT, ROOT / "inbox"]
-    if args.include_archive or args.initial_openings or args.organize_only:
+    if args.include_archive or args.initial_august or args.organize_only:
         default_paths.append(ROOT / "bills")
     for p in args.paths or default_paths:
         p = p.resolve()
@@ -240,8 +241,8 @@ def main():
             raise ValueError(f'Two PDFs describe the same bill with different contents: {b["id"]}. Import the reviewed file explicitly.')
         bills_by_id[b["id"]] = b
     bills = list(bills_by_id.values())
-    if args.initial_openings:
-        bills += list({b["id"]: b for b in initial_openings([r for _, r in parsed])}.values())
+    if args.initial_august:
+        bills += list({b["id"]: b for b in initial_august_bills([r for _, r in parsed])}.values())
     for b in bills:
         print(f'{b["utility"]:12} {b["start_date"] or "unknown":10} → {b["end_date"] or "unknown":10}  ${sum(c["amount_cents"] for c in b["charges"])/100:8.2f}  {b["id"]}')
     print(f"\n{len(parsed)} PDFs → bills/<year>/<utility>/ with provider, service dates, amount, and hash in each filename.")

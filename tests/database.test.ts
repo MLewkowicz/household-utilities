@@ -50,13 +50,33 @@ test('payments support cross-session reads, edits, idempotence, stale-write reje
  }
 });
 test('opening balances require explicit versioned reconciliation and keep their original audit record',async()=>{
- const prior={...seed.find((b:any)=>b.utility==='gas'&&b.start_date),id:'gas:earlier',start_date:'2026-07-21',end_date:'2026-08-20',charges:[{kind:'recurring',amount_cents:3098,label:'Earlier service'}]};
+ const opening={...seed.find((b:any)=>b.utility==='gas'),id:'test-opening-gas',start_date:null,end_date:null,opening_before:'2026-08-01',charges:[{kind:'opening',amount_cents:100,label:'Earlier service'}]};
+ await importBills([opening]);
+ const prior={...opening,id:'gas:earlier',start_date:'2026-07-01',end_date:'2026-07-31',opening_before:null,charges:[{kind:'recurring',amount_cents:100,label:'Earlier service'}]};
  await assert.rejects(importBills([prior]),/Reconcile opening/);
- await importBills([{...prior,replaces_opening:[{id:'opening-gas',expected_version:1}]}]);
+ await importBills([{...prior,replaces_opening:[{id:'test-opening-gas',expected_version:1}]}]);
  const dashboard=await call('dashboard');
- assert.ok(!dashboard.bills.some((b:any)=>b.id==='opening-gas'));
- assert.ok(dashboard.bill_history.some((b:any)=>b.bill_id==='opening-gas'&&b.deleted));
- assert.equal(dashboard.allocations.reduce((s:number,a:any)=>s+a.cents,0),42753);
+ assert.ok(!dashboard.bills.some((b:any)=>b.id==='test-opening-gas'));
+ assert.ok(dashboard.bill_history.some((b:any)=>b.bill_id==='test-opening-gas'&&b.deleted));
+ assert.equal(dashboard.allocations.reduce((s:number,a:any)=>s+a.cents,0),42853);
+});
+test('confirming August opening-charge dates preserves every roommate balance and payment history',async()=>{
+ const isolated=await openDatabase();
+ try {
+  const earlier=seed.filter((b:any)=>b.utility!=='wifi'&&b.start_date==='2026-08-01');
+  assert.equal(earlier.length,2);
+  const legacy=seed.map((b:any)=>earlier.includes(b)?{...b,id:'opening-'+b.utility,start_date:null,end_date:null,opening_before:'2026-08-21',charges:b.charges.map((c:any)=>({...c,kind:'opening'}))}:b);
+  await callRpc(isolated,'import_bills',{p:{request_id:randomUUID(),bills:legacy}},'service_role');
+  await callRpc(isolated,'save_payment',{p:{action:'create',payment_id:randomUUID(),request_id:randomUUID(),member_id:'rina',actor:'rina',amount_cents:123,method:'venmo',paid_on:'2026-10-01'}});
+  const before=await callRpc(isolated,'dashboard');
+  await callRpc(isolated,'import_bills',{p:{request_id:randomUUID(),bills:earlier.map((b:any)=>({...b,replaces_opening:[{id:'opening-'+b.utility,expected_version:1}]}))}},'service_role');
+  const after=await callRpc(isolated,'dashboard');
+  const totals=(d:any)=>['michal','rina','ohm','rohil'].map(member=>d.allocations.filter((a:any)=>a.member===member).reduce((s:number,a:any)=>s+a.cents,0));
+  assert.deepEqual(totals(before),totals(after));
+  assert.deepEqual(before.history,after.history);
+  assert.ok(after.allocations.every((a:any)=>a.month!=='opening'));
+  assert.equal(after.bill_history.filter((b:any)=>b.deleted&&b.bill_id.startsWith('opening-')).length,2);
+ } finally {await isolated.close();}
 });
 test('concurrent payment edits permit one winner and preserve the other revision',async()=>{
  const p={action:'create',payment_id:randomUUID(),request_id:randomUUID(),member_id:'ohm',actor:'ohm',amount_cents:500,method:'other',other:'cash',paid_on:'2026-10-01'};
