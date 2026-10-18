@@ -142,183 +142,8 @@
     }
   ],
   "history": [],
-  "updated_at": "2026-10-18T21:04:31.775018+00:00",
+  "updated_at": "2026-10-18T22:22:52.791253+00:00",
   "allocations": [
-    {
-      "cents": 1244,
-      "month": "2026-08",
-      "member": "michal",
-      "bill_id": "electricity:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 1244,
-      "month": "2026-08",
-      "member": "rina",
-      "bill_id": "electricity:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 1244,
-      "month": "2026-08",
-      "member": "ohm",
-      "bill_id": "electricity:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 1442,
-      "month": "2026-09",
-      "member": "michal",
-      "bill_id": "electricity:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 1442,
-      "month": "2026-09",
-      "member": "rina",
-      "bill_id": "electricity:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 1441,
-      "month": "2026-09",
-      "member": "ohm",
-      "bill_id": "electricity:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 1441,
-      "month": "2026-09",
-      "member": "rohil",
-      "bill_id": "electricity:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 732,
-      "month": "2026-09",
-      "member": "michal",
-      "bill_id": "gas:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 732,
-      "month": "2026-09",
-      "member": "rina",
-      "bill_id": "gas:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 732,
-      "month": "2026-09",
-      "member": "ohm",
-      "bill_id": "gas:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 732,
-      "month": "2026-09",
-      "member": "rohil",
-      "bill_id": "gas:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 631,
-      "month": "2026-08",
-      "member": "michal",
-      "bill_id": "gas:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 631,
-      "month": "2026-08",
-      "member": "rina",
-      "bill_id": "gas:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 631,
-      "month": "2026-08",
-      "member": "ohm",
-      "bill_id": "gas:2026-08-21:2026-09-17",
-      "charge_index": 0
-    },
-    {
-      "cents": 1698,
-      "month": "2026-08",
-      "member": "michal",
-      "bill_id": "wifi:2026-08-01:2026-08-31",
-      "charge_index": 0
-    },
-    {
-      "cents": 1698,
-      "month": "2026-08",
-      "member": "rina",
-      "bill_id": "wifi:2026-08-01:2026-08-31",
-      "charge_index": 0
-    },
-    {
-      "cents": 1698,
-      "month": "2026-08",
-      "member": "ohm",
-      "bill_id": "wifi:2026-08-01:2026-08-31",
-      "charge_index": 0
-    },
-    {
-      "cents": 1274,
-      "month": "2026-09",
-      "member": "michal",
-      "bill_id": "wifi:2026-09-01:2026-09-30",
-      "charge_index": 0
-    },
-    {
-      "cents": 1274,
-      "month": "2026-09",
-      "member": "rina",
-      "bill_id": "wifi:2026-09-01:2026-09-30",
-      "charge_index": 0
-    },
-    {
-      "cents": 1273,
-      "month": "2026-09",
-      "member": "ohm",
-      "bill_id": "wifi:2026-09-01:2026-09-30",
-      "charge_index": 0
-    },
-    {
-      "cents": 1273,
-      "month": "2026-09",
-      "member": "rohil",
-      "bill_id": "wifi:2026-09-01:2026-09-30",
-      "charge_index": 0
-    },
-    {
-      "cents": 1274,
-      "month": "2026-10",
-      "member": "michal",
-      "bill_id": "wifi:2026-10-01:2026-10-31",
-      "charge_index": 0
-    },
-    {
-      "cents": 1274,
-      "month": "2026-10",
-      "member": "rina",
-      "bill_id": "wifi:2026-10-01:2026-10-31",
-      "charge_index": 0
-    },
-    {
-      "cents": 1273,
-      "month": "2026-10",
-      "member": "ohm",
-      "bill_id": "wifi:2026-10-01:2026-10-31",
-      "charge_index": 0
-    },
-    {
-      "cents": 1273,
-      "month": "2026-10",
-      "member": "rohil",
-      "bill_id": "wifi:2026-10-01:2026-10-31",
-      "charge_index": 0
-    },
     {
       "cents": 3352,
       "month": "2026-08",
@@ -343,26 +168,201 @@
     {
       "cents": 1033,
       "month": "2026-08",
-      "member": "michal",
+      "member": "rina",
       "bill_id": "gas:2026-08-01:2026-08-20",
       "charge_index": 0
     },
     {
       "cents": 1033,
       "month": "2026-08",
-      "member": "rina",
+      "member": "ohm",
       "bill_id": "gas:2026-08-01:2026-08-20",
       "charge_index": 0
     },
     {
       "cents": 1032,
       "month": "2026-08",
-      "member": "ohm",
+      "member": "michal",
       "bill_id": "gas:2026-08-01:2026-08-20",
+      "charge_index": 0
+    },
+    {
+      "cents": 1698,
+      "month": "2026-08",
+      "member": "michal",
+      "bill_id": "wifi:2026-08-01:2026-08-31",
+      "charge_index": 0
+    },
+    {
+      "cents": 1698,
+      "month": "2026-08",
+      "member": "rina",
+      "bill_id": "wifi:2026-08-01:2026-08-31",
+      "charge_index": 0
+    },
+    {
+      "cents": 1698,
+      "month": "2026-08",
+      "member": "ohm",
+      "bill_id": "wifi:2026-08-01:2026-08-31",
+      "charge_index": 0
+    },
+    {
+      "cents": 1244,
+      "month": "2026-08",
+      "member": "michal",
+      "bill_id": "electricity:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 1244,
+      "month": "2026-08",
+      "member": "rina",
+      "bill_id": "electricity:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 1244,
+      "month": "2026-08",
+      "member": "ohm",
+      "bill_id": "electricity:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 1442,
+      "month": "2026-09",
+      "member": "rohil",
+      "bill_id": "electricity:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 1442,
+      "month": "2026-09",
+      "member": "michal",
+      "bill_id": "electricity:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 1441,
+      "month": "2026-09",
+      "member": "rina",
+      "bill_id": "electricity:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 1441,
+      "month": "2026-09",
+      "member": "ohm",
+      "bill_id": "electricity:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 732,
+      "month": "2026-09",
+      "member": "rina",
+      "bill_id": "gas:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 732,
+      "month": "2026-09",
+      "member": "ohm",
+      "bill_id": "gas:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 732,
+      "month": "2026-09",
+      "member": "rohil",
+      "bill_id": "gas:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 732,
+      "month": "2026-09",
+      "member": "michal",
+      "bill_id": "gas:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 631,
+      "month": "2026-08",
+      "member": "rina",
+      "bill_id": "gas:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 631,
+      "month": "2026-08",
+      "member": "ohm",
+      "bill_id": "gas:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 631,
+      "month": "2026-08",
+      "member": "michal",
+      "bill_id": "gas:2026-08-21:2026-09-17",
+      "charge_index": 0
+    },
+    {
+      "cents": 1274,
+      "month": "2026-09",
+      "member": "rina",
+      "bill_id": "wifi:2026-09-01:2026-09-30",
+      "charge_index": 0
+    },
+    {
+      "cents": 1274,
+      "month": "2026-09",
+      "member": "ohm",
+      "bill_id": "wifi:2026-09-01:2026-09-30",
+      "charge_index": 0
+    },
+    {
+      "cents": 1273,
+      "month": "2026-09",
+      "member": "rohil",
+      "bill_id": "wifi:2026-09-01:2026-09-30",
+      "charge_index": 0
+    },
+    {
+      "cents": 1273,
+      "month": "2026-09",
+      "member": "michal",
+      "bill_id": "wifi:2026-09-01:2026-09-30",
+      "charge_index": 0
+    },
+    {
+      "cents": 1274,
+      "month": "2026-10",
+      "member": "rohil",
+      "bill_id": "wifi:2026-10-01:2026-10-31",
+      "charge_index": 0
+    },
+    {
+      "cents": 1274,
+      "month": "2026-10",
+      "member": "michal",
+      "bill_id": "wifi:2026-10-01:2026-10-31",
+      "charge_index": 0
+    },
+    {
+      "cents": 1273,
+      "month": "2026-10",
+      "member": "rina",
+      "bill_id": "wifi:2026-10-01:2026-10-31",
+      "charge_index": 0
+    },
+    {
+      "cents": 1273,
+      "month": "2026-10",
+      "member": "ohm",
+      "bill_id": "wifi:2026-10-01:2026-10-31",
       "charge_index": 0
     }
   ],
-  "exported_at": "2026-10-18T21:04:31.775018+00:00",
+  "exported_at": "2026-10-18T22:22:52.791253+00:00",
   "bill_history": [
     {
       "data": {
@@ -607,5 +607,6 @@
       "created_at": "2026-10-18T20:46:14.85054+00:00"
     }
   ],
-  "format_version": 1
+  "format_version": 2,
+  "allocation_version": 2
 }
