@@ -8,6 +8,10 @@ export async function openDatabase(path) {
     await db.exec('CREATE ROLE anon; CREATE ROLE authenticated; CREATE ROLE service_role;');
     await db.exec(await readFile(new URL('../supabase/migrations/001_utilities.sql', import.meta.url),'utf8'));
   }
+  const rotation = await db.query("SELECT to_regprocedure('ledger_private.allocate_ledger(jsonb)') AS fn");
+  if (!rotation.rows[0].fn) {
+    await db.exec(await readFile(new URL('../supabase/migrations/002_rotating_rounding.sql', import.meta.url),'utf8'));
+  }
   return db;
 }
 export async function callRpc(db,name,params={},role='anon') {

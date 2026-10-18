@@ -70,7 +70,7 @@ export function normalizeBill(raw: Record<string, unknown>): Bill {
 
 // One denominator per charge: day shares use twelfths (LCM of 3 and 4).
 // Integer arithmetic avoids intermediate daily rounding and floating-point drift.
-export function allocateBill(bill: Bill): Allocation[] {
+function allocateWithRotation(bill: Bill, cursors: number[]): Allocation[] {
   const result: Allocation[] = [];
   bill.charges.forEach((charge, charge_index) => {
     const weights = new Map<string, number>();
@@ -99,18 +99,49 @@ export function allocateBill(bill: Bill): Allocation[] {
       return { month, member: member as Member, cents: Math.floor(numerator / denominator), remainder: numerator % denominator };
     });
     let remaining = amount - cells.reduce((sum, c) => sum + c.cents, 0);
-    cells.sort((a, b) => b.remainder - a.remainder || a.month.localeCompare(b.month) || MEMBERS.indexOf(a.member) - MEMBERS.indexOf(b.member));
-    for (const cell of cells) {
-      if (remaining > 0) { cell.cents++; remaining--; }
-      result.push({ member: cell.member, month: cell.month, cents: cell.cents * sign, bill_id: bill.id, charge_index });
+    cells.sort((a, b) => b.remainder - a.remainder || compareText(a.month, b.month));
+    // Rotate only genuinely tied pennies. Fully awarded groups need no turn.
+    // Credits have their own rotation so alternating charges/refunds stay fair.
+    const direction = sign < 0 ? 1 : 0;
+    for (let i = 0; i < cells.length;) {
+      let end = i + 1;
+      while (end < cells.length && cells[end].remainder === cells[i].remainder && cells[end].month === cells[i].month) end++;
+      const group = cells.slice(i, end);
+      const take = Math.min(remaining, group.length);
+      const contested = take > 0 && take < group.length;
+      group.sort((a, b) => (MEMBERS.indexOf(a.member) - cursors[direction] + 4) % 4 - (MEMBERS.indexOf(b.member) - cursors[direction] + 4) % 4);
+      group.forEach((cell, rank) => {
+        if (rank < take) cell.cents++;
+        result.push({ member: cell.member, month: cell.month, cents: cell.cents === 0 ? 0 : cell.cents * sign, bill_id: bill.id, charge_index });
+      });
+      if (contested) cursors[direction] = (MEMBERS.indexOf(group[take - 1].member) + 1) % 4;
+      remaining -= take;
+      i = end;
     }
   });
   return result;
 }
 
+const compareText = (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0;
+
+export function allocateBill(bill: Bill): Allocation[] {
+  return allocateWithRotation(bill, [0, 0]);
+}
+
+// Replay a canonical bill order: imports, refreshes, and payments never consume
+// turns. Backdated bills/corrections can redistribute pennies on later bills.
+export function allocateBills(bills: Bill[]): Allocation[] {
+  const cursors = [0, 0];
+  return [...bills].sort((a, b) =>
+    compareText(a.start_date ?? a.opening_before!, b.start_date ?? b.opening_before!) ||
+    compareText(a.end_date ?? a.opening_before!, b.end_date ?? b.opening_before!) ||
+    compareText(a.utility, b.utility) || compareText(a.id, b.id)
+  ).flatMap(bill => allocateWithRotation(bill, cursors));
+}
+
 export function summarize(bills: StoredBill[], events: Payment[]) {
   const activeBills = bills.filter(b => !b.deleted);
-  const allocations = activeBills.flatMap(allocateBill);
+  const allocations = allocateBills(activeBills);
   const latest = new Map<string, Payment>();
   for (const event of events) if (!latest.has(event.payment_id) || latest.get(event.payment_id)!.version < event.version) latest.set(event.payment_id, event);
   const payments = [...latest.values()];

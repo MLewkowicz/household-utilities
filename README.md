@@ -74,7 +74,7 @@ If an unknown-date opening charge is ever added, its original statement must exp
 - Rohil’s recurring share starts **September 1, 2026**. Earlier service days split three ways; later days split four ways.
 - Recurring charges, taxes, and fees are spread uniformly over the statement’s inclusive service days. Original statements remain the source for service dates; the parser checks printed day counts.
 - One-time installation/equipment charges split among all four, allocated to the service-start month. Review and classify unusual charges manually.
-- Calculate person/month shares before rounding. Largest-remainder allocation conserves every statement’s cents; ties use month, then Michal, Rina, Ohm, Rohil. Tiny differences in otherwise equal balances are expected.
+- Calculate person/month shares before rounding. Largest-remainder allocation conserves every statement’s cents and month totals. Tied pennies rotate among eligible roommates across bills in service-date order (then end date, utility, ID, and charge order); whole tied groups do not consume a turn. Credits rotate separately. Reimports, page refreshes, and payments do not advance the rotation. Backdated bills and corrections replay it, so later shares may move by pennies.
 - The five initial statements contribute $296.01 in new charges. The earlier electricity ($100.54) and gas ($30.98) charges cover **August 1–20, 2026**, as confirmed by the household. They add $131.52, for **$427.53** total, and appear in August’s breakdown. The next cycle begins August 21, so there is no overlap. The previous unknown-date records remain only in the correction history.
 - August’s $25 Xfinity EFT is a provider payment, not an expense or roommate reimbursement. August Wi-Fi costs $50.94 and splits into three shares of $16.98.
 
@@ -117,7 +117,7 @@ Initial setup:
 ./publish.sh
 ```
 
-`configure.sh` prompts locally for a Supabase personal access token, installs `supabase/migrations/001_utilities.sql`, retrieves the importer credential, and saves it to `.env.local` with owner-only permissions. It does not save the access token. Alternatively, run the SQL in the Supabase SQL Editor, then use `./configure.sh --manual` to enter a secret/service-role key locally. Never put secret keys in the public configuration or GitHub Actions.
+`configure.sh` prompts locally for a Supabase personal access token, installs missing SQL migrations from `supabase/migrations/`, retrieves the importer credential, and saves it to `.env.local` with owner-only permissions. It does not save the access token. Rerun it to apply database upgrades; existing bills and payments are preserved. Alternatively, run only the missing SQL files in order in the Supabase SQL Editor, then use `./configure.sh --manual` to enter a secret/service-role key locally. Never put secret keys in the public configuration or GitHub Actions.
 
 `publish.sh` uses the authenticated GitHub account and a public `household-utilities` repository. It checks the app, stages an explicit source allowlist, performs the privacy check, pushes `main`, and enables GitHub Pages. The workflow deploys only `dist/`. Later code changes deploy on pushes to `main`; normal bill/payment updates go directly to Supabase.
 

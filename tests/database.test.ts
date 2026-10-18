@@ -2,8 +2,9 @@ import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
+import {PGlite} from '@electric-sql/pglite';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
-import {allocateBill} from '../src/ledger.ts';
+import {allocateBills} from '../src/ledger.ts';
 let db:any;
 const seed=JSON.parse(await readFile(new URL('../data/initial-bills.json',import.meta.url),'utf8'));
 const call=(fn:string,p?:any,role='anon')=>callRpc(db,fn,p?{p}: {},role);
@@ -19,7 +20,8 @@ test('initial import is atomic and database allocations exactly match independen
  const dashboard=await call('dashboard');
  assert.equal(dashboard.bills.length,7);assert.equal(dashboard.allocations.reduce((s:number,a:any)=>s+a.cents,0),42753);
  const order=(a:any,b:any)=>(a.bill_id+a.charge_index+a.month+a.member).localeCompare(b.bill_id+b.charge_index+b.month+b.member);
- assert.deepEqual(dashboard.allocations.sort(order),seed.flatMap(allocateBill).sort(order));
+ assert.deepEqual(dashboard.allocations.sort(order),allocateBills(seed).sort(order));
+ assert.deepEqual(['michal','rina','ohm','rohil'].map(member=>dashboard.allocations.filter((a:any)=>a.member===member).reduce((s:number,a:any)=>s+a.cents,0)),[12678,12677,12677,4721]);
  assert.equal(dashboard.history.length,0);
  const bad={...seed[0],id:'invalid',start_date:'2026-02-30'};
  await assert.rejects(importBills([{...seed[0],id:'future',start_date:'2027-01-01',end_date:'2027-01-31'},bad]));
@@ -84,4 +86,43 @@ test('concurrent payment edits permit one winner and preserve the other revision
  const results=await Promise.allSettled([700,900].map(amount_cents=>call('save_payment',{...p,action:'edit',expected_version:1,amount_cents,request_id:randomUUID()})));
  assert.equal(results.filter(r=>r.status==='fulfilled').length,1);
  assert.equal(results.filter(r=>r.status==='rejected').length,1);
+});
+
+test('rounding upgrade preserves source records, payments, statement totals, and household monthly totals',async()=>{
+ const legacy=new PGlite();await legacy.waitReady;
+ try {
+  await legacy.exec('CREATE ROLE anon; CREATE ROLE authenticated; CREATE ROLE service_role;');
+  await legacy.exec(await readFile(new URL('../supabase/migrations/001_utilities.sql',import.meta.url),'utf8'));
+  await callRpc(legacy,'import_bills',{p:{request_id:randomUUID(),bills:seed}},'service_role');
+  await callRpc(legacy,'save_payment',{p:{action:'create',payment_id:randomUUID(),request_id:randomUUID(),member_id:'rina',actor:'rina',amount_cents:123,method:'venmo',paid_on:'2026-10-01'}});
+  const prior=await callRpc(legacy,'export_ledger');
+  const storedBefore=await legacy.query('SELECT * FROM ledger_private.allocations ORDER BY bill_id,version,charge_index,month,member');
+  await legacy.exec(await readFile(new URL('../supabase/migrations/002_rotating_rounding.sql',import.meta.url),'utf8'));
+  const after=await callRpc(legacy,'export_ledger');
+  assert.equal(after.allocation_version,2);assert.equal(after.format_version,2);
+  for (const field of ['bills','bill_history','history']) assert.deepEqual(after[field],prior[field]);
+  assert.deepEqual((await legacy.query('SELECT * FROM ledger_private.allocations ORDER BY bill_id,version,charge_index,month,member')).rows,storedBefore.rows);
+  const monthly=(d:any)=>Object.fromEntries([...new Set(d.allocations.map((a:any)=>a.bill_id+'|'+a.month))].sort().map(k=>[k,d.allocations.filter((a:any)=>a.bill_id+'|'+a.month===k).reduce((s:number,a:any)=>s+a.cents,0)]));
+  assert.deepEqual(monthly(after),monthly(prior));
+  assert.deepEqual(after.allocations,allocateBills(seed));
+  await callRpc(legacy,'import_bills',{p:{request_id:randomUUID(),bills:[...seed].reverse()}},'service_role');
+  assert.deepEqual((await callRpc(legacy,'dashboard')).allocations,after.allocations);
+ } finally {await legacy.close();}
+});
+
+test('SQL and TypeScript agree on rotation across credits, dates, fees, openings, and backfilled imports',async()=>{
+ const fixtures=[];
+ for (const amount of [-5094,-2,-1,0,1,2,3,5094,100000000]) {
+  for (const [start,end] of [['2026-08-01','2026-08-31'],['2026-08-21','2026-09-17'],['2026-09-01','2026-09-30'],['2028-02-28','2028-03-01']]) {
+   fixtures.push({...seed[0],id:`case:${fixtures.length}`,start_date:start,end_date:end,charges:[{kind:'recurring',amount_cents:amount,label:'Service'},{kind:'one_time',amount_cents:amount,label:'Fee'}]});
+  }
+ }
+ fixtures.push({...seed[0],id:'test:opening',start_date:null,end_date:null,opening_before:'2026-08-01',charges:[{kind:'opening',amount_cents:101,label:'Earlier charge'}]});
+ const result=await db.query("SELECT jsonb_agg(to_jsonb(a)) AS allocations FROM ledger_private.allocate_ledger($1::jsonb) a",[JSON.stringify(fixtures.reverse())]);
+ assert.deepEqual(result.rows[0].allocations,allocateBills(fixtures));
+ const isolated=await openDatabase();
+ try {
+  for (const b of [...seed].reverse()) await callRpc(isolated,'import_bills',{p:{request_id:randomUUID(),bills:[b]}},'service_role');
+  assert.deepEqual((await callRpc(isolated,'dashboard')).allocations,allocateBills(seed));
+ } finally {await isolated.close();}
 });

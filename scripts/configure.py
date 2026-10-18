@@ -21,7 +21,8 @@ def request(url, token, data=None):
 def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
-        print("First run supabase/migrations/001_utilities.sql in the project's SQL Editor.")
+        print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
+        print("Existing projects need only 002_rotating_rounding.sql; do not rerun 001.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
         print("Create a personal access token at https://supabase.com/dashboard/account/tokens")
@@ -36,7 +37,13 @@ def main():
             request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/001_utilities.sql").read_text()})
             print("Database schema installed.")
         else:
-            print("Database schema already installed; left unchanged.")
+            print("Base database schema already installed.")
+        rotation = request(base + "/database/query", token, {"query": "SELECT to_regprocedure('ledger_private.allocate_ledger(jsonb)')::text AS fn"})
+        if not rotation or not rotation[0].get("fn"):
+            request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/002_rotating_rounding.sql").read_text()})
+            print("Rotating rounding installed; bill and payment history preserved.")
+        else:
+            print("Database migrations are up to date.")
         keys = request(base + "/api-keys", token)
         candidates = [k for k in keys if k.get("name") == "service_role" or k.get("type") == "secret"]
         if not candidates:
