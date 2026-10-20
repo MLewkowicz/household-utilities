@@ -5,16 +5,18 @@ from import_bills import ROOT, load_config, rpc, write_json
 
 def main():
     config = load_config("--local" in sys.argv)
-    # Fetch all three before replacing snapshots, so a failed connection changes none.
+    # Fetch all four before replacing snapshots, so a failed connection changes none.
     utilities = rpc(config, "export_ledger")
     miscellaneous = rpc(config, "export_misc_ledger")
     chores = rpc(config, "export_chores")
+    bulletin = rpc(config, "export_bulletin")
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M-%S")
-    write_json(ROOT / ".local/backups" / f"household_{stamp}.json", {"utilities": utilities, "miscellaneous": miscellaneous, "chores": chores})
+    write_json(ROOT / ".local/backups" / f"household_{stamp}.json", {"utilities": utilities, "miscellaneous": miscellaneous, "chores": chores, "bulletin": bulletin})
     write_json(ROOT / "data/ledger.json", utilities)
     write_json(ROOT / "data/misc-ledger.json", miscellaneous)
     write_json(ROOT / "data/chores.json", chores)
-    print("Saved a private backup and refreshed all three separate website snapshots. Publish to update the offline copies.")
+    write_json(ROOT / "data/bulletin.json", bulletin)
+    print("Saved a private backup and refreshed all four separate website snapshots. Publish to update the offline copies.")
 
 if __name__ == "__main__":
     try:

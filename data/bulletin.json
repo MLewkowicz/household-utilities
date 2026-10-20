@@ -1,0 +1,176 @@
+{
+  "notes": [],
+  "stats": [
+    {
+      "member": "michal",
+      "period": "all",
+      "direction": "received",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "ohm",
+      "period": "all",
+      "direction": "received",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "rina",
+      "period": "all",
+      "direction": "received",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "rohil",
+      "period": "all",
+      "direction": "received",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "michal",
+      "period": "all",
+      "direction": "written",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "ohm",
+      "period": "all",
+      "direction": "written",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "rina",
+      "period": "all",
+      "direction": "written",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "rohil",
+      "period": "all",
+      "direction": "written",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "michal",
+      "period": "month",
+      "direction": "received",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "ohm",
+      "period": "month",
+      "direction": "received",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "rina",
+      "period": "month",
+      "direction": "received",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "rohil",
+      "period": "month",
+      "direction": "received",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "michal",
+      "period": "month",
+      "direction": "written",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "ohm",
+      "period": "month",
+      "direction": "written",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "rina",
+      "period": "month",
+      "direction": "written",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "rohil",
+      "period": "month",
+      "direction": "written",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "michal",
+      "period": "week",
+      "direction": "received",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "ohm",
+      "period": "week",
+      "direction": "received",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "rina",
+      "period": "week",
+      "direction": "received",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "rohil",
+      "period": "week",
+      "direction": "received",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "michal",
+      "period": "week",
+      "direction": "written",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "ohm",
+      "period": "week",
+      "direction": "written",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "rina",
+      "period": "week",
+      "direction": "written",
+      "complaints": 0,
+      "compliments": 0
+    },
+    {
+      "member": "rohil",
+      "period": "week",
+      "direction": "written",
+      "complaints": 0,
+      "compliments": 0
+    }
+  ],
+  "history": [],
+  "updated_at": "2026-10-20T05:34:43.541977+00:00",
+  "format_version": 1
+}

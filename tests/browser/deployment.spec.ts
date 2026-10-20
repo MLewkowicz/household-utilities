@@ -19,7 +19,7 @@ test('a returning visitor gets working navigation and themes after a deployment'
           </head><body><h1>Earlier dashboard</h1></body></html>`);
       }
       if (path.startsWith('/rest/v1/rpc/')) {
-        const file = path.endsWith('/utilities_chores_dashboard') ? 'chores' : path.endsWith('/utilities_misc_dashboard') ? 'misc-ledger' :
+        const file = path.endsWith('/utilities_bulletin_dashboard') ? 'bulletin' : path.endsWith('/utilities_chores_dashboard') ? 'chores' : path.endsWith('/utilities_misc_dashboard') ? 'misc-ledger' :
           path.endsWith('/utilities_dashboard') ? 'ledger' : null;
         if (!file) { res.writeHead(405); return res.end(); }
         res.writeHead(200, { 'content-type': 'application/json', 'cache-control': 'no-store' });
@@ -72,6 +72,8 @@ test('a returning visitor gets working navigation and themes after a deployment'
     await page.getByRole('link', { name: 'Chores', exact: true }).click();
     await expect(page.locator('#chores-page')).toBeVisible();
     await expect(page.locator('#chores-status')).toHaveText('Shared chores · up to date');
+    await page.getByRole('link', { name: 'Bulletin', exact: true }).click();
+    await expect(page.locator('#bulletin-status')).toHaveText('Shared notes · up to date');
     expect(assetRequests.filter(path => path === '/app.js')).toHaveLength(1);
     expect(assetRequests.filter(path => path === '/style.css')).toHaveLength(1);
     expect(errors).toEqual([]);

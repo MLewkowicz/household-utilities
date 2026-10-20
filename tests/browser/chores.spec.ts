@@ -22,7 +22,7 @@ test('requests, urgency, hand-back and shared identity work across tabs on a pho
  await choosePerson(page,'michal');const request=card(page,'Bananas <b>for everyone</b>');await expect(request).toContainText('Asked by Rohil');await expect(request).toContainText('Pinned');await expect(request.locator('h3 b')).toHaveCount(0);
  await expect(page.locator('#chore-badge')).toHaveText('1');
  await request.getByRole('button',{name:'Hand back',exact:true}).click();await expect(page.locator('#chore-action-heading')).toBeFocused();
- await page.locator('#chore-action-note').fill('Could someone cover today?');await page.locator('#chore-action-save').click();await expect(page.locator('#chore-action-dialog')).not.toBeVisible();await expect(request).toHaveCount(0);
+ await page.locator('#chore-action-note').fill('Could someone cover today?');await page.locator('#chore-action-save').click();await expect(page.locator('#chore-action-dialog')).not.toBeVisible();await expect(request).toHaveClass(/is-unassigned/);await expect(request).toContainText('Unassigned');
  await view(page,'household');await page.locator('#chore-filter').selectOption('anyone');
  await request.getByRole('button',{name:'Claim',exact:true}).click();await page.locator('#chore-action-save').click();await expect(page.locator('#chore-action-dialog')).not.toBeVisible();
  await view(page,'mine');await expect(request).toBeVisible();await request.locator('summary').click();await expect(request).toContainText('Could someone cover today?');
@@ -100,4 +100,16 @@ test('pinned reminders retain zero points through editing, completion, correctio
  d=await rpc(page,'chores_dashboard');const routine=d.routines.find((r:any)=>r.title==='Repair follow-up reminders');expect(routine.steps[0].points).toBe(0);expect(routine.steps[0].icon_id).toBe('repair-request');expect(d.tasks.filter((t:any)=>t.routine_id===routine.id).every((t:any)=>t.points===0)).toBeTruthy();expect(d.leaderboard).toEqual(before.leaderboard);
  await page.locator('#chore-manage-routines').click();await page.locator(`[data-edit-routine="${routine.id}"]`).click();await expect(page.locator('[data-step-field=points]')).toHaveValue('0');
  expect(await page.locator('#chore-routine-dialog').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBeTruthy();
+});
+
+test('requesting without an identity explains how to continue, and unassigned work appears in every queue',async({page})=>{
+ await page.goto('/#chores');await expect(page.locator('#chores-status')).toHaveText('Shared chores · up to date');
+ await page.locator('#chore-new').click();await expect(page.locator('#chore-identity-error')).toContainText('Choose your name before requesting');await expect(page.locator('[data-chore-person=michal]')).toBeFocused();
+ await page.locator('[data-chore-person=rohil]').click();await expect(page.locator('#chore-task-dialog')).toBeVisible();await expect(page.locator('#chore-task-heading')).toBeFocused();
+ await page.locator('#chore-title').fill('An open invitation to help');await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();
+ const task=card(page,'An open invitation to help');await expect(task).toHaveClass(/is-unassigned/);await expect(task).toContainText('Asked by Rohil');
+ for(const who of ['rina','ohm','michal']){await choosePerson(page,who);await expect(task).toBeVisible();await expect(task).toHaveClass(/is-unassigned/);}
+ await task.getByRole('button',{name:'Claim',exact:true}).click();await page.locator('#chore-action-save').click();await expect(page.locator('#chore-action-dialog')).not.toBeVisible();await expect(task).not.toHaveClass(/is-unassigned/);
+ await choosePerson(page,'rina');await expect(task).toHaveCount(0);
+ await page.locator('#chore-switch').click();await page.locator('#chore-log').click();await expect(page.locator('#chore-identity-error')).toContainText('logging a completion');
 });
