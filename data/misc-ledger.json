@@ -1,11 +1,244 @@
 {
-  "pairs": [],
-  "expenses": [],
-  "updated_at": "2026-10-20T02:13:35.786844+00:00",
-  "exported_at": "2026-10-20T02:13:35.786844+00:00",
-  "settlements": [],
+  "pairs": [
+    {
+      "sender": "ohm",
+      "recipient": "rina",
+      "amount_cents": 768
+    },
+    {
+      "sender": "rohil",
+      "recipient": "rina",
+      "amount_cents": 768
+    }
+  ],
+  "expenses": [
+    {
+      "id": "44428ea1-9c87-49f1-95da-941e520cfaea",
+      "actor": "rina",
+      "payer": "rina",
+      "shares": {
+        "rina": 1447,
+        "michal": 1446
+      },
+      "deleted": false,
+      "icon_id": "groceries",
+      "paid_on": "2026-10-19",
+      "version": 2,
+      "created_at": "2026-10-20T03:19:42.8814+00:00",
+      "split_mode": "equal",
+      "description": "Groceries",
+      "amount_cents": 2893,
+      "participants": [
+        "michal",
+        "rina"
+      ]
+    },
+    {
+      "id": "562c8bbc-5af1-44da-95b1-dd47415b4ffd",
+      "actor": "rina",
+      "payer": "rina",
+      "shares": {
+        "ohm": 384,
+        "rina": 384,
+        "rohil": 384,
+        "michal": 384
+      },
+      "deleted": false,
+      "icon_id": "toilet-paper",
+      "paid_on": "2026-10-19",
+      "version": 1,
+      "created_at": "2026-10-20T03:17:11.835282+00:00",
+      "split_mode": "equal",
+      "description": "Toilet Paper",
+      "amount_cents": 1536,
+      "participants": [
+        "michal",
+        "rina",
+        "ohm",
+        "rohil"
+      ]
+    },
+    {
+      "id": "8a455d10-95eb-456c-9cf6-d41d330f92d0",
+      "actor": "rina",
+      "payer": "rina",
+      "shares": {
+        "ohm": 384,
+        "rina": 384,
+        "rohil": 384,
+        "michal": 384
+      },
+      "deleted": false,
+      "icon_id": "paper-towels",
+      "paid_on": "2026-10-19",
+      "version": 2,
+      "created_at": "2026-10-20T03:18:03.802549+00:00",
+      "split_mode": "equal",
+      "description": "Paper towels",
+      "amount_cents": 1536,
+      "participants": [
+        "michal",
+        "rina",
+        "ohm",
+        "rohil"
+      ]
+    }
+  ],
+  "updated_at": "2026-10-20T03:45:12.647226+00:00",
+  "exported_at": "2026-10-20T03:45:12.647226+00:00",
+  "settlements": [
+    {
+      "id": "6994c448-ef11-4c0e-95a7-6758ccae7127",
+      "actor": "michal",
+      "other": "",
+      "method": "venmo",
+      "sender": "michal",
+      "deleted": false,
+      "paid_on": "2026-10-19",
+      "version": 1,
+      "recipient": "rina",
+      "created_at": "2026-10-20T03:21:38.02002+00:00",
+      "amount_cents": 2214
+    }
+  ],
   "format_version": 1,
-  "expense_history": [],
-  "rounding_cursor": 0,
-  "settlement_history": []
+  "expense_history": [
+    {
+      "id": "44428ea1-9c87-49f1-95da-941e520cfaea",
+      "actor": "rina",
+      "payer": "rina",
+      "shares": {
+        "rina": 1447,
+        "michal": 1446
+      },
+      "deleted": false,
+      "icon_id": "groceries",
+      "paid_on": "2026-10-19",
+      "version": 2,
+      "created_at": "2026-10-20T03:19:42.8814+00:00",
+      "split_mode": "equal",
+      "description": "Groceries",
+      "amount_cents": 2893,
+      "participants": [
+        "michal",
+        "rina"
+      ]
+    },
+    {
+      "id": "44428ea1-9c87-49f1-95da-941e520cfaea",
+      "actor": "rina",
+      "payer": "rina",
+      "shares": {
+        "ohm": 723,
+        "rina": 723,
+        "rohil": 723,
+        "michal": 724
+      },
+      "deleted": false,
+      "icon_id": "groceries",
+      "paid_on": "2026-10-19",
+      "version": 1,
+      "created_at": "2026-10-20T03:19:24.579494+00:00",
+      "split_mode": "equal",
+      "description": "Groceries",
+      "amount_cents": 2893,
+      "participants": [
+        "michal",
+        "rina",
+        "ohm",
+        "rohil"
+      ]
+    },
+    {
+      "id": "8a455d10-95eb-456c-9cf6-d41d330f92d0",
+      "actor": "rina",
+      "payer": "rina",
+      "shares": {
+        "ohm": 384,
+        "rina": 384,
+        "rohil": 384,
+        "michal": 384
+      },
+      "deleted": false,
+      "icon_id": "paper-towels",
+      "paid_on": "2026-10-19",
+      "version": 2,
+      "created_at": "2026-10-20T03:18:03.802549+00:00",
+      "split_mode": "equal",
+      "description": "Paper towels",
+      "amount_cents": 1536,
+      "participants": [
+        "michal",
+        "rina",
+        "ohm",
+        "rohil"
+      ]
+    },
+    {
+      "id": "8a455d10-95eb-456c-9cf6-d41d330f92d0",
+      "actor": "rina",
+      "payer": "rina",
+      "shares": {
+        "ohm": 384,
+        "rina": 384,
+        "rohil": 384,
+        "michal": 384
+      },
+      "deleted": false,
+      "icon_id": "paper-towels",
+      "paid_on": "2026-10-19",
+      "version": 1,
+      "created_at": "2026-10-20T03:17:37.850933+00:00",
+      "split_mode": "equal",
+      "description": "Paper",
+      "amount_cents": 1536,
+      "participants": [
+        "michal",
+        "rina",
+        "ohm",
+        "rohil"
+      ]
+    },
+    {
+      "id": "562c8bbc-5af1-44da-95b1-dd47415b4ffd",
+      "actor": "rina",
+      "payer": "rina",
+      "shares": {
+        "ohm": 384,
+        "rina": 384,
+        "rohil": 384,
+        "michal": 384
+      },
+      "deleted": false,
+      "icon_id": "toilet-paper",
+      "paid_on": "2026-10-19",
+      "version": 1,
+      "created_at": "2026-10-20T03:17:11.835282+00:00",
+      "split_mode": "equal",
+      "description": "Toilet Paper",
+      "amount_cents": 1536,
+      "participants": [
+        "michal",
+        "rina",
+        "ohm",
+        "rohil"
+      ]
+    }
+  ],
+  "rounding_cursor": 2,
+  "settlement_history": [
+    {
+      "id": "6994c448-ef11-4c0e-95a7-6758ccae7127",
+      "actor": "michal",
+      "other": "",
+      "method": "venmo",
+      "sender": "michal",
+      "deleted": false,
+      "paid_on": "2026-10-19",
+      "version": 1,
+      "recipient": "rina",
+      "created_at": "2026-10-20T03:21:38.02002+00:00",
+      "amount_cents": 2214
+    }
+  ]
 }

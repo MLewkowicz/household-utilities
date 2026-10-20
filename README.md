@@ -18,11 +18,17 @@ Open **Miscellaneous** at the same link, or go directly to `/#miscellaneous` aft
 
 Choose **Add expense**, describe what you already bought, and enter its amount and date. All four roommates start included. Tap the other three tiles to exclude people, or switch off **Include my share** for something bought entirely for others. Equal shares preview immediately; **Custom amounts** lets you assign exact dollar amounts, which must sum to the total. Purchases use USD and one payer. Rohil’s September utility cutoff does not apply to this ledger.
 
-The 41 bundled SVG icons have local keyword suggestions and a searchable category picker, including specific foods and bathroom supplies. A manually selected icon stays selected when the description changes. Descriptions and method notes are public: omit addresses, account details, and other personal information. There are no receipt uploads or external icon/AI services.
+Use **Calculator** under a purchase or repayment amount to add items or evaluate arithmetic such as `12.50 + 8.75` or `60 × 25%`. In **Custom amounts**, each person's **÷** button opens a calculator with **Fraction / %**: `1/3` or `25%` applies to the purchase total. Optionally check **Split the rest equally among the others** to allocate the remainder to the other selected roommates. Results are rounded to cents; the saved custom shares must still add up exactly. Calculations only fill the form, and nothing is recorded until the expense or repayment is confirmed.
+
+The 41 bundled SVG icons have local keyword suggestions and a searchable category picker, including specific foods and bathroom supplies. Typing previews an icon without marking it selected. Tapping an icon selects it and fills the description with its name by default; the text remains editable and the selected icon stays fixed. Switch off **Use icon name as description** to change only the icon. Descriptions and method notes are public: omit addresses, account details, and other personal information. There are no receipt uploads or external icon/AI services.
 
 Each participant owes their share to the payer. Debts offset only between the same two people. **Record repayment** records money already sent between those people via Venmo, Zelle, or Other. Partial payments and overpayments are supported. The cards separately show what each person must pay and collect; all these amounts remain separate from utilities.
 
+Opening a repayment from a debt card pre-fills that debt's amount and focuses the heading, so an input does not summon the phone keyboard. Tap an input when a correction or partial repayment is needed.
+
 Anyone can edit or delete entries. Each card shows its latest version, with an expandable **History** listing changes and actors. **Show deleted** reveals removed entries. There is no approval queue. Concurrent edits must refresh before saving; retries are idempotent. New or changed equal splits rotate extra pennies using a separate transactional cursor. Saved shares on unrelated purchases never change, and description/icon edits or retries do not consume turns.
+
+For an explicitly requested permanent cleanup, `./remove-deleted-expense.sh EXPENSE_ID --expected-version VERSION` removes only an already-deleted expense and its revisions. It requires a Supabase personal access token entered locally, saves a private recovery copy, checks the latest version, and verifies that other ledger data and balances are unchanged in the same transaction. It is not exposed to website visitors. Refresh the saved snapshots after cleanup.
 
 **Export ledger** downloads the currently selected tab, including its history. To refresh both separate website snapshots and save a private combined backup locally:
 

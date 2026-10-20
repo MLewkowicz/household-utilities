@@ -2,6 +2,7 @@ import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
+import {execFileSync} from 'node:child_process';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
 import {equalShares,pairBalances,parseAmount} from '../src/misc-ledger.ts';
 import {MEMBERS} from '../src/ledger.ts';
@@ -127,4 +128,21 @@ test('icon catalog upgrade preserves existing ledgers and accepts new icons with
  for(const icon_id of ['',null,{},'<svg>','https://example.com/icon','UPPER','two--dashes','-leading','trailing-','a'.repeat(41)]) {
   await assert.rejects(save(draft({icon_id})),/available icon/);
  }
+});
+test('targeted cleanup removes only a deleted expense and its revisions, and rejects active or stale targets',async()=>{
+ const sql=(id:string,version:number)=>execFileSync('uv',['run','--frozen','python','-c',"import sys; sys.path.insert(0,'scripts'); from remove_deleted_expense import cleanup_sql; print(cleanup_sql(sys.argv[1],int(sys.argv[2])))",id,String(version)],{encoding:'utf8'});
+ const active=await save(draft());
+ await assert.rejects(db.exec(sql(active.id,1)),/active or its version changed/);
+ await save({action:'delete',id:active.id,expected_version:1,request_id:randomUUID(),actor:'rina'});
+ const before=await dashboard();
+ await assert.rejects(db.exec(sql(active.id,1)),/active or its version changed/);
+ const cleanup=sql(active.id,2);
+ await db.exec(cleanup);
+ const after=await dashboard();
+ assert.deepEqual(after.expenses,before.expenses.filter((e:any)=>e.id!==active.id));
+ assert.deepEqual(after.expense_history,before.expense_history.filter((e:any)=>e.id!==active.id));
+ for(const k of ['settlements','settlement_history','pairs','rounding_cursor'])assert.deepEqual(after[k],before[k]);
+ assert.equal((await db.query('SELECT count(*)::int AS count FROM ledger_private.misc_expense_events WHERE record_id=$1',[active.id])).rows[0].count,0);
+ await db.exec(cleanup);
+ assert.deepEqual((await dashboard()).expenses,after.expenses);
 });

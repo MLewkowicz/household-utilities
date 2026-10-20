@@ -2,6 +2,7 @@ import { MEMBERS, type Member } from './ledger';
 import { equalShares, parseAmount, type Expense, type Settlement, type MiscLedger, type Shares, type Pair } from './misc-ledger';
 import { $, esc, money, name, date, today, saved, remember, rpc, toast, download } from './ui';
 import { CATEGORIES, getIcon, iconSvg, suggestIcons, searchIcons } from './icons';
+import { initCalculator, openCalculator } from './calculator-ui';
 
 let ledger: MiscLedger|undefined, live=false, loading=false, busy=false;
 let identity: Member|null=MEMBERS.includes(saved('household-person') as Member)?saved('household-person') as Member:null;
@@ -33,8 +34,9 @@ export function initMisc() {
   <dialog id="expense-dialog" class="expense-dialog" aria-labelledby="expense-title"><form id="expense-form"><div class="dialog-top"><div class="eyebrow">ONE LITTLE THING</div><button type="button" class="icon-button" data-close="expense-dialog" aria-label="Close expense form">×</button></div><h2 id="expense-title">Add an expense</h2>
    <div class="expense-hero"><span id="chosen-icon" class="chosen-icon"></span><label>What did you buy?<input id="expense-description" maxlength="160" placeholder="e.g. paper towels for the kitchen" required autocomplete="off"></label></div>
    <div class="icon-suggestions" id="icon-suggestions" aria-label="Suggested purchase icons"></div>
+   <label class="inline-check icon-name-option"><input type="checkbox" id="icon-fill-name" checked> Use icon name as description</label>
    <details class="icon-picker" id="icon-picker"><summary>Choose an icon <span id="chosen-icon-label">Receipt</span></summary><div class="picker-controls"><label class="sr-only" for="icon-search">Search icons</label><input id="icon-search" placeholder="Try milk, cleaning, or travel" type="search"><label class="sr-only" for="icon-category">Icon category</label><select id="icon-category"><option value="">All categories</option>${CATEGORIES.map(c=>`<option>${c}</option>`).join('')}</select></div><div id="icon-grid" class="icon-grid"></div></details>
-   <div class="form-row"><label>Purchase amount<span class="amount-input"><span>$</span><input id="expense-amount" aria-label="Purchase amount" inputmode="decimal" placeholder="0.00" required autocomplete="off"></span></label><label>Purchase date<input id="expense-date" type="date" required></label></div>
+   <div class="form-row"><div class="amount-field"><label>Purchase amount<span class="amount-input"><span>$</span><input id="expense-amount" aria-label="Purchase amount" inputmode="decimal" placeholder="0.00" required autocomplete="off"></span></label><button type="button" class="text-button calculator-link" data-calculate="expense" aria-label="Calculate purchase amount">Calculator</button></div><label>Purchase date<input id="expense-date" type="date" required></label></div>
    <div id="expense-payer-line" class="payer-line"></div><label id="expense-payer-label" hidden>Who paid?<select id="expense-payer">${options()}</select></label>
    <fieldset><legend>How should we split it?</legend><div class="method-options split-options"><label><input type="radio" name="split-mode" value="equal" checked><span>Equally</span></label><label><input type="radio" name="split-mode" value="custom"><span>Custom amounts</span></label></div></fieldset>
    <div class="split-heading"><h3>Share with</h3><label class="inline-check"><input type="checkbox" id="include-self" checked> Include my share</label></div>
@@ -43,14 +45,14 @@ export function initMisc() {
    <div id="expense-error" class="form-error" role="alert" hidden></div><button id="reload-expense" type="button" class="text-button" hidden>Load latest version</button>
    <div class="dialog-actions"><button type="button" class="button secondary" data-close="expense-dialog">Cancel</button><button id="save-expense" class="button primary" type="submit">Add expense</button></div><p class="dialog-footnote" id="expense-actor"></p>
   </form></dialog>
-  <dialog id="settlement-dialog" aria-labelledby="settlement-title"><form id="settlement-form"><div class="dialog-top"><div class="eyebrow">SQUARE THINGS UP</div><button type="button" class="icon-button" data-close="settlement-dialog" aria-label="Close repayment form">×</button></div><h2 id="settlement-title">Record a repayment</h2><p class="dialog-description">For shared purchases. Add money that has already been sent.</p>
+  <dialog id="settlement-dialog" aria-labelledby="settlement-title"><form id="settlement-form"><div class="dialog-top"><div class="eyebrow">SQUARE THINGS UP</div><button type="button" class="icon-button" data-close="settlement-dialog" aria-label="Close repayment form">×</button></div><h2 id="settlement-title" tabindex="-1" autofocus>Record a repayment</h2><p class="dialog-description">For shared purchases. Add money that has already been sent.</p>
    <div class="form-row"><label>Who sent it?<select id="settlement-sender">${options()}</select></label><label>Who received it?<select id="settlement-recipient">${options()}</select></label></div>
-   <label>Repayment amount<span class="amount-input"><span>$</span><input id="settlement-amount" aria-label="Repayment amount" inputmode="decimal" placeholder="0.00" required autocomplete="off"></span></label><p id="repayment-balance" class="split-status" role="status"></p>
+   <div class="amount-field"><label>Repayment amount<span class="amount-input"><span>$</span><input id="settlement-amount" aria-label="Repayment amount" inputmode="decimal" placeholder="0.00" required autocomplete="off"></span></label><button type="button" class="text-button calculator-link" data-calculate="settlement" aria-label="Calculate repayment amount">Calculator</button></div><p id="repayment-balance" class="split-status" role="status"></p>
    <label>Repayment date<input id="settlement-date" type="date" required></label><fieldset><legend>Sent with</legend><div class="method-options">${['venmo','zelle','other'].map(m=>`<label><input type="radio" name="settlement-method" value="${m}" ${m==='venmo'?'checked':''}><span>${name(m)}</span></label>`).join('')}</div></fieldset><label id="settlement-other-label" hidden>How was it sent?<input id="settlement-other" maxlength="80" placeholder="e.g. cash"><small>Don’t include account or contact details.</small></label>
    <div id="settlement-error" class="form-error" role="alert" hidden></div><button type="button" id="reload-settlement" class="text-button" hidden>Load latest version</button><div class="dialog-actions"><button type="button" class="button secondary" data-close="settlement-dialog">Cancel</button><button id="save-settlement" class="button primary" type="submit">Save repayment</button></div><p id="settlement-actor" class="dialog-footnote"></p>
   </form></dialog>
   <dialog id="misc-delete-dialog" aria-labelledby="misc-delete-title"><form id="misc-delete-form"><div class="eyebrow">CORRECT THE RECORD</div><h2 id="misc-delete-title">Delete this entry?</h2><p id="misc-delete-description" class="dialog-description"></p><p class="dialog-description">It will be removed from balances. The entry and its history stay available under Show deleted.</p><div id="misc-delete-error" class="form-error" role="alert" hidden></div><div class="dialog-actions"><button type="button" class="button secondary" data-close="misc-delete-dialog">Keep entry</button><button id="confirm-misc-delete" class="button danger" type="submit">Delete entry</button></div><p id="misc-delete-actor" class="dialog-footnote"></p></form></dialog>`);
- bindEvents();renderIdentity();renderIconGrid();
+ initCalculator();bindEvents();renderIdentity();renderIconGrid();
 }
 
 function renderIdentity() {
@@ -133,7 +135,7 @@ function renderParticipants() {
  input('include-self').checked=participants.has(payer);
  $('#participant-tiles').innerHTML=MEMBERS.filter(m=>m!==payer).map(m=>`<button type="button" class="person-tile member-${m}" data-participant="${m}" aria-pressed="${participants.has(m)}">${avatar(m)}<span>${name(m)}</span><strong data-share-value="${m}">—</strong><span class="tile-check" aria-hidden="true">${participants.has(m)?'✓':'＋'}</span></button>`).join('');
  $('#self-share').innerHTML=`${avatar(payer)}<span>${name(payer)}’s own share</span><strong data-share-value="${payer}">—</strong>`;
- $('#custom-shares').innerHTML=selectedParticipants().map(m=>`<label class="custom-share-row member-${m}">${avatar(m)}<span>${name(m)}</span><span class="compact-amount"><span>$</span><input data-custom-share="${m}" aria-label="${name(m)}’s share" inputmode="decimal" value="${esc(customDraft[m]??'0.00')}"></span></label>`).join('');
+ $('#custom-shares').innerHTML=selectedParticipants().map(m=>`<div class="custom-share-row member-${m}">${avatar(m)}<label for="custom-share-${m}">${name(m)}</label><span class="compact-amount"><span>$</span><input id="custom-share-${m}" data-custom-share="${m}" aria-label="${name(m)}’s share" inputmode="decimal" value="${esc(customDraft[m]??'0.00')}"></span><button type="button" class="share-calculator" data-calculate="${m}" aria-label="Calculate ${name(m)}’s share" title="Calculator">÷</button></div>`).join('');
  $('#custom-shares').hidden=splitMode()!=='custom';
  $('#expense-payer-line').innerHTML=`${avatar(payer)}<span>Paid by ${memberChip(payer)}</span>`;
  updateSplitPreview();
@@ -161,12 +163,12 @@ function updateSplitPreview() {
 function updateChosenIcon() {
  $('#chosen-icon').innerHTML=iconSvg(chosenIcon);$('#chosen-icon-label').textContent=getIcon(chosenIcon).label;
  const suggestions=suggestIcons(input('expense-description').value);
- $('#icon-suggestions').innerHTML=suggestions.length?`<span>Looks like</span>${suggestions.map(i=>`<button type="button" data-icon="${i.id}" class="suggestion-chip" aria-pressed="${i.id===chosenIcon}">${iconSvg(i.id)}${i.label}</button>`).join('')}`:'';
- document.querySelectorAll<HTMLElement>('#icon-grid [data-icon]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.icon===chosenIcon)));
+ $('#icon-suggestions').innerHTML=suggestions.length?`<span>${input('icon-fill-name').checked?'Tap to name it':'Choose an icon'}</span>${suggestions.map(i=>`<button type="button" data-icon="${i.id}" class="suggestion-chip" aria-pressed="${manualIcon&&i.id===chosenIcon}">${iconSvg(i.id)}${i.label}</button>`).join('')}`:'';
+ document.querySelectorAll<HTMLElement>('#icon-grid [data-icon]').forEach(el=>el.setAttribute('aria-pressed',String(manualIcon&&el.dataset.icon===chosenIcon)));
 }
 function renderIconGrid() {
  const icons=searchIcons(input('icon-search').value,input('icon-category').value);
- $('#icon-grid').innerHTML=icons.map(i=>`<button type="button" data-icon="${i.id}" class="icon-choice" aria-label="${i.label} icon" aria-pressed="${chosenIcon===i.id}">${iconSvg(i.id)}<span>${i.label}</span></button>`).join('')||'<p class="section-copy">No matching icons. Try a broader word or another category.</p>';
+ $('#icon-grid').innerHTML=icons.map(i=>`<button type="button" data-icon="${i.id}" class="icon-choice" aria-label="${i.label} icon" aria-pressed="${manualIcon&&chosenIcon===i.id}">${iconSvg(i.id)}<span>${i.label}</span></button>`).join('')||'<p class="section-copy">No matching icons. Try a broader word or another category.</p>';
 }
 function openExpense(entry?:Expense) {
  if(!identity||!live||busy)return;
@@ -208,7 +210,7 @@ function openSettlement(entry?:Settlement,pair?:Pair) {
  $('#settlement-title').textContent=entry?'Edit repayment':'Record a repayment';
  $('#settlement-actor').textContent=`${entry?'Editing':'Recording'} as ${name(identity)}`;
  message('settlement-error','');$('#reload-settlement').hidden=true;updateSettlement();
- $<HTMLDialogElement>('#settlement-dialog').showModal();input('settlement-amount').focus();
+ $<HTMLDialogElement>('#settlement-dialog').showModal();$('#settlement-title').focus({preventScroll:true});
 }
 function openDelete(kind:'expense'|'settlement',entry:Expense|Settlement) {
  if(!identity||busy||!live)return;
@@ -299,6 +301,7 @@ function bindEvents() {
  document.querySelectorAll<HTMLElement>('[data-close]').forEach(b=>b.addEventListener('click',()=>{if(!busy)$<HTMLDialogElement>('#'+b.dataset.close).close();}));
  for(const id of ['expense-dialog','settlement-dialog','misc-delete-dialog'])$('#'+id).addEventListener('cancel',event=>{if(busy)event.preventDefault();});
  $('#expense-description').addEventListener('input',()=>{if(!manualIcon)chosenIcon=suggestIcons(input('expense-description').value)[0]?.id||'receipt';updateChosenIcon();});
+ $('#icon-fill-name').addEventListener('change',updateChosenIcon);
  $('#expense-amount').addEventListener('input',updateSplitPreview);
  $('#expense-payer').addEventListener('change',renderParticipants);
  $('#include-self').addEventListener('change',()=>{const m=input('expense-payer').value as Member;input('include-self').checked?participants.add(m):participants.delete(m);renderParticipants();});
@@ -317,12 +320,32 @@ function bindEvents() {
  }));
  function pickIcon(event:Event){
   const button=(event.target as HTMLElement).closest<HTMLElement>('[data-icon]');if(!button)return;
-  chosenIcon=button.dataset.icon!;manualIcon=true;updateChosenIcon();$<HTMLDetailsElement>('#icon-picker').open=false;$('#icon-picker summary').focus();
+  chosenIcon=button.dataset.icon!;manualIcon=true;if(input('icon-fill-name').checked)input('expense-description').value=getIcon(chosenIcon).label;
+  updateChosenIcon();$<HTMLDetailsElement>('#icon-picker').open=false;$('#icon-picker summary').focus();
  }
  $('#icon-grid').addEventListener('click',pickIcon);$('#icon-suggestions').addEventListener('click',pickIcon);
  $('#icon-search').addEventListener('input',renderIconGrid);$('#icon-category').addEventListener('change',renderIconGrid);
  $('#expense-form').addEventListener('submit',saveExpense);$('#settlement-form').addEventListener('submit',saveSettlement);$('#misc-delete-form').addEventListener('submit',deleteEntry);
  $('#settlement-form').addEventListener('input',updateSettlement);$('#settlement-form').addEventListener('change',updateSettlement);
+ for(const id of ['expense-form','settlement-form'])$('#'+id).addEventListener('click',event=>{
+  const button=(event.target as HTMLElement).closest<HTMLElement>('[data-calculate]');if(!button||busy||!live)return;
+  const target=button.dataset.calculate!;
+  if(target==='expense'||target==='settlement'){
+   const field=input(target==='expense'?'expense-amount':'settlement-amount');
+   openCalculator({title:target==='expense'?'Purchase calculator':'Repayment calculator',initial:field.value,onUse:cents=>{
+    field.value=(cents/100).toFixed(2);target==='expense'?updateSplitPreview():updateSettlement();
+   }});
+  }else{
+   const member=target as Member;let total:number;
+   try{total=parseAmount(input('expense-amount').value);}catch{message('expense-error','Enter the purchase amount before calculating a share.');return;}
+   message('expense-error','');
+   openCalculator({title:`${name(member)}’s share`,initial:customDraft[member]||'',totalCents:total,allowZero:true,canSplitRest:participants.size>1,onUse:(cents,splitRest)=>{
+    customDraft[member]=(cents/100).toFixed(2);
+    if(splitRest){const others=selectedParticipants().filter(m=>m!==member),shares=equalShares(total-cents,others,ledger!.rounding_cursor);for(const m of others)customDraft[m]=(shares[m]!/100).toFixed(2);}
+    renderParticipants();
+   }});
+  }
+ });
  $('#reload-expense').addEventListener('click',()=>{
   const latest=ledger?.expenses.find(e=>e.id===expenseId);if(latest&&!latest.deleted){$<HTMLDialogElement>('#expense-dialog').close();openExpense(latest);}else{$<HTMLDialogElement>('#expense-dialog').close();toast('This expense was deleted.');}
  });

@@ -16,5 +16,8 @@ test('specific foods and toiletries are discoverable by name and common shopping
     assert.ok(searchIcons(description, icon.category).some(icon => icon.id === id), description);
   }
   assert.equal(getIcon('future-food-icon').id, 'receipt');
+  assert.equal(suggestIcons('past')[0]?.id, 'pasta');
+  assert.equal(suggestIcons('pap')[0]?.id, 'paper-towels');
+  assert.equal(suggestIcons('sham')[0]?.id, 'shampoo');
   assert.equal(iconSvg('<script>alert(1)</script>'), iconSvg('receipt'));
 });

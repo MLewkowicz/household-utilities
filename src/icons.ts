@@ -52,7 +52,7 @@ const normalize = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g,' '
 export function suggestIcons(text: string): Icon[] {
   const phrase=normalize(text); if(!phrase) return [];
   const words=phrase.split(' ').filter(w=>w.length>2);
-  return ICONS.map(icon=>({icon,score:(phrase.includes(normalize(icon.label))?20:0)+words.reduce((s,w)=>s+((' '+icon.keywords+' ').includes(' '+w+' ')?w.length:0),0)}))
+  return ICONS.map(icon=>({icon,score:(phrase.includes(normalize(icon.label))?20:normalize(icon.label).startsWith(phrase)?8:0)+words.reduce((s,w)=>s+((' '+icon.keywords+' ').includes(' '+w+' ')?w.length:icon.keywords.split(' ').some(k=>k.startsWith(w))?w.length/2:0),0)}))
     .filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,4).map(x=>x.icon);
 }
 export function searchIcons(query: string,category: string): Icon[] {
