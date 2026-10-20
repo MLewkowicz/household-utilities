@@ -15,7 +15,7 @@ const port=Number(process.env.PORT||4173);
 const server=createServer(async(req,res)=>{
   try {
     const path=new URL(req.url,'http://localhost').pathname;
-    if(path==='/config.js') {
+    if(path==='/config.js'||/^\/config-[a-f0-9]{12}\.js$/.test(path)) {
       res.writeHead(200,{'content-type':'application/javascript','cache-control':'no-store'});
       return res.end(`window.UTILITIES_CONFIG=${JSON.stringify({url:`http://127.0.0.1:${port}`,key:'local-public'})};`);
     }
