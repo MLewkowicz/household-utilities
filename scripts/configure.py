@@ -22,7 +22,7 @@ def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
         print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
-        print("Existing projects need only 002_rotating_rounding.sql; do not rerun 001.")
+        print("Projects with rotating rounding need only 003_miscellaneous.sql; do not rerun installed migrations.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
         print("Create a personal access token at https://supabase.com/dashboard/account/tokens")
@@ -43,7 +43,11 @@ def main():
             request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/002_rotating_rounding.sql").read_text()})
             print("Rotating rounding installed; bill and payment history preserved.")
         else:
-            print("Database migrations are up to date.")
+            print("Rotating rounding is already installed.")
+        misc = request(base + "/database/query", token, {"query": "SELECT to_regprocedure('public.utilities_misc_dashboard()')::text AS fn"})
+        if not misc or not misc[0].get("fn"):
+            request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/003_miscellaneous.sql").read_text()})
+            print("Miscellaneous ledger installed, initially empty. Utilities preserved.")
         keys = request(base + "/api-keys", token)
         candidates = [k for k in keys if k.get("name") == "service_role" or k.get("type") == "secret"]
         if not candidates:
@@ -57,7 +61,7 @@ def main():
     with os.fdopen(fd, "w") as out:
         out.write(f"SUPABASE_SECRET_KEY={key}\n")
     print("Importer configured in .env.local (excluded from Git).")
-    print("Next: ./import-bills.sh --initial-august")
+    print("Use ./import-bills.sh for new statements, or ./export-ledgers.sh to refresh both saved snapshots.")
 
 if __name__ == "__main__":
     try:

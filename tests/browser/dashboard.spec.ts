@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 test('dark dashboard, monthly proration, and shared payment lifecycle',async({page,browser})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('/');await expect(page.getByText('Shared ledger · up to date')).toBeVisible();
+ await page.emulateMedia({colorScheme:'dark'});await page.goto('/');await expect(page.getByText('Shared ledger · up to date')).toBeVisible();
  await expect(page.locator('.balance-card')).toHaveCount(4);
  await expect(page.locator('body')).toHaveCSS('background-color','rgba(0, 0, 0, 0)');
  await page.getByRole('button',{name:'Rohil',exact:true}).click();
@@ -14,8 +14,8 @@ test('dark dashboard, monthly proration, and shared payment lifecycle',async({pa
  const initial=await rinaCard.locator('.balance-amount').textContent();
  await expect(rinaCard.locator('.balance-amount')).toHaveText('$126.77');
  await expect(page.locator('.balance-card.member-ohm .balance-amount')).toHaveText('$126.77');
- await page.locator('#new-payment').click();await page.getByLabel('Who paid?').selectOption('rina');
- await page.getByLabel('Amount',{exact:true}).fill('13.37');await page.getByText('Other',{exact:true}).click();
+ await page.locator('#new-payment').click();await page.locator('#payment-dialog').getByLabel('Who paid?').selectOption('rina');
+ await page.getByLabel('Amount',{exact:true}).fill('13.37');await page.locator('#payment-dialog').getByText('Other',{exact:true}).click();
  await page.getByLabel('How did you pay?').fill('cash');await page.getByRole('button',{name:'Confirm payment',exact:true}).click();
  await expect(page.locator('#payment-dialog')).not.toBeVisible();
  await expect(page.locator('.payment-row')).toContainText('$13.37');

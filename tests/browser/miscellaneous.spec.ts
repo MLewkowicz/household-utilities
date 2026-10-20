@@ -1,0 +1,91 @@
+import {test,expect,type Page} from '@playwright/test';
+const rpc=async(page:Page,name:string,p?:unknown)=>(await page.request.post(`/rest/v1/rpc/utilities_${name}`,{headers:{apikey:'local-public'},data:p?{p}:{}})).json();
+async function open(page:Page,who='rina') {
+ await page.goto('/#miscellaneous');await expect(page.locator('#misc-status')).toHaveText('Shared purchases · up to date');
+ await page.locator(`[data-identity=${who}]`).click();
+}
+test('name-first expenses, custom shares, icons, history and pair repayments stay separate from utilities',async({page,browser})=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ const utilityBefore=await rpc(page,'dashboard');
+ await page.goto('/#miscellaneous');await expect(page.locator('#identity-panel')).toBeVisible();
+ await expect(page.locator('#new-expense')).toBeDisabled();await page.locator('[data-identity=rina]').click();
+ await page.locator('#new-expense').click();await page.getByLabel('What did you buy?').fill('Paper towels <b>for home</b>');
+ await page.getByLabel('Purchase amount',{exact:true}).fill('24.00');
+ await expect(page.locator('#chosen-icon-label')).toHaveText('Paper towels');
+ await expect(page.locator('#participant-tiles [aria-pressed=true]')).toHaveCount(3);
+ await expect(page.locator('#self-share')).toContainText('$6.00');
+ await page.locator('#save-expense').click();await expect(page.locator('#expense-dialog')).not.toBeVisible();
+ const data=await rpc(page,'misc_dashboard');const entry=data.expenses.find((e:any)=>e.description==='Paper towels <b>for home</b>');
+ const card=page.locator(`[data-entry-id="${entry.id}"]`);
+ await expect(card.locator('h3')).toHaveText('Paper towels <b>for home</b>');await expect(card.locator('h3 b')).toHaveCount(0);
+ await expect(page.locator('#misc-balances .member-rina')).toContainText('$18.00');
+ const other=await browser.newPage();await other.goto('http://127.0.0.1:4174/#miscellaneous');
+ await expect(other.locator(`[data-entry-id="${entry.id}"]`)).toBeVisible();await other.close();
+ await card.getByRole('button',{name:/^Edit /}).click();await page.locator('[data-participant=rohil]').click();
+ await page.getByText('Custom amounts',{exact:true}).click();
+ await page.getByLabel('Michal’s share',{exact:true}).fill('10');await page.getByLabel('Rina’s share',{exact:true}).fill('4');
+ await expect(page.locator('#split-status')).toHaveText('$2.00 left to assign');await expect(page.locator('#save-expense')).toBeDisabled();
+ await page.getByLabel('Ohm’s share',{exact:true}).fill('10');await expect(page.locator('#split-status')).toHaveText('Every cent accounted for.');
+ await page.locator('#icon-picker summary').click();await page.getByLabel('Search icons',{exact:true}).fill('milk');
+ await page.getByRole('button',{name:'Milk icon',exact:true}).click();
+ await page.getByLabel('What did you buy?').fill('Paper towels and milk');await expect(page.locator('#chosen-icon-label')).toHaveText('Milk');
+ await page.locator('#save-expense').click();await expect(page.locator('#expense-dialog')).not.toBeVisible();
+ await expect(card).toContainText('Edited');await expect(page.locator('#misc-feed .expense-card')).toHaveCount(1);
+ await card.locator('summary').click();await expect(card.locator('.entry-history')).toContainText('Edited by Rina');await expect(card.locator('.entry-history')).toContainText('Rohil');
+ await page.locator('.pair-card').filter({hasText:'Ohm owes Rina'}).getByRole('button').click();
+ await expect(page.locator('#settlement-amount')).toHaveValue('10.00');
+ await page.locator('#settlement-form').getByText('Other',{exact:true}).click();await page.getByLabel('How was it sent?').fill('cash');
+ await page.locator('#save-settlement').click();await expect(page.locator('#settlement-dialog')).not.toBeVisible();
+ await expect(page.locator('.pair-card').filter({hasText:'Ohm owes Rina'})).toHaveCount(0);
+ await card.getByRole('button',{name:/^Delete /}).click();await page.locator('#confirm-misc-delete').click();await expect(page.locator('#misc-delete-dialog')).not.toBeVisible();
+ await expect(page.locator('.pair-card').filter({hasText:'Rina owes Ohm'})).toContainText('$10.00');
+ const repayment=page.locator('#misc-feed .expense-card');await repayment.getByRole('button',{name:'Delete repayment'}).click();
+ await page.locator('#confirm-misc-delete').click();await expect(page.locator('#misc-delete-dialog')).not.toBeVisible();
+ await expect(page.locator('#misc-pairs')).toContainText('Everyone’s square.');
+ await page.getByLabel('Show deleted').check();await expect(page.locator('#misc-feed .expense-card')).toHaveCount(2);
+ await card.locator('summary').click();await expect(card.locator('.entry-history')).toContainText('Deleted by Rina');
+ const utilityAfter=await rpc(page,'dashboard');for(const key of ['bills','allocations','history','bill_history'])expect(utilityAfter[key]).toEqual(utilityBefore[key]);
+ expect(errors).toEqual([]);
+});
+
+test('themes, identity, hash navigation and icon browsing work on phones and persist',async({page})=>{
+ await page.setViewportSize({width:390,height:844});await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});
+ await open(page,'michal');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
+ await page.getByLabel('Color theme').selectOption('light');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+ await page.getByRole('link',{name:'Utilities',exact:true}).click();await expect(page.locator('#utilities-page')).toBeVisible();
+ await page.goBack();await expect(page.locator('#misc-page')).toBeVisible();await page.reload();
+ await expect(page.locator('#identity-name')).toContainText('You’re Michal');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+ await page.getByLabel('Color theme').selectOption('system');await page.emulateMedia({colorScheme:'light'});await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+ await page.emulateMedia({colorScheme:'dark'});await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
+ await page.locator('#new-expense').click();await page.getByLabel('What did you buy?').fill('Milk');await page.getByLabel('Purchase amount',{exact:true}).fill('9.99');
+ await page.getByLabel('Include my share').uncheck();await expect(page.locator('#self-share')).not.toBeVisible();
+ await page.locator('[data-participant=ohm]').click();await page.locator('[data-participant=rohil]').click();
+ await expect(page.locator('[data-participant=rina]')).toContainText('$9.99');
+ await page.locator('#icon-picker summary').click();await expect(page.locator('#icon-grid button')).toHaveCount(32);
+ await page.getByLabel('Icon category').selectOption('Travel');await expect(page.locator('#icon-grid button')).toHaveCount(4);
+ await page.getByRole('button',{name:'Flight icon'}).focus();await page.keyboard.press('Enter');await expect(page.locator('#chosen-icon-label')).toHaveText('Flight');
+ expect(await page.locator('#expense-dialog').evaluate(el=>el.scrollWidth<=el.clientWidth)).toBeTruthy();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
+ await page.keyboard.press('Escape');await expect(page.locator('#expense-dialog')).not.toBeVisible();
+ await page.locator('#switch-person').click();await page.locator('[data-identity=ohm]').click();await expect(page.locator('#identity-name')).toContainText('You’re Ohm');
+});
+
+test('lost save responses can be retried without duplicate entries or extra rounding turns',async({page})=>{
+ await open(page);await page.locator('#new-expense').click();await page.getByLabel('What did you buy?').fill('Retry test');await page.getByLabel('Purchase amount',{exact:true}).fill('0.01');
+ await page.route('**/rpc/utilities_save_misc_expense',async route=>{await route.fetch();await route.abort();},{times:1});
+ await page.locator('#save-expense').click();await expect(page.locator('#expense-error')).toBeVisible();await expect(page.locator('#save-expense')).toBeEnabled();
+ const once=await rpc(page,'misc_dashboard');const e=once.expenses.find((e:any)=>e.description==='Retry test');expect(e).toBeTruthy();
+ await page.locator('#save-expense').click();await expect(page.locator('#expense-dialog')).not.toBeVisible();
+ const twice=await rpc(page,'misc_dashboard');expect(twice.expense_history.filter((x:any)=>x.id===e.id)).toHaveLength(1);expect(twice.rounding_cursor).toBe(once.rounding_cursor);
+ await rpc(page,'save_misc_expense',{action:'delete',id:e.id,expected_version:1,request_id:crypto.randomUUID(),actor:'rina'});
+});
+
+test('miscellaneous failures preserve drafts, disable writes offline, and do not block utilities',async({page})=>{
+ await open(page);await page.locator('#new-expense').click();await page.getByLabel('What did you buy?').fill('Keep this draft');await page.getByLabel('Purchase amount',{exact:true}).fill('5');
+ await page.route('**/rpc/utilities_save_misc_expense',route=>route.fulfill({status:400,contentType:'application/json',body:JSON.stringify({message:'Review this purchase before saving'})}));
+ await page.locator('#save-expense').click();await expect(page.locator('#expense-error')).toHaveText('Review this purchase before saving');await expect(page.getByLabel('What did you buy?')).toHaveValue('Keep this draft');
+ await page.keyboard.press('Escape');
+ await page.route('**/rpc/utilities_misc_dashboard',route=>route.abort());await page.reload();
+ await expect(page.locator('#misc-status')).toHaveText('Viewing saved purchases');await expect(page.locator('#new-expense')).toBeDisabled();await expect(page.locator('#new-settlement')).toBeDisabled();
+ await page.getByRole('link',{name:'Utilities',exact:true}).click();await expect(page.getByText('Shared ledger · up to date')).toBeVisible();await expect(page.locator('#new-payment')).toBeEnabled();
+});

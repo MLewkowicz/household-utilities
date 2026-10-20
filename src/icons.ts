@@ -1,0 +1,52 @@
+type Icon = { id: string; label: string; category: string; keywords: string; art: string };
+const rows: [string,string,string,string,string][] = [
+ ['toilet-paper','Toilet paper','Household supplies','toilet paper tissue bathroom tp','<path fill="#faf5e9" d="M12 12h18v23H12z"/><ellipse fill="#fff" cx="12" cy="23" rx="7" ry="11"/><ellipse cx="12" cy="23" rx="2" ry="4"/><path fill="#f5edd9" d="M30 12q10 0 10 11v15l-4-2-3 3-3-2V23"/><path stroke-dasharray="2 3" d="M31 26h9"/>'],
+ ['paper-towels','Paper towels','Household supplies','paper towels kitchen roll napkins','<path fill="#fff5d8" d="M12 11h19v28H12z"/><ellipse fill="#fff" cx="21.5" cy="11" rx="9.5" ry="4"/><ellipse cx="21.5" cy="11" rx="3" ry="1.5"/><path fill="#f9e6b4" d="M31 15q9 2 9 8v16l-4-2-5 2z"/><path stroke-dasharray="2 3" d="M33 27h6"/>'],
+ ['cleaning-spray','Cleaning spray','Household supplies','cleaning spray cleaner detergent bleach disinfectant household supplies','<path fill="#a9ded5" d="M18 19h11l5 10v12H13V29z"/><path fill="#f3d38a" d="M18 8h17v6h-8v5h-9z"/><path d="M28 14l5 8M39 9h4m-4 5 3 2"/><rect fill="#fff" x="17" y="27" width="13" height="8" rx="2"/>'],
+ ['sponge','Sponge','Household supplies','sponge scrub dish soap dishes washing','<path fill="#98c8b0" d="M8 18q16-6 32 0v15q-16 6-32 0z"/><path fill="#f5d688" d="M8 14q16-6 32 0v14q-16 6-32 0z"/><path d="M14 17h1m8 3h1m8-4h1m-18 8h1m15 1h1"/>'],
+ ['groceries','Groceries','Groceries','groceries grocery shopping market food supermarket','<path fill="#a9cba2" d="M10 18h28l-3 23H13z"/><path d="M17 20V12a7 7 0 0 1 14 0v8"/><path fill="#f4c084" d="m13 18 2-11 6 1 1 10"/><path fill="#b9dfb7" d="M27 17q-7-12 2-12 3 0 3 4 7-3 8 3 0 6-13 5"/>'],
+ ['milk','Milk','Groceries','milk dairy oat milk almond milk carton','<path fill="#fff6e1" d="M14 13h20v28H14z"/><path fill="#9ed5e3" d="m14 13 5-7h10l5 7z"/><path fill="#b9e2ec" d="M14 23h20v12H14z"/><path d="M19 6v7m10-7v7"/><path fill="#fff" d="M24 25q-7 9 0 9t0-9z"/>'],
+ ['bread','Bread','Groceries','bread toast loaf bagel bakery sandwich','<path fill="#e6b47d" d="M12 21C1 12 14 4 24 9c10-5 23 3 12 12v19H12z"/><path fill="#f9dfb2" d="M17 23c-9-7 0-13 7-9 7-4 16 2 7 9v12H17z"/>'],
+ ['produce','Produce','Groceries','fruit vegetables produce apple banana salad berries','<path fill="#ed9c8a" d="M24 16C4 7 4 38 19 40q5-3 10 0C44 38 44 7 24 16z"/><path d="M24 16q-3-8 2-12"/><path fill="#acd4a5" d="M26 10q4-10 13-5-3 9-13 5"/><path stroke="#fff0e7" d="M14 23q-2 7 2 10"/>'],
+ ['plate','Dining','Food and drinks','dinner lunch restaurant dining meal breakfast food','<circle fill="#f5ead7" cx="26" cy="25" r="15"/><circle fill="#fff" cx="26" cy="25" r="10"/><path d="M5 7v13m-3-13v8q3 6 6 0V7M5 20v21M44 7v34m0-34q-7 14 0 15"/>'],
+ ['takeaway','Takeaway','Food and drinks','takeout takeaway delivery doordash uber eats grubhub','<path fill="#f4d8b0" d="m9 17 6 24h18l6-24z"/><path fill="#fff3df" d="m9 17 8-10h14l8 10-15 4z"/><path d="M13 13 5 5m17 7L14 3M17 27h14m-11 5h8"/>'],
+ ['coffee','Coffee','Food and drinks','coffee cafe tea latte drinks','<path fill="#d0b9e3" d="M12 17h23l-3 25H15z"/><path fill="#fff" d="M9 13h29v5H9zm5-6h19v6H14z"/><path fill="#f8ecda" d="M14 25h19l-1 9H15z"/><path d="M20 3v2m8-3v3"/>'],
+ ['pizza','Pizza','Food and drinks','pizza slice','<path fill="#f7d77e" d="m9 13 31 1-11 28z"/><path fill="#d59b67" d="M8 10q16-7 33 0l-1 5q-14-5-30 0z"/><circle fill="#de8a79" cx="22" cy="20" r="3"/><circle fill="#de8a79" cx="30" cy="27" r="3"/><path d="m16 16 1 1m11 19 1 1m6-16 1-1"/>'],
+ ['car','Car','Transport','car uber lyft taxi cab ride rideshare','<path fill="#a5d7e2" d="m8 24 5-12h22l5 12v12H8z"/><path fill="#ecf5f1" d="m15 15-3 9h24l-3-9z"/><rect fill="#526365" x="10" y="34" width="7" height="6" rx="2"/><rect fill="#526365" x="31" y="34" width="7" height="6" rx="2"/><path d="M12 29h5m14 0h5m-16 3h8"/>'],
+ ['bus','Bus','Transport','bus transit shuttle public transport','<rect fill="#f1d28d" x="10" y="6" width="28" height="32" rx="5"/><path fill="#d3e9e7" d="M14 14h20v12H14z"/><path d="M24 14v12m-7-16h14m-17 21h4m12 0h4"/><path fill="#526365" d="M12 38h6v4h-6zm18 0h6v4h-6z"/>'],
+ ['bicycle','Bicycle','Transport','bicycle bike cycling bikeshare bluebikes','<circle fill="#e0eee6" cx="11" cy="32" r="9"/><circle fill="#e0eee6" cx="37" cy="32" r="9"/><path stroke="#689e98" stroke-width="2.5" d="m11 32 9-16 8 16H11m9-16h11l6 16m-9 0 6-21h5M16 12h8"/>'],
+ ['fuel','Fuel','Transport','fuel petrol gasoline gas station parking toll','<rect fill="#b4d5bb" x="9" y="7" width="21" height="33" rx="3"/><rect fill="#edf3de" x="13" y="11" width="13" height="11" rx="1"/><path d="M7 41h25m-2-22q8-1 8 8v8q0 5 4 3V17l-6-7m2 3v7h4M17 28h5"/>'],
+ ['suitcase','Suitcase','Travel','travel trip luggage suitcase vacation holiday','<rect fill="#d3b7df" x="9" y="13" width="30" height="27" rx="5"/><path d="M18 13V7h12v6m-14 7v13m16-13v13m-18 7v3m20-3v3"/><rect fill="#f5e5b0" x="22" y="20" width="8" height="10" rx="1"/>'],
+ ['airplane','Flight','Travel','flight plane airfare airline airplane','<path fill="#c9dfe9" d="m22 5 4 0 2 15 16 10-1 4-15-5-1 9 5 4v2l-8-2-8 2v-2l5-4-1-9-15 5-1-4 16-10z"/>'],
+ ['train','Train','Travel','train rail railway amtrak subway metro','<rect fill="#a8ccc7" x="12" y="5" width="24" height="31" rx="7"/><path fill="#e5f0e5" d="M16 12h16v12H16z"/><path d="M24 12v12m-6 5h2m8 0h2m-14 7-5 7m21-7 5 7m-23-3h20"/>'],
+ ['hotel','Hotel','Travel','hotel accommodation lodging airbnb hostel stay','<path fill="#edc99c" d="M10 8h28v34H10z"/><path fill="#a9cbd6" d="M20 31h8v11h-8z"/><path d="M16 14h3m10 0h3m-16 7h3m10 0h3m-16 7h3m10 0h3M7 42h34"/>'],
+ ['furniture','Furniture','Home','furniture sofa couch chair home furnishing','<rect fill="#bdb4de" x="9" y="13" width="30" height="20" rx="6"/><path fill="#d6cbea" d="M7 24q5-3 7 3v4h20v-4q2-6 7-3v14H7z"/><path d="M11 38v4m26-4v4M24 15v14"/>'],
+ ['light-bulb','Light bulb','Home','light bulb lamp lighting bulb batteries','<path fill="#f5d98b" d="M17 31C1 12 20 2 29 9c11 7 6 15 2 22z"/><path fill="#b6cecd" d="M18 31h12v8H18z"/><path d="M20 42h8m-10-7h12M24 31V20m-4 0 4 4 4-4M4 9l3 3m34-3-3 3M24 2v3"/>'],
+ ['tools','Tools','Home','tools repair hardware maintenance fix screws','<path fill="#c1d6db" d="m8 5 6 6-4 4-6-6q-3 13 10 13l18 20 8-8-20-18Q23 3 8 5z"/><circle fill="#fff" cx="34" cy="36" r="2"/>'],
+ ['plant','Plant','Home','plant plants flowers garden gardening','<path fill="#cce2b7" d="M24 27Q4 24 7 9q18 0 17 18zm0-8Q23 2 41 6q0 15-17 13z"/><path d="M24 31V16M14 16l10 10m10-14-10 7"/><path fill="#e2b395" d="M14 30h21l-4 13H18z"/>'],
+ ['board-game','Board game','Entertainment','game games board game dice gaming','<rect fill="#edbdc3" x="8" y="9" width="32" height="31" rx="7"/><g fill="#fff"><circle cx="16" cy="17" r="2"/><circle cx="32" cy="17" r="2"/><circle cx="24" cy="25" r="2"/><circle cx="16" cy="33" r="2"/><circle cx="32" cy="33" r="2"/></g>'],
+ ['movie','Movie','Entertainment','movie movies cinema film netflix streaming','<path fill="#b6c6df" d="M8 16h32v25H8z"/><path fill="#eee8d9" d="m7 11 31-6 2 10-31 6z"/><path d="m14 10 5 8m5-10 5 8m-13 10h15m-15 6h9"/>'],
+ ['music','Music','Entertainment','music concert spotify album band','<path fill="#c2b5e0" d="M20 11v23q-2 9-10 7-8-4-1-9 4-2 8 0V11l22-6v24q-2 9-10 7-8-4-1-9 4-2 8 0V11z"/>'],
+ ['tickets','Tickets','Entertainment','ticket tickets event festival show admission','<path fill="#e7c291" d="M6 14h36v7q-7 3 0 6v7H6v-7q7-3 0-6z"/><path stroke-dasharray="2 3" d="M30 15v18"/><path fill="#fff2cd" d="m18 18 2 4 5 1-4 3 1 5-4-3-4 3 1-5-4-3 5-1z"/>'],
+ ['receipt','Receipt','Other','receipt purchase expense other miscellaneous','<path fill="#f4eddc" d="m12 6 4 3 4-3 4 3 4-3 4 3 4-3v36l-4-3-4 3-4-3-4 3-4-3-4 3z"/><path d="M17 16h14m-14 6h14m-14 6h7m-7 6h14"/>'],
+ ['gift','Gift','Other','gift birthday present celebration','<path fill="#edb8bf" d="M9 21h30v20H9z"/><path fill="#f5d68a" d="M6 15h36v7H6zM21 16h6v25h-6z"/><path fill="#f5d68a" d="M24 15C5 16 9 1 17 5q5 2 7 10zm0 0C43 16 39 1 31 5q-5 2-7 10z"/>'],
+ ['parcel','Parcel','Other','parcel package shipping postage delivery mail','<path fill="#d8b78d" d="m8 14 16-8 16 8v23l-16 7-16-7z"/><path fill="#f1d9b1" d="m8 14 16 8 16-8-16-8z"/><path d="M24 22v22M16 10l17 8v10l-7 3v-9"/><path fill="#fff" d="m12 23 8 4v7l-8-4z"/>'],
+ ['misc-box','Something else','Other','miscellaneous other stuff items box supplies','<path fill="#bdd2c3" d="m8 19 16-7 16 7v21H8z"/><path fill="#dce8c8" d="m8 19-5-7 15-6 6 6 6-6 15 6-5 7-16-7z"/><path d="M24 22v18m-7-11h-4m18 0h4"/>'],
+];
+export const ICONS: Icon[] = rows.map(([id,label,category,keywords,art])=>({id,label,category,keywords,art}));
+export const CATEGORIES = [...new Set(ICONS.map(i=>i.category))];
+export const getIcon = (id: string) => ICONS.find(i=>i.id===id)||ICONS.find(i=>i.id==='receipt')!;
+export function iconSvg(id: string): string {
+  return `<svg viewBox="0 0 48 48" class="purchase-icon" aria-hidden="true" fill="none" stroke="#354c4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${getIcon(id).art}</svg>`;
+}
+const normalize = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+export function suggestIcons(text: string): Icon[] {
+  const phrase=normalize(text); if(!phrase) return [];
+  const words=phrase.split(' ').filter(w=>w.length>2);
+  return ICONS.map(icon=>({icon,score:(phrase.includes(normalize(icon.label))?20:0)+words.reduce((s,w)=>s+((' '+icon.keywords+' ').includes(' '+w+' ')?w.length:0),0)}))
+    .filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,4).map(x=>x.icon);
+}
+export function searchIcons(query: string,category: string): Icon[] {
+  const words=normalize(query).split(' ').filter(Boolean);
+  return ICONS.filter(i=>(!category||i.category===category)&&words.every(w=>normalize(i.label+' '+i.keywords+' '+i.category).includes(w)));
+}

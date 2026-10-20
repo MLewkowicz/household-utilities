@@ -2,13 +2,8 @@ import { MEMBERS, UTILITIES, type Member, type Payment, type StoredBill, type Al
 type Config = { url: string; key: string };
 type RawLedger = { bills: StoredBill[]; allocations: Allocation[]; history: Payment[]; updated_at: string; bill_history?: {bill_id:string;version:number;deleted:boolean;data:StoredBill;created_at:string}[] };
 declare global { interface Window { UTILITIES_CONFIG: Config } }
-const $ = <T extends HTMLElement = HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
-const esc = (v: unknown) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
-const money = (cents: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cents / 100);
-const name = (id: string) => id[0].toUpperCase() + id.slice(1);
+import { $, esc, money, name, date, today, toast, rpc, download } from './ui';
 const title = (u: Utility) => u === 'wifi' ? 'Wi-Fi' : name(u);
-const date = (d: string, year = false) => new Date(d.slice(0,10)+'T12:00:00Z').toLocaleDateString('en-US', { month:'short',day:'numeric',...(year ? {year:'numeric'} as const : {}),timeZone:'UTC' });
-const today = () => new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const id = (): string => crypto.randomUUID();
 let ledger: RawLedger, selected: Member | 'all' = 'all', historyTab = 'payments', live = false;
 let loading = false, mutationInFlight = false;
@@ -17,16 +12,7 @@ let paymentRequest = id(), paymentId = id(), lastPaymentPayload = '', deleteRequ
 let deleting: Payment | null = null;
 const config = window.UTILITIES_CONFIG || {url:'',key:''};
 
-async function rpc<T>(functionName: string, params: Record<string,unknown> = {}): Promise<T> {
-  const headers: Record<string,string> = { 'Content-Type':'application/json', apikey: config.key };
-  if (config.key.startsWith('eyJ')) headers.Authorization = `Bearer ${config.key}`;
-  const res = await fetch(`${config.url.replace(/\/$/,'')}/rest/v1/rpc/utilities_${functionName}`, { method:'POST',headers,body:JSON.stringify(params),signal:AbortSignal.timeout(15000) });
-  const body = await res.json().catch(()=>({message:'Could not read the server response.'}));
-  if (!res.ok) throw new Error(body.message || `Could not save (${res.status}). Please try again.`);
-  return body as T;
-}
 function notice(message: string, error = false) { const el=$(error?'#error':'#notice'); el.textContent=message; el.hidden=!message; }
-function toast(message: string) { $('#toast').textContent=message; $('#toast').hidden=false; setTimeout(()=>$('#toast').hidden=true,4500); }
 function latestPayments() { const map=new Map<string,Payment>(); for(const p of ledger.history) if(!map.has(p.payment_id)||map.get(p.payment_id)!.version<p.version) map.set(p.payment_id,p); return [...map.values()].sort((a,b)=>b.paid_on.localeCompare(a.paid_on)||b.created_at.localeCompare(a.created_at)); }
 function shares(member?: Member) { return ledger.allocations.filter(a=>!member||a.member===member).reduce((s,a)=>s+a.cents,0); }
 function paid(member: Member) { return latestPayments().filter(p=>p.member_id===member&&!p.deleted).reduce((s,p)=>s+p.amount_cents,0); }
@@ -166,7 +152,5 @@ for(const dialog of ['#payment-dialog','#delete-dialog']) $(dialog).addEventList
 $('#person-filter').addEventListener('click',event=>{const b=(event.target as HTMLElement).closest<HTMLButtonElement>('button');if(!b||!ledger)return;selected=b.dataset.person as Member|'all';document.querySelectorAll('#person-filter button').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));render();});
 $('#history-tabs').addEventListener('click',event=>{const b=(event.target as HTMLElement).closest<HTMLButtonElement>('button');if(!b||!ledger)return;historyTab=b.dataset.history!;document.querySelectorAll('#history-tabs button').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));renderHistory();});
 $('#months').addEventListener('click',event=>{const b=(event.target as HTMLElement).closest<HTMLButtonElement>('[data-month]');if(!b)return;const month=b.dataset.month!;expanded.has(month)?expanded.delete(month):expanded.add(month);renderMonths();$<HTMLButtonElement>(`[data-month="${month}"]`).focus();});
-$('#refresh').addEventListener('click',()=>refresh());
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&!$<HTMLDialogElement>('#payment-dialog').open&&!$<HTMLDialogElement>('#delete-dialog').open)void refresh();});
-$('#export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify({...ledger,exported_at:new Date().toISOString()},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`utilities-ledger-${today()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);});
-void refresh();
+export { refresh as refreshUtilities };
+export function exportUtilities() { if(ledger) download({...ledger,exported_at:new Date().toISOString()},'utilities-ledger'); }

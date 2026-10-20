@@ -141,8 +141,33 @@
       "opening_before": null
     }
   ],
-  "history": [],
-  "updated_at": "2026-10-18T22:22:52.791253+00:00",
+  "history": [
+    {
+      "actor": "rohil",
+      "other": "",
+      "method": "venmo",
+      "deleted": false,
+      "paid_on": "2026-10-18",
+      "version": 1,
+      "member_id": "rohil",
+      "created_at": "2026-10-18T22:45:54.860706+00:00",
+      "payment_id": "ae132e65-9031-4058-8f15-c14b2f39a2d1",
+      "amount_cents": 4721
+    },
+    {
+      "actor": "rina",
+      "other": "",
+      "method": "venmo",
+      "deleted": false,
+      "paid_on": "2026-10-18",
+      "version": 1,
+      "member_id": "rina",
+      "created_at": "2026-10-18T22:24:33.04839+00:00",
+      "payment_id": "e0315603-71a8-42c1-ae20-9e3838b283dc",
+      "amount_cents": 12679
+    }
+  ],
+  "updated_at": "2026-10-20T02:13:35.33341+00:00",
   "allocations": [
     {
       "cents": 3352,
@@ -362,7 +387,7 @@
       "charge_index": 0
     }
   ],
-  "exported_at": "2026-10-18T22:22:52.791253+00:00",
+  "exported_at": "2026-10-20T02:13:35.33341+00:00",
   "bill_history": [
     {
       "data": {
