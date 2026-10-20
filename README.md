@@ -1,6 +1,6 @@
 # Household ledger
 
-A small dashboard for Michal, Rina, Ohm, and Rohil, with **Utilities**, **Miscellaneous**, and **Chores** tabs. GitHub Pages hosts the frontend; a free Supabase project stores shared history. There are no logins or private links. Changes are trust-based and names are self-reported. The header theme control supports System, Light, and Dark, remembers the choice on this device, and applies to all three tabs.
+A small dashboard for Michal, Rina, Ohm, and Rohil, with **Utilities**, **Miscellaneous**, **Chores**, and **Bulletin** tabs. GitHub Pages hosts the frontend; a free Supabase project stores shared history. There are no logins or private links. Changes are trust-based and names are self-reported. The header theme control supports System, Light, and Dark, remembers the choice on this device, and applies to every tab.
 
 Website: **https://mlewkowicz.github.io/household-utilities/**
 
@@ -43,7 +43,7 @@ Snapshots are published on the next code deployment. If a ledger cannot connect,
 
 Open **Chores** at the same link (`/#chores`). Your selected identity is shared with Miscellaneous and Bulletin. The live board starts empty; shortcut illustrations and the trash-cycle template are drafts until someone saves them. Chores and credit never affect money balances.
 
-- **My queue** shows your assigned work and muted unassigned requests that anyone can claim, ordered by pinned priority, overdue, due today, upcoming, and undated. Deadlines and oldest requests break ties. The Chores badge counts your distinct pinned, overdue, or due-today tasks. Visible pages refresh it every 45 seconds; nothing sends external notifications.
+- **My queue** shows your assigned work and muted unassigned requests that anyone can claim, ordered by pinned priority, overdue, due today, upcoming, and undated. Deadlines and oldest requests break ties. The Chores badge counts your distinct pinned, overdue, or due-today tasks. Visible pages refresh it every 45 seconds. Phone alerts are optional; see below.
 - **Household** defaults to unassigned requests. Use **Assignee → Everyone** to see all household chores, or choose a roommate to see their assigned work. Its assignee filter is independent of the Week filter and resets to Unassigned on a fresh page load. Anyone can claim, hand back, reassign, edit, cancel, or complete a chore. The Show filter in both My queue and Household also reveals completed, missed, expired, and cancelled history within that view; the Week agenda retains its assignee filter. Each task has one card with expandable revisions, including the actor and optional change notes.
 - **Week** is a Monday–Sunday agenda, with previous/next/Today and an assignee filter. It becomes a stacked agenda on phones. Undated requests remain on the board; spontaneous completions appear on the date done. Future routine previews extend 12 weeks.
 - **Leaderboard** defaults to the current month, with week and all-time choices. Expand a person to see the completions behind their score. Equal exact scores share a rank.
@@ -67,6 +67,42 @@ Choose your name and **Pin a note**, select one or more recipients, and write up
 Anyone can edit, delete, or restore a note. Editing preserves its original author, paper color, and posting date while recording who changed it. Deleted notes leave the board and activity counts but remain available under **Show deleted**, with their revisions. **By the numbers** shows complaints and compliments written and received, plus leaders including ties, for all time, this month, or this week. A note counts once for its author and once for each recipient; edits never add extra counts. These are counts, not temperature-weighted scores, and never affect chore credit or either financial ledger.
 
 Migration `007_bulletin.sql` creates an empty, separate note history and scoped save/read/export functions. Expected versions prevent overwriting someone else's changes; request IDs make retries safe. The anonymous API cannot access the underlying tables. This is the same public, trust-based household model: notes, identities, temperature, counts, and full revision history are publicly readable. Keep addresses and other personal information out of notes. The fallback snapshot is `data/bulletin.json`; offline views disable adding and editing. **Export ledger** on this tab includes all notes and revisions. The active board refreshes every 45 seconds when no form is open.
+
+## Phone notifications
+
+Tap the bell in the header to opt in on each device. No email, password, or phone number is required.
+
+- **iPhone/iPad (iOS 16.4+):** Open the site in Safari, choose Share → Add to Home Screen, then open that new icon. Tap the bell, select your name, and enable notifications.
+- **Android:** Open the site in a current supported browser such as Chrome, tap the bell, select your name, and enable notifications. A Home Screen shortcut is optional.
+- **Desktop:** Supported browsers can opt in through the same bell. Multiple devices can receive one roommate’s notifications.
+- The subscribed name belongs to this device. Switching whose dashboard you view does not change it. Change the name explicitly in notification settings, or choose **Disable on this device**.
+- Toggle chores, bills, and notes independently. Quiet hours are 10 p.m.–8 a.m. New York time, including daylight-saving changes. Your phone’s notification/Focus settings still apply.
+- Chores notify on assignment by someone else and once when due. Date-only chores remind at 9 a.m.; timed chores remind at their due time. Recurring and zero-point chores are included. Unassigned, completed, cancelled, expired, and missed tasks do not notify. There are no daily overdue nags.
+- New bill imports produce one alert per affected roommate per import. Reimports, revised bills, payments, and miscellaneous purchases do not notify.
+- Notes notify their recipients, excluding the author, with **“Rina left you a note”**. The body, complaint/compliment classification, and temperature stay out of the notification. Text edits do not notify again; newly added recipients do.
+- A tap opens the corresponding item. The **Send test notification** button queues an alert only for this device, bypasses quiet hours, and does not create a household record.
+
+Run `./configure.sh` once to install migration `008_notifications.sql`, deploy the `household-push` Edge Function, store signing material in Supabase Vault/Edge secrets, and schedule a minute-by-minute sender. Use a Supabase personal access token with database, Edge Function, and secrets access. The token stays in the terminal session. Reruns preserve existing signing keys and subscriptions; setup checks worker readiness without sending a notification. `--manual` configures only the importer, not the push worker.
+
+The service worker handles push and notification clicks only; it does not cache pages or intercept financial requests. Manifest and worker paths are relative to the GitHub Pages project directory. Phone icons can be regenerated with `uv run --frozen python scripts/generate-phone-icons.py`.
+
+Subscriptions, opaque device-token hashes, delivery attempts, and signing keys are private and excluded from exports and publication. Device enrollment follows the site's existing choose-a-name trust model; it is not verified identity. Only the server can claim/send alerts. Endpoints are restricted to browser push providers. Temporary failures retry with backoff; expired subscriptions are disabled. Delivery records expire after 30 days. Public ledger data and revision history remain untouched.
+
+For administration, the Supabase SQL Editor can inspect queue health without exposing device endpoints:
+
+```sql
+SELECT e.kind, d.state, count(*), max(d.sent_at) AS last_accepted,
+       max(d.last_error) AS last_error
+FROM ledger_private.push_deliveries d
+JOIN ledger_private.push_events e ON e.id=d.event_id
+GROUP BY e.kind,d.state;
+SELECT start_time,status,return_message
+FROM cron.job_run_details
+WHERE jobid=(SELECT jobid FROM cron.job WHERE jobname='household-push')
+ORDER BY start_time DESC LIMIT 10;
+```
+
+The Edge Function logs operational batch failures without subscription URLs or message bodies. A successful push-service response means accepted, not confirmed displayed. Phones can delay delivery, and a paused/unavailable Supabase project cannot send reminders. Real lock-screen delivery must be checked on an opted-in iPhone and Android phone; automated tests mock browser permission and push-service delivery without contacting anyone.
 
 ## Import and organize PDFs
 

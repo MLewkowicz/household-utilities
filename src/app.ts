@@ -1,11 +1,12 @@
 import { $, saved, remember } from './ui';
-import { refreshUtilities, exportUtilities } from './client';
+import { refreshUtilities, exportUtilities, focusUtilityNotification } from './client';
 import { initMisc, refreshMisc, exportMisc } from './misc-client';
-import { initChores, refreshChores, exportChores } from './chores-client';
+import { initChores, refreshChores, exportChores, focusChoreNotification } from './chores-client';
 
-import { initBulletin, refreshBulletin, exportBulletin } from './bulletin-client';
+import { initBulletin, refreshBulletin, exportBulletin, focusBulletinNotification } from './bulletin-client';
+import {initNotifications,missingNotification} from './notifications';
 
-initMisc();initChores();initBulletin();
+initMisc();initChores();initBulletin();initNotifications();
 const systemTheme=matchMedia('(prefers-color-scheme: dark)');
 const selector=$<HTMLSelectElement>('#theme-select');
 const preference=saved('household-theme');
@@ -24,7 +25,13 @@ function route() {
   if(link.dataset.ledger===active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
  });
  document.title=`Household ledger · ${active==='utilities'?'Utilities':active==='chores'?'Chores':active==='bulletin'?'Bulletin':'Miscellaneous'}`;
- void refresh();
+ void refresh().then(()=>{
+  const url=new URL(location.href),item=url.searchParams.get('notice');
+  if(!item)return;
+  const found=active==='chores'?focusChoreNotification(item):active==='bulletin'?focusBulletinNotification(item):active==='utilities'?focusUtilityNotification(item):false;
+  if(!found)missingNotification();
+  url.searchParams.delete('notice');history.replaceState(null,'',url);
+ });
 }
 window.addEventListener('hashchange',route);
 $('#refresh').addEventListener('click',()=>void refresh());

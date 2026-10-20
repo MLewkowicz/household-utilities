@@ -1,4 +1,11 @@
 import {MEMBERS,type Member} from './ledger';
+import {highlightNotification} from './notifications';
+
+export function focusBulletinNotification(id:string){
+ if(!ledger?.notes.some(n=>n.id===id&&!n.deleted))return false;
+ view='board';kind='all';recipient='all';showDeleted=false;render();
+ return highlightNotification(`[data-note-id="${CSS.escape(id)}"]`);
+}
 import {$,esc,name,date,rpc,toast,download} from './ui';
 import {identity,setIdentity,onIdentityChange} from './identity';
 import {localDateTime} from './chores';

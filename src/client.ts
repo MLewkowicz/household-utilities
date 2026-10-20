@@ -3,6 +3,12 @@ type Config = { url: string; key: string };
 type RawLedger = { bills: StoredBill[]; allocations: Allocation[]; history: Payment[]; updated_at: string; bill_history?: {bill_id:string;version:number;deleted:boolean;data:StoredBill;created_at:string}[] };
 declare global { interface Window { UTILITIES_CONFIG: Config } }
 import { $, esc, money, name, date, today, toast, rpc, download } from './ui';
+import {highlightNotification} from './notifications';
+export function focusUtilityNotification(id:string){
+ if(!ledger?.bills.some(b=>b.id===id&&!b.deleted))return false;
+ ledger.allocations.filter(a=>a.bill_id===id).forEach(a=>expanded.add(a.month));renderMonths();
+ return highlightNotification(`[data-bill-id="${CSS.escape(id)}"]`);
+}
 const title = (u: Utility) => u === 'wifi' ? 'Wi-Fi' : name(u);
 const id = (): string => crypto.randomUUID();
 let ledger: RawLedger, selected: Member | 'all' = 'all', historyTab = 'payments', live = false;
@@ -59,7 +65,7 @@ function billDetail(bill: StoredBill, month: string) {
     if(bill.charges.some(c=>c.kind==='one_time')) calculation+=' One-time fees split four ways.';
   }
   const amounts=MEMBERS.map(m=>({m,cents:ledger.allocations.filter(a=>a.bill_id===bill.id&&a.month===month&&a.member===m).reduce((s,a)=>s+a.cents,0)}));
-  return `<div class="bill-detail"><div class="bill-detail-header"><span>${title(bill.utility)} <small>${esc(period)}</small></span><span>${money(total)} <small>statement charges</small></span></div><p>${esc(calculation)} ${esc(bill.note)}</p><div class="bill-shares">${amounts.map(({m,cents})=>`<span class="share-chip member-${m}">${name(m)} <strong>${money(cents)}</strong></span>`).join('')}</div></div>`;
+  return `<div class="bill-detail" data-bill-id="${esc(bill.id)}"><div class="bill-detail-header"><span>${title(bill.utility)} <small>${esc(period)}</small></span><span>${money(total)} <small>statement charges</small></span></div><p>${esc(calculation)} ${esc(bill.note)}</p><div class="bill-shares">${amounts.map(({m,cents})=>`<span class="share-chip member-${m}">${name(m)} <strong>${money(cents)}</strong></span>`).join('')}</div></div>`;
 }
 function renderMonths() {
   const months=[...new Set(ledger.allocations.map(a=>a.month))].sort((a,b)=>a==='opening'?1:b==='opening'?-1:b.localeCompare(a));

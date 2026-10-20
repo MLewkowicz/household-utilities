@@ -32,13 +32,15 @@ export async function openDatabase(path) {
   if (!bulletin.rows[0].fn) {
     await db.exec(await readFile(new URL('../supabase/migrations/007_bulletin.sql', import.meta.url),'utf8'));
   }
+  const push = await db.query("SELECT to_regprocedure('public.utilities_push_config()') AS fn");
+  if (!push.rows[0].fn) await db.exec(await readFile(new URL('../supabase/migrations/008_notifications.sql', import.meta.url),'utf8'));
   return db;
 }
 export async function callRpc(db,name,params={},role='anon') {
-  if (!['dashboard','save_payment','import_bills','export_ledger','misc_dashboard','save_misc_expense','save_misc_settlement','export_misc_ledger','chores_dashboard','save_chore','save_chore_routine','export_chores','bulletin_dashboard','save_bulletin_note','export_bulletin'].includes(name)) throw new Error('Unknown operation');
+  if (!['dashboard','save_payment','import_bills','export_ledger','misc_dashboard','save_misc_expense','save_misc_settlement','export_misc_ledger','chores_dashboard','save_chore','save_chore_routine','export_chores','bulletin_dashboard','save_bulletin_note','export_bulletin','push_config','push_device','push_claim','push_finish'].includes(name)) throw new Error('Unknown operation');
   return db.transaction(async tx=>{
     await tx.exec(`SET LOCAL ROLE ${role==='service_role'?'service_role':'anon'}`);
-    const result = ['save_payment','import_bills','save_misc_expense','save_misc_settlement','save_chore','save_chore_routine','save_bulletin_note'].includes(name)
+    const result = ['save_payment','import_bills','save_misc_expense','save_misc_settlement','save_chore','save_chore_routine','save_bulletin_note','push_device','push_finish'].includes(name)
       ? await tx.query(`SELECT public.utilities_${name}($1::jsonb) AS result`,[JSON.stringify(params.p)])
       : await tx.query(`SELECT public.utilities_${name}() AS result`);
     return result.rows[0].result;

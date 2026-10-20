@@ -4,5 +4,5 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"], "types": [],
     "strict": true, "noEmit": true, "skipLibCheck": true, "allowImportingTsExtensions": true
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "supabase/functions/household-push/worker.ts"]
 }

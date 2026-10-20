@@ -4,7 +4,7 @@ import { mkdir, copyFile, readdir, rm, readFile, writeFile, rename } from 'node:
 await rm('dist', { recursive: true, force: true });
 await mkdir('dist', { recursive: true });
 for (const file of await readdir('public')) {
-  if (!/\.(html|css|svg|txt)$/.test(file) && file !== '_headers') throw new Error(`Unexpected public file: ${file}`);
+  if (!/\.(html|css|svg|txt)$/.test(file) && !['sw.js','manifest.webmanifest','icon-192.png','icon-512.png','_headers'].includes(file)) throw new Error(`Unexpected public file: ${file}`);
   await copyFile(`public/${file}`, `dist/${file}`);
 }
 await build({ entryPoints: ['src/app.ts'], bundle: true, outfile: 'dist/app.js', minify: true, target: 'es2022' });

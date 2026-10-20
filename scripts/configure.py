@@ -6,6 +6,7 @@ from pathlib import Path
 import sys
 import urllib.error
 import urllib.request
+from configure_notifications import configure_notifications
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -14,7 +15,10 @@ def request(url, token, data=None):
         headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
     try:
         with urllib.request.urlopen(req, timeout=90) as response:
-            return json.load(response)
+            # Management writes such as uploading Edge Function secrets can
+            # succeed with an empty 201/204 response body.
+            body = response.read()
+            return json.loads(body) if body.strip() else None
     except urllib.error.HTTPError as exc:
         raise RuntimeError(f"Supabase returned HTTP {exc.code}. Check the token and project access.") from None
 
@@ -22,7 +26,8 @@ def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
         print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
-        print("Existing projects need 007_bulletin.sql (and any earlier missing migrations); do not rerun installed migrations.")
+        print("Existing projects need 008_notifications.sql (and any earlier missing migrations); do not rerun installed migrations.")
+        print("Phone delivery also needs the normal ./configure.sh flow to deploy its worker, signing keys, and schedule.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
         print("Create a personal access token at https://supabase.com/dashboard/account/tokens")
@@ -69,6 +74,7 @@ def main():
         if not candidates:
             raise RuntimeError("Schema installed. Run ./configure.sh --manual with a secret key from Project Settings > API Keys.")
         key = candidates[0]["api_key"]
+        configure_notifications(base, token, config, request)
     if not key.startswith(("sb_secret_", "eyJ")):
         raise RuntimeError("Use a secret/service_role key, not the publishable key.")
     target = ROOT / ".env.local"

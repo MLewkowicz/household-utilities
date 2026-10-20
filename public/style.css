@@ -2,6 +2,19 @@
 
 :root[data-theme="dark"]{--bg:#101712;--paper:#18221b;--ink:#e3ebdf;--body:#bcc9b8;--muted:#a4b19e;--line:#344332;--green:#bed79c;--pale:#253422;--error:#efb4a6;--accent-ink:#152111;--accent-hover:#d0e5b7;--field:#121d15;--surface-muted:#141e17;--danger:#a64b3f;--notice-bg:#302c1c;--notice-ink:#e1d6b1;--notice-line:#6b603d;--error-bg:#34221d;--michal:#cba8ff;--rina:#ff91b1;--ohm:#64dff4;--rohil:#ffc76e;color-scheme:dark}
 *{box-sizing:border-box}
+.push-dialog{max-width:500px}
+.push-status{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--pale);margin-bottom:15px;color:var(--ink);line-height:1.5}
+.push-install{padding:16px;background:var(--notice-bg);color:var(--notice-ink);border:1px solid var(--notice-line);border-radius:12px;margin:14px 0}
+.push-install ol{padding-left:20px;margin-bottom:0;line-height:1.7}
+.push-categories{border:0;padding:0;margin:24px 0 18px}
+.push-categories legend{font-weight:600;color:var(--ink);margin-bottom:10px}
+.push-categories label{display:flex;align-items:start;gap:12px;padding:12px 0;margin:0;border-bottom:1px solid var(--line);cursor:pointer}
+.push-categories input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--green)}
+.push-categories small{display:block;font-size:12px;line-height:1.5;font-weight:400;color:var(--muted);margin-top:4px}
+.push-test{width:100%;margin-top:12px}
+.notification-target{outline:3px solid var(--green);outline-offset:5px;scroll-margin:24px}
+#notifications{display:grid;place-items:center;flex-shrink:0}
+@media(max-width:480px){.topbar-right{gap:8px!important}.brand{font-size:23px}.push-dialog .dialog-actions{flex-wrap:wrap;gap:16px}}
 body{margin:0}
 button,input,select{font:inherit}
 button{cursor:pointer}
@@ -392,3 +405,5 @@ dialog{padding:24px}
 @media(max-width:650px){.bulletin-filters{flex-wrap:wrap;gap:0 12px}.bulletin-filters>label:not(.chore-inline-check){flex:1;min-width:0}.bulletin-filters select{min-width:0;width:100%}.bulletin-filters .chore-inline-check{flex-basis:100%;margin:7px 0 0!important}.bulletin-board{margin-top:6px}}
 .bulletin-note:has(.note-tools[open]){transform:rotate(0deg)}
 #bulletin-show-deleted{appearance:auto;width:15px;height:15px;min-height:15px;flex:none;margin:0;padding:0;accent-color:var(--green)}
+
+@media(max-width:350px){.topbar{height:auto;min-height:96px;flex-wrap:wrap;gap:12px;padding:16px 0}.topbar-right{margin-left:auto}}

@@ -1,4 +1,11 @@
 import {MEMBERS,type Member} from './ledger';
+import {highlightNotification} from './notifications';
+
+export function focusChoreNotification(id:string){
+ if(!ledger?.tasks.some(t=>t.id===id&&!t.projected))return false;
+ view='household';householdFilter='all';statusFilter='all';render();
+ return highlightNotification(`[data-chore-id="${CSS.escape(id)}"]`);
+}
 import {$,esc,name,date,today,rpc,toast,download} from './ui';
 import {identity,setIdentity,onIdentityChange} from './identity';
 import {type Chore,type Routine,type RoutineStep,type ChoreLedger,addDays,weekStart,activeChore,urgentChore,queueOrder,points,localDateTime} from './chores';

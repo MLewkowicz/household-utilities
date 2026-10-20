@@ -7,7 +7,7 @@ import sys
 ROOT = Path(__file__).resolve().parent.parent
 violations = []
 for p in (ROOT / "dist").rglob("*"):
-    if p.is_file() and p.suffix.lower() not in (".html", ".css", ".js", ".svg", ".txt", ".json") and p.name != ".nojekyll":
+    if p.is_file() and p.suffix.lower() not in (".html", ".css", ".js", ".svg", ".txt", ".json") and p.name not in (".nojekyll", "manifest.webmanifest", "icon-192.png", "icon-512.png"):
         violations.append(f"Unexpected deploy artifact: {p.relative_to(ROOT)}")
 paths = [p for folder in ("dist", "data", "src", "public", "supabase") for p in (ROOT/folder).rglob("*") if p.is_file()]
 texts = {p: p.read_text(errors="ignore") for p in paths}
