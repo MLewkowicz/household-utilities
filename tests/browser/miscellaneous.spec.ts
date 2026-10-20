@@ -61,7 +61,7 @@ test('themes, identity, hash navigation and icon browsing work on phones and per
  await page.getByLabel('Include my share').uncheck();await expect(page.locator('#self-share')).not.toBeVisible();
  await page.locator('[data-participant=ohm]').click();await page.locator('[data-participant=rohil]').click();
  await expect(page.locator('[data-participant=rina]')).toContainText('$9.99');
- await page.locator('#icon-picker summary').click();await expect(page.locator('#icon-grid button')).toHaveCount(32);
+ await page.locator('#icon-picker summary').click();await expect(page.locator('#icon-grid button')).toHaveCount(41);
  await page.getByLabel('Icon category').selectOption('Travel');await expect(page.locator('#icon-grid button')).toHaveCount(4);
  await page.getByRole('button',{name:'Flight icon'}).focus();await page.keyboard.press('Enter');await expect(page.locator('#chosen-icon-label')).toHaveText('Flight');
  expect(await page.locator('#expense-dialog').evaluate(el=>el.scrollWidth<=el.clientWidth)).toBeTruthy();

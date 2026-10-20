@@ -16,6 +16,10 @@ export async function openDatabase(path) {
   if (!misc.rows[0].fn) {
     await db.exec(await readFile(new URL('../supabase/migrations/003_miscellaneous.sql', import.meta.url),'utf8'));
   }
+  const icons = await db.query("SELECT to_regprocedure('ledger_private.valid_misc_icon_id(text)') AS fn");
+  if (!icons.rows[0].fn) {
+    await db.exec(await readFile(new URL('../supabase/migrations/004_expand_icon_catalog.sql', import.meta.url),'utf8'));
+  }
   return db;
 }
 export async function callRpc(db,name,params={},role='anon') {

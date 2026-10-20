@@ -22,7 +22,7 @@ def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
         print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
-        print("Projects with rotating rounding need only 003_miscellaneous.sql; do not rerun installed migrations.")
+        print("Projects with the miscellaneous ledger need 004_expand_icon_catalog.sql; do not rerun installed migrations.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
         print("Create a personal access token at https://supabase.com/dashboard/account/tokens")
@@ -48,6 +48,10 @@ def main():
         if not misc or not misc[0].get("fn"):
             request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/003_miscellaneous.sql").read_text()})
             print("Miscellaneous ledger installed, initially empty. Utilities preserved.")
+        icons = request(base + "/database/query", token, {"query": "SELECT to_regprocedure('ledger_private.valid_misc_icon_id(text)')::text AS fn"})
+        if not icons or not icons[0].get("fn"):
+            request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/004_expand_icon_catalog.sql").read_text()})
+            print("Expanded icon support installed; balances and all history preserved.")
         keys = request(base + "/api-keys", token)
         candidates = [k for k in keys if k.get("name") == "service_role" or k.get("type") == "secret"]
         if not candidates:

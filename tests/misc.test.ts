@@ -5,6 +5,7 @@ import {readFile} from 'node:fs/promises';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
 import {equalShares,pairBalances,parseAmount} from '../src/misc-ledger.ts';
 import {MEMBERS} from '../src/ledger.ts';
+import {ICONS} from '../src/icons.ts';
 let db:any,original:any;
 const call=(fn:string,p?:any)=>callRpc(db,fn,p?{p}:{});
 const dashboard=()=>call('misc_dashboard');
@@ -103,4 +104,27 @@ test('concurrent revisions allow one winner, and all data exports with its histo
 test('amount parsing uses integer cents and rejects ambiguous formats',()=>{
  assert.equal(parseAmount('12.34'),1234);assert.equal(parseAmount('0',true),0);
  for(const s of ['-1','1.234','1e3','NaN','0','1000000.01'])assert.throws(()=>parseAmount(s));
+});
+test('icon catalog upgrade preserves existing ledgers and accepts new icons without allowing markup',async()=>{
+ const oldSql=await readFile(new URL('../supabase/migrations/003_miscellaneous.sql',import.meta.url),'utf8');
+ const start=oldSql.indexOf('CREATE FUNCTION ledger_private.save_misc(');
+ const end=oldSql.indexOf('CREATE FUNCTION public.utilities_save_misc_expense(',start);
+ await db.exec(oldSql.slice(start,end).replace('CREATE FUNCTION','CREATE OR REPLACE FUNCTION'));
+ await db.exec('DROP FUNCTION ledger_private.valid_misc_icon_id(text)');
+ await assert.rejects(save(draft({icon_id:'pasta'})),/available icon/);
+ const before=await dashboard(),utilities=await call('dashboard');
+ const upgrade=await readFile(new URL('../supabase/migrations/004_expand_icon_catalog.sql',import.meta.url),'utf8');
+ for(let i=0;i<2;i++){
+  await db.exec(upgrade);
+  const after=await dashboard(),currentUtilities=await call('dashboard');
+  for(const k of ['expenses','settlements','expense_history','settlement_history','pairs','rounding_cursor'])assert.deepEqual(after[k],before[k]);
+  for(const k of ['bills','bill_history','history','allocations'])assert.deepEqual(currentUtilities[k],utilities[k]);
+ }
+ for(const icon of [...ICONS,{id:'future-food-icon'}]) {
+  const entry=await save(draft({icon_id:icon.id}));
+  assert.equal(entry.icon_id,icon.id);
+ }
+ for(const icon_id of ['',null,{},'<svg>','https://example.com/icon','UPPER','two--dashes','-leading','trailing-','a'.repeat(41)]) {
+  await assert.rejects(save(draft({icon_id})),/available icon/);
+ }
 });
