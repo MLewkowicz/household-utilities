@@ -9,5 +9,5 @@ export function temperatureLabel(value:number){
 }
 export function notePlacement(id:string){
  let hash=0;for(const c of id)hash=(Math.imul(hash,31)+c.charCodeAt(0))>>>0;
- return {rotation:((hash%25)-12)/10,offset:(hash>>>5)%9,tone:(hash>>>9)%3};
+ return {rotation:((hash&1)?1:-1)*(2.4+(hash%27)/10),offset:(hash>>>5)%29,inset:(hash>>>9)%19};
 }

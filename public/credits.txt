@@ -1,0 +1,9 @@
+Household ledger — illustration credits
+
+Red pushpin (thumbtack.svg): Twemoji by Twitter, Inc and other contributors.
+Source: https://github.com/twitter/twemoji/blob/v14.0.2/assets/svg/1f4cc.svg
+Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+Original SVG artwork is unchanged; displayed at a smaller size with a CSS shadow.
+
+The faces, paper, cork grain, wooden frame, post, and grass are original artwork.
