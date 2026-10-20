@@ -22,7 +22,7 @@ def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
         print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
-        print("Projects with the miscellaneous ledger need 004_expand_icon_catalog.sql; do not rerun installed migrations.")
+        print("Existing projects need 005_chores.sql (and any earlier missing migrations); do not rerun installed migrations.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
         print("Create a personal access token at https://supabase.com/dashboard/account/tokens")
@@ -52,6 +52,10 @@ def main():
         if not icons or not icons[0].get("fn"):
             request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/004_expand_icon_catalog.sql").read_text()})
             print("Expanded icon support installed; balances and all history preserved.")
+        chores = request(base + "/database/query", token, {"query": "SELECT to_regprocedure('public.utilities_chores_dashboard()')::text AS fn"})
+        if not chores or not chores[0].get("fn"):
+            request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/005_chores.sql").read_text()})
+            print("Chore Corner installed, initially empty. Both financial ledgers and all history preserved.")
         keys = request(base + "/api-keys", token)
         candidates = [k for k in keys if k.get("name") == "service_role" or k.get("type") == "secret"]
         if not candidates:
@@ -65,7 +69,7 @@ def main():
     with os.fdopen(fd, "w") as out:
         out.write(f"SUPABASE_SECRET_KEY={key}\n")
     print("Importer configured in .env.local (excluded from Git).")
-    print("Use ./import-bills.sh for new statements, or ./export-ledgers.sh to refresh both saved snapshots.")
+    print("Use ./import-bills.sh for new statements, or ./export-ledgers.sh to refresh all saved snapshots.")
 
 if __name__ == "__main__":
     try:

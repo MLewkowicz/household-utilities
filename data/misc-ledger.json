@@ -1,14 +1,19 @@
 {
   "pairs": [
     {
+      "sender": "rina",
+      "recipient": "michal",
+      "amount_cents": 384
+    },
+    {
       "sender": "ohm",
       "recipient": "rina",
-      "amount_cents": 768
+      "amount_cents": 384
     },
     {
       "sender": "rohil",
       "recipient": "rina",
-      "amount_cents": 768
+      "amount_cents": 384
     }
   ],
   "expenses": [
@@ -35,7 +40,7 @@
     },
     {
       "id": "562c8bbc-5af1-44da-95b1-dd47415b4ffd",
-      "actor": "rina",
+      "actor": "michal",
       "payer": "rina",
       "shares": {
         "ohm": 384,
@@ -43,11 +48,11 @@
         "rohil": 384,
         "michal": 384
       },
-      "deleted": false,
+      "deleted": true,
       "icon_id": "toilet-paper",
       "paid_on": "2026-10-19",
-      "version": 1,
-      "created_at": "2026-10-20T03:17:11.835282+00:00",
+      "version": 2,
+      "created_at": "2026-10-20T03:54:16.780513+00:00",
       "split_mode": "equal",
       "description": "Toilet Paper",
       "amount_cents": 1536,
@@ -84,8 +89,8 @@
       ]
     }
   ],
-  "updated_at": "2026-10-20T03:45:12.647226+00:00",
-  "exported_at": "2026-10-20T03:45:12.647226+00:00",
+  "updated_at": "2026-10-20T04:48:39.232387+00:00",
+  "exported_at": "2026-10-20T04:48:39.232387+00:00",
   "settlements": [
     {
       "id": "6994c448-ef11-4c0e-95a7-6758ccae7127",
@@ -103,6 +108,31 @@
   ],
   "format_version": 1,
   "expense_history": [
+    {
+      "id": "562c8bbc-5af1-44da-95b1-dd47415b4ffd",
+      "actor": "michal",
+      "payer": "rina",
+      "shares": {
+        "ohm": 384,
+        "rina": 384,
+        "rohil": 384,
+        "michal": 384
+      },
+      "deleted": true,
+      "icon_id": "toilet-paper",
+      "paid_on": "2026-10-19",
+      "version": 2,
+      "created_at": "2026-10-20T03:54:16.780513+00:00",
+      "split_mode": "equal",
+      "description": "Toilet Paper",
+      "amount_cents": 1536,
+      "participants": [
+        "michal",
+        "rina",
+        "ohm",
+        "rohil"
+      ]
+    },
     {
       "id": "44428ea1-9c87-49f1-95da-941e520cfaea",
       "actor": "rina",

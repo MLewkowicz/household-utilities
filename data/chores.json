@@ -1,0 +1,97 @@
+{
+  "tasks": [],
+  "history": [],
+  "routines": [],
+  "local_day": "2026-10-20",
+  "updated_at": "2026-10-20T04:48:39.463835+00:00",
+  "exported_at": "2026-10-20T04:48:39.463835+00:00",
+  "leaderboard": [
+    {
+      "rank": 1,
+      "units": 0,
+      "member": "michal",
+      "period": "all",
+      "entries": []
+    },
+    {
+      "rank": 1,
+      "units": 0,
+      "member": "ohm",
+      "period": "all",
+      "entries": []
+    },
+    {
+      "rank": 1,
+      "units": 0,
+      "member": "rina",
+      "period": "all",
+      "entries": []
+    },
+    {
+      "rank": 1,
+      "units": 0,
+      "member": "rohil",
+      "period": "all",
+      "entries": []
+    },
+    {
+      "rank": 1,
+      "units": 0,
+      "member": "michal",
+      "period": "month",
+      "entries": []
+    },
+    {
+      "rank": 1,
+      "units": 0,
+      "member": "ohm",
+      "period": "month",
+      "entries": []
+    },
+    {
+      "rank": 1,
+      "units": 0,
+      "member": "rina",
+      "period": "month",
+      "entries": []
+    },
+    {
+      "rank": 1,
+      "units": 0,
+      "member": "rohil",
+      "period": "month",
+      "entries": []
+    },
+    {
+      "rank": 1,
+      "units": 0,
+      "member": "michal",
+      "period": "week",
+      "entries": []
+    },
+    {
+      "rank": 1,
+      "units": 0,
+      "member": "ohm",
+      "period": "week",
+      "entries": []
+    },
+    {
+      "rank": 1,
+      "units": 0,
+      "member": "rina",
+      "period": "week",
+      "entries": []
+    },
+    {
+      "rank": 1,
+      "units": 0,
+      "member": "rohil",
+      "period": "week",
+      "entries": []
+    }
+  ],
+  "format_version": 1,
+  "routine_history": [],
+  "projection_until": "2027-01-12"
+}

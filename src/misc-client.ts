@@ -1,11 +1,12 @@
 import { MEMBERS, type Member } from './ledger';
 import { equalShares, parseAmount, type Expense, type Settlement, type MiscLedger, type Shares, type Pair } from './misc-ledger';
-import { $, esc, money, name, date, today, saved, remember, rpc, toast, download } from './ui';
+import { $, esc, money, name, date, today, rpc, toast, download } from './ui';
 import { CATEGORIES, getIcon, iconSvg, suggestIcons, searchIcons } from './icons';
 import { initCalculator, openCalculator } from './calculator-ui';
 
+import {identity,setIdentity,onIdentityChange} from './identity';
+
 let ledger: MiscLedger|undefined, live=false, loading=false, busy=false;
-let identity: Member|null=MEMBERS.includes(saved('household-person') as Member)?saved('household-person') as Member:null;
 let person: Member|'all'='all', feedType='all', showDeleted=false;
 let editingExpense: Expense|undefined, editingSettlement: Settlement|undefined;
 let participants=new Set<Member>(), customDraft: Partial<Record<Member,string>>={}, chosenIcon='receipt', manualIcon=false;
@@ -20,6 +21,7 @@ const message=(id:string,text:string)=>{const el=$('#'+id);el.textContent=text;e
 const isExpense=(e:Expense|Settlement):e is Expense=>'description' in e;
 
 export function initMisc() {
+ onIdentityChange(()=>{renderIdentity();if(ledger)render();});
  $('#misc-page').innerHTML=`
   <section class="intro"><div><div class="eyebrow">THE EVERYDAY EXTRAS</div><h1>Little things.<br>Fairly shared.</h1><p class="intro-copy">From paper towels to pizza night.<br class="mobile-break"> Keep the little things between us.</p></div><div class="intro-side"><span class="status"><span class="status-dot"></span><span id="misc-status">Loading purchases</span></span><div class="misc-primary-actions"><button id="new-expense" class="button primary" disabled><span aria-hidden="true">＋</span> Add expense</button><button id="new-settlement" class="button secondary" disabled>Record repayment</button></div></div></section>
   <div id="misc-notice" class="ledger-notice" role="status" hidden></div>
@@ -275,9 +277,9 @@ async function deleteEntry(event:Event) {
 function bindEvents() {
  $('#identity-panel').addEventListener('click',event=>{
   const button=(event.target as HTMLElement).closest<HTMLElement>('[data-identity]');if(!button)return;
-  identity=button.dataset.identity as Member;remember('household-person',identity);renderIdentity();if(ledger)render();
+  setIdentity(button.dataset.identity as Member);
  });
- $('#switch-person').addEventListener('click',()=>{identity=null;remember('household-person','');renderIdentity();if(ledger)render();$('#identity-panel button').focus();});
+ $('#switch-person').addEventListener('click',()=>{setIdentity(null);$('#identity-panel button').focus();});
  $('#new-expense').addEventListener('click',()=>openExpense());$('#new-settlement').addEventListener('click',()=>openSettlement());
  $('#misc-pairs').addEventListener('click',event=>{
   const button=(event.target as HTMLElement).closest<HTMLElement>('[data-repay-from]');if(!button)return;

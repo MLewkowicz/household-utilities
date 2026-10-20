@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Our household ledger for utilities and shared purchases.">
+  <meta name="description" content="Our household ledger for utilities, shared purchases, and chores.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="referrer" content="no-referrer">
   <meta name="color-scheme" content="light dark">
@@ -20,7 +20,7 @@
       <a class="brand" href="#utilities" aria-label="Household ledger home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>household<span class="brand-period">.</span></a>
       <div class="topbar-right"><span class="household-tag">ONE HOUSEHOLD · FOUR PEOPLE</span><label class="theme-control"><span class="sr-only">Color theme</span><select id="theme-select" aria-label="Color theme"><option value="system">◐ System</option><option value="light">☀ Light</option><option value="dark">☾ Dark</option></select></label><button id="refresh" class="icon-button" title="Refresh balances" aria-label="Refresh balances">↻</button></div>
     </header>
-    <nav class="ledger-nav" aria-label="Household ledgers"><a href="#utilities" data-ledger="utilities" aria-current="page"><span aria-hidden="true">⌁</span> Utilities</a><a href="#miscellaneous" data-ledger="miscellaneous"><span aria-hidden="true">✳</span> Miscellaneous</a><span>Same household. Separate balances.</span></nav>
+    <nav class="ledger-nav" aria-label="Household ledgers"><a href="#utilities" data-ledger="utilities" aria-current="page"><span aria-hidden="true">⌁</span> Utilities</a><a href="#miscellaneous" data-ledger="miscellaneous"><span aria-hidden="true">✳</span> Miscellaneous</a><a href="#chores" data-ledger="chores"><span aria-hidden="true">✓</span> Chores <span id="chore-badge" class="chore-nav-badge" hidden></span></a><span>A home in good company.</span></nav>
     <main id="main">
       <div id="utilities-page">
       <section class="intro">
@@ -39,6 +39,7 @@
       <section class="how-it-works"><div class="small-mark" aria-hidden="true">↗</div><div><h3>Already sent your share?</h3><p>Send money to Michal using your usual payment app, then record it here. This ledger tracks payments; it doesn’t move money.</p></div><button id="bottom-payment" class="button secondary" disabled>Record a payment <span aria-hidden="true">↗</span></button></section>
       </div>
       <section id="misc-page" aria-label="Miscellaneous ledger" hidden></section>
+      <section id="chores-page" aria-label="Chore corner" hidden></section>
     </main>
     <footer><span class="footer-brand">A little less household math.</span><span>Shared ledger · Entries are self-reported</span><button id="export" class="text-button" disabled>Export ledger ↓</button></footer>
   </div>

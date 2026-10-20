@@ -24,5 +24,6 @@ for (const file of ['app.js', 'style.css', 'config.js']) {
 await writeFile('dist/index.html', html);
 await copyFile('data/ledger.json','dist/ledger.json');
 await copyFile('data/misc-ledger.json','dist/misc-ledger.json');
+await copyFile('data/chores.json','dist/chores.json');
 await writeFile('dist/.nojekyll','');
 console.log('Built dashboard assets.');

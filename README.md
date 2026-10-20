@@ -1,6 +1,6 @@
 # Household ledger
 
-A small dashboard for Michal, Rina, Ohm, and Rohil, with separate **Utilities** and **Miscellaneous** tabs. GitHub Pages hosts the frontend; a free Supabase project stores shared history. There are no logins or private links. Changes are trust-based and names are self-reported. The header theme control supports System, Light, and Dark, remembers the choice on this device, and applies to both tabs.
+A small dashboard for Michal, Rina, Ohm, and Rohil, with **Utilities**, **Miscellaneous**, and **Chores** tabs. GitHub Pages hosts the frontend; a free Supabase project stores shared history. There are no logins or private links. Changes are trust-based and names are self-reported. The header theme control supports System, Light, and Dark, remembers the choice on this device, and applies to all three tabs.
 
 Website: **https://mlewkowicz.github.io/household-utilities/**
 
@@ -30,14 +30,33 @@ Anyone can edit or delete entries. Each card shows its latest version, with an e
 
 For an explicitly requested permanent cleanup, `./remove-deleted-expense.sh EXPENSE_ID --expected-version VERSION` removes only an already-deleted expense and its revisions. It requires a Supabase personal access token entered locally, saves a private recovery copy, checks the latest version, and verifies that other ledger data and balances are unchanged in the same transaction. It is not exposed to website visitors. Refresh the saved snapshots after cleanup.
 
-**Export ledger** downloads the currently selected tab, including its history. To refresh both separate website snapshots and save a private combined backup locally:
+**Export ledger** downloads the currently selected tab, including its history. To refresh all three separate website snapshots and save a private combined backup locally:
 
 ```bash
 ./export-ledgers.sh          # live ledgers, read-only database access
 ./export-ledgers.sh --local  # local preview on port 4173
 ```
 
-Snapshots are published on the next code deployment. If a ledger cannot connect, its dated snapshot is displayed and its writes are disabled. New entries are never silently queued offline. The other tab can still connect independently.
+Snapshots are published on the next code deployment. If a ledger cannot connect, its dated snapshot is displayed and its writes are disabled. New entries are never silently queued offline. The other tabs can still connect independently.
+
+## Chore Corner
+
+Open **Chores** at the same link (`/#chores`). Your selected identity is shared with Miscellaneous. The live board starts empty; shortcut illustrations and the trash-cycle template are drafts until someone saves them. Chores and credit never affect money balances. Complaints and compliments are not part of this release.
+
+- **My queue** shows your assigned work, ordered by pinned priority, overdue, due today, upcoming, and undated. Deadlines and oldest requests break ties. The Chores badge counts your distinct pinned, overdue, or due-today tasks. Visible pages refresh it every 45 seconds; nothing sends external notifications.
+- **Household** shows everyone's work and unassigned requests. Anyone can claim, hand back, reassign, edit, cancel, or complete a chore. The filters also reveal completed, missed, expired, and cancelled history. Each task has one card with expandable revisions, including the actor and optional change notes.
+- **Week** is a Monday–Sunday agenda, with previous/next/Today and an assignee filter. It becomes a stacked agenda on phones. Undated requests remain on the board; spontaneous completions appear on the date done. Future routine previews extend 12 weeks.
+- **Leaderboard** defaults to the current month, with week and all-time choices. Expand a person to see the completions behind their score. Equal exact scores share a rank.
+
+**Request a chore** starts with 1 point, Anyone, and no pin or dates. Titles suggest bundled illustrations; the editable shortcuts include bananas, trash, recycling, and bins. A deadline makes unfinished work overdue. **Expire tonight** removes it from active queues at the next New York midnight; another expiry can be specified. Expired requests retain history and earn no credit. One-off chores do not disappear merely because a week ends.
+
+**Log something done** records spontaneous work. Completing an existing chore defaults to you as contributor; select helpers to split credit equally among the actual contributors, regardless of assignment. Small/medium/large tasks earn 1/2/3 points. Credit is stored as exact twelfths, displayed to at most two decimal places. Missed, cancelled, and expired chores earn zero, with no deductions. Correct the people, effort, or actual completion time (including past dates) from the Household history. **Undo** reverses the credit and restores the task's current scheduled/expired/missed status.
+
+Use **Week → Manage routines** for weekly routines, optionally every 2–12 weeks. Choose a fixed owner or an ordered set of roommates, a starting Monday, and the first person in the rotation. Each step has its own weekday, optional time, illustration, context, and effort. All steps belong to the same cycle's owner: Monday trash out and Tuesday bins back rotate together but earn credit separately. Dates without times are due at the end of that day. All scheduling uses America/New_York, including daylight-saving changes.
+
+Rotation advances with the schedule even if work is missed or someone covers. At the next cycle, unfinished routine steps become **Missed**. Routine edits and pauses apply from the next cycle; completed history and explicitly edited individual occurrences remain intact. The original cycle anchor and interval stay fixed after creation; pause the old routine and create another to change its cadence. Pausing does not cancel individually edited future occurrences—cancel those separately if needed.
+
+Migration `005_chores.sql` adds separate private task and routine revision tables plus narrowly scoped dashboard, save, and export functions. Stable occurrence IDs and transactional materialization prevent duplicate tasks without requiring a background job or visits every week. Updates use expected versions and idempotent request IDs; statuses and exact leaderboard totals are derived by the server. Refreshing the board materializes scheduled occurrences, never financial entries. The public snapshot is `data/chores.json`; offline chores are read-only. Chore titles, notes, assignments, scores, and revision history are public under the same trust-based model as the ledgers; leave personal details out.
 
 ## Import and organize PDFs
 
@@ -130,7 +149,7 @@ npm run test:browser
 uv run --frozen python scripts/check_privacy.py
 ```
 
-Browser checks start an isolated temporary database on port 4174. They never write test entries to Supabase. If Chromium is unavailable, run `npx playwright install chromium` once. Accounting, database permissions, stale updates, idempotency, PDF extraction, archive collisions, and desktop/mobile flows have automated coverage, including miscellaneous shares, repayments, themes, and retrying lost save responses.
+Browser checks start an isolated temporary database on port 4174. They never write test entries to Supabase. If Chromium is unavailable, run `npx playwright install chromium` once. Accounting, database permissions, stale updates, idempotency, PDF extraction, archive collisions, and desktop/mobile flows have automated coverage, including miscellaneous shares, repayments, themes, retrying lost save responses, chore rotations, shared credit, DST boundaries, concurrent completion, and financial-ledger invariance.
 
 ## Supabase and publication
 
