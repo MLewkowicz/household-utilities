@@ -110,7 +110,10 @@ test('requesting without an identity explains how to continue, and unassigned wo
  const task=card(page,'An open invitation to help');await expect(task).toHaveClass(/is-unassigned/);await expect(task).toContainText('Asked by Rohil');
  for(const who of ['rina','ohm','michal']){await choosePerson(page,who);await expect(task).toBeVisible();await expect(task).toHaveClass(/is-unassigned/);}
  await task.getByRole('button',{name:'Claim',exact:true}).click();await page.locator('#chore-action-save').click();await expect(page.locator('#chore-action-dialog')).not.toBeVisible();await expect(task).not.toHaveClass(/is-unassigned/);
- await view(page,'household');await expect(task).toHaveCount(0);await expect(page.locator('#chore-filter')).toHaveCount(0);await view(page,'mine');await expect(task).toBeVisible();
- await choosePerson(page,'rina');await expect(task).toHaveCount(0);
+ await view(page,'household');await expect(task).toHaveCount(0);await expect(page.locator('#chore-household-filter')).toHaveValue('anyone');await page.locator('#chore-household-filter').selectOption('all');await expect(task).toBeVisible();await page.locator('#chore-household-filter').selectOption('rina');await expect(task).toHaveCount(0);await page.locator('#chore-household-filter').selectOption('michal');await expect(task).toBeVisible();
+ await view(page,'week');await expect(page.locator('#chore-filter')).toHaveValue('all');await page.locator('#chore-filter').selectOption('ohm');await view(page,'household');await expect(page.locator('#chore-household-filter')).toHaveValue('michal');await expect(task).toBeVisible();await view(page,'mine');await expect(task).toBeVisible();
+ await choosePerson(page,'rina');await expect(task).toHaveCount(0);await view(page,'household');await page.locator('#chore-household-filter').selectOption('all');await expect(task).toBeVisible();
+ await page.reload();await expect(page.locator('#chores-status')).toHaveText('Shared chores · up to date');await view(page,'household');await expect(page.locator('#chore-household-filter')).toHaveValue('anyone');await expect(task).toHaveCount(0);
+ await page.setViewportSize({width:390,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
  await page.locator('#chore-switch').click();await page.locator('#chore-log').click();await expect(page.locator('#chore-identity-error')).toContainText('logging a completion');
 });

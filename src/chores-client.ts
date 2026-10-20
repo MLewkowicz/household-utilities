@@ -5,7 +5,7 @@ import {type Chore,type Routine,type RoutineStep,type ChoreLedger,addDays,weekSt
 import {CHORE_ICONS,choreIcon,suggestChoreIcon} from './chore-icons';
 
 let ledger:ChoreLedger|undefined,live=false,loading=false,busy=false;
-let view='mine',filter='all',statusFilter='active',myStatusFilter='active',period='month',week=weekStart(today());
+let view='mine',filter='all',householdFilter='anyone',statusFilter='active',myStatusFilter='active',period='month',week=weekStart(today());
 let taskDraft:Chore|undefined,taskId='',taskMode='request',chosenIcon='tidy',manualIcon=false;
 let completionTask:Chore|undefined,actionTask:Chore|undefined,actionKind='';
 let routineDraft:Routine|undefined,routineId='',owners:Member[]=[],steps:RoutineStep[]=[];
@@ -83,11 +83,11 @@ function card(t:Chore,compact=false){
 }
 function queueView(){
  const mine=view==='mine',selectedStatus=mine?myStatusFilter:statusFilter;
- const candidates=(ledger?.tasks||[]).filter(t=>!t.projected).filter(t=>mine?(t.assignee===identity||!t.assignee):!t.assignee).filter(t=>selectedStatus==='active'?activeChore(t):selectedStatus==='all'?true:t.status===selectedStatus);
+ const candidates=(ledger?.tasks||[]).filter(t=>!t.projected).filter(t=>mine?(t.assignee===identity||!t.assignee):(householdFilter==='all'||(householdFilter==='anyone'?!t.assignee:t.assignee===householdFilter))).filter(t=>selectedStatus==='active'?activeChore(t):selectedStatus==='all'?true:t.status===selectedStatus);
  candidates.sort(selectedStatus==='active'?queueOrder(day()):(a,b)=>(b.completion?.completed_at||b.created_at).localeCompare(a.completion?.completed_at||a.created_at));
  const heading=mine?identity?`${name(identity)}’s ${selectedStatus==='active'?'queue':'history'}`:'Your corner of the household':'The household board';
- const copy=mine?(selectedStatus==='active'?'Your assigned chores, plus muted requests open to anyone. Pinned first.':'Your assigned chores and unassigned requests, including their history.'):`${candidates.length} unassigned chore${candidates.length===1?'':'s'} · anyone can lend a hand.`;
- return `<div class="chore-section-top"><div><h2>${heading}</h2><p class="section-copy">${copy}</p></div><div class="chore-filters"><label>Show<select id="${mine?'chore-mine-status-filter':'chore-status-filter'}">${[['active','To do'],['all','All history'],['completed','Completed'],['missed','Missed'],['expired','Expired'],['cancelled','Cancelled']].map(([v,l])=>`<option value="${v}" ${v===selectedStatus?'selected':''}>${l}</option>`).join('')}</select></label></div></div>${mine&&!identity?noResults('Make yourself at home.','Choose your name above to see your personal queue.'):candidates.length?`<div class="chore-grid">${candidates.map(t=>card(t)).join('')}</div>`:noResults(selectedStatus!=='active'?'No chores in this view.':mine?'A little breathing room.':'Nothing waiting for a volunteer.',selectedStatus!=='active'?'Choose another status to find earlier chores.':mine?'You’re all caught up, and there are no unassigned requests.':'Assigned chores live in each person’s queue. Request a chore for Anyone to add it here.')}<p class="chore-bottom-note">Use Show to find completed, expired, and missed chores.</p>`;
+ const copy=mine?(selectedStatus==='active'?'Your assigned chores, plus muted requests open to anyone. Pinned first.':'Your assigned chores and unassigned requests, including their history.'):`${candidates.length} ${householdFilter==='anyone'?'unassigned ':''}chore${candidates.length===1?'':'s'} · ${householdFilter==='anyone'?'anyone can lend a hand.':householdFilter==='all'?'across the whole household.':'assigned to '+name(householdFilter)+'.'}`;
+ return `<div class="chore-section-top"><div><h2>${heading}</h2><p class="section-copy">${copy}</p></div><div class="chore-filters">${!mine?`<label>Assignee<select id="chore-household-filter">${options(true)}</select></label>`:''}<label>Show<select id="${mine?'chore-mine-status-filter':'chore-status-filter'}">${[['active','To do'],['all','All history'],['completed','Completed'],['missed','Missed'],['expired','Expired'],['cancelled','Cancelled']].map(([v,l])=>`<option value="${v}" ${v===selectedStatus?'selected':''}>${l}</option>`).join('')}</select></label></div></div>${mine&&!identity?noResults('Make yourself at home.','Choose your name above to see your personal queue.'):candidates.length?`<div class="chore-grid">${candidates.map(t=>card(t)).join('')}</div>`:noResults(selectedStatus!=='active'?'No chores in this view.':mine?'A little breathing room.':householdFilter==='anyone'?'Nothing waiting for a volunteer.':'Nothing here right now.',selectedStatus!=='active'?'Choose another status to find earlier chores.':mine?'You’re all caught up, and there are no unassigned requests.':householdFilter==='anyone'?'Choose Everyone or a roommate to see assigned chores.':'Try another assignee or status to find more chores.')}<p class="chore-bottom-note">Use Show to find completed, expired, and missed chores.</p>`;
 }
 function weekView(){
  const days=Array.from({length:7},(_,i)=>addDays(week,i));
@@ -106,7 +106,10 @@ export async function refreshChores(){
  finally{loading=false;if(location.hash==='#chores')$('#export').toggleAttribute('disabled',!ledger);if(wasLive!==live||previous!==JSON.stringify(ledger&&{...ledger,updated_at:null}))render();}
 }
 export function exportChores(){if(ledger)download({...ledger,exported_at:new Date().toISOString()},'household-chores');else toast('No chore data is available to export yet.');}
-function restoreFilters(){const el=$<HTMLSelectElement>('#chore-filter');if(el)el.value=filter;}
+function restoreFilters(){
+ const weekFilter=$<HTMLSelectElement>('#chore-filter');if(weekFilter)weekFilter.value=filter;
+ const boardFilter=$<HTMLSelectElement>('#chore-household-filter');if(boardFilter)boardFilter.value=householdFilter;
+}
 function show(id:string){retry=null;errorText(id+'-error','');const d=$<HTMLDialogElement>('#'+id+'-dialog');d.showModal();$('#'+id+'-heading').focus({preventScroll:true});}
 function setChecks(group:string,selected:Member[]){document.querySelectorAll<HTMLInputElement>(`input[name="${group}"]`).forEach(el=>el.checked=selected.includes(el.value as Member));}
 function selectedContributors(group:string){const people=[...document.querySelectorAll<HTMLInputElement>(`input[name="${group}"]:checked`)].map(el=>el.value as Member);if(!people.length)throw new Error('Choose at least one person who helped.');return people;}
@@ -205,7 +208,7 @@ function bind(){
   if(b.id==='chore-manage-routines'){renderRoutineList();$<HTMLDialogElement>('#chore-routines-dialog').showModal();$('#chore-routines-heading').focus({preventScroll:true});}
   if(b.dataset.choreCommand){const id=b.closest<HTMLElement>('[data-chore-id]')!.dataset.choreId;const task=ledger?.tasks.find(t=>t.id===id);if(!task)return;const action=b.dataset.choreCommand;if(action==='edit'||action==='open')openTask('request',task);else if(action==='complete')openCompletion(task);else openAction(task,action);}
  });
- $('#chores-page').addEventListener('change',event=>{const el=event.target as HTMLSelectElement;if(el.id==='chore-filter')filter=el.value;else if(el.id==='chore-status-filter')statusFilter=el.value;else if(el.id==='chore-mine-status-filter')myStatusFilter=el.value;else if(el.id==='chore-period')period=el.value;else return;render();restoreFilters();});
+ $('#chores-page').addEventListener('change',event=>{const el=event.target as HTMLSelectElement;if(el.id==='chore-filter')filter=el.value;else if(el.id==='chore-household-filter')householdFilter=el.value;else if(el.id==='chore-status-filter')statusFilter=el.value;else if(el.id==='chore-mine-status-filter')myStatusFilter=el.value;else if(el.id==='chore-period')period=el.value;else return;render();restoreFilters();});
  document.querySelectorAll<HTMLDialogElement>('.chore-dialog').forEach(d=>d.addEventListener('cancel',event=>{if(busy)event.preventDefault();}));
  document.querySelectorAll<HTMLButtonElement>('[data-chore-close]').forEach(b=>b.addEventListener('click',()=>{if(!busy)$<HTMLDialogElement>('#'+b.dataset.choreClose+'-dialog').close();}));
  $('#chore-task-done').addEventListener('click',()=>{if(taskDraft){$<HTMLDialogElement>('#chore-task-dialog').close();openCompletion(taskDraft);}});
