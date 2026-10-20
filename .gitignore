@@ -18,3 +18,4 @@ __pycache__/
 test-results/
 playwright-report/
 config.local.json
+bitmoji_photos/

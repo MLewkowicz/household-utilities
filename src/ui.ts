@@ -7,12 +7,16 @@ export const today = () => new Intl.DateTimeFormat('en-CA',{timeZone:'America/Ne
 export function saved(key: string) {try{return localStorage.getItem(key);}catch{return null;}}
 export function remember(key: string,value: string) {try{localStorage.setItem(key,value);}catch{/* Usable without local storage. */}}
 let toastTimer: ReturnType<typeof setTimeout>;
-export function toast(message: string) {clearTimeout(toastTimer);$('#toast').textContent=message;$('#toast').hidden=false;toastTimer=setTimeout(()=>$('#toast').hidden=true,4500);}
+export function toast(message: string, action?: {label:string;run:()=>void}) {
+ clearTimeout(toastTimer);const el=$('#toast');el.textContent=message;el.hidden=false;
+ if(action){const button=document.createElement('button');button.className='text-button';button.textContent=action.label;button.onclick=()=>{el.hidden=true;action.run();};el.append(' ',button);}
+ toastTimer=setTimeout(()=>el.hidden=true,action?12000:4500);
+}
 export function download(data: unknown,prefix: string) {
  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
  a.href=url;a.download=`${prefix}-${today()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);
 }
-export async function rpc<T>(functionName: string,params: Record<string,unknown>={}): Promise<T> {
+async function fetchRpc<T>(functionName: string,params: Record<string,unknown>={}): Promise<T> {
  const config=window.UTILITIES_CONFIG;
  if(!config?.url||!config.key)throw new Error('The shared database is not connected.');
  const headers: Record<string,string>={'Content-Type':'application/json',apikey:config.key};
@@ -21,4 +25,25 @@ export async function rpc<T>(functionName: string,params: Record<string,unknown>
  const body=await res.json().catch(()=>({message:'Could not read the server response.'}));
  if(!res.ok)throw new Error(body.message||`Could not save (${res.status}). Please try again.`);
  return body as T;
+}
+
+// Deduplicate reads only. Mutation idempotency remains the server's request-ID contract.
+const reads=new Map<string,Promise<unknown>>();
+let dataEpoch=0;
+export function rpc<T>(functionName:string,params:Record<string,unknown>={}):Promise<T>{
+ if(Object.keys(params).length){
+  if(!functionName.startsWith('save_'))return fetchRpc<T>(functionName,params);
+  dataEpoch++;reads.clear();
+  return fetchRpc<T>(functionName,params).finally(()=>{dataEpoch++;reads.clear();});
+ }
+ let pending=reads.get(functionName);
+ if(!pending){
+  const read=async():Promise<T>=>{
+   const epoch=dataEpoch;
+   try{const result=await fetchRpc<T>(functionName,params);return epoch===dataEpoch?result:read();}
+   catch(error){if(epoch!==dataEpoch)return read();throw error;}
+  };
+  pending=read().finally(()=>{if(reads.get(functionName)===pending)reads.delete(functionName);});reads.set(functionName,pending);
+ }
+ return pending as Promise<T>;
 }

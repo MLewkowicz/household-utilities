@@ -1,5 +1,102 @@
 {
-  "notes": [],
+  "notes": [
+    {
+      "id": "a07bd6ab-2127-4c51-adc1-bd2550b192b6",
+      "body": "Thank you for slamming the door at 7:45am today! I actually really wanted to start waking up early \ud83d\udc9b",
+      "kind": "compliment",
+      "actor": "rina",
+      "action": "create",
+      "author": "rina",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-20T16:45:11.529666+00:00",
+      "created_at": "2026-10-20T16:45:11.529666+00:00",
+      "recipients": [
+        "ohm"
+      ],
+      "temperature": 25
+    },
+    {
+      "id": "f600b3bc-5791-43d9-a115-6f164c693199",
+      "body": "Thank you for doing the dishes \ud83d\ude1e",
+      "kind": "compliment",
+      "actor": "michal",
+      "action": "create",
+      "author": "michal",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-20T15:21:47.36535+00:00",
+      "created_at": "2026-10-20T15:21:47.36535+00:00",
+      "recipients": [
+        "rina"
+      ],
+      "temperature": 50
+    },
+    {
+      "id": "20763499-8eee-44cb-ba23-2a0b83df2841",
+      "body": "Don\u2019t leave your shoes on the stairs (apparently their presence leaves King Ohm no choice but to slam the door shut)",
+      "kind": "complaint",
+      "actor": "rohil",
+      "action": "create",
+      "author": "rohil",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-20T12:45:08.685354+00:00",
+      "created_at": "2026-10-20T12:45:08.685354+00:00",
+      "recipients": [
+        "rina"
+      ],
+      "temperature": -15
+    },
+    {
+      "id": "79feccd9-ba85-4473-958d-f5e995797fe1",
+      "body": "DONT SLAM THE DOOR \ud83d\ude10",
+      "kind": "complaint",
+      "actor": "rohil",
+      "action": "create",
+      "author": "rohil",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-20T12:43:02.346101+00:00",
+      "created_at": "2026-10-20T12:43:02.346101+00:00",
+      "recipients": [
+        "ohm"
+      ],
+      "temperature": -70
+    },
+    {
+      "id": "50dc9c88-f520-4d37-b2c9-7d579c7f3f10",
+      "body": "DONT SLAM THE DOOR \ud83d\ude10",
+      "kind": "complaint",
+      "actor": "rohil",
+      "action": "delete",
+      "author": "rohil",
+      "deleted": true,
+      "version": 2,
+      "posted_at": "2026-10-20T12:41:29.337276+00:00",
+      "created_at": "2026-10-20T12:42:29.173586+00:00",
+      "recipients": [
+        "michal"
+      ],
+      "temperature": -70
+    },
+    {
+      "id": "2ba0451b-7766-4f66-97a7-2fe32d914cbe",
+      "body": "ohm is such a studious good little boy, good luck on your exam today",
+      "kind": "compliment",
+      "actor": "michal",
+      "action": "create",
+      "author": "michal",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-20T05:46:51.341503+00:00",
+      "created_at": "2026-10-20T05:46:51.341503+00:00",
+      "recipients": [
+        "ohm"
+      ],
+      "temperature": 100
+    }
+  ],
   "stats": [
     {
       "member": "michal",
@@ -12,15 +109,15 @@
       "member": "ohm",
       "period": "all",
       "direction": "received",
-      "complaints": 0,
-      "compliments": 0
+      "complaints": 1,
+      "compliments": 2
     },
     {
       "member": "rina",
       "period": "all",
       "direction": "received",
-      "complaints": 0,
-      "compliments": 0
+      "complaints": 1,
+      "compliments": 1
     },
     {
       "member": "rohil",
@@ -34,7 +131,7 @@
       "period": "all",
       "direction": "written",
       "complaints": 0,
-      "compliments": 0
+      "compliments": 2
     },
     {
       "member": "ohm",
@@ -48,13 +145,13 @@
       "period": "all",
       "direction": "written",
       "complaints": 0,
-      "compliments": 0
+      "compliments": 1
     },
     {
       "member": "rohil",
       "period": "all",
       "direction": "written",
-      "complaints": 0,
+      "complaints": 2,
       "compliments": 0
     },
     {
@@ -68,15 +165,15 @@
       "member": "ohm",
       "period": "month",
       "direction": "received",
-      "complaints": 0,
-      "compliments": 0
+      "complaints": 1,
+      "compliments": 2
     },
     {
       "member": "rina",
       "period": "month",
       "direction": "received",
-      "complaints": 0,
-      "compliments": 0
+      "complaints": 1,
+      "compliments": 1
     },
     {
       "member": "rohil",
@@ -90,7 +187,7 @@
       "period": "month",
       "direction": "written",
       "complaints": 0,
-      "compliments": 0
+      "compliments": 2
     },
     {
       "member": "ohm",
@@ -104,13 +201,13 @@
       "period": "month",
       "direction": "written",
       "complaints": 0,
-      "compliments": 0
+      "compliments": 1
     },
     {
       "member": "rohil",
       "period": "month",
       "direction": "written",
-      "complaints": 0,
+      "complaints": 2,
       "compliments": 0
     },
     {
@@ -124,15 +221,15 @@
       "member": "ohm",
       "period": "week",
       "direction": "received",
-      "complaints": 0,
-      "compliments": 0
+      "complaints": 1,
+      "compliments": 2
     },
     {
       "member": "rina",
       "period": "week",
       "direction": "received",
-      "complaints": 0,
-      "compliments": 0
+      "complaints": 1,
+      "compliments": 1
     },
     {
       "member": "rohil",
@@ -146,7 +243,7 @@
       "period": "week",
       "direction": "written",
       "complaints": 0,
-      "compliments": 0
+      "compliments": 2
     },
     {
       "member": "ohm",
@@ -160,17 +257,131 @@
       "period": "week",
       "direction": "written",
       "complaints": 0,
-      "compliments": 0
+      "compliments": 1
     },
     {
       "member": "rohil",
       "period": "week",
       "direction": "written",
-      "complaints": 0,
+      "complaints": 2,
       "compliments": 0
     }
   ],
-  "history": [],
-  "updated_at": "2026-10-20T05:34:43.541977+00:00",
+  "history": [
+    {
+      "id": "a07bd6ab-2127-4c51-adc1-bd2550b192b6",
+      "body": "Thank you for slamming the door at 7:45am today! I actually really wanted to start waking up early \ud83d\udc9b",
+      "kind": "compliment",
+      "actor": "rina",
+      "action": "create",
+      "author": "rina",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-20T16:45:11.529666+00:00",
+      "created_at": "2026-10-20T16:45:11.529666+00:00",
+      "recipients": [
+        "ohm"
+      ],
+      "temperature": 25
+    },
+    {
+      "id": "f600b3bc-5791-43d9-a115-6f164c693199",
+      "body": "Thank you for doing the dishes \ud83d\ude1e",
+      "kind": "compliment",
+      "actor": "michal",
+      "action": "create",
+      "author": "michal",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-20T15:21:47.36535+00:00",
+      "created_at": "2026-10-20T15:21:47.36535+00:00",
+      "recipients": [
+        "rina"
+      ],
+      "temperature": 50
+    },
+    {
+      "id": "20763499-8eee-44cb-ba23-2a0b83df2841",
+      "body": "Don\u2019t leave your shoes on the stairs (apparently their presence leaves King Ohm no choice but to slam the door shut)",
+      "kind": "complaint",
+      "actor": "rohil",
+      "action": "create",
+      "author": "rohil",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-20T12:45:08.685354+00:00",
+      "created_at": "2026-10-20T12:45:08.685354+00:00",
+      "recipients": [
+        "rina"
+      ],
+      "temperature": -15
+    },
+    {
+      "id": "79feccd9-ba85-4473-958d-f5e995797fe1",
+      "body": "DONT SLAM THE DOOR \ud83d\ude10",
+      "kind": "complaint",
+      "actor": "rohil",
+      "action": "create",
+      "author": "rohil",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-20T12:43:02.346101+00:00",
+      "created_at": "2026-10-20T12:43:02.346101+00:00",
+      "recipients": [
+        "ohm"
+      ],
+      "temperature": -70
+    },
+    {
+      "id": "50dc9c88-f520-4d37-b2c9-7d579c7f3f10",
+      "body": "DONT SLAM THE DOOR \ud83d\ude10",
+      "kind": "complaint",
+      "actor": "rohil",
+      "action": "delete",
+      "author": "rohil",
+      "deleted": true,
+      "version": 2,
+      "posted_at": "2026-10-20T12:41:29.337276+00:00",
+      "created_at": "2026-10-20T12:42:29.173586+00:00",
+      "recipients": [
+        "michal"
+      ],
+      "temperature": -70
+    },
+    {
+      "id": "50dc9c88-f520-4d37-b2c9-7d579c7f3f10",
+      "body": "DONT SLAM THE DOOR \ud83d\ude10",
+      "kind": "complaint",
+      "actor": "rohil",
+      "action": "create",
+      "author": "rohil",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-20T12:41:29.337276+00:00",
+      "created_at": "2026-10-20T12:41:29.337276+00:00",
+      "recipients": [
+        "michal"
+      ],
+      "temperature": -70
+    },
+    {
+      "id": "2ba0451b-7766-4f66-97a7-2fe32d914cbe",
+      "body": "ohm is such a studious good little boy, good luck on your exam today",
+      "kind": "compliment",
+      "actor": "michal",
+      "action": "create",
+      "author": "michal",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-20T05:46:51.341503+00:00",
+      "created_at": "2026-10-20T05:46:51.341503+00:00",
+      "recipients": [
+        "ohm"
+      ],
+      "temperature": 100
+    }
+  ],
+  "updated_at": "2026-10-20T22:50:52.958512+00:00",
+  "exported_at": "2026-10-20T22:50:52.958512+00:00",
   "format_version": 1
 }

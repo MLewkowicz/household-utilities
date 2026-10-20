@@ -1,12 +1,21 @@
 """Check the publication allowlist and compare assets against private PDF details."""
 from pathlib import Path
 import re
+import json
+import hashlib
 import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 violations = []
+avatar_manifest = json.loads((ROOT / 'public/avatars/v1/manifest.json').read_text())
+approved_avatars = {f'avatars/v1/{name}': info for name, info in avatar_manifest['files'].items()}
 for p in (ROOT / "dist").rglob("*"):
+    if p.is_file() and p.relative_to(ROOT / 'dist').as_posix() in approved_avatars:
+        info = approved_avatars[p.relative_to(ROOT / 'dist').as_posix()]
+        if hashlib.sha256(p.read_bytes()).hexdigest() != info['sha256']:
+            violations.append(f"Avatar checksum mismatch: {p.relative_to(ROOT)}")
+        continue
     if p.is_file() and p.suffix.lower() not in (".html", ".css", ".js", ".svg", ".txt", ".json") and p.name not in (".nojekyll", "manifest.webmanifest", "icon-192.png", "icon-512.png"):
         violations.append(f"Unexpected deploy artifact: {p.relative_to(ROOT)}")
 paths = [p for folder in ("dist", "data", "src", "public", "supabase") for p in (ROOT/folder).rglob("*") if p.is_file()]
@@ -37,7 +46,7 @@ except ImportError:
 if (ROOT/".git").exists():
     tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT).decode().split("\0")
     for file in filter(None,tracked):
-        if file.lower().endswith(".pdf") or file.startswith(("bills/", ".local/", ".venv/", ".tools/", "node_modules/", ".env", ".dev.vars")):
+        if file.lower().endswith(".pdf") or file.startswith(("bitmoji_photos/", "bills/", ".local/", ".venv/", ".tools/", "node_modules/", ".env", ".dev.vars")):
             violations.append(f"Private file tracked by Git: {file}")
 if violations:
     print("\n".join(sorted(set(violations))), file=sys.stderr)

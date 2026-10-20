@@ -1,9 +1,12 @@
 import type {Member} from './ledger';
+export type TaskKind='reminder'|'request'|'chore';
+export const taskKind=(task:{kind?:TaskKind;points:number}):TaskKind=>task.kind||(task.points===0?'reminder':'chore');
 export type ChoreStatus='active'|'overdue'|'completed'|'cancelled'|'expired'|'missed';
 export type Completion={contributors:Member[];completed_at:string};
-export type Chore={id:string;version:number;title:string;note:string;icon_id:string;assignee:Member|null;requester:Member;points:number;pinned:boolean;due_on:string|null;due_time:string|null;due_at:string|null;expires_on:string|null;expires_time:string|null;expires_at:string|null;state:'active'|'completed'|'cancelled';status:ChoreStatus;completion:Completion|null;routine_id:string|null;routine_title?:string;cycle_start:string|null;cycle_end:string|null;step_id?:string;projected:boolean;created_at:string;actor:Member};
+export type Chore={kind?:TaskKind;reminder_group_id?:string|null;id:string;version:number;title:string;note:string;icon_id:string;assignee:Member|null;requester:Member;points:number;pinned:boolean;due_on:string|null;due_time:string|null;due_at:string|null;expires_on:string|null;expires_time:string|null;expires_at:string|null;state:'active'|'completed'|'cancelled';status:ChoreStatus;completion:Completion|null;routine_id:string|null;routine_title?:string;cycle_start:string|null;cycle_end:string|null;step_id?:string;projected:boolean;created_at:string;actor:Member};
 export type ChoreRevision=Chore&{action:string;change_note:string};
-export type RoutineStep={id:string;title:string;note:string;icon_id:string;points:number;weekday:number;time:string|null};
+// weekday is a day offset from start_week, which may now be any date.
+export type RoutineStep={kind?:TaskKind;id:string;title:string;note:string;icon_id:string;points:number;weekday:number;time:string|null};
 export type Routine={id:string;version:number;title:string;start_week:string;interval_weeks:number;owners:Member[];start_index:number;enabled:boolean;steps:RoutineStep[];effective_on:string;actor:Member;created_at:string};
 export type Score={member:Member;period:'week'|'month'|'all';rank:number;units:number;entries:{id:string;title:string;member:Member;units:number;completed_at:string}[]};
 export type ChoreLedger={tasks:Chore[];routines:Routine[];history:ChoreRevision[];routine_history:Routine[];leaderboard:Score[];updated_at:string|null;local_day:string;projection_until:string;format_version:number};

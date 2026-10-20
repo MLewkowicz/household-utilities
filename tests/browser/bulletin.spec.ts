@@ -51,8 +51,8 @@ test('Post-its grow the page to the bottom and remain legible on phones in both 
   }
  }
  await page.locator('#bulletin-new').click();await expect(page.locator('#bulletin-note-heading')).toBeFocused();expect(await page.locator('#bulletin-note-dialog').evaluate(el=>el.scrollWidth<=el.clientWidth)).toBeTruthy();
- await page.emulateMedia({reducedMotion:'reduce'});await page.locator('#bulletin-temperature').fill('-100');expect(await page.locator('#bulletin-reaction svg').evaluate(el=>getComputedStyle(el).getPropertyValue('--rage'))).toBe('1');expect(await page.locator('#bulletin-reaction .steam-one').evaluate(el=>getComputedStyle(el).animationName)).toBe('none');
- await page.locator('#bulletin-temperature').fill('100');expect(await page.locator('#bulletin-reaction svg').evaluate(el=>getComputedStyle(el).getPropertyValue('--love'))).toBe('1');
+ await page.emulateMedia({reducedMotion:'reduce'});await page.locator('#bulletin-temperature').fill('-100');const expression=page.locator('#bulletin-reaction .bulletin-character');await expect(expression).toHaveClass(/has-character-canvas/);await expect(expression).toHaveAttribute('aria-label','Michal: About to burst');const frozen=await expression.locator('canvas').evaluate((el:HTMLCanvasElement)=>el.toDataURL());await page.waitForTimeout(120);expect(await expression.locator('canvas').evaluate((el:HTMLCanvasElement)=>el.toDataURL())).toBe(frozen);
+ await page.locator('#bulletin-temperature').fill('100');await expect(expression).toHaveAttribute('aria-label','Michal: Heart overflowing');expect(await expression.locator('canvas').evaluate((el:HTMLCanvasElement)=>el.toDataURL())).not.toBe(frozen);
  await page.keyboard.press('Escape');await selectView(page,'activity');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.locator('#bulletin-period').selectOption('week');
  await page.getByRole('link',{name:/^Chores/}).click();await expect(page.locator('#chore-identity-name')).toContainText('Michal');await page.getByRole('link',{name:'Bulletin',exact:true}).click();await expect(page.locator('#bulletin-identity-name')).toContainText('Michal');
 });

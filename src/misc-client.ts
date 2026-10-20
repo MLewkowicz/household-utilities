@@ -1,3 +1,5 @@
+import {avatar} from './people';
+import {info} from './disclosure';
 import { MEMBERS, type Member } from './ledger';
 import { equalShares, parseAmount, type Expense, type Settlement, type MiscLedger, type Shares, type Pair } from './misc-ledger';
 import { $, esc, money, name, date, today, rpc, toast, download } from './ui';
@@ -14,7 +16,6 @@ let expenseId='', expenseRequest='', expenseFingerprint='', settlementId='', set
 let expensePayload: Record<string,unknown>|null=null;
 let deleting: {kind:'expense'|'settlement';entry:Expense|Settlement;request:string}|null=null;
 const options=()=>MEMBERS.map(m=>`<option value="${m}">${name(m)}</option>`).join('');
-const avatar=(m: Member)=>`<span class="avatar ${m}">${name(m)[0]}</span>`;
 const memberChip=(m: Member)=>`<span class="actor-chip member-${m}">${name(m)}</span>`;
 const input=<T extends HTMLInputElement|HTMLSelectElement=HTMLInputElement>(id:string)=>$<T>('#'+id);
 const message=(id:string,text:string)=>{const el=$('#'+id);el.textContent=text;el.hidden=!text;};
@@ -29,9 +30,9 @@ export function initMisc() {
   <section id="identity-panel" class="identity-panel" aria-labelledby="identity-title"><div><div class="eyebrow">MAKE YOURSELF AT HOME</div><h2 id="identity-title">Who are you?</h2><p class="section-copy">Choose your name before adding a purchase.<br>We’ll remember it on this device.</p></div><div class="identity-choices">${MEMBERS.map(m=>`<button class="person-tile member-${m}" data-identity="${m}">${avatar(m)}<span>I’m ${name(m)}</span></button>`).join('')}</div></section>
   <div id="identity-bar" class="identity-bar" hidden><span id="identity-name"></span><button id="switch-person" class="text-button">Switch person</button><span class="identity-caption">Your purchases. Everyone’s fair share.</span></div>
   <section class="misc-overview" aria-labelledby="misc-balances-title"><div class="section-top compact"><h2 id="misc-balances-title">At a glance</h2><span id="misc-as-of" class="quiet"></span></div><div id="misc-balances" class="balance-grid" aria-busy="true"></div></section>
-  <section class="misc-pair-section" aria-labelledby="pair-title"><div class="section-top"><div><div class="eyebrow">01 / BETWEEN ROOMMATES</div><h2 id="pair-title">Who owes whom</h2><p class="section-copy">Shared purchases only. Utility balances stay in Utilities.</p></div></div><div id="misc-pairs" class="pair-grid"></div></section>
+  <section class="misc-pair-section" aria-labelledby="pair-title"><div class="section-top"><div><div class="eyebrow">01 / BETWEEN ROOMMATES</div><h2 id="pair-title">Who owes whom</h2>${info('About purchase balances','Shared purchases only. Utility balances stay in Utilities.')}</div></div><div id="misc-pairs" class="pair-grid"></div></section>
   <section class="misc-feed-section" aria-labelledby="misc-feed-title"><div class="section-top"><div><div class="eyebrow">02 / THE LITTLE THINGS</div><h2 id="misc-feed-title">Around the household</h2><p class="section-copy" id="misc-spent">Purchases and repayments, together in one place.</p></div><div id="misc-person-filter" class="segmented" role="group" aria-label="Filter purchases by person"><button data-filter-person="all" aria-pressed="true">Everyone</button>${MEMBERS.map(m=>`<button data-filter-person="${m}" class="member-${m}" aria-pressed="false">${name(m)}</button>`).join('')}</div></div><div class="feed-toolbar"><div id="misc-type-filter" class="segmented" role="group" aria-label="Entry type"><button data-type="all" aria-pressed="true">All</button><button data-type="expense" aria-pressed="false">Expenses</button><button data-type="settlement" aria-pressed="false">Repayments</button></div><label class="inline-check"><input type="checkbox" id="show-deleted"> Show deleted</label></div><div id="misc-feed"></div></section>
-  <p class="misc-footnote">A shared notebook for the things you’ve already paid for. Repayments are recorded here after sending money in your usual app.</p>`;
+  ${info('About repayments','Record repayments after sending money in your usual payment app.')}`;
  document.body.insertAdjacentHTML('beforeend',`
   <dialog id="expense-dialog" class="expense-dialog" aria-labelledby="expense-title"><form id="expense-form"><div class="dialog-top"><div class="eyebrow">ONE LITTLE THING</div><button type="button" class="icon-button" data-close="expense-dialog" aria-label="Close expense form">×</button></div><h2 id="expense-title">Add an expense</h2>
    <div class="expense-hero"><span id="chosen-icon" class="chosen-icon"></span><label>What did you buy?<input id="expense-description" maxlength="160" placeholder="e.g. paper towels for the kitchen" required autocomplete="off"></label></div>
@@ -40,7 +41,7 @@ export function initMisc() {
    <details class="icon-picker" id="icon-picker"><summary>Choose an icon <span id="chosen-icon-label">Receipt</span></summary><div class="picker-controls"><label class="sr-only" for="icon-search">Search icons</label><input id="icon-search" placeholder="Try milk, cleaning, or travel" type="search"><label class="sr-only" for="icon-category">Icon category</label><select id="icon-category"><option value="">All categories</option>${CATEGORIES.map(c=>`<option>${c}</option>`).join('')}</select></div><div id="icon-grid" class="icon-grid"></div></details>
    <div class="form-row"><div class="amount-field"><label>Purchase amount<span class="amount-input"><span>$</span><input id="expense-amount" aria-label="Purchase amount" inputmode="decimal" placeholder="0.00" required autocomplete="off"></span></label><button type="button" class="text-button calculator-link" data-calculate="expense" aria-label="Calculate purchase amount">Calculator</button></div><label>Purchase date<input id="expense-date" type="date" required></label></div>
    <div id="expense-payer-line" class="payer-line"></div><label id="expense-payer-label" hidden>Who paid?<select id="expense-payer">${options()}</select></label>
-   <fieldset><legend>How should we split it?</legend><div class="method-options split-options"><label><input type="radio" name="split-mode" value="equal" checked><span>Equally</span></label><label><input type="radio" name="split-mode" value="custom"><span>Custom amounts</span></label></div></fieldset>
+   <button type="button" id="guest-split-open" class="button secondary">Split with guests</button><fieldset><legend>How should we split it?</legend><div class="method-options split-options"><label><input type="radio" name="split-mode" value="equal" checked><span>Equally</span></label><label><input type="radio" name="split-mode" value="custom"><span>Custom amounts</span></label></div></fieldset>
    <div class="split-heading"><h3>Share with</h3><label class="inline-check"><input type="checkbox" id="include-self" checked> Include my share</label></div>
    <div id="participant-tiles" class="participant-grid"></div><div id="self-share" class="self-share"></div><div id="custom-shares" class="custom-shares" hidden></div>
    <p id="split-status" class="split-status" role="status"></p><p class="privacy-hint">Entries are public. Keep addresses, account numbers, and other personal details out of descriptions.</p>
@@ -68,11 +69,11 @@ function render() {
  $('#misc-balances').innerHTML=MEMBERS.map(m=>{
   const owed=ledger!.pairs.filter(p=>p.sender===m).reduce((s,p)=>s+p.amount_cents,0);
   const collect=ledger!.pairs.filter(p=>p.recipient===m).reduce((s,p)=>s+p.amount_cents,0);
-  return `<article class="balance-card member-${m}"><div class="person-heading"><div class="person-name">${avatar(m)}${name(m)}</div></div><div class="misc-balance-line"><strong>${money(owed)}</strong><span>to pay</span></div><div class="misc-balance-line collect"><strong>${money(collect)}</strong><span>to collect</span></div><div class="balance-caption">${!owed&&!collect?'All settled up':'Shared purchases only'}</div></article>`;
+  return `<article class="balance-card member-${m}"><div class="person-heading"><div class="person-name">${avatar(m)}${name(m)}</div></div><div class="misc-balance-line"><strong>${money(owed)}</strong><span>to pay</span></div><div class="misc-balance-line collect"><strong>${money(collect)}</strong><span>to collect</span></div><div class="balance-caption">${!owed&&!collect?'All settled up':'Shared purchases only'}</div></details></article>`;
  }).join('');$('#misc-balances').setAttribute('aria-busy','false');
  $('#misc-pairs').innerHTML=ledger.pairs.length?ledger.pairs.map(p=>`<div class="pair-card"><div class="pair-people">${avatar(p.sender)}<span class="pair-arrow" aria-hidden="true">→</span>${avatar(p.recipient)}<span>${memberChip(p.sender)} owes ${memberChip(p.recipient)}</span></div><strong>${money(p.amount_cents)}</strong><button class="text-button" data-repay-from="${p.sender}" data-repay-to="${p.recipient}" ${!live||!identity?'disabled':''}>Record repayment</button></div>`).join(''):'<div class="empty-state settled-empty"><span class="settled-mark" aria-hidden="true">✓</span><div><h3>Everyone’s square.</h3><p>Shared purchases will appear here when someone is owed.</p></div></div>';
  $('#misc-spent').textContent=money(ledger.expenses.filter(e=>!e.deleted).reduce((s,e)=>s+e.amount_cents,0))+' in purchases · repayments counted separately';
- renderFeed();$('#export').removeAttribute('disabled');
+ renderFeed();if(location.hash==='#miscellaneous')$('#export').removeAttribute('disabled');
 }
 
 function entryHistory(entry:Expense|Settlement) {
@@ -98,8 +99,14 @@ function changesBetween(before:Expense|Settlement,after:Expense|Settlement):stri
  }
  return Object.keys(labels).filter(k=>JSON.stringify(a[k])!==JSON.stringify(b[k])).map(k=>`${labels[k]}: ${format(k,a[k])} → ${format(k,b[k])}`);
 }
+function fillEntryHistory(details:HTMLDetailsElement){
+ const target=details.querySelector<HTMLElement>('[data-entry-history]');if(!target||target.childElementCount||!ledger)return;
+ const entry=[...ledger.expenses,...ledger.settlements].find(e=>e.id===target.dataset.entryHistory);if(entry)target.innerHTML=entryHistory(entry);
+}
 function renderFeed() {
  if(!ledger)return;
+ const openDetails=[...document.querySelectorAll<HTMLElement>('#misc-feed .tile-details[open]')].map(el=>el.closest<HTMLElement>('[data-entry-id]')!.dataset.entryId);
+ const openHistory=[...document.querySelectorAll<HTMLElement>('#misc-feed .entry-history[open]')].map(el=>el.closest<HTMLElement>('[data-entry-id]')!.dataset.entryId);
  const entries: (Expense|Settlement)[]=[...(feedType==='settlement'?[]:ledger.expenses),...(feedType==='expense'?[]:ledger.settlements)]
   .filter(e=>(showDeleted||!e.deleted)&&(person==='all'||(isExpense(e)?e.payer===person||e.participants.includes(person):e.sender===person||e.recipient===person)))
   .sort((a,b)=>b.paid_on.localeCompare(a.paid_on)||b.created_at.localeCompare(a.created_at)||a.id.localeCompare(b.id));
@@ -108,8 +115,12 @@ function renderFeed() {
   const purchase=isExpense(e),payer=purchase?e.payer:e.sender,kind=purchase?'expense':'settlement';
   const thisMonth=e.paid_on.slice(0,7);let heading='';
   if(month!==thisMonth){month=thisMonth;heading=`<h3 class="feed-month">${new Date(month+'-01T12:00Z').toLocaleDateString('en-US',{month:'long',year:'numeric',timeZone:'UTC'})}</h3>`;}
-  return `${heading}<article class="expense-card member-${payer} ${e.deleted?'entry-deleted':''}" data-entry-id="${e.id}"><div class="expense-card-main"><span class="entry-illustration">${purchase?iconSvg(e.icon_id):'<span class="repayment-symbol" aria-hidden="true">↗</span>'}</span><div class="entry-description"><h3>${purchase?esc(e.description):`${name(e.sender)} → ${name(e.recipient)}`}</h3><p>${purchase?`${memberChip(e.payer)} paid`:`Repayment · ${esc(e.method==='other'?e.other:name(e.method))}`} · ${date(e.paid_on)} ${e.deleted?'<span class="deleted-label">DELETED</span>':e.version>1?'<span class="edited-label">Edited</span>':''}</p></div><strong class="entry-amount">${money(e.amount_cents)}</strong></div>${purchase?`<div class="entry-shares">${e.participants.map(m=>`<span class="share-chip member-${m}">${name(m)} <strong>${money(e.shares[m]||0)}</strong></span>`).join('')}</div>`:''}<div class="entry-bottom">${entryHistory(e)}${!e.deleted&&live&&identity?`<div class="entry-actions"><button class="text-button" data-misc-edit="${e.id}" data-kind="${kind}" aria-label="Edit ${purchase?esc(e.description):'repayment'}">Edit</button><button class="text-button" data-misc-delete="${e.id}" data-kind="${kind}" aria-label="Delete ${purchase?esc(e.description):'repayment'}">Delete</button></div>`:''}</div></article>`;
+  return `${heading}<article class="expense-card ${purchase?"member-"+payer:"settlement-card"} ${e.deleted?'entry-deleted':''}" data-entry-id="${e.id}"><div class="expense-card-main"><span class="entry-illustration">${purchase?iconSvg(e.icon_id):'<span class="repayment-symbol" aria-hidden="true">↗</span>'}</span><div class="entry-description"><h3>${purchase?esc(e.description):`${name(e.sender)} → ${name(e.recipient)}`}</h3><p>${purchase?`${memberChip(e.payer)} paid`:`Repayment · ${esc(e.method==='other'?e.other:name(e.method))}`} · ${date(e.paid_on)} ${e.deleted?'<span class="deleted-label">DELETED</span>':e.version>1?'<span class="edited-label">Edited</span>':''}</p></div><strong class="entry-amount">${money(e.amount_cents)}</strong></div><details class="tile-details"><summary>Details <span aria-hidden="true">⌄</span></summary>${purchase?`<div class="entry-shares">${e.participants.map(m=>`<span class="share-chip member-${m}">${name(m)} <strong>${money(e.shares[m]||0)}</strong></span>`).join('')}</div>`:''}<div class="entry-bottom"><div data-entry-history="${e.id}"></div>${!e.deleted&&live&&identity?`<div class="entry-actions"><button class="text-button" data-misc-edit="${e.id}" data-kind="${kind}" aria-label="Edit ${purchase?esc(e.description):'repayment'}">Edit</button><button class="text-button" data-misc-delete="${e.id}" data-kind="${kind}" aria-label="Delete ${purchase?esc(e.description):'repayment'}">Delete</button></div>`:''}</div></details></article>`;
  }).join('')||`<div class="empty-state misc-empty"><span class="empty-illustration">${iconSvg('groceries')}${iconSvg('paper-towels')}${iconSvg('pizza')}</span><h3>${ledger.expenses.length||ledger.settlements.length?'Nothing in this view yet.':'Good things are better shared.'}</h3><p>${ledger.expenses.length||ledger.settlements.length?'Try another filter or include deleted entries.':'Bought something for the household? Add the first expense.'}</p></div>`;
+ document.querySelectorAll<HTMLDetailsElement>('#misc-feed .tile-details').forEach(details=>{
+  const id=details.closest<HTMLElement>('[data-entry-id]')!.dataset.entryId;
+  if(openDetails.includes(id)){details.open=true;fillEntryHistory(details);const history=details.querySelector<HTMLDetailsElement>('.entry-history');if(history)history.open=openHistory.includes(id);}
+ });
 }
 
 export async function refreshMisc() {
@@ -275,6 +286,17 @@ async function deleteEntry(event:Event) {
 }
 
 function bindEvents() {
+ $('#misc-feed').addEventListener('toggle',event=>{const el=event.target as HTMLDetailsElement;if(el.open&&el.matches('.tile-details'))fillEntryHistory(el);},true);
+ $('#guest-split-open').addEventListener('click',async()=>{
+  if(busy||!live)return;
+  const {openGuestSplit}=await import('./guest-split-ui');
+  openGuestSplit({total:input('expense-amount').value,members:selectedParticipants()},(total,members,shares)=>{
+   input('expense-amount').value=(total/100).toFixed(2);participants=new Set(members);
+   $<HTMLInputElement>('#expense-form [name=split-mode][value=custom]').checked=true;
+   customDraft=Object.fromEntries(members.map(m=>[m,(shares[m]!/100).toFixed(2)]));
+   renderParticipants();
+  });
+ });
  $('#identity-panel').addEventListener('click',event=>{
   const button=(event.target as HTMLElement).closest<HTMLElement>('[data-identity]');if(!button)return;
   setIdentity(button.dataset.identity as Member);

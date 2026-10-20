@@ -1,5 +1,6 @@
-import {test,expect,type Page} from '@playwright/test';
+import {test,expect,type Page,type Locator} from '@playwright/test';
 const rpc=async(page:Page,name:string,p?:unknown)=>(await page.request.post(`/rest/v1/rpc/utilities_${name}`,{headers:{apikey:'local-public'},data:p?{p}:{}})).json();
+async function expand(card:Locator){const details=card.locator(':scope > .tile-details');if(!await details.evaluate(el=>el.hasAttribute('open')))await details.locator(':scope > summary').click();}
 async function open(page:Page,who='rina') {
  await page.goto('/#miscellaneous');await expect(page.locator('#misc-status')).toHaveText('Shared purchases · up to date');
  await page.locator(`[data-identity=${who}]`).click();
@@ -21,7 +22,7 @@ test('name-first expenses, custom shares, icons, history and pair repayments sta
  await expect(page.locator('#misc-balances .member-rina')).toContainText('$18.00');
  const other=await browser.newPage();await other.goto('http://127.0.0.1:4174/#miscellaneous');
  await expect(other.locator(`[data-entry-id="${entry.id}"]`)).toBeVisible();await other.close();
- await card.getByRole('button',{name:/^Edit /}).click();await page.locator('[data-participant=rohil]').click();
+ await expand(card);await card.getByRole('button',{name:/^Edit /}).click();await page.locator('[data-participant=rohil]').click();
  await page.getByText('Custom amounts',{exact:true}).click();
  await page.getByLabel('Michal’s share',{exact:true}).fill('10');await page.getByLabel('Rina’s share',{exact:true}).fill('4');
  await expect(page.locator('#split-status')).toHaveText('$2.00 left to assign');await expect(page.locator('#save-expense')).toBeDisabled();
@@ -31,20 +32,20 @@ test('name-first expenses, custom shares, icons, history and pair repayments sta
  await page.getByLabel('What did you buy?').fill('Paper towels and milk');await expect(page.locator('#chosen-icon-label')).toHaveText('Milk');
  await page.locator('#save-expense').click();await expect(page.locator('#expense-dialog')).not.toBeVisible();
  await expect(card).toContainText('Edited');await expect(page.locator('#misc-feed .expense-card')).toHaveCount(1);
- await card.locator('summary').click();await expect(card.locator('.entry-history')).toContainText('Edited by Rina');await expect(card.locator('.entry-history')).toContainText('Rohil');
+ await expand(card);await card.locator('.entry-history > summary').click();await expect(card.locator('.entry-history')).toContainText('Edited by Rina');await expect(card.locator('.entry-history')).toContainText('Rohil');
  await page.locator('.pair-card').filter({hasText:'Ohm owes Rina'}).getByRole('button').click();
  await expect(page.locator('#settlement-amount')).toHaveValue('10.00');
  await expect(page.locator('#settlement-title')).toBeFocused();
  await page.locator('#settlement-form').getByText('Other',{exact:true}).click();await page.getByLabel('How was it sent?').fill('cash');
  await page.locator('#save-settlement').click();await expect(page.locator('#settlement-dialog')).not.toBeVisible();
  await expect(page.locator('.pair-card').filter({hasText:'Ohm owes Rina'})).toHaveCount(0);
- await card.getByRole('button',{name:/^Delete /}).click();await page.locator('#confirm-misc-delete').click();await expect(page.locator('#misc-delete-dialog')).not.toBeVisible();
+ await expand(card);await card.getByRole('button',{name:/^Delete /}).click();await page.locator('#confirm-misc-delete').click();await expect(page.locator('#misc-delete-dialog')).not.toBeVisible();
  await expect(page.locator('.pair-card').filter({hasText:'Rina owes Ohm'})).toContainText('$10.00');
- const repayment=page.locator('#misc-feed .expense-card');await repayment.getByRole('button',{name:'Delete repayment'}).click();
+ const repayment=page.locator('#misc-feed .expense-card');await expand(repayment);await repayment.getByRole('button',{name:'Delete repayment'}).click();
  await page.locator('#confirm-misc-delete').click();await expect(page.locator('#misc-delete-dialog')).not.toBeVisible();
  await expect(page.locator('#misc-pairs')).toContainText('Everyone’s square.');
  await page.locator('#misc-page').getByLabel('Show deleted').check();await expect(page.locator('#misc-feed .expense-card')).toHaveCount(2);
- await card.locator('summary').click();await expect(card.locator('.entry-history')).toContainText('Deleted by Rina');
+ await expand(card);await card.locator('.entry-history > summary').click();await expect(card.locator('.entry-history')).toContainText('Deleted by Rina');
  const utilityAfter=await rpc(page,'dashboard');for(const key of ['bills','allocations','history','bill_history'])expect(utilityAfter[key]).toEqual(utilityBefore[key]);
  expect(errors).toEqual([]);
 });

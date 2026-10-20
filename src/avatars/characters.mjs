@@ -1,0 +1,8 @@
+// Coordinates use the approved artwork's 1000 × 1000 normalized canvas.
+// Each face keeps its own proportions; expressions share motion, not geometry.
+export const CHARACTERS = {
+  michal: {name:'Michal', eyeX:500,eyeY:554,eyeGap:124,eyeScale:1,iris:['#655928','#3b3520'],browY:460,browStyle:'michal',browScale:1,browColor:['#5d4533','#443024'],mouthX:500,mouthY:727,mouthScale:1,cheeks:[337,663,633],nose:[501,650],ears:[185,815,600],vapor:[[338,230],[492,153],[650,240]],skin:[143,180,20,42,18,35],occlusion:false},
+  rina: {name:'Rina',eyeX:490,eyeY:517,eyeGap:127,eyeScale:1.04,iris:['#4b351d','#292014'],browY:420,browStyle:'soft',browScale:.95,browColor:['#4d382b','#35271f'],mouthX:490,mouthY:687,mouthScale:.98,cheeks:[303,680,618],nose:[490,629],ears:[230,765,580],vapor:[[330,185],[490,123],[658,193]],skin:[130,170,18,40,15,32],occlusion:true},
+  ohm: {name:'Ohm',eyeX:488,eyeY:514,eyeGap:129,eyeScale:1.02,iris:['#4b3722','#292017'],browY:414,browStyle:'bold',browScale:1.04,browColor:['#302822','#201c19'],mouthX:489,mouthY:698,mouthScale:.83,mouthScaleY:.56,mouthAngryDrop:16,cheeks:[291,705,624],nose:[490,617],ears:[178,816,560],vapor:[[327,210],[489,119],[664,210]],skin:[100,145,18,38,12,29],occlusion:true},
+  rohil: {name:'Rohil',eyeX:490,eyeY:528,eyeGap:130,eyeScale:1.03,iris:['#4d4424','#2d291b'],browY:437,browStyle:'bold',browScale:1.01,browColor:['#514032','#352a23'],mouthX:490,mouthY:719,mouthScale:.88,mouthScaleY:.64,mouthAngryDrop:5,cheeks:[290,703,643],nose:[489,636],ears:[180,811,595],vapor:[[332,206],[490,131],[657,199]],skin:[105,145,18,38,12,30],occlusion:false},
+};

@@ -1,0 +1,283 @@
+{
+  "version": 1,
+  "style": "Slightly detailed Mii-inspired floating heads",
+  "default": "approved smiling portrait",
+  "temperature": {
+    "min": -100,
+    "neutral": 0,
+    "max": 100
+  },
+  "characters": {
+    "michal": {
+      "name": "Michal",
+      "happy128": "michal-happy128-4052c3f42b0a.webp",
+      "happy256": "michal-happy256-a17ff8e974e2.webp",
+      "happy512": "michal-happy512-575582bc6bbd.webp",
+      "faceplate": "michal-faceplate-ba2deed163ab.webp",
+      "neutral": "michal-neutral-eaa087cf9d27.webp",
+      "annoyed": "michal-annoyed-b54189992101.webp",
+      "angry": "michal-angry-a9ead947ebca.webp",
+      "grateful": "michal-grateful-a0e74a914f0f.webp",
+      "loving": "michal-loving-e2484104b251.webp"
+    },
+    "rina": {
+      "name": "Rina",
+      "happy128": "rina-happy128-41816ac8e69d.webp",
+      "happy256": "rina-happy256-5f808abe9390.webp",
+      "happy512": "rina-happy512-228d949bdc40.webp",
+      "faceplate": "rina-faceplate-5f0730d68062.webp",
+      "neutral": "rina-neutral-4ef9567a3783.webp",
+      "annoyed": "rina-annoyed-e5d3ab1ad70c.webp",
+      "angry": "rina-angry-22a949a75315.webp",
+      "grateful": "rina-grateful-0ed38cf05f57.webp",
+      "loving": "rina-loving-d15e819b104a.webp"
+    },
+    "ohm": {
+      "name": "Ohm",
+      "happy128": "ohm-happy128-109112d7f0bf.webp",
+      "happy256": "ohm-happy256-08e7efd0ce01.webp",
+      "happy512": "ohm-happy512-75c95dd1d9cb.webp",
+      "faceplate": "ohm-faceplate-0926a261bddf.webp",
+      "neutral": "ohm-neutral-f9890211a576.webp",
+      "annoyed": "ohm-annoyed-bd6b93985d89.webp",
+      "angry": "ohm-angry-623499811381.webp",
+      "grateful": "ohm-grateful-583840d74c9a.webp",
+      "loving": "ohm-loving-40415a0f2afe.webp"
+    },
+    "rohil": {
+      "name": "Rohil",
+      "happy128": "rohil-happy128-282297f5db2a.webp",
+      "happy256": "rohil-happy256-6ef33e06284d.webp",
+      "happy512": "rohil-happy512-1d9a85f6cd1b.webp",
+      "faceplate": "rohil-faceplate-f14a3dfe7ff7.webp",
+      "neutral": "rohil-neutral-12c086aee842.webp",
+      "annoyed": "rohil-annoyed-9c3d84996c5a.webp",
+      "angry": "rohil-angry-25f805f17e7b.webp",
+      "grateful": "rohil-grateful-4e58d0d73577.webp",
+      "loving": "rohil-loving-39cd9ff1979c.webp"
+    }
+  },
+  "files": {
+    "michal-happy128-4052c3f42b0a.webp": {
+      "bytes": 6420,
+      "sha256": "4052c3f42b0a7fab2f6afb8589eb50be35536087a330c82bf1ecd3685fbeb18f",
+      "width": 128,
+      "height": 128
+    },
+    "michal-happy256-a17ff8e974e2.webp": {
+      "bytes": 14752,
+      "sha256": "a17ff8e974e217394a560431feb4421a33ef28cd10c5ecbd2036eba0e6da6f27",
+      "width": 256,
+      "height": 256
+    },
+    "michal-happy512-575582bc6bbd.webp": {
+      "bytes": 37526,
+      "sha256": "575582bc6bbd8613f9a4fcfd31aceacbe1e4669e6ae6a30b8d8d26ab31de0f70",
+      "width": 512,
+      "height": 512
+    },
+    "michal-faceplate-ba2deed163ab.webp": {
+      "bytes": 23094,
+      "sha256": "ba2deed163ab4ec89e75bb4de3faa67faeec4d6329cab87e4b79cf7cf8a416ce",
+      "width": 512,
+      "height": 512
+    },
+    "michal-neutral-eaa087cf9d27.webp": {
+      "bytes": 7848,
+      "sha256": "eaa087cf9d2723daa21726f5a06ec5f1bdbb49e0554e9ce579fd01fae9058e32",
+      "width": 256,
+      "height": 256
+    },
+    "michal-annoyed-b54189992101.webp": {
+      "bytes": 9664,
+      "sha256": "b541899921011e77973e1dcbbc77ab19253684727fecb86fae525f304ad0d41a",
+      "width": 256,
+      "height": 256
+    },
+    "michal-angry-a9ead947ebca.webp": {
+      "bytes": 10552,
+      "sha256": "a9ead947ebca33ff843cc49a903667d44d3d68cf93791d9b53aa979d15fc259a",
+      "width": 256,
+      "height": 256
+    },
+    "michal-grateful-a0e74a914f0f.webp": {
+      "bytes": 8240,
+      "sha256": "a0e74a914f0fead75248a9971cba19aa1ca9b13ba4edf3d3893fa8180e031ad5",
+      "width": 256,
+      "height": 256
+    },
+    "michal-loving-e2484104b251.webp": {
+      "bytes": 8416,
+      "sha256": "e2484104b2510f38fe6d5ccdbca1526a6059259cbda9ee8a50ba3d023a791f69",
+      "width": 256,
+      "height": 256
+    },
+    "rina-happy128-41816ac8e69d.webp": {
+      "bytes": 7720,
+      "sha256": "41816ac8e69dd802e1093d8c496ecf37ac81fff655f81cc265f7b2a10f9ed8e1",
+      "width": 128,
+      "height": 128
+    },
+    "rina-happy256-5f808abe9390.webp": {
+      "bytes": 17546,
+      "sha256": "5f808abe93900e01e9f2afc7044d6b4f651cbe7d7950278fd8a9ac50ae0f68eb",
+      "width": 256,
+      "height": 256
+    },
+    "rina-happy512-228d949bdc40.webp": {
+      "bytes": 41968,
+      "sha256": "228d949bdc402241a3ffd72b50fb2a9cce382709b9287f6b704bc57ecc1741a3",
+      "width": 512,
+      "height": 512
+    },
+    "rina-faceplate-5f0730d68062.webp": {
+      "bytes": 28606,
+      "sha256": "5f0730d680621705eeb096218ad8c136eba0c660e07babbc177bf79656009b4a",
+      "width": 512,
+      "height": 512
+    },
+    "rina-neutral-4ef9567a3783.webp": {
+      "bytes": 8882,
+      "sha256": "4ef9567a3783fa02a1d0989fbaf994d7e3ce9dc40dc38b9ea41a505c0dc175ae",
+      "width": 256,
+      "height": 256
+    },
+    "rina-annoyed-e5d3ab1ad70c.webp": {
+      "bytes": 9422,
+      "sha256": "e5d3ab1ad70cb6ce09762c0cf0ed89e6f42eb8bbd627312b861589c4043d6e41",
+      "width": 256,
+      "height": 256
+    },
+    "rina-angry-22a949a75315.webp": {
+      "bytes": 11200,
+      "sha256": "22a949a753156c5b1c69be2f62adc21c1dea8d613fc9ed8b3a4817e67de07a29",
+      "width": 256,
+      "height": 256
+    },
+    "rina-grateful-0ed38cf05f57.webp": {
+      "bytes": 8996,
+      "sha256": "0ed38cf05f57172759a4df5d4ef6c6ca83febdbecf1cc8757ea63c2e35977d69",
+      "width": 256,
+      "height": 256
+    },
+    "rina-loving-d15e819b104a.webp": {
+      "bytes": 9226,
+      "sha256": "d15e819b104a8b9b59ce6619c51e3e4466b8a4acf846eba41e5437e87aeff77b",
+      "width": 256,
+      "height": 256
+    },
+    "ohm-happy128-109112d7f0bf.webp": {
+      "bytes": 8402,
+      "sha256": "109112d7f0bf12262a984db832d613e5b924a0f2258f6b076c3a5af7b34d0218",
+      "width": 128,
+      "height": 128
+    },
+    "ohm-happy256-08e7efd0ce01.webp": {
+      "bytes": 19388,
+      "sha256": "08e7efd0ce0107555ab3ad227c02ea7dbb7a1f430de60866f6585bd076038efa",
+      "width": 256,
+      "height": 256
+    },
+    "ohm-happy512-75c95dd1d9cb.webp": {
+      "bytes": 46464,
+      "sha256": "75c95dd1d9cb028543110c564bcaace15187824163e52885b04f994438e779d6",
+      "width": 512,
+      "height": 512
+    },
+    "ohm-faceplate-0926a261bddf.webp": {
+      "bytes": 37152,
+      "sha256": "0926a261bddf2776336fcd8c1d624e42b36ae7d0c823e20d9cbd96e09bc43996",
+      "width": 512,
+      "height": 512
+    },
+    "ohm-neutral-f9890211a576.webp": {
+      "bytes": 11320,
+      "sha256": "f9890211a57600ab181de7c90cee362087a33548777cc4edee62b4cd24bea7c2",
+      "width": 256,
+      "height": 256
+    },
+    "ohm-annoyed-bd6b93985d89.webp": {
+      "bytes": 11748,
+      "sha256": "bd6b93985d89b976150ceb27ff7c54bc926f611fa85a7c45514ee5d8f18530b2",
+      "width": 256,
+      "height": 256
+    },
+    "ohm-angry-623499811381.webp": {
+      "bytes": 12274,
+      "sha256": "623499811381ee15982e14c28651a8b55240298d161ee092253ae1ac252035c7",
+      "width": 256,
+      "height": 256
+    },
+    "ohm-grateful-583840d74c9a.webp": {
+      "bytes": 11324,
+      "sha256": "583840d74c9ae0e25ac7d3709d51dc27debcabd07064bb6fc7445ffb0936b8d1",
+      "width": 256,
+      "height": 256
+    },
+    "ohm-loving-40415a0f2afe.webp": {
+      "bytes": 11202,
+      "sha256": "40415a0f2afe6bc692bf982b6c0eacd898bba7364851a211bae2f6b9d31fc51e",
+      "width": 256,
+      "height": 256
+    },
+    "rohil-happy128-282297f5db2a.webp": {
+      "bytes": 6774,
+      "sha256": "282297f5db2a44924398cf2094290e591c659029b9251aa1fd0d4e2491de78c3",
+      "width": 128,
+      "height": 128
+    },
+    "rohil-happy256-6ef33e06284d.webp": {
+      "bytes": 14632,
+      "sha256": "6ef33e06284dc4a882f791951ceedfcf52c3eaacc2d76d7ce54a838ef5c5fbc4",
+      "width": 256,
+      "height": 256
+    },
+    "rohil-happy512-1d9a85f6cd1b.webp": {
+      "bytes": 34348,
+      "sha256": "1d9a85f6cd1be03921886ac37564f7117a76c529495a66a852c0dcee8124ffe7",
+      "width": 512,
+      "height": 512
+    },
+    "rohil-faceplate-f14a3dfe7ff7.webp": {
+      "bytes": 25308,
+      "sha256": "f14a3dfe7ff7fc264ec07d0bbd566560efd6078ec1eabc94f205fafb413ae6fa",
+      "width": 512,
+      "height": 512
+    },
+    "rohil-neutral-12c086aee842.webp": {
+      "bytes": 8594,
+      "sha256": "12c086aee842602795cca694a8c463713623593ab9524b2b97e111e6c4e7168c",
+      "width": 256,
+      "height": 256
+    },
+    "rohil-annoyed-9c3d84996c5a.webp": {
+      "bytes": 9998,
+      "sha256": "9c3d84996c5affc621a4f5c3b61c96449d36ea2692f5251762135580512345f6",
+      "width": 256,
+      "height": 256
+    },
+    "rohil-angry-25f805f17e7b.webp": {
+      "bytes": 11014,
+      "sha256": "25f805f17e7b27a1088b4cbfb554875e3c3e32071d6686e3f007b757f98ef5da",
+      "width": 256,
+      "height": 256
+    },
+    "rohil-grateful-4e58d0d73577.webp": {
+      "bytes": 8812,
+      "sha256": "4e58d0d735777cdff214973e742c18ca45d844e3adf247183cb3e7a8b8a12f25",
+      "width": 256,
+      "height": 256
+    },
+    "rohil-loving-39cd9ff1979c.webp": {
+      "bytes": 8786,
+      "sha256": "39cd9ff1979cfd2a8cb22d2e2694b4b11293347c8adc2e3812869ce29e27b049",
+      "width": 256,
+      "height": 256
+    },
+    "motion-93f9b9e8370e.js": {
+      "bytes": 19467,
+      "sha256": "93f9b9e8370e6c0a165bc2d4fe0ed435bd14decc73d28a743d60a7242b905c50"
+    }
+  },
+  "module": "motion-93f9b9e8370e.js"
+}

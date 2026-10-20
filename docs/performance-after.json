@@ -1,0 +1,114 @@
+{
+  "conditions": "390x844, 4x CPU, 100ms latency, 750KB/s download; isolated local DB",
+  "initialReadyMs": 1276,
+  "choreTabReadyMs": 526,
+  "initialJS": 28803,
+  "initialRequests": [
+    "/",
+    "/style-7555dd05da10.css",
+    "/config-0dcdee5c9311.js",
+    "/app-76T3I6ZE.js",
+    "/chunk-CMC2A22S.js",
+    "/chunk-F4MQFVEW.js",
+    "/chunk-AE556KH4.js",
+    "/chunk-NAO7CHQW.js",
+    "/chunk-DA74HI54.js",
+    "/chunk-KUC6ZJVL.js",
+    "/rest/v1/rpc/utilities_dashboard",
+    "/favicon.svg"
+  ],
+  "tabRequests": [
+    "/chunk-NGI25YKJ.js",
+    "/chunk-HAJWIZHQ.js",
+    "/chunk-TONDRKYF.js",
+    "/favicon.svg",
+    "/rest/v1/rpc/utilities_chores_dashboard"
+  ],
+  "assets": [
+    {
+      "file": "app-76T3I6ZE.js",
+      "bytes": 3325,
+      "gzip": 1408
+    },
+    {
+      "file": "chunk-7CLDGDAW.js",
+      "bytes": 5671,
+      "gzip": 2478
+    },
+    {
+      "file": "chunk-AE556KH4.js",
+      "bytes": 359,
+      "gzip": 249
+    },
+    {
+      "file": "chunk-CMC2A22S.js",
+      "bytes": 728,
+      "gzip": 436
+    },
+    {
+      "file": "chunk-DA74HI54.js",
+      "bytes": 13394,
+      "gzip": 5000
+    },
+    {
+      "file": "chunk-F4MQFVEW.js",
+      "bytes": 8202,
+      "gzip": 3366
+    },
+    {
+      "file": "chunk-HAJWIZHQ.js",
+      "bytes": 12839,
+      "gzip": 5259
+    },
+    {
+      "file": "chunk-KUC6ZJVL.js",
+      "bytes": 300,
+      "gzip": 247
+    },
+    {
+      "file": "chunk-NAO7CHQW.js",
+      "bytes": 2362,
+      "gzip": 1328
+    },
+    {
+      "file": "chunk-NGI25YKJ.js",
+      "bytes": 45855,
+      "gzip": 14633
+    },
+    {
+      "file": "chunk-NPSVJ4WB.js",
+      "bytes": 607,
+      "gzip": 431
+    },
+    {
+      "file": "chunk-OVSL6QHE.js",
+      "bytes": 22433,
+      "gzip": 8331
+    },
+    {
+      "file": "chunk-TONDRKYF.js",
+      "bytes": 1021,
+      "gzip": 574
+    },
+    {
+      "file": "chunk-Y32FIGEL.js",
+      "bytes": 38099,
+      "gzip": 11817
+    },
+    {
+      "file": "config-0dcdee5c9311.js",
+      "bytes": 133,
+      "gzip": 153
+    },
+    {
+      "file": "style-7555dd05da10.css",
+      "bytes": 69509,
+      "gzip": 14424
+    },
+    {
+      "file": "sw.js",
+      "bytes": 1652,
+      "gzip": 765
+    }
+  ]
+}

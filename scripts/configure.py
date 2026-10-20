@@ -26,7 +26,7 @@ def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
         print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
-        print("Existing projects need 008_notifications.sql (and any earlier missing migrations); do not rerun installed migrations.")
+        print("Existing projects need migrations 009 through 012 (and any earlier missing migrations); do not rerun installed migrations.")
         print("Phone delivery also needs the normal ./configure.sh flow to deploy its worker, signing keys, and schedule.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
@@ -75,6 +75,22 @@ def main():
             raise RuntimeError("Schema installed. Run ./configure.sh --manual with a secret key from Project Settings > API Keys.")
         key = candidates[0]["api_key"]
         configure_notifications(base, token, config, request)
+        tasks = request(base + "/database/query", token, {"query": "SELECT to_regprocedure('public.utilities_save_reminders(jsonb)')::text AS fn"})
+        if not tasks or not tasks[0].get("fn"):
+            request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/009_task_refresh.sql").read_text()})
+            print("Task types, recipient reminders, and quick completion installed; existing records preserved.")
+        routines = request(base + "/database/query", token, {"query": "SELECT to_regprocedure('ledger_private.chore_routine_start(text)')::text AS fn"})
+        if not routines or not routines[0].get("fn"):
+            request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/010_routine_start_dates.sql").read_text()})
+            print("Routines can start on any date; existing schedules and history preserved.")
+        points = request(base + "/database/query", token, {"query": "SELECT to_regprocedure('ledger_private.chore_effort(jsonb)')::text AS fn"})
+        if not points or not points[0].get("fn"):
+            request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/011_half_point_chores.sql").read_text()})
+            print("Half-point chores installed with exact shared credit.")
+        split = request(base + "/database/query", token, {"query": "SELECT to_regclass('ledger_private.chore_routine_splits')::text AS marker"})
+        if not split or not split[0].get("marker"):
+            request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/012_split_trash_routine.sql").read_text()})
+            print("Trash and replacement-bag routines split into separate half-point items.")
     if not key.startswith(("sb_secret_", "eyJ")):
         raise RuntimeError("Use a secret/service_role key, not the publishable key.")
     target = ROOT / ".env.local"

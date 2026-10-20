@@ -12,7 +12,7 @@ run('npm',['run','build']);run('uv',['run','--frozen','python','scripts/check_pr
 const user=JSON.parse(run('gh',['api','user'],{capture:true}));
 const repo=`${user.login}/household-utilities`;
 if(!existsSync('.git'))run('git',['init','-b','main']);
-const files=['.gitignore','.github','README.md','package.json','package-lock.json','pyproject.toml','uv.lock','tsconfig.json','playwright.config.ts','config.public.json','src','public','scripts','tests','supabase','data',...readdirSync('.').filter(f=>f.endsWith('.sh'))];
+const files=['.gitignore','.github','README.md','HANDOFF.md','ROADMAP.md','docs','package.json','package-lock.json','pyproject.toml','uv.lock','tsconfig.json','playwright.config.ts','config.public.json','src','public','scripts','tests','supabase','data',...readdirSync('.').filter(f=>f.endsWith('.sh'))];
 run('git',['add','--',...files]);
 run('uv',['run','--frozen','python','scripts/check_privacy.py']);
 if(!succeeds('git',['diff','--cached','--quiet'])) {

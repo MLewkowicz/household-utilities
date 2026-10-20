@@ -32,7 +32,7 @@ const server=createServer(async(req,res)=>{
     const file=path==='/'?'index.html':decodeURIComponent(path.slice(1));
     if(file.includes('..')||file.includes('\\')||file.startsWith('.')||!/^[-a-zA-Z0-9._/]+$/.test(file)) {res.writeHead(404);return res.end();}
     const data=await readFile(`dist/${file}`);
-    res.writeHead(200,{'content-type':({'html':'text/html','css':'text/css','js':'application/javascript','json':'application/json','webmanifest':'application/manifest+json','png':'image/png','svg':'image/svg+xml','txt':'text/plain'})[file.split('.').pop()]||'application/octet-stream','cache-control':'no-store'});res.end(data);
+    res.writeHead(200,{'content-type':({'html':'text/html','css':'text/css','js':'application/javascript','json':'application/json','webmanifest':'application/manifest+json','png':'image/png','webp':'image/webp','svg':'image/svg+xml','txt':'text/plain'})[file.split('.').pop()]||'application/octet-stream','cache-control':'no-store'});res.end(data);
   } catch(error) {res.writeHead(error.code==='ENOENT'?404:400,{'content-type':'application/json'});res.end(JSON.stringify({message:error.message}));}
 });
 server.listen(port,'127.0.0.1',()=>console.log(`Utilities preview: http://127.0.0.1:${port}`));

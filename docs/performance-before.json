@@ -1,0 +1,41 @@
+{
+  "conditions": "390x844, 4x CPU, 100ms latency, 750KB/s download; empty isolated chore DB",
+  "initialReadyMs": 1787,
+  "choreTabReadyMs": 263,
+  "initialRequests": [
+    "/",
+    "/style-671079815b82.css",
+    "/config-0dcdee5c9311.js",
+    "/app-a4d57f1dae35.js",
+    "/rest/v1/rpc/utilities_chores_dashboard",
+    "/rest/v1/rpc/utilities_dashboard",
+    "/thumbtack.svg",
+    "/favicon.svg"
+  ],
+  "tabRequests": [
+    "/rest/v1/rpc/utilities_chores_dashboard",
+    "/favicon.svg"
+  ],
+  "assets": [
+    {
+      "file": "app-a4d57f1dae35.js",
+      "bytes": 137528,
+      "gzip": 44756
+    },
+    {
+      "file": "config-0dcdee5c9311.js",
+      "bytes": 133,
+      "gzip": 153
+    },
+    {
+      "file": "style-671079815b82.css",
+      "bytes": 64096,
+      "gzip": 13510
+    },
+    {
+      "file": "sw.js",
+      "bytes": 1652,
+      "gzip": 765
+    }
+  ]
+}

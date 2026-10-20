@@ -2,6 +2,7 @@ import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
+import {PGlite} from '@electric-sql/pglite';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
 let db:any,utilities:any,misc:any,day:string,monday:string;
 const call=(fn:string,p?:any)=>callRpc(db,fn,p?{p}:{});
@@ -107,7 +108,7 @@ test('every-N-week rotation, initial owner and leaderboard ties are deterministi
 test('invalid submissions fail atomically; concurrent completions award once and export has revisions',async()=>{
  const before=await dash();
  for(const bad of [{actor:'stranger'},{assignee:'stranger'},{points:1.5},{points:-1},{points:4},{points:'0'},{points:null},{pinned:'yes'},{title:''},{icon_id:'<script>'},{due_on:'2026-02-30'},{due_time:'99:00'},{expires_on:'2020-01-01',due_on:'2026-01-01'},{completion:completion([])},{completion:completion(['rina','rina'])},{completion:{contributors:['rina'],completed_at:'2099-01-01T10:00'}}])await assert.rejects(call('save_chore',task(bad)));
- for(const bad of [{owners:[]},{owners:['ohm','ohm']},{steps:[]},{interval_weeks:0},{start_week:addDays(monday,1)},{start_index:4},{steps:[{id:'bad',title:'Oops',points:1,icon_id:'trash',weekday:7,time:null}]}])await assert.rejects(call('save_chore_routine',routine(bad)));
+ for(const bad of [{owners:[]},{owners:['ohm','ohm']},{steps:[]},{interval_weeks:0},{start_week:'2026-02-30'},{start_index:4},{steps:[{id:'bad',title:'Oops',points:1,icon_id:'trash',weekday:7,time:null}]}])await assert.rejects(call('save_chore_routine',routine(bad)));
  const after=await dash();for(const k of ['tasks','history','routines','routine_history','leaderboard'])assert.deepEqual(after[k],before[k]);
  const t=await call('save_chore',task());
  const results=await Promise.allSettled([['rina'],['ohm']].map(people=>edit(t,'complete',{points:1,completion:completion(people)})));
@@ -116,20 +117,21 @@ test('invalid submissions fail atomically; concurrent completions award once and
  const exported=await call('export_chores');assert.deepEqual(exported.history,d.history);assert.deepEqual(exported.routine_history,d.routine_history);
 });
 test('reminder migration preserves existing chores, rankings and history, including on a repeated install',async()=>{
- const oldSql=await readFile(new URL('../supabase/migrations/005_chores.sql',import.meta.url),'utf8');
- const points=oldSql.slice(oldSql.indexOf('CREATE FUNCTION ledger_private.chore_points('),oldSql.indexOf('CREATE FUNCTION ledger_private.chore_deadline('));
- const dashboardSql=oldSql.slice(oldSql.indexOf('CREATE FUNCTION public.utilities_chores_dashboard()'),oldSql.indexOf('CREATE FUNCTION public.utilities_export_chores()'));
- await db.exec(points.replace('CREATE FUNCTION','CREATE OR REPLACE FUNCTION'));
- await db.exec(dashboardSql.replace('CREATE FUNCTION','CREATE OR REPLACE FUNCTION'));
- await db.exec('DROP FUNCTION ledger_private.chore_credit_units(jsonb)');
- await assert.rejects(call('save_chore',task({points:0})),/Effort must/);
- const before=await dash();
- const migration=await readFile(new URL('../supabase/migrations/006_chore_reminders.sql',import.meta.url),'utf8');
- for(let i=0;i<2;i++){
-  await db.exec(migration);const after=await dash();
-  for(const k of ['tasks','routines','history','routine_history','leaderboard'])assert.deepEqual(after[k],before[k],k);
- }
- await assert.rejects(db.transaction(async(tx:any)=>{await tx.exec('SET LOCAL ROLE anon');await tx.query("SELECT ledger_private.chore_credit_units('{}'::jsonb)");}),/permission denied/);
+ const legacy=new PGlite();await legacy.waitReady;
+ const legacyCall=(fn:string,p?:any)=>callRpc(legacy,fn,p?{p}:{});
+ try{
+  await legacy.exec('CREATE ROLE anon;CREATE ROLE authenticated;CREATE ROLE service_role;');
+  for(const file of ['001_utilities','002_rotating_rounding','003_miscellaneous','004_expand_icon_catalog','005_chores'])await legacy.exec(await readFile(new URL(`../supabase/migrations/${file}.sql`,import.meta.url),'utf8'));
+  await legacyCall('save_chore',task({completion:completion(['rina','ohm'])}));await legacyCall('save_chore_routine',routine());
+  await assert.rejects(legacyCall('save_chore',task({points:0})),/Effort must/);
+  const before=await legacyCall('chores_dashboard');
+  const migration=await readFile(new URL('../supabase/migrations/006_chore_reminders.sql',import.meta.url),'utf8');
+  for(let i=0;i<2;i++){
+   await legacy.exec(migration);const after=await legacyCall('chores_dashboard');
+   for(const k of ['tasks','routines','history','routine_history','leaderboard'])assert.deepEqual(after[k],before[k],k);
+  }
+  await assert.rejects(legacy.transaction(async(tx:any)=>{await tx.exec('SET LOCAL ROLE anon');await tx.query("SELECT ledger_private.chore_credit_units('{}'::jsonb)");}),/permission denied/);
+ }finally{await legacy.close();}
 });
 test('zero-point reminders can be urgent and completed with helpers without changing the leaderboard',async()=>{
  const before=await dash();const p=task({title:'Wash your dishes',icon_id:'dishes',points:0,pinned:true});
@@ -151,7 +153,7 @@ test('changing completion credit between scored and zero preserves other contrib
  const before=await dash();let t=await call('save_chore',task({points:3,completion:completion(['rina'])}));
  assert.equal((await dash()).leaderboard.find((s:any)=>s.member==='rina'&&s.period==='all').units,before.leaderboard.find((s:any)=>s.member==='rina'&&s.period==='all').units+36);
  t=await edit(t,'complete',{points:0,completion:completion(['rina'])});assert.deepEqual((await dash()).leaderboard,before.leaderboard);
- t=await edit(t,'complete',{points:2,completion:completion(['ohm','rohil'])});
+ t=await edit(t,'complete',{kind:'chore',points:2,completion:completion(['ohm','rohil'])});
  let d=await dash();for(const member of ['ohm','rohil'])assert.equal(d.leaderboard.find((s:any)=>s.member===member&&s.period==='all').entries.find((e:any)=>e.id===t.id).units,12);
  t=await edit(t,'edit',{points:0});assert.deepEqual((await dash()).leaderboard,before.leaderboard);
  t=await edit(t,'undo');assert.equal(t.points,0);assert.deepEqual((await dash()).leaderboard,before.leaderboard);
