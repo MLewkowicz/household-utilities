@@ -80,3 +80,24 @@ test('chores have an independent read-only fallback and do not block the other t
  await page.getByRole('link',{name:'Utilities',exact:true}).click();await expect(page.locator('#new-payment')).toBeEnabled();
  await page.getByRole('link',{name:'Miscellaneous',exact:true}).click();await expect(page.locator('#new-expense')).toBeEnabled();
 });
+
+test('pinned reminders retain zero points through editing, completion, correction, undo and routines',async({page})=>{
+ await page.setViewportSize({width:390,height:844});await open(page);
+ const before=await rpc(page,'chores_dashboard');
+ await page.locator('#chore-new').click();await expect(page.locator('#chore-effort')).toHaveValue('1');
+ await page.locator('#chore-title').fill('Wash your own dishes');await page.locator('input[name=chore-assignee][value=michal]').check();await page.locator('#chore-pinned').check();await page.locator('#chore-effort').selectOption('0');
+ await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();const c=card(page,'Wash your own dishes');
+ await expect(c.locator('.chore-points')).toHaveText('No points');await expect(c).toContainText('Pinned');
+ await c.getByRole('button',{name:'Edit',exact:true}).click();await expect(page.locator('#chore-effort')).toHaveValue('0');await page.locator('#chore-note').fill('Before bed, please.');await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();await expect(c.locator('.chore-points')).toHaveText('No points');
+ await c.getByRole('button',{name:'Mark done',exact:true}).click();await expect(page.locator('#chore-complete-effort')).toHaveValue('0');await expect(page.locator('#chore-complete-summary')).toContainText('earns no points');
+ await page.locator('input[name=chore-contributor][value=rina]').check();await page.locator('#chore-complete-save').click();await expect(page.locator('#chore-complete-dialog')).not.toBeVisible();
+ let d=await rpc(page,'chores_dashboard');expect(d.leaderboard).toEqual(before.leaderboard);expect(d.tasks.find((t:any)=>t.title==='Wash your own dishes').status).toBe('completed');
+ await view(page,'household');await page.locator('#chore-status-filter').selectOption('completed');await expect(c).toBeVisible();await c.getByRole('button',{name:'Correct completion',exact:true}).click();await page.locator('#chore-complete-effort').selectOption('2');await expect(page.locator('#chore-complete-summary')).toContainText('recalculated');await page.locator('#chore-complete-save').click();await expect(page.locator('#chore-complete-dialog')).not.toBeVisible();
+ await c.getByRole('button',{name:'Correct completion',exact:true}).click();await page.locator('#chore-complete-effort').selectOption('0');await expect(page.locator('#chore-complete-summary')).toContainText('earns no points');await page.locator('#chore-complete-save').click();await expect(page.locator('#chore-complete-dialog')).not.toBeVisible();expect((await rpc(page,'chores_dashboard')).leaderboard).toEqual(before.leaderboard);
+ await c.getByRole('button',{name:'Undo',exact:true}).click();await page.locator('#chore-action-save').click();await expect(page.locator('#chore-action-dialog')).not.toBeVisible();await view(page,'mine');await expect(c.locator('.chore-points')).toHaveText('No points');
+ await page.locator('#chore-new').click();await page.locator('.chore-icon-picker summary').click();await page.getByRole('button',{name:'Request a repair icon',exact:true}).click();await expect(page.locator('#chore-title')).toHaveValue('Request a repair');await page.keyboard.press('Escape');
+ await view(page,'week');await page.locator('#chore-manage-routines').click();await page.locator('#routine-new').click();await page.locator('#routine-title').fill('Repair follow-up reminders');await page.locator('[data-step-field=title]').fill('Message the landlord');await page.locator('[data-step-field=icon_id]').selectOption('repair-request');await page.locator('[data-step-field=points]').selectOption('0');await page.locator('#chore-routine-save').click();await expect(page.locator('#chore-routine-dialog')).not.toBeVisible();
+ d=await rpc(page,'chores_dashboard');const routine=d.routines.find((r:any)=>r.title==='Repair follow-up reminders');expect(routine.steps[0].points).toBe(0);expect(routine.steps[0].icon_id).toBe('repair-request');expect(d.tasks.filter((t:any)=>t.routine_id===routine.id).every((t:any)=>t.points===0)).toBeTruthy();expect(d.leaderboard).toEqual(before.leaderboard);
+ await page.locator('#chore-manage-routines').click();await page.locator(`[data-edit-routine="${routine.id}"]`).click();await expect(page.locator('[data-step-field=points]')).toHaveValue('0');
+ expect(await page.locator('#chore-routine-dialog').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBeTruthy();
+});

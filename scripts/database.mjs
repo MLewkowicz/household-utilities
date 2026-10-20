@@ -24,6 +24,10 @@ export async function openDatabase(path) {
   if (!chores.rows[0].fn) {
     await db.exec(await readFile(new URL('../supabase/migrations/005_chores.sql', import.meta.url),'utf8'));
   }
+  const reminders = await db.query("SELECT to_regprocedure('ledger_private.chore_credit_units(jsonb)') AS fn");
+  if (!reminders.rows[0].fn) {
+    await db.exec(await readFile(new URL('../supabase/migrations/006_chore_reminders.sql', import.meta.url),'utf8'));
+  }
   return db;
 }
 export async function callRpc(db,name,params={},role='anon') {

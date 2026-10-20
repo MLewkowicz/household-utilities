@@ -22,7 +22,7 @@ def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
         print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
-        print("Existing projects need 005_chores.sql (and any earlier missing migrations); do not rerun installed migrations.")
+        print("Existing projects need 006_chore_reminders.sql (and any earlier missing migrations); do not rerun installed migrations.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
         print("Create a personal access token at https://supabase.com/dashboard/account/tokens")
@@ -56,6 +56,10 @@ def main():
         if not chores or not chores[0].get("fn"):
             request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/005_chores.sql").read_text()})
             print("Chore Corner installed, initially empty. Both financial ledgers and all history preserved.")
+        reminders = request(base + "/database/query", token, {"query": "SELECT to_regprocedure('ledger_private.chore_credit_units(jsonb)')::text AS fn"})
+        if not reminders or not reminders[0].get("fn"):
+            request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/006_chore_reminders.sql").read_text()})
+            print("No-points reminders installed; existing chores, scores, and financial history preserved.")
         keys = request(base + "/api-keys", token)
         candidates = [k for k in keys if k.get("name") == "service_role" or k.get("type") == "secret"]
         if not candidates:

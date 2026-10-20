@@ -2,7 +2,7 @@ import {iconSvg} from './icons';
 const rows=[
  ['bananas','Pick up bananas','banana bananas lounge fruit pickup','<path fill="#f5d978" d="M12 7c2 17 11 26 27 22C27 47 7 38 9 13z"/><path fill="#ffe9a0" d="M17 8c0 14 6 21 22 21C31 42 10 29 14 12z"/><path fill="#b0c788" d="m12 5 6 2-2 6-5-2z"/><path d="M13 17q3 15 17 16"/>'],
  ['trash','Take out trash','trash rubbish garbage smelly full bag','<path fill="#bfd4c4" d="M12 14h25l-3 28H15z"/><path fill="#a6bfc1" d="M9 10h31v6H9zM20 5h10v5H20z"/><path d="m20 21 1 14m8-14-1 14"/>'],
- ['recycling','Take out recycling','recycling cardboard bottles cans paper','<rect fill="#b9d5e0" x="10" y="12" width="28" height="30" rx="4"/><path fill="#c5dfbc" d="m24 18 6 9h-4l-2-4-3 5-4-2zm-7 9-5 9h12v-4h-6l3-5m6 6h6l-3-6 4-2 6 11H27z"/><path d="M8 12h32"/>'],
+ ['recycling','Take out recycling','recycling cardboard bottles cans paper','<path fill="#b7d5ba" d="M17 6C27 2 37 6 40 14l4-2-3 13-12-6 4-2c-2-6-8-7-12-4z"/><path fill="#b5d4cf" transform="rotate(120 24 24)" d="M17 6C27 2 37 6 40 14l4-2-3 13-12-6 4-2c-2-6-8-7-12-4z"/><path fill="#d3e1af" transform="rotate(240 24 24)" d="M17 6C27 2 37 6 40 14l4-2-3 13-12-6 4-2c-2-6-8-7-12-4z"/>'],
  ['bins','Bring bins back','bins retrieve return collection curb','<path fill="#bbceab" d="m10 13 3 25h23l3-25z"/><path fill="#d1e2bf" d="M8 8h33v6H8z"/><circle fill="#596c67" cx="17" cy="41" r="3"/><circle fill="#596c67" cx="33" cy="41" r="3"/><path d="M21 20h12m-12 0 5-4m-5 4 5 4"/>'],
  ['sweep','Sweep the floor','sweep mop floor broom vacuum clean','<path fill="#dfc19b" d="m30 5 5 2-12 26-5-2z"/><path fill="#f2d78f" d="m16 26 12 6-7 12L5 36z"/><path d="m13 33-4 5m9-3-3 6m8-3-3 5"/>'],
  ['dishes','Do the dishes','dishes dishwasher wash sink kitchen','<circle fill="#c2d9e6" cx="25" cy="28" r="16"/><circle fill="#edf1e4" cx="25" cy="28" r="10"/><path fill="#e7c58f" d="M5 7h12v14H5z"/><path d="M5 12h12m-5-7v4M36 7v6m-3-3h6"/>'],
@@ -12,6 +12,7 @@ const rows=[
  ['plant','Water the plants','plants water garden'],
  ['parcel','Collect a parcel','mail package parcel collect delivery'],
  ['tools','Fix something','repair fix maintenance tools'],
+ ['repair-request','Request a repair','landlord message text contact request report repair maintenance broken call email','<path fill="#b9d5e0" d="M13 7h22a7 7 0 0 1 7 7v13a7 7 0 0 1-7 7H23l-10 7v-7a7 7 0 0 1-7-7V14a7 7 0 0 1 7-7z"/><g transform="translate(12 9) scale(.55)"><path fill="#f0d28e" d="m8 5 6 6-4 4-6-6q-3 13 10 13l18 20 8-8-20-18Q23 3 8 5z"/><circle fill="#fff4d6" cx="34" cy="36" r="2"/></g>'],
 ] as const;
 export const CHORE_ICONS=rows.map(([id,label,keywords,...rest])=>({id,label,keywords,art:rest[0]}));
 export function choreIcon(id:string){const icon=CHORE_ICONS.find(i=>i.id===id);return icon?.art?`<svg class="purchase-icon" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#354c4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${icon.art}</svg>`:iconSvg(id);}
