@@ -1,15 +1,16 @@
+import {initMyTasks,renderMyTasks,resetMyTasks,refreshMyTasks,reconcileMyTaskOrder,setMyTaskFilter,myTasksInUse,personalAvailable,personalExportAvailable,createPersonalTask,exportMyTasks,focusMyTaskNotification} from './my-tasks-client';
 import {choreSource,onChoresChange,loadChores,saveSharedTask,completeSharedTask} from './chore-store';
 import {pointPreset,presetOptions} from './point-presets';
 import {choreCard} from './chore-cards';
 import {bindCompletionSwipe} from './swipe';
 import {avatar} from './people';
-import {info} from './disclosure';
 import {MEMBERS,type Member} from './ledger';
 import {highlightNotification} from './notifications';
 
 export function focusChoreNotification(id:string){
  if(!ledger?.tasks.some(t=>t.id===id&&!t.projected))return false;
- view='household';householdFilter='all';statusFilter='all';typeFilter='all';render();
+ if(view==='mine'&&focusMyTaskNotification(id))return true;
+ window.history.replaceState(null,'','#chores/household');view='household';householdFilter='all';statusFilter='all';typeFilter='all';render();
  return highlightNotification(`[data-chore-id="${CSS.escape(id)}"]`);
 }
 import {$,esc,name,date,today,toast,download} from './ui';
@@ -18,7 +19,7 @@ import {taskKind,type TaskKind,type Chore,type Routine,type RoutineStep,type Cho
 import {CHORE_ICONS,TASK_ICONS,TASK_CATEGORIES,searchTaskIcons,choreIcon,suggestTaskIcon,suggestChoreIcon} from './chore-icons';
 
 let ledger:ChoreLedger|undefined,live=false,busy=false;
-let view='household',filter='all',householdFilter='anyone',statusFilter='active',period='month',week=weekStart(today());
+let view='mine',filter='all',householdFilter='all',statusFilter='active',period='month',week=weekStart(today());
 let taskDraft:Chore|undefined,taskId='',taskMode='request',chosenIcon='tidy',manualIcon=false;
 let draftKind:TaskKind='chore';
 let completionTask:Chore|undefined,actionTask:Chore|undefined,actionKind='';
@@ -44,33 +45,54 @@ export function initChores(){
  <div id="chores-notice" class="ledger-notice" role="status" hidden></div>
  <section id="chore-identity" class="identity-panel"><div><p id="chore-identity-error" class="form-error" role="alert" hidden></p><h2>Choose your name</h2></div><div class="identity-choices">${MEMBERS.map(m=>`<button class="person-tile member-${m}" data-chore-person="${m}">${avatar(m)}<span>I’m ${name(m)}</span></button>`).join('')}</div></section>
  <div id="chore-identity-bar" class="identity-bar" hidden><span id="chore-identity-name"></span><button id="chore-switch" class="text-button">Switch person</button></div>
- <nav class="chore-views" aria-label="To-do views"><a href="#home/assigned">My queue ↗</a>${[['household','Household'],['week','Week'],['leaderboard','Leaderboard']].map(([v,label])=>`<button data-chore-view="${v}" aria-pressed="${v==='household'}">${label}</button>`).join('')}</nav>
- <div id="chore-content" aria-live="polite"></div>`;
- initChoreDialogs();bindBoard();onIdentityChange(()=>render());onChoresChange(()=>{ledger=choreSource.ledger;live=choreSource.live;render();});render();
+ <nav class="chore-views" aria-label="To-do views">${[['mine','My tasks'],['household','Household'],['week','Week'],['leaderboard','Leaderboard']].map(([v,label])=>`<button data-chore-view="${v}" aria-pressed="${v==='mine'}">${label}</button>`).join('')}</nav>
+ <div id="my-tasks"></div><div id="chore-content" aria-live="polite" hidden></div>`;
+ initMyTasks(renderChrome);initChoreDialogs();bindBoard();
+ onIdentityChange(()=>{resetMyTasks();render();if(!$('#chores-page').hidden)void refreshChores();});
+ onChoresChange(()=>{ledger=choreSource.ledger;live=choreSource.live;render();});render();
+ document.addEventListener('close',()=>{if(!document.querySelector('dialog[open]'))render();},true);
 }
+function renderChrome(){
+ $('#chore-identity').hidden=!!identity;$('#chore-identity-bar').hidden=!identity;
+ if(identity)$('#chore-identity-name').innerHTML=`${avatar(identity)} <span class="actor-chip member-${identity}">You’re ${name(identity)}</span>`;
+ $('#chore-new').toggleAttribute('disabled',!live&&!personalAvailable());$('#chore-log').toggleAttribute('disabled',!live);
+ $('#chores-status').textContent=live?'Shared to-dos · up to date':ledger?'Viewing saved to-dos':'To-dos unavailable';errorText('chores-notice',choreSource.notice);
+ if(!$('#chores-page').hidden)$('#export').toggleAttribute('disabled',view==='mine'?!personalExportAvailable():!ledger);
+ if(identity)errorText('chore-identity-error','');
+ document.querySelectorAll<HTMLElement>('[data-chore-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.choreView===view)));
+ const count=identity&&ledger?ledger.tasks.filter(t=>!t.projected&&t.assignee===identity&&urgentChore(t,day())).length:0;
+ $('#chore-badge').textContent=String(count);$('#chore-badge').hidden=!count;
+ $('#my-tasks').hidden=view!=='mine';$('#chore-content').hidden=view==='mine';
+ if($('#chore-task-dialog'))updateTaskAvailability();
+}
+function selectRoute(){
+ const part=location.hash.startsWith('#chores/')?location.hash.split('/')[1]:'';
+ view=['household','week','leaderboard'].includes(part)?part:'mine';
+ setMyTaskFilter(['personal','assigned'].includes(part)?part:'all');
+}
+
 let editorInitialized=false;
 export function initChoreDialogs(){
  if(editorInitialized)return;editorInitialized=true;
  ledger=choreSource.ledger;live=choreSource.live;
- onChoresChange(()=>{ledger=choreSource.ledger;live=choreSource.live;});
  document.body.insertAdjacentHTML('beforeend',
- dialog('chore-task','Add task',`<label for="chore-kind">Type</label><select id="chore-kind"><option value="chore">Chore · points for shared work</option><option value="reminder">Reminder · each person completes</option><option value="request">Request · a favor, no points</option><option value="routine">Routine · one recurring item</option></select><div class="chore-shortcuts" id="chore-shortcuts">${['bananas','trash','recycling','bins'].map(id=>`<button type="button" data-chore-shortcut="${id}">${choreIcon(id)}<span>${CHORE_ICONS.find(i=>i.id===id)!.label}</span></button>`).join('')}</div>
+ dialog('chore-task','Add task',`<label for="chore-kind">Type</label><select id="chore-kind"><option value="personal">Personal</option><option value="chore">Chore · points for shared work</option><option value="reminder">Reminder · each person completes</option><option value="request">Request · a favor, no points</option><option value="routine">Routine · one recurring item</option></select>
  <label for="chore-title">What needs doing?</label><input id="chore-title" required maxlength="120" placeholder="Task title">
- <details class="chore-icon-picker"><summary><span id="chore-selected-icon"></span><span>Choose an illustration</span></summary><div class="picker-controls"><input id="chore-icon-search" type="search" aria-label="Search task illustrations" placeholder="Search illustrations"><select id="chore-icon-category" aria-label="Illustration category"><option value="">All categories</option>${TASK_CATEGORIES.map(c=>`<option>${esc(c)}</option>`).join('')}</select></div><div class="chore-icon-grid" id="chore-icon-grid"></div><label class="chore-inline-check"><input type="checkbox" id="chore-fill-title" checked> Use icon name as the title</label></details>
+ <div id="shared-task-fields"><div class="chore-shortcuts" id="chore-shortcuts">${['bananas','trash','recycling','bins'].map(id=>`<button type="button" data-chore-shortcut="${id}">${choreIcon(id)}<span>${CHORE_ICONS.find(i=>i.id===id)!.label}</span></button>`).join('')}</div><details class="chore-icon-picker"><summary><span id="chore-selected-icon"></span><span>Choose an illustration</span></summary><div class="picker-controls"><input id="chore-icon-search" type="search" aria-label="Search task illustrations" placeholder="Search illustrations"><select id="chore-icon-category" aria-label="Illustration category"><option value="">All categories</option>${TASK_CATEGORIES.map(c=>`<option>${esc(c)}</option>`).join('')}</select></div><div class="chore-icon-grid" id="chore-icon-grid"></div><label class="chore-inline-check"><input type="checkbox" id="chore-fill-title" checked> Use icon name as the title</label></details>
  <fieldset id="chore-assignee-fields" class="chore-contributors"><legend>For whom?</legend><div class="chore-member-options"><label class="chore-check-tile"><input type="radio" name="chore-assignee" value="" checked>Anyone</label>${MEMBERS.map(m=>`<label class="chore-check-tile member-${m}"><input type="radio" name="chore-assignee" value="${m}">${avatar(m)}${name(m)}</label>`).join('')}</div></fieldset>
  <fieldset id="reminder-recipients" class="chore-contributors" hidden><legend>Remind whom?</legend><div class="chore-member-options">${MEMBERS.map(m=>`<label class="chore-check-tile member-${m}"><input type="checkbox" name="reminder-recipient" value="${m}">${avatar(m)}${name(m)}</label>`).join('')}</div></fieldset>
  <div id="chore-points-fields"><label for="chore-preset">Household job</label><select id="chore-preset">${presetOptions()}</select>${effort('chore-effort')}</div><details id="chore-more" class="form-details"><summary>Context & advanced settings</summary><label for="chore-note">Details <span class="quiet">(optional)</span></label><textarea id="chore-note" rows="2" maxlength="1000" placeholder="Where, what, or why…"></textarea>
- </details><div class="chore-two-fields"><div><label for="chore-due">Due date <span class="quiet">(optional)</span></label><input id="chore-due" type="date"></div><div><label for="chore-time">Time <span class="quiet">(optional)</span></label><input id="chore-time" type="time"></div></div>${info('About deadlines','New York time. Without a time, the deadline is the end of the day.')}
- <div id="chore-queue-fields"><label for="chore-queue">Show in queue</label><select id="chore-queue"><option value="immediately">Immediately</option><option value="due_date">On due date</option></select>${info('About queue timing','On due date means the start of that day in New York, even if a deadline time is set. Upcoming tasks remain in Week; late tasks stay in the queue until completed, expired, or the routine cycle ends.')}</div>
+ </details><div class="chore-two-fields"><div><label for="chore-due">Due date <span class="quiet">(optional)</span></label><input id="chore-due" type="date"></div><div><label for="chore-time">Time <span class="quiet">(optional)</span></label><input id="chore-time" type="time"></div></div><p class="field-help">New York time. Without a time, the deadline is the end of the day.</p>
+ <div id="chore-queue-fields"><label for="chore-queue">Show in queue</label><select id="chore-queue"><option value="immediately">Immediately</option><option value="due_date">On due date</option></select><p class="field-help">On due date: available from midnight in New York. Upcoming tasks appear in Week.</p></div>
  <details id="chore-scheduling" class="form-details"><summary>Priority & expiry</summary><label class="chore-inline-check"><input id="chore-pinned" type="checkbox"> Pin as high priority</label>
  <label class="chore-inline-check"><input id="chore-tonight" type="checkbox"> Expire tonight</label>
- <details id="chore-expiry-details"><summary>Choose another expiry</summary><div class="chore-two-fields"><div><label for="chore-expiry">Expiry date</label><input id="chore-expiry" type="date"></div><div><label for="chore-expiry-time">Expiry time <span class="quiet">(optional)</span></label><input id="chore-expiry-time" type="time"></div></div></details>${info('About expiry','Expired tasks leave the queue and remain in history.')}</details>
- <div id="chore-log-fields" hidden>${contributors('chore-log-contributor')}<label for="chore-log-time">When was it done? · New York time</label><input id="chore-log-time" type="datetime-local"></div><p id="chore-task-actor" class="field-help"></p>`,'Save chore')+
+ <details id="chore-expiry-details"><summary>Choose another expiry</summary><div class="chore-two-fields"><div><label for="chore-expiry">Expiry date</label><input id="chore-expiry" type="date"></div><div><label for="chore-expiry-time">Expiry time <span class="quiet">(optional)</span></label><input id="chore-expiry-time" type="time"></div></div></details><p class="field-help">Expired tasks leave the queue and remain in history.</p></details>
+ <div id="chore-log-fields" hidden>${contributors('chore-log-contributor')}<label for="chore-log-time">When was it done? · New York time</label><input id="chore-log-time" type="datetime-local"></div></div><p id="chore-task-actor" class="field-help"></p><p id="task-source-notice" class="ledger-notice" role="status" hidden></p>`,'Save chore')+
  dialog('chore-complete','Complete task',`<div id="chore-complete-summary" class="chore-complete-summary"></div>${contributors('chore-contributor')}${effort('chore-complete-effort')}<label for="chore-completed-at">When was it done? · New York time</label><input id="chore-completed-at" type="datetime-local" required><label for="chore-completion-note">Change note <span class="quiet">(optional)</span></label><input id="chore-completion-note" maxlength="500">`,'Save completion')+
  dialog('chore-action','Update chore',`<p id="chore-action-copy" class="section-copy"></p><label for="chore-action-note">A note for the household <span class="quiet">(optional)</span></label><textarea id="chore-action-note" maxlength="500" rows="2"></textarea>`,'Confirm')+
- dialog('chore-routine','Add routine',`<label for="routine-title">What repeats?</label><input id="routine-title" required maxlength="120" placeholder="Take the bins out"><div class="chore-two-fields"><div><label for="routine-start">First due date</label><input id="routine-start" type="date" required></div><div><label for="routine-interval">Repeat every</label><select id="routine-interval">${Array.from({length:12},(_,i)=>`<option value="${i+1}">${i+1} week${i?'s':''}</option>`).join('')}</select></div></div><div id="routine-anchor-note">${info('About this schedule','The first item is due on the date you choose, then repeats at this interval. Dates and times use New York time.')}</div>
- <div id="routine-items"></div><fieldset class="chore-contributors"><legend>For whom? ${info('About routine owners','Choose one person, or several to take turns with each occurrence.')}</legend><div id="routine-owner-tiles" class="chore-member-options"></div></fieldset><details id="routine-rotation" class="form-details"><summary>Rotation order</summary><ol id="routine-order" class="routine-order"></ol><label for="routine-first">First person</label><select id="routine-first"></select></details>
- <label class="chore-inline-check"><input id="routine-enabled" type="checkbox" checked> Keep this routine running</label><div id="routine-effective" hidden>${info('About routine changes','Changes apply from the next occurrence. Completed history and individual task edits are preserved. To change the start date or repeat interval, pause this routine and create another.')}</div>`,'Save routine')+
+ dialog('chore-routine','Add routine',`<label for="routine-title">What repeats?</label><input id="routine-title" required maxlength="120" placeholder="Take the bins out"><div class="chore-two-fields"><div><label for="routine-start">First due date</label><input id="routine-start" type="date" required></div><div><label for="routine-interval">Repeat every</label><select id="routine-interval">${Array.from({length:12},(_,i)=>`<option value="${i+1}">${i+1} week${i?'s':''}</option>`).join('')}</select></div></div><div id="routine-anchor-note"><p class="field-help">Repeats from the first due date, using New York time.</p></div>
+ <div id="routine-items"></div><fieldset class="chore-contributors"><legend>For whom? <span class="field-help">Choose one person, or several to take turns.</span></legend><div id="routine-owner-tiles" class="chore-member-options"></div></fieldset><details id="routine-rotation" class="form-details"><summary>Rotation order</summary><ol id="routine-order" class="routine-order"></ol><label for="routine-first">First person</label><select id="routine-first"></select></details>
+ <label class="chore-inline-check"><input id="routine-enabled" type="checkbox" checked> Keep this routine running</label><div id="routine-effective" hidden><p class="field-help">Changes apply from the next occurrence. To change the start date or interval, pause this routine and create another.</p></div>`,'Save routine')+
  `<dialog id="chore-routines-dialog" class="chore-dialog" aria-labelledby="chore-routines-heading"><div class="dialog-top"><h2 id="chore-routines-heading" tabindex="-1" autofocus>Household routines</h2><button class="icon-button" data-chore-close="chore-routines" aria-label="Close">×</button></div><div id="chore-routine-list"></div><button id="routine-new" class="button primary">＋ New routine</button></dialog>`);
  bindEditor();
 }
@@ -84,13 +106,9 @@ function render(){
  const focused=document.activeElement as HTMLElement|null;
  const focusedId=focused&&content.contains(focused)?focused.id:'';
  const weekShift=focused&&content.contains(focused)?focused.dataset.weekShift:undefined;
- $('#chore-identity').hidden=!!identity;$('#chore-identity-bar').hidden=!identity;
- if(identity)$('#chore-identity-name').innerHTML=`${avatar(identity)} <span class="actor-chip member-${identity}">You’re ${name(identity)}</span>`;
- $('#chore-new').toggleAttribute('disabled',!live);$('#chore-log').toggleAttribute('disabled',!live);
- if(identity)errorText('chore-identity-error','');
- document.querySelectorAll<HTMLElement>('[data-chore-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.choreView===view)));
- const count=identity&&ledger?ledger.tasks.filter(t=>!t.projected&&t.assignee===identity&&urgentChore(t,day())).length:0;
- $('#chore-badge').textContent=String(count);$('#chore-badge').hidden=!count;
+ renderChrome();renderMyTasks();
+ if(view==='mine'){$('#chore-content').replaceChildren();return;}
+ if(busy||document.querySelector('dialog[open]'))return;
  $('#chore-content').innerHTML=view==='week'?weekView():view==='leaderboard'?leaderboardView():queueView();restoreFilters();
  content.querySelectorAll<HTMLDetailsElement>('[data-task-details]').forEach(el=>{if(openDetails.includes(el.dataset.taskDetails)){el.open=true;fillTaskHistory(el);}});
  content.querySelectorAll<HTMLDetailsElement>('.chore-history').forEach(el=>el.open=openHistory.includes(el.closest<HTMLElement>('[data-chore-id]')?.dataset.choreId));
@@ -108,9 +126,19 @@ function fillTaskHistory(details:HTMLDetailsElement){
  if(!target||target.childElementCount)return;
  const task=ledger?.tasks.find(t=>t.id===target.dataset.taskHistory);if(task)target.innerHTML=history(task);
 }
+function updateTaskAvailability(){
+ const personal=input('chore-kind').value==='personal',available=personal?personalAvailable():live;
+ $('#chore-task-save').toggleAttribute('disabled',busy||!available);
+ $('#task-source-notice').hidden=available;$('#task-source-notice').textContent=available?'':(personal?'Personal':'Shared')+' tasks unavailable. Close this form and use Refresh to retry.';
+}
 function updateTaskKind(resetPoints=false){
  const kind=input('chore-kind').value;
- if(kind==='routine'){$<HTMLDialogElement>('#chore-task-dialog').close();openRoutine(undefined,true);return;}
+ $('#shared-task-fields').hidden=kind==='personal';
+ $('#shared-task-fields').querySelectorAll<HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement>('input,select,textarea').forEach(el=>el.disabled=kind==='personal');
+ updateTaskAvailability();
+ if(kind==='personal'){$('#chore-task-save').textContent='Add personal task';input('chore-due').required=false;return;}
+ input('chore-effort').disabled=!!input('chore-preset').value;updateQueueTiming();
+ if(kind==='routine'){if(!live)return;$<HTMLDialogElement>('#chore-task-dialog').close();openRoutine(undefined,true);return;}
  draftKind=kind as TaskKind;
  input('chore-icon-category').innerHTML='<option value="">All categories</option>'+(kind==='chore'?['Chores']:TASK_CATEGORIES).map(c=>`<option>${esc(c)}</option>`).join('');
  renderTaskIcons();
@@ -132,20 +160,20 @@ function weekView(){
 }
 function leaderboardView(){
  const scores=ledger?.leaderboard.filter(s=>s.period===period)||[];
- return `<div class="chore-section-top"><div><h2>Leaderboard</h2>${info('About points','Shared credit is divided equally. Reminders and requests earn no points; missed tasks have no penalty.')}</div><label>Time frame<select id="chore-period"><option value="week" ${period==='week'?'selected':''}>This week</option><option value="month" ${period==='month'?'selected':''}>This month</option><option value="all" ${period==='all'?'selected':''}>All time</option></select></label></div><div class="chore-scores">${scores.map(s=>`<details class="chore-score member-${s.member}" data-score-member="${s.member}" style="--race-width:${Math.round(s.units/Math.max(1,...scores.map(x=>x.units))*100)}%"><summary><span class="chore-rank">${s.units?'#'+s.rank:'—'}</span>${avatar(s.member)}<span>${name(s.member)}<small>${s.entries.length} contribution${s.entries.length===1?'':'s'}</small></span><strong>${points(s.units)}<small>points</small></strong><span class="quiet">⌄</span><span class="race-track" aria-hidden="true"><span class="race-bar"></span></span></summary><div class="chore-score-entries">${s.entries.length?s.entries.map(e=>`<div><span>${esc(e.title)}<small>${localStamp(e.completed_at)}</small></span><strong>+${points(e.units)}</strong></div>`).join(''):'<p>No contributions in this period yet.</p>'}</div></details>`).join('')}</div>`;
+ return `<div class="chore-section-top"><div><h2>Leaderboard</h2></div><label>Time frame<select id="chore-period"><option value="week" ${period==='week'?'selected':''}>This week</option><option value="month" ${period==='month'?'selected':''}>This month</option><option value="all" ${period==='all'?'selected':''}>All time</option></select></label></div><div class="chore-scores">${scores.map(s=>`<details class="chore-score member-${s.member}" data-score-member="${s.member}" style="--race-width:${Math.round(s.units/Math.max(1,...scores.map(x=>x.units))*100)}%"><summary><span class="chore-rank">${s.units?'#'+s.rank:'—'}</span>${avatar(s.member)}<span>${name(s.member)}<small>${s.entries.length} contribution${s.entries.length===1?'':'s'}</small></span><strong>${points(s.units)}<small>points</small></strong><span class="quiet">⌄</span><span class="race-track" aria-hidden="true"><span class="race-bar"></span></span></summary><div class="chore-score-entries">${s.entries.length?s.entries.map(e=>`<div><span>${esc(e.title)}<small>${localStamp(e.completed_at)}</small></span><strong>+${points(e.units)}</strong></div>`).join(''):'<p>No contributions in this period yet.</p>'}</div></details>`).join('')}</div>`;
 }
 export async function refreshChores(){
- if(busy||dragging)return;
- await loadChores();ledger=choreSource.ledger;live=choreSource.live;
- if($('#chores-status')){$('#chores-status').textContent=live?'Shared to-dos · up to date':ledger?'Viewing saved to-dos':'To-dos unavailable';errorText('chores-notice',choreSource.notice);}
- if(location.hash==='#chores')$('#export').toggleAttribute('disabled',!ledger);render();
+ selectRoute();render();
+ if(busy||dragging||myTasksInUse())return;
+ await Promise.allSettled([loadChores(),refreshMyTasks()]);ledger=choreSource.ledger;live=choreSource.live;
+ selectRoute();await reconcileMyTaskOrder();render();
 }
 export function openSharedTask(task?:Chore,command='edit'){
  initChoreDialogs();ledger=choreSource.ledger;live=choreSource.live;
  if(!identity){toast('Choose your name first.');return;}
  if(!task||command==='edit')openTask('request',task);else if(command==='complete')openCompletion(task);else openAction(task,command);
 }
-export function exportChores(){if(ledger)download({...ledger,exported_at:new Date().toISOString()},'household-chores');else toast('No chore data is available to export yet.');}
+export function exportChores(){if(view==='mine'){exportMyTasks();return;}if(ledger)download({...ledger,exported_at:new Date().toISOString()},'household-chores');else toast('No chore data is available to export yet.');}
 function restoreFilters(){
  const weekFilter=$<HTMLSelectElement>('#chore-filter');if(weekFilter)weekFilter.value=filter;
  const boardFilter=$<HTMLSelectElement>('#chore-household-filter');if(boardFilter)boardFilter.value=householdFilter;
@@ -166,12 +194,13 @@ function updateQueueTiming(){
  $('#chore-task-form label[for="chore-due"] .quiet').hidden=required;
 }
 function openTask(mode:string,task?:Chore){
- if(!live||busy)return;
- if(!identity){pendingTask=mode;errorText('chore-identity-error','Choose your name before '+(mode==='log'?'logging a completion.':'requesting a chore.'));$('#chore-identity').scrollIntoView({block:'center',behavior:'smooth'});$('#chore-identity button').focus({preventScroll:true});return;}
+ if(busy||(!live&&!personalAvailable()))return;
+ if(!identity){pendingTask=mode;errorText('chore-identity-error','Choose your name before '+(mode==='log'?'logging a completion.':'adding a task.'));$('#chore-identity').scrollIntoView({block:'center',behavior:'smooth'});$('#chore-identity button').focus({preventScroll:true});return;}
  taskDraft=task;taskMode=mode;taskId=task?.id||crypto.randomUUID();chosenIcon=task?.icon_id||'tidy';manualIcon=!!task;
  $<HTMLFormElement>('#chore-task-form').reset();
  $('#chore-task-heading').textContent=task?'Edit task':mode==='log'?'Log completed work':'Add task';
- input('chore-kind').value=task?taskKind(task):'chore';input('chore-kind').disabled=!!task?.reminder_group_id;
+ input('chore-kind').querySelector<HTMLOptionElement>('option[value=personal]')!.disabled=!!task||mode==='log';
+ input('chore-kind').value=task?taskKind(task):mode==='log'?'chore':'personal';input('chore-kind').disabled=!!task?.reminder_group_id;
  setChecks('reminder-recipient',[identity]);
  $<HTMLDetailsElement>('#chore-more').open=!!task?.note;
  $<HTMLDetailsElement>('#chore-scheduling').open=!!task?.expires_on||!!task?.pinned;
@@ -267,6 +296,15 @@ function openRoutine(routine?:Routine,fromTask=false){
  $('#routine-effective').hidden=!routine;
  show('chore-routine');
 }
+async function savePersonal(){
+ if(busy||!identity||!personalAvailable())return;
+ busy=true;errorText('chore-task-error','');
+ const fields=[...$('#chore-task-form').querySelectorAll<HTMLInputElement|HTMLButtonElement|HTMLSelectElement|HTMLTextAreaElement>('input,button,select,textarea')],states=fields.map(el=>el.disabled);
+ fields.forEach(el=>el.disabled=true);
+ try{await createPersonalTask(taskId,input('chore-title').value.trim());$<HTMLDialogElement>('#chore-task-dialog').close();toast('Personal task added.');}
+ catch(error){errorText('chore-task-error',(error as Error).message);}
+ finally{busy=false;fields.forEach((el,i)=>el.disabled=states[i]);render();}
+}
 function renderRoutineList(){
  $('#chore-routine-list').innerHTML=ledger?.routines.length?ledger.routines.map(r=>`<article class="routine-summary"><div><h3>${esc(r.title)}</h3><p class="section-copy">Every ${r.interval_weeks===1?'week':r.interval_weeks+' weeks'} · ${r.owners.map(name).join(' → ')}</p><p class="quiet">${r.effective_on>day()?`${r.enabled?'Changes start':'Pauses'} ${date(r.effective_on)}`:r.enabled?'Running':'Paused'}</p></div><button class="text-button" data-edit-routine="${r.id}">Edit routine</button><details><summary>Schedule & history</summary><ul>${r.steps.map(s=>`<li>${routineWeekday(r.start_week,s.weekday)}${s.time?' '+s.time:''} · ${esc(s.title)} · ${effortLabel(s.points)}</li>`).join('')}</ul>${ledger!.routine_history.filter(h=>h.id===r.id).map(h=>`<div class="chore-revision"><p>Version ${h.version} · ${memberChip(h.actor)} · ${localStamp(h.created_at)}</p><p>Effective ${date(h.effective_on)} · ${h.enabled?'running':'paused'} · ${h.owners.map(name).join(' → ')}</p><p>Starts with ${name(h.owners[h.start_index])} at ${date(h.start_week)}.</p><ul>${h.steps.map(s=>`<li>${routineWeekday(h.start_week,s.weekday)} ${s.time||'end of day'} · ${esc(s.title)} · ${effortLabel(s.points)}${s.note?' · '+esc(s.note):''}</li>`).join('')}</ul></div>`).join('')}</details></article>`).join(''):noResults('No routines yet.','Add a weekly routine and choose who takes turns.');
 }
@@ -277,11 +315,11 @@ function bindBoard(){
   const b=(event.target as HTMLElement).closest<HTMLElement>('button');if(!b||b.hasAttribute('disabled')||busy)return;
   if(b.dataset.chorePerson){setIdentity(b.dataset.chorePerson as Member);const next=pendingTask;pendingTask=null;if(next)openTask(next);return;}
   if(b.id==='chore-switch'){setIdentity(null);$('#chore-identity button').focus();return;}
-  if(b.dataset.choreView){view=b.dataset.choreView;render();restoreFilters();return;}
+  if(b.dataset.choreView){location.hash=b.dataset.choreView==='mine'?'#chores':'#chores/'+b.dataset.choreView;return;}
   if(b.id==='chore-new')openTask('request');if(b.id==='chore-log')openTask('log');
   if(b.dataset.weekShift){week=b.dataset.weekShift==='0'?weekStart(day()):addDays(week,Number(b.dataset.weekShift));render();restoreFilters();}
   if(b.id==='chore-manage-routines'){renderRoutineList();$<HTMLDialogElement>('#chore-routines-dialog').showModal();$('#chore-routines-heading').focus({preventScroll:true});}
-  if(b.dataset.choreCommand){const id=b.closest<HTMLElement>('[data-chore-id]')!.dataset.choreId;const task=ledger?.tasks.find(t=>t.id===id);if(!task)return;const action=b.dataset.choreCommand;if(action==='edit')openTask('request',task);else if(action==='complete')openCompletion(task);else openAction(task,action);}
+  if(b.dataset.choreCommand&&!b.closest('#my-tasks')){const id=b.closest<HTMLElement>('[data-chore-id]')!.dataset.choreId;const task=ledger?.tasks.find(t=>t.id===id);if(!task)return;const action=b.dataset.choreCommand;if(action==='edit')openTask('request',task);else if(action==='complete')openCompletion(task);else openAction(task,action);}
  });
  $('#chores-page').addEventListener('change',event=>{const el=event.target as HTMLSelectElement;if(el.id==='chore-type-filter')typeFilter=el.value;else if(el.id==='chore-filter')filter=el.value;else if(el.id==='chore-household-filter')householdFilter=el.value;else if(el.id==='chore-status-filter')statusFilter=el.value;else if(el.id==='chore-period')period=el.value;else return;render();restoreFilters();});
 }
@@ -302,6 +340,7 @@ function bindEditor(){
  for(const id of ['chore-expiry','chore-expiry-time'])$('#'+id).addEventListener('change',()=>input('chore-tonight').checked=false);
  $('#chore-task-form').addEventListener('submit',event=>{
   event.preventDefault();try{
+   if(input('chore-kind').value==='personal'){void savePersonal();return;}
    const kind=input('chore-kind').value as TaskKind;
    const p={kind,queue_visibility:input('chore-queue').value,id:taskId,actor:identity,action:taskDraft?'edit':'create',expected_version:taskDraft?.version||0,title:input('chore-title').value.trim(),icon_id:chosenIcon,note:input('chore-note').value,assignee:$<HTMLInputElement>('input[name="chore-assignee"]:checked').value||null,preset_id:kind==='chore'?input('chore-preset').value||null:null,points:kind==='chore'?Number(input('chore-effort').value):0,pinned:input('chore-pinned').checked,due_on:input('chore-due').value||null,due_time:input('chore-time').value||null,expires_on:input('chore-expiry').value||null,expires_time:input('chore-expiry-time').value||null,...(taskMode==='log'?{completion:{contributors:selectedContributors('chore-log-contributor'),completed_at:input('chore-log-time').value}}:{})};
    if(kind==='reminder'&&!taskDraft&&taskMode!=='log'){const recipients=selectedContributors('reminder-recipient');void save('chore-task','save_reminders',{...p,recipients});}

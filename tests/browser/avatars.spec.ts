@@ -4,7 +4,7 @@ import {AVATAR_ASSETS} from '../../src/avatars/catalog';
 test('approved smiles appear in identity, leaderboard and request tiles without loading animation',async({page})=>{
  const requests:string[]=[];page.on('request',request=>requests.push(request.url()));
  await page.setViewportSize({width:390,height:844});
- await page.goto('/#chores');
+ await page.goto('/#chores/household');
  await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');
  for(const [member,asset] of Object.entries(AVATAR_ASSETS)){
   const image=page.locator(`[data-chore-person="${member}"] img`);

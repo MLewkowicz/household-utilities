@@ -38,7 +38,7 @@ test('pinned notes, temperature, attribution, revisions, deletion and counts wor
 test('Post-its grow the page to the bottom and remain legible on phones in both themes',async({page})=>{
  for(let i=0;i<19;i++)await rpc(page,'save_bulletin_note',{id:crypto.randomUUID(),request_id:crypto.randomUUID(),actor:['michal','rina','ohm','rohil'][i%4],action:'create',body:`Local scrolling fixture ${i}. `+(i===18?'A'.repeat(550):'A little note with enough words to make it feel like home.'),recipients:['rina','ohm'],temperature:i%2?-60:75});
  await open(page);await expect(page.locator('.bulletin-note')).toHaveCount(20);
- const colors=await page.locator('.bulletin-note').evaluateAll(nodes=>Object.fromEntries(nodes.map(n=>[n.className.match(/note-member-(\w+)/)![1],getComputedStyle(n).backgroundColor])));expect(new Set(Object.values(colors)).size).toBe(4);
+ const colors=await page.locator('.bulletin-note').evaluateAll(nodes=>Object.fromEntries(nodes.map(n=>[n.className.match(/note-member-(\w+)/)![1],getComputedStyle(n.querySelector('.paper-fill')!).fill])));expect(new Set(Object.values(colors)).size).toBe(4);
  for(const width of [1280,390]){
   await page.setViewportSize({width,height:844});
   for(const theme of ['light','dark']){

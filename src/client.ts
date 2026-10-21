@@ -1,5 +1,4 @@
 import {avatar} from './people';
-import {info} from './disclosure';
 import { MEMBERS, UTILITIES, type Member, type Payment, type StoredBill, type Allocation, type Utility, dateDays } from './ledger';
 type Config = { url: string; key: string };
 type RawLedger = { bills: StoredBill[]; allocations: Allocation[]; history: Payment[]; updated_at: string; bill_history?: {bill_id:string;version:number;deleted:boolean;data:StoredBill;created_at:string}[] };

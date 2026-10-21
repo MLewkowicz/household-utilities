@@ -19,7 +19,7 @@ test('one reaction per person replaces, removes, and leaves the author temperatu
  const d=await rpc(page,'bulletin_dashboard');expect(d.notes.find((x:any)=>x.id===n.id).temperature).toBe(-50);
 });
 test('presets set task values and remain fixed through completion',async({page})=>{
- await identify(page);await page.goto('/#chores');await page.locator('#chore-new').click();await page.locator('#chore-preset').selectOption('shared-groceries');await expect(page.locator('#chore-title')).toHaveValue('Pick up shared groceries');await expect(page.locator('#chore-effort')).toHaveValue('2');await expect(page.locator('#chore-effort')).toBeDisabled();await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();
+ await identify(page);await page.goto('/#chores/household');await page.locator('#chore-new').click();await page.locator('#chore-kind').selectOption('chore');await page.locator('#chore-preset').selectOption('shared-groceries');await expect(page.locator('#chore-title')).toHaveValue('Pick up shared groceries');await expect(page.locator('#chore-effort')).toHaveValue('2');await expect(page.locator('#chore-effort')).toBeDisabled();await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();
  const d=await rpc(page,'chores_dashboard'),t=d.tasks.find((t:any)=>t.preset_id==='shared-groceries');expect(t.points).toBe(2);expect(t.point_policy).toBe('household-v1');
 });
 

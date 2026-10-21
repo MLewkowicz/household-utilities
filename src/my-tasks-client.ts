@@ -1,13 +1,10 @@
 import {$,esc,name,rpc,toast,download} from './ui';
-import {MEMBERS,type Member} from './ledger';
-import {identity,setIdentity,onIdentityChange} from './identity';
-import {avatar} from './people';
+import {type Member} from './ledger';
+import {identity} from './identity';
 import {cornerTab} from './tile-corner';
-import {urgentChore} from './chores';
-import {info} from './disclosure';
 import {choreCard} from './chore-cards';
 import {bindCompletionSwipe} from './swipe';
-import {choreSource,onChoresChange,loadChores,completeSharedTask} from './chore-store';
+import {choreSource,completeSharedTask} from './chore-store';
 import {combinedFeed,orderedFeed,reconcileOrder,moveEntry,type PersonalTask,type PersonalLedger,type HomeOrder,type FeedEntry} from './home';
 import {highlightNotification} from './notifications';
 
@@ -22,41 +19,36 @@ const sorted=()=>orderedFeed(entries(),orderDraft||order?.keys||[]);
 const matchesFilter=(e:FeedEntry)=>filter==='all'||(filter==='personal'?e.source==='personal':e.source==='shared');
 const stamp=(s:string)=>new Date(s).toLocaleString('en-US',{timeZone:'America/New_York',dateStyle:'medium',timeStyle:'short'});
 
-export function initHome(){
- $('#home-page').innerHTML=`<section class="intro"><div class="home-heading"><h1>Home</h1>${info('About personal tasks','Personal tasks belong to the selected name and are publicly readable, like other household records. They earn no points and send no assignment alerts.')}</div><button id="home-add-task" class="button primary" disabled>＋ Add task</button></section>
- <div id="home-identity" class="identity-panel"><h2>Choose your name</h2><div class="identity-choices">${MEMBERS.map(m=>`<button class="person-tile member-${m}" data-home-person="${m}">${avatar(m)}${name(m)}</button>`).join('')}</div></div>
- <div id="home-identity-bar" class="identity-bar" hidden><span id="home-identity-name"></span><button id="home-switch" class="text-button">Switch person</button></div>
- <form id="home-quick" class="home-quick"><label class="sr-only" for="personal-title">Personal task</label><input id="personal-title" maxlength="120" required placeholder="Add a personal task…" autocomplete="off"><button id="personal-add" class="button primary">Add</button></form>
- <p id="home-personal-notice" class="ledger-notice" role="status" hidden></p><p id="home-shared-notice" class="ledger-notice" role="status" hidden></p>
+let stateChanged=()=>{};
+export function initMyTasks(onChange:()=>void){
+ stateChanged=onChange;
+ $('#my-tasks').innerHTML=` <form id="home-quick" class="home-quick"><label class="sr-only" for="personal-title">Personal task</label><input id="personal-title" maxlength="120" required placeholder="Add a personal task…" autocomplete="off"><button id="personal-add" class="button primary">Add</button></form>
+ <p id="home-personal-notice" class="ledger-notice" role="status" hidden></p>
  <p id="home-order-notice" class="ledger-notice" role="status" hidden></p><button id="home-order-retry" class="text-button" hidden>Retry saving order</button>
  <div class="home-toolbar"><div class="segmented" role="group" aria-label="Task sources">${['all','personal','assigned'].map(f=>`<button data-home-filter="${f}" aria-pressed="${f==='all'}">${name(f)}</button>`).join('')}</div><label class="chore-inline-check"><input id="home-history" type="checkbox"> Completed & history</label></div>
  <div id="home-feed" aria-live="polite"></div>`;
  document.body.insertAdjacentHTML('beforeend',`<dialog id="personal-dialog" aria-labelledby="personal-heading"><form id="personal-form"><div class="dialog-top"><h2 id="personal-heading">Edit personal task</h2><button class="icon-button" type="button" data-personal-close aria-label="Close">×</button></div><label for="personal-edit-title">Title</label><input id="personal-edit-title" maxlength="120" required><p id="personal-error" class="form-error" role="alert" hidden></p><div class="dialog-actions"><button type="button" class="button secondary" data-personal-close>Cancel</button><button class="button primary" id="personal-save">Save changes</button></div></form></dialog>`);
- $('#home-page').addEventListener('click',click);
+ $('#my-tasks').addEventListener('click',click);
  $('#home-quick').addEventListener('submit',event=>{event.preventDefault();void addPersonal();});
- $('#home-quick').addEventListener('focusout',()=>setTimeout(()=>{if(pending&&!inUse())render();},0));
- $('#home-history').addEventListener('change',()=>{showHistory=$<HTMLInputElement>('#home-history').checked;render();});
+ $('#home-quick').addEventListener('focusout',()=>setTimeout(()=>{if(pending&&!inUse())renderMyTasks();},0));
+ $('#home-history').addEventListener('change',()=>{showHistory=$<HTMLInputElement>('#home-history').checked;renderMyTasks();});
  $('#personal-form').addEventListener('submit',event=>{event.preventDefault();if(draft)void changePersonal(draft,'edit',{title:$<HTMLInputElement>('#personal-edit-title').value.trim()},true);});
  document.querySelectorAll('[data-personal-close]').forEach(b=>b.addEventListener('click',()=>{if(!busy)$<HTMLDialogElement>('#personal-dialog').close();}));
  $('#personal-dialog').addEventListener('cancel',e=>{if(busy)e.preventDefault();});
- document.addEventListener('close',()=>{if(pending&&!inUse()&&!$('#home-page').hidden)render();},true);
- bindCompletionSwipe($('#home-feed'),id=>{const e=entries().find(e=>e.task.id===id);if(e?.source==='personal')void changePersonal(e.task,'complete');else if(e&&identity)void completeSharedTask(e.task,identity);},value=>{dragging=value;if(!value)queueMicrotask(()=>{if(pending&&!inUse())render();});});
+ document.addEventListener('close',()=>{if(pending&&!inUse()&&!$('#my-tasks').hidden)renderMyTasks();},true);
+ bindCompletionSwipe($('#home-feed'),id=>{const e=entries().find(e=>e.task.id===id);if(e?.source==='personal')void changePersonal(e.task,'complete');else if(e&&identity)void completeSharedTask(e.task,identity);},value=>{dragging=value;if(!value)queueMicrotask(()=>{if(pending&&!inUse())renderMyTasks();});});
  bindDrag();
- onChoresChange(()=>render());
- onIdentityChange(()=>{readVersion++;personal=undefined;order=undefined;orderDraft=undefined;personalLive=false;orderLive=false;personalNotice='';orderNotice='';quickId=crypto.randomUUID();$<HTMLInputElement>('#personal-title').value='';render();if(!$('#home-page').hidden)void refreshHome();});
- render();
+
+ renderMyTasks();
 }
 function notice(id:string,text:string){$('#'+id).textContent=text;$('#'+id).hidden=!text;}
-function render(){
- $('#home-identity').hidden=!!identity;$('#home-identity-bar').hidden=!identity;
- if(identity)$('#home-identity-name').innerHTML=`${avatar(identity)} <span class="actor-chip member-${identity}">${name(identity)}</span>`;
+export function renderMyTasks(){
  $('#home-quick').hidden=!identity;
- $('#personal-add').toggleAttribute('disabled',!personalLive||busy);$<HTMLInputElement>('#personal-title').disabled=false;
- $('#home-add-task').toggleAttribute('disabled',!identity||!choreSource.live);
- if(choreSource.ledger){const count=identity?choreSource.ledger.tasks.filter(t=>!t.projected&&t.assignee===identity&&urgentChore(t,choreSource.ledger!.local_day)).length:0;$('#chore-badge').textContent=String(count);$('#chore-badge').hidden=!count;}
- notice('home-personal-notice',personalNotice);notice('home-shared-notice',choreSource.notice);notice('home-order-notice',orderNotice);
+ $('#personal-add').toggleAttribute('disabled',!personalLive||busy);
+ notice('home-personal-notice',personalNotice);notice('home-order-notice',orderNotice);
  $('#home-order-retry').hidden=!orderDraft||!orderNotice||!orderLive;
- if(!$('#home-page').hidden)$('#export').toggleAttribute('disabled',!identity||(!personal&&!choreSource.ledger));
+ stateChanged();
+ if($('#my-tasks').hidden){$('#home-feed').replaceChildren();return;}
  if(busy||dragging||document.querySelector('dialog[open]')){pending=true;return;}pending=false;
  document.querySelectorAll('[data-home-filter]').forEach(b=>b.setAttribute('aria-pressed',String((b as HTMLElement).dataset.homeFilter===filter)));
  const feed=$('#home-feed'),opened=[...feed.querySelectorAll<HTMLDetailsElement>('details[open]')].map(d=>d.dataset.homeDetails||d.dataset.taskDetails).filter(Boolean);
@@ -89,18 +81,27 @@ async function loadPersonal(member:Member,version:number){
   try{if(!personal){const r=await fetch('./personal-tasks.json',{cache:'no-store'});if(r.ok){const data=await r.json() as PersonalLedger;if(identity===member&&version===readVersion)personal={...data,tasks:data.tasks.filter(t=>t.owner===member),history:data.history.filter(t=>t.owner===member)};}}}catch{/* Keep last known tasks. */}
   if(identity!==member||version!==readVersion)return;
   personalNotice=(personal?'Personal tasks offline. Showing saved tasks; changes are disabled. Use Refresh to retry.':'Personal tasks unavailable. Use Refresh to retry.')+' '+(error as Error).message;
- }finally{if(identity===member&&version===readVersion)render();}
+ }finally{if(identity===member&&version===readVersion)renderMyTasks();}
 }
 async function loadOrder(member:Member,version:number){
  try{const result=await rpc<HomeOrder>('home_order',{p:{member}});if(identity!==member||version!==readVersion)return;order=result;orderLive=true;if(!orderDraft)orderNotice='';}
  catch{if(identity!==member||version!==readVersion)return;orderLive=false;orderNotice='Task order unavailable. Reordering is disabled.';}
 }
-export async function refreshHome(){
- filter=location.hash==='#home/assigned'?'assigned':location.hash==='#home/personal'?'personal':'all';
+export function setMyTaskFilter(value:string){filter=value;}
+export function personalAvailable(){return personalLive;}
+export function personalExportAvailable(){return !!identity&&!!(personal||choreSource.ledger);}
+export const myTasksInUse=inUse;
+export function resetMyTasks(){
+ readVersion++;personal=undefined;order=undefined;orderDraft=undefined;personalLive=false;orderLive=false;personalNotice='';orderNotice='';quickId=crypto.randomUUID();$<HTMLInputElement>('#personal-title').value='';renderMyTasks();
+}
+export async function refreshMyTasks(){
  if(inUse()){pending=true;return;}
  const member=identity,version=++readVersion;
- await Promise.allSettled([loadChores(),...(member?[loadPersonal(member,version),loadOrder(member,version)]:[])]);
- if(version!==readVersion)return;render();
+ await Promise.allSettled(member?[loadPersonal(member,version),loadOrder(member,version)]:[]);
+ if(version!==readVersion)return;renderMyTasks();
+}
+export async function reconcileMyTaskOrder(){
+ const member=identity;
  if(member&&orderLive&&personalLive&&choreSource.live&&!orderDraft){const keys=reconcileOrder(combinedFeed(member,personal!.tasks,choreSource.ledger),order?.keys||[]);if(JSON.stringify(keys)!==JSON.stringify(order?.keys||[]))await persistOrder(keys);}
 }
 async function addPersonal(){
@@ -109,7 +110,7 @@ async function addPersonal(){
  const actor=identity,p={id:quickId,expected_version:0,actor,action:'create',title};busy=true;$('#personal-add').toggleAttribute('disabled',true);
  try{await rpc('save_personal_task',{p:{...p,request_id:keyFor(p)}});if(identity===actor&&field.value.trim()===title)field.value='';quickId=crypto.randomUUID();toast('Personal task added.');}
  catch(error){toast((error as Error).message);}
- finally{busy=false;await loadPersonal(actor,readVersion);render();field.focus();}
+ finally{busy=false;await loadPersonal(actor,readVersion);renderMyTasks();field.focus();}
 }
 async function changePersonal(task:PersonalTask,action:string,extra:Record<string,unknown>={},editing=false){
  if(!identity||!personalLive||busy)return;const actor=identity;
@@ -121,15 +122,12 @@ async function changePersonal(task:PersonalTask,action:string,extra:Record<strin
   if(action==='complete')toast('✓ '+task.title,{label:'Undo',run:()=>void changePersonal(result,'undo')});
   else toast(action==='delete'?'Task deleted; history retained.':'Personal task updated.');
  }catch(error){if(editing)notice('personal-error',(error as Error).message);else toast((error as Error).message,{label:'Retry',run:()=>void changePersonal(task,action,extra)});}
- finally{busy=false;$('#personal-save').removeAttribute('disabled');$<HTMLInputElement>('#personal-edit-title').disabled=false;await loadPersonal(actor,readVersion);render();}
+ finally{busy=false;$('#personal-save').removeAttribute('disabled');$<HTMLInputElement>('#personal-edit-title').disabled=false;await loadPersonal(actor,readVersion);renderMyTasks();}
 }
 async function click(event:MouseEvent){
  const b=(event.target as HTMLElement).closest<HTMLButtonElement>('button');if(!b||b.disabled||busy)return;
- if(b.dataset.homePerson){setIdentity(b.dataset.homePerson as Member);return;}
- if(b.id==='home-switch'){setIdentity(null);return;}
- if(b.dataset.homeFilter){filter=b.dataset.homeFilter;history.replaceState(null,'',filter==='all'?'#home':'#home/'+filter);render();return;}
+ if(b.dataset.homeFilter){filter=b.dataset.homeFilter;history.replaceState(null,'',filter==='all'?'#chores':'#chores/'+filter);renderMyTasks();return;}
  if(b.id==='home-order-retry'){if(orderDraft)void persistOrder(orderDraft);return;}
- if(b.id==='home-add-task'){const m=await import('./chores-client');m.openSharedTask();return;}
  const key=b.closest<HTMLElement>('[data-home-key]')?.dataset.homeKey,e=entries().find(e=>e.key===key);if(!e)return;
  if(b.dataset.homeMove){const group=sorted().filter(x=>x.task.pinned===e.task.pinned&&matchesFilter(x)),target=group[group.findIndex(x=>x.key===key)+Number(b.dataset.homeMove)];if(target)void move(key!,target.key);return;}
  if(e.source==='personal'&&b.dataset.personalAction){
@@ -146,19 +144,26 @@ async function persistOrder(keys:string[]){
  const actor=identity,p={actor,expected_version:order?.version||0,keys};orderDraft=keys;busy=true;
  try{const result=await rpc<HomeOrder>('save_home_order',{p:{...p,request_id:keyFor(p)}});if(identity===actor){order=result;orderDraft=undefined;orderNotice='';}}
  catch(error){if(identity===actor){orderNotice=(error as Error).message;await loadOrder(actor,readVersion);}}
- finally{busy=false;render();}
+ finally{busy=false;renderMyTasks();}
 }
 function bindDrag(){
  const root=$('#home-feed');let gesture:{pointer:number;x:number;y:number;key:string;target:string;button:HTMLElement}|undefined;
  root.addEventListener('pointerdown',event=>{const b=(event.target as HTMLElement).closest<HTMLButtonElement>('.home-drag');if(!b||b.disabled||event.button!==0)return;const key=b.closest<HTMLElement>('[data-home-key]')!.dataset.homeKey!;gesture={pointer:event.pointerId,x:event.clientX,y:event.clientY,key,target:key,button:b};b.setPointerCapture(event.pointerId);dragging=true;});
  root.addEventListener('pointermove',event=>{if(!gesture||gesture.pointer!==event.pointerId)return;const dx=event.clientX-gesture.x,dy=event.clientY-gesture.y;if(Math.abs(dx)<8&&Math.abs(dy)<8)return;const target=document.elementFromPoint(event.clientX,event.clientY)?.closest<HTMLElement>('[data-home-key]');root.querySelectorAll('.home-drop').forEach(e=>e.classList.remove('home-drop'));if(target){gesture.target=target.dataset.homeKey!;target.classList.add('home-drop');}});
- const finish=(event:PointerEvent)=>{if(!gesture)return;const g=gesture;gesture=undefined;dragging=false;g.button.releasePointerCapture?.(g.pointer);root.querySelectorAll('.home-drop').forEach(e=>e.classList.remove('home-drop'));if(event.type==='pointerup')void move(g.key,g.target);if(pending&&!inUse())render();};
+ const finish=(event:PointerEvent)=>{if(!gesture)return;const g=gesture;gesture=undefined;dragging=false;g.button.releasePointerCapture?.(g.pointer);root.querySelectorAll('.home-drop').forEach(e=>e.classList.remove('home-drop'));if(event.type==='pointerup')void move(g.key,g.target);if(pending&&!inUse())renderMyTasks();};
  root.addEventListener('pointerup',finish);root.addEventListener('pointercancel',finish);
 }
-export function focusHomeNotification(id:string){
- if(!entries().some(e=>e.task.id===id))return false;filter='all';render();return highlightNotification(`[data-home-key="shared:${CSS.escape(id)}"]`);
+export function focusMyTaskNotification(id:string){
+ if(!entries().some(e=>e.task.id===id))return false;filter='all';history.replaceState(null,'','#chores');renderMyTasks();return highlightNotification(`[data-home-key="shared:${CSS.escape(id)}"]`);
 }
-export function exportHome(){
+export function exportMyTasks(){
  if(!identity)return;const member=identity,assigned=choreSource.ledger;const assignedIds=new Set([...(assigned?.tasks||[]),...(assigned?.history||[])].filter(t=>t.assignee===member).map(t=>t.id));
- download({member,exported_at:new Date().toISOString(),personal_tasks:personal?{...personal,tasks:personal.tasks.filter(t=>t.owner===member),history:personal.history.filter(t=>t.owner===member)}:null,assigned_tasks:assigned?{tasks:assigned.tasks.filter(t=>t.assignee===member&&!t.projected),history:assigned.history.filter(t=>assignedIds.has(t.id)),updated_at:assigned.updated_at}:null,home_order:order||null},'household-home-'+member);
+ download({member,exported_at:new Date().toISOString(),personal_tasks:personal?{...personal,tasks:personal.tasks.filter(t=>t.owner===member),history:personal.history.filter(t=>t.owner===member)}:null,assigned_tasks:assigned?{tasks:assigned.tasks.filter(t=>t.assignee===member&&!t.projected),history:assigned.history.filter(t=>assignedIds.has(t.id)),updated_at:assigned.updated_at}:null,home_order:order||null},'household-tasks-'+member);
+}
+
+export async function createPersonalTask(id:string,title:string){
+ if(!identity||!personalLive)throw new Error('Personal tasks unavailable. Use Refresh to retry.');
+ const actor=identity,p={id,expected_version:0,actor,action:'create',title};
+ await rpc('save_personal_task',{p:{...p,request_id:keyFor(p)}});
+ await loadPersonal(actor,readVersion);
 }

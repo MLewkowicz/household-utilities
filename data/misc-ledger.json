@@ -110,9 +110,22 @@
       ]
     }
   ],
-  "updated_at": "2026-10-21T19:39:32.011617+00:00",
-  "exported_at": "2026-10-21T19:39:32.011617+00:00",
+  "updated_at": "2026-10-21T20:17:04.218922+00:00",
+  "exported_at": "2026-10-21T20:17:04.218922+00:00",
   "settlements": [
+    {
+      "id": "5aecef12-6c43-4e8b-91a6-c8b61e089f5b",
+      "actor": "rina",
+      "other": "",
+      "method": "venmo",
+      "sender": "rina",
+      "deleted": true,
+      "paid_on": "2026-10-21",
+      "version": 2,
+      "recipient": "michal",
+      "created_at": "2026-10-21T20:11:38.426022+00:00",
+      "amount_cents": 2000
+    },
     {
       "id": "6780e6dd-609b-4e40-8f04-ab381d232677",
       "actor": "michal",
@@ -312,6 +325,32 @@
   ],
   "rounding_cursor": 2,
   "settlement_history": [
+    {
+      "id": "5aecef12-6c43-4e8b-91a6-c8b61e089f5b",
+      "actor": "rina",
+      "other": "",
+      "method": "venmo",
+      "sender": "rina",
+      "deleted": true,
+      "paid_on": "2026-10-21",
+      "version": 2,
+      "recipient": "michal",
+      "created_at": "2026-10-21T20:11:38.426022+00:00",
+      "amount_cents": 2000
+    },
+    {
+      "id": "5aecef12-6c43-4e8b-91a6-c8b61e089f5b",
+      "actor": "rina",
+      "other": "",
+      "method": "venmo",
+      "sender": "rina",
+      "deleted": false,
+      "paid_on": "2026-10-21",
+      "version": 1,
+      "recipient": "michal",
+      "created_at": "2026-10-21T20:11:22.029+00:00",
+      "amount_cents": 2000
+    },
     {
       "id": "6780e6dd-609b-4e40-8f04-ab381d232677",
       "actor": "michal",

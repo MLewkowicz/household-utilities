@@ -22,12 +22,11 @@
 <body>
   <div class="shell">
     <header class="topbar">
-      <a class="brand" href="#home" aria-label="Household ledger home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>household<span class="brand-period">.</span></a>
+      <a class="brand" href="#chores" aria-label="Household To-dos"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>household<span class="brand-period">.</span></a>
       <div class="topbar-right"><label class="theme-control"><span class="sr-only">Color theme</span><select id="theme-select" aria-label="Color theme"><option value="system">◐ System</option><option value="light">☀ Light</option><option value="dark">☾ Dark</option></select></label><button id="notifications" class="icon-button" title="Phone notifications" aria-label="Phone notifications"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></button><button id="refresh" class="icon-button" title="Refresh" aria-label="Refresh">↻</button></div>
     </header>
-    <nav class="ledger-nav" aria-label="Household ledgers"><a href="#home" data-ledger="home">Home</a><a href="#utilities" data-ledger="utilities" aria-current="page"><span aria-hidden="true">⌁</span> Utilities</a><a href="#miscellaneous" data-ledger="miscellaneous"><span aria-hidden="true">✳</span> Expenses</a><a href="#chores" data-ledger="chores"><span aria-hidden="true">✓</span> To-dos <span id="chore-badge" class="chore-nav-badge" hidden></span></a><a href="#events" data-ledger="events"><span aria-hidden="true">✧</span> Events</a><a href="#bulletin" data-ledger="bulletin"><span aria-hidden="true">♡</span> Bulletin</a></nav>
+    <nav class="ledger-nav" aria-label="Household sections"><a href="#chores" data-ledger="chores" aria-current="page">To-dos <span id="chore-badge" class="chore-nav-badge" hidden></span></a><a href="#miscellaneous" data-ledger="miscellaneous">Expenses</a><a href="#events" data-ledger="events">Events</a><a href="#bulletin" data-ledger="bulletin">Bulletin</a><a href="#utilities" data-ledger="utilities">Utilities</a></nav>
     <main id="main">
-      <section id="home-page" aria-label="Home"></section>
       <div id="utilities-page" hidden>
       <section class="intro">
         <div><h1>Utilities</h1></div>
@@ -39,13 +38,12 @@
       <section class="ledger-section" aria-labelledby="breakdown-title">
         <div class="section-top"><div><h2 id="breakdown-title">Month by month</h2></div><div id="person-filter" class="segmented" role="group" aria-label="View shares for"><button data-person="all" aria-pressed="true">Household</button><button data-person="michal" aria-pressed="false">Michal</button><button data-person="rina" aria-pressed="false">Rina</button><button data-person="ohm" aria-pressed="false">Ohm</button><button data-person="rohil" aria-pressed="false">Rohil</button></div></div>
         <p class="mobile-table-hint">Swipe the table to see all utilities →</p><div class="table-wrap"><table class="monthly-table"><thead><tr><th scope="col">SERVICE MONTH</th><th scope="col"><span class="utility-symbol gas" aria-hidden="true">◒</span> Gas</th><th scope="col"><svg class="utility-symbol electricity" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M13 2 3 14h8l-1 8 11-12h-8z"/></svg> Electricity</th><th scope="col"><svg class="utility-symbol wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M2 7c5.5-5.3 14.5-5.3 20 0M5 11c3.9-3.9 10.1-3.9 14 0M8.5 15c1.9-1.9 5.1-1.9 7 0"/><circle cx="12" cy="19.5" r="1.25" fill="currentColor" stroke="none"/></svg> Wi-Fi</th><th scope="col">TOTAL</th><th scope="col"><span class="sr-only">Details</span></th></tr></thead><tbody id="months"></tbody><tfoot id="monthly-total"></tfoot></table></div>
-        <details class="info-disclosure"><summary aria-label="How utility shares are calculated"><span aria-hidden="true">i</span></summary><div class="info-content"><p>Rohil’s recurring share starts September 1. Earlier days are split three ways; later days are split four ways. <span id="coverage-note">Expand a month to see service dates and calculations.</span></p></div></details>
       </section>
       <section class="history-section" aria-labelledby="history-title"><div class="section-top"><div><h2 id="history-title">Payment history</h2></div><div class="segmented" id="history-tabs" role="group" aria-label="Payment history view"><button data-history="payments" aria-pressed="true">Payments</button><button data-history="activity" aria-pressed="false">All activity</button></div></div><div id="history"></div></section>
       <section class="how-it-works"><div class="small-mark" aria-hidden="true">↗</div><div><h3>Already sent your share?</h3><p>Send money to Michal using your usual payment app, then record it here. This ledger tracks payments; it doesn’t move money.</p></div><button id="bottom-payment" class="button secondary" disabled>Record a payment <span aria-hidden="true">↗</span></button></section>
       </div>
       <section id="misc-page" aria-label="Expenses" hidden></section>
-      <section id="chores-page" aria-label="To-dos" hidden></section>
+      <section id="chores-page" aria-label="To-dos"></section>
       <section id="events-page" aria-label="Events calendar" hidden></section>
       <section id="bulletin-page" aria-label="Household bulletin board" hidden></section>
     </main>

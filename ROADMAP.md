@@ -133,3 +133,11 @@ The standalone assignments are saved in `docs/app-refresh-plan.md` and `docs/hou
 Release sequence: run `./configure.sh` to install missing additive migrations, then `./publish.sh`. The publisher now verifies live capabilities, refreshes all six snapshots, and includes browser checks before pushing. The Pages workflow also blocks a deployment when those schema capabilities are missing. Use `npm run preview:reactions` for local expression review. Review screenshots and check logs are in ignored `.local/refresh-review/` and `.local/reaction-checks/`.
 
 Validation passed: 97 Node/database tests, 8 Python tests, and all 54 browser scenarios, plus TypeScript checking, production build, privacy checks, and whitespace checks. After the final keyboard-focus adjustment, all five Home browser scenarios passed again. The six-snapshot export pipeline was also verified against an isolated database without replacing production fallbacks.
+
+## Unified To-dos and continuous paper borders
+
+- Merged Home into My tasks inside To-dos, alongside Household, Week, and Leaderboard. Navigation starts with To-dos and Expenses, with Utilities last. Old Home links redirect to matching task views; personal records and saved ordering use the existing APIs without a migration.
+- Kept quick personal entry and added Personal to the unified Add task form, with independent source availability and preserved drafts.
+- Removed explanatory info controls throughout, including the personal-task and September 1 notices. Relevant form guidance, errors, history, financial calculations, and avatar fallbacks remain.
+- Replaced separate card borders and corner patches with one full-card SVG silhouette and outline. Personal/shared tasks, expenses, and bulletin notes share the frame, responsive geometry, accessible corner target, and observer cleanup.
+- House-animation work remains outside this session. Review artifacts are in ignored `.local/paper-review/`.

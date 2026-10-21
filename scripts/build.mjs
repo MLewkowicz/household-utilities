@@ -23,13 +23,13 @@ html=html.replace('./app.js',`./${entry}`).replace('src="./'+entry+'" defer','sr
 // Preload just the requested route and its shared imports. This avoids a module
 // waterfall without downloading any other section or expression artwork.
 const preload={};
-for(const [route,source] of Object.entries({home:'home-client',utilities:'client',miscellaneous:'misc-client',chores:'chores-client',bulletin:'bulletin-client',events:'events-client'})){
+for(const [route,source] of Object.entries({utilities:'client',miscellaneous:'misc-client',chores:'chores-client',bulletin:'bulletin-client',events:'events-client'})){
  const start=Object.keys(bundle.metafile.outputs).find(path=>bundle.metafile.outputs[path].entryPoint===`src/${source}.ts`);
  const paths=new Set();
  function visit(path){if(!path||paths.has(path))return;paths.add(path);for(const item of bundle.metafile.outputs[path].imports)if(item.kind==='import-statement')visit(item.path);}
  visit(start);preload[route]=[...paths].map(path=>'./'+path.replace(/^dist\//,''));
 }
-html=html.replace('</head>',`<script>{const routes=${JSON.stringify(preload)},loaded=new Set();function preload(route){for(const href of routes[route.split('/')[0]]||routes.home){if(loaded.has(href))continue;loaded.add(href);const link=document.createElement('link');link.rel='modulepreload';link.href=href;document.head.append(link);}}preload(location.hash.slice(1));window.addEventListener('hashchange',()=>preload(location.hash.slice(1)));for(const event of ['pointerover','focusin','pointerdown'])document.addEventListener(event,e=>{const link=e.target.closest?.('[data-ledger]');if(link)preload(link.dataset.ledger);});}</script>\n</head>`);
+html=html.replace('</head>',`<script>{const routes=${JSON.stringify(preload)},loaded=new Set();function preload(route){for(const href of routes[route.split('/')[0]]||routes.chores){if(loaded.has(href))continue;loaded.add(href);const link=document.createElement('link');link.rel='modulepreload';link.href=href;document.head.append(link);}}preload(location.hash.slice(1));window.addEventListener('hashchange',()=>preload(location.hash.slice(1)));for(const event of ['pointerover','focusin','pointerdown'])document.addEventListener(event,e=>{const link=e.target.closest?.('[data-ledger]');if(link)preload(link.dataset.ledger);});}</script>\n</head>`);
 for (const file of ['style.css', 'events-refresh.css', 'config.js']) {
   const hash = createHash('sha256').update(await readFile(`dist/${file}`)).digest('hex').slice(0, 12);
   const versioned = file.replace(/(\.[^.]+)$/, `-${hash}$1`);

@@ -13,3 +13,7 @@ export function avatar(member: Member): string {
  const asset = AVATARS[member];
  return `<span class="avatar ${member}" aria-hidden="true"><span class="avatar-fallback">${name(member)[0]}</span>${asset ? `<img src="${esc(asset.src)}" alt="" width="64" height="64" decoding="async" loading="lazy">` : ''}</span>`;
 }
+
+export function initAvatarFallback(){
+ document.addEventListener('error',event=>{if(event.target instanceof HTMLImageElement&&event.target.closest('.avatar'))event.target.hidden=true;},true);
+}

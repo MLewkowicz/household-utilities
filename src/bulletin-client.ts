@@ -1,7 +1,6 @@
 import {cornerTab} from './tile-corner';
 import {NOTE_REACTIONS,expressionLabel,reactionPortrait,paintReactionThumbnails,animateReaction,stopReactionAnimation,setReactionsPaused,type NoteExpression} from './note-reactions';
 import {avatar} from './people';
-import {info} from './disclosure';
 import {MEMBERS,type Member} from './ledger';
 import {highlightNotification} from './notifications';
 

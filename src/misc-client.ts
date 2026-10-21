@@ -1,7 +1,6 @@
 import {balanceSplit} from './expense-split';
 import {cornerTab} from './tile-corner';
 import {avatar} from './people';
-import {info} from './disclosure';
 import { MEMBERS, type Member } from './ledger';
 import { equalShares, parseAmount, type Expense, type Settlement, type MiscLedger, type Shares, type Pair } from './misc-ledger';
 import { $, esc, money, name, date, today, rpc, toast, download } from './ui';
@@ -33,9 +32,9 @@ export function initMisc() {
   <section id="identity-panel" class="identity-panel" aria-labelledby="identity-title"><div><h2 id="identity-title">Choose your name</h2></div><div class="identity-choices">${MEMBERS.map(m=>`<button class="person-tile member-${m}" data-identity="${m}">${avatar(m)}<span>I’m ${name(m)}</span></button>`).join('')}</div></section>
   <div id="identity-bar" class="identity-bar" hidden><span id="identity-name"></span><button id="switch-person" class="text-button">Switch person</button><span class="identity-caption">Your purchases. Everyone’s fair share.</span></div>
   <section class="misc-overview" aria-labelledby="misc-balances-title"><div class="section-top compact"><h2 id="misc-balances-title">Balances</h2><span id="misc-as-of" class="quiet"></span></div><div id="misc-balances" class="balance-grid" aria-busy="true"></div></section>
-  <section class="misc-pair-section" aria-labelledby="pair-title"><div class="section-top"><div><h2 id="pair-title">Who owes whom</h2>${info('About purchase balances','Shared purchases only. Utility balances stay in Utilities.')}</div></div><div id="misc-pairs" class="pair-grid"></div></section>
+  <section class="misc-pair-section" aria-labelledby="pair-title"><div class="section-top"><div><h2 id="pair-title">Who owes whom</h2></div></div><div id="misc-pairs" class="pair-grid"></div></section>
   <section class="misc-feed-section" aria-labelledby="misc-feed-title"><div class="section-top"><div><h2 id="misc-feed-title">Activity</h2><p class="section-copy" id="misc-spent">Purchases and repayments</p></div><div id="misc-person-filter" class="segmented" role="group" aria-label="Filter purchases by person"><button data-filter-person="all" aria-pressed="true">Everyone</button>${MEMBERS.map(m=>`<button data-filter-person="${m}" class="member-${m}" aria-pressed="false">${name(m)}</button>`).join('')}</div></div><div class="feed-toolbar"><div id="misc-type-filter" class="segmented" role="group" aria-label="Entry type"><button data-type="all" aria-pressed="true">All</button><button data-type="expense" aria-pressed="false">Expenses</button><button data-type="settlement" aria-pressed="false">Repayments</button></div><label class="inline-check"><input type="checkbox" id="show-deleted"> Show deleted</label></div><div id="misc-feed"></div></section>
-  ${info('About repayments','Record repayments after sending money in your usual payment app.')}`;
+  `;
  document.body.insertAdjacentHTML('beforeend',`
   <dialog id="expense-dialog" class="expense-dialog" aria-labelledby="expense-title"><form id="expense-form"><div class="dialog-top"><button type="button" class="icon-button" data-close="expense-dialog" aria-label="Close expense form">×</button></div><h2 id="expense-title">Add an expense</h2>
    <div class="expense-hero"><span id="chosen-icon" class="chosen-icon"></span><label>What did you buy?<input id="expense-description" maxlength="160" placeholder="e.g. paper towels for the kitchen" required autocomplete="off"></label></div>
@@ -47,7 +46,7 @@ export function initMisc() {
    <fieldset><legend>How should we split it?</legend><div class="method-options split-options"><label><input type="radio" name="split-mode" value="equal" checked><span>Equally</span></label><label><input type="radio" name="split-mode" value="custom"><span>Custom amounts</span></label></div></fieldset>
    <div class="split-heading"><h3>Share with</h3><label class="inline-check"><input type="checkbox" id="include-self" checked> Include my share</label></div>
    <div id="participant-tiles" class="participant-grid"></div><div id="self-share" class="self-share"></div><div id="custom-shares" class="custom-shares" hidden></div>
-   <p id="split-status" class="split-status" role="status"></p>${info('About custom amounts','Amounts you edit stay fixed. Everyone on Auto shares the remainder. Tap Fixed to return someone to Auto. Excluding yourself with one person left assigns them the full total.')}<div class="expense-extras"><button type="button" id="guest-split-open" class="text-button">Split with guests ↗</button></div><p class="privacy-hint">Entries are public. Keep addresses, account numbers, and other personal details out of descriptions.</p>
+   <p id="split-status" class="split-status" role="status"></p><p class="field-help">Fixed amounts stay as entered; Auto divides the remainder. Tap Fixed to return to Auto.</p><div class="expense-extras"><button type="button" id="guest-split-open" class="text-button">Split with guests ↗</button></div><p class="privacy-hint">Entries are public. Keep addresses, account numbers, and other personal details out of descriptions.</p>
    <div id="expense-error" class="form-error" role="alert" hidden></div><button id="reload-expense" type="button" class="text-button" hidden>Load latest version</button>
    <div class="dialog-actions"><button type="button" class="button secondary" data-close="expense-dialog">Cancel</button><button id="save-expense" class="button primary" type="submit">Add expense</button></div><p class="dialog-footnote" id="expense-actor"></p>
   </form></dialog>

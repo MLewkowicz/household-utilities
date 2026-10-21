@@ -13,12 +13,12 @@ export function loadChores():Promise<void>{
  loading=(async()=>{
   try{choreSource.ledger=await rpc<ChoreLedger>('chores_dashboard');choreSource.live=true;choreSource.notice='';}
   catch{choreSource.live=false;try{if(!choreSource.ledger){const response=await fetch('./chores.json',{cache:'no-store'});if(response.ok)choreSource.ledger=await response.json();}}catch{/* Keep last known copy. */}
-   choreSource.notice=choreSource.ledger?'Assigned tasks offline. Showing saved tasks; changes are disabled.':'Assigned tasks unavailable. Use Refresh to retry.';
+   choreSource.notice=choreSource.ledger?'Shared tasks offline. Showing saved tasks; changes are disabled.':'Shared tasks unavailable. Use Refresh to retry.';
   }finally{loading=undefined;emit();}
  })();return loading;
 }
 export async function saveSharedTask(p:Record<string,unknown>,operation='save_chore'){
- if(!choreSource.live)throw new Error('Assigned tasks are offline. Refresh before saving.');
+ if(!choreSource.live)throw new Error('Shared tasks are offline. Refresh before saving.');
  const result=await rpc<Chore>(operation,{p});
  void loadChores();return result;
 }
