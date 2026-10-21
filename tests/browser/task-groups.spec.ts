@@ -1,10 +1,10 @@
-import {test,expect,type Page} from '@playwright/test';
+import {test,expect,devices,type Page} from '@playwright/test';
 import {mkdir} from 'node:fs/promises';
 const rpc=async(page:Page,operation:string,p?:unknown)=>{const r=await page.request.post('/rest/v1/rpc/utilities_'+operation,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(r.ok(),await r.text()).toBeTruthy();return r.json();};
 const create=(page:Page,title:string,group_name:string|null)=>rpc(page,'save_personal_task',{id:crypto.randomUUID(),request_id:crypto.randomUUID(),actor:'ohm',action:'create',title,group_name});
 async function open(page:Page){await page.addInitScript(()=>localStorage.setItem('household-person','ohm'));await page.goto('/#chores/personal');await expect(page.locator('#personal-add')).toBeEnabled();await expect(page.locator('#main')).toHaveAttribute('aria-busy','false');}
 const entry=(page:Page,id:string)=>page.locator(`[data-home-key="personal:${id}"]`);
-async function hold(page:Page,id:string){const title=entry(page,id).locator('h3');await title.scrollIntoViewIfNeeded();const r=(await title.boundingBox())!;await page.mouse.move(r.x+15,r.y+10);await page.mouse.down();await expect(page.locator('.task-drag-preview')).toBeVisible();}
+async function hold(page:Page,id:string){const card=entry(page,id).locator('.chore-card');await card.scrollIntoViewIfNeeded();const r=(await card.boundingBox())!;await page.mouse.move(r.x+r.width/2,r.y+r.height/2);await page.mouse.down();await expect(page.locator('.task-drag-preview')).toBeVisible();}
 test('personal groups can be named, reused and edited, and survive fallback loading',async({page})=>{
  await open(page);await page.locator('#personal-title').fill('Read MIT paper');await page.locator('#personal-quick-group').fill('MIT');await page.locator('#personal-title').press('Enter');
  await expect(page.locator('.home-group-heading').filter({hasText:'MIT'})).toHaveCount(1);await expect(page.locator('#personal-groups option[value=MIT]')).toHaveCount(1);
@@ -28,11 +28,24 @@ test('held tiles move neighbors before drop, cancel safely and save cross-group 
 });
 test('touch scroll remains native before a hold; held touch drag persists without completing a task',async({browser,page})=>{
  const a=await create(page,'Touch A','Touch group'),b=await create(page,'Touch B','Touch group');
- const context=await browser.newContext({baseURL:'http://127.0.0.1:4174',viewport:{width:390,height:844},hasTouch:true,isMobile:true});const phone=await context.newPage();await open(phone);const session=await context.newCDPSession(phone);
+ const context=await browser.newContext({baseURL:'http://127.0.0.1:4174',...devices['Pixel 7'],viewport:{width:390,height:844}});const phone=await context.newPage();await open(phone);const session=await context.newCDPSession(phone);
  const touch=async(type:string,x:number,y:number)=>session.send('Input.dispatchTouchEvent',{type,touchPoints:type==='touchEnd'?[]:[{x,y}]});
  await entry(phone,b.id).locator('h3').scrollIntoViewIfNeeded();let r=(await entry(phone,b.id).locator('h3').boundingBox())!;const scroll=await phone.evaluate(()=>scrollY);
  await touch('touchStart',r.x+15,r.y+10);await touch('touchMove',r.x+15,r.y-70);await touch('touchEnd',0,0);await expect(phone.locator('.task-drag-preview')).toHaveCount(0);await expect.poll(()=>phone.evaluate(()=>scrollY)).toBeGreaterThan(scroll);
- await phone.evaluate(()=>scrollTo(0,0));await entry(phone,a.id).locator('h3').scrollIntoViewIfNeeded();r=(await entry(phone,a.id).locator('h3').boundingBox())!;const target=(await entry(phone,b.id).boundingBox())!;
- await touch('touchStart',r.x+15,r.y+10);await expect(phone.locator('.task-drag-preview')).toBeVisible();await touch('touchMove',target.x+target.width/2,target.y+35);await expect(phone.locator('[data-task-group="Touch group"] [data-home-key]').first()).toHaveAttribute('data-home-key','personal:'+a.id);await touch('touchEnd',0,0);
- await expect.poll(async()=>{const d=await rpc(phone,'home_order',{member:'ohm'});return d.keys.indexOf('personal:'+a.id)<d.keys.indexOf('personal:'+b.id);}).toBeTruthy();const tasks=(await rpc(phone,'personal_tasks',{member:'ohm'})).tasks;expect(tasks.find((t:any)=>t.id===a.id).completed_at).toBeNull();await context.close();
+ await phone.evaluate(()=>scrollTo(0,0));await entry(phone,a.id).locator('.completion-track').scrollIntoViewIfNeeded();r=(await entry(phone,a.id).locator('.completion-track').boundingBox())!;const target=(await entry(phone,b.id).boundingBox())!;
+ await touch('touchStart',r.x+r.width/2,r.y+r.height/2);await expect(phone.locator('.task-drag-preview')).toBeVisible();await touch('touchMove',target.x+target.width/2,target.y+35);await expect(phone.locator('[data-task-group="Touch group"] [data-home-key]').first()).toHaveAttribute('data-home-key','personal:'+a.id);await touch('touchEnd',0,0);
+ await expect.poll(async()=>{const d=await rpc(phone,'home_order',{member:'ohm'});return d.keys.indexOf('personal:'+a.id)<d.keys.indexOf('personal:'+b.id);}).toBeTruthy();const tasks=(await rpc(phone,'personal_tasks',{member:'ohm'})).tasks;expect(tasks.find((t:any)=>t.id===a.id).completed_at).toBeNull();
+ // The completion handle retains its own gesture even when held before sliding.
+ const handle=entry(phone,a.id).locator('[data-swipe-complete]');await handle.scrollIntoViewIfNeeded();const h=(await handle.boundingBox())!,track=(await entry(phone,a.id).locator('.completion-track').boundingBox())!;
+ await touch('touchStart',h.x+h.width/2,h.y+h.height/2);await phone.waitForTimeout(300);await expect(phone.locator('.task-drag-preview')).toHaveCount(0);await touch('touchMove',track.x+track.width-10,h.y+h.height/2);await touch('touchEnd',0,0);await expect(entry(phone,a.id)).toHaveCount(0);
+ expect((await rpc(phone,'personal_tasks',{member:'ohm'})).tasks.find((t:any)=>t.id===a.id).completed_at).not.toBeNull();await context.close();
+});
+
+test('desktop tiles start dragging with ordinary mouse movement from the center',async({page})=>{
+ const a=await create(page,'Mouse drag A','Mouse group'),b=await create(page,'Mouse drag B','Mouse group');await open(page);
+ const card=entry(page,a.id).locator('.chore-card');await card.scrollIntoViewIfNeeded();const start=(await card.boundingBox())!,target=(await entry(page,b.id).boundingBox())!;
+ await page.mouse.move(start.x+start.width/2,start.y+start.height/2);await page.mouse.down();
+ await page.mouse.move(target.x+target.width/2,target.y+target.height/2,{steps:8});
+ await expect(page.locator('.task-drag-preview')).toBeVisible();await expect(page.locator('[data-task-group="Mouse group"] [data-home-key]').first()).toHaveAttribute('data-home-key','personal:'+a.id);await page.mouse.up();
+ await expect.poll(async()=>{const d=await rpc(page,'home_order',{member:'ohm'});return d.keys.indexOf('personal:'+a.id)<d.keys.indexOf('personal:'+b.id);}).toBeTruthy();
 });

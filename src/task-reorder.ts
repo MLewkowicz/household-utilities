@@ -1,6 +1,6 @@
 /** Long press leaves ordinary touch scrolling and all tile controls available. */
 export function bindTaskReorder(root:HTMLElement, options:{enabled:()=>boolean;active:(value:boolean)=>void;commit:(key:string,keys:string[],group:string)=>void}){
- type Gesture={pointer:number;x:number;y:number;startX:number;startY:number;entry:HTMLElement;parent:HTMLElement;next:Element|null;group:string;keys:string[];timer:number;active:boolean;ghost?:HTMLElement;left:number;top:number;frame:number};
+ type Gesture={pointer:number;pointerType:string;x:number;y:number;startX:number;startY:number;entry:HTMLElement;parent:HTMLElement;next:Element|null;group:string;keys:string[];timer:number;active:boolean;ghost?:HTMLElement;left:number;top:number;frame:number};
  let gesture:Gesture|undefined,suppressClick=false;
  const rows=()=>[...root.querySelectorAll<HTMLElement>('[data-home-key]')];
  function finish(save=false){
@@ -59,13 +59,18 @@ export function bindTaskReorder(root:HTMLElement, options:{enabled:()=>boolean;a
  root.addEventListener('pointerdown',event=>{
   if(gesture||!options.enabled()||!event.isPrimary||event.button!==0)return;
   const target=event.target as HTMLElement,entry=target.closest<HTMLElement>('[data-reorderable=true]');
-  if(!entry||target.closest('button,a,input,select,textarea,summary,.tile-details-body,.completion-track'))return;
-  const g:Gesture={pointer:event.pointerId,x:event.clientX,y:event.clientY,startX:event.clientX,startY:event.clientY,entry,parent:entry.parentElement!,next:entry.nextElementSibling,group:entry.closest<HTMLElement>('[data-task-group]')!.dataset.taskGroup!,keys:rows().map(e=>e.dataset.homeKey!),timer:0,active:false,left:0,top:0,frame:0};
-  gesture=g;options.active(true);g.timer=window.setTimeout(()=>lift(g),350);
+  if(!entry||target.closest('button,a,input,select,textarea,summary'))return;
+  const g:Gesture={pointer:event.pointerId,pointerType:event.pointerType,x:event.clientX,y:event.clientY,startX:event.clientX,startY:event.clientY,entry,parent:entry.parentElement!,next:entry.nextElementSibling,group:entry.closest<HTMLElement>('[data-task-group]')!.dataset.taskGroup!,keys:rows().map(e=>e.dataset.homeKey!),timer:0,active:false,left:0,top:0,frame:0};
+  gesture=g;options.active(true);g.timer=window.setTimeout(()=>lift(g),event.pointerType==='mouse'?120:220);
  });
  document.addEventListener('pointermove',event=>{
   const g=gesture;if(!g||event.pointerId!==g.pointer)return;g.x=event.clientX;g.y=event.clientY;
-  if(!g.active){if(Math.hypot(g.x-g.startX,g.y-g.startY)>9)finish();return;}
+  if(!g.active){
+   const distance=Math.hypot(g.x-g.startX,g.y-g.startY);
+   if(g.pointerType==='mouse'&&distance>=4){event.preventDefault();clearTimeout(g.timer);lift(g);}
+   else if(distance>12)finish();
+   return;
+  }
   event.preventDefault();reposition();
  });
  // Prevent scrolling only after the hold. Changing touch-action mid-gesture is too late.
@@ -73,6 +78,7 @@ export function bindTaskReorder(root:HTMLElement, options:{enabled:()=>boolean;a
  document.addEventListener('pointerup',event=>{if(gesture?.pointer===event.pointerId)finish(true);});
  document.addEventListener('pointercancel',event=>{if(gesture?.pointer===event.pointerId)finish();});
  root.addEventListener('lostpointercapture',event=>{if(gesture?.pointer===event.pointerId)finish();});
+ root.addEventListener('dragstart',event=>{if(gesture)event.preventDefault();});
  root.addEventListener('contextmenu',event=>{if(gesture)event.preventDefault();});
  root.addEventListener('click',event=>{if(suppressClick){event.preventDefault();event.stopImmediatePropagation();}},{capture:true});
  document.addEventListener('keydown',event=>{if(gesture&&event.key==='Escape'){event.preventDefault();finish();}});
