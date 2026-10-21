@@ -54,7 +54,7 @@ export function initChores(){
 }
 function renderChrome(){
  $('#chore-identity').hidden=!!identity;$('#chore-identity-bar').hidden=!identity;
- if(identity)$('#chore-identity-name').innerHTML=`${avatar(identity)} <span class="actor-chip member-${identity}">You’re ${name(identity)}</span>`;
+ if(identity)$('#chore-identity-name').innerHTML=`${avatar(identity)} You’re ${name(identity)}`;
  $('#chore-new').toggleAttribute('disabled',!live&&!personalAvailable());$('#chore-log').toggleAttribute('disabled',!live);
  $('#chores-status').textContent=live?'Shared to-dos · up to date':ledger?'Viewing saved to-dos':'To-dos unavailable';errorText('chores-notice',choreSource.notice);
  if(!$('#chores-page').hidden)$('#export').toggleAttribute('disabled',view==='mine'?!personalExportAvailable():!ledger);
@@ -78,7 +78,7 @@ export function initChoreDialogs(){
  document.body.insertAdjacentHTML('beforeend',
  dialog('chore-task','Add task',`<label for="chore-kind">Type</label><select id="chore-kind"><option value="personal">Personal</option><option value="chore">Chore · points for shared work</option><option value="reminder">Reminder · each person completes</option><option value="request">Request · a favor, no points</option><option value="routine">Routine · one recurring item</option></select>
  <label for="chore-title">What needs doing?</label><input id="chore-title" required maxlength="120" placeholder="Task title">
- <div id="shared-task-fields"><div class="chore-shortcuts" id="chore-shortcuts">${['bananas','trash','recycling','bins'].map(id=>`<button type="button" data-chore-shortcut="${id}">${choreIcon(id)}<span>${CHORE_ICONS.find(i=>i.id===id)!.label}</span></button>`).join('')}</div><details class="chore-icon-picker"><summary><span id="chore-selected-icon"></span><span>Choose an illustration</span></summary><div class="picker-controls"><input id="chore-icon-search" type="search" aria-label="Search task illustrations" placeholder="Search illustrations"><select id="chore-icon-category" aria-label="Illustration category"><option value="">All categories</option>${TASK_CATEGORIES.map(c=>`<option>${esc(c)}</option>`).join('')}</select></div><div class="chore-icon-grid" id="chore-icon-grid"></div><label class="chore-inline-check"><input type="checkbox" id="chore-fill-title" checked> Use icon name as the title</label></details>
+ <div id="personal-task-group-field"><label for="chore-personal-group">Group <span class="quiet">(optional)</span></label><input id="chore-personal-group" list="personal-groups" maxlength="60" placeholder="Choose or name a group" autocomplete="off"></div><div id="shared-task-fields"><div class="chore-shortcuts" id="chore-shortcuts">${['bananas','trash','recycling','bins'].map(id=>`<button type="button" data-chore-shortcut="${id}">${choreIcon(id)}<span>${CHORE_ICONS.find(i=>i.id===id)!.label}</span></button>`).join('')}</div><details class="chore-icon-picker"><summary><span id="chore-selected-icon"></span><span>Choose an illustration</span></summary><div class="picker-controls"><input id="chore-icon-search" type="search" aria-label="Search task illustrations" placeholder="Search illustrations"><select id="chore-icon-category" aria-label="Illustration category"><option value="">All categories</option>${TASK_CATEGORIES.map(c=>`<option>${esc(c)}</option>`).join('')}</select></div><div class="chore-icon-grid" id="chore-icon-grid"></div><label class="chore-inline-check"><input type="checkbox" id="chore-fill-title" checked> Use icon name as the title</label></details>
  <fieldset id="chore-assignee-fields" class="chore-contributors"><legend>For whom?</legend><div class="chore-member-options"><label class="chore-check-tile"><input type="radio" name="chore-assignee" value="" checked>Anyone</label>${MEMBERS.map(m=>`<label class="chore-check-tile member-${m}"><input type="radio" name="chore-assignee" value="${m}">${avatar(m)}${name(m)}</label>`).join('')}</div></fieldset>
  <fieldset id="reminder-recipients" class="chore-contributors" hidden><legend>Remind whom?</legend><div class="chore-member-options">${MEMBERS.map(m=>`<label class="chore-check-tile member-${m}"><input type="checkbox" name="reminder-recipient" value="${m}">${avatar(m)}${name(m)}</label>`).join('')}</div></fieldset>
  <div id="chore-points-fields"><label for="chore-preset">Household job</label><select id="chore-preset">${presetOptions()}</select>${effort('chore-effort')}</div><details id="chore-more" class="form-details"><summary>Context & advanced settings</summary><label for="chore-note">Details <span class="quiet">(optional)</span></label><textarea id="chore-note" rows="2" maxlength="1000" placeholder="Where, what, or why…"></textarea>
@@ -133,6 +133,7 @@ function updateTaskAvailability(){
 }
 function updateTaskKind(resetPoints=false){
  const kind=input('chore-kind').value;
+ $('#personal-task-group-field').hidden=kind!=='personal';
  $('#shared-task-fields').hidden=kind==='personal';
  $('#shared-task-fields').querySelectorAll<HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement>('input,select,textarea').forEach(el=>el.disabled=kind==='personal');
  updateTaskAvailability();
@@ -301,7 +302,7 @@ async function savePersonal(){
  busy=true;errorText('chore-task-error','');
  const fields=[...$('#chore-task-form').querySelectorAll<HTMLInputElement|HTMLButtonElement|HTMLSelectElement|HTMLTextAreaElement>('input,button,select,textarea')],states=fields.map(el=>el.disabled);
  fields.forEach(el=>el.disabled=true);
- try{await createPersonalTask(taskId,input('chore-title').value.trim());$<HTMLDialogElement>('#chore-task-dialog').close();toast('Personal task added.');}
+ try{await createPersonalTask(taskId,input('chore-title').value.trim(),input('chore-personal-group').value.trim()||null);$<HTMLDialogElement>('#chore-task-dialog').close();toast('Personal task added.');}
  catch(error){errorText('chore-task-error',(error as Error).message);}
  finally{busy=false;fields.forEach((el,i)=>el.disabled=states[i]);render();}
 }

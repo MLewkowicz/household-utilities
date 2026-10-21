@@ -48,7 +48,7 @@ export async function openDatabase(path) {
   }
   const queueTiming=await db.query("SELECT to_regprocedure('ledger_private.chore_queue_ready(jsonb,date)') AS fn");
   if(!queueTiming.rows[0].fn)await db.exec(await readFile(new URL('../supabase/migrations/016_chore_queue_timing.sql',import.meta.url),'utf8'));
-  for(const [file,signature] of [['017_home_personal_tasks.sql','public.utilities_personal_tasks(jsonb)'],['018_event_icons.sql','ledger_private.valid_event_icon_id(text)'],['019_reaction_library.sql','ledger_private.valid_note_expression(text)']]){
+  for(const [file,signature] of [['017_home_personal_tasks.sql','public.utilities_personal_tasks(jsonb)'],['018_event_icons.sql','ledger_private.valid_event_icon_id(text)'],['019_reaction_library.sql','ledger_private.valid_note_expression(text)'],['020_personal_task_groups.sql','ledger_private.personal_task_group(jsonb)']]){
     const installed=await db.query('SELECT to_regprocedure($1) AS fn',[signature]);
     if(!installed.rows[0].fn)await db.exec(await readFile(new URL('../supabase/migrations/'+file,import.meta.url),'utf8'));
   }

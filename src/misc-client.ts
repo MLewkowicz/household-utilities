@@ -30,7 +30,7 @@ export function initMisc() {
   <div id="misc-notice" class="ledger-notice" role="status" hidden></div>
   <div id="misc-error" class="ledger-error" role="alert" hidden></div>
   <section id="identity-panel" class="identity-panel" aria-labelledby="identity-title"><div><h2 id="identity-title">Choose your name</h2></div><div class="identity-choices">${MEMBERS.map(m=>`<button class="person-tile member-${m}" data-identity="${m}">${avatar(m)}<span>I’m ${name(m)}</span></button>`).join('')}</div></section>
-  <div id="identity-bar" class="identity-bar" hidden><span id="identity-name"></span><button id="switch-person" class="text-button">Switch person</button><span class="identity-caption">Your purchases. Everyone’s fair share.</span></div>
+  <div id="identity-bar" class="identity-bar" hidden><span id="identity-name"></span><button id="switch-person" class="text-button">Switch person</button></div>
   <section class="misc-overview" aria-labelledby="misc-balances-title"><div class="section-top compact"><h2 id="misc-balances-title">Balances</h2><span id="misc-as-of" class="quiet"></span></div><div id="misc-balances" class="balance-grid" aria-busy="true"></div></section>
   <section class="misc-pair-section" aria-labelledby="pair-title"><div class="section-top"><div><h2 id="pair-title">Who owes whom</h2></div></div><div id="misc-pairs" class="pair-grid"></div></section>
   <section class="misc-feed-section" aria-labelledby="misc-feed-title"><div class="section-top"><div><h2 id="misc-feed-title">Activity</h2><p class="section-copy" id="misc-spent">Purchases and repayments</p></div><div id="misc-person-filter" class="segmented" role="group" aria-label="Filter purchases by person"><button data-filter-person="all" aria-pressed="true">Everyone</button>${MEMBERS.map(m=>`<button data-filter-person="${m}" class="member-${m}" aria-pressed="false">${name(m)}</button>`).join('')}</div></div><div class="feed-toolbar"><div id="misc-type-filter" class="segmented" role="group" aria-label="Entry type"><button data-type="all" aria-pressed="true">All</button><button data-type="expense" aria-pressed="false">Expenses</button><button data-type="settlement" aria-pressed="false">Repayments</button></div><label class="inline-check"><input type="checkbox" id="show-deleted"> Show deleted</label></div><div id="misc-feed"></div></section>
@@ -62,7 +62,7 @@ export function initMisc() {
 
 function renderIdentity() {
  $('#identity-panel').hidden=!!identity;$('#identity-bar').hidden=!identity;
- if(identity)$('#identity-name').innerHTML=`${avatar(identity)} <span class="actor-chip member-${identity}">You’re ${name(identity)}</span>`;
+ if(identity)$('#identity-name').innerHTML=`${avatar(identity)} You’re ${name(identity)}`;
  $('#new-expense').toggleAttribute('disabled',!identity||!live);$('#new-settlement').toggleAttribute('disabled',!identity||!live);
 }
 function render() {

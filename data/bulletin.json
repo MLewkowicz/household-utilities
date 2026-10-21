@@ -475,6 +475,13 @@
       "expression": "disappointed"
     },
     {
+      "member": "rina",
+      "note_id": "79feccd9-ba85-4473-958d-f5e995797fe1",
+      "version": 1,
+      "created_at": "2026-10-21T20:34:27.29331+00:00",
+      "expression": "mogging"
+    },
+    {
       "member": "ohm",
       "note_id": "a07bd6ab-2127-4c51-adc1-bd2550b192b6",
       "version": 1,
@@ -496,10 +503,17 @@
       "expression": "gentle-laughing"
     }
   ],
-  "updated_at": "2026-10-21T20:17:04.860717+00:00",
-  "exported_at": "2026-10-21T20:17:04.860717+00:00",
+  "updated_at": "2026-10-21T20:55:20.68244+00:00",
+  "exported_at": "2026-10-21T20:55:20.68244+00:00",
   "format_version": 2,
   "reaction_history": [
+    {
+      "member": "rina",
+      "note_id": "79feccd9-ba85-4473-958d-f5e995797fe1",
+      "version": 1,
+      "created_at": "2026-10-21T20:34:27.29331+00:00",
+      "expression": "mogging"
+    },
     {
       "member": "rohil",
       "note_id": "e40073a9-d341-4abb-af1e-3b259221c18c",

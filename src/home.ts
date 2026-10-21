@@ -1,6 +1,6 @@
 import type {Member} from './ledger';
 import {activeChore,queueReady,queueOrder,type Chore,type ChoreLedger} from './chores';
-export type PersonalTask={id:string;version:number;owner:Member;title:string;pinned:boolean;completed_at:string|null;deleted:boolean;actor:Member;action:string;created_at:string;added_at:string};
+export type PersonalTask={id:string;version:number;owner:Member;title:string;group_name?:string|null;pinned:boolean;completed_at:string|null;deleted:boolean;actor:Member;action:string;created_at:string;added_at:string};
 export type PersonalLedger={member?:Member;tasks:PersonalTask[];history:PersonalTask[];updated_at:string|null;format_version:number;orders?:HomeOrder[]};
 export type HomeOrder={member:Member;version:number;keys:string[]};
 export type FeedEntry={source:'personal';key:string;task:PersonalTask}|{source:'shared';key:string;task:Chore};
@@ -20,4 +20,11 @@ export function moveEntry(entries:FeedEntry[],key:string,target:string):string[]
  const from=entries.findIndex(e=>e.key===key),to=entries.findIndex(e=>e.key===target);
  if(from<0||to<0||from===to||entries[from].task.pinned!==entries[to].task.pinned)return null;
  const copy=[...entries];copy.splice(to,0,copy.splice(from,1)[0]);return copy.map(e=>e.key);
+}
+
+export function taskGroup(entry:FeedEntry):string{return entry.source==='personal'?entry.task.group_name||'':'';}
+export function groupedFeed(entries:FeedEntry[]){
+ const groups=new Map<string,{key:string;name:string;pinned:boolean;entries:FeedEntry[]}>();
+ for(const entry of entries){const name=taskGroup(entry),key=JSON.stringify([entry.task.pinned,name]);let group=groups.get(key);if(!group){group={key,name,pinned:entry.task.pinned,entries:[]};groups.set(key,group);}group.entries.push(entry);}
+ return [...groups.values()];
 }

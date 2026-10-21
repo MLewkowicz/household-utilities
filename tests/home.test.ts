@@ -49,3 +49,24 @@ test('combined feed excludes other owners, unassigned work, projections, and una
  assert.deepEqual(reconcileOrder(arrivals,['personal:a','shared:now','shared:missing']),['personal:new','personal:a','shared:now','shared:missing']);
  assert.equal(moveEntry(arrivals,'personal:a','shared:now'),null);assert.deepEqual(moveEntry(arrivals,'personal:a','personal:new'),['shared:now','personal:new','personal:a']);
 });
+
+test('named groups survive cached edits, completion and exports, and reject malformed metadata',async()=>{
+ const p=task({group_name:'  MIT  project  '}),a=await call('save_personal_task',p);assert.equal(a.group_name,'MIT project');assert.deepEqual(await call('save_personal_task',p),a);
+ const b=await call('save_personal_task',task({group_name:'mit project'}));assert.equal(b.group_name,'MIT project');
+ const oldClient=await change(a,'edit',{title:'Legacy client edit'});assert.equal(oldClient.group_name,'MIT project');
+ const completed=await change(oldClient,'complete');assert.equal(completed.group_name,'MIT project');
+ const moved=await change(completed,'edit',{title:'New project',group_name:'Research'});assert.equal(moved.group_name,'Research');
+ const ungrouped=await change(moved,'group',{group_name:null});assert.equal(ungrouped.group_name,null);
+ for(const group_name of ['x'.repeat(61),'line\nbreak',{},5])await assert.rejects(call('save_personal_task',task({group_name})),/group/i);
+ const exported=await call('export_personal_tasks',{});assert.equal(exported.format_version,2);assert.equal(exported.history.find((t:any)=>t.id===a.id&&t.version===1).group_name,'MIT project');
+});
+test('dragging a personal task across groups saves its group and order atomically with safe retries',async()=>{
+ const t=await call('save_personal_task',task({group_name:'MIT'})),order=await call('home_order',{member:'michal'});
+ const p={actor:'michal',expected_version:order.version,request_id:randomUUID(),keys:['personal:'+t.id,...order.keys],move:{id:t.id,expected_version:t.version,group_name:'Project'}};
+ const saved=await call('save_home_order',p);assert.deepEqual(await call('save_home_order',p),saved);
+ let personal=await call('personal_tasks',{member:'michal'});assert.equal(personal.tasks.find((x:any)=>x.id===t.id).group_name,'Project');assert.equal(personal.history.filter((x:any)=>x.id===t.id).length,2);
+ await assert.rejects(call('save_home_order',{...p,expected_version:saved.version,request_id:randomUUID(),keys:[],move:{...p.move,group_name:'Stale'}}),/changed/);
+ assert.deepEqual((await call('home_order',{member:'michal'})).keys,saved.keys);
+ await assert.rejects(call('save_home_order',{...p,actor:'rina',expected_version:0,request_id:randomUUID(),move:{...p.move,expected_version:2}}),/owner/);
+ assert.equal((await call('home_order',{member:'rina'})).version,0);
+});

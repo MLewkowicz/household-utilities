@@ -8,7 +8,7 @@ async function open(page:Page,who='michal'){
 }
 const card=(page:Page,title:string)=>page.locator('.chore-grid .chore-card').filter({has:page.locator('h3',{hasText:title})});
 async function expand(card:Locator){const details=card.locator(':scope > .tile-details');if(!await details.evaluate(el=>el.hasAttribute('open')))await details.locator(':scope > summary').click();}
-const view=async(page:Page,v:string)=>{await page.locator(`[data-chore-view=${v==='mine'?'household':v}]`).click();if(v==='mine'){const who=(await page.locator('#chore-identity-name .actor-chip').innerText()).replace('You’re ','').trim().toLowerCase();await page.locator('#chore-household-filter').selectOption(who);}};
+const view=async(page:Page,v:string)=>{await page.locator(`[data-chore-view=${v==='mine'?'household':v}]`).click();if(v==='mine'){const who=(await page.locator('#chore-identity-name').innerText()).match(/You’re (\w+)/)![1].toLowerCase();await page.locator('#chore-household-filter').selectOption(who);}};
 async function choosePerson(page:Page,who:string){await page.locator('#chore-switch').click();await page.locator(`[data-chore-person=${who}]`).click();}
 
 test('requests, urgency, hand-back and shared identity work across tabs on a phone',async({page})=>{

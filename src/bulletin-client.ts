@@ -80,7 +80,7 @@ function render(){
  const content=$('#bulletin-content'),opened=[...content.querySelectorAll<HTMLDetailsElement>('details[open]')].map(d=>d.id);
  const focused=document.activeElement as HTMLElement|null,focusId=focused&&content.contains(focused)?focused.id:'';
  $('#bulletin-identity').hidden=!!identity;$('#bulletin-identity-bar').hidden=!identity;
- if(identity){$('#bulletin-identity-name').innerHTML=`${avatar(identity)} ${chip(identity)}`;error('bulletin-identity-error','');}
+ if(identity){$('#bulletin-identity-name').innerHTML=`${avatar(identity)} You’re ${name(identity)}`;error('bulletin-identity-error','');}
  $('#bulletin-new').toggleAttribute('disabled',!live);
  document.querySelectorAll<HTMLElement>('[data-bulletin-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.bulletinView===view)));
  stopReactionAnimation();content.innerHTML=view==='activity'?charts():board();
