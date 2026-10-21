@@ -274,10 +274,10 @@
       "width": 256,
       "height": 256
     },
-    "motion-93f9b9e8370e.js": {
-      "bytes": 19467,
-      "sha256": "93f9b9e8370e6c0a165bc2d4fe0ed435bd14decc73d28a743d60a7242b905c50"
+    "motion-c890e51b4ce5.js": {
+      "bytes": 22905,
+      "sha256": "c890e51b4ce55e1a75a2609de2ee790729e00e920ddfa762d70ad62271d797a8"
     }
   },
-  "module": "motion-93f9b9e8370e.js"
+  "module": "motion-c890e51b4ce5.js"
 }

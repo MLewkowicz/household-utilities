@@ -1,3 +1,5 @@
+import {balanceSplit} from './expense-split';
+import {cornerTab} from './tile-corner';
 import {avatar} from './people';
 import {info} from './disclosure';
 import { MEMBERS, type Member } from './ledger';
@@ -11,6 +13,7 @@ import {identity,setIdentity,onIdentityChange} from './identity';
 let ledger: MiscLedger|undefined, live=false, loading=false, busy=false;
 let person: Member|'all'='all', feedType='all', showDeleted=false;
 let editingExpense: Expense|undefined, editingSettlement: Settlement|undefined;
+let fixedShares:Shares={}, balancedDraft:Partial<Record<Member,string>>={}, balancedTotal='';
 let participants=new Set<Member>(), customDraft: Partial<Record<Member,string>>={}, chosenIcon='receipt', manualIcon=false;
 let expenseId='', expenseRequest='', expenseFingerprint='', settlementId='', settlementRequest='', settlementFingerprint='';
 let expensePayload: Record<string,unknown>|null=null;
@@ -41,10 +44,10 @@ export function initMisc() {
    <details class="icon-picker" id="icon-picker"><summary>Choose an icon <span id="chosen-icon-label">Receipt</span></summary><div class="picker-controls"><label class="sr-only" for="icon-search">Search icons</label><input id="icon-search" placeholder="Try milk, cleaning, or travel" type="search"><label class="sr-only" for="icon-category">Icon category</label><select id="icon-category"><option value="">All categories</option>${CATEGORIES.map(c=>`<option>${c}</option>`).join('')}</select></div><div id="icon-grid" class="icon-grid"></div></details>
    <div class="form-row"><div class="amount-field"><label>Purchase amount<span class="amount-input"><span>$</span><input id="expense-amount" aria-label="Purchase amount" inputmode="decimal" placeholder="0.00" required autocomplete="off"></span></label><button type="button" class="text-button calculator-link" data-calculate="expense" aria-label="Calculate purchase amount">Calculator</button></div><label>Purchase date<input id="expense-date" type="date" required></label></div>
    <div id="expense-payer-line" class="payer-line"></div><label id="expense-payer-label" hidden>Who paid?<select id="expense-payer">${options()}</select></label>
-   <button type="button" id="guest-split-open" class="button secondary">Split with guests</button><fieldset><legend>How should we split it?</legend><div class="method-options split-options"><label><input type="radio" name="split-mode" value="equal" checked><span>Equally</span></label><label><input type="radio" name="split-mode" value="custom"><span>Custom amounts</span></label></div></fieldset>
+   <fieldset><legend>How should we split it?</legend><div class="method-options split-options"><label><input type="radio" name="split-mode" value="equal" checked><span>Equally</span></label><label><input type="radio" name="split-mode" value="custom"><span>Custom amounts</span></label></div></fieldset>
    <div class="split-heading"><h3>Share with</h3><label class="inline-check"><input type="checkbox" id="include-self" checked> Include my share</label></div>
    <div id="participant-tiles" class="participant-grid"></div><div id="self-share" class="self-share"></div><div id="custom-shares" class="custom-shares" hidden></div>
-   <p id="split-status" class="split-status" role="status"></p><p class="privacy-hint">Entries are public. Keep addresses, account numbers, and other personal details out of descriptions.</p>
+   <p id="split-status" class="split-status" role="status"></p>${info('About custom amounts','Amounts you edit stay fixed. Everyone on Auto shares the remainder. Tap Fixed to return someone to Auto. Excluding yourself with one person left assigns them the full total.')}<div class="expense-extras"><button type="button" id="guest-split-open" class="text-button">Split with guests ↗</button></div><p class="privacy-hint">Entries are public. Keep addresses, account numbers, and other personal details out of descriptions.</p>
    <div id="expense-error" class="form-error" role="alert" hidden></div><button id="reload-expense" type="button" class="text-button" hidden>Load latest version</button>
    <div class="dialog-actions"><button type="button" class="button secondary" data-close="expense-dialog">Cancel</button><button id="save-expense" class="button primary" type="submit">Add expense</button></div><p class="dialog-footnote" id="expense-actor"></p>
   </form></dialog>
@@ -69,7 +72,7 @@ function render() {
  $('#misc-balances').innerHTML=MEMBERS.map(m=>{
   const owed=ledger!.pairs.filter(p=>p.sender===m).reduce((s,p)=>s+p.amount_cents,0);
   const collect=ledger!.pairs.filter(p=>p.recipient===m).reduce((s,p)=>s+p.amount_cents,0);
-  return `<article class="balance-card member-${m}"><div class="person-heading"><div class="person-name">${avatar(m)}${name(m)}</div></div><div class="misc-balance-line"><strong>${money(owed)}</strong><span>to pay</span></div><div class="misc-balance-line collect"><strong>${money(collect)}</strong><span>to collect</span></div><div class="balance-caption">${!owed&&!collect?'All settled up':'Shared purchases only'}</div></details></article>`;
+  return `<article class="balance-card member-${m}"><div class="person-heading"><div class="person-name">${avatar(m)}${name(m)}</div></div><div class="misc-balance-line"><strong>${money(owed)}</strong><span>to pay</span></div><div class="misc-balance-line collect"><strong>${money(collect)}</strong><span>to collect</span></div><div class="balance-caption">${!owed&&!collect?'All settled up':'Shared purchases only'}</div></div></details></article>`;
  }).join('');$('#misc-balances').setAttribute('aria-busy','false');
  $('#misc-pairs').innerHTML=ledger.pairs.length?ledger.pairs.map(p=>`<div class="pair-card"><div class="pair-people">${avatar(p.sender)}<span class="pair-arrow" aria-hidden="true">→</span>${avatar(p.recipient)}<span>${memberChip(p.sender)} owes ${memberChip(p.recipient)}</span></div><strong>${money(p.amount_cents)}</strong><button class="text-button" data-repay-from="${p.sender}" data-repay-to="${p.recipient}" ${!live||!identity?'disabled':''}>Record repayment</button></div>`).join(''):'<div class="empty-state settled-empty"><span class="settled-mark" aria-hidden="true">✓</span><div><h3>Everyone’s square.</h3><p>Shared purchases will appear here when someone is owed.</p></div></div>';
  $('#misc-spent').textContent=money(ledger.expenses.filter(e=>!e.deleted).reduce((s,e)=>s+e.amount_cents,0))+' in purchases · repayments counted separately';
@@ -115,7 +118,7 @@ function renderFeed() {
   const purchase=isExpense(e),payer=purchase?e.payer:e.sender,kind=purchase?'expense':'settlement';
   const thisMonth=e.paid_on.slice(0,7);let heading='';
   if(month!==thisMonth){month=thisMonth;heading=`<h3 class="feed-month">${new Date(month+'-01T12:00Z').toLocaleDateString('en-US',{month:'long',year:'numeric',timeZone:'UTC'})}</h3>`;}
-  return `${heading}<article class="expense-card ${purchase?"member-"+payer:"settlement-card"} ${e.deleted?'entry-deleted':''}" data-entry-id="${e.id}"><div class="expense-card-main"><span class="entry-illustration">${purchase?iconSvg(e.icon_id):'<span class="repayment-symbol" aria-hidden="true">↗</span>'}</span><div class="entry-description"><h3>${purchase?esc(e.description):`${name(e.sender)} → ${name(e.recipient)}`}</h3><p>${purchase?`${memberChip(e.payer)} paid`:`Repayment · ${esc(e.method==='other'?e.other:name(e.method))}`} · ${date(e.paid_on)} ${e.deleted?'<span class="deleted-label">DELETED</span>':e.version>1?'<span class="edited-label">Edited</span>':''}</p></div><strong class="entry-amount">${money(e.amount_cents)}</strong></div><details class="tile-details"><summary>Details <span aria-hidden="true">⌄</span></summary>${purchase?`<div class="entry-shares">${e.participants.map(m=>`<span class="share-chip member-${m}">${name(m)} <strong>${money(e.shares[m]||0)}</strong></span>`).join('')}</div>`:''}<div class="entry-bottom"><div data-entry-history="${e.id}"></div>${!e.deleted&&live&&identity?`<div class="entry-actions"><button class="text-button" data-misc-edit="${e.id}" data-kind="${kind}" aria-label="Edit ${purchase?esc(e.description):'repayment'}">Edit</button><button class="text-button" data-misc-delete="${e.id}" data-kind="${kind}" aria-label="Delete ${purchase?esc(e.description):'repayment'}">Delete</button></div>`:''}</div></details></article>`;
+  return `${heading}<article class="expense-card ${purchase?"member-"+payer:"settlement-card"} ${e.deleted?'entry-deleted':''}" data-entry-id="${e.id}"><div class="expense-card-main"><span class="entry-illustration">${purchase?iconSvg(e.icon_id):'<span class="repayment-symbol" aria-hidden="true">↗</span>'}</span><div class="entry-description"><h3>${purchase?esc(e.description):`${name(e.sender)} → ${name(e.recipient)}`}</h3><p>${purchase?`${memberChip(e.payer)} paid`:`Repayment · ${esc(e.method==='other'?e.other:name(e.method))}`} · ${date(e.paid_on)} ${e.deleted?'<span class="deleted-label">DELETED</span>':e.version>1?'<span class="edited-label">Edited</span>':''}</p></div><strong class="entry-amount">${money(e.amount_cents)}</strong></div><details class="tile-details expense-details">${cornerTab(purchase?e.description:'repayment')}<div class="tile-details-body">${purchase?`<div class="entry-shares">${e.participants.map(m=>`<span class="share-chip member-${m}">${name(m)} <strong>${money(e.shares[m]||0)}</strong></span>`).join('')}</div>`:''}<div class="entry-bottom"><div data-entry-history="${e.id}"></div>${!e.deleted&&live&&identity?`<div class="entry-actions"><button class="text-button" data-misc-edit="${e.id}" data-kind="${kind}" aria-label="Edit ${purchase?esc(e.description):'repayment'}">Edit</button><button class="text-button" data-misc-delete="${e.id}" data-kind="${kind}" aria-label="Delete ${purchase?esc(e.description):'repayment'}">Delete</button></div>`:''}</div></div></details></article>`;
  }).join('')||`<div class="empty-state misc-empty"><span class="empty-illustration">${iconSvg('groceries')}${iconSvg('paper-towels')}${iconSvg('pizza')}</span><h3>${ledger.expenses.length||ledger.settlements.length?'Nothing in this view yet.':'Good things are better shared.'}</h3><p>${ledger.expenses.length||ledger.settlements.length?'Try another filter or include deleted entries.':'Bought something for the household? Add the first expense.'}</p></div>`;
  document.querySelectorAll<HTMLDetailsElement>('#misc-feed .tile-details').forEach(details=>{
   const id=details.closest<HTMLElement>('[data-entry-id]')!.dataset.entryId;
@@ -148,10 +151,37 @@ function renderParticipants() {
  input('include-self').checked=participants.has(payer);
  $('#participant-tiles').innerHTML=MEMBERS.filter(m=>m!==payer).map(m=>`<button type="button" class="person-tile member-${m}" data-participant="${m}" aria-pressed="${participants.has(m)}">${avatar(m)}<span>${name(m)}</span><strong data-share-value="${m}">—</strong><span class="tile-check" aria-hidden="true">${participants.has(m)?'✓':'＋'}</span></button>`).join('');
  $('#self-share').innerHTML=`${avatar(payer)}<span>${name(payer)}’s own share</span><strong data-share-value="${payer}">—</strong>`;
- $('#custom-shares').innerHTML=selectedParticipants().map(m=>`<div class="custom-share-row member-${m}">${avatar(m)}<label for="custom-share-${m}">${name(m)}</label><span class="compact-amount"><span>$</span><input id="custom-share-${m}" data-custom-share="${m}" aria-label="${name(m)}’s share" inputmode="decimal" value="${esc(customDraft[m]??'0.00')}"></span><button type="button" class="share-calculator" data-calculate="${m}" aria-label="Calculate ${name(m)}’s share" title="Calculator">÷</button></div>`).join('');
+ $('#custom-shares').innerHTML=selectedParticipants().map(m=>`<div class="custom-share-row member-${m}">${avatar(m)}<label for="custom-share-${m}">${name(m)}</label><span class="compact-amount"><span>$</span><input id="custom-share-${m}" data-custom-share="${m}" aria-label="${name(m)}’s share" inputmode="decimal" value="${esc(customDraft[m]??'0.00')}"></span><button type="button" class="share-auto" data-share-auto="${m}" aria-label="${name(m)}: ${fixedShares[m]===undefined?'automatic share':'return share to automatic'}" aria-pressed="${fixedShares[m]!==undefined}">${fixedShares[m]===undefined?'Auto':'Fixed'}</button><button type="button" class="share-calculator" data-calculate="${m}" aria-label="Calculate ${name(m)}’s share" title="Calculator">÷</button></div>`).join('');
  $('#custom-shares').hidden=splitMode()!=='custom';
  $('#expense-payer-line').innerHTML=`${avatar(payer)}<span>Paid by ${memberChip(payer)}</span>`;
  updateSplitPreview();
+}
+function rememberSplit(){balancedDraft={...customDraft};balancedTotal=input('expense-amount').value;}
+function rebalance(member?:Member,raw?:string,commit=false,sole=false):boolean {
+ try{
+  const total=parseAmount(input('expense-amount').value);
+  if(splitMode()==='equal'){balancedTotal=input('expense-amount').value;updateSplitPreview();return true;}
+  const next={...fixedShares};
+  for(const m of MEMBERS)if(!participants.has(m))delete next[m];
+  if(member)next[member]=parseAmount(raw??customDraft[member]??'',true);
+  if(sole&&participants.size===1)delete next[selectedParticipants()[0]];
+  const shares=balanceSplit(total,selectedParticipants(),next,ledger?.rounding_cursor||0);
+  fixedShares=next;customDraft=Object.fromEntries(selectedParticipants().map(m=>[m,(shares[m]!/100).toFixed(2)]));
+  document.querySelectorAll<HTMLInputElement>('[data-custom-share]').forEach(el=>{if(el.dataset.customShare!==member)el.value=customDraft[el.dataset.customShare as Member]!;});
+  document.querySelectorAll<HTMLButtonElement>('[data-share-auto]').forEach(el=>{const m=el.dataset.shareAuto as Member;el.textContent=fixedShares[m]===undefined?'Auto':'Fixed';el.setAttribute('aria-pressed',String(fixedShares[m]!==undefined));el.setAttribute('aria-label',`${name(m)}: ${fixedShares[m]===undefined?'automatic share':'return share to automatic'}`);});
+  rememberSplit();message('expense-error','');updateSplitPreview();return true;
+ }catch(error){
+  message('expense-error',(error as Error).message);
+  if(commit){customDraft={...balancedDraft};input('expense-amount').value=balancedTotal;renderParticipants();}
+  else $('#save-expense').setAttribute('disabled','');
+  return false;
+ }
+}
+function changeParticipants(change:()=>void){
+ const previous=new Set(participants);change();
+ if(!input('expense-amount').value){renderParticipants();return;}
+ if(!participants.size||!rebalance(undefined,undefined,false,true)){participants=previous;renderParticipants();return;}
+ renderParticipants();
 }
 function updateSplitPreview() {
  let valid=true,amount=0,shares:Shares={},status='Enter an amount to see everyone’s share.';
@@ -191,9 +221,9 @@ function openExpense(entry?:Expense) {
  input('expense-date').value=entry?.paid_on||today();input('expense-date').max=today();
  input('expense-payer').value=entry?.payer||identity;$('#expense-payer-label').hidden=!entry;
  $<HTMLInputElement>(`#expense-form [name=split-mode][value=${entry?.split_mode||'equal'}]`).checked=true;
- participants=new Set(entry?.participants||MEMBERS);customDraft={};
+ participants=new Set(entry?.participants||MEMBERS);customDraft={};fixedShares={};
  if(entry)for(const m of entry.participants)customDraft[m]=((entry.shares[m]||0)/100).toFixed(2);
- chosenIcon=entry?.icon_id||'receipt';manualIcon=!!entry;
+ rememberSplit();chosenIcon=entry?.icon_id||'receipt';manualIcon=!!entry;
  $<HTMLDetailsElement>('#icon-picker').open=false;input('icon-search').value='';input('icon-category').value='';
  $('#expense-title').textContent=entry?'Edit expense':'Add an expense';$('#save-expense').textContent=entry?'Save changes':'Add expense';
  $('#expense-actor').textContent=`${entry?'Editing':'Recording'} as ${name(identity)}`;
@@ -293,7 +323,7 @@ function bindEvents() {
   openGuestSplit({total:input('expense-amount').value,members:selectedParticipants()},(total,members,shares)=>{
    input('expense-amount').value=(total/100).toFixed(2);participants=new Set(members);
    $<HTMLInputElement>('#expense-form [name=split-mode][value=custom]').checked=true;
-   customDraft=Object.fromEntries(members.map(m=>[m,(shares[m]!/100).toFixed(2)]));
+   customDraft=Object.fromEntries(members.map(m=>[m,(shares[m]!/100).toFixed(2)]));fixedShares={};rememberSplit();
    renderParticipants();
   });
  });
@@ -326,21 +356,25 @@ function bindEvents() {
  for(const id of ['expense-dialog','settlement-dialog','misc-delete-dialog'])$('#'+id).addEventListener('cancel',event=>{if(busy)event.preventDefault();});
  $('#expense-description').addEventListener('input',()=>{if(!manualIcon)chosenIcon=suggestIcons(input('expense-description').value)[0]?.id||'receipt';updateChosenIcon();});
  $('#icon-fill-name').addEventListener('change',updateChosenIcon);
- $('#expense-amount').addEventListener('input',updateSplitPreview);
+ $('#expense-amount').addEventListener('input',()=>rebalance());
+ $('#expense-amount').addEventListener('change',()=>rebalance(undefined,undefined,true));
  $('#expense-payer').addEventListener('change',renderParticipants);
- $('#include-self').addEventListener('change',()=>{const m=input('expense-payer').value as Member;input('include-self').checked?participants.add(m):participants.delete(m);renderParticipants();});
+ $('#include-self').addEventListener('change',()=>{const m=input('expense-payer').value as Member;changeParticipants(()=>{input('include-self').checked?participants.add(m):participants.delete(m);});});
  $('#participant-tiles').addEventListener('click',event=>{
   const button=(event.target as HTMLElement).closest<HTMLElement>('[data-participant]');if(!button)return;
-  const m=button.dataset.participant as Member;participants.has(m)?participants.delete(m):participants.add(m);renderParticipants();
+  const m=button.dataset.participant as Member;changeParticipants(()=>{participants.has(m)?participants.delete(m):participants.add(m);});
   $<HTMLButtonElement>(`[data-participant=${m}]`).focus();
  });
- $('#custom-shares').addEventListener('input',event=>{const field=event.target as HTMLInputElement;customDraft[field.dataset.customShare as Member]=field.value;updateSplitPreview();});
+ $('#custom-shares').addEventListener('input',event=>{const field=event.target as HTMLInputElement;if(field.dataset.customShare)rebalance(field.dataset.customShare as Member,field.value);});
+ $('#custom-shares').addEventListener('change',event=>{const field=event.target as HTMLInputElement;if(field.dataset.customShare)rebalance(field.dataset.customShare as Member,field.value,true);});
+ $('#custom-shares').addEventListener('click',event=>{const button=(event.target as HTMLElement).closest<HTMLElement>('[data-share-auto]');if(!button)return;delete fixedShares[button.dataset.shareAuto as Member];rebalance();renderParticipants();});
  document.querySelectorAll<HTMLInputElement>('[name=split-mode]').forEach(radio=>radio.addEventListener('change',()=>{
+  fixedShares={};
   if(splitMode()==='custom'){
    let amount=0;try{amount=parseAmount(input('expense-amount').value);}catch{/* Start at zero. */}
    const shares=previewShares(amount);for(const m of participants)customDraft[m]=((shares[m]||0)/100).toFixed(2);
   }
-  renderParticipants();
+  rememberSplit();renderParticipants();
  }));
  function pickIcon(event:Event){
   const button=(event.target as HTMLElement).closest<HTMLElement>('[data-icon]');if(!button)return;
@@ -357,15 +391,14 @@ function bindEvents() {
   if(target==='expense'||target==='settlement'){
    const field=input(target==='expense'?'expense-amount':'settlement-amount');
    openCalculator({title:target==='expense'?'Purchase calculator':'Repayment calculator',initial:field.value,onUse:cents=>{
-    field.value=(cents/100).toFixed(2);target==='expense'?updateSplitPreview():updateSettlement();
+    field.value=(cents/100).toFixed(2);target==='expense'?rebalance(undefined,undefined,true):updateSettlement();
    }});
   }else{
    const member=target as Member;let total:number;
    try{total=parseAmount(input('expense-amount').value);}catch{message('expense-error','Enter the purchase amount before calculating a share.');return;}
    message('expense-error','');
-   openCalculator({title:`${name(member)}’s share`,initial:customDraft[member]||'',totalCents:total,allowZero:true,canSplitRest:participants.size>1,onUse:(cents,splitRest)=>{
-    customDraft[member]=(cents/100).toFixed(2);
-    if(splitRest){const others=selectedParticipants().filter(m=>m!==member),shares=equalShares(total-cents,others,ledger!.rounding_cursor);for(const m of others)customDraft[m]=(shares[m]!/100).toFixed(2);}
+   openCalculator({title:`${name(member)}’s share`,initial:customDraft[member]||'',totalCents:total,allowZero:true,canSplitRest:false,onUse:(cents,splitRest)=>{
+    rebalance(member,(cents/100).toFixed(2),true);
     renderParticipants();
    }});
   }

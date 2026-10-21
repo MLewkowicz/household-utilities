@@ -23,7 +23,7 @@ html=html.replace('./app.js',`./${entry}`).replace('src="./'+entry+'" defer','sr
 // Preload just the requested route and its shared imports. This avoids a module
 // waterfall without downloading any other section or expression artwork.
 const preload={};
-for(const [route,source] of Object.entries({utilities:'client',miscellaneous:'misc-client',chores:'chores-client',bulletin:'bulletin-client'})){
+for(const [route,source] of Object.entries({utilities:'client',miscellaneous:'misc-client',chores:'chores-client',bulletin:'bulletin-client',events:'events-client'})){
  const start=Object.keys(bundle.metafile.outputs).find(path=>bundle.metafile.outputs[path].entryPoint===`src/${source}.ts`);
  const paths=new Set();
  function visit(path){if(!path||paths.has(path))return;paths.add(path);for(const item of bundle.metafile.outputs[path].imports)if(item.kind==='import-statement')visit(item.path);}
@@ -41,5 +41,6 @@ await copyFile('data/ledger.json','dist/ledger.json');
 await copyFile('data/misc-ledger.json','dist/misc-ledger.json');
 await copyFile('data/chores.json','dist/chores.json');
 await copyFile('data/bulletin.json','dist/bulletin.json');
+await copyFile('data/events.json','dist/events.json');
 await writeFile('dist/.nojekyll','');
 console.log('Built dashboard assets.');

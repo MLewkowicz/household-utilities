@@ -1,3 +1,4 @@
+import {NOTE_REACTIONS,expressionLabel,reactionPortrait,paintReactionThumbnails,animateReaction,stopReactionAnimation,type NoteExpression} from './note-reactions';
 import {avatar} from './people';
 import {info} from './disclosure';
 import {MEMBERS,type Member} from './ledger';
@@ -16,7 +17,9 @@ import {reactionSVG} from './reactions';
 import {bulletinCharacter,watchBulletinCharacters} from './bulletin-avatars';
 import {thumbtack,noteFold,boardStand} from './bulletin-art';
 
-let ledger:Bulletin|undefined,live=false,loading=false,busy=false;
+let ledger:Bulletin|undefined,live=false,loading=false,busy=false,refreshAgain=false;
+let reactingNote='';
+const reactionRetries=new Map<string,{fingerprint:string;id:string}>();
 let view='board',kind='all',recipient='all',period='all',showDeleted=false,pendingNew=false;
 let draft:BulletinNote|undefined,noteId='',actionNote:BulletinNote|undefined,action='delete';
 let retry:{fingerprint:string;id:string}|null=null;
@@ -40,6 +43,10 @@ export function initBulletin(){
  <fieldset class="chore-contributors"><legend>Who’s this for?</legend><div class="chore-member-options">${MEMBERS.map(m=>`<label class="chore-check-tile member-${m}"><input type="checkbox" name="bulletin-recipient" value="${m}">${avatar(m)}${name(m)}</label>`).join('')}</div></fieldset>
  <label for="bulletin-body">Your note</label><textarea id="bulletin-body" rows="4" maxlength="600" required placeholder="Something on your mind…"></textarea><div class="bulletin-writing-help"><span>Public to anyone with the link. Keep personal details out.</span><span id="bulletin-character-count">0 / 600</span></div><p id="bulletin-actor" class="field-help"></p>`,'Pin note')+
  dialog('bulletin-action','Take this note down?',`<p id="bulletin-action-copy" class="section-copy"></p>`,'Delete note'));
+ document.body.insertAdjacentHTML('beforeend',`<dialog id="note-reaction-dialog" class="bulletin-dialog" aria-labelledby="note-reaction-heading"><div class="dialog-top"><h2 id="note-reaction-heading" tabindex="-1" autofocus>Your reaction</h2><button type="button" class="icon-button" id="note-reaction-close" aria-label="Close reactions">×</button></div><div id="note-reaction-options" class="note-reaction-options"></div><p id="note-reaction-error" class="form-error" role="alert" hidden></p></dialog>`);
+ $('#note-reaction-close').onclick=()=>{if(!busy){$<HTMLDialogElement>('#note-reaction-dialog').close();stopReactionAnimation();}};
+ $('#note-reaction-dialog').addEventListener('cancel',e=>{if(busy)e.preventDefault();else stopReactionAnimation();});
+ $('#note-reaction-options').addEventListener('click',e=>{const b=(e.target as HTMLElement).closest<HTMLElement>('[data-note-expression]');if(b)void saveReaction(b.dataset.noteExpression as NoteExpression);});
  boardCharacters=watchBulletinCharacters($('#bulletin-content'));
  previewCharacters=watchBulletinCharacters($('#bulletin-reaction'));
  window.addEventListener('hashchange',updateAvatarActivity);
@@ -51,6 +58,7 @@ export function initBulletin(){
   if(b.id==='bulletin-new'){openNote();return;}
   if(b.id==='bulletin-motion'){animateCharacters=!animateCharacters;remember('household-note-motion',animateCharacters?'on':'off');updateAvatarActivity();return;}
   if(b.dataset.bulletinView){view=b.dataset.bulletinView;render();return;}
+  if(b.dataset.reactNote){openReactions(b.dataset.reactNote);return;}
   if(b.dataset.bulletinCommand){const n=ledger?.notes.find(n=>n.id===b.closest<HTMLElement>('[data-note-id]')?.dataset.noteId);if(!n)return;if(b.dataset.bulletinCommand==='edit')openNote(n);else openAction(n,b.dataset.bulletinCommand);}
  });
  $('#bulletin-page').addEventListener('change',event=>{const el=event.target as HTMLInputElement;if(el.id==='bulletin-recipient-filter')recipient=el.value;else if(el.id==='bulletin-kind-filter')kind=el.value;else if(el.id==='bulletin-period')period=el.value;else if(el.id==='bulletin-show-deleted')showDeleted=el.checked;else return;render();});
@@ -75,9 +83,9 @@ function render(){
  if(identity){$('#bulletin-identity-name').innerHTML=`${avatar(identity)} ${chip(identity)}`;error('bulletin-identity-error','');}
  $('#bulletin-new').toggleAttribute('disabled',!live);
  document.querySelectorAll<HTMLElement>('[data-bulletin-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.bulletinView===view)));
- content.innerHTML=view==='activity'?charts():board();
+ stopReactionAnimation();content.innerHTML=view==='activity'?charts():board();
  content.querySelectorAll<HTMLDetailsElement>('details').forEach(d=>d.open=opened.includes(d.id));
- boardCharacters.sync();updateAvatarActivity();
+ boardCharacters.sync();paintReactionThumbnails(content);updateAvatarActivity();
  if(focusId)document.getElementById(focusId)?.focus({preventScroll:true});
 }
 function history(note:BulletinNote){
@@ -91,10 +99,32 @@ function noteCard(note:BulletinNote){
  return `<article class="bulletin-note note-${note.kind} note-member-${note.author} ${note.deleted?'note-deleted':''}" data-note-id="${esc(note.id)}" aria-label="Note from ${name(note.author)} to ${note.recipients.map(name).join(', ')}" style="--note-turn:${turn}deg;--note-offset:${p.offset}px;--note-inset:${p.inset}px">
  ${thumbtack}<div class="note-top"><div class="note-to"><span>To</span> ${note.recipients.map(chip).join(' ')}</div><span class="note-reaction">${bulletinCharacter(note.author,note.temperature)}</span></div>
  <p class="note-body">${esc(note.body)}</p><div class="note-byline"><span>From ${chip(note.author)}</span><time datetime="${esc(note.posted_at)}" title="${stamp(note.posted_at)}">${date(localDateTime(note.posted_at))}</time></div>
+ ${note.deleted?'':noteResponses(note)}
  <details class="note-tools" id="note-tools-${esc(note.id)}"><summary class="note-fold" id="note-fold-${esc(note.id)}" aria-label="Note details and actions" title="Lift for details & editing">${noteFold}</summary><div class="note-tools-panel">
  <p class="note-extra">${note.deleted?'Taken down · ':''}${tempText(note.temperature)}<br>${temperatureLabel(note.temperature)}</p>
  ${writable?`<div class="note-actions">${note.deleted?'<button class="text-button" data-bulletin-command="restore">Restore</button>':'<button class="text-button" data-bulletin-command="edit">Edit note</button><button class="text-button" data-bulletin-command="delete">Delete note</button>'}</div>`:!identity&&live?'<p class="note-extra">Choose your name above to edit this note.</p>':''}
  ${history(note)}</div></details></article>`;
+}
+function noteResponses(note:BulletinNote){
+ const reactions=(ledger?.reactions||[]).filter(r=>r.note_id===note.id&&r.expression);
+ return `<div class="note-responses">${reactions.map(r=>`<button type="button" class="note-response-chip" ${r.member===identity&&live?`data-react-note="${note.id}"`:'disabled'} title="${name(r.member)} · ${expressionLabel(r.expression!)}" aria-label="${name(r.member)} · ${expressionLabel(r.expression!)}">${reactionPortrait(r.member,r.expression!)}</button>`).join('')}${live&&identity?`<button class="note-add-reaction" data-react-note="${note.id}" aria-label="React to this note">＋ React</button>`:''}</div>`;
+}
+function openReactions(id:string){
+ if(!identity||!live||busy)return;reactingNote=id;
+ const mine=ledger?.reactions?.find(r=>r.note_id===id&&r.member===identity)?.expression;
+ $('#note-reaction-options').innerHTML=NOTE_REACTIONS.map(([expression,label])=>`<button type="button" data-note-expression="${expression}" aria-pressed="${mine===expression}">${reactionPortrait(identity!,expression)}<span>${label}</span></button>`).join('');
+ error('note-reaction-error','');$<HTMLDialogElement>('#note-reaction-dialog').showModal();paintReactionThumbnails($('#note-reaction-options'));
+}
+async function saveReaction(expression:NoteExpression){
+ if(!identity||!live||busy)return;
+ const actor=identity,note=reactingNote,old=ledger?.reactions?.find(r=>r.note_id===note&&r.member===actor),value=old?.expression===expression?null:expression;
+ const p={note_id:note,actor,expected_version:old?.version||0,expression:value},fingerprint=JSON.stringify(p),key=note+':'+actor,prior=reactionRetries.get(key),id=prior?.fingerprint===fingerprint?prior.id:crypto.randomUUID();reactionRetries.set(key,{fingerprint,id});
+ busy=true;$('#note-reaction-options').querySelectorAll('button').forEach(b=>b.disabled=true);
+ let saved=false;
+ try{await rpc('save_note_reaction',{p:{...p,request_id:id}});reactionRetries.delete(key);$<HTMLDialogElement>('#note-reaction-dialog').close();saved=true;}
+ catch(e){error('note-reaction-error',(e as Error).message);}
+ finally{busy=false;$('#note-reaction-options').querySelectorAll('button').forEach(b=>b.disabled=false);await refreshBulletin();}
+ if(saved&&value){const portrait=$<HTMLElement>(`[data-note-id="${note}"] [data-reaction-member="${actor}"]`);if(portrait)void animateReaction(portrait);}
 }
 function board(){
  const notes=(ledger?.notes||[]).filter(n=>(showDeleted||!n.deleted)&&(kind==='all'||n.kind===kind)&&(recipient==='all'||n.recipients.includes(recipient as Member)));
@@ -157,10 +187,11 @@ async function save(id:string,p:Record<string,unknown>){
  finally{busy=false;fields.forEach((el,i)=>el.disabled=states[i]);await refreshBulletin();}
 }
 export async function refreshBulletin(){
- if(loading||busy)return;loading=true;const previous=JSON.stringify(ledger&&{...ledger,updated_at:null}),wasLive=live;
+ if(loading||busy){refreshAgain=true;return;}loading=true;const previous=JSON.stringify(ledger&&{...ledger,updated_at:null}),wasLive=live;
  try{ledger=await rpc<Bulletin>('bulletin_dashboard');live=true;$('#bulletin-status').textContent='Shared notes · up to date';error('bulletin-notice','');}
  catch{live=false;try{const res=await fetch('./bulletin.json',{cache:'no-store'});if(res.ok&&!ledger)ledger=await res.json() as Bulletin;}catch{/* Keep the most recent view. */}
  $('#bulletin-status').textContent=ledger?'Viewing saved notes':'Board unavailable';error('bulletin-notice',`The live bulletin board is unavailable. ${ledger?.updated_at?'Showing the last saved view from '+stamp(ledger.updated_at)+'.':'No saved notes are available.'} Adding and editing are disabled until the connection returns.`);}
  finally{loading=false;if(location.hash==='#bulletin')$('#export').toggleAttribute('disabled',!ledger);if(wasLive!==live||previous!==JSON.stringify(ledger&&{...ledger,updated_at:null}))render();}
+ if(refreshAgain){refreshAgain=false;await refreshBulletin();}
 }
 export function exportBulletin(){if(ledger)download({...ledger,exported_at:new Date().toISOString()},'household-bulletin');else toast('No notes are available to export yet.');}

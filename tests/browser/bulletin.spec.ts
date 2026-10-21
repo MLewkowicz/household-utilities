@@ -54,7 +54,7 @@ test('Post-its grow the page to the bottom and remain legible on phones in both 
  await page.emulateMedia({reducedMotion:'reduce'});await page.locator('#bulletin-temperature').fill('-100');const expression=page.locator('#bulletin-reaction .bulletin-character');await expect(expression).toHaveClass(/has-character-canvas/);await expect(expression).toHaveAttribute('aria-label','Michal: About to burst');const frozen=await expression.locator('canvas').evaluate((el:HTMLCanvasElement)=>el.toDataURL());await page.waitForTimeout(120);expect(await expression.locator('canvas').evaluate((el:HTMLCanvasElement)=>el.toDataURL())).toBe(frozen);
  await page.locator('#bulletin-temperature').fill('100');await expect(expression).toHaveAttribute('aria-label','Michal: Heart overflowing');expect(await expression.locator('canvas').evaluate((el:HTMLCanvasElement)=>el.toDataURL())).not.toBe(frozen);
  await page.keyboard.press('Escape');await selectView(page,'activity');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.locator('#bulletin-period').selectOption('week');
- await page.getByRole('link',{name:/^Chores/}).click();await expect(page.locator('#chore-identity-name')).toContainText('Michal');await page.getByRole('link',{name:'Bulletin',exact:true}).click();await expect(page.locator('#bulletin-identity-name')).toContainText('Michal');
+ await page.getByRole('link',{name:/^To-dos/}).click();await expect(page.locator('#chore-identity-name')).toContainText('Michal');await page.getByRole('link',{name:'Bulletin',exact:true}).click();await expect(page.locator('#bulletin-identity-name')).toContainText('Michal');
 });
 
 test('lost saves retry idempotently and stale edits preserve the note draft',async({page})=>{
@@ -68,5 +68,5 @@ test('lost saves retry idempotently and stale edits preserve the note draft',asy
 
 test('an unavailable bulletin is read-only and does not block the other tabs',async({page})=>{
  await page.route('**/rpc/utilities_bulletin_dashboard',route=>route.abort());await page.goto('/#bulletin');await expect(page.locator('#bulletin-status')).toHaveText('Viewing saved notes');await expect(page.locator('#bulletin-new')).toBeDisabled();await expect(page.locator('#bulletin-notice')).toContainText('disabled');
- for(const [tab,status] of [['Utilities','#new-payment'],['Miscellaneous','#new-expense'],['Chores','#chore-new']]){await page.getByRole('link',{name:tab,exact:true}).click();if(tab==='Miscellaneous')await page.locator('[data-identity=michal]').click();await expect(page.locator(status)).toBeEnabled();}
+ for(const [tab,status] of [['Utilities','#new-payment'],['Expenses','#new-expense'],['To-dos','#chore-new']]){await page.getByRole('link',{name:tab,exact:true}).click();if(tab==='Expenses')await page.locator('[data-identity=michal]').click();await expect(page.locator(status)).toBeEnabled();}
 });

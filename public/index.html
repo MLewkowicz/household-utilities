@@ -24,7 +24,7 @@
       <a class="brand" href="#utilities" aria-label="Household ledger home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>household<span class="brand-period">.</span></a>
       <div class="topbar-right"><span class="household-tag">ONE HOUSEHOLD · FOUR PEOPLE</span><label class="theme-control"><span class="sr-only">Color theme</span><select id="theme-select" aria-label="Color theme"><option value="system">◐ System</option><option value="light">☀ Light</option><option value="dark">☾ Dark</option></select></label><button id="notifications" class="icon-button" title="Phone notifications" aria-label="Phone notifications"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></button><button id="refresh" class="icon-button" title="Refresh balances" aria-label="Refresh balances">↻</button></div>
     </header>
-    <nav class="ledger-nav" aria-label="Household ledgers"><a href="#utilities" data-ledger="utilities" aria-current="page"><span aria-hidden="true">⌁</span> Utilities</a><a href="#miscellaneous" data-ledger="miscellaneous"><span aria-hidden="true">✳</span> Miscellaneous</a><a href="#chores" data-ledger="chores"><span aria-hidden="true">✓</span> Chores <span id="chore-badge" class="chore-nav-badge" hidden></span></a><a href="#bulletin" data-ledger="bulletin"><span aria-hidden="true">♡</span> Bulletin</a></nav>
+    <nav class="ledger-nav" aria-label="Household ledgers"><a href="#utilities" data-ledger="utilities" aria-current="page"><span aria-hidden="true">⌁</span> Utilities</a><a href="#miscellaneous" data-ledger="miscellaneous"><span aria-hidden="true">✳</span> Expenses</a><a href="#chores" data-ledger="chores"><span aria-hidden="true">✓</span> To-dos <span id="chore-badge" class="chore-nav-badge" hidden></span></a><a href="#events" data-ledger="events"><span aria-hidden="true">✧</span> Events</a><a href="#bulletin" data-ledger="bulletin"><span aria-hidden="true">♡</span> Bulletin</a></nav>
     <main id="main">
       <div id="utilities-page">
       <section class="intro">
@@ -42,8 +42,9 @@
       <section class="history-section" aria-labelledby="history-title"><div class="section-top"><div><div class="eyebrow">02 / KEEPING TRACK</div><h2 id="history-title">Payment history</h2><p class="section-copy">Reimbursements to Michal. Every correction stays in the record.</p></div><div class="segmented" id="history-tabs" role="group" aria-label="Payment history view"><button data-history="payments" aria-pressed="true">Payments</button><button data-history="activity" aria-pressed="false">All activity</button></div></div><div id="history"></div></section>
       <section class="how-it-works"><div class="small-mark" aria-hidden="true">↗</div><div><h3>Already sent your share?</h3><p>Send money to Michal using your usual payment app, then record it here. This ledger tracks payments; it doesn’t move money.</p></div><button id="bottom-payment" class="button secondary" disabled>Record a payment <span aria-hidden="true">↗</span></button></section>
       </div>
-      <section id="misc-page" aria-label="Miscellaneous ledger" hidden></section>
-      <section id="chores-page" aria-label="Chore corner" hidden></section>
+      <section id="misc-page" aria-label="Expenses" hidden></section>
+      <section id="chores-page" aria-label="To-dos" hidden></section>
+      <section id="events-page" aria-label="Events calendar" hidden></section>
       <section id="bulletin-page" aria-label="Household bulletin board" hidden></section>
     </main>
     <footer><span class="footer-brand">A little less household math.</span><span>Shared ledger · Entries are self-reported</span><button id="export" class="text-button" disabled>Export ledger ↓</button></footer>

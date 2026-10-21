@@ -143,6 +143,18 @@
   ],
   "history": [
     {
+      "actor": "ohm",
+      "other": "",
+      "method": "zelle",
+      "deleted": false,
+      "paid_on": "2026-10-20",
+      "version": 1,
+      "member_id": "ohm",
+      "created_at": "2026-10-21T01:15:44.375255+00:00",
+      "payment_id": "9d33e265-524e-4cb9-9090-0f97820d6cdf",
+      "amount_cents": 12677
+    },
+    {
       "actor": "rohil",
       "other": "",
       "method": "venmo",
@@ -167,7 +179,7 @@
       "amount_cents": 12679
     }
   ],
-  "updated_at": "2026-10-20T22:50:51.626576+00:00",
+  "updated_at": "2026-10-21T02:25:13.810952+00:00",
   "allocations": [
     {
       "cents": 3352,
@@ -387,7 +399,7 @@
       "charge_index": 0
     }
   ],
-  "exported_at": "2026-10-20T22:50:51.626576+00:00",
+  "exported_at": "2026-10-21T02:25:13.810952+00:00",
   "bill_history": [
     {
       "data": {

@@ -4,6 +4,21 @@ Prepared October 20, 2026, from the current repository and the project's setup a
 
 This document describes the implemented application, its operating rules, and context that should be preserved when making changes. The repository and live database may evolve after this handoff; inspect their current state before altering anything.
 
+## October 21, 2026 update — latest implementation
+
+The app now has **Utilities, Expenses, To-dos, Events, and Bulletin**. Existing expense/task route hashes and records are retained. The older sections below document the original implementation; this update supersedes their naming, custom-split, events, and point-policy descriptions.
+
+- Custom expenses track draft-only fixed shares. `src/expense-split.ts` balances untouched shares in cents; impossible edits restore the last balanced draft. Typed/calculated amounts and participant/total changes share this path. Excluding the payer with one recipient assigns the full total. Guest splitting is at the bottom of the split controls and still saves no guest data.
+- Expense/task cards reuse `src/tile-corner.ts`; the accepted task slider is unchanged. Alcohol is a new shared SVG icon.
+- `src/events-client.ts` is a lazily loaded agenda/month calendar with interval proposals, Yes/Maybe/No responses, approving avatars, and host confirmation/cancellation. Changing times increments `interval_version` and clears current responses; response versions remain independent per person. The app uses New York time, rejects DST gaps, and chooses standard time for repeated autumn times. Migration 013 provides event and response histories, version checks, retries, and exports. Host identity follows the existing self-reported model.
+- Migration 014 adds independent per-note/per-member reaction revisions. The bulletin export includes current responses and history. Six discrete facial expressions extend the existing renderer; visible static thumbnails are cached and only a selected reaction animates briefly. Author temperature and note statistics are untouched.
+- Migration 015 validates fixed task/routine presets independently of icons. `src/point-presets.ts` is checked against the database catalog. It adds service-only point-policy preview/apply/reverse APIs and adjustment history. Historical adoption appends new task/routine revisions, keeps original completions/history, and retains unrelated custom values. The agreed values are in README; reminders/requests stay zero. No utility rewards are applied.
+- `scripts/apply_point_policy.py --apply` saves a fresh private backup and exact preview, applies the policy transactionally, and checks financial/note/event records and exact score deltas. Reversal requires an unchanged latest task version. `./export-ledgers.sh` now saves all five ledgers.
+- All 86 Node/database tests, 8 Python tests, and 43 browser scenarios pass. A rehearsal against the actual private backup confirmed preserved source revisions, IDs, dates, assignees, and completions. Mobile screenshots cover both themes, all 24 reactions, and 320px navigation without overflow. Final build/privacy checks also pass.
+- Release state: live migrations and historical adoption are verified. Four existing tasks and three routine definitions adopted the catalog, preserving original revisions. Exact score deltas are Michal +1/3, Rina +1/3, Rohil −1/6, Ohm unchanged. Both financial ledgers, notes, and events are unchanged. Five fallback snapshots are refreshed; frontend release checks pass. Publication uses the existing GitHub Pages workflow. Recovery: ignored `.local/backups/point-policy-20261021T022259Z.json`.
+
+Remaining product iterations: alternate event times/when2meet, recurring events, external guests for events, event notifications, and an agreed utility-credit reward policy. `docs/events-prototype.html` is an older design artifact, not the production implementation.
+
 ## Project and current state
 
 This is a shared household application for **Michal, Rina, Ohm, and Rohil**, with four tabs:

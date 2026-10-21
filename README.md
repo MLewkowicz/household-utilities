@@ -1,6 +1,6 @@
 # Household ledger
 
-A small dashboard for Michal, Rina, Ohm, and Rohil, with **Utilities**, **Miscellaneous**, **Chores**, and **Bulletin** tabs. GitHub Pages hosts the frontend; a free Supabase project stores shared history. There are no logins or private links. Changes are trust-based and names are self-reported. The header theme control supports System, Light, and Dark, remembers the choice on this device, and applies to every tab.
+A small dashboard for Michal, Rina, Ohm, and Rohil, with **Utilities**, **Expenses**, **To-dos**, **Events**, and **Bulletin** tabs. GitHub Pages hosts the frontend; a free Supabase project stores shared history. There are no logins or private links. Changes are trust-based and names are self-reported. The header theme control supports System, Light, and Dark, remembers the choice on this device, and applies to every tab.
 
 Website: **https://mlewkowicz.github.io/household-utilities/**
 
@@ -12,15 +12,15 @@ Anyone using the site can record or correct a payment. Edits and deletions creat
 
 The four cards show current balances. Michal’s card shows remaining reimbursements and his own share. The monthly table shows **charges before reimbursements**, with household and individual views. Payments apply to the overall balance. An overpayment becomes a credit. Missing statements say “Not imported”; partial months show the covered days.
 
-## Miscellaneous purchases
+## Expenses
 
-Open **Miscellaneous** at the same link, or go directly to `/#miscellaneous` after the repository path. Choose your name first; the site remembers it on this device and provides **Switch person**. This is a convenience, not authentication.
+Open **Expenses** at the same link, or go directly to `/#miscellaneous` after the repository path. Choose your name first; the site remembers it on this device and provides **Switch person**. This is a convenience, not authentication.
 
-Choose **Add expense**, describe what you already bought, and enter its amount and date. All four roommates start included. Tap the other three tiles to exclude people, or switch off **Include my share** for something bought entirely for others. Equal shares preview immediately; **Custom amounts** lets you assign exact dollar amounts, which must sum to the total. Purchases use USD and one payer. Rohil’s September utility cutoff does not apply to this ledger.
+Choose **Add expense**, describe what you already bought, and enter its amount and date. All four roommates start included. Tap the other three tiles to exclude people, or switch off **Include my share** for something bought entirely for others. Equal shares preview immediately; **Custom amounts** preserves shares you edit and divides the remaining cents among people on **Auto**. Tap **Fixed** to release a share. A conflicting edit is prevented without changing earlier fixed amounts or the purchase total. Excluding yourself when one other person remains assigns that person the entire total. Purchases use USD and one payer. Rohil’s September utility cutoff does not apply to this ledger.
 
-Use **Calculator** under a purchase or repayment amount to add items or evaluate arithmetic such as `12.50 + 8.75` or `60 × 25%`. In **Custom amounts**, each person's **÷** button opens a calculator with **Fraction / %**: `1/3` or `25%` applies to the purchase total. Optionally check **Split the rest equally among the others** to allocate the remainder to the other selected roommates. Results are rounded to cents; the saved custom shares must still add up exactly. Calculations only fill the form, and nothing is recorded until the expense or repayment is confirmed.
+Use **Calculator** under a purchase or repayment amount to add items or evaluate arithmetic such as `12.50 + 8.75` or `60 × 25%`. In **Custom amounts**, each person's **÷** button opens a calculator with **Fraction / %**: `1/3` or `25%` applies to the purchase total. Calculator results use the same automatic balancing and preserve earlier edited shares. **Split with guests** is a secondary action below the regular split controls; only the household subtotal and shares are saved. Calculations only fill the form, and nothing is recorded until the expense or repayment is confirmed.
 
-The 41 bundled SVG icons have local keyword suggestions and a searchable category picker, including specific foods and bathroom supplies. Typing previews an icon without marking it selected. Tapping an icon selects it and fills the description with its name by default; the text remains editable and the selected icon stays fixed. Switch off **Use icon name as description** to change only the icon. Descriptions and method notes are public: omit addresses, account details, and other personal information. There are no receipt uploads or external icon/AI services.
+The 42 bundled SVG icons have local keyword suggestions and a searchable category picker, including specific foods and bathroom supplies. Typing previews an icon without marking it selected. Tapping an icon selects it and fills the description with its name by default; the text remains editable and the selected icon stays fixed. Switch off **Use icon name as description** to change only the icon. Descriptions and method notes are public: omit addresses, account details, and other personal information. There are no receipt uploads or external icon/AI services.
 
 Each participant owes their share to the payer. Debts offset only between the same two people. **Record repayment** records money already sent between those people via Venmo, Zelle, or Other. Partial payments and overpayments are supported. The cards separately show what each person must pay and collect; all these amounts remain separate from utilities.
 
@@ -30,7 +30,7 @@ Anyone can edit or delete entries. Each card shows its latest version, with an e
 
 For an explicitly requested permanent cleanup, `./remove-deleted-expense.sh EXPENSE_ID --expected-version VERSION` removes only an already-deleted expense and its revisions. It requires a Supabase personal access token entered locally, saves a private recovery copy, checks the latest version, and verifies that other ledger data and balances are unchanged in the same transaction. It is not exposed to website visitors. Refresh the saved snapshots after cleanup.
 
-**Export ledger** downloads the currently selected tab, including its history. To refresh all four separate website snapshots and save a private combined backup locally:
+**Export ledger** downloads the currently selected tab, including its history. To refresh all five separate website snapshots and save a private combined backup locally:
 
 ```bash
 ./export-ledgers.sh          # live ledgers, read-only database access
@@ -39,9 +39,9 @@ For an explicitly requested permanent cleanup, `./remove-deleted-expense.sh EXPE
 
 Snapshots are published on the next code deployment. If a ledger cannot connect, its dated snapshot is displayed and its writes are disabled. New entries are never silently queued offline. The other tabs can still connect independently.
 
-## Chore Corner
+## To-dos
 
-Open **Chores** at the same link (`/#chores`). Your selected identity is shared with Miscellaneous and Bulletin. The live board starts empty; shortcut illustrations and the trash-cycle template are drafts until someone saves them. Chores and credit never affect money balances.
+Open **To-dos** at the same link (`/#chores`). Your selected identity is shared with Miscellaneous and Bulletin. The live board starts empty; shortcut illustrations and the trash-cycle template are drafts until someone saves them. Chores and credit never affect money balances.
 
 - **My queue** shows your assigned work and muted unassigned requests that anyone can claim, ordered by pinned priority, overdue, due today, upcoming, and undated. Deadlines and oldest requests break ties. The Chores badge counts your distinct pinned, overdue, or due-today tasks. Visible pages refresh it every 45 seconds. Phone alerts are optional; see below.
 - **Household** defaults to unassigned requests. Use **Assignee → Everyone** to see all household chores, or choose a roommate to see their assigned work. Its assignee filter is independent of the Week filter and resets to Unassigned on a fresh page load. Anyone can claim, hand back, reassign, edit, cancel, or complete a chore. The Show filter in both My queue and Household also reveals completed, missed, expired, and cancelled history within that view; the Week agenda retains its assignee filter. Each task has one card with expandable revisions, including the actor and optional change notes.
@@ -224,10 +224,24 @@ Miscellaneous descriptions, purchase dates, payer/participants, saved shares, re
 PDFs, addresses, full names, provider account numbers, original extracted text, local backups, and secret credentials are excluded from Git and deployment. PDFs never leave the computer through this tooling. The privacy check compares deploy artifacts with address/account strings extracted locally and rejects secret keys or tracked private files. `noindex` discourages search engines; it does not make a public site private.
 
 
-## Household refresh
+## Current household refresh
 
-Implementation status and follow-up decisions are tracked in [ROADMAP.md](ROADMAP.md). Install missing migrations **009–012** with `./configure.sh` before publishing this frontend. Take a private backup first. The only intentional data conversion is migration 012: split the existing trash routine into “Take out the trash” and “Put in new trash bag,” each worth 0.5 points. The latter has its own liner icon. Occurrence IDs, dates, rotation, completions, and revision metadata survive the conversion; unrelated records are preserved. The local adapter installs the same upgrades automatically.
+Install missing migrations **013–015** with `./configure.sh` before publishing this release. Existing records and prior revisions remain intact. Migration 013 adds Events; 014 adds note reactions; 015 adds fixed point presets and append-only adjustment support. The earlier migration 012 preserves the already split trash routines.
 
-Chore cards now have muted roommate-colored fills, expandable details, and swipe/keyboard completion. Add task offers chores, unscored requests, independently completed recipient reminders, and routines. The guest calculator saves only the household subtotal and exact shares. All four approved characters are integrated. Ordinary tiles use small still portraits; visible bulletin notes and the temperature editor use the separate animation module. Source artwork stays outside the public build.
+Expense and task cards share the compact lifted corner. Expenses retain payer-colored fills, amount and date; splits, history, and editing sit behind the corner. Existing `#miscellaneous` and `#chores` links still work. Alcohol is available in the illustration picker.
 
-[Loading measurements](docs/performance.md), [events prototype](docs/events-prototype.html), and [point-policy preview instructions](docs/next-design-session.md) support the next sessions. Events and utility rewards are not enabled production features.
+### Events
+
+Open **Events** for the upcoming agenda or month calendar. Propose a title and start/end interval with optional location and details. All four roommates can answer Yes, Maybe, or No and change or clear their answer; approving portraits appear on the invitation card. The host confirms explicitly. Changing the interval clears current responses and reopens voting, retaining history. Text-only edits preserve responses. All times use New York time; nonexistent spring-forward times are rejected and the repeated autumn hour uses standard time. Past and cancelled events remain available in history. Events have no push notifications yet.
+
+### Points
+
+Tasks and routine items can select a **Household job** preset with fixed points, independent of the illustration. Custom jobs retain the 0/0.5/1/2/3 effort scale; reminders and personal requests earn zero. Presets: trash, bag replacement, recycling, bins out/return, and starting the dishwasher: 0.5; bananas and corridor sweeping: 1; kitchen/living-room sweeping and shared grocery pickup: 2; furniture pickup and repair of a shared household item: 3.
+
+After installing the schema, preview the agreed historical adoption with `uv run --frozen python scripts/apply_point_policy.py`; use `--apply` to apply it. The tool saves a fresh private combined backup, an exact versioned preview, and the resulting records. It maps explicit job titles, never illustrations, keeps unmatched work unchanged, and appends task/routine revisions. `point_adjustments` records preserve before/after values and reasons. The service-only reversal API requires that the task has not changed since its adjustment. Undo and recompletion use the latest task snapshot, so credit is never counted twice. Utility-credit rewards are still deferred.
+
+### Note reactions and rendering
+
+Each roommate can leave one changeable reaction using their own character: crying laughing, confused, mogging, vomit, gentle laughing, or disappointed head shake. Selecting the same reaction removes it. Reactions never change the author’s temperature or note statistics. Static expression thumbnails are generated once and cached for up to 24 character/expression pairs. Only selection plays a brief animation; reduced motion stays still. Existing author-temperature animation remains independent. Source artwork stays outside the public build.
+
+Each tab remains lazy loaded. Events and reactions use version checks, retry identifiers, exported histories, and read-only fallback behavior. See [ROADMAP.md](ROADMAP.md) for release validation and remaining iterations.

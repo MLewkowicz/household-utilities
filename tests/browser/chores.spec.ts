@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 import {addDays,weekStart} from '../../src/chores';
 const rpc=async(page:Page,name:string,p?:unknown)=>(await page.request.post(`/rest/v1/rpc/utilities_${name}`,{headers:{apikey:'local-public'},data:p?{p}:{}})).json();
 async function open(page:Page,who='michal'){
- await page.goto('/#chores');await expect(page.locator('#chores-status')).toHaveText('Shared chores · up to date');
+ await page.goto('/#chores');await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');
  await page.locator(`[data-chore-person=${who}]`).click();
 }
 const card=(page:Page,title:string)=>page.locator('.chore-grid .chore-card').filter({has:page.locator('h3',{hasText:title})});
@@ -29,8 +29,8 @@ test('requests, urgency, hand-back and shared identity work across tabs on a pho
  await expand(request);await request.getByRole('button',{name:'Claim',exact:true}).click();await page.locator('#chore-action-save').click();await expect(page.locator('#chore-action-dialog')).not.toBeVisible();
  await view(page,'mine');await expect(request).toBeVisible();await expand(request);await request.locator('.chore-history > summary').click();await expect(request).toContainText('Could someone cover today?');
  await page.locator('#refresh').click();await expect(request.locator(':scope > .tile-details')).toHaveAttribute('open','');
- await page.getByRole('link',{name:'Miscellaneous',exact:true}).click();await expect(page.locator('#identity-name')).toContainText('You’re Michal');
- await page.locator('#switch-person').click();await page.locator('[data-identity=rina]').click();await page.getByRole('link',{name:/^Chores/}).click();await expect(page.locator('#chore-identity-name')).toContainText('You’re Rina');
+ await page.getByRole('link',{name:'Expenses',exact:true}).click();await expect(page.locator('#identity-name')).toContainText('You’re Michal');
+ await page.locator('#switch-person').click();await page.locator('[data-identity=rina]').click();await page.getByRole('link',{name:/^To-dos/}).click();await expect(page.locator('#chore-identity-name')).toContainText('You’re Rina');
  await page.getByLabel('Color theme').selectOption('dark');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');await page.getByLabel('Color theme').selectOption('light');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
  await page.reload();await expect(page.locator('#chore-identity-name')).toContainText('You’re Rina');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();expect(errors).toEqual([]);
@@ -38,7 +38,7 @@ test('requests, urgency, hand-back and shared identity work across tabs on a pho
 
 test('logging, shared credit, correction, undo, and history leave both financial ledgers unchanged',async({page})=>{
  const u=await rpc(page,'dashboard'),m=await rpc(page,'misc_dashboard');await open(page);
- await page.locator('#chore-log').click();await page.locator('[data-chore-shortcut=recycling]').click();await page.locator('#chore-title').fill('Recycling together');
+ await page.locator('#chore-log').click();await page.locator('[data-chore-shortcut=recycling]').click();await page.locator('#chore-preset').selectOption('');await page.locator('#chore-title').fill('Recycling together');
  await page.locator('#chore-effort').selectOption('2');await page.locator('input[name=chore-log-contributor][value=rina]').check();await page.locator('input[name=chore-log-contributor][value=ohm]').check();
  await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();
  await view(page,'leaderboard');const michal=page.locator('.chore-score.member-michal');await expect(michal).toContainText('0.67');await michal.locator('summary').click();await expect(michal).toContainText('Recycling together');
@@ -76,7 +76,7 @@ test('editing older grouped and offset routines preserves their items and actual
  for(const items of [steps,[steps[1]]]){
   const r=await rpc(page,'save_chore_routine',{id:crypto.randomUUID(),request_id:crypto.randomUUID(),actor:'rina',title:'Older schedule '+items.length,start_week:anchor,interval_weeks:1,owners:['rina'],start_index:0,enabled:true,steps:items});
   await page.goto('/#chores');await page.reload(); // Fixtures were seeded outside this page's RPC cache.
-  await expect(page.locator('#chores-status')).toHaveText('Shared chores · up to date');
+  await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');
   if(await page.locator('[data-chore-person=michal]').isVisible())await page.locator('[data-chore-person=michal]').click();
   await view(page,'week');await page.locator('#chore-manage-routines').click();await page.locator(`[data-edit-routine="${r.id}"]`).click();
   await expect(page.locator('#routine-start')).toHaveValue(items.length===1?addDays(anchor,3):anchor);await expect(page.locator('[data-routine-item]')).toHaveCount(items.length);
@@ -99,10 +99,10 @@ test('lost chore responses retry once; stale revisions preserve the draft',async
 
 test('chores have an independent read-only fallback and do not block the other tabs',async({page})=>{
  await page.route('**/rpc/utilities_chores_dashboard',route=>route.abort());await page.goto('/#chores');
- await expect(page.locator('#chores-status')).toHaveText('Viewing saved chores');await page.locator('[data-chore-person=michal]').click();await expect(page.locator('#chore-new')).toBeDisabled();await expect(page.locator('#chore-log')).toBeDisabled();await expect(page.locator('#chores-notice')).toContainText('disabled');
+ await expect(page.locator('#chores-status')).toHaveText('Viewing saved to-dos');await page.locator('[data-chore-person=michal]').click();await expect(page.locator('#chore-new')).toBeDisabled();await expect(page.locator('#chore-log')).toBeDisabled();await expect(page.locator('#chores-notice')).toContainText('disabled');
  await view(page,'week');await expect(page.locator('#chore-manage-routines')).toBeDisabled();
  await page.getByRole('link',{name:'Utilities',exact:true}).click();await expect(page.locator('#new-payment')).toBeEnabled();
- await page.getByRole('link',{name:'Miscellaneous',exact:true}).click();await expect(page.locator('#new-expense')).toBeEnabled();
+ await page.getByRole('link',{name:'Expenses',exact:true}).click();await expect(page.locator('#new-expense')).toBeEnabled();
 });
 
 test('pinned reminders retain zero points through editing, completion, correction, undo and routines',async({page})=>{
@@ -127,7 +127,7 @@ test('pinned reminders retain zero points through editing, completion, correctio
 });
 
 test('requesting without an identity explains how to continue, and unassigned work appears in every queue',async({page})=>{
- await page.goto('/#chores');await expect(page.locator('#chores-status')).toHaveText('Shared chores · up to date');
+ await page.goto('/#chores');await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');
  await page.locator('#chore-new').click();await expect(page.locator('#chore-identity-error')).toContainText('Choose your name before requesting');await expect(page.locator('[data-chore-person=michal]')).toBeFocused();
  await page.locator('[data-chore-person=rohil]').click();await expect(page.locator('#chore-task-dialog')).toBeVisible();await expect(page.locator('#chore-task-heading')).toBeFocused();
  await page.locator('#chore-title').fill('An open invitation to help');await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();
@@ -137,7 +137,7 @@ test('requesting without an identity explains how to continue, and unassigned wo
  await view(page,'household');await expect(task).toHaveCount(0);await expect(page.locator('#chore-household-filter')).toHaveValue('anyone');await page.locator('#chore-household-filter').selectOption('all');await expect(task).toBeVisible();await page.locator('#chore-household-filter').selectOption('rina');await expect(task).toHaveCount(0);await page.locator('#chore-household-filter').selectOption('michal');await expect(task).toBeVisible();
  await view(page,'week');await expect(page.locator('#chore-filter')).toHaveValue('all');await page.locator('#chore-filter').selectOption('ohm');await view(page,'household');await expect(page.locator('#chore-household-filter')).toHaveValue('michal');await expect(task).toBeVisible();await view(page,'mine');await expect(task).toBeVisible();
  await choosePerson(page,'rina');await expect(task).toHaveCount(0);await view(page,'household');await page.locator('#chore-household-filter').selectOption('all');await expect(task).toBeVisible();
- await page.reload();await expect(page.locator('#chores-status')).toHaveText('Shared chores · up to date');await view(page,'household');await expect(page.locator('#chore-household-filter')).toHaveValue('anyone');await expect(task).toHaveCount(0);
+ await page.reload();await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');await view(page,'household');await expect(page.locator('#chore-household-filter')).toHaveValue('anyone');await expect(task).toHaveCount(0);
  await page.setViewportSize({width:390,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
  await page.locator('#chore-switch').click();await page.locator('#chore-log').click();await expect(page.locator('#chore-identity-error')).toContainText('logging a completion');
 });

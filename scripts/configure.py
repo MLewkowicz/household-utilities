@@ -26,7 +26,7 @@ def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
         print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
-        print("Existing projects need migrations 009 through 012 (and any earlier missing migrations); do not rerun installed migrations.")
+        print("Existing projects need migrations 009 through 015 (and any earlier missing migrations); do not rerun installed migrations.")
         print("Phone delivery also needs the normal ./configure.sh flow to deploy its worker, signing keys, and schedule.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
@@ -91,6 +91,15 @@ def main():
         if not split or not split[0].get("marker"):
             request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/012_split_trash_routine.sql").read_text()})
             print("Trash and replacement-bag routines split into separate half-point items.")
+        for filename, function in [
+            ("013_events.sql", "utilities_events_dashboard"),
+            ("014_note_reactions.sql", "utilities_bulletin_dashboard_before_reactions"),
+            ("015_point_presets.sql", "utilities_point_policy_preview"),
+        ]:
+            installed = request(base + "/database/query", token, {"query": f"SELECT to_regprocedure('public.{function}()')::text AS fn"})
+            if not installed or not installed[0].get("fn"):
+                request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations" / filename).read_text()})
+                print(f"Installed {filename}; existing history preserved.")
     if not key.startswith(("sb_secret_", "eyJ")):
         raise RuntimeError("Use a secret/service_role key, not the publishable key.")
     target = ROOT / ".env.local"

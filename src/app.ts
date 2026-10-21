@@ -4,7 +4,7 @@ import {initNotifications,missingNotification} from './notifications';
 import {initDisclosures} from './disclosure';
 import type {Member} from './ledger';
 
-type Route='utilities'|'miscellaneous'|'chores'|'bulletin';
+type Route='utilities'|'miscellaneous'|'chores'|'bulletin'|'events';
 type Page={refresh:()=>Promise<void>;export:()=>void;focus?:(id:string)=>boolean};
 const pages=new Map<Route,Promise<Page>>();
 function load(route:Route):Promise<Page>{
@@ -14,6 +14,7 @@ function load(route:Route):Promise<Page>{
    if(route==='utilities'){const m=await import('./client');return{refresh:m.refreshUtilities,export:m.exportUtilities,focus:m.focusUtilityNotification};}
    if(route==='miscellaneous'){const m=await import('./misc-client');m.initMisc();return{refresh:m.refreshMisc,export:m.exportMisc};}
    if(route==='chores'){const m=await import('./chores-client');m.initChores();return{refresh:m.refreshChores,export:m.exportChores,focus:m.focusChoreNotification};}
+   if(route==='events'){const m=await import('./events-client');m.initEvents();return{refresh:m.refreshEvents,export:m.exportEvents};}
    const m=await import('./bulletin-client');m.initBulletin();return{refresh:m.refreshBulletin,export:m.exportBulletin,focus:m.focusBulletinNotification};
   })().catch(error=>{pages.delete(route);throw error;});
   pages.set(route,pending);
@@ -40,7 +41,7 @@ async function refreshBadge(){
   if((active as Route)==='chores')return;
   const count=identity?result.counts[identity]||0:0;
   $('#chore-badge').textContent=String(count);$('#chore-badge').hidden=!count;$('#chore-badge').removeAttribute('title');
- }catch{$('#chore-badge').title='Count unavailable. Open Chores to refresh.';}
+ }catch{$('#chore-badge').title='Count unavailable. Open To-dos to refresh.';}
 }
 async function refresh(){
  const route=active,version=routeVersion;
@@ -55,10 +56,10 @@ async function refresh(){
  finally{if(version===routeVersion){$('#main').setAttribute('aria-busy','false');$('#refresh').removeAttribute('disabled');}}
 }
 function route(){
- active=location.hash==='#bulletin'?'bulletin':location.hash==='#chores'?'chores':location.hash==='#miscellaneous'?'miscellaneous':'utilities';routeVersion++;
- for(const [key,id] of Object.entries({utilities:'utilities-page',miscellaneous:'misc-page',chores:'chores-page',bulletin:'bulletin-page'}))$('#'+id).hidden=key!==active;
+ active=location.hash==='#events'?'events':location.hash==='#bulletin'?'bulletin':location.hash==='#chores'?'chores':location.hash==='#miscellaneous'?'miscellaneous':'utilities';routeVersion++;
+ for(const [key,id] of Object.entries({utilities:'utilities-page',miscellaneous:'misc-page',chores:'chores-page',bulletin:'bulletin-page',events:'events-page'}))$('#'+id).hidden=key!==active;
  document.querySelectorAll<HTMLAnchorElement>('[data-ledger]').forEach(link=>{if(link.dataset.ledger===active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
- document.title=`Household ledger · ${active==='utilities'?'Utilities':active==='chores'?'Chores':active==='bulletin'?'Bulletin':'Miscellaneous'}`;
+ document.title=`Household ledger · ${active==='utilities'?'Utilities':active==='chores'?'To-dos':active==='events'?'Events':active==='bulletin'?'Bulletin':'Expenses'}`;
  $('#export').setAttribute('disabled','');$('#main').setAttribute('aria-busy','true');void refresh();
 }
 window.addEventListener('hashchange',route);

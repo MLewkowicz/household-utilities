@@ -5,7 +5,7 @@ test('approved smiles appear in identity, leaderboard and request tiles without 
  const requests:string[]=[];page.on('request',request=>requests.push(request.url()));
  await page.setViewportSize({width:390,height:844});
  await page.goto('/#chores');
- await expect(page.locator('#chores-status')).toHaveText('Shared chores · up to date');
+ await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');
  for(const [member,asset] of Object.entries(AVATAR_ASSETS)){
   const image=page.locator(`[data-chore-person="${member}"] img`);
   await expect(image).toHaveAttribute('src',`./avatars/v1/${asset.happy128}`);

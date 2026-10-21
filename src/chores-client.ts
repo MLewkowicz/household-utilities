@@ -1,3 +1,4 @@
+import {pointPreset,presetOptions} from './point-presets';
 import {choreCard} from './chore-cards';
 import {bindCompletionSwipe} from './swipe';
 import {avatar} from './people';
@@ -39,11 +40,11 @@ const deadline=(t:Chore)=>t.due_on?`${date(t.due_on)}${t.due_time?' · '+t.due_t
 function dialog(id:string,title:string,body:string,submit:string){return `<dialog id="${id}-dialog" class="chore-dialog" aria-labelledby="${id}-heading"><form id="${id}-form"><div class="dialog-top"><h2 id="${id}-heading" tabindex="-1" autofocus>${title}</h2><button type="button" class="icon-button" data-chore-close="${id}" aria-label="Close">×</button></div>${body}<p class="form-error" id="${id}-error" role="alert" hidden></p><div class="dialog-actions"><button type="button" class="button secondary" data-chore-close="${id}">Cancel</button><button type="submit" id="${id}-save" class="button primary">${submit}</button></div></form></dialog>`;}
 const contributors=(id:string)=>`<fieldset class="chore-contributors"><legend>Who helped?</legend><p class="field-help">Any points are shared equally between the people who did it.</p><div class="chore-member-options">${MEMBERS.map(m=>`<label class="chore-check-tile member-${m}"><input type="checkbox" name="${id}" value="${m}">${avatar(m)}${name(m)}</label>`).join('')}</div></fieldset>`;
 export function initChores(){
- $('#chores-page').innerHTML=`<section class="intro"><div><div class="eyebrow">A LITTLE HELP GOES A LONG WAY</div><h1>Chore corner<span class="brand-period">.</span></h1><p class="intro-copy">Reminders, favors, and shared work.</p></div><div class="intro-side"><span class="status"><span class="status-dot"></span><span id="chores-status">Loading chores</span></span><div class="misc-primary-actions"><button id="chore-new" class="button primary" disabled>＋ Add task</button><button id="chore-log" class="button secondary" disabled>✓ Log something done</button></div></div></section>
+ $('#chores-page').innerHTML=`<section class="intro"><div><div class="eyebrow">A LITTLE HELP GOES A LONG WAY</div><h1>To-dos<span class="brand-period">.</span></h1><p class="intro-copy">Reminders, favors, and shared work.</p></div><div class="intro-side"><span class="status"><span class="status-dot"></span><span id="chores-status">Loading to-dos</span></span><div class="misc-primary-actions"><button id="chore-new" class="button primary" disabled>＋ Add task</button><button id="chore-log" class="button secondary" disabled>✓ Log something done</button></div></div></section>
  <div id="chores-notice" class="ledger-notice" role="status" hidden></div>
  <section id="chore-identity" class="identity-panel"><div><p id="chore-identity-error" class="form-error" role="alert" hidden></p><div class="eyebrow">MAKE YOURSELF AT HOME</div><h2>Who are you?</h2><p class="section-copy">Choose your name to see your queue.<br>We’ll remember it across the household tabs.</p></div><div class="identity-choices">${MEMBERS.map(m=>`<button class="person-tile member-${m}" data-chore-person="${m}">${avatar(m)}<span>I’m ${name(m)}</span></button>`).join('')}</div></section>
  <div id="chore-identity-bar" class="identity-bar" hidden><span id="chore-identity-name"></span><button id="chore-switch" class="text-button">Switch person</button></div>
- <nav class="chore-views" aria-label="Chore views">${[['mine','My queue'],['household','Household'],['week','Week'],['leaderboard','Leaderboard']].map(([v,label])=>`<button data-chore-view="${v}" aria-pressed="${v==='mine'}">${label}</button>`).join('')}</nav>
+ <nav class="chore-views" aria-label="To-do views">${[['mine','My queue'],['household','Household'],['week','Week'],['leaderboard','Leaderboard']].map(([v,label])=>`<button data-chore-view="${v}" aria-pressed="${v==='mine'}">${label}</button>`).join('')}</nav>
  <div id="chore-content" aria-live="polite"></div>`;
  document.body.insertAdjacentHTML('beforeend',
  dialog('chore-task','Add task',`<label for="chore-kind">Type</label><select id="chore-kind"><option value="chore">Chore · points for shared work</option><option value="reminder">Reminder · each person completes</option><option value="request">Request · a favor, no points</option><option value="routine">Routine · one recurring item</option></select><div class="chore-shortcuts" id="chore-shortcuts">${['bananas','trash','recycling','bins'].map(id=>`<button type="button" data-chore-shortcut="${id}">${choreIcon(id)}<span>${CHORE_ICONS.find(i=>i.id===id)!.label}</span></button>`).join('')}</div>
@@ -51,7 +52,7 @@ export function initChores(){
  <details class="chore-icon-picker"><summary><span id="chore-selected-icon"></span><span>Choose an illustration</span></summary><div class="chore-icon-grid">${CHORE_ICONS.map(i=>`<button type="button" data-chore-icon="${i.id}" aria-label="${esc(i.label)} icon" aria-pressed="false">${choreIcon(i.id)}<span>${esc(i.label)}</span></button>`).join('')}</div><label class="chore-inline-check"><input type="checkbox" id="chore-fill-title" checked> Use icon name as the title</label></details>
  <fieldset id="chore-assignee-fields" class="chore-contributors"><legend>For whom?</legend><div class="chore-member-options"><label class="chore-check-tile"><input type="radio" name="chore-assignee" value="" checked>Anyone</label>${MEMBERS.map(m=>`<label class="chore-check-tile member-${m}"><input type="radio" name="chore-assignee" value="${m}">${avatar(m)}${name(m)}</label>`).join('')}</div></fieldset>
  <fieldset id="reminder-recipients" class="chore-contributors" hidden><legend>Remind whom?</legend><div class="chore-member-options">${MEMBERS.map(m=>`<label class="chore-check-tile member-${m}"><input type="checkbox" name="reminder-recipient" value="${m}">${avatar(m)}${name(m)}</label>`).join('')}</div></fieldset>
- <div id="chore-points-fields">${effort('chore-effort')}</div><details id="chore-more" class="form-details"><summary>Context & advanced settings</summary><label for="chore-note">A little context <span class="quiet">(optional)</span></label><textarea id="chore-note" rows="2" maxlength="1000" placeholder="Where, what, or why…"></textarea>
+ <div id="chore-points-fields"><label for="chore-preset">Household job</label><select id="chore-preset">${presetOptions()}</select>${effort('chore-effort')}</div><details id="chore-more" class="form-details"><summary>Context & advanced settings</summary><label for="chore-note">A little context <span class="quiet">(optional)</span></label><textarea id="chore-note" rows="2" maxlength="1000" placeholder="Where, what, or why…"></textarea>
  </details><div class="chore-two-fields"><div><label for="chore-due">Due date <span class="quiet">(optional)</span></label><input id="chore-due" type="date"></div><div><label for="chore-time">Time <span class="quiet">(optional)</span></label><input id="chore-time" type="time"></div></div>${info('About deadlines','New York time. Without a time, the deadline is the end of the day.')}
  <details id="chore-scheduling" class="form-details"><summary>Priority & expiry</summary><label class="chore-inline-check"><input id="chore-pinned" type="checkbox"> Pin as high priority</label>
  <label class="chore-inline-check"><input id="chore-tonight" type="checkbox"> Expire tonight</label>
@@ -105,7 +106,7 @@ function updateTaskKind(resetPoints=false){
  const group=kind==='reminder'&&!taskDraft&&taskMode!=='log';
  $('#reminder-recipients').hidden=!group;$('#chore-assignee-fields').hidden=group;
  $('#chore-points-fields').hidden=kind!=='chore';
- if(kind!=='chore')input('chore-effort').value='0';else if(resetPoints&&input('chore-effort').value==='0')input('chore-effort').value='1';
+ if(kind!=='chore'){input('chore-effort').value='0';input('chore-preset').value='';input('chore-effort').disabled=false;}else if(resetPoints&&input('chore-effort').value==='0')input('chore-effort').value='1';
  $('#chore-task-save').textContent=taskMode==='log'?'Log completion':taskDraft?'Save changes':kind==='reminder'?'Create reminders':kind==='request'?'Create request':'Create chore';
 }
 async function quickComplete(task:Chore){
@@ -153,9 +154,9 @@ export async function refreshChores(){
  if(loading){refreshAgain=true;return;}
  if(busy||dragging)return;loading=true;
  const previous=JSON.stringify(ledger&&{...ledger,updated_at:null}),wasLive=live;
- try{ledger=await rpc<ChoreLedger>('chores_dashboard');live=true;$('#chores-status').textContent='Shared chores · up to date';errorText('chores-notice','');}
+ try{ledger=await rpc<ChoreLedger>('chores_dashboard');live=true;$('#chores-status').textContent='Shared to-dos · up to date';errorText('chores-notice','');}
  catch(error){live=false;try{const res=await fetch('./chores.json',{cache:'no-store'});if(res.ok){const snapshot=await res.json() as ChoreLedger;if(!ledger)ledger=snapshot;}}catch{/* Retain last known copy. */}
- $('#chores-status').textContent=ledger?'Viewing saved chores':'Chores unavailable';errorText('chores-notice',`The live chore board is unavailable. ${ledger?.updated_at?'Showing the last saved view from '+localStamp(ledger.updated_at)+'.':'No saved chores are available.'} Adding and editing are disabled. Use ↻ to retry. ${(error as Error).message}`);}
+ $('#chores-status').textContent=ledger?'Viewing saved to-dos':'To-dos unavailable';errorText('chores-notice',`The live chore board is unavailable. ${ledger?.updated_at?'Showing the last saved view from '+localStamp(ledger.updated_at)+'.':'No saved chores are available.'} Adding and editing are disabled. Use ↻ to retry. ${(error as Error).message}`);}
  finally{loading=false;if(location.hash==='#chores')$('#export').toggleAttribute('disabled',!ledger);if(wasLive!==live||previous!==JSON.stringify(ledger&&{...ledger,updated_at:null}))render();}
  if(refreshAgain){refreshAgain=false;await refreshChores();}
 }
@@ -181,7 +182,7 @@ function openTask(mode:string,task?:Chore){
  setChecks('reminder-recipient',[identity]);
  $<HTMLDetailsElement>('#chore-more').open=!!task?.note;
  $<HTMLDetailsElement>('#chore-scheduling').open=!!task?.expires_on||!!task?.pinned;
- input('chore-title').value=task?.title||'';input('chore-note').value=task?.note||'';input('chore-effort').value=String(task?.points??1);
+ input('chore-title').value=task?.title||'';input('chore-note').value=task?.note||'';input('chore-effort').value=String(task?.points??1);input('chore-preset').value=task?.preset_id||'';input('chore-effort').disabled=!!task?.preset_id;
  $<HTMLInputElement>(`input[name="chore-assignee"][value="${task?.assignee||''}"]`).checked=true;
  input('chore-due').value=task?.due_on||'';input('chore-time').value=task?.due_time||'';input('chore-pinned').checked=task?.pinned||false;
  input('chore-expiry').value=task?.expires_on||'';input('chore-expiry-time').value=task?.expires_time||'';
@@ -199,7 +200,7 @@ function openCompletion(task:Chore){
  $<HTMLFormElement>('#chore-complete-form').reset();
  $('#chore-complete-summary').innerHTML=`${choreIcon(task.icon_id)}<div><h3>${esc(task.title)}</h3><p>${task.points===0?'This is a reminder. Completing it earns no points.':task.completion?'Update this completion. Credit will be recalculated.':'A little effort makes a difference.'}</p></div>`;
  setChecks('chore-contributor',task.completion?.contributors||[identity]);
- input('chore-complete-effort').value=String(task.points);input('chore-complete-effort').disabled=taskKind(task)!=='chore';input('chore-completed-at').value=localDateTime(task.completion?.completed_at);
+ input('chore-complete-effort').value=String(task.points);input('chore-complete-effort').disabled=taskKind(task)!=='chore'||!!task.preset_id;input('chore-completed-at').value=localDateTime(task.completion?.completed_at);
  updateCompletionHint();show('chore-complete');
 }
 function updateCompletionHint(){
@@ -227,14 +228,14 @@ function newStep():RoutineStep{return{kind:'chore',id:crypto.randomUUID(),title:
 // one item with offset zero, so their selected date is also the actual due date.
 const routineWeekday=(start:string,offset=0)=>new Intl.DateTimeFormat('en-US',{weekday:'long',timeZone:'UTC'}).format(new Date(addDays(start,offset)+'T12:00:00Z'));
 function readRoutineItems(){
- steps=steps.map(s=>{const row=$<HTMLElement>(`[data-routine-item="${s.id}"]`);const value=(key:string)=>row.querySelector<HTMLInputElement|HTMLSelectElement>(`[data-routine-field="${key}"]`)!.value;return{...s,title:steps.length===1?input('routine-title').value.trim():value('title'),note:value('note'),icon_id:value('icon_id'),kind:value('kind') as TaskKind,points:value('kind')==='chore'?Number(value('points')):0,weekday:steps.length===1?s.weekday:Number(value('weekday')),time:value('time')||null};});
+ steps=steps.map(s=>{const row=$<HTMLElement>(`[data-routine-item="${s.id}"]`);const value=(key:string)=>row.querySelector<HTMLInputElement|HTMLSelectElement>(`[data-routine-field="${key}"]`)!.value;return{...s,preset_id:value('kind')==='chore'?value('preset_id')||null:null,title:steps.length===1?input('routine-title').value.trim():value('title'),note:value('note'),icon_id:value('icon_id'),kind:value('kind') as TaskKind,points:value('kind')==='chore'?Number(value('points')):0,weekday:steps.length===1?s.weekday:Number(value('weekday')),time:value('time')||null};});
 }
 function renderRoutineItems(){
  const grouped=steps.length>1;
  $('#routine-items').innerHTML=steps.map((s,i)=>{
   const prefix=`routine-item-${i}`;
   return `<${grouped?'fieldset class="routine-item"':'div'} data-routine-item="${s.id}">${grouped?`<legend>Item ${i+1}</legend><label for="${prefix}-title">Task</label><input id="${prefix}-title" data-routine-field="title" value="${esc(s.title)}" maxlength="120" required><label for="${prefix}-day">Day</label><select id="${prefix}-day" data-routine-field="weekday">${Array.from({length:7},(_,n)=>`<option value="${n}" ${n===s.weekday?'selected':''}>${routineWeekday(routineDraft!.start_week,n)}</option>`).join('')}</select>`:''}
-  <div class="chore-two-fields"><div><label for="${prefix}-kind">Type</label><select id="${prefix}-kind" data-routine-field="kind">${['chore','reminder','request'].map(k=>`<option value="${k}" ${k===taskKind(s)?'selected':''}>${name(k)}</option>`).join('')}</select></div><div data-routine-points ${taskKind(s)!=='chore'?'hidden':''}><label for="${prefix}-points">Effort</label><select id="${prefix}-points" data-routine-field="points" ${taskKind(s)!=='chore'?'disabled':''}>${[[0,'No points'],[0.5,'Quick · 0.5 points'],[1,'Small · 1 point'],[2,'Medium · 2 points'],[3,'Large · 3 points']].map(([value,label])=>`<option value="${value}" ${value===s.points?'selected':''}>${label}</option>`).join('')}</select></div></div>
+  <div class="chore-two-fields"><div><label for="${prefix}-kind">Type</label><select id="${prefix}-kind" data-routine-field="kind">${['chore','reminder','request'].map(k=>`<option value="${k}" ${k===taskKind(s)?'selected':''}>${name(k)}</option>`).join('')}</select></div><div data-routine-points ${taskKind(s)!=='chore'?'hidden':''}><label for="${prefix}-preset">Household job</label><select id="${prefix}-preset" data-routine-field="preset_id">${presetOptions(s.preset_id)}</select><label for="${prefix}-points">Effort</label><select id="${prefix}-points" data-routine-field="points" ${taskKind(s)!=='chore'||s.preset_id?'disabled':''}>${[[0,'No points'],[0.5,'Quick · 0.5 points'],[1,'Small · 1 point'],[2,'Medium · 2 points'],[3,'Large · 3 points']].map(([value,label])=>`<option value="${value}" ${value===s.points?'selected':''}>${label}</option>`).join('')}</select></div></div>
   <details class="form-details routine-context"><summary><span data-routine-icon>${choreIcon(s.icon_id)}</span> Time, illustration & context</summary><div class="chore-two-fields"><div><label for="${prefix}-time">Time (optional)</label><input id="${prefix}-time" data-routine-field="time" type="time" value="${s.time||''}"></div><div><label for="${prefix}-icon">Illustration</label><select id="${prefix}-icon" data-routine-field="icon_id">${CHORE_ICONS.map(icon=>`<option value="${icon.id}" ${icon.id===s.icon_id?'selected':''}>${icon.label}</option>`).join('')}</select></div></div><label for="${prefix}-note">Context (optional)</label><textarea id="${prefix}-note" data-routine-field="note" maxlength="1000" rows="2">${esc(s.note)}</textarea></details></${grouped?'fieldset':'div'}>`;
  }).join('');
 }
@@ -252,7 +253,7 @@ function openRoutine(routine?:Routine,fromTask=false){
  owners=[...(routine?.owners||[identity])];steps=routine?structuredClone(routine.steps):[newStep()];
  if(fromTask){
   const points=Number(input('chore-effort').value);
-  steps=[{...newStep(),kind:draftKind==='chore'&&points===0?'reminder':draftKind,points,title:input('chore-title').value,note:input('chore-note').value,icon_id:chosenIcon,time:input('chore-time').value||null}];
+  steps=[{...newStep(),preset_id:input('chore-preset').value||null,kind:draftKind==='chore'&&points===0?'reminder':draftKind,points,title:input('chore-title').value,note:input('chore-note').value,icon_id:chosenIcon,time:input('chore-time').value||null}];
   const assignee=$<HTMLInputElement>('input[name="chore-assignee"]:checked').value;
   if(assignee)owners=[assignee as Member];
  }
@@ -274,6 +275,7 @@ function renderRoutineList(){
 function bind(){
  bindCompletionSwipe($('#chore-content'),id=>{const task=ledger?.tasks.find(t=>t.id===id);if(task)void quickComplete(task);},value=>{dragging=value;if(!value)queueMicrotask(()=>{if(pendingRender&&!busy)render();});});
  $('#chore-content').addEventListener('toggle',event=>{const el=event.target as HTMLDetailsElement;if(el.open&&el.matches('[data-task-details]'))fillTaskHistory(el);},true);
+ $('#chore-preset').addEventListener('change',()=>{const p=pointPreset(input('chore-preset').value);input('chore-effort').disabled=!!p;if(p){input('chore-title').value=p.title;input('chore-effort').value=String(p.points);chosenIcon=p.icon;manualIcon=true;renderChosenIcon();}});
  $('#chore-kind').addEventListener('change',()=>updateTaskKind(true));
  $('#chore-task-save').insertAdjacentHTML('beforebegin','<button id="chore-task-done" type="button" class="button secondary" hidden>Mark done</button>');
  $('#chore-task-actor').insertAdjacentHTML('afterend','<div id="chore-task-history"></div>');
@@ -292,13 +294,13 @@ function bind(){
  document.querySelectorAll<HTMLButtonElement>('[data-chore-close]').forEach(b=>b.addEventListener('click',()=>{if(!busy)$<HTMLDialogElement>('#'+b.dataset.choreClose+'-dialog').close();}));
  $('#chore-task-done').addEventListener('click',()=>{if(taskDraft){$<HTMLDialogElement>('#chore-task-dialog').close();openCompletion(taskDraft);}});
  $('#chore-title').addEventListener('input',()=>{if(!manualIcon){chosenIcon=suggestChoreIcon(input('chore-title').value)||'tidy';renderChosenIcon();}});
- $('#chore-task-form').addEventListener('click',event=>{const b=(event.target as HTMLElement).closest<HTMLElement>('[data-chore-icon],[data-chore-shortcut]');if(!b)return;chosenIcon=b.dataset.choreIcon||b.dataset.choreShortcut!;manualIcon=true;if(b.dataset.choreShortcut||input('chore-fill-title').checked)input('chore-title').value=CHORE_ICONS.find(i=>i.id===chosenIcon)!.label;renderChosenIcon();});
+ $('#chore-task-form').addEventListener('click',event=>{const b=(event.target as HTMLElement).closest<HTMLElement>('[data-chore-icon],[data-chore-shortcut]');if(!b)return;chosenIcon=b.dataset.choreIcon||b.dataset.choreShortcut!;manualIcon=true;if(b.dataset.choreShortcut||input('chore-fill-title').checked)input('chore-title').value=CHORE_ICONS.find(i=>i.id===chosenIcon)!.label;if(b.dataset.choreShortcut&&input('chore-kind').value==='chore'){const id=({bananas:'bananas',trash:'trash-out',recycling:'recycling-out',bins:'bins-return'} as Record<string,string>)[b.dataset.choreShortcut];const preset=pointPreset(id);if(preset){input('chore-preset').value=preset.id;input('chore-effort').value=String(preset.points);input('chore-effort').disabled=true;}}renderChosenIcon();});
  $('#chore-tonight').addEventListener('change',()=>{if(input('chore-tonight').checked){input('chore-expiry').value=day();input('chore-expiry-time').value='';}else{input('chore-expiry').value='';input('chore-expiry-time').value='';}});
  for(const id of ['chore-expiry','chore-expiry-time'])$('#'+id).addEventListener('change',()=>input('chore-tonight').checked=false);
  $('#chore-task-form').addEventListener('submit',event=>{
   event.preventDefault();try{
    const kind=input('chore-kind').value as TaskKind;
-   const p={kind,id:taskId,actor:identity,action:taskDraft?'edit':'create',expected_version:taskDraft?.version||0,title:input('chore-title').value.trim(),icon_id:chosenIcon,note:input('chore-note').value,assignee:$<HTMLInputElement>('input[name="chore-assignee"]:checked').value||null,points:kind==='chore'?Number(input('chore-effort').value):0,pinned:input('chore-pinned').checked,due_on:input('chore-due').value||null,due_time:input('chore-time').value||null,expires_on:input('chore-expiry').value||null,expires_time:input('chore-expiry-time').value||null,...(taskMode==='log'?{completion:{contributors:selectedContributors('chore-log-contributor'),completed_at:input('chore-log-time').value}}:{})};
+   const p={kind,id:taskId,actor:identity,action:taskDraft?'edit':'create',expected_version:taskDraft?.version||0,title:input('chore-title').value.trim(),icon_id:chosenIcon,note:input('chore-note').value,assignee:$<HTMLInputElement>('input[name="chore-assignee"]:checked').value||null,preset_id:kind==='chore'?input('chore-preset').value||null:null,points:kind==='chore'?Number(input('chore-effort').value):0,pinned:input('chore-pinned').checked,due_on:input('chore-due').value||null,due_time:input('chore-time').value||null,expires_on:input('chore-expiry').value||null,expires_time:input('chore-expiry-time').value||null,...(taskMode==='log'?{completion:{contributors:selectedContributors('chore-log-contributor'),completed_at:input('chore-log-time').value}}:{})};
    if(kind==='reminder'&&!taskDraft&&taskMode!=='log'){const recipients=selectedContributors('reminder-recipient');void save('chore-task','save_reminders',{...p,recipients});}
    else void save('chore-task','save_chore',p);
   }catch(error){errorText('chore-task-error',(error as Error).message);}
@@ -312,9 +314,10 @@ function bind(){
  $('#chore-routine-list').addEventListener('click',event=>{const b=(event.target as HTMLElement).closest<HTMLElement>('[data-edit-routine]');if(b)openRoutine(ledger!.routines.find(r=>r.id===b.dataset.editRoutine));});
  $('#routine-owner-tiles').addEventListener('click',event=>{const b=(event.target as HTMLElement).closest<HTMLElement>('[data-routine-owner]');if(!b)return;const m=b.dataset.routineOwner as Member;owners=owners.includes(m)?owners.filter(p=>p!==m):[...owners,m];renderOwners();});
  $('#routine-order').addEventListener('click',event=>{const b=(event.target as HTMLElement).closest<HTMLElement>('[data-owner-move]');if(!b||b.hasAttribute('disabled'))return;const i=owners.indexOf(b.dataset.ownerMove as Member),to=i+Number(b.dataset.direction);[owners[i],owners[to]]=[owners[to],owners[i]];renderOwners();});
+ $('#routine-items').addEventListener('change',event=>{const el=event.target as HTMLSelectElement;if(el.dataset.routineField!=='preset_id')return;const p=pointPreset(el.value),row=el.closest<HTMLElement>('[data-routine-item]')!,points=row.querySelector<HTMLSelectElement>('[data-routine-field="points"]')!;points.disabled=!!p;if(p){points.value=String(p.points);row.querySelector<HTMLSelectElement>('[data-routine-field="icon_id"]')!.value=p.icon;if(steps.length===1)input('routine-title').value=p.title;else row.querySelector<HTMLInputElement>('[data-routine-field="title"]')!.value=p.title;}});
  $('#routine-items').addEventListener('change',event=>{
   const el=event.target as HTMLSelectElement,row=el.closest<HTMLElement>('[data-routine-item]');if(!row)return;
-  if(el.dataset.routineField==='kind'){const points=row.querySelector<HTMLSelectElement>('[data-routine-field="points"]')!;points.disabled=el.value!=='chore';row.querySelector<HTMLElement>('[data-routine-points]')!.hidden=el.value!=='chore';}
+  if(el.dataset.routineField==='kind'){const points=row.querySelector<HTMLSelectElement>('[data-routine-field="points"]')!;const preset=row.querySelector<HTMLSelectElement>('[data-routine-field="preset_id"]')!;if(el.value!=='chore')preset.value='';points.disabled=el.value!=='chore'||!!preset.value;row.querySelector<HTMLElement>('[data-routine-points]')!.hidden=el.value!=='chore';}
   else if(el.dataset.routineField==='icon_id')row.querySelector('[data-routine-icon]')!.innerHTML=choreIcon(el.value);
  });
  $('#chore-routine-form').addEventListener('submit',event=>{event.preventDefault();readRoutineItems();if(!owners.length){errorText('chore-routine-error','Choose at least one person.');return;}void save('chore-routine','save_chore_routine',{id:routineId,expected_version:routineDraft?.version||0,actor:identity,title:input('routine-title').value.trim(),start_week:routineDraft?.start_week||input('routine-start').value,interval_weeks:Number(input('routine-interval').value),owners,start_index:owners.indexOf(input('routine-first').value as Member),steps,enabled:input('routine-enabled').checked});});

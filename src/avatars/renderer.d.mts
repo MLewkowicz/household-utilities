@@ -3,6 +3,7 @@ export interface AvatarEffects {steam:boolean; hearts:boolean; blush:boolean}
 export interface AvatarMetrics {frames:number;steam:number;risingSteam:number;hearts:number;lastDrawMs:number;earAnchors:{x:number;y:number}[];lastParticleSamples:{side:number;x:number;y:number;vx:number;age:number}[];lastRisingSamples:{x:number;y:number;vy:number;age:number}[]}
 export class AvatarRenderer {
  constructor(canvas:HTMLCanvasElement,small:HTMLCanvasElement|null,base:HTMLImageElement,original:HTMLImageElement,character?:string);
+ expression:string|null;
  metrics:AvatarMetrics;
  floating:unknown[];
  resize():void;

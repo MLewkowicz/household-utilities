@@ -25,7 +25,7 @@ test('name-first expenses, custom shares, icons, history and pair repayments sta
  await expand(card);await card.getByRole('button',{name:/^Edit /}).click();await page.locator('[data-participant=rohil]').click();
  await page.getByText('Custom amounts',{exact:true}).click();
  await page.getByLabel('Michal’s share',{exact:true}).fill('10');await page.getByLabel('Rina’s share',{exact:true}).fill('4');
- await expect(page.locator('#split-status')).toHaveText('$2.00 left to assign');await expect(page.locator('#save-expense')).toBeDisabled();
+ await expect(page.locator('#split-status')).toHaveText('Every cent accounted for.');await expect(page.locator('#save-expense')).toBeEnabled();await expect(page.getByLabel('Ohm’s share',{exact:true})).toHaveValue('10.00');
  await page.getByLabel('Ohm’s share',{exact:true}).fill('10');await expect(page.locator('#split-status')).toHaveText('Every cent accounted for.');
  await page.locator('#icon-picker summary').click();await page.getByLabel('Search icons',{exact:true}).fill('milk');
  await page.getByRole('button',{name:'Milk icon',exact:true}).click();
@@ -63,7 +63,7 @@ test('themes, identity, hash navigation and icon browsing work on phones and per
  await page.getByLabel('Include my share').uncheck();await expect(page.locator('#self-share')).not.toBeVisible();
  await page.locator('[data-participant=ohm]').click();await page.locator('[data-participant=rohil]').click();
  await expect(page.locator('[data-participant=rina]')).toContainText('$9.99');
- await page.locator('#icon-picker summary').click();await expect(page.locator('#icon-grid button')).toHaveCount(41);
+ await page.locator('#icon-picker summary').click();await expect(page.locator('#icon-grid button')).toHaveCount(42);
  await page.getByLabel('Icon category').selectOption('Travel');await expect(page.locator('#icon-grid button')).toHaveCount(4);
  await page.getByRole('button',{name:'Flight icon'}).focus();await page.keyboard.press('Enter');await expect(page.locator('#chosen-icon-label')).toHaveText('Flight');
  expect(await page.locator('#expense-dialog').evaluate(el=>el.scrollWidth<=el.clientWidth)).toBeTruthy();
@@ -126,7 +126,7 @@ test('calculator sums groceries and assigns a fractional share with an exact rem
  await page.getByText('Custom amounts',{exact:true}).click();
  await page.getByRole('button',{name:'Calculate Michal’s share',exact:true}).click();
  await page.locator('[data-calc-expression="1/3"]').click();await expect(page.locator('#calculator-result')).toHaveText('$3.34');
- await page.getByLabel('Split the rest equally among the others').check();
+ await expect(page.getByLabel('Split the rest equally among the others')).not.toBeVisible();
  expect(await page.locator('#calculator-dialog').evaluate(el=>el.scrollWidth<=el.clientWidth)).toBeTruthy();
  await page.locator('#calculator-use').click();
  await expect(page.getByRole('textbox',{name:'Michal’s share',exact:true})).toHaveValue('3.34');
@@ -149,4 +149,17 @@ test('calculator sums groceries and assigns a fractional share with an exact rem
  await page.locator('#new-settlement').click();await expect(page.locator('#settlement-title')).toBeFocused();await page.keyboard.press('Escape');
  await rpc(page,'save_misc_expense',{action:'delete',id:entry.id,expected_version:1,request_id:crypto.randomUUID(),actor:'michal'});
  const utilityAfter=await rpc(page,'dashboard');for(const key of ['bills','allocations','history','bill_history'])expect(utilityAfter[key]).toEqual(utilityBefore[key]);
+});
+
+test('automatic shares preserve edits, reject conflicts, and request the full total after excluding self',async({page})=>{
+ await open(page,'michal');await page.locator('#new-expense').click();await page.getByLabel('What did you buy?').fill('Balanced automatically');await page.getByLabel('Purchase amount',{exact:true}).fill('100');await page.getByText('Custom amounts',{exact:true}).click();
+ await page.getByLabel('Michal’s share',{exact:true}).fill('40');await page.getByLabel('Rina’s share',{exact:true}).fill('10');
+ await expect(page.getByLabel('Ohm’s share',{exact:true})).toHaveValue('25.00');await expect(page.getByLabel('Rohil’s share',{exact:true})).toHaveValue('25.00');
+ await page.getByLabel('Ohm’s share',{exact:true}).fill('80');await page.getByLabel('Ohm’s share',{exact:true}).press('Tab');await expect(page.getByLabel('Ohm’s share',{exact:true})).toHaveValue('25.00');await expect(page.getByLabel('Michal’s share',{exact:true})).toHaveValue('40.00');
+ await page.locator('[data-share-auto=michal]').click();await page.locator('[data-share-auto=rina]').click();
+ await page.locator('[data-participant=ohm]').click();await page.locator('[data-participant=rohil]').click();
+ await page.getByRole('button',{name:'Calculate purchase amount',exact:true}).click();await page.getByLabel('Calculation',{exact:true}).fill('20 + 3.40');await page.locator('#calculator-use').click();
+ await page.locator('#include-self').uncheck();await expect(page.getByLabel('Rina’s share',{exact:true})).toHaveValue('23.40');await expect(page.locator('#save-expense')).toBeEnabled();
+ expect(await page.locator('#guest-split-open').evaluate(el=>!!(document.querySelector('#split-status')!.compareDocumentPosition(el)&Node.DOCUMENT_POSITION_FOLLOWING))).toBeTruthy();
+ await page.locator('#save-expense').click();await expect(page.locator('#expense-dialog')).not.toBeVisible();const d=await rpc(page,'misc_dashboard'),e=d.expenses.find((e:any)=>e.description==='Balanced automatically');expect(e.amount_cents).toBe(2340);expect(e.shares).toEqual({rina:2340});
 });

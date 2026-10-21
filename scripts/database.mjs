@@ -42,13 +42,17 @@ export async function openDatabase(path) {
   if (!halfPoints.rows[0].fn) await db.exec(await readFile(new URL('../supabase/migrations/011_half_point_chores.sql', import.meta.url),'utf8'));
   const trashSplit = await db.query("SELECT to_regclass('ledger_private.chore_routine_splits') AS marker");
   if (!trashSplit.rows[0].marker) await db.exec(await readFile(new URL('../supabase/migrations/012_split_trash_routine.sql', import.meta.url),'utf8'));
+  for(const [file,fn] of [['013_events.sql','utilities_events_dashboard'],['014_note_reactions.sql','utilities_bulletin_dashboard_before_reactions'],['015_point_presets.sql','utilities_point_policy_preview']]){
+    const installed=await db.query(`SELECT to_regprocedure('public.${fn}()') AS fn`);
+    if(!installed.rows[0].fn)await db.exec(await readFile(new URL('../supabase/migrations/'+file,import.meta.url),'utf8'));
+  }
   return db;
 }
 export async function callRpc(db,name,params={},role='anon') {
-  if (!['dashboard','save_payment','import_bills','export_ledger','misc_dashboard','save_misc_expense','save_misc_settlement','export_misc_ledger','chores_dashboard','chores_summary','save_reminders','save_chore','save_chore_routine','export_chores','bulletin_dashboard','save_bulletin_note','export_bulletin','push_config','push_device','push_claim','push_finish'].includes(name)) throw new Error('Unknown operation');
+  if (!['dashboard','save_payment','import_bills','export_ledger','misc_dashboard','save_misc_expense','save_misc_settlement','export_misc_ledger','chores_dashboard','chores_summary','save_reminders','save_chore','save_chore_routine','export_chores','bulletin_dashboard','save_bulletin_note','export_bulletin','point_policy_preview','apply_point_policy','reverse_point_adjustment','save_note_reaction','events_dashboard','export_events','save_event','save_event_response','push_config','push_device','push_claim','push_finish'].includes(name)) throw new Error('Unknown operation');
   return db.transaction(async tx=>{
     await tx.exec(`SET LOCAL ROLE ${role==='service_role'?'service_role':'anon'}`);
-    const result = ['save_reminders','save_payment','import_bills','save_misc_expense','save_misc_settlement','save_chore','save_chore_routine','save_bulletin_note','push_device','push_finish'].includes(name)
+    const result = ['save_reminders','save_payment','import_bills','save_misc_expense','save_misc_settlement','save_chore','save_chore_routine','save_bulletin_note','save_event','save_event_response','save_note_reaction','apply_point_policy','reverse_point_adjustment','push_device','push_finish'].includes(name)
       ? await tx.query(`SELECT public.utilities_${name}($1::jsonb) AS result`,[JSON.stringify(params.p)])
       : await tx.query(`SELECT public.utilities_${name}() AS result`);
     return result.rows[0].result;

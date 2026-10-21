@@ -6,6 +6,7 @@ export {AVATAR_ASSETS};
 export type {AvatarMember,AvatarEffects};
 export interface AvatarOptions {
  member:AvatarMember;
+ expression?:string;
  temperature?:number;
  effects?:Partial<AvatarEffects>;
  /** Directory containing this pack's images, relative to the document or absolute. */
@@ -39,13 +40,14 @@ export async function mountAvatar(canvas:HTMLCanvasElement,options:AvatarOptions
  const base=await image(new URL(asset.faceplate,baseUrl).href);
  options.signal?.throwIfAborted();
  const renderer=new AvatarRenderer(canvas,null,base,base,options.member);
+ renderer.expression=options.expression||null;
  const effects:AvatarEffects={steam:true,hearts:true,blush:true,...options.effects};
  const motion=matchMedia('(prefers-reduced-motion: reduce)');
  let target=clamp(Number.isFinite(options.temperature)?options.temperature!:0,-100,100),shown=target;
  let paused=options.paused??false,disposed=false,inView=false,previous=0;
  const canAnimate=()=>!disposed&&!paused&&!motion.matches&&!document.hidden&&inView&&canvas.isConnected;
  const draw=(dt=0)=>{if(!disposed)renderer.draw(moodFromValue(shown),effects,{dt,animate:canAnimate()});};
- const label=()=>{canvas.setAttribute('role','img');canvas.setAttribute('aria-label',`${asset.name}, ${describe(target)[0].toLowerCase()}`);};
+ const label=()=>{canvas.setAttribute('role','img');canvas.setAttribute('aria-label',`${asset.name}, ${options.expression||describe(target)[0].toLowerCase()}`);};
  function schedule(){if(canAnimate())play(tick);}
  function stop(){stopPlaying(tick);previous=0;}
  function tick(now:number){if(!canAnimate()){stop();return;}const dt=previous?Math.min(now-previous,50):1000/30;previous=now;shown=ease(shown,target,dt);draw(dt);}
@@ -66,3 +68,15 @@ export async function mountAvatar(canvas:HTMLCanvasElement,options:AvatarOptions
  };
 }
 export type AvatarController=Awaited<ReturnType<typeof mountAvatar>>;
+
+// At most 24 cached still expressions. Canvases exist only during one-time rendering.
+const thumbnails=new Map<string,Promise<string>>();
+export function reactionThumbnail(member:AvatarMember,expression:string):Promise<string>{
+ const key=member+':'+expression;let pending=thumbnails.get(key);
+ if(!pending){pending=(async()=>{
+  const base=await image(new URL('./avatars/v1/'+AVATAR_ASSETS[member].faceplate,document.baseURI).href);
+  const canvas=document.createElement('canvas');canvas.style.cssText='position:fixed;left:-500px;top:0;width:128px;height:128px;pointer-events:none';document.body.append(canvas);
+  try{const renderer=new AvatarRenderer(canvas,null,base,base,member);renderer.expression=expression;renderer.draw(moodFromValue(0),{hearts:false,steam:false,blush:false},{animate:false});return canvas.toDataURL('image/webp',.85);}finally{canvas.remove();}
+ })().catch(error=>{thumbnails.delete(key);throw error;});thumbnails.set(key,pending);}
+ return pending;
+}

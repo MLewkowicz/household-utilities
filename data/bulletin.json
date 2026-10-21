@@ -381,7 +381,9 @@
       "temperature": 100
     }
   ],
-  "updated_at": "2026-10-20T22:50:52.958512+00:00",
-  "exported_at": "2026-10-20T22:50:52.958512+00:00",
-  "format_version": 1
+  "reactions": [],
+  "updated_at": "2026-10-21T02:25:14.962266+00:00",
+  "exported_at": "2026-10-21T02:25:14.962266+00:00",
+  "format_version": 2,
+  "reaction_history": []
 }

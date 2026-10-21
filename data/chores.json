@@ -33,8 +33,9 @@
     },
     {
       "id": "31aed63b-53a9-4435-8df5-83abd586818d",
+      "kind": "chore",
       "note": "",
-      "actor": "rohil",
+      "actor": "michal",
       "state": "completed",
       "title": "Pick up bananas",
       "due_at": null,
@@ -43,10 +44,11 @@
       "points": 1,
       "status": "completed",
       "icon_id": "bananas",
-      "version": 3,
+      "version": 4,
       "assignee": "rohil",
       "due_time": null,
       "cycle_end": null,
+      "preset_id": "bananas",
       "projected": false,
       "requester": "rohil",
       "completion": {
@@ -60,10 +62,12 @@
       "expires_on": "2026-10-20",
       "routine_id": null,
       "cycle_start": null,
-      "expires_time": null
+      "expires_time": null,
+      "point_policy": "household-v1"
     },
     {
       "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
+      "kind": "chore",
       "note": "Help with picking up groceries from star market (paper towels)",
       "actor": "michal",
       "state": "completed",
@@ -71,13 +75,14 @@
       "due_at": "2026-10-20T15:00:00+00:00",
       "due_on": "2026-10-20",
       "pinned": false,
-      "points": 1,
+      "points": 2,
       "status": "completed",
       "icon_id": "parcel",
-      "version": 2,
+      "version": 3,
       "assignee": null,
       "due_time": "11:00",
       "cycle_end": null,
+      "preset_id": "shared-groceries",
       "projected": false,
       "requester": "rina",
       "completion": {
@@ -92,24 +97,27 @@
       "expires_on": null,
       "routine_id": null,
       "cycle_start": null,
-      "expires_time": null
+      "expires_time": null,
+      "point_policy": "household-v1"
     },
     {
       "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
+      "kind": "chore",
       "note": "Brought bins back",
-      "actor": "rohil",
+      "actor": "michal",
       "state": "completed",
       "title": "Bring bins back",
       "due_at": "2026-10-20T15:36:00+00:00",
       "due_on": "2026-10-20",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "completed",
       "icon_id": "bins",
-      "version": 2,
+      "version": 3,
       "assignee": null,
       "due_time": "11:36",
       "cycle_end": null,
+      "preset_id": "bins-return",
       "projected": false,
       "requester": "michal",
       "completion": {
@@ -125,7 +133,8 @@
       "expires_on": null,
       "routine_id": null,
       "cycle_start": null,
-      "expires_time": null
+      "expires_time": null,
+      "point_policy": "household-v1"
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-10-26:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -145,6 +154,7 @@
       "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-11-02T05:00:00+00:00",
+      "preset_id": "trash-out",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -154,14 +164,15 @@
       "routine_id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "cycle_start": "2026-10-26",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-10-26:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
       "kind": "chore",
       "note": "",
-      "actor": "rina",
+      "actor": "michal",
       "state": "active",
       "title": "Put in new trash bag",
       "due_at": "2026-10-27T04:00:00+00:00",
@@ -171,10 +182,11 @@
       "status": "active",
       "icon_id": "trash-bag",
       "step_id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
-      "version": 1,
+      "version": 2,
       "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-11-02T05:00:00+00:00",
+      "preset_id": "trash-bag",
       "projected": false,
       "requester": "rina",
       "completion": null,
@@ -184,6 +196,7 @@
       "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "cycle_start": "2026-10-26",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
       "schedule_version": 1
     },
@@ -205,6 +218,7 @@
       "assignee": "michal",
       "due_time": null,
       "cycle_end": "2026-11-09T05:00:00+00:00",
+      "preset_id": "trash-out",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -214,8 +228,9 @@
       "routine_id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "cycle_start": "2026-11-02",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-02:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -235,6 +250,7 @@
       "assignee": "michal",
       "due_time": null,
       "cycle_end": "2026-11-09T05:00:00+00:00",
+      "preset_id": "trash-bag",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -244,8 +260,9 @@
       "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "cycle_start": "2026-11-02",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-09:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -265,6 +282,7 @@
       "assignee": "rina",
       "due_time": null,
       "cycle_end": "2026-11-16T05:00:00+00:00",
+      "preset_id": "trash-out",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -274,8 +292,9 @@
       "routine_id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "cycle_start": "2026-11-09",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-09:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -295,6 +314,7 @@
       "assignee": "rina",
       "due_time": null,
       "cycle_end": "2026-11-16T05:00:00+00:00",
+      "preset_id": "trash-bag",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -304,8 +324,9 @@
       "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "cycle_start": "2026-11-09",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-16:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -325,6 +346,7 @@
       "assignee": "rohil",
       "due_time": null,
       "cycle_end": "2026-11-23T05:00:00+00:00",
+      "preset_id": "trash-out",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -334,8 +356,9 @@
       "routine_id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "cycle_start": "2026-11-16",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-16:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -355,6 +378,7 @@
       "assignee": "rohil",
       "due_time": null,
       "cycle_end": "2026-11-23T05:00:00+00:00",
+      "preset_id": "trash-bag",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -364,8 +388,9 @@
       "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "cycle_start": "2026-11-16",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-23:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -385,6 +410,7 @@
       "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-11-30T05:00:00+00:00",
+      "preset_id": "trash-out",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -394,8 +420,9 @@
       "routine_id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "cycle_start": "2026-11-23",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-23:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -415,6 +442,7 @@
       "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-11-30T05:00:00+00:00",
+      "preset_id": "trash-bag",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -424,8 +452,9 @@
       "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "cycle_start": "2026-11-23",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-30:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -445,6 +474,7 @@
       "assignee": "michal",
       "due_time": null,
       "cycle_end": "2026-12-07T05:00:00+00:00",
+      "preset_id": "trash-out",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -454,8 +484,9 @@
       "routine_id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "cycle_start": "2026-11-30",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-30:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -475,6 +506,7 @@
       "assignee": "michal",
       "due_time": null,
       "cycle_end": "2026-12-07T05:00:00+00:00",
+      "preset_id": "trash-bag",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -484,8 +516,9 @@
       "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "cycle_start": "2026-11-30",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-07:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -505,6 +538,7 @@
       "assignee": "rina",
       "due_time": null,
       "cycle_end": "2026-12-14T05:00:00+00:00",
+      "preset_id": "trash-out",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -514,8 +548,9 @@
       "routine_id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "cycle_start": "2026-12-07",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-07:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -535,6 +570,7 @@
       "assignee": "rina",
       "due_time": null,
       "cycle_end": "2026-12-14T05:00:00+00:00",
+      "preset_id": "trash-bag",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -544,8 +580,9 @@
       "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "cycle_start": "2026-12-07",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-14:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -565,6 +602,7 @@
       "assignee": "rohil",
       "due_time": null,
       "cycle_end": "2026-12-21T05:00:00+00:00",
+      "preset_id": "trash-out",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -574,8 +612,9 @@
       "routine_id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "cycle_start": "2026-12-14",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-14:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -595,6 +634,7 @@
       "assignee": "rohil",
       "due_time": null,
       "cycle_end": "2026-12-21T05:00:00+00:00",
+      "preset_id": "trash-bag",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -604,8 +644,9 @@
       "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "cycle_start": "2026-12-14",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-21:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -625,6 +666,7 @@
       "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-12-28T05:00:00+00:00",
+      "preset_id": "trash-out",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -634,8 +676,9 @@
       "routine_id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "cycle_start": "2026-12-21",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-21:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -655,6 +698,7 @@
       "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-12-28T05:00:00+00:00",
+      "preset_id": "trash-bag",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -664,8 +708,9 @@
       "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "cycle_start": "2026-12-21",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-28:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -685,6 +730,7 @@
       "assignee": "michal",
       "due_time": null,
       "cycle_end": "2027-01-04T05:00:00+00:00",
+      "preset_id": "trash-out",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -694,8 +740,9 @@
       "routine_id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "cycle_start": "2026-12-28",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-28:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -715,6 +762,7 @@
       "assignee": "michal",
       "due_time": null,
       "cycle_end": "2027-01-04T05:00:00+00:00",
+      "preset_id": "trash-bag",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -724,8 +772,9 @@
       "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "cycle_start": "2026-12-28",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2027-01-04:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -745,6 +794,7 @@
       "assignee": "rina",
       "due_time": null,
       "cycle_end": "2027-01-11T05:00:00+00:00",
+      "preset_id": "trash-out",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -754,8 +804,9 @@
       "routine_id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "cycle_start": "2027-01-04",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2027-01-04:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -775,6 +826,7 @@
       "assignee": "rina",
       "due_time": null,
       "cycle_end": "2027-01-11T05:00:00+00:00",
+      "preset_id": "trash-bag",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -784,8 +836,9 @@
       "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "cycle_start": "2027-01-04",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2027-01-11:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -805,6 +858,7 @@
       "assignee": "rohil",
       "due_time": null,
       "cycle_end": "2027-01-18T05:00:00+00:00",
+      "preset_id": "trash-out",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -814,8 +868,9 @@
       "routine_id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "cycle_start": "2027-01-11",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2027-01-11:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -835,6 +890,7 @@
       "assignee": "rohil",
       "due_time": null,
       "cycle_end": "2027-01-18T05:00:00+00:00",
+      "preset_id": "trash-bag",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -844,8 +900,9 @@
       "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "cycle_start": "2027-01-11",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-10-26:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -857,7 +914,7 @@
       "due_at": "2026-10-28T04:00:00+00:00",
       "due_on": "2026-10-27",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "active",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -865,6 +922,7 @@
       "assignee": "rohil",
       "due_time": null,
       "cycle_end": "2026-11-02T05:00:00+00:00",
+      "preset_id": "bins-return",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -874,8 +932,9 @@
       "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "cycle_start": "2026-10-26",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Bin return",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-02:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -887,7 +946,7 @@
       "due_at": "2026-11-04T05:00:00+00:00",
       "due_on": "2026-11-03",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "active",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -895,6 +954,7 @@
       "assignee": "rina",
       "due_time": null,
       "cycle_end": "2026-11-09T05:00:00+00:00",
+      "preset_id": "bins-return",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -904,8 +964,9 @@
       "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "cycle_start": "2026-11-02",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Bin return",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-09:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -917,7 +978,7 @@
       "due_at": "2026-11-11T05:00:00+00:00",
       "due_on": "2026-11-10",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "active",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -925,6 +986,7 @@
       "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-11-16T05:00:00+00:00",
+      "preset_id": "bins-return",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -934,8 +996,9 @@
       "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "cycle_start": "2026-11-09",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Bin return",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-16:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -947,7 +1010,7 @@
       "due_at": "2026-11-18T05:00:00+00:00",
       "due_on": "2026-11-17",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "active",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -955,6 +1018,7 @@
       "assignee": "michal",
       "due_time": null,
       "cycle_end": "2026-11-23T05:00:00+00:00",
+      "preset_id": "bins-return",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -964,8 +1028,9 @@
       "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "cycle_start": "2026-11-16",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Bin return",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-23:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -977,7 +1042,7 @@
       "due_at": "2026-11-25T05:00:00+00:00",
       "due_on": "2026-11-24",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "active",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -985,6 +1050,7 @@
       "assignee": "rohil",
       "due_time": null,
       "cycle_end": "2026-11-30T05:00:00+00:00",
+      "preset_id": "bins-return",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -994,8 +1060,9 @@
       "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "cycle_start": "2026-11-23",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Bin return",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-30:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1007,7 +1074,7 @@
       "due_at": "2026-12-02T05:00:00+00:00",
       "due_on": "2026-12-01",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "active",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1015,6 +1082,7 @@
       "assignee": "rina",
       "due_time": null,
       "cycle_end": "2026-12-07T05:00:00+00:00",
+      "preset_id": "bins-return",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -1024,8 +1092,9 @@
       "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "cycle_start": "2026-11-30",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Bin return",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-12-07:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1037,7 +1106,7 @@
       "due_at": "2026-12-09T05:00:00+00:00",
       "due_on": "2026-12-08",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "active",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1045,6 +1114,7 @@
       "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-12-14T05:00:00+00:00",
+      "preset_id": "bins-return",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -1054,8 +1124,9 @@
       "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "cycle_start": "2026-12-07",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Bin return",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-12-14:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1067,7 +1138,7 @@
       "due_at": "2026-12-16T05:00:00+00:00",
       "due_on": "2026-12-15",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "active",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1075,6 +1146,7 @@
       "assignee": "michal",
       "due_time": null,
       "cycle_end": "2026-12-21T05:00:00+00:00",
+      "preset_id": "bins-return",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -1084,8 +1156,9 @@
       "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "cycle_start": "2026-12-14",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Bin return",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-12-21:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1097,7 +1170,7 @@
       "due_at": "2026-12-23T05:00:00+00:00",
       "due_on": "2026-12-22",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "active",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1105,6 +1178,7 @@
       "assignee": "rohil",
       "due_time": null,
       "cycle_end": "2026-12-28T05:00:00+00:00",
+      "preset_id": "bins-return",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -1114,8 +1188,9 @@
       "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "cycle_start": "2026-12-21",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Bin return",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-12-28:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1127,7 +1202,7 @@
       "due_at": "2026-12-30T05:00:00+00:00",
       "due_on": "2026-12-29",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "active",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1135,6 +1210,7 @@
       "assignee": "rina",
       "due_time": null,
       "cycle_end": "2027-01-04T05:00:00+00:00",
+      "preset_id": "bins-return",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -1144,8 +1220,9 @@
       "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "cycle_start": "2026-12-28",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Bin return",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2027-01-04:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1157,7 +1234,7 @@
       "due_at": "2027-01-06T05:00:00+00:00",
       "due_on": "2027-01-05",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "active",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1165,6 +1242,7 @@
       "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2027-01-11T05:00:00+00:00",
+      "preset_id": "bins-return",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -1174,8 +1252,9 @@
       "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "cycle_start": "2027-01-04",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Bin return",
-      "schedule_version": 2
+      "schedule_version": 3
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2027-01-11:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1187,7 +1266,7 @@
       "due_at": "2027-01-13T05:00:00+00:00",
       "due_on": "2027-01-12",
       "pinned": false,
-      "points": 1,
+      "points": 0.5,
       "status": "active",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1195,6 +1274,7 @@
       "assignee": "michal",
       "due_time": null,
       "cycle_end": "2027-01-18T05:00:00+00:00",
+      "preset_id": "bins-return",
       "projected": true,
       "requester": "rina",
       "completion": null,
@@ -1204,11 +1284,149 @@
       "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "cycle_start": "2027-01-11",
       "expires_time": null,
+      "point_policy": "household-v1",
       "routine_title": "Bin return",
-      "schedule_version": 2
+      "schedule_version": 3
     }
   ],
   "history": [
+    {
+      "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-10-26:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+      "kind": "chore",
+      "note": "",
+      "actor": "michal",
+      "state": "active",
+      "title": "Put in new trash bag",
+      "action": "edit",
+      "due_at": "2026-10-27T04:00:00+00:00",
+      "due_on": "2026-10-26",
+      "pinned": false,
+      "points": 0.5,
+      "icon_id": "trash-bag",
+      "step_id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+      "version": 2,
+      "assignee": "ohm",
+      "due_time": null,
+      "cycle_end": "2026-11-02T05:00:00+00:00",
+      "preset_id": "trash-bag",
+      "requester": "rina",
+      "completion": null,
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
+      "change_note": "Adopt household-v1 standardized points; original completion preserved",
+      "cycle_start": "2026-10-26",
+      "expires_time": null,
+      "point_policy": "household-v1",
+      "routine_title": "Put in new trash bag",
+      "schedule_version": 1
+    },
+    {
+      "id": "31aed63b-53a9-4435-8df5-83abd586818d",
+      "kind": "chore",
+      "note": "",
+      "actor": "michal",
+      "state": "completed",
+      "title": "Pick up bananas",
+      "action": "edit",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 1,
+      "icon_id": "bananas",
+      "version": 4,
+      "assignee": "rohil",
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": "bananas",
+      "requester": "rohil",
+      "completion": {
+        "completed_at": "2026-10-20T19:18:00+00:00",
+        "contributors": [
+          "rohil"
+        ]
+      },
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "expires_at": "2026-10-21T04:00:00+00:00",
+      "expires_on": "2026-10-20",
+      "routine_id": null,
+      "change_note": "Adopt household-v1 standardized points; original completion preserved",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "household-v1"
+    },
+    {
+      "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
+      "kind": "chore",
+      "note": "Help with picking up groceries from star market (paper towels)",
+      "actor": "michal",
+      "state": "completed",
+      "title": "Grocery pick up",
+      "action": "edit",
+      "due_at": "2026-10-20T15:00:00+00:00",
+      "due_on": "2026-10-20",
+      "pinned": false,
+      "points": 2,
+      "icon_id": "parcel",
+      "version": 3,
+      "assignee": null,
+      "due_time": "11:00",
+      "cycle_end": null,
+      "preset_id": "shared-groceries",
+      "requester": "rina",
+      "completion": {
+        "completed_at": "2026-10-20T15:38:00+00:00",
+        "contributors": [
+          "michal",
+          "rina"
+        ]
+      },
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "change_note": "Adopt household-v1 standardized points; original completion preserved",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "household-v1"
+    },
+    {
+      "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
+      "kind": "chore",
+      "note": "Brought bins back",
+      "actor": "michal",
+      "state": "completed",
+      "title": "Bring bins back",
+      "action": "edit",
+      "due_at": "2026-10-20T15:36:00+00:00",
+      "due_on": "2026-10-20",
+      "pinned": false,
+      "points": 0.5,
+      "icon_id": "bins",
+      "version": 3,
+      "assignee": null,
+      "due_time": "11:36",
+      "cycle_end": null,
+      "preset_id": "bins-return",
+      "requester": "michal",
+      "completion": {
+        "completed_at": "2026-10-20T15:36:00+00:00",
+        "contributors": [
+          "michal",
+          "rina",
+          "rohil"
+        ]
+      },
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "change_note": "Adopt household-v1 standardized points; original completion preserved",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "household-v1"
+    },
     {
       "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
       "note": "Brought bins back",
@@ -1558,7 +1776,7 @@
   "routines": [
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007",
-      "actor": "rina",
+      "actor": "michal",
       "steps": [
         {
           "id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -1568,7 +1786,9 @@
           "title": "Take out the trash",
           "points": 0.5,
           "icon_id": "trash",
-          "weekday": 0
+          "weekday": 0,
+          "preset_id": "trash-out",
+          "point_policy": "household-v1"
         }
       ],
       "title": "Take out the trash",
@@ -1579,43 +1799,12 @@
         "rohil"
       ],
       "enabled": true,
-      "version": 2,
-      "created_at": "2026-10-20T17:13:37.478992+00:00",
+      "version": 3,
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
       "start_week": "2026-10-26",
       "start_index": 0,
       "effective_on": "2026-10-26",
       "interval_weeks": 1
-    },
-    {
-      "id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
-      "actor": "rina",
-      "steps": [
-        {
-          "id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
-          "kind": "chore",
-          "note": "",
-          "time": null,
-          "title": "Put in new trash bag",
-          "points": 0.5,
-          "icon_id": "trash-bag",
-          "weekday": 0
-        }
-      ],
-      "title": "Put in new trash bag",
-      "owners": [
-        "ohm",
-        "michal",
-        "rina",
-        "rohil"
-      ],
-      "enabled": true,
-      "version": 2,
-      "created_at": "2026-10-20T17:13:37.478992+00:00",
-      "start_week": "2026-10-26",
-      "start_index": 0,
-      "effective_on": "2026-10-26",
-      "interval_weeks": 1,
-      "occurrence_root": "10986bd6-79a1-4a69-b799-e4938953c007"
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
@@ -1623,12 +1812,15 @@
       "steps": [
         {
           "id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
+          "kind": "chore",
           "note": "",
           "time": null,
           "title": "Bring bins back",
-          "points": 1,
+          "points": 0.5,
           "icon_id": "bins",
-          "weekday": 1
+          "weekday": 1,
+          "preset_id": "bins-return",
+          "point_policy": "household-v1"
         }
       ],
       "title": "Bin return",
@@ -1639,21 +1831,54 @@
         "michal"
       ],
       "enabled": true,
-      "version": 2,
-      "created_at": "2026-10-20T17:22:06.57198+00:00",
+      "version": 3,
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
       "start_week": "2026-10-26",
       "start_index": 0,
       "effective_on": "2026-10-26",
       "interval_weeks": 1
+    },
+    {
+      "id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
+      "actor": "michal",
+      "steps": [
+        {
+          "id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+          "kind": "chore",
+          "note": "",
+          "time": null,
+          "title": "Put in new trash bag",
+          "points": 0.5,
+          "icon_id": "trash-bag",
+          "weekday": 0,
+          "preset_id": "trash-bag",
+          "point_policy": "household-v1"
+        }
+      ],
+      "title": "Put in new trash bag",
+      "owners": [
+        "ohm",
+        "michal",
+        "rina",
+        "rohil"
+      ],
+      "enabled": true,
+      "version": 3,
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "start_week": "2026-10-26",
+      "start_index": 0,
+      "effective_on": "2026-10-26",
+      "interval_weeks": 1,
+      "occurrence_root": "10986bd6-79a1-4a69-b799-e4938953c007"
     }
   ],
   "local_day": "2026-10-20",
-  "updated_at": "2026-10-20T22:50:52.558191+00:00",
-  "exported_at": "2026-10-20T22:50:52.558191+00:00",
+  "updated_at": "2026-10-21T02:25:14.500543+00:00",
+  "exported_at": "2026-10-21T02:25:14.500543+00:00",
   "leaderboard": [
     {
       "rank": 1,
-      "units": 22.0,
+      "units": 26.0,
       "member": "michal",
       "period": "all",
       "entries": [
@@ -1667,14 +1892,14 @@
         {
           "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
           "title": "Grocery pick up",
-          "units": 6.0,
+          "units": 12.0,
           "member": "michal",
           "completed_at": "2026-10-20T15:38:00+00:00"
         },
         {
           "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
           "title": "Bring bins back",
-          "units": 4.0,
+          "units": 2.0,
           "member": "michal",
           "completed_at": "2026-10-20T15:36:00+00:00"
         }
@@ -1682,7 +1907,29 @@
     },
     {
       "rank": 2,
-      "units": 16.0,
+      "units": 14.0,
+      "member": "rina",
+      "period": "all",
+      "entries": [
+        {
+          "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
+          "title": "Grocery pick up",
+          "units": 12.0,
+          "member": "rina",
+          "completed_at": "2026-10-20T15:38:00+00:00"
+        },
+        {
+          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
+          "title": "Bring bins back",
+          "units": 2.0,
+          "member": "rina",
+          "completed_at": "2026-10-20T15:36:00+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "units": 14.0,
       "member": "rohil",
       "period": "all",
       "entries": [
@@ -1696,30 +1943,8 @@
         {
           "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
           "title": "Bring bins back",
-          "units": 4.0,
+          "units": 2.0,
           "member": "rohil",
-          "completed_at": "2026-10-20T15:36:00+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 3,
-      "units": 10.0,
-      "member": "rina",
-      "period": "all",
-      "entries": [
-        {
-          "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
-          "title": "Grocery pick up",
-          "units": 6.0,
-          "member": "rina",
-          "completed_at": "2026-10-20T15:38:00+00:00"
-        },
-        {
-          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
-          "title": "Bring bins back",
-          "units": 4.0,
-          "member": "rina",
           "completed_at": "2026-10-20T15:36:00+00:00"
         }
       ]
@@ -1733,7 +1958,7 @@
     },
     {
       "rank": 1,
-      "units": 22.0,
+      "units": 26.0,
       "member": "michal",
       "period": "month",
       "entries": [
@@ -1747,14 +1972,14 @@
         {
           "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
           "title": "Grocery pick up",
-          "units": 6.0,
+          "units": 12.0,
           "member": "michal",
           "completed_at": "2026-10-20T15:38:00+00:00"
         },
         {
           "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
           "title": "Bring bins back",
-          "units": 4.0,
+          "units": 2.0,
           "member": "michal",
           "completed_at": "2026-10-20T15:36:00+00:00"
         }
@@ -1762,7 +1987,29 @@
     },
     {
       "rank": 2,
-      "units": 16.0,
+      "units": 14.0,
+      "member": "rina",
+      "period": "month",
+      "entries": [
+        {
+          "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
+          "title": "Grocery pick up",
+          "units": 12.0,
+          "member": "rina",
+          "completed_at": "2026-10-20T15:38:00+00:00"
+        },
+        {
+          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
+          "title": "Bring bins back",
+          "units": 2.0,
+          "member": "rina",
+          "completed_at": "2026-10-20T15:36:00+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "units": 14.0,
       "member": "rohil",
       "period": "month",
       "entries": [
@@ -1776,30 +2023,8 @@
         {
           "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
           "title": "Bring bins back",
-          "units": 4.0,
+          "units": 2.0,
           "member": "rohil",
-          "completed_at": "2026-10-20T15:36:00+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 3,
-      "units": 10.0,
-      "member": "rina",
-      "period": "month",
-      "entries": [
-        {
-          "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
-          "title": "Grocery pick up",
-          "units": 6.0,
-          "member": "rina",
-          "completed_at": "2026-10-20T15:38:00+00:00"
-        },
-        {
-          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
-          "title": "Bring bins back",
-          "units": 4.0,
-          "member": "rina",
           "completed_at": "2026-10-20T15:36:00+00:00"
         }
       ]
@@ -1813,7 +2038,7 @@
     },
     {
       "rank": 1,
-      "units": 22.0,
+      "units": 26.0,
       "member": "michal",
       "period": "week",
       "entries": [
@@ -1827,14 +2052,14 @@
         {
           "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
           "title": "Grocery pick up",
-          "units": 6.0,
+          "units": 12.0,
           "member": "michal",
           "completed_at": "2026-10-20T15:38:00+00:00"
         },
         {
           "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
           "title": "Bring bins back",
-          "units": 4.0,
+          "units": 2.0,
           "member": "michal",
           "completed_at": "2026-10-20T15:36:00+00:00"
         }
@@ -1842,7 +2067,29 @@
     },
     {
       "rank": 2,
-      "units": 16.0,
+      "units": 14.0,
+      "member": "rina",
+      "period": "week",
+      "entries": [
+        {
+          "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
+          "title": "Grocery pick up",
+          "units": 12.0,
+          "member": "rina",
+          "completed_at": "2026-10-20T15:38:00+00:00"
+        },
+        {
+          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
+          "title": "Bring bins back",
+          "units": 2.0,
+          "member": "rina",
+          "completed_at": "2026-10-20T15:36:00+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "units": 14.0,
       "member": "rohil",
       "period": "week",
       "entries": [
@@ -1856,30 +2103,8 @@
         {
           "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
           "title": "Bring bins back",
-          "units": 4.0,
+          "units": 2.0,
           "member": "rohil",
-          "completed_at": "2026-10-20T15:36:00+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 3,
-      "units": 10.0,
-      "member": "rina",
-      "period": "week",
-      "entries": [
-        {
-          "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
-          "title": "Grocery pick up",
-          "units": 6.0,
-          "member": "rina",
-          "completed_at": "2026-10-20T15:38:00+00:00"
-        },
-        {
-          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
-          "title": "Bring bins back",
-          "units": 4.0,
-          "member": "rina",
           "completed_at": "2026-10-20T15:36:00+00:00"
         }
       ]
@@ -1894,6 +2119,103 @@
   ],
   "format_version": 1,
   "routine_history": [
+    {
+      "id": "10986bd6-79a1-4a69-b799-e4938953c007",
+      "actor": "michal",
+      "steps": [
+        {
+          "id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
+          "kind": "chore",
+          "note": "",
+          "time": null,
+          "title": "Take out the trash",
+          "points": 0.5,
+          "icon_id": "trash",
+          "weekday": 0,
+          "preset_id": "trash-out",
+          "point_policy": "household-v1"
+        }
+      ],
+      "title": "Take out the trash",
+      "owners": [
+        "ohm",
+        "michal",
+        "rina",
+        "rohil"
+      ],
+      "enabled": true,
+      "version": 3,
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "start_week": "2026-10-26",
+      "start_index": 0,
+      "effective_on": "2026-10-26",
+      "interval_weeks": 1
+    },
+    {
+      "id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
+      "actor": "michal",
+      "steps": [
+        {
+          "id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
+          "kind": "chore",
+          "note": "",
+          "time": null,
+          "title": "Bring bins back",
+          "points": 0.5,
+          "icon_id": "bins",
+          "weekday": 1,
+          "preset_id": "bins-return",
+          "point_policy": "household-v1"
+        }
+      ],
+      "title": "Bin return",
+      "owners": [
+        "rohil",
+        "rina",
+        "ohm",
+        "michal"
+      ],
+      "enabled": true,
+      "version": 3,
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "start_week": "2026-10-26",
+      "start_index": 0,
+      "effective_on": "2026-10-26",
+      "interval_weeks": 1
+    },
+    {
+      "id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
+      "actor": "michal",
+      "steps": [
+        {
+          "id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+          "kind": "chore",
+          "note": "",
+          "time": null,
+          "title": "Put in new trash bag",
+          "points": 0.5,
+          "icon_id": "trash-bag",
+          "weekday": 0,
+          "preset_id": "trash-bag",
+          "point_policy": "household-v1"
+        }
+      ],
+      "title": "Put in new trash bag",
+      "owners": [
+        "ohm",
+        "michal",
+        "rina",
+        "rohil"
+      ],
+      "enabled": true,
+      "version": 3,
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "start_week": "2026-10-26",
+      "start_index": 0,
+      "effective_on": "2026-10-26",
+      "interval_weeks": 1,
+      "occurrence_root": "10986bd6-79a1-4a69-b799-e4938953c007"
+    },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "actor": "michal",
@@ -2075,5 +2397,266 @@
       "occurrence_root": "10986bd6-79a1-4a69-b799-e4938953c007"
     }
   ],
-  "projection_until": "2027-01-12"
+  "projection_until": "2027-01-12",
+  "point_adjustments": [
+    {
+      "id": "2b8a273b382a2742ed12fe2a37fb5668",
+      "actor": "michal",
+      "reason": "Adopt household-v1 standardized points",
+      "task_id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-10-26:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+      "reverses": null,
+      "after_data": {
+        "kind": "chore",
+        "note": "",
+        "state": "active",
+        "title": "Put in new trash bag",
+        "due_at": "2026-10-27T04:00:00+00:00",
+        "due_on": "2026-10-26",
+        "pinned": false,
+        "points": 0.5,
+        "icon_id": "trash-bag",
+        "step_id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+        "assignee": "ohm",
+        "due_time": null,
+        "cycle_end": "2026-11-02T05:00:00+00:00",
+        "preset_id": "trash-bag",
+        "requester": "rina",
+        "completion": null,
+        "expires_at": null,
+        "expires_on": null,
+        "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
+        "cycle_start": "2026-10-26",
+        "expires_time": null,
+        "point_policy": "household-v1",
+        "routine_title": "Put in new trash bag",
+        "schedule_version": 1
+      },
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "before_data": {
+        "kind": "chore",
+        "note": "",
+        "state": "active",
+        "title": "Put in new trash bag",
+        "due_at": "2026-10-27T04:00:00+00:00",
+        "due_on": "2026-10-26",
+        "pinned": false,
+        "points": 0.5,
+        "icon_id": "trash-bag",
+        "step_id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+        "assignee": "ohm",
+        "due_time": null,
+        "cycle_end": "2026-11-02T05:00:00+00:00",
+        "requester": "rina",
+        "completion": null,
+        "expires_at": null,
+        "expires_on": null,
+        "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
+        "cycle_start": "2026-10-26",
+        "expires_time": null,
+        "routine_title": "Put in new trash bag",
+        "schedule_version": 1
+      },
+      "after_version": 2,
+      "before_version": 1,
+      "policy_version": "household-v1"
+    },
+    {
+      "id": "9e9ee1de9adf233ba4d695312b1d853b",
+      "actor": "michal",
+      "reason": "Adopt household-v1 standardized points",
+      "task_id": "31aed63b-53a9-4435-8df5-83abd586818d",
+      "reverses": null,
+      "after_data": {
+        "kind": "chore",
+        "note": "",
+        "state": "completed",
+        "title": "Pick up bananas",
+        "due_at": null,
+        "due_on": null,
+        "pinned": false,
+        "points": 1,
+        "icon_id": "bananas",
+        "assignee": "rohil",
+        "due_time": null,
+        "cycle_end": null,
+        "preset_id": "bananas",
+        "requester": "rohil",
+        "completion": {
+          "completed_at": "2026-10-20T19:18:00+00:00",
+          "contributors": [
+            "rohil"
+          ]
+        },
+        "expires_at": "2026-10-21T04:00:00+00:00",
+        "expires_on": "2026-10-20",
+        "routine_id": null,
+        "cycle_start": null,
+        "expires_time": null,
+        "point_policy": "household-v1"
+      },
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "before_data": {
+        "note": "",
+        "state": "completed",
+        "title": "Pick up bananas",
+        "due_at": null,
+        "due_on": null,
+        "pinned": false,
+        "points": 1,
+        "icon_id": "bananas",
+        "assignee": "rohil",
+        "due_time": null,
+        "cycle_end": null,
+        "requester": "rohil",
+        "completion": {
+          "completed_at": "2026-10-20T19:18:00+00:00",
+          "contributors": [
+            "rohil"
+          ]
+        },
+        "expires_at": "2026-10-21T04:00:00+00:00",
+        "expires_on": "2026-10-20",
+        "routine_id": null,
+        "cycle_start": null,
+        "expires_time": null
+      },
+      "after_version": 4,
+      "before_version": 3,
+      "policy_version": "household-v1"
+    },
+    {
+      "id": "08c21b9a4e5f70c7c9d3638beea37171",
+      "actor": "michal",
+      "reason": "Adopt household-v1 standardized points",
+      "task_id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
+      "reverses": null,
+      "after_data": {
+        "kind": "chore",
+        "note": "Help with picking up groceries from star market (paper towels)",
+        "state": "completed",
+        "title": "Grocery pick up",
+        "due_at": "2026-10-20T15:00:00+00:00",
+        "due_on": "2026-10-20",
+        "pinned": false,
+        "points": 2,
+        "icon_id": "parcel",
+        "assignee": null,
+        "due_time": "11:00",
+        "cycle_end": null,
+        "preset_id": "shared-groceries",
+        "requester": "rina",
+        "completion": {
+          "completed_at": "2026-10-20T15:38:00+00:00",
+          "contributors": [
+            "michal",
+            "rina"
+          ]
+        },
+        "expires_at": null,
+        "expires_on": null,
+        "routine_id": null,
+        "cycle_start": null,
+        "expires_time": null,
+        "point_policy": "household-v1"
+      },
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "before_data": {
+        "note": "Help with picking up groceries from star market (paper towels)",
+        "state": "completed",
+        "title": "Grocery pick up",
+        "due_at": "2026-10-20T15:00:00+00:00",
+        "due_on": "2026-10-20",
+        "pinned": false,
+        "points": 1,
+        "icon_id": "parcel",
+        "assignee": null,
+        "due_time": "11:00",
+        "cycle_end": null,
+        "requester": "rina",
+        "completion": {
+          "completed_at": "2026-10-20T15:38:00+00:00",
+          "contributors": [
+            "michal",
+            "rina"
+          ]
+        },
+        "expires_at": null,
+        "expires_on": null,
+        "routine_id": null,
+        "cycle_start": null,
+        "expires_time": null
+      },
+      "after_version": 3,
+      "before_version": 2,
+      "policy_version": "household-v1"
+    },
+    {
+      "id": "7874a686a8ff6e8fb2d3841e5666515a",
+      "actor": "michal",
+      "reason": "Adopt household-v1 standardized points",
+      "task_id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
+      "reverses": null,
+      "after_data": {
+        "kind": "chore",
+        "note": "Brought bins back",
+        "state": "completed",
+        "title": "Bring bins back",
+        "due_at": "2026-10-20T15:36:00+00:00",
+        "due_on": "2026-10-20",
+        "pinned": false,
+        "points": 0.5,
+        "icon_id": "bins",
+        "assignee": null,
+        "due_time": "11:36",
+        "cycle_end": null,
+        "preset_id": "bins-return",
+        "requester": "michal",
+        "completion": {
+          "completed_at": "2026-10-20T15:36:00+00:00",
+          "contributors": [
+            "michal",
+            "rina",
+            "rohil"
+          ]
+        },
+        "expires_at": null,
+        "expires_on": null,
+        "routine_id": null,
+        "cycle_start": null,
+        "expires_time": null,
+        "point_policy": "household-v1"
+      },
+      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "before_data": {
+        "note": "Brought bins back",
+        "state": "completed",
+        "title": "Bring bins back",
+        "due_at": "2026-10-20T15:36:00+00:00",
+        "due_on": "2026-10-20",
+        "pinned": false,
+        "points": 1,
+        "icon_id": "bins",
+        "assignee": null,
+        "due_time": "11:36",
+        "cycle_end": null,
+        "requester": "michal",
+        "completion": {
+          "completed_at": "2026-10-20T15:36:00+00:00",
+          "contributors": [
+            "michal",
+            "rina",
+            "rohil"
+          ]
+        },
+        "expires_at": null,
+        "expires_on": null,
+        "routine_id": null,
+        "cycle_start": null,
+        "expires_time": null
+      },
+      "after_version": 3,
+      "before_version": 2,
+      "policy_version": "household-v1"
+    }
+  ]
 }

@@ -1,12 +1,12 @@
 # Household refresh roadmap
 
-October 20, 2026 release: S1–S7 and the finalized artwork are implemented and verified. S8 remains a separate design follow-up. Architecture and setup are documented in [HANDOFF.md](HANDOFF.md).
+October 20, 2026 release: S1–S7 and the finalized artwork are implemented and verified. The October 21 follow-up implements Events, note reactions, expense balancing, and the agreed point catalog; utility rewards remain deferred. Architecture and setup are documented in [HANDOFF.md](HANDOFF.md).
 
 ## Agreed direction
 
 Muted filled tiles identify Michal (lavender), Rina (rose), Ohm (cyan), and Rohil (amber). Assignee colors identify tasks; requester colors identify unassigned tasks; payer colors identify purchases; authors retain their note colors. Between-person repayments remain neutral with separate participant identities. Names and status labels remain readable independently of color. Light and dark surfaces are tuned separately.
 
-All four characters are approved and integrated. Hashed, allowlisted WebP derivatives supply the app; source artwork remains outside the public build. Financial records are preserved. The user authorized one targeted retroactive change: split the existing trash routine into two 0.5-point items; no other point policy is applied.
+All four characters are approved and integrated. Hashed, allowlisted WebP derivatives supply the app; source artwork remains outside the public build. Financial records are preserved. The user authorized one targeted retroactive change: split the existing trash routine into two 0.5-point items; The October 21 follow-up additionally adopts the agreed fixed job presets through recorded revisions.
 
 ## Implemented locally
 
@@ -62,15 +62,17 @@ All four characters are approved and integrated. Hashed, allowlisted WebP deriva
 - [x] S7.4 Chore/purchase history markup is deferred until details open; open panels survive refreshes. Saved fallback data remains read-only and isolated by module.
 - [x] S7.5 Notification links, exports, themes, identity, retries, and cached deployments covered by regression checks.
 
-## S8 — Design artifacts ready; decisions deliberately pending
+## S8 — Events, points, reactions, and expense corrections
 
-- [x] S8.1 [Interactive events prototype](docs/events-prototype.html): separate tab versus Chores subview, time responses, alternate suggestions, and an availability grid. Open locally; sample data only, no backend calls or persistence.
-- [x] S8.2 `scripts/preview-points.mjs` produces before/after totals and per-task changes from an exported ledger and a proposed policy. It has no database client or mutation path.
-- [ ] S8.3 Choose event placement, organizer/finalization controls, response editing, cancellation, and notification rules before adding production event APIs.
-- [ ] S8.4 Choose point values, date range, ties/eligibility, reward budget, funding, and treatment of Michal as the bill payer. Inspect the preview before applying any adjustment.
-- [ ] S8.5 Implement append-only point adjustments and separate utility-credit entries only after that policy is agreed. Never turn a credit into a fake provider bill or reimbursement.
-
-See [next design session](docs/next-design-session.md) for concrete decisions and preview usage.
+- [x] Expenses and To-dos replace the visible old tab names, preserving links and data identifiers. Expense tiles reuse the accepted corner peel; Alcohol joins the icon picker.
+- [x] Automatic custom balancing preserves edited shares and distributes only the remainder. Conflicting edits are prevented; fixed shares can return to Auto. Excluding self with one recipient assigns the full total. Guest splitting is secondary, below ordinary split controls.
+- [x] Separate Events tab, agenda/month calendar, festive invitation cards, interval proposals, Yes/Maybe/No responses, approving portraits, and host confirmation/cancellation. Time edits reopen voting; histories and retries remain intact.
+- [x] Fixed household job presets plus custom effort. Explicit historical mapping, append-only adjustments and revisions, exact contributor credit, safe reversal, and preserved routine start dates. Utilities remain independent.
+- [x] One changeable character reaction per person per note, six expressions, still cached thumbnails and brief selection animation. Author temperature is unchanged.
+- [x] New migrations 013–015 rehearsed against the actual backup; original IDs, revision history, dates, owners, and completions preserved. User completed live schema setup.
+- [x] Live historical scores verified, five fallback exports refreshed, and frontend release checks passed. Publication uses the existing Pages workflow; smoke checks make no live test entries.
+- [ ] Later: alternate-time polling/when2meet, recurring events, external event guests, and opt-in event notifications.
+- [ ] Later: utility-credit rewards after budget, eligibility, ties, and funding are agreed.
 
 ## Independent artwork track
 
@@ -87,7 +89,7 @@ See [next design session](docs/next-design-session.md) for concrete decisions an
 4. Run `./export-ledgers.sh` after the upgrade to refresh offline snapshots, then `./publish.sh`. GitHub Actions publishes the refreshed frontend. The user has explicitly authorized deployment once checks pass.
 5. Smoke-test reads, navigation, theme, routines, and notification links. Do not create fake live entries. Check both trash routines have one 0.5-point item, the bag icon is set, and occurrence IDs/completions and unrelated records survive.
 
-Release status: the user ran the schema upgrade locally. Live verification confirmed the independent half-point routines, bag icon, preserved occurrence IDs/completions, unchanged earned scores, both financial ledgers, and bulletin. Offline snapshots were refreshed. Frontend publication uses the [Pages workflow](https://github.com/MLewkowicz/household-utilities/actions/workflows/pages.yml). Events and the broader utility-credit policy remain the separate S8 follow-up phase; they are not enabled by this release.
+Release status: the user ran the schema upgrade locally. Live verification confirmed the independent half-point routines, bag icon, preserved occurrence IDs/completions, unchanged earned scores, both financial ledgers, and bulletin. Offline snapshots were refreshed. Frontend publication uses the [Pages workflow](https://github.com/MLewkowicz/household-utilities/actions/workflows/pages.yml). The earlier release preserved all financial data; the S8 implementation above supersedes its deferred Events and point-catalog scope. Utility-credit rewards remain deferred.
 
 New optional task/step fields: `kind`; task-only `reminder_group_id`. Old snapshots remain readable through inferred kinds. Group creation is transactional and has a separate retry fingerprint. Existing `utilities_save_chore` adds `quick_complete`, with current-time completion and automatic assignment; no financial API changes.
 
@@ -100,4 +102,8 @@ New optional task/step fields: `kind`; task-only `reminder_group_id`. Old snapsh
 
 Character integration: TypeScript, build, privacy check, nine avatar/bulletin browser scenarios, and the standalone four-character animation checks pass. Approved artwork files are unchanged; the exported runtime can be refreshed with `node scripts/export-avatars.mjs --motion-only`.
 
-Next starting point: continue the deliberately deferred S8 events and reward-policy design decisions. The current release adds no utility credits or production events.
+Next starting point: iterate on the production Events experience and reaction artwork as requested. The release adds no utility credits.
+
+## October 21 validation
+
+86 Node/database tests, 8 Python tests, and 43 browser scenarios pass. New coverage includes exact-cent split balancing and conflicts, single-recipient requests, event lifecycle and DST boundaries, reaction retries/replacement/removal, preset enforcement, historical adjustment/reversal, and undo/recompletion. Existing financial, task, notification, avatar, and offline behavior remains covered. Visual checks include all four characters, mobile light/dark themes, and 320px navigation. Live score verification passed: Michal +1/3, Rina +1/3, Rohil −1/6, Ohm unchanged; financial ledgers, notes, and events unchanged.

@@ -24,7 +24,7 @@ function eyeShape(ctx,cx,cy,heartAmount,blink,angry,side,delight=0){
 
 export class AvatarRenderer{
   constructor(canvas,small,base,original,character='michal'){
-    this.character=CHARACTERS[character];if(!this.character)throw new Error('Unknown avatar character');
+    this.expression=null;this.character=CHARACTERS[character];if(!this.character)throw new Error('Unknown avatar character');
     this.canvas=canvas;this.ctx=canvas.getContext('2d');this.small=small;this.smallCtx=small?.getContext('2d');this.base=base;this.original=original;
     this.steam=[];this.vapor=[];this.floating=[];this.emit=0;this.vaporEmit=0;this.heartEmit=0;this.time=0;this.frames=0;this.lastMini=0;this.width=0;this.height=0;
     if(!steamSprite){
@@ -103,7 +103,8 @@ export class AvatarRenderer{
     const ctx=this.ctx;ctx.setTransform(this.dpr,0,0,this.dpr,0,0);ctx.clearRect(0,0,this.width,this.height);
     const shake=animate&&effects.steam?Math.sin(this.time*.055)*mood.steam*mood.steam*2:0;
     const bob=animate?Math.sin(this.time*.0017)*(1+mood.love*4):0;
-    const tilt=compare?0:mood.love*(.025+(animate?Math.sin(this.time*.0018)*.04:0));
+    const reactionTilt=this.expression==='disappointed'&&animate?Math.sin(this.time*.012)*.09:this.expression==='crying-laughing'&&animate?Math.sin(this.time*.018)*.045:0;
+    const tilt=compare?0:reactionTilt+mood.love*(.025+(animate?Math.sin(this.time*.0018)*.04:0));
     ctx.save();ctx.translate(this.cx+shake,this.cy+bob);ctx.rotate(tilt);ctx.scale(this.scale,this.scale);ctx.translate(-500,-500);
     const power=effects.steam?mood.steam:0;
     if(!compare&&power>.01)this.drawSteam(ctx,power,animate);
@@ -176,6 +177,7 @@ export class AvatarRenderer{
     if(m.blush>.01){const [x,y]=this.character.nose;const g=ctx.createRadialGradient(x,y,2,x,y,31);g.addColorStop(0,`rgba(224,63,105,${m.blush*.23})`);g.addColorStop(1,'rgba(224,63,105,0)');ctx.fillStyle=g;ctx.fillRect(x-31,y-31,62,62);}
   }
   drawFace(ctx,m,effects,animate){
+    if(this.expression){this.drawReactionFace(ctx,this.expression,animate);return;}
     const heartAmount=effects.hearts?m.hearts:0;
     const phase=(this.time%5200)/5200;
     const blink=animate&&phase>.945?Math.pow(Math.sin((phase-.945)/.055*Math.PI),2)*(1-heartAmount):0;
@@ -195,6 +197,34 @@ export class AvatarRenderer{
     }
     this.drawMouth(ctx,m,animate);
     if(this.character.occlusion)ctx.drawImage(this.foreground,0,0,1000,1000);
+  }
+  drawReactionFace(ctx,expression,animate){
+    const c=this.character,laugh=expression==='crying-laughing'||expression==='gentle-laughing',big=expression==='crying-laughing';
+    const pulse=animate?Math.sin(this.time*.018):0;
+    ctx.save();ctx.strokeStyle='#35251f';ctx.lineWidth=12;ctx.lineCap='round';ctx.lineJoin='round';
+    for(const side of [-1,1]){
+      const x=c.eyeX+side*c.eyeGap,y=c.eyeY;
+      ctx.save();ctx.translate(x,y);ctx.scale(c.eyeScale,c.eyeScale);
+      if(laugh||expression==='disappointed'||expression==='vomit'){
+        ctx.beginPath();ctx.moveTo(-58,5);ctx.quadraticCurveTo(0,laugh?-50:expression==='vomit'?-18:25,58,5);ctx.stroke();
+      }else{
+        const h=expression==='mogging'?14:side<0?30:18;
+        ctx.fillStyle='#fff5e5';ctx.beginPath();ctx.ellipse(0,0,61,h,0,0,TAU);ctx.fill();ctx.stroke();ctx.fillStyle=c.iris[0];ctx.beginPath();ctx.ellipse(expression==='confused'?14:0,0,18,h*.85,0,0,TAU);ctx.fill();ctx.fillStyle='#211b17';ctx.beginPath();ctx.arc(expression==='confused'?14:0,0,9,0,TAU);ctx.fill();
+      }
+      if(big){ctx.fillStyle='#74c5e0';ctx.beginPath();const drop=20+(animate?(1+pulse)*12:0);ctx.moveTo(side*64,20);ctx.bezierCurveTo(side*100,drop+35,side*94,drop+80,side*62,drop+70);ctx.bezierCurveTo(side*42,drop+60,side*49,drop+30,side*64,20);ctx.fill();}
+      ctx.restore();
+      const raised=expression==='confused'&&side<0;
+      ctx.save();ctx.translate(x,c.browY-(raised?48:laugh?18:0));ctx.rotate(expression==='mogging'?-side*.12:expression==='disappointed'?side*.16:raised?-.12:0);ctx.strokeStyle=c.browColor[0];ctx.lineWidth=c.browStyle==='bold'?24:17;ctx.beginPath();ctx.moveTo(-65,8);ctx.quadraticCurveTo(0,raised?-32:-15,65,6);ctx.stroke();ctx.restore();
+    }
+    if(c.occlusion&&expression==='vomit')ctx.drawImage(this.foreground,0,0,1000,1000);
+    ctx.save();ctx.translate(c.mouthX,c.mouthY);ctx.scale(c.mouthScale,c.mouthScaleY||c.mouthScale);
+    ctx.strokeStyle='#513424';ctx.lineWidth=12;ctx.beginPath();
+    if(laugh){const w=big?112:78,h=big?125+pulse*10:48;ctx.moveTo(-w,-10);ctx.quadraticCurveTo(0,15,w,-10);ctx.quadraticCurveTo(0,h,-w,-10);ctx.fillStyle='#482c28';ctx.fill();ctx.stroke();ctx.fillStyle='#fff8e8';ctx.beginPath();ctx.moveTo(-w+8,-5);ctx.quadraticCurveTo(0,18,w-8,-5);ctx.lineTo(w-20,15);ctx.quadraticCurveTo(0,37,-w+20,15);ctx.fill();}
+    else if(expression==='vomit'){ctx.fillStyle='#514a28';ctx.ellipse(0,8,50,35,0,0,TAU);ctx.fill();ctx.stroke();ctx.fillStyle='#a0bc5e';ctx.beginPath();ctx.moveTo(-33,15);ctx.bezierCurveTo(-20,70,-70,100,-50,145+pulse*10);ctx.quadraticCurveTo(0,173,55,147);ctx.bezierCurveTo(75,105,23,65,33,15);ctx.closePath();ctx.fill();ctx.strokeStyle='#cfdf8b';ctx.lineWidth=9;ctx.beginPath();ctx.moveTo(-8,36);ctx.quadraticCurveTo(-27,95,-14,122);ctx.stroke();}
+    else if(expression==='mogging'){ctx.moveTo(-72,4);ctx.quadraticCurveTo(15,30,91,-23);ctx.stroke();ctx.lineWidth=6;ctx.globalAlpha=.48;ctx.beginPath();ctx.moveTo(-150,0);ctx.lineTo(-105,120);ctx.lineTo(0,155);ctx.lineTo(105,120);ctx.lineTo(150,0);ctx.stroke();}
+    else if(expression==='confused'){ctx.moveTo(-62,15);ctx.quadraticCurveTo(0,-4,62,8);ctx.stroke();}
+    else{ctx.moveTo(-70,14);ctx.quadraticCurveTo(0,-28,70,14);ctx.stroke();}
+    ctx.restore();if(c.occlusion&&expression!=='vomit')ctx.drawImage(this.foreground,0,0,1000,1000);ctx.restore();
   }
   drawBrow(ctx,side,m,animate){
     const cx=this.character.eyeX+side*this.character.eyeGap;
