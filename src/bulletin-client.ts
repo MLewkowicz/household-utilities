@@ -1,4 +1,5 @@
-import {NOTE_REACTIONS,expressionLabel,reactionPortrait,paintReactionThumbnails,animateReaction,stopReactionAnimation,type NoteExpression} from './note-reactions';
+import {cornerTab} from './tile-corner';
+import {NOTE_REACTIONS,expressionLabel,reactionPortrait,paintReactionThumbnails,animateReaction,stopReactionAnimation,setReactionsPaused,type NoteExpression} from './note-reactions';
 import {avatar} from './people';
 import {info} from './disclosure';
 import {MEMBERS,type Member} from './ledger';
@@ -15,7 +16,7 @@ import {localDateTime} from './chores';
 import {type Bulletin,type BulletinNote,temperatureLabel,notePlacement} from './bulletin';
 import {reactionSVG} from './reactions';
 import {bulletinCharacter,watchBulletinCharacters} from './bulletin-avatars';
-import {thumbtack,noteFold,boardStand} from './bulletin-art';
+import {thumbtack,boardStand} from './bulletin-art';
 
 let ledger:Bulletin|undefined,live=false,loading=false,busy=false,refreshAgain=false;
 let reactingNote='';
@@ -32,12 +33,12 @@ function error(id:string,message:string){$('#'+id).textContent=message;$('#'+id)
 const tempText=(value:number)=>`${value<0?'Complaint':value>0?'Compliment':'Neutral'} · ${Math.abs(value)}/100`;
 function dialog(id:string,title:string,content:string,button:string){return `<dialog id="${id}-dialog" class="bulletin-dialog" aria-labelledby="${id}-heading"><form id="${id}-form"><div class="dialog-top"><h2 id="${id}-heading" tabindex="-1" autofocus>${title}</h2><button type="button" class="icon-button" data-bulletin-close="${id}" aria-label="Close">×</button></div>${content}<p id="${id}-error" class="form-error" role="alert" hidden></p><div class="dialog-actions"><button type="button" class="button secondary" data-bulletin-close="${id}">Cancel</button><button type="submit" id="${id}-save" class="button primary">${button}</button></div></form></dialog>`;}
 export function initBulletin(){
- $('#bulletin-page').innerHTML=`<section class="intro"><div><div class="eyebrow">LITTLE NOTES, BIG FEELINGS</div><h1>The bulletin board<span class="brand-period">.</span></h1><p class="intro-copy">A corner for your gripes. A corner for your gratitude.</p></div><div class="intro-side"><span class="status"><span class="status-dot"></span><span id="bulletin-status">Loading notes</span></span><button id="bulletin-new" class="button primary" disabled>＋ Pin a note</button></div></section>
+ $('#bulletin-page').innerHTML=`<section class="intro"><div><h1>Bulletin</h1></div><div class="intro-side"><span class="status"><span class="status-dot"></span><span id="bulletin-status">Loading notes</span></span><button id="bulletin-new" class="button primary" disabled>＋ Pin a note</button></div></section>
  <div id="bulletin-notice" class="ledger-notice" role="status" hidden></div>
- <section id="bulletin-identity" class="identity-panel"><div><div class="eyebrow">MAKE YOURSELF AT HOME</div><h2>Who are you?</h2><p class="section-copy">Put a name to your note.</p><p id="bulletin-identity-error" class="form-error" role="alert" hidden></p></div><div class="identity-choices">${MEMBERS.map(m=>`<button class="person-tile member-${m}" data-bulletin-person="${m}">${avatar(m)}<span>I’m ${name(m)}</span></button>`).join('')}</div></section>
- <div id="bulletin-identity-bar" class="identity-bar" hidden><span id="bulletin-identity-name"></span><button id="bulletin-switch" class="text-button">Switch person</button><span class="identity-caption">A little honesty. A little kindness.</span></div>
+ <section id="bulletin-identity" class="identity-panel"><div><h2>Choose your name</h2><p id="bulletin-identity-error" class="form-error" role="alert" hidden></p></div><div class="identity-choices">${MEMBERS.map(m=>`<button class="person-tile member-${m}" data-bulletin-person="${m}">${avatar(m)}<span>I’m ${name(m)}</span></button>`).join('')}</div></section>
+ <div id="bulletin-identity-bar" class="identity-bar" hidden><span id="bulletin-identity-name"></span><button id="bulletin-switch" class="text-button">Switch person</button></div>
  <nav class="chore-views bulletin-views" aria-label="Bulletin views">${[['board','The board'],['activity','By the numbers']].map(([v,label])=>`<button data-bulletin-view="${v}" aria-pressed="${v==='board'}">${label}</button>`).join('')}</nav><div id="bulletin-content"></div>`;
- document.body.insertAdjacentHTML('beforeend',dialog('bulletin-note','Pin a little feeling.',`
+ document.body.insertAdjacentHTML('beforeend',dialog('bulletin-note','Pin a note',`
  <div class="temperature-control"><div id="bulletin-reaction" class="bulletin-reaction"></div><div class="temperature-caption"><strong id="bulletin-expression"></strong><output id="bulletin-temperature-output" for="bulletin-temperature"></output></div>
  <label for="bulletin-temperature" class="sr-only">Temperature</label><input type="range" id="bulletin-temperature" min="-100" max="100" step="1" value="35" aria-describedby="bulletin-temperature-help"><div class="temperature-ends"><span>← Complaint</span><span>Compliment →</span></div><p id="bulletin-temperature-help" class="field-help">Slide to find the feeling.</p></div>
  <fieldset class="chore-contributors"><legend>Who’s this for?</legend><div class="chore-member-options">${MEMBERS.map(m=>`<label class="chore-check-tile member-${m}"><input type="checkbox" name="bulletin-recipient" value="${m}">${avatar(m)}${name(m)}</label>`).join('')}</div></fieldset>
@@ -69,7 +70,7 @@ export function initBulletin(){
  $('#bulletin-note-form').addEventListener('submit',event=>{
   event.preventDefault();const recipients=[...document.querySelectorAll<HTMLInputElement>('input[name=bulletin-recipient]:checked')].map(el=>el.value);
   if(!recipients.length){error('bulletin-note-error','Choose at least one person this note is for.');return;}
-  if(!field('bulletin-body').value.trim()){error('bulletin-note-error','Write a little note first.');return;}
+  if(!field('bulletin-body').value.trim()){error('bulletin-note-error','Write a note first.');return;}
   const temperature=Number(field('bulletin-temperature').value);if(!temperature){error('bulletin-note-error','Slide toward a complaint or a compliment before pinning.');return;}
   void save('bulletin-note',{id:noteId,expected_version:draft?.version||0,action:draft?'edit':'create',actor:identity,body:field('bulletin-body').value.trim(),recipients,temperature});
  });
@@ -100,7 +101,7 @@ function noteCard(note:BulletinNote){
  ${thumbtack}<div class="note-top"><div class="note-to"><span>To</span> ${note.recipients.map(chip).join(' ')}</div><span class="note-reaction">${bulletinCharacter(note.author,note.temperature)}</span></div>
  <p class="note-body">${esc(note.body)}</p><div class="note-byline"><span>From ${chip(note.author)}</span><time datetime="${esc(note.posted_at)}" title="${stamp(note.posted_at)}">${date(localDateTime(note.posted_at))}</time></div>
  ${note.deleted?'':noteResponses(note)}
- <details class="note-tools" id="note-tools-${esc(note.id)}"><summary class="note-fold" id="note-fold-${esc(note.id)}" aria-label="Note details and actions" title="Lift for details & editing">${noteFold}</summary><div class="note-tools-panel">
+ <details class="note-tools" id="note-tools-${esc(note.id)}">${cornerTab('note by '+name(note.author)).replace('class="chore-corner-tab"',`class="chore-corner-tab note-fold" id="note-fold-${esc(note.id)}"`)}<div class="note-tools-panel">
  <p class="note-extra">${note.deleted?'Taken down · ':''}${tempText(note.temperature)}<br>${temperatureLabel(note.temperature)}</p>
  ${writable?`<div class="note-actions">${note.deleted?'<button class="text-button" data-bulletin-command="restore">Restore</button>':'<button class="text-button" data-bulletin-command="edit">Edit note</button><button class="text-button" data-bulletin-command="delete">Delete note</button>'}</div>`:!identity&&live?'<p class="note-extra">Choose your name above to edit this note.</p>':''}
  ${history(note)}</div></details></article>`;
@@ -129,17 +130,17 @@ async function saveReaction(expression:NoteExpression){
 function board(){
  const notes=(ledger?.notes||[]).filter(n=>(showDeleted||!n.deleted)&&(kind==='all'||n.kind===kind)&&(recipient==='all'||n.recipients.includes(recipient as Member)));
  const title='Notes from home.';
- return `<div class="bulletin-section-top"><div><div class="bulletin-heading"><h2>${title}</h2>${notes.length?'<button id="bulletin-motion" class="bulletin-motion-toggle" type="button" aria-label="Pause character animations"></button>':''}</div><p class="section-copy">${notes.length} note${notes.length===1?'':'s'} pinned · lift a paper corner for details.</p></div><div class="bulletin-filters"><label>Notes<select id="bulletin-kind-filter">${[['all','All notes'],['complaint','Complaints only'],['compliment','Compliments only']].map(([v,l])=>`<option value="${v}" ${kind===v?'selected':''}>${l}</option>`).join('')}</select></label><label>Directed to<select id="bulletin-recipient-filter"><option value="all">Everyone</option>${MEMBERS.map(m=>`<option value="${m}" ${recipient===m?'selected':''}>${name(m)}</option>`).join('')}</select></label><label class="chore-inline-check"><input type="checkbox" id="bulletin-show-deleted" ${showDeleted?'checked':''}> Show deleted</label></div></div><div class="bulletin-display"><div class="bulletin-board" aria-label="Pinned notes">${notes.length?`<div class="bulletin-columns">${notes.map(noteCard).join('')}</div>`:`<div class="bulletin-empty"><div class="empty-papers" aria-hidden="true"><span>${thumbtack}${reactionSVG(-48)}</span><span>${thumbtack}${reactionSVG(70)}</span></div><h3>${recipient!=='all'?'No notes for '+name(recipient)+' here yet.':'A fresh patch of board.'}</h3><p>${kind==='complaint'?'A small gripe or a big feeling—put it into words.':kind==='compliment'?'Someone made your day? Leave them a little love.':'A thank-you, a pet peeve, a little something to say.'}</p></div>`}</div>${boardStand}</div><p class="bulletin-end">${notes.length?'You’ve reached the last note.':'Your next note has a place here.'} <a href="./credits.txt" class="bulletin-credit" target="_blank" rel="noopener">Art credits</a></p>`;
+ return `<div class="bulletin-section-top"><div><div class="bulletin-heading"><h2>${title}</h2>${notes.length?'<button id="bulletin-motion" class="bulletin-motion-toggle" type="button" aria-label="Pause character animations"></button>':''}</div><p class="section-copy">${notes.length} note${notes.length===1?'':'s'} pinned.</p></div><div class="bulletin-filters"><label>Notes<select id="bulletin-kind-filter">${[['all','All notes'],['complaint','Complaints only'],['compliment','Compliments only']].map(([v,l])=>`<option value="${v}" ${kind===v?'selected':''}>${l}</option>`).join('')}</select></label><label>Directed to<select id="bulletin-recipient-filter"><option value="all">Everyone</option>${MEMBERS.map(m=>`<option value="${m}" ${recipient===m?'selected':''}>${name(m)}</option>`).join('')}</select></label><label class="chore-inline-check"><input type="checkbox" id="bulletin-show-deleted" ${showDeleted?'checked':''}> Show deleted</label></div></div><div class="bulletin-display"><div class="bulletin-board" aria-label="Pinned notes">${notes.length?`<div class="bulletin-columns">${notes.map(noteCard).join('')}</div>`:`<div class="bulletin-empty"><div class="empty-papers" aria-hidden="true"><span>${thumbtack}${reactionSVG(-48)}</span><span>${thumbtack}${reactionSVG(70)}</span></div><h3>${recipient!=='all'?'No notes for '+name(recipient)+' here yet.':'No notes yet.'}</h3><p>Pin a note to begin.</p></div>`}</div>${boardStand}</div><p class="bulletin-end"><a href="./credits.txt" class="bulletin-credit" target="_blank" rel="noopener">Art credits</a></p>`;
 }
 function charts(){
  const stats=ledger?.stats.filter(s=>s.period===period)||[];
  const chart=(direction:'written'|'received')=>{
   const rows=MEMBERS.map(m=>stats.find(s=>s.member===m&&s.direction===direction)||{member:m,complaints:0,compliments:0});
   const max=Math.max(1,...rows.map(r=>r.complaints+r.compliments));
-  return `<section class="bulletin-chart"><h3>Notes ${direction}</h3><p class="section-copy">${direction==='written'?'Who’s putting feelings into words.':'Who those little notes are for.'}</p>${rows.map(r=>`<div class="bulletin-chart-row member-${r.member}"><div>${chip(r.member)}<span>${r.complaints+r.compliments} note${r.complaints+r.compliments===1?'':'s'}</span></div><div class="bulletin-bar" role="img" aria-label="${name(r.member)}: ${r.complaints} complaints and ${r.compliments} compliments ${direction}"><span class="bar-complaint" style="width:${r.complaints/max*100}%"></span><span class="bar-compliment" style="width:${r.compliments/max*100}%"></span></div><small>${r.complaints} complaints · ${r.compliments} compliments</small></div>`).join('')}</section>`;
+  return `<section class="bulletin-chart"><h3>Notes ${direction}</h3>${rows.map(r=>`<div class="bulletin-chart-row member-${r.member}"><div>${chip(r.member)}<span>${r.complaints+r.compliments} note${r.complaints+r.compliments===1?'':'s'}</span></div><div class="bulletin-bar" role="img" aria-label="${name(r.member)}: ${r.complaints} complaints and ${r.compliments} compliments ${direction}"><span class="bar-complaint" style="width:${r.complaints/max*100}%"></span><span class="bar-compliment" style="width:${r.compliments/max*100}%"></span></div><small>${r.complaints} complaints · ${r.compliments} compliments</small></div>`).join('')}</section>`;
  };
  const leaders=(direction:string,kind:'complaints'|'compliments')=>{const rows=stats.filter(s=>s.direction===direction),max=Math.max(0,...rows.map(r=>r[kind]));return max?`<div class="bulletin-leader-people">${rows.filter(r=>r[kind]===max).map(r=>chip(r.member)).join(' ')}</div><span>${max} ${max===1?kind.slice(0,-1):kind}</span>`:'<p>No notes yet</p>';};
- return `<div class="bulletin-section-top"><div><h2>The household temperature.</h2><p class="section-copy">Little patterns in what we say to each other.</p></div><label>Time frame<select id="bulletin-period">${[['all','All time'],['month','This month'],['week','This week']].map(([v,l])=>`<option value="${v}" ${period===v?'selected':''}>${l}</option>`).join('')}</select></label></div><div class="bulletin-legend"><span><i class="bar-complaint"></i> Complaints</span><span><i class="bar-compliment"></i> Compliments</span></div><div class="bulletin-charts">${chart('written')}${chart('received')}</div><div class="bulletin-leaders">${[['written','complaints','Most complaints written'],['received','complaints','Most complaints received'],['written','compliments','Most compliments written'],['received','compliments','Most compliments received']].map(([d,k,l])=>`<div><h3>${l}</h3>${leaders(d,k as 'complaints'|'compliments')}</div>`).join('')}</div><p class="bulletin-end">Each note counts once for its author and once for each recipient. Edits don’t add counts; deleted notes don’t count. Time frames use the original posting date in New York.</p>`;
+ return `<div class="bulletin-section-top"><div><h2>Note activity</h2></div><label>Time frame<select id="bulletin-period">${[['all','All time'],['month','This month'],['week','This week']].map(([v,l])=>`<option value="${v}" ${period===v?'selected':''}>${l}</option>`).join('')}</select></label></div><div class="bulletin-legend"><span><i class="bar-complaint"></i> Complaints</span><span><i class="bar-compliment"></i> Compliments</span></div><div class="bulletin-charts">${chart('written')}${chart('received')}</div><div class="bulletin-leaders">${[['written','complaints','Most complaints written'],['received','complaints','Most complaints received'],['written','compliments','Most compliments written'],['received','compliments','Most compliments received']].map(([d,k,l])=>`<div><h3>${l}</h3>${leaders(d,k as 'complaints'|'compliments')}</div>`).join('')}</div><p class="bulletin-end">Each note counts once for its author and once for each recipient. Edits don’t add counts; deleted notes don’t count. Time frames use the original posting date in New York.</p>`;
 }
 function updateTemperature(immediate=false){
  const value=Number(field('bulletin-temperature').value);
@@ -154,7 +155,7 @@ function openNote(note?:BulletinNote){
  if(!live||busy)return;
  if(!identity){pendingNew=true;error('bulletin-identity-error','Choose your name before pinning a note.');$('#bulletin-identity button').focus();return;}
  draft=note;noteId=note?.id||crypto.randomUUID();$<HTMLFormElement>('#bulletin-note-form').reset();
- $('#bulletin-note-heading').textContent=note?'A little change of words.':'Pin a little feeling.';
+ $('#bulletin-note-heading').textContent=note?'Edit note':'Pin a note';
  field('bulletin-body').value=note?.body||'';field('bulletin-temperature').value=String(note?.temperature||(kind==='complaint'?-35:35));
  $('#bulletin-reaction').innerHTML=bulletinCharacter(note?.author||identity,Number(field('bulletin-temperature').value));previewCharacters.sync();
  document.querySelectorAll<HTMLInputElement>('input[name=bulletin-recipient]').forEach(el=>el.checked=note?.recipients.includes(el.value as Member)||false);
@@ -171,6 +172,7 @@ function openAction(note:BulletinNote,next:string){
 function show(id:string){retry=null;error(id+'-error','');$<HTMLDialogElement>('#'+id+'-dialog').showModal();$('#'+id+'-heading').focus({preventScroll:true});updateAvatarActivity();}
 function updateAvatarActivity(){
  const active=location.hash==='#bulletin'&&!document.hidden;
+ setReactionsPaused(!animateCharacters||!active);
  const editing=$<HTMLDialogElement>('#bulletin-note-dialog').open;
  boardCharacters.setPaused(!animateCharacters||!!document.querySelector('.bulletin-dialog[open]'));
  boardCharacters.setActive(active&&view==='board');

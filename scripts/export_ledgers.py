@@ -5,20 +5,22 @@ from import_bills import ROOT, load_config, rpc, write_json
 
 def main():
     config = load_config("--local" in sys.argv)
-    # Fetch all five before replacing snapshots, so a failed connection changes none.
+    # Fetch all six before replacing snapshots, so a failed connection changes none.
     utilities = rpc(config, "export_ledger")
     miscellaneous = rpc(config, "export_misc_ledger")
     chores = rpc(config, "export_chores")
     bulletin = rpc(config, "export_bulletin")
     events = rpc(config, "export_events")
+    personal = rpc(config, "export_personal_tasks", {})
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M-%S")
-    write_json(ROOT / ".local/backups" / f"household_{stamp}.json", {"utilities": utilities, "miscellaneous": miscellaneous, "chores": chores, "bulletin": bulletin, "events": events})
+    write_json(ROOT / ".local/backups" / f"household_{stamp}.json", {"utilities": utilities, "miscellaneous": miscellaneous, "chores": chores, "bulletin": bulletin, "events": events, "personal_tasks": personal})
     write_json(ROOT / "data/ledger.json", utilities)
     write_json(ROOT / "data/misc-ledger.json", miscellaneous)
     write_json(ROOT / "data/chores.json", chores)
     write_json(ROOT / "data/bulletin.json", bulletin)
     write_json(ROOT / "data/events.json", events)
-    print("Saved a private backup and refreshed all five separate website snapshots. Publish to update the offline copies.")
+    write_json(ROOT / "data/personal-tasks.json", personal)
+    print("Saved a private backup and refreshed all six separate website snapshots. Publish to update the offline copies.")
 
 if __name__ == "__main__":
     try:

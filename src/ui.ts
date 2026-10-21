@@ -31,19 +31,21 @@ async function fetchRpc<T>(functionName: string,params: Record<string,unknown>={
 const reads=new Map<string,Promise<unknown>>();
 let dataEpoch=0;
 export function rpc<T>(functionName:string,params:Record<string,unknown>={}):Promise<T>{
- if(Object.keys(params).length){
+ const scopedRead=['personal_tasks','home_order','export_personal_tasks'].includes(functionName);
+ if(Object.keys(params).length&&!scopedRead){
   if(!functionName.startsWith('save_'))return fetchRpc<T>(functionName,params);
   dataEpoch++;reads.clear();
   return fetchRpc<T>(functionName,params).finally(()=>{dataEpoch++;reads.clear();});
  }
- let pending=reads.get(functionName);
+ const readKey=functionName+JSON.stringify(params);
+ let pending=reads.get(readKey);
  if(!pending){
   const read=async():Promise<T>=>{
    const epoch=dataEpoch;
    try{const result=await fetchRpc<T>(functionName,params);return epoch===dataEpoch?result:read();}
    catch(error){if(epoch!==dataEpoch)return read();throw error;}
   };
-  pending=read().finally(()=>{if(reads.get(functionName)===pending)reads.delete(functionName);});reads.set(functionName,pending);
+  pending=read().finally(()=>{if(reads.get(readKey)===pending)reads.delete(readKey);});reads.set(readKey,pending);
  }
  return pending as Promise<T>;
 }

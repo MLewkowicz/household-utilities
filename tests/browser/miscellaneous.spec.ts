@@ -43,7 +43,7 @@ test('name-first expenses, custom shares, icons, history and pair repayments sta
  await expect(page.locator('.pair-card').filter({hasText:'Rina owes Ohm'})).toContainText('$10.00');
  const repayment=page.locator('#misc-feed .expense-card');await expand(repayment);await repayment.getByRole('button',{name:'Delete repayment'}).click();
  await page.locator('#confirm-misc-delete').click();await expect(page.locator('#misc-delete-dialog')).not.toBeVisible();
- await expect(page.locator('#misc-pairs')).toContainText('Everyone’s square.');
+ await expect(page.locator('#misc-pairs')).toContainText('No outstanding balances');
  await page.locator('#misc-page').getByLabel('Show deleted').check();await expect(page.locator('#misc-feed .expense-card')).toHaveCount(2);
  await expand(card);await card.locator('.entry-history > summary').click();await expect(card.locator('.entry-history')).toContainText('Deleted by Rina');
  const utilityAfter=await rpc(page,'dashboard');for(const key of ['bills','allocations','history','bill_history'])expect(utilityAfter[key]).toEqual(utilityBefore[key]);

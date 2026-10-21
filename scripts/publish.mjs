@@ -8,7 +8,9 @@ function run(cmd,args,options={}) {
 function succeeds(cmd,args){return spawnSync(cmd,args,{stdio:'ignore'}).status===0;}
 run('npm',['run','check']);run('npm',['test']);
 run('uv',['run','--frozen','python','-m','unittest','discover','-s','tests','-p','test_*.py']);
-run('npm',['run','build']);run('uv',['run','--frozen','python','scripts/check_privacy.py']);
+run('node',['scripts/check-release-schema.mjs']);
+run('uv',['run','--frozen','python','scripts/export_ledgers.py']);
+run('npm',['run','build']);run('npm',['run','test:browser']);run('uv',['run','--frozen','python','scripts/check_privacy.py']);
 const user=JSON.parse(run('gh',['api','user'],{capture:true}));
 const repo=`${user.login}/household-utilities`;
 if(!existsSync('.git'))run('git',['init','-b','main']);

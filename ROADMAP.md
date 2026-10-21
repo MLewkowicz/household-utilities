@@ -119,3 +119,17 @@ Next starting point: iterate on the production Events experience and reaction ar
 - [x] Install migration 016 via local `./configure.sh`, verify all baseline live records and scores, preserve concurrent household additions, and refresh all five fallbacks.
 
 Publication follows the existing Pages workflow. `.local/smoke-queue-timing.mjs` checks the published bundle and both trash cards on desktop/phone, with no test writes.
+
+## Home refresh
+
+The standalone assignments are saved in `docs/app-refresh-plan.md` and `docs/house-concept-brief.md`. House-concept work was stopped in this session at the user's request; it belongs to a separate session and has no production app dependencies.
+
+- Implemented inset priority borders and shared bulletin corners, focused chore suggestions, Guinness search, and the full illustration catalog for reminders/requests. No accounting entries were corrected.
+- Implemented Home, separate personal-task revision storage, combined assigned/personal feed, filters, completion/undo, retained deletion history, per-member order, drag and keyboard movement, independent source failures, scoped exports and fallback support. Shared forms initialize independently of the To-dos page.
+- Implemented six event draft presets and optional persisted event illustrations. Existing events and cached clients remain supported.
+- Implemented fourteen reactions, a 56-example development gallery, bounded still-image caching and motion controls. Author temperature remains independent.
+- Validated migrations 017–019 in isolated local databases. After the user ran configuration, the read-only production capability check confirmed Home, event illustrations, and expanded reactions are available. Publication refreshes all six fallback snapshots before building and deploying.
+
+Release sequence: run `./configure.sh` to install missing additive migrations, then `./publish.sh`. The publisher now verifies live capabilities, refreshes all six snapshots, and includes browser checks before pushing. The Pages workflow also blocks a deployment when those schema capabilities are missing. Use `npm run preview:reactions` for local expression review. Review screenshots and check logs are in ignored `.local/refresh-review/` and `.local/reaction-checks/`.
+
+Validation passed: 97 Node/database tests, 8 Python tests, and all 54 browser scenarios, plus TypeScript checking, production build, privacy checks, and whitespace checks. After the final keyboard-focus adjustment, all five Home browser scenarios passed again. The six-snapshot export pipeline was also verified against an isolated database without replacing production fallbacks.

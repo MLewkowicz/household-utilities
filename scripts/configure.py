@@ -26,7 +26,7 @@ def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
         print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
-        print("Existing projects need migrations 009 through 016 (and any earlier missing migrations); do not rerun installed migrations.")
+        print("Existing projects need migrations 009 through 019 (and any earlier missing migrations); do not rerun installed migrations.")
         print("Phone delivery also needs the normal ./configure.sh flow to deploy its worker, signing keys, and schedule.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
@@ -104,6 +104,15 @@ def main():
         if not queue_timing or not queue_timing[0].get("fn"):
             request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/016_chore_queue_timing.sql").read_text()})
             print("Queue timing installed; upcoming routines stay in Week until their due date.")
+        for filename, signature in [
+            ("017_home_personal_tasks.sql", "public.utilities_personal_tasks(jsonb)"),
+            ("018_event_icons.sql", "ledger_private.valid_event_icon_id(text)"),
+            ("019_reaction_library.sql", "ledger_private.valid_note_expression(text)"),
+        ]:
+            installed = request(base + "/database/query", token, {"query": f"SELECT to_regprocedure('{signature}')::text AS fn"})
+            if not installed or not installed[0].get("fn"):
+                request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations" / filename).read_text()})
+                print(f"Installed {filename}; existing history preserved.")
     if not key.startswith(("sb_secret_", "eyJ")):
         raise RuntimeError("Use a secret/service_role key, not the publishable key.")
     target = ROOT / ".env.local"

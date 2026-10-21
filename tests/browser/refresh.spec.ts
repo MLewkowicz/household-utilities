@@ -1,7 +1,7 @@
 import {test,expect,type Page} from '@playwright/test';
 const rpc=async(page:Page,name:string,p?:unknown)=>{const r=await page.request.post(`/rest/v1/rpc/utilities_${name}`,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(r.ok()).toBeTruthy();return r.json();};
 const task=(extra={})=>({id:crypto.randomUUID(),request_id:crypto.randomUUID(),actor:'rohil',action:'create',title:'Swipe test '+crypto.randomUUID(),icon_id:'tidy',note:'Only visible in details',points:2,assignee:null,pinned:false,...extra});
-async function chores(page:Page){await page.goto('/#chores');await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');await page.locator('[data-chore-person=michal]').click();}
+async function chores(page:Page){await page.goto('/#chores');await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');await page.locator('[data-chore-person=michal]').click();await page.locator('#chore-household-filter').selectOption('all');}
 
 test('a deliberate swipe claims and completes, with keyboard undo and independent typed reminders',async({page})=>{
  await page.setViewportSize({width:390,height:844});const t=await rpc(page,'save_chore',task());await chores(page);
@@ -19,6 +19,7 @@ test('a deliberate swipe claims and completes, with keyboard undo and independen
  await page.locator('#chore-new').click();await page.locator('#chore-kind').selectOption('reminder');await page.locator('#chore-title').fill('Register today independently');
  await page.locator('[name=reminder-recipient][value=rina]').check();await page.locator('[name=reminder-recipient][value=ohm]').check();
  await expect(page.locator('#chore-points-fields')).not.toBeVisible();await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();
+ await page.locator('#chore-household-filter').selectOption('michal');
  const reminder=page.locator('.chore-grid .chore-card').filter({has:page.getByRole('heading',{name:'Register today independently',exact:true})});
  await expect(reminder).toHaveCount(1);await reminder.locator('[data-swipe-complete]').focus();await page.keyboard.press('Enter');await expect(reminder).toHaveCount(0);
  d=await rpc(page,'chores_dashboard');const group=d.tasks.filter((x:any)=>x.title==='Register today independently');expect(group).toHaveLength(3);expect(group.filter((x:any)=>x.state==='completed')).toHaveLength(1);expect(group.every((x:any)=>x.points===0)).toBeTruthy();
@@ -38,7 +39,7 @@ test('guest calculator sends only household shares and discards its inputs on cl
 test('inactive sections do not initialize or fetch; unavailable badges do not block utilities',async({page})=>{
  const requests:string[]=[];page.on('request',r=>requests.push(new URL(r.url()).pathname));
  await page.addInitScript(()=>localStorage.setItem('household-person','michal'));
- await page.route('**/utilities_chores_summary',route=>route.abort());await page.goto('/');await expect(page.locator('#connection-status')).toHaveText('Shared ledger · up to date');
+ await page.route('**/utilities_chores_summary',route=>route.abort());await page.goto('/#utilities');await expect(page.locator('#connection-status')).toHaveText('Shared ledger · up to date');
  await expect(page.locator('#chore-task-dialog')).toHaveCount(0);await expect(page.locator('#expense-dialog')).toHaveCount(0);await expect(page.locator('#bulletin-note-dialog')).toHaveCount(0);
  expect(requests.some(p=>/utilities_(chores|misc|bulletin)_dashboard/.test(p))).toBeFalsy();expect(requests).not.toContain('/thumbtack.svg');
  await page.getByRole('link',{name:'Expenses',exact:true}).click();await expect(page.locator('#new-expense')).toBeEnabled();await expect(page.locator('#chore-task-dialog')).toHaveCount(0);
@@ -47,7 +48,7 @@ test('inactive sections do not initialize or fetch; unavailable badges do not bl
 });
 
 test('utility explanation opens from its information icon with keyboard access',async({page})=>{
- await page.goto('/');const info=page.getByLabel('How utility shares are calculated');await expect(page.getByText(/Rohil’s recurring share starts/)).not.toBeVisible();
+ await page.goto('/#utilities');const info=page.getByLabel('How utility shares are calculated');await expect(page.getByText(/Rohil’s recurring share starts/)).not.toBeVisible();
  await info.focus();await page.keyboard.press('Enter');await expect(page.getByText(/Rohil’s recurring share starts/)).toBeVisible();await page.keyboard.press('Escape');await expect(page.getByText(/Rohil’s recurring share starts/)).not.toBeVisible();
 });
 

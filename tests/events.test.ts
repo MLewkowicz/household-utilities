@@ -1,6 +1,7 @@
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
+import {EVENT_PRESETS,eventIconSvg} from '../src/event-icons';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
 let db:any;const call=(fn:string,p?:any)=>callRpc(db,fn,p?{p}:{});
 const draft=(extra={})=>({id:randomUUID(),request_id:randomUUID(),action:'create',actor:'rina',title:'Dinner together',starts_local:'2027-06-15T19:00',ends_local:'2027-06-15T21:00',...extra});
@@ -27,4 +28,25 @@ test('New York intervals reject invalid or nonexistent times and allow midnight'
  const e=await call('save_event',draft({ends_local:'2027-06-16T01:00'}));assert.equal(new Date(e.ends_at).toISOString(),'2027-06-16T05:00:00.000Z');
  const fall=await call('save_event',draft({starts_local:'2027-11-07T01:30',ends_local:'2027-11-07T02:30'}));assert.equal(new Date(fall.starts_at).toISOString(),'2027-11-07T06:30:00.000Z');
  await assert.rejects(db.transaction(async(tx:any)=>{await tx.exec('SET LOCAL ROLE anon');await tx.query('SELECT * FROM ledger_private.household_events');}),/permission denied/);
+});
+
+test('six presets have illustrations and event icons persist through edits, history and exports',async()=>{
+ assert.deepEqual(EVENT_PRESETS.map(p=>p.title),['Movie night','Board games','Go for a walk','Skiing','Eat out','Cook together']);
+ for(const preset of EVENT_PRESETS){
+  assert.match(eventIconSvg(preset.icon),/<svg/);
+  const p=draft({title:preset.title,icon_id:preset.icon});const saved=await call('save_event',p);
+  assert.equal(saved.icon_id,preset.icon);assert.deepEqual(await call('save_event',p),saved);
+  const {icon_id,...cachedClient}=p;
+  const edited=await call('save_event',{...cachedClient,action:'edit',expected_version:1,request_id:randomUUID(),title:preset.title+' tonight'});
+  assert.equal(edited.icon_id,preset.icon);assert.equal(edited.interval_version,1);
+  const changed=await call('save_event',{...p,action:'edit',expected_version:2,request_id:randomUUID(),icon_id:'calendar'});
+  assert.equal(changed.icon_id,'calendar');assert.equal(changed.interval_version,1);
+  const exportData=await call('export_events');
+  assert.equal(exportData.events.find((e:any)=>e.id===saved.id).icon_id,'calendar');
+  assert.deepEqual(exportData.history.filter((e:any)=>e.id===saved.id).map((e:any)=>e.icon_id),['calendar',preset.icon,preset.icon]);
+ }
+ await assert.rejects(call('save_event',draft({icon_id:'unknown'})),/illustration/);
+ const old=await call('save_event',draft());assert.equal(old.icon_id,null);
+ assert.equal(eventIconSvg(undefined),eventIconSvg('calendar'));
+ assert.equal(eventIconSvg('unknown'),eventIconSvg('calendar'));
 });

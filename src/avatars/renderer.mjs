@@ -4,6 +4,7 @@ import {CHARACTERS} from './characters.mjs';
 const TAU=Math.PI*2;
 // Every note by the same author shares the expensive, immutable skin overlays.
 const preparedFaces=new WeakMap();
+const jawPortraits=new WeakMap();
 let steamSprite;
 function path(ctx,points){ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.closePath();}
 function heart(ctx,x,y,size,angle=0){ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.scale(size/32,size/32);ctx.beginPath();ctx.moveTo(0,13);ctx.bezierCurveTo(-5,7,-17,0,-15,-8);ctx.bezierCurveTo(-13,-17,-3,-18,0,-10);ctx.bezierCurveTo(3,-18,13,-17,15,-8);ctx.bezierCurveTo(17,0,5,7,0,13);ctx.closePath();ctx.fill();ctx.restore();}
@@ -103,13 +104,13 @@ export class AvatarRenderer{
     const ctx=this.ctx;ctx.setTransform(this.dpr,0,0,this.dpr,0,0);ctx.clearRect(0,0,this.width,this.height);
     const shake=animate&&effects.steam?Math.sin(this.time*.055)*mood.steam*mood.steam*2:0;
     const bob=animate?Math.sin(this.time*.0017)*(1+mood.love*4):0;
-    const reactionTilt=this.expression==='disappointed'&&animate?Math.sin(this.time*.012)*.09:this.expression==='crying-laughing'&&animate?Math.sin(this.time*.018)*.045:0;
-    const tilt=compare?0:reactionTilt+mood.love*(.025+(animate?Math.sin(this.time*.0018)*.04:0));
-    ctx.save();ctx.translate(this.cx+shake,this.cy+bob);ctx.rotate(tilt);ctx.scale(this.scale,this.scale);ctx.translate(-500,-500);
+    const pose=compare?{x:0,y:0,tilt:0,scale:1}:this.reactionPose(animate);
+    const tilt=compare?0:pose.tilt+mood.love*(.025+(animate?Math.sin(this.time*.0018)*.04:0));
+    ctx.save();ctx.translate(this.cx+shake+pose.x*this.scale,this.cy+bob+pose.y*this.scale);ctx.rotate(tilt);ctx.scale(this.scale*pose.scale,this.scale*pose.scale);ctx.translate(-500,-500);
     const power=effects.steam?mood.steam:0;
     if(!compare&&power>.01)this.drawSteam(ctx,power,animate);
     if(!compare&&effects.steam&&mood.risingSteam>.01)this.drawRisingSteam(ctx,mood.risingSteam,animate);
-    ctx.drawImage(compare?this.original:this.base,0,0,1000,1000);
+    if(compare)ctx.drawImage(this.original,0,0,1000,1000);else this.drawPortrait(ctx,this.base,animate);
     if(!compare){
       if(effects.blush)this.drawBlush(ctx,mood);
       this.drawFace(ctx,mood,effects,animate);
@@ -198,33 +199,160 @@ export class AvatarRenderer{
     this.drawMouth(ctx,m,animate);
     if(this.character.occlusion)ctx.drawImage(this.foreground,0,0,1000,1000);
   }
+  reactionPose(animate){
+    const t=this.time/1000,s=(rate)=>animate?Math.sin(t*rate):0;
+    let x=0,y=0,tilt=0,scale=1;
+    switch(this.expression){
+      case 'crying-laughing':tilt=.035+s(15)*.10;y=-Math.abs(s(15))*25;break;
+      case 'gentle-laughing':tilt=-.04+s(10)*.065;y=-Math.abs(s(10))*15;break;
+      case 'confused':tilt=.12+s(3.8)*.12;x=s(3.8)*12;break;
+      case 'disappointed':tilt=.10+s(5)*.08;y=22+Math.abs(s(5))*14;break;
+      case 'vomit':tilt=-.025+s(21)*.085;x=s(21)*18;y=10;scale=.95;break;
+      case 'mogging':tilt=-.085+s(2.5)*.025;y=-24-s(2.5)*8;break;
+      case 'shocked':tilt=.035+s(8)*.045;y=-20-Math.max(0,s(4))*22;scale=.97-Math.max(0,s(4))*.035;break;
+      case 'gasp':tilt=-.055+s(6)*.04;y=-24-Math.max(0,s(3))*30;scale=.96-Math.max(0,s(3))*.04;break;
+      case 'eye-roll':tilt=.09+s(2.6)*.075;y=-9;break;
+      case 'sobbing':tilt=s(9)*.09;y=15+Math.abs(s(9))*25;break;
+      case 'rage':tilt=-.035+s(32)*.045;x=s(36)*13;y=-8;break;
+      case 'heart-eyes':tilt=-.05+s(3)*.07;y=-12+Math.abs(s(6))*13;break;
+      case 'smug':tilt=-.115+s(2.4)*.025;y=-13;x=10;break;
+      case 'facepalm':tilt=.13+s(3.5)*.035;y=25+Math.abs(s(3.5))*10;break;
+    }
+    return {x,y,tilt,scale};
+  }
+  drawPortrait(ctx,image,animate){
+    if(this.expression!=='mogging'){ctx.drawImage(image,0,0,1000,1000);return;}
+    // Warp the actual cheek, beard and chin pixels, leaving the hair untouched.
+    // Prepare at integer destination rows so scaling never exposes strip seams.
+    let warped=jawPortraits.get(image);
+    if(!warped){
+      warped=document.createElement('canvas');warped.width=1000;warped.height=1040;
+      const target=warped.getContext('2d'),sw=image.naturalWidth||image.width,sh=image.naturalHeight||image.height;
+      target.drawImage(image,0,0,sw,sh*.64,0,0,1000,640);
+      for(let y=640;y<1027;y++){
+        let sourceY=y;for(let i=0;i<4;i++)sourceY=y-smooth(720,970,sourceY)*27;
+        const jaw=smooth(640,810,sourceY)*(1-smooth(925,1000,sourceY));
+        const width=1000*(1+jaw*.20);
+        target.drawImage(image,0,sourceY/1000*sh,sw,sh/1000,500-width/2,y,width,1);
+      }
+      jawPortraits.set(image,warped);
+    }
+    ctx.drawImage(warped,0,0,1000,1040);
+  }
   drawReactionFace(ctx,expression,animate){
-    const c=this.character,laugh=expression==='crying-laughing'||expression==='gentle-laughing',big=expression==='crying-laughing';
-    const pulse=animate?Math.sin(this.time*.018):0;
+    const c=this.character,t=this.time/1000,s=(rate)=>animate?Math.sin(t*rate):0;
+    const big=expression==='crying-laughing',laugh=big||expression==='gentle-laughing';
+    const sad=expression==='sobbing'||expression==='disappointed',surprise=expression==='shocked'||expression==='gasp';
     ctx.save();ctx.strokeStyle='#35251f';ctx.lineWidth=12;ctx.lineCap='round';ctx.lineJoin='round';
+    if(expression==='rage'){ctx.save();ctx.globalAlpha=.65;ctx.drawImage(this.angerTint,0,0,1000,1000);ctx.restore();}
     for(const side of [-1,1]){
       const x=c.eyeX+side*c.eyeGap,y=c.eyeY;
       ctx.save();ctx.translate(x,y);ctx.scale(c.eyeScale,c.eyeScale);
-      if(laugh||expression==='disappointed'||expression==='vomit'){
-        ctx.beginPath();ctx.moveTo(-58,5);ctx.quadraticCurveTo(0,laugh?-50:expression==='vomit'?-18:25,58,5);ctx.stroke();
+      if(expression==='heart-eyes'){
+        ctx.fillStyle='#dc4675';heart(ctx,0,0,125+(animate?Math.max(0,s(7))*12:0));
+        ctx.fillStyle='#ffe1e8';ctx.beginPath();ctx.ellipse(-28,-28,8,14,-.5,0,TAU);ctx.fill();
+      }else if(laugh||sad||expression==='vomit'||expression==='facepalm'){
+        ctx.beginPath();ctx.moveTo(-62,5);
+        ctx.quadraticCurveTo(0,laugh?-57:expression==='vomit'?-22:expression==='sobbing'?-30:28,62,5);ctx.stroke();
+        if(expression==='vomit'||expression==='sobbing'){ctx.beginPath();ctx.moveTo(side*60,5);ctx.lineTo(side*80,-13);ctx.moveTo(side*60,5);ctx.lineTo(side*80,24);ctx.stroke();}
       }else{
-        const h=expression==='mogging'?14:side<0?30:18;
-        ctx.fillStyle='#fff5e5';ctx.beginPath();ctx.ellipse(0,0,61,h,0,0,TAU);ctx.fill();ctx.stroke();ctx.fillStyle=c.iris[0];ctx.beginPath();ctx.ellipse(expression==='confused'?14:0,0,18,h*.85,0,0,TAU);ctx.fill();ctx.fillStyle='#211b17';ctx.beginPath();ctx.arc(expression==='confused'?14:0,0,9,0,TAU);ctx.fill();
+        const h=surprise?(expression==='gasp'?67:57):expression==='mogging'||expression==='smug'?17:expression==='rage'?31:expression==='eye-roll'?36:side<0?40:22;
+        const w=surprise?76:63;
+        ctx.save();ctx.beginPath();ctx.ellipse(0,0,w,h,0,0,TAU);ctx.fillStyle='#fff5e5';ctx.fill();ctx.clip();
+        const px=expression==='confused'?19+s(4)*12:expression==='smug'?19:0;
+        const py=expression==='eye-roll'?-24-(animate?Math.max(0,s(2.8))*8:0):0;
+        const iris=surprise?16:expression==='rage'?21:24;
+        ctx.fillStyle=c.iris[0];ctx.beginPath();ctx.ellipse(px,py,iris,Math.max(13,Math.min(iris*1.15,h*.9)),0,0,TAU);ctx.fill();
+        ctx.fillStyle='#211b17';ctx.beginPath();ctx.ellipse(px,py,surprise?8:12,surprise?12:Math.min(17,h*.8),0,0,TAU);ctx.fill();
+        ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(px-6,py-8,4,0,TAU);ctx.fill();ctx.restore();
+        ctx.strokeStyle='#35251f';ctx.lineWidth=surprise?7:10;ctx.beginPath();ctx.ellipse(0,0,w,h,0,0,TAU);ctx.stroke();
       }
-      if(big){ctx.fillStyle='#74c5e0';ctx.beginPath();const drop=20+(animate?(1+pulse)*12:0);ctx.moveTo(side*64,20);ctx.bezierCurveTo(side*100,drop+35,side*94,drop+80,side*62,drop+70);ctx.bezierCurveTo(side*42,drop+60,side*49,drop+30,side*64,20);ctx.fill();}
       ctx.restore();
-      const raised=expression==='confused'&&side<0;
-      ctx.save();ctx.translate(x,c.browY-(raised?48:laugh?18:0));ctx.rotate(expression==='mogging'?-side*.12:expression==='disappointed'?side*.16:raised?-.12:0);ctx.strokeStyle=c.browColor[0];ctx.lineWidth=c.browStyle==='bold'?24:17;ctx.beginPath();ctx.moveTo(-65,8);ctx.quadraticCurveTo(0,raised?-32:-15,65,6);ctx.stroke();ctx.restore();
+      const lift=surprise?(expression==='gasp'?66:48):expression==='heart-eyes'?29:expression==='confused'?(side<0?50:-12):laugh?25:expression==='smug'&&side>0?35:0;
+      const angle=expression==='rage'?-side*.34:sad?side*.28:expression==='mogging'?-side*.15:expression==='confused'?side*.12:0;
+      ctx.save();ctx.translate(x,c.browY-lift);ctx.rotate(angle);ctx.strokeStyle=c.browColor[0];ctx.lineWidth=c.browStyle==='bold'?25:18;
+      ctx.beginPath();ctx.moveTo(-66,8);ctx.quadraticCurveTo(0,surprise?-36:expression==='rage'?-7:-19,66,6);ctx.stroke();ctx.restore();
     }
-    if(c.occlusion&&expression==='vomit')ctx.drawImage(this.foreground,0,0,1000,1000);
+    // Foreground restores glasses and bangs over the moving eyes. Mouth artwork
+    // sits in front of the beard without replacing its surrounding silhouette.
+    if(c.occlusion)this.drawPortrait(ctx,this.foreground,animate);
+    if(big||expression==='sobbing')this.drawReactionTears(ctx,expression,animate);
     ctx.save();ctx.translate(c.mouthX,c.mouthY);ctx.scale(c.mouthScale,c.mouthScaleY||c.mouthScale);
     ctx.strokeStyle='#513424';ctx.lineWidth=12;ctx.beginPath();
-    if(laugh){const w=big?112:78,h=big?125+pulse*10:48;ctx.moveTo(-w,-10);ctx.quadraticCurveTo(0,15,w,-10);ctx.quadraticCurveTo(0,h,-w,-10);ctx.fillStyle='#482c28';ctx.fill();ctx.stroke();ctx.fillStyle='#fff8e8';ctx.beginPath();ctx.moveTo(-w+8,-5);ctx.quadraticCurveTo(0,18,w-8,-5);ctx.lineTo(w-20,15);ctx.quadraticCurveTo(0,37,-w+20,15);ctx.fill();}
-    else if(expression==='vomit'){ctx.fillStyle='#514a28';ctx.ellipse(0,8,50,35,0,0,TAU);ctx.fill();ctx.stroke();ctx.fillStyle='#a0bc5e';ctx.beginPath();ctx.moveTo(-33,15);ctx.bezierCurveTo(-20,70,-70,100,-50,145+pulse*10);ctx.quadraticCurveTo(0,173,55,147);ctx.bezierCurveTo(75,105,23,65,33,15);ctx.closePath();ctx.fill();ctx.strokeStyle='#cfdf8b';ctx.lineWidth=9;ctx.beginPath();ctx.moveTo(-8,36);ctx.quadraticCurveTo(-27,95,-14,122);ctx.stroke();}
-    else if(expression==='mogging'){ctx.moveTo(-72,4);ctx.quadraticCurveTo(15,30,91,-23);ctx.stroke();ctx.lineWidth=6;ctx.globalAlpha=.48;ctx.beginPath();ctx.moveTo(-150,0);ctx.lineTo(-105,120);ctx.lineTo(0,155);ctx.lineTo(105,120);ctx.lineTo(150,0);ctx.stroke();}
-    else if(expression==='confused'){ctx.moveTo(-62,15);ctx.quadraticCurveTo(0,-4,62,8);ctx.stroke();}
-    else{ctx.moveTo(-70,14);ctx.quadraticCurveTo(0,-28,70,14);ctx.stroke();}
-    ctx.restore();if(c.occlusion&&expression!=='vomit')ctx.drawImage(this.foreground,0,0,1000,1000);ctx.restore();
+    if(laugh||expression==='heart-eyes'){
+      const w=big?119:expression==='heart-eyes'?99:92,h=big?156+s(15)*22:expression==='heart-eyes'?96:78+s(10)*13;
+      ctx.moveTo(-w,-13);ctx.quadraticCurveTo(0,19,w,-13);ctx.quadraticCurveTo(0,h,-w,-13);ctx.fillStyle='#482c28';ctx.fill();ctx.stroke();
+      ctx.fillStyle='#fff8e8';ctx.beginPath();ctx.moveTo(-w+8,-8);ctx.quadraticCurveTo(0,18,w-8,-8);ctx.lineTo(w-24,19);ctx.quadraticCurveTo(0,41,-w+24,19);ctx.fill();
+      if(big){ctx.fillStyle='#d9838b';ctx.beginPath();ctx.ellipse(0,h*.48,35,14,0,0,TAU);ctx.fill();}
+    }else if(surprise||expression==='sobbing'){
+      const w=expression==='gasp'?52:expression==='sobbing'?89:79,h=expression==='gasp'?99:expression==='sobbing'?71+s(9)*10:90;
+      ctx.fillStyle='#432a29';ctx.ellipse(0,33,w,h,0,0,TAU);ctx.fill();ctx.stroke();
+      ctx.fillStyle='#d9838b';ctx.beginPath();ctx.ellipse(0,33+h*.66,w*.55,13,0,0,TAU);ctx.fill();
+      if(expression==='sobbing'){ctx.fillStyle='#fff4dc';ctx.fillRect(-w*.65,-24,w*1.3,17);}
+    }else if(expression==='rage'){
+      ctx.moveTo(-100,9);ctx.quadraticCurveTo(0,-52,100,9);ctx.lineTo(92,54);ctx.quadraticCurveTo(0,25,-92,54);ctx.closePath();ctx.fillStyle='#fff2d5';ctx.fill();ctx.stroke();
+      ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(-95,25);ctx.lineTo(95,25);for(let x=-60;x<=60;x+=30){ctx.moveTo(x,-6);ctx.lineTo(x,43);}ctx.stroke();
+    }else if(expression==='vomit'){
+      ctx.fillStyle='#514a28';ctx.ellipse(0,15,66,45,0,0,TAU);ctx.fill();ctx.stroke();
+    }else if(expression==='mogging'||expression==='smug'){
+      ctx.moveTo(-77,6);ctx.bezierCurveTo(-12,30,52,25,98,-31);ctx.stroke();
+      ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(84,-39);ctx.quadraticCurveTo(108,-34,106,-14);ctx.stroke();
+    }else if(expression==='confused'){
+      ctx.moveTo(-68,17);ctx.quadraticCurveTo(-18,-16,12,8);ctx.quadraticCurveTo(42,25,71,-6);ctx.stroke();
+    }else if(expression==='eye-roll'){
+      ctx.moveTo(-73,6);ctx.quadraticCurveTo(0,18,73,6);ctx.stroke();
+    }else{
+      ctx.moveTo(-78,23);ctx.quadraticCurveTo(0,-44,78,23);ctx.stroke();
+    }
+    ctx.restore();
+    if(expression==='vomit')this.drawVomit(ctx,animate);
+    if(expression==='heart-eyes'){
+      ctx.fillStyle='#e786a8';heart(ctx,199,420,33+s(5)*5,-.2);heart(ctx,810,365,40+s(5)*6,.2);
+    }
+    if(expression==='rage'){
+      ctx.strokeStyle='#b53931';ctx.lineWidth=12;ctx.beginPath();ctx.moveTo(700,365);ctx.quadraticCurveTo(718,387,740,374);ctx.moveTo(713,347);ctx.quadraticCurveTo(733,367,752,349);ctx.moveTo(743,381);ctx.quadraticCurveTo(722,403,737,423);ctx.stroke();
+    }
+    if(expression==='facepalm')this.drawFacepalm(ctx,animate);
+    ctx.restore();
+  }
+  drawReactionTears(ctx,expression,animate){
+    const c=this.character,sobbing=expression==='sobbing';
+    ctx.save();ctx.fillStyle='#75c8e7';ctx.strokeStyle='#d0eff8';ctx.lineWidth=6;
+    for(const side of [-1,1]){
+      const x=c.eyeX+side*(c.eyeGap+52),y=c.eyeY+20;
+      if(sobbing){
+        const wiggle=animate?Math.sin(this.time*.012+side)*11:0;
+        ctx.beginPath();ctx.moveTo(x-17,y);ctx.bezierCurveTo(x-32+wiggle,y+100,x-17,y+190,x-28,y+252);ctx.quadraticCurveTo(x+11,y+284,x+28,y+250);ctx.bezierCurveTo(x+17,y+175,x+27+wiggle,y+95,x+17,y);ctx.fill();
+        ctx.beginPath();ctx.moveTo(x-4,y+21);ctx.quadraticCurveTo(x+wiggle,y+138,x-5,y+216);ctx.stroke();
+      }
+      for(let i=0;i<(sobbing?3:2);i++){
+        const phase=animate?(this.time/780+i*.43+(side>0?.22:0))%1:(i+1)/3;
+        const dx=x+side*(sobbing?8:24+phase*67),dy=y+phase*(sobbing?310:170);
+        const r=(sobbing?14:19)*(1-phase*.4);ctx.beginPath();ctx.moveTo(dx,dy-r*1.7);ctx.bezierCurveTo(dx-r*1.7,dy,dx-r,dy+r,dx,dy+r);ctx.bezierCurveTo(dx+r,dy+r,dx+r*1.7,dy,dx,dy-r*1.7);ctx.fill();
+      }
+    }
+    ctx.restore();
+  }
+  drawVomit(ctx,animate){
+    const c=this.character,flow=animate?Math.sin(this.time*.015):0;
+    // Stream has its own full-height geometry, independent of individual mouth
+    // scale, so bearded characters have the same legible flowing reaction.
+    ctx.save();ctx.translate(c.mouthX,c.mouthY+12);ctx.fillStyle='#9ab757';ctx.strokeStyle='#6c813b';ctx.lineWidth=6;
+    ctx.beginPath();ctx.moveTo(-40,0);ctx.bezierCurveTo(-35+flow*12,65,-90-flow*10,147,-63,231);ctx.quadraticCurveTo(-13,286,72,235);ctx.bezierCurveTo(98+flow*8,163,33+flow*12,74,40,0);ctx.closePath();ctx.fill();ctx.stroke();
+    ctx.strokeStyle='#d8e58b';ctx.lineWidth=12;ctx.beginPath();ctx.moveTo(-10,23);ctx.bezierCurveTo(5+flow*15,95,-43,144,-22,210);ctx.stroke();
+    for(let i=0;i<8;i++){
+      const phase=animate?(this.time/650+i*.137)%1:(i+.5)/8;
+      const side=i%2?-1:1,x=side*(50+phase*(30+i*3)),y=105+phase*205;
+      ctx.fillStyle=i%3?'#a7c45e':'#d5df88';ctx.beginPath();ctx.ellipse(x+flow*6,y,7+i%3*3,11+i%2*6,-side*.3,0,TAU);ctx.fill();
+    }
+    ctx.restore();
+  }
+  drawFacepalm(ctx,animate){
+    const c=this.character,shift=animate?Math.sin(this.time*.0035)*14:0;
+    ctx.save();ctx.translate(c.eyeX+40+shift,c.eyeY-70+shift*.5);ctx.rotate(-.20);
+    const gradient=ctx.createLinearGradient(-70,0,100,200);gradient.addColorStop(0,'#edc39b');gradient.addColorStop(1,'#bf906e');ctx.fillStyle=gradient;ctx.strokeStyle='#86634b';ctx.lineWidth=7;
+    ctx.beginPath();ctx.moveTo(70,270);ctx.lineTo(-20,230);ctx.quadraticCurveTo(-62,201,-72,148);ctx.lineTo(-103,86);ctx.quadraticCurveTo(-114,61,-92,56);ctx.quadraticCurveTo(-75,55,-55,100);ctx.lineTo(-60,-50);ctx.quadraticCurveTo(-58,-80,-39,-67);ctx.lineTo(-25,41);ctx.lineTo(-24,-83);ctx.quadraticCurveTo(-13,-108,1,-80);ctx.lineTo(16,39);ctx.lineTo(18,-69);ctx.quadraticCurveTo(36,-91,45,-60);ctx.lineTo(53,52);ctx.lineTo(65,-31);ctx.quadraticCurveTo(86,-52,91,-20);ctx.lineTo(93,144);ctx.quadraticCurveTo(89,187,61,202);ctx.closePath();ctx.fill();ctx.stroke();
+    ctx.strokeStyle='#a67b5c';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(-44,141);ctx.quadraticCurveTo(-4,113,41,143);ctx.moveTo(-25,41);ctx.lineTo(-18,106);ctx.moveTo(16,39);ctx.lineTo(22,101);ctx.moveTo(53,52);ctx.lineTo(55,111);ctx.stroke();ctx.restore();
   }
   drawBrow(ctx,side,m,animate){
     const cx=this.character.eyeX+side*this.character.eyeGap;

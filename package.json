@@ -8,6 +8,7 @@
     "test": "node --import tsx --test tests/*.test.ts",
     "dev": "npm run build && node scripts/serve.mjs",
     "test:browser": "playwright test",
+    "preview:reactions": "node scripts/preview-reactions.mjs",
     "deploy": "node scripts/publish.mjs"
   },
   "engines": {

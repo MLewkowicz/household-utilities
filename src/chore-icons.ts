@@ -1,4 +1,4 @@
-import {iconSvg} from './icons';
+import {ICONS,iconSvg,suggestIcons} from './icons';
 const rows=[
  ['bananas','Pick up bananas','banana bananas lounge fruit pickup','<path fill="#f5d978" d="M12 7c2 17 11 26 27 22C27 47 7 38 9 13z"/><path fill="#ffe9a0" d="M17 8c0 14 6 21 22 21C31 42 10 29 14 12z"/><path fill="#b0c788" d="m12 5 6 2-2 6-5-2z"/><path d="M13 17q3 15 17 16"/>'],
  ['trash','Take out trash','trash rubbish garbage smelly full bag','<path fill="#bfd4c4" d="M12 14h25l-3 28H15z"/><path fill="#a6bfc1" d="M9 10h31v6H9zM20 5h10v5H20z"/><path d="m20 21 1 14m8-14-1 14"/>'],
@@ -12,7 +12,6 @@ const rows=[
  ['bathroom','Clean the bathroom','bathroom toilet shower sink cleaning','<path fill="#d5e4e2" d="M8 6h16v17H8zM13 23h27q0 12-12 12v8H17v-8q-5-4-4-12z"/><path d="M13 13h6m-8 10h30"/>'],
  ['groceries','Pick up shared groceries','groceries shared grocery shopping'],
  ['furniture','Pick up furniture','furniture pickup sofa couch'],
- ['alcohol','Alcohol','alcohol beer wine cocktail drinks'],
  ['plant','Water the plants','plants water garden'],
  ['parcel','Collect a parcel','mail package parcel collect delivery'],
  ['tools','Fix something','repair fix maintenance tools'],
@@ -21,3 +20,9 @@ const rows=[
 export const CHORE_ICONS=rows.map(([id,label,keywords,...rest])=>({id,label,keywords,art:rest[0]}));
 export function choreIcon(id:string){const icon=CHORE_ICONS.find(i=>i.id===id);return icon?.art?`<svg class="purchase-icon" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#354c4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${icon.art}</svg>`:iconSvg(id);}
 export function suggestChoreIcon(text:string){const words=text.toLowerCase().split(/\W+/).filter(w=>w.length>2);return CHORE_ICONS.map(i=>({id:i.id,score:words.filter(w=>i.keywords.split(' ').some(k=>k.startsWith(w))).length})).sort((a,b)=>b.score-a.score).find(i=>i.score>0)?.id;}
+
+// Chores keep their focused shortcuts; requests/reminders can use every expense illustration.
+export const TASK_ICONS=[...CHORE_ICONS.map(i=>({...i,category:'Chores'})),...ICONS.filter(i=>!CHORE_ICONS.some(c=>c.id===i.id))];
+export const TASK_CATEGORIES=[...new Set(TASK_ICONS.map(i=>i.category))];
+export function searchTaskIcons(query:string,category=''){const words=query.toLowerCase().split(/\W+/).filter(Boolean);return TASK_ICONS.filter(i=>(!category||category===i.category)&&words.every(w=>(i.label+' '+i.keywords+' '+i.category).toLowerCase().includes(w)));}
+export function suggestTaskIcon(text:string){return suggestChoreIcon(text)||suggestIcons(text)[0]?.id;}

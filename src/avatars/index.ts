@@ -1,12 +1,13 @@
 import {AVATAR_ASSETS, type AvatarMember} from './catalog';
 import {AvatarRenderer,type AvatarEffects} from './renderer.mjs';
 import {clamp,describe,ease,moodFromValue} from './mood.mjs';
+import {NOTE_REACTIONS,type NoteExpression} from './reactions';
 
 export {AVATAR_ASSETS};
 export type {AvatarMember,AvatarEffects};
 export interface AvatarOptions {
  member:AvatarMember;
- expression?:string;
+ expression?:NoteExpression;
  temperature?:number;
  effects?:Partial<AvatarEffects>;
  /** Directory containing this pack's images, relative to the document or absolute. */
@@ -69,14 +70,19 @@ export async function mountAvatar(canvas:HTMLCanvasElement,options:AvatarOptions
 }
 export type AvatarController=Awaited<ReturnType<typeof mountAvatar>>;
 
-// At most 24 cached still expressions. Canvases exist only during one-time rendering.
+// One still per character/expression, with LRU eviction and no retained canvases.
+export const REACTION_THUMBNAIL_LIMIT=Object.keys(AVATAR_ASSETS).length*NOTE_REACTIONS.length;
 const thumbnails=new Map<string,Promise<string>>();
-export function reactionThumbnail(member:AvatarMember,expression:string):Promise<string>{
+export function reactionThumbnail(member:AvatarMember,expression:NoteExpression):Promise<string>{
+ if(!AVATAR_ASSETS[member]||!NOTE_REACTIONS.some(([id])=>id===expression))return Promise.reject(new Error('Unknown reaction'));
  const key=member+':'+expression;let pending=thumbnails.get(key);
+ if(pending){thumbnails.delete(key);thumbnails.set(key,pending);}
  if(!pending){pending=(async()=>{
   const base=await image(new URL('./avatars/v1/'+AVATAR_ASSETS[member].faceplate,document.baseURI).href);
   const canvas=document.createElement('canvas');canvas.style.cssText='position:fixed;left:-500px;top:0;width:128px;height:128px;pointer-events:none';document.body.append(canvas);
   try{const renderer=new AvatarRenderer(canvas,null,base,base,member);renderer.expression=expression;renderer.draw(moodFromValue(0),{hearts:false,steam:false,blush:false},{animate:false});return canvas.toDataURL('image/webp',.85);}finally{canvas.remove();}
- })().catch(error=>{thumbnails.delete(key);throw error;});thumbnails.set(key,pending);}
+ })().catch(error=>{thumbnails.delete(key);throw error;});thumbnails.set(key,pending);
+ while(thumbnails.size>REACTION_THUMBNAIL_LIMIT)thumbnails.delete(thumbnails.keys().next().value!);
+ }
  return pending;
 }

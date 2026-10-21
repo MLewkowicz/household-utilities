@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 test('dark dashboard, monthly proration, and shared payment lifecycle',async({page,browser})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
- await page.emulateMedia({colorScheme:'dark'});await page.goto('/');await expect(page.getByText('Shared ledger · up to date')).toBeVisible();
+ await page.emulateMedia({colorScheme:'dark'});await page.goto('/#utilities');await expect(page.getByText('Shared ledger · up to date')).toBeVisible();
  await expect(page.locator('.balance-card')).toHaveCount(4);
  await expect(page.locator('body')).toHaveCSS('background-color','rgba(0, 0, 0, 0)');
  await page.getByRole('button',{name:'Rohil',exact:true}).click();
@@ -20,7 +20,7 @@ test('dark dashboard, monthly proration, and shared payment lifecycle',async({pa
  await expect(page.locator('#payment-dialog')).not.toBeVisible();
  await expect(page.locator('.payment-row')).toContainText('$13.37');
  await expect(rinaCard.locator('.balance-amount')).toHaveText('$113.40');
- const other=await browser.newPage();await other.goto('http://127.0.0.1:4174/');
+ const other=await browser.newPage();await other.goto('http://127.0.0.1:4174/#utilities');
  await expect(other.locator('.payment-row')).toContainText('$13.37');
  await page.getByRole('button',{name:'Edit Rina payment of $13.37'}).click();
  await page.getByLabel('Amount',{exact:true}).fill('12.34');await page.locator('#payment-dialog').getByLabel('Changed by').selectOption('michal');
@@ -37,7 +37,7 @@ test('dark dashboard, monthly proration, and shared payment lifecycle',async({pa
  await other.close();expect(errors).toEqual([]);
 });
 test('mobile layout and unavailable backend preserve a clearly labeled snapshot',async({page})=>{
- await page.setViewportSize({width:390,height:844});await page.goto('/');
+ await page.setViewportSize({width:390,height:844});await page.goto('/#utilities');
  await expect(page.locator('.balance-card')).toHaveCount(4);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
  await page.route('**/rest/v1/rpc/**',route=>route.abort());await page.reload();
