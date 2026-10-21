@@ -1,7 +1,7 @@
 import type {Member} from './ledger';
 import {activeChore,queueReady,queueOrder,type Chore,type ChoreLedger} from './chores';
 export type PersonalTask={id:string;version:number;owner:Member;title:string;group_name?:string|null;pinned:boolean;completed_at:string|null;deleted:boolean;actor:Member;action:string;created_at:string;added_at:string};
-export type PersonalLedger={member?:Member;tasks:PersonalTask[];history:PersonalTask[];updated_at:string|null;format_version:number;orders?:HomeOrder[]};
+export type PersonalLedger={member?:Member;tasks:PersonalTask[];history:PersonalTask[];updated_at:string|null;format_version:number;group_rename_version?:number;orders?:HomeOrder[]};
 export type HomeOrder={member:Member;version:number;keys:string[]};
 export type FeedEntry={source:'personal';key:string;task:PersonalTask}|{source:'shared';key:string;task:Chore};
 export function combinedFeed(member:Member,personal:PersonalTask[],shared:ChoreLedger|undefined,history=false):FeedEntry[]{

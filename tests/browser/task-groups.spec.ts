@@ -49,3 +49,29 @@ test('desktop tiles start dragging with ordinary mouse movement from the center'
  await expect(page.locator('.task-drag-preview')).toBeVisible();await expect(page.locator('[data-task-group="Mouse group"] [data-home-key]').first()).toHaveAttribute('data-home-key','personal:'+a.id);await page.mouse.up();
  await expect.poll(async()=>{const d=await rpc(page,'home_order',{member:'ohm'});return d.keys.indexOf('personal:'+a.id)<d.keys.indexOf('personal:'+b.id);}).toBeTruthy();
 });
+
+test('group header rename updates both priority sections and completed history, with safe lost-response retries',async({page})=>{
+ const a=await create(page,'Rename ordinary','Rename MIT'),b=await create(page,'Rename pinned','Rename MIT'),c=await create(page,'Rename completed','Rename MIT');
+ await rpc(page,'save_personal_task',{id:b.id,actor:'ohm',action:'pin',pinned:true,expected_version:b.version,request_id:crypto.randomUUID()});
+ await rpc(page,'save_personal_task',{id:c.id,actor:'ohm',action:'complete',expected_version:c.version,request_id:crypto.randomUUID()});
+ await open(page);const rename=page.getByRole('button',{name:'Rename Rename MIT group',exact:true});await expect(rename).toHaveCount(2);
+ await rename.first().focus();await page.keyboard.press('Enter');await expect(page.locator('#group-rename-name')).toHaveValue('Rename MIT');await page.locator('#group-rename-name').fill('Research project');
+ await page.route('**/utilities_rename_personal_group',async route=>{await route.fetch();await route.abort();},{times:1});await page.locator('#group-rename-save').click();
+ await expect(page.locator('#group-rename-error')).toContainText(/fetch/i);await expect(page.locator('#group-rename-name')).toHaveValue('Research project');
+ await page.locator('#group-rename-save').click();await expect(page.locator('#group-rename-dialog')).not.toBeVisible();
+ await expect(page.locator('[data-task-group="Research project"]')).toHaveCount(2);await expect(page.locator('[data-task-group="Rename MIT"]')).toHaveCount(0);
+ const saved=await rpc(page,'personal_tasks',{member:'ohm'});for(const t of [a,b,c]){expect(saved.tasks.find((x:any)=>x.id===t.id).group_name).toBe('Research project');expect(saved.history.filter((x:any)=>x.id===t.id&&x.action==='rename_group')).toHaveLength(1);}
+ await page.locator('#home-history').check();await expect(page.locator('[data-task-group="Research project"]')).toContainText(['Rename pinned','Rename ordinary']);await expect(entry(page,c.id)).toContainText('Completed');
+ await page.reload();await expect(page.locator('#personal-groups option[value="Research project"]')).toHaveCount(1);await expect(page.locator('#personal-groups option[value="Rename MIT"]')).toHaveCount(0);
+ const snapshot=await rpc(page,'export_personal_tasks',{});await page.route('**/utilities_personal_tasks',r=>r.abort());await page.route('**/personal-tasks.json',r=>r.fulfill({json:snapshot}));await page.reload();await expect(page.getByRole('button',{name:'Rename Research project group'}).first()).toBeDisabled();
+});
+
+test('group rename keeps failed drafts, rejects conflicts, and fits narrow screens',async({page})=>{
+ const a=await create(page,'Concurrent rename A','Group to rename'),b=await create(page,'Concurrent rename B','Group to rename');await create(page,'Existing name task','Existing name');await open(page);await page.setViewportSize({width:390,height:844});
+ await page.getByRole('button',{name:'Rename Group to rename group'}).click();await page.locator('#group-rename-name').fill('Existing name');await page.locator('#group-rename-save').click();await expect(page.locator('#group-rename-error')).toContainText('already exists');await expect(page.locator('#group-rename-name')).toHaveValue('Existing name');
+ await rpc(page,'save_personal_task',{id:a.id,actor:'ohm',action:'edit',title:'Concurrent rename edited',expected_version:a.version,request_id:crypto.randomUUID()});
+ const next='A'.repeat(60);await page.locator('#group-rename-name').fill(next);await page.locator('#group-rename-save').click();await expect(page.locator('#group-rename-error')).toContainText('changed');await expect(page.locator('#group-rename-name')).toHaveValue(next);
+ expect((await rpc(page,'personal_tasks',{member:'ohm'})).tasks.find((t:any)=>t.id===b.id).group_name).toBe('Group to rename');await page.keyboard.press('Escape');
+ await page.getByRole('button',{name:'Rename Group to rename group'}).click();await page.locator('#group-rename-name').fill(next);await page.locator('#group-rename-name').press('Enter');await expect(page.locator('#group-rename-dialog')).not.toBeVisible();await expect(page.locator(`[data-task-group="${next}"]`)).toContainText('Concurrent rename edited');
+ await mkdir('.local/group-rename-review',{recursive:true});for(const width of [320,390,1280]){await page.setViewportSize({width,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.locator(`[data-task-group="${next}"]`).scrollIntoViewIfNeeded();await page.screenshot({path:`.local/group-rename-review/rename-${width}.png`});}
+});

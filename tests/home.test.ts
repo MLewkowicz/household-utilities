@@ -70,3 +70,45 @@ test('dragging a personal task across groups saves its group and order atomicall
  await assert.rejects(call('save_home_order',{...p,actor:'rina',expected_version:0,request_id:randomUUID(),move:{...p.move,expected_version:2}}),/owner/);
  assert.equal((await call('home_order',{member:'rina'})).version,0);
 });
+
+test('one group rename updates every current task, retains revisions and retries without duplicates',async()=>{
+ const a=await call('save_personal_task',task({group_name:'Rename project'}));
+ const b=await change(await call('save_personal_task',task({group_name:'Rename project',pinned:true})),'complete');
+ const c=await change(await call('save_personal_task',task({group_name:'Rename project'})),'delete');
+ const other=await call('save_personal_task',task({actor:'rina',group_name:'Rename project'}));
+ const before=await Promise.all(['dashboard','misc_dashboard','chores_dashboard','home_order'].map(n=>call(n,n==='home_order'?{member:'michal'}:undefined)));
+ const notifications=await db.query('SELECT count(*) FROM ledger_private.push_events');
+ const p={actor:'michal',request_id:randomUUID(),group_name:'Rename project',new_name:'  New   project ',expected_tasks:[a,b,c].map(t=>({id:t.id,version:t.version}))};
+ const result=await call('rename_personal_group',p);assert.deepEqual(result,{group_name:'New project',renamed_count:3});assert.deepEqual(await call('rename_personal_group',p),result);
+ await assert.rejects(call('rename_personal_group',{...p,new_name:'Something else'}),/different/);
+ const mine=await call('personal_tasks',{member:'michal'});assert.equal(mine.group_rename_version,1);
+ for(const old of [a,b,c]){
+  const updated=mine.tasks.find((t:any)=>t.id===old.id);assert.equal(updated.group_name,'New project');assert.equal(updated.version,old.version+1);
+  for(const prop of ['title','pinned','completed_at','deleted','added_at'])assert.equal(updated[prop],old[prop]);
+  assert.equal(mine.history.filter((t:any)=>t.id===old.id&&t.action==='rename_group').length,1);
+  assert.equal(mine.history.find((t:any)=>t.id===old.id&&t.version===old.version).group_name,'Rename project');
+ }
+ assert.equal((await call('personal_tasks',{member:'rina'})).tasks.find((t:any)=>t.id===other.id).group_name,'Rename project');
+ const exported=await call('export_personal_tasks',{});assert.equal(exported.group_rename_version,1);assert.ok(exported.history.some((t:any)=>t.id===c.id&&t.group_name==='Rename project'));assert.equal(exported.tasks.find((t:any)=>t.id===c.id).group_name,'New project');
+ const after=await Promise.all(['dashboard','misc_dashboard','chores_dashboard','home_order'].map(n=>call(n,n==='home_order'?{member:'michal'}:undefined)));
+ for(let i=0;i<before.length;i++){delete before[i].updated_at;delete after[i].updated_at;assert.deepEqual(after[i],before[i]);}
+ assert.deepEqual(await db.query('SELECT count(*) FROM ledger_private.push_events'),notifications);
+ await assert.rejects(db.transaction(async(tx:any)=>{await tx.exec('SET LOCAL ROLE anon');await tx.query('SELECT * FROM ledger_private.personal_group_renames');}),/permission denied/);
+});
+test('group renames reject stale membership and edits atomically, existing names, and malformed requests',async()=>{
+ const a=await call('save_personal_task',task({group_name:'Concurrent project'})),b=await call('save_personal_task',task({group_name:'Concurrent project'}));
+ const p={actor:'michal',request_id:randomUUID(),group_name:'Concurrent project',new_name:'Safe project',expected_tasks:[a,b].map(t=>({id:t.id,version:t.version}))};
+ await assert.rejects(call('rename_personal_group',{...p,actor:'rina'}),/no longer/);
+ for(const new_name of [null,'   ',5,{},'x'.repeat(61),'a\nb'])await assert.rejects(call('rename_personal_group',{...p,new_name}),/group/i);
+ await call('save_personal_task',task({group_name:'Occupied group'}));
+ await assert.rejects(call('rename_personal_group',{...p,new_name:'occupied group'}),/already exists/);
+ const updated=await change(b,'edit',{title:'Concurrent edit'});await assert.rejects(call('rename_personal_group',p),/changed/);
+ assert.equal((await call('personal_tasks',{member:'michal'})).tasks.find((t:any)=>t.id===a.id).version,a.version);
+ const fresh={...p,expected_tasks:[a,updated].map(t=>({id:t.id,version:t.version}))};
+ const added=await call('save_personal_task',task({group_name:'Concurrent project'}));await assert.rejects(call('rename_personal_group',fresh),/changed/);
+ const ready={...fresh,expected_tasks:[...fresh.expected_tasks,{id:added.id,version:added.version}]};
+ const outcomes=await Promise.allSettled([call('rename_personal_group',ready),call('rename_personal_group',{...ready,request_id:randomUUID(),new_name:'Other name'})]);assert.equal(outcomes.filter(x=>x.status==='fulfilled').length,1);
+ const renamed=(await call('personal_tasks',{member:'michal'})).tasks.filter((t:any)=>[a.id,b.id,added.id].includes(t.id));assert.equal(new Set(renamed.map((t:any)=>t.group_name)).size,1);
+ const group=renamed[0].group_name;await call('rename_personal_group',{actor:'michal',request_id:randomUUID(),group_name:group,new_name:group.toUpperCase(),expected_tasks:renamed.map((t:any)=>({id:t.id,version:t.version}))});
+ const cachedEdit=await change((await call('personal_tasks',{member:'michal'})).tasks.find((t:any)=>t.id===a.id),'edit',{title:'Cached client'});assert.equal(cachedEdit.group_name,group.toUpperCase());
+});
