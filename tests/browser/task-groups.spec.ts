@@ -75,3 +75,25 @@ test('group rename keeps failed drafts, rejects conflicts, and fits narrow scree
  await page.getByRole('button',{name:'Rename Group to rename group'}).click();await page.locator('#group-rename-name').fill(next);await page.locator('#group-rename-name').press('Enter');await expect(page.locator('#group-rename-dialog')).not.toBeVisible();await expect(page.locator(`[data-task-group="${next}"]`)).toContainText('Concurrent rename edited');
  await mkdir('.local/group-rename-review',{recursive:true});for(const width of [320,390,1280]){await page.setViewportSize({width,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.locator(`[data-task-group="${next}"]`).scrollIntoViewIfNeeded();await page.screenshot({path:`.local/group-rename-review/rename-${width}.png`});}
 });
+
+test('touch holds survive small finger movement and capture transfer, while cancellation restores the order',async({browser,page})=>{
+ const a=await create(page,'Finger movement A','Finger movement'),b=await create(page,'Finger movement B','Finger movement');
+ const context=await browser.newContext({baseURL:'http://127.0.0.1:4174',...devices['Pixel 7'],viewport:{width:390,height:844}}),phone=await context.newPage();await open(phone);
+ const session=await context.newCDPSession(phone),touch=async(type:string,x=0,y=0)=>session.send('Input.dispatchTouchEvent',{type,touchPoints:type==='touchEnd'||type==='touchCancel'?[]:[{x,y}]});
+ for(const [selector,jitter] of [['h3',2],['.completion-track',5]] as const){
+  const section=phone.locator('[data-task-group="Finger movement"]');await entry(phone,a.id).scrollIntoViewIfNeeded();
+  const start=(await entry(phone,a.id).locator(selector).boundingBox())!,target=(await entry(phone,b.id).boundingBox())!,x=start.x+start.width/2,y=start.y+start.height/2;
+  const original=await section.locator('[data-home-key]').first().getAttribute('data-home-key');
+  await touch('touchStart',x,y);await touch('touchMove',x+jitter,y+1);
+  await expect(phone.locator('.task-drag-preview')).toBeVisible();
+  // Process the transfer from the original target's implicit capture to the feed.
+  await touch('touchMove',x+jitter+1,y+2);await phone.waitForTimeout(450);await expect(phone.locator('.task-drag-preview')).toBeVisible();
+  await touch('touchMove',target.x+target.width/2,target.y+35);await expect(section.locator('[data-home-key]').first()).not.toHaveAttribute('data-home-key',original!);
+  const newFirst=await section.locator('[data-home-key]').first().getAttribute('data-home-key');await touch('touchEnd');await expect(phone.locator('.task-drag-preview')).toHaveCount(0);
+  await expect.poll(async()=>{const keys=(await rpc(phone,'home_order',{member:'ohm'})).keys;return keys.filter((k:string)=>k==='personal:'+a.id||k==='personal:'+b.id)[0];}).toBe(newFirst);
+ }
+ const before=await rpc(phone,'home_order',{member:'ohm'});await entry(phone,a.id).scrollIntoViewIfNeeded();const start=(await entry(phone,a.id).locator('h3').boundingBox())!,target=(await entry(phone,b.id).boundingBox())!;
+ await touch('touchStart',start.x+10,start.y+10);await touch('touchMove',start.x+12,start.y+11);await expect(phone.locator('.task-drag-preview')).toBeVisible();await touch('touchMove',target.x+target.width/2,target.y+35);await touch('touchCancel');
+ await expect(phone.locator('.task-drag-preview')).toHaveCount(0);await expect(phone.locator('body')).not.toHaveClass(/task-reordering/);expect(await rpc(phone,'home_order',{member:'ohm'})).toEqual(before);
+ const tasks=(await rpc(phone,'personal_tasks',{member:'ohm'})).tasks;expect(tasks.find((t:any)=>t.id===a.id).completed_at).toBeNull();await context.close();
+});

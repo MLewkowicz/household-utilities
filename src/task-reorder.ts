@@ -77,7 +77,9 @@ export function bindTaskReorder(root:HTMLElement, options:{enabled:()=>boolean;a
  root.addEventListener('touchmove',event=>{if(gesture?.active)event.preventDefault();},{passive:false});
  document.addEventListener('pointerup',event=>{if(gesture?.pointer===event.pointerId)finish(true);});
  document.addEventListener('pointercancel',event=>{if(gesture?.pointer===event.pointerId)finish();});
- root.addEventListener('lostpointercapture',event=>{if(gesture?.pointer===event.pointerId)finish();});
+ // Touch initially captures the tile child. Its capture loss bubbles here when
+ // lift transfers control to the feed; only losing the feed's own capture cancels.
+ root.addEventListener('lostpointercapture',event=>{if(event.target===root&&gesture?.pointer===event.pointerId&&!root.hasPointerCapture(event.pointerId))finish();});
  root.addEventListener('dragstart',event=>{if(gesture)event.preventDefault();});
  root.addEventListener('contextmenu',event=>{if(gesture)event.preventDefault();});
  root.addEventListener('click',event=>{if(suppressClick){event.preventDefault();event.stopImmediatePropagation();}},{capture:true});
