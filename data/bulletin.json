@@ -1,6 +1,22 @@
 {
   "notes": [
     {
+      "id": "05a481ec-15df-4b55-ac0e-4ed3be76b4f3",
+      "body": "This is a helpful app, thanks for not just rejecting Splitwise but instead creating a better and more comprehensive alternative!",
+      "kind": "compliment",
+      "actor": "rohil",
+      "action": "create",
+      "author": "rohil",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-21T02:44:38.440321+00:00",
+      "created_at": "2026-10-21T02:44:38.440321+00:00",
+      "recipients": [
+        "michal"
+      ],
+      "temperature": 30
+    },
+    {
       "id": "a07bd6ab-2127-4c51-adc1-bd2550b192b6",
       "body": "Thank you for slamming the door at 7:45am today! I actually really wanted to start waking up early \ud83d\udc9b",
       "kind": "compliment",
@@ -103,7 +119,7 @@
       "period": "all",
       "direction": "received",
       "complaints": 0,
-      "compliments": 0
+      "compliments": 1
     },
     {
       "member": "ohm",
@@ -152,14 +168,14 @@
       "period": "all",
       "direction": "written",
       "complaints": 2,
-      "compliments": 0
+      "compliments": 1
     },
     {
       "member": "michal",
       "period": "month",
       "direction": "received",
       "complaints": 0,
-      "compliments": 0
+      "compliments": 1
     },
     {
       "member": "ohm",
@@ -208,14 +224,14 @@
       "period": "month",
       "direction": "written",
       "complaints": 2,
-      "compliments": 0
+      "compliments": 1
     },
     {
       "member": "michal",
       "period": "week",
       "direction": "received",
       "complaints": 0,
-      "compliments": 0
+      "compliments": 1
     },
     {
       "member": "ohm",
@@ -264,10 +280,26 @@
       "period": "week",
       "direction": "written",
       "complaints": 2,
-      "compliments": 0
+      "compliments": 1
     }
   ],
   "history": [
+    {
+      "id": "05a481ec-15df-4b55-ac0e-4ed3be76b4f3",
+      "body": "This is a helpful app, thanks for not just rejecting Splitwise but instead creating a better and more comprehensive alternative!",
+      "kind": "compliment",
+      "actor": "rohil",
+      "action": "create",
+      "author": "rohil",
+      "deleted": false,
+      "version": 1,
+      "posted_at": "2026-10-21T02:44:38.440321+00:00",
+      "created_at": "2026-10-21T02:44:38.440321+00:00",
+      "recipients": [
+        "michal"
+      ],
+      "temperature": 30
+    },
     {
       "id": "a07bd6ab-2127-4c51-adc1-bd2550b192b6",
       "body": "Thank you for slamming the door at 7:45am today! I actually really wanted to start waking up early \ud83d\udc9b",
@@ -381,9 +413,95 @@
       "temperature": 100
     }
   ],
-  "reactions": [],
-  "updated_at": "2026-10-21T02:25:14.962266+00:00",
-  "exported_at": "2026-10-21T02:25:14.962266+00:00",
+  "reactions": [
+    {
+      "member": "ohm",
+      "note_id": "05a481ec-15df-4b55-ac0e-4ed3be76b4f3",
+      "version": 1,
+      "created_at": "2026-10-21T02:45:57.246242+00:00",
+      "expression": "vomit"
+    },
+    {
+      "member": "ohm",
+      "note_id": "20763499-8eee-44cb-ba23-2a0b83df2841",
+      "version": 1,
+      "created_at": "2026-10-21T02:52:34.262443+00:00",
+      "expression": "mogging"
+    },
+    {
+      "member": "ohm",
+      "note_id": "2ba0451b-7766-4f66-97a7-2fe32d914cbe",
+      "version": 1,
+      "created_at": "2026-10-21T02:53:15.806561+00:00",
+      "expression": "gentle-laughing"
+    },
+    {
+      "member": "ohm",
+      "note_id": "79feccd9-ba85-4473-958d-f5e995797fe1",
+      "version": 1,
+      "created_at": "2026-10-21T02:52:38.940427+00:00",
+      "expression": "disappointed"
+    },
+    {
+      "member": "ohm",
+      "note_id": "a07bd6ab-2127-4c51-adc1-bd2550b192b6",
+      "version": 1,
+      "created_at": "2026-10-21T02:52:20.516631+00:00",
+      "expression": "mogging"
+    },
+    {
+      "member": "rina",
+      "note_id": "f600b3bc-5791-43d9-a115-6f164c693199",
+      "version": 1,
+      "created_at": "2026-10-21T02:58:53.416827+00:00",
+      "expression": "gentle-laughing"
+    }
+  ],
+  "updated_at": "2026-10-21T03:03:06.018376+00:00",
+  "exported_at": "2026-10-21T03:03:06.018376+00:00",
   "format_version": 2,
-  "reaction_history": []
+  "reaction_history": [
+    {
+      "member": "rina",
+      "note_id": "f600b3bc-5791-43d9-a115-6f164c693199",
+      "version": 1,
+      "created_at": "2026-10-21T02:58:53.416827+00:00",
+      "expression": "gentle-laughing"
+    },
+    {
+      "member": "ohm",
+      "note_id": "2ba0451b-7766-4f66-97a7-2fe32d914cbe",
+      "version": 1,
+      "created_at": "2026-10-21T02:53:15.806561+00:00",
+      "expression": "gentle-laughing"
+    },
+    {
+      "member": "ohm",
+      "note_id": "79feccd9-ba85-4473-958d-f5e995797fe1",
+      "version": 1,
+      "created_at": "2026-10-21T02:52:38.940427+00:00",
+      "expression": "disappointed"
+    },
+    {
+      "member": "ohm",
+      "note_id": "20763499-8eee-44cb-ba23-2a0b83df2841",
+      "version": 1,
+      "created_at": "2026-10-21T02:52:34.262443+00:00",
+      "expression": "mogging"
+    },
+    {
+      "member": "ohm",
+      "note_id": "a07bd6ab-2127-4c51-adc1-bd2550b192b6",
+      "version": 1,
+      "created_at": "2026-10-21T02:52:20.516631+00:00",
+      "expression": "mogging"
+    },
+    {
+      "member": "ohm",
+      "note_id": "05a481ec-15df-4b55-ac0e-4ed3be76b4f3",
+      "version": 1,
+      "created_at": "2026-10-21T02:45:57.246242+00:00",
+      "expression": "vomit"
+    }
+  ]
 }

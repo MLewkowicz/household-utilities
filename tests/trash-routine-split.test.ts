@@ -1,7 +1,8 @@
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
-import {readFile} from 'node:fs/promises';
+import {readFile,readdir} from 'node:fs/promises';
+import {PGlite} from '@electric-sql/pglite';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
 import {addDays,weekStart} from '../src/chores';
 import {suggestChoreIcon} from '../src/chore-icons';
@@ -34,6 +35,11 @@ test('half-point chores retain exact credit for one to four helpers, edits, corr
 });
 
 test('the authorized trash conversion yields two half-point routines without duplicate tasks, lost history, notifications, or unrelated changes',async()=>{
+ // Rehearse the conversion against its original schema: legacy records could
+ // include early completions, which the later queue-timing guard now prevents.
+ await db.close();db=new PGlite();await db.waitReady;
+ await db.exec('CREATE ROLE anon;CREATE ROLE authenticated;CREATE ROLE service_role;');
+ for(const f of (await readdir('supabase/migrations')).filter(f=>f.endsWith('.sql')&&Number(f.slice(0,3))<=11).sort())await db.exec(await readFile('supabase/migrations/'+f,'utf8'));
  const start=addDays(weekStart(day),7);
  const p={id:source,request_id:randomUUID(),actor:'rina',title:'Take out the trash',start_week:start,interval_weeks:1,owners:['ohm','michal','rina','rohil'],start_index:0,enabled:true,steps:[{id:outId,title:'Take out the trash',points:1,weekday:0,time:null,icon_id:'trash',note:''},{id:bagId,title:'Put in new trash bag',points:1,weekday:0,time:null,icon_id:'tidy',note:''}]};
  await call('save_chore_routine',p);

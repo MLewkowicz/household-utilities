@@ -151,7 +151,7 @@
       "icon_id": "trash",
       "step_id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
       "version": 0,
-      "assignee": "ohm",
+      "assignee": "michal",
       "due_time": null,
       "cycle_end": "2026-11-02T05:00:00+00:00",
       "preset_id": "trash-out",
@@ -166,7 +166,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 3
+      "schedule_version": 6
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-10-26:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -182,8 +182,8 @@
       "status": "active",
       "icon_id": "trash-bag",
       "step_id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
-      "version": 2,
-      "assignee": "ohm",
+      "version": 3,
+      "assignee": "michal",
       "due_time": null,
       "cycle_end": "2026-11-02T05:00:00+00:00",
       "preset_id": "trash-bag",
@@ -215,7 +215,7 @@
       "icon_id": "trash",
       "step_id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
       "version": 0,
-      "assignee": "michal",
+      "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-11-09T05:00:00+00:00",
       "preset_id": "trash-out",
@@ -230,7 +230,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 3
+      "schedule_version": 6
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-02:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -247,7 +247,7 @@
       "icon_id": "trash-bag",
       "step_id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
       "version": 0,
-      "assignee": "michal",
+      "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-11-09T05:00:00+00:00",
       "preset_id": "trash-bag",
@@ -262,7 +262,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 3
+      "schedule_version": 7
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-09:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -294,7 +294,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 3
+      "schedule_version": 6
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-09:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -326,7 +326,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 3
+      "schedule_version": 7
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-16:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -358,7 +358,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 3
+      "schedule_version": 6
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-16:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -390,7 +390,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 3
+      "schedule_version": 7
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-23:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -407,7 +407,7 @@
       "icon_id": "trash",
       "step_id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
       "version": 0,
-      "assignee": "ohm",
+      "assignee": "michal",
       "due_time": null,
       "cycle_end": "2026-11-30T05:00:00+00:00",
       "preset_id": "trash-out",
@@ -422,7 +422,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 3
+      "schedule_version": 6
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-23:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -439,7 +439,7 @@
       "icon_id": "trash-bag",
       "step_id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
       "version": 0,
-      "assignee": "ohm",
+      "assignee": "michal",
       "due_time": null,
       "cycle_end": "2026-11-30T05:00:00+00:00",
       "preset_id": "trash-bag",
@@ -454,7 +454,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 3
+      "schedule_version": 7
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-30:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -471,7 +471,7 @@
       "icon_id": "trash",
       "step_id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
       "version": 0,
-      "assignee": "michal",
+      "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-12-07T05:00:00+00:00",
       "preset_id": "trash-out",
@@ -486,7 +486,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 3
+      "schedule_version": 6
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-30:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -503,7 +503,7 @@
       "icon_id": "trash-bag",
       "step_id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
       "version": 0,
-      "assignee": "michal",
+      "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-12-07T05:00:00+00:00",
       "preset_id": "trash-bag",
@@ -518,7 +518,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 3
+      "schedule_version": 7
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-07:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -550,7 +550,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 3
+      "schedule_version": 6
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-07:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -582,7 +582,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 3
+      "schedule_version": 7
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-14:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -614,7 +614,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 3
+      "schedule_version": 6
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-14:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -646,7 +646,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 3
+      "schedule_version": 7
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-21:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -663,7 +663,7 @@
       "icon_id": "trash",
       "step_id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
       "version": 0,
-      "assignee": "ohm",
+      "assignee": "michal",
       "due_time": null,
       "cycle_end": "2026-12-28T05:00:00+00:00",
       "preset_id": "trash-out",
@@ -678,7 +678,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 3
+      "schedule_version": 6
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-21:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -695,7 +695,7 @@
       "icon_id": "trash-bag",
       "step_id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
       "version": 0,
-      "assignee": "ohm",
+      "assignee": "michal",
       "due_time": null,
       "cycle_end": "2026-12-28T05:00:00+00:00",
       "preset_id": "trash-bag",
@@ -710,7 +710,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 3
+      "schedule_version": 7
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-28:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -727,7 +727,7 @@
       "icon_id": "trash",
       "step_id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
       "version": 0,
-      "assignee": "michal",
+      "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2027-01-04T05:00:00+00:00",
       "preset_id": "trash-out",
@@ -742,7 +742,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 3
+      "schedule_version": 6
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-12-28:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -759,7 +759,7 @@
       "icon_id": "trash-bag",
       "step_id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
       "version": 0,
-      "assignee": "michal",
+      "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2027-01-04T05:00:00+00:00",
       "preset_id": "trash-bag",
@@ -774,7 +774,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 3
+      "schedule_version": 7
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2027-01-04:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -806,7 +806,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 3
+      "schedule_version": 6
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2027-01-04:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -838,7 +838,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 3
+      "schedule_version": 7
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2027-01-11:1a7bbd79-0488-4b94-825d-6843207f75dc",
@@ -870,7 +870,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Take out the trash",
-      "schedule_version": 3
+      "schedule_version": 6
     },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2027-01-11:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
@@ -902,7 +902,7 @@
       "expires_time": null,
       "point_policy": "household-v1",
       "routine_title": "Put in new trash bag",
-      "schedule_version": 3
+      "schedule_version": 7
     },
     {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-10-26:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
@@ -1287,9 +1287,191 @@
       "point_policy": "household-v1",
       "routine_title": "Bin return",
       "schedule_version": 3
+    },
+    {
+      "id": "891e5282-f216-4ba2-a0fd-c5b41b4db881_michal",
+      "kind": "reminder",
+      "note": "",
+      "actor": "michal",
+      "state": "active",
+      "title": "Text landlord about heating",
+      "due_at": "2026-10-22T04:00:00+00:00",
+      "due_on": "2026-10-21",
+      "pinned": true,
+      "points": 0,
+      "status": "active",
+      "icon_id": "repair-request",
+      "version": 2,
+      "assignee": "michal",
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": null,
+      "projected": false,
+      "requester": "michal",
+      "completion": null,
+      "created_at": "2026-10-21T02:54:17.965548+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": null,
+      "reminder_group_id": "891e5282-f216-4ba2-a0fd-c5b41b4db881"
+    },
+    {
+      "id": "0096135e-bf89-4924-a99d-235f2f3ce57c",
+      "kind": "chore",
+      "note": "",
+      "actor": "rina",
+      "state": "active",
+      "title": "Do the dishes",
+      "due_at": "2026-10-21T03:59:00+00:00",
+      "due_on": "2026-10-20",
+      "pinned": false,
+      "points": 0,
+      "status": "active",
+      "icon_id": "dishes",
+      "version": 1,
+      "assignee": "michal",
+      "due_time": "23:59",
+      "cycle_end": null,
+      "preset_id": null,
+      "projected": false,
+      "requester": "rina",
+      "completion": null,
+      "created_at": "2026-10-21T03:00:46.401673+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": null,
+      "reminder_group_id": null
     }
   ],
   "history": [
+    {
+      "id": "0096135e-bf89-4924-a99d-235f2f3ce57c",
+      "kind": "chore",
+      "note": "",
+      "actor": "rina",
+      "state": "active",
+      "title": "Do the dishes",
+      "action": "create",
+      "due_at": "2026-10-21T03:59:00+00:00",
+      "due_on": "2026-10-20",
+      "pinned": false,
+      "points": 0,
+      "icon_id": "dishes",
+      "version": 1,
+      "assignee": "michal",
+      "due_time": "23:59",
+      "cycle_end": null,
+      "preset_id": null,
+      "requester": "rina",
+      "completion": null,
+      "created_at": "2026-10-21T03:00:46.401673+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "change_note": "",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": null,
+      "reminder_group_id": null
+    },
+    {
+      "id": "891e5282-f216-4ba2-a0fd-c5b41b4db881_michal",
+      "kind": "reminder",
+      "note": "",
+      "actor": "michal",
+      "state": "active",
+      "title": "Text landlord about heating",
+      "action": "edit",
+      "due_at": "2026-10-22T04:00:00+00:00",
+      "due_on": "2026-10-21",
+      "pinned": true,
+      "points": 0,
+      "icon_id": "repair-request",
+      "version": 2,
+      "assignee": "michal",
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": null,
+      "requester": "michal",
+      "completion": null,
+      "created_at": "2026-10-21T02:56:25.559179+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "change_note": "",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": null,
+      "reminder_group_id": "891e5282-f216-4ba2-a0fd-c5b41b4db881"
+    },
+    {
+      "id": "891e5282-f216-4ba2-a0fd-c5b41b4db881_michal",
+      "kind": "reminder",
+      "note": "",
+      "actor": "michal",
+      "state": "active",
+      "title": "Request a repair",
+      "action": "create",
+      "due_at": "2026-10-22T04:00:00+00:00",
+      "due_on": "2026-10-21",
+      "pinned": true,
+      "points": 0,
+      "icon_id": "repair-request",
+      "version": 1,
+      "assignee": "michal",
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": null,
+      "requester": "michal",
+      "completion": null,
+      "created_at": "2026-10-21T02:54:17.965548+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "change_note": "",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": null,
+      "reminder_group_id": "891e5282-f216-4ba2-a0fd-c5b41b4db881"
+    },
+    {
+      "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-10-26:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+      "kind": "chore",
+      "note": "",
+      "actor": "michal",
+      "state": "active",
+      "title": "Put in new trash bag",
+      "action": "edit",
+      "due_at": "2026-10-27T04:00:00+00:00",
+      "due_on": "2026-10-26",
+      "pinned": false,
+      "points": 0.5,
+      "icon_id": "trash-bag",
+      "step_id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+      "version": 3,
+      "assignee": "michal",
+      "due_time": null,
+      "cycle_end": "2026-11-02T05:00:00+00:00",
+      "preset_id": "trash-bag",
+      "requester": "rina",
+      "completion": null,
+      "created_at": "2026-10-21T02:39:41.020264+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
+      "change_note": "",
+      "cycle_start": "2026-10-26",
+      "expires_time": null,
+      "point_policy": "household-v1",
+      "routine_title": "Put in new trash bag",
+      "schedule_version": 1
+    },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-10-26:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
       "kind": "chore",
@@ -1775,38 +1957,6 @@
   ],
   "routines": [
     {
-      "id": "10986bd6-79a1-4a69-b799-e4938953c007",
-      "actor": "michal",
-      "steps": [
-        {
-          "id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
-          "kind": "chore",
-          "note": "",
-          "time": null,
-          "title": "Take out the trash",
-          "points": 0.5,
-          "icon_id": "trash",
-          "weekday": 0,
-          "preset_id": "trash-out",
-          "point_policy": "household-v1"
-        }
-      ],
-      "title": "Take out the trash",
-      "owners": [
-        "ohm",
-        "michal",
-        "rina",
-        "rohil"
-      ],
-      "enabled": true,
-      "version": 3,
-      "created_at": "2026-10-21T02:22:59.21102+00:00",
-      "start_week": "2026-10-26",
-      "start_index": 0,
-      "effective_on": "2026-10-26",
-      "interval_weeks": 1
-    },
-    {
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
       "actor": "michal",
       "steps": [
@@ -1839,6 +1989,38 @@
       "interval_weeks": 1
     },
     {
+      "id": "10986bd6-79a1-4a69-b799-e4938953c007",
+      "actor": "michal",
+      "steps": [
+        {
+          "id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
+          "kind": "chore",
+          "note": "",
+          "time": null,
+          "title": "Take out the trash",
+          "points": 0.5,
+          "icon_id": "trash",
+          "weekday": 0,
+          "preset_id": "trash-out",
+          "point_policy": "household-v1"
+        }
+      ],
+      "title": "Take out the trash",
+      "owners": [
+        "michal",
+        "ohm",
+        "rina",
+        "rohil"
+      ],
+      "enabled": true,
+      "version": 6,
+      "created_at": "2026-10-21T02:38:31.225503+00:00",
+      "start_week": "2026-10-26",
+      "start_index": 0,
+      "effective_on": "2026-10-26",
+      "interval_weeks": 1
+    },
+    {
       "id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
       "actor": "michal",
       "steps": [
@@ -1857,14 +2039,14 @@
       ],
       "title": "Put in new trash bag",
       "owners": [
-        "ohm",
         "michal",
+        "ohm",
         "rina",
         "rohil"
       ],
       "enabled": true,
-      "version": 3,
-      "created_at": "2026-10-21T02:22:59.21102+00:00",
+      "version": 7,
+      "created_at": "2026-10-21T02:44:17.583613+00:00",
       "start_week": "2026-10-26",
       "start_index": 0,
       "effective_on": "2026-10-26",
@@ -1873,8 +2055,8 @@
     }
   ],
   "local_day": "2026-10-20",
-  "updated_at": "2026-10-21T02:25:14.500543+00:00",
-  "exported_at": "2026-10-21T02:25:14.500543+00:00",
+  "updated_at": "2026-10-21T03:03:05.717694+00:00",
+  "exported_at": "2026-10-21T03:03:05.717694+00:00",
   "leaderboard": [
     {
       "rank": 1,
@@ -2119,6 +2301,234 @@
   ],
   "format_version": 1,
   "routine_history": [
+    {
+      "id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
+      "actor": "michal",
+      "steps": [
+        {
+          "id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+          "kind": "chore",
+          "note": "",
+          "time": null,
+          "title": "Put in new trash bag",
+          "points": 0.5,
+          "icon_id": "trash-bag",
+          "weekday": 0,
+          "preset_id": "trash-bag",
+          "point_policy": "household-v1"
+        }
+      ],
+      "title": "Put in new trash bag",
+      "owners": [
+        "michal",
+        "ohm",
+        "rina",
+        "rohil"
+      ],
+      "enabled": true,
+      "version": 7,
+      "created_at": "2026-10-21T02:44:17.583613+00:00",
+      "start_week": "2026-10-26",
+      "start_index": 0,
+      "effective_on": "2026-10-26",
+      "interval_weeks": 1,
+      "occurrence_root": "10986bd6-79a1-4a69-b799-e4938953c007"
+    },
+    {
+      "id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
+      "actor": "michal",
+      "steps": [
+        {
+          "id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+          "kind": "chore",
+          "note": "",
+          "time": null,
+          "title": "Put in new trash bag",
+          "points": 0.5,
+          "icon_id": "trash-bag",
+          "weekday": 0,
+          "preset_id": "trash-bag",
+          "point_policy": "household-v1"
+        }
+      ],
+      "title": "Put in new trash bag",
+      "owners": [
+        "michal",
+        "ohm",
+        "rina",
+        "rohil"
+      ],
+      "enabled": true,
+      "version": 6,
+      "created_at": "2026-10-21T02:38:55.598806+00:00",
+      "start_week": "2026-10-26",
+      "start_index": 0,
+      "effective_on": "2026-10-26",
+      "interval_weeks": 1,
+      "occurrence_root": "10986bd6-79a1-4a69-b799-e4938953c007"
+    },
+    {
+      "id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
+      "actor": "michal",
+      "steps": [
+        {
+          "id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+          "kind": "chore",
+          "note": "",
+          "time": null,
+          "title": "Put in new trash bag",
+          "points": 0.5,
+          "icon_id": "trash-bag",
+          "weekday": 0,
+          "preset_id": "trash-bag",
+          "point_policy": "household-v1"
+        }
+      ],
+      "title": "Put in new trash bag",
+      "owners": [
+        "michal",
+        "ohm",
+        "rina",
+        "rohil"
+      ],
+      "enabled": true,
+      "version": 5,
+      "created_at": "2026-10-21T02:38:37.001151+00:00",
+      "start_week": "2026-10-26",
+      "start_index": 0,
+      "effective_on": "2026-10-26",
+      "interval_weeks": 1,
+      "occurrence_root": "10986bd6-79a1-4a69-b799-e4938953c007"
+    },
+    {
+      "id": "10986bd6-79a1-4a69-b799-e4938953c007",
+      "actor": "michal",
+      "steps": [
+        {
+          "id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
+          "kind": "chore",
+          "note": "",
+          "time": null,
+          "title": "Take out the trash",
+          "points": 0.5,
+          "icon_id": "trash",
+          "weekday": 0,
+          "preset_id": "trash-out",
+          "point_policy": "household-v1"
+        }
+      ],
+      "title": "Take out the trash",
+      "owners": [
+        "michal",
+        "ohm",
+        "rina",
+        "rohil"
+      ],
+      "enabled": true,
+      "version": 6,
+      "created_at": "2026-10-21T02:38:31.225503+00:00",
+      "start_week": "2026-10-26",
+      "start_index": 0,
+      "effective_on": "2026-10-26",
+      "interval_weeks": 1
+    },
+    {
+      "id": "10986bd6-79a1-4a69-b799-e4938953c007",
+      "actor": "michal",
+      "steps": [
+        {
+          "id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
+          "kind": "chore",
+          "note": "",
+          "time": null,
+          "title": "Take out the trash",
+          "points": 0.5,
+          "icon_id": "trash",
+          "weekday": 0,
+          "preset_id": "trash-out",
+          "point_policy": "household-v1"
+        }
+      ],
+      "title": "Take out the trash",
+      "owners": [
+        "michal",
+        "ohm",
+        "rina",
+        "rohil"
+      ],
+      "enabled": true,
+      "version": 5,
+      "created_at": "2026-10-21T02:38:21.486435+00:00",
+      "start_week": "2026-10-26",
+      "start_index": 0,
+      "effective_on": "2026-10-26",
+      "interval_weeks": 1
+    },
+    {
+      "id": "bd7cfae6-c01b-d639-c781-a8cef98bbc95",
+      "actor": "michal",
+      "steps": [
+        {
+          "id": "c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+          "kind": "chore",
+          "note": "",
+          "time": null,
+          "title": "Put in new trash bag",
+          "points": 0.5,
+          "icon_id": "trash-bag",
+          "weekday": 0,
+          "preset_id": "trash-bag",
+          "point_policy": "household-v1"
+        }
+      ],
+      "title": "Put in new trash bag",
+      "owners": [
+        "michal",
+        "ohm",
+        "rina",
+        "rohil"
+      ],
+      "enabled": true,
+      "version": 4,
+      "created_at": "2026-10-21T02:38:09.227966+00:00",
+      "start_week": "2026-10-26",
+      "start_index": 1,
+      "effective_on": "2026-10-26",
+      "interval_weeks": 1,
+      "occurrence_root": "10986bd6-79a1-4a69-b799-e4938953c007"
+    },
+    {
+      "id": "10986bd6-79a1-4a69-b799-e4938953c007",
+      "actor": "rina",
+      "steps": [
+        {
+          "id": "1a7bbd79-0488-4b94-825d-6843207f75dc",
+          "kind": "chore",
+          "note": "",
+          "time": null,
+          "title": "Take out the trash",
+          "points": 0.5,
+          "icon_id": "trash",
+          "weekday": 0,
+          "preset_id": "trash-out",
+          "point_policy": "household-v1"
+        }
+      ],
+      "title": "Take out the trash",
+      "owners": [
+        "michal",
+        "ohm",
+        "rina",
+        "rohil"
+      ],
+      "enabled": true,
+      "version": 4,
+      "created_at": "2026-10-21T02:37:37.437413+00:00",
+      "start_week": "2026-10-26",
+      "start_index": 1,
+      "effective_on": "2026-10-26",
+      "interval_weeks": 1
+    },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007",
       "actor": "michal",
@@ -2658,5 +3068,6 @@
       "before_version": 2,
       "policy_version": "household-v1"
     }
-  ]
+  ],
+  "queue_timing_version": 1
 }

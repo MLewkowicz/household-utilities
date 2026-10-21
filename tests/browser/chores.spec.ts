@@ -153,3 +153,44 @@ test('the trash liner has its own icon and half-point recurring work completes a
  await page.locator('#chore-mine-status-filter').selectOption('completed');await expand(c);await c.getByRole('button',{name:'Correct completion',exact:true}).click();await expect(page.locator('#chore-complete-effort')).toHaveValue('0.5');await page.keyboard.press('Escape');
  await view(page,'week');await page.locator('#chore-manage-routines').click();await page.locator(`[data-edit-routine="${routine.id}"]`).click();await expect(page.locator('[data-routine-field=points]')).toHaveValue('0.5');
 });
+
+test('future trash remains in Week after editing, without early completion controls',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ const d=await rpc(page,'chores_dashboard'),start=addDays(weekStart(d.local_day),7);
+ const ids:string[]=[];
+ for(const title of ['Queue test trash out','Queue test new bag']){
+  const r=await rpc(page,'save_chore_routine',{id:crypto.randomUUID(),request_id:crypto.randomUUID(),actor:'rina',title,start_week:start,interval_weeks:1,owners:['michal'],start_index:0,enabled:true,steps:[{id:'one',title,kind:'chore',icon_id:'trash',note:'',points:0.5,weekday:0,time:null}]});ids.push(r.id);
+ }
+ await open(page);await view(page,'week');await page.locator('[data-week-shift="7"]').click();
+ const cards=page.locator('.chore-week .chore-card').filter({has:page.getByRole('heading',{name:/Queue test (trash out|new bag)/})});
+ await expect(cards).toHaveCount(2);await expect(cards.locator('[data-swipe-complete]')).toHaveCount(0);
+ const bag=cards.filter({has:page.getByRole('heading',{name:'Queue test new bag',exact:true})});
+ await expand(bag);await expect(bag.locator('[data-chore-command=complete]')).toHaveCount(0);
+ await bag.getByRole('button',{name:'Edit',exact:true}).click();await expect(page.locator('#chore-queue')).toHaveValue('due_date');await expect(page.locator('#chore-task-done')).not.toBeVisible();
+ await page.locator('#chore-more > summary').click();await page.locator('#chore-note').fill('Individually edited future occurrence');
+ await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();
+ await expect(cards).toHaveCount(2);await expect(cards.locator('[data-swipe-complete]')).toHaveCount(0);
+ await view(page,'mine');await expect(page.locator('.chore-grid .chore-card').filter({has:page.getByRole('heading',{name:/Queue test (trash out|new bag)/})})).toHaveCount(0);
+ const saved=await rpc(page,'chores_dashboard');expect(saved.tasks.filter((t:any)=>ids.includes(t.routine_id)&&t.cycle_start===start).map((t:any)=>t.projected).sort()).toEqual([false,true]);
+ // Simulate the next dashboard response after New York midnight on the due day.
+ await page.route('**/utilities_chores_dashboard',route=>route.fulfill({json:{...saved,local_day:start,tasks:saved.tasks.map((t:any)=>ids.includes(t.routine_id)&&t.cycle_start===start?{...t,projected:false}:t)}}));
+ await page.locator('#refresh').click();
+ const due=page.locator('.chore-grid .chore-card').filter({has:page.getByRole('heading',{name:/Queue test (trash out|new bag)/})});
+ await expect(due).toHaveCount(2);await expect(due.locator('[data-swipe-complete]')).toHaveCount(2);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+});
+
+test('a due-day-only task can be configured and edited without losing its queue setting',async({page})=>{
+ await open(page);const d=await rpc(page,'chores_dashboard'),due=addDays(d.local_day,1);
+ await page.locator('#chore-new').click();await page.locator('#chore-title').fill('Wait until the deadline day');
+ await page.locator('#chore-queue').selectOption('due_date');await expect(page.locator('#chore-due')).toHaveAttribute('required','');
+ await page.locator('#chore-due').fill(due);await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();
+ const t=(await rpc(page,'chores_dashboard')).tasks.find((t:any)=>t.title==='Wait until the deadline day');expect(t.queue_visibility).toBe('due_date');
+ await expect(page.locator(`[data-chore-id="${t.id}"]`)).toHaveCount(0);
+ await view(page,'week');if(weekStart(due)>weekStart(d.local_day))await page.locator('[data-week-shift="7"]').click();
+ const c=page.locator(`[data-chore-id="${t.id}"]`);await expand(c);await c.getByRole('button',{name:'Edit',exact:true}).click();
+ await expect(page.locator('#chore-queue')).toHaveValue('due_date');await page.locator('#chore-due').fill(d.local_day);
+ await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();await view(page,'mine');
+ await expect(c).toBeVisible();await c.locator('[data-swipe-complete]').focus();await page.keyboard.press('Enter');await expect(c).toHaveCount(0);
+ expect((await rpc(page,'chores_dashboard')).tasks.find((x:any)=>x.id===t.id).state).toBe('completed');
+});

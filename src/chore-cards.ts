@@ -1,5 +1,5 @@
 import {cornerTab} from './tile-corner';
-import {type Chore, activeChore, taskKind, points} from './chores';
+import {type Chore, activeChore, queueReady, queueOpensOn, taskKind, points} from './chores';
 import {type Member} from './ledger';
 import {esc, name, date} from './ui';
 import {avatar} from './people';
@@ -7,7 +7,8 @@ import {choreIcon} from './chore-icons';
 
 export function choreCard(t:Chore, context:{identity:Member|null;live:boolean;day:string}) {
  const {identity,live,day}=context;
- const writable=!!identity&&live,quick=writable&&activeChore(t)&&!t.projected&&(!t.assignee||t.assignee===identity);
+ const ready=queueReady(t,day),opens=queueOpensOn(t);
+ const writable=!!identity&&live,quick=writable&&activeChore(t)&&ready&&!t.projected&&(!t.assignee||t.assignee===identity);
  const kind=taskKind(t),owner=t.assignee||t.requester;
  const due=t.due_on===day?'today':t.due_on?date(t.due_on):'';
  const status=activeChore(t)?'':t.status==='completed'?'✓ Completed':name(t.status);
@@ -19,14 +20,15 @@ export function choreCard(t:Chore, context:{identity:Member|null;live:boolean;da
    ${t.routine_id||t.reminder_group_id?`<p class="quiet">${t.routine_id?'Routine by '+name(t.requester):'Your own reminder'}</p>`:''}
    ${t.note?`<p class="chore-description">${esc(t.note)}</p>`:''}
    ${t.due_on?`<p class="chore-timing">Due ${date(t.due_on,true)}${t.due_time?' · '+t.due_time:' · end of day'}</p>`:''}
+   ${activeChore(t)&&!ready&&opens?`<p class="chore-timing">In queue from ${date(opens,true)}</p>`:''}
    ${t.expires_at?`<p class="chore-timing">Expires ${new Date(t.expires_at).toLocaleString('en-US',{timeZone:'America/New_York',dateStyle:'medium',timeStyle:'short'})}</p>`:''}
    ${t.completion?`<p class="chore-done-by">Completed by ${t.completion.contributors.map(name).join(', ')} · ${t.points?points(t.points*12/t.completion.contributors.length)+' pts each':'No points'} · ${new Date(t.completion.completed_at).toLocaleString('en-US',{timeZone:'America/New_York',dateStyle:'medium',timeStyle:'short'})}</p>`:''}
    ${writable?`<div class="chore-card-actions">
-    ${t.status!=='completed'&&t.status!=='cancelled'?`<button class="button secondary" data-chore-command="complete">${activeChore(t)?'Mark done':'Log completion'}</button>`:''}
+    ${ready&&t.status!=='completed'&&t.status!=='cancelled'?`<button class="button secondary" data-chore-command="complete">${activeChore(t)?'Mark done':'Log completion'}</button>`:''}
     ${t.status==='completed'?'<button class="text-button" data-chore-command="complete">Correct completion</button><button class="text-button" data-chore-command="undo">Undo</button>':''}
-    ${activeChore(t)&&!t.assignee?'<button class="text-button" data-chore-command="claim">Claim</button>':''}
+    ${ready&&activeChore(t)&&!t.assignee?'<button class="text-button" data-chore-command="claim">Claim</button>':''}
     <button class="text-button" data-chore-command="edit">Edit</button>
-    ${activeChore(t)&&t.assignee?'<button class="text-button" data-chore-command="hand_back">Hand back</button>':''}
+    ${ready&&activeChore(t)&&t.assignee?'<button class="text-button" data-chore-command="hand_back">Hand back</button>':''}
     ${t.status==='cancelled'?'<button class="text-button" data-chore-command="reopen">Reopen</button>':t.status!=='completed'?'<button class="text-button" data-chore-command="cancel">Cancel chore</button>':''}
    </div>`:''}<div data-task-history="${esc(t.id)}"></div>
   </div></details>

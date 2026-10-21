@@ -107,3 +107,15 @@ Next starting point: iterate on the production Events experience and reaction ar
 ## October 21 validation
 
 86 Node/database tests, 8 Python tests, and 43 browser scenarios pass. New coverage includes exact-cent split balancing and conflicts, single-recipient requests, event lifecycle and DST boundaries, reaction retries/replacement/removal, preset enforcement, historical adjustment/reversal, and undo/recompletion. Existing financial, task, notification, avatar, and offline behavior remains covered. Visual checks include all four characters, mobile light/dark themes, and 320px navigation. Live score verification passed: Michal +1/3, Rina +1/3, Rohil −1/6, Ohm unchanged; financial ledgers, notes, and events unchanged.
+
+## Queue timing correction — October 21
+
+- [x] Explain and reproduce the edited-future-occurrence bug affecting the trash pair.
+- [x] Make routines wait for their actual due date, including offset items and saved overrides.
+- [x] Add **Show in queue** to task/routine forms; keep upcoming work in Week.
+- [x] Apply readiness to active queues, sliders, detailed completion, and urgent badges; validate it server-side.
+- [x] Preserve all records, current owner rotations, score history, retries, and financial ledgers; rehearse migration 016 with the fresh live backup.
+- [x] Pass 92 Node/database tests, 8 Python tests, 45 browser scenarios, and a read-only desktop/mobile preview against live records.
+- [x] Install migration 016 via local `./configure.sh`, verify all baseline live records and scores, preserve concurrent household additions, and refresh all five fallbacks.
+
+Publication follows the existing Pages workflow. `.local/smoke-queue-timing.mjs` checks the published bundle and both trash cards on desktop/phone, with no test writes.

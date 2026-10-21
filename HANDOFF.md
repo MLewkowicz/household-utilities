@@ -4,7 +4,18 @@ Prepared October 20, 2026, from the current repository and the project's setup a
 
 This document describes the implemented application, its operating rules, and context that should be preserved when making changes. The repository and live database may evolve after this handoff; inspect their current state before altering anything.
 
-## October 21, 2026 update — latest implementation
+## October 21, 2026 queue timing fix — latest follow-up
+
+An edited October 26 trash-bag occurrence was stored (`projected: false`) while the matching trash-out occurrence remained a preview. The old queue/slider checked storage state without checking scheduling. This is now independent of materialization: `queueReady` / `queueOpensOn` in `src/chores.ts` and `ledger_private.chore_queue_ready` enforce calendar-day availability in New York.
+
+- Missing `queue_visibility` means `due_date` for routines and `immediately` for ordinary tasks. Optional task/routine item policies are `due_date` or `immediately`; the latter is labelled **At cycle start** for routines and cannot bypass `cycle_start`. Existing offset routines such as bin return wait until their actual due date by default.
+- My queue/Household active views, sliders, completion forms, and urgent badges use availability. Week keeps upcoming work editable; completed history/corrections remain accessible. Server completion guards reject early completions, while preserving version checks and idempotent retries. Due-day-only tasks require a date; overdue/expiry/missed rules are unchanged.
+- Migration **016_chore_queue_timing.sql** replaces functions only. It does not rewrite stored tasks, routine definitions, audit history, or points. The dashboard advertises `queue_timing_version: 1`; setup and the local database loader detect the private helper before installing.
+- A fresh live backup is in ignored `.local/backups/before-queue-timing-20261021T025403Z.json`. Rehearsal confirms both trash tasks open October 26 and bin return October 27, with all records/scores preserved, including the user's latest routine owner-order changes.
+- Verification: 92 Node/database tests, 8 Python tests, and all 45 browser scenarios pass. A read-only preview against the live records confirms both trash cards in Week without early sliders, in light/dark themes on desktop and phone.
+- Migration 016 is installed and verified live (`queue_timing_version: 1`). All baseline records, routine owner order, and scores are preserved; two tasks and a note reaction added during development are retained. All five fallback snapshots are refreshed. Publication uses `./publish.sh` and the existing Pages workflow; the read-only `.local/smoke-queue-timing.mjs` checks the published bundle, queue, Week, forms, and both themes. Never rerun point recalculation for this fix.
+
+## October 21, 2026 update — prior feature release
 
 The app now has **Utilities, Expenses, To-dos, Events, and Bulletin**. Existing expense/task route hashes and records are retained. The older sections below document the original implementation; this update supersedes their naming, custom-split, events, and point-policy descriptions.
 

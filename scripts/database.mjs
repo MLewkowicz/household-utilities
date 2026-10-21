@@ -46,6 +46,8 @@ export async function openDatabase(path) {
     const installed=await db.query(`SELECT to_regprocedure('public.${fn}()') AS fn`);
     if(!installed.rows[0].fn)await db.exec(await readFile(new URL('../supabase/migrations/'+file,import.meta.url),'utf8'));
   }
+  const queueTiming=await db.query("SELECT to_regprocedure('ledger_private.chore_queue_ready(jsonb,date)') AS fn");
+  if(!queueTiming.rows[0].fn)await db.exec(await readFile(new URL('../supabase/migrations/016_chore_queue_timing.sql',import.meta.url),'utf8'));
   return db;
 }
 export async function callRpc(db,name,params={},role='anon') {

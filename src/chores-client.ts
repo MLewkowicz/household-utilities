@@ -13,7 +13,7 @@ export function focusChoreNotification(id:string){
 }
 import {$,esc,name,date,today,rpc,toast,download} from './ui';
 import {identity,setIdentity,onIdentityChange} from './identity';
-import {taskKind,type TaskKind,type Chore,type Routine,type RoutineStep,type ChoreLedger,addDays,weekStart,activeChore,urgentChore,queueOrder,points,localDateTime} from './chores';
+import {taskKind,type TaskKind,type Chore,type Routine,type RoutineStep,type ChoreLedger,addDays,weekStart,activeChore,queueReady,queueVisibility,type QueueVisibility,urgentChore,queueOrder,points,localDateTime} from './chores';
 import {CHORE_ICONS,choreIcon,suggestChoreIcon} from './chore-icons';
 
 let ledger:ChoreLedger|undefined,live=false,loading=false,busy=false,refreshAgain=false;
@@ -54,6 +54,7 @@ export function initChores(){
  <fieldset id="reminder-recipients" class="chore-contributors" hidden><legend>Remind whom?</legend><div class="chore-member-options">${MEMBERS.map(m=>`<label class="chore-check-tile member-${m}"><input type="checkbox" name="reminder-recipient" value="${m}">${avatar(m)}${name(m)}</label>`).join('')}</div></fieldset>
  <div id="chore-points-fields"><label for="chore-preset">Household job</label><select id="chore-preset">${presetOptions()}</select>${effort('chore-effort')}</div><details id="chore-more" class="form-details"><summary>Context & advanced settings</summary><label for="chore-note">A little context <span class="quiet">(optional)</span></label><textarea id="chore-note" rows="2" maxlength="1000" placeholder="Where, what, or why…"></textarea>
  </details><div class="chore-two-fields"><div><label for="chore-due">Due date <span class="quiet">(optional)</span></label><input id="chore-due" type="date"></div><div><label for="chore-time">Time <span class="quiet">(optional)</span></label><input id="chore-time" type="time"></div></div>${info('About deadlines','New York time. Without a time, the deadline is the end of the day.')}
+ <div id="chore-queue-fields"><label for="chore-queue">Show in queue</label><select id="chore-queue"><option value="immediately">Immediately</option><option value="due_date">On due date</option></select>${info('About queue timing','On due date means the start of that day in New York, even if a deadline time is set. Upcoming tasks remain in Week; late tasks stay in the queue until completed, expired, or the routine cycle ends.')}</div>
  <details id="chore-scheduling" class="form-details"><summary>Priority & expiry</summary><label class="chore-inline-check"><input id="chore-pinned" type="checkbox"> Pin as high priority</label>
  <label class="chore-inline-check"><input id="chore-tonight" type="checkbox"> Expire tonight</label>
  <details id="chore-expiry-details"><summary>Choose another expiry</summary><div class="chore-two-fields"><div><label for="chore-expiry">Expiry date</label><input id="chore-expiry" type="date"></div><div><label for="chore-expiry-time">Expiry time <span class="quiet">(optional)</span></label><input id="chore-expiry-time" type="time"></div></div></details>${info('About expiry','Expired tasks leave the queue and remain in history.')}</details>
@@ -110,7 +111,7 @@ function updateTaskKind(resetPoints=false){
  $('#chore-task-save').textContent=taskMode==='log'?'Log completion':taskDraft?'Save changes':kind==='reminder'?'Create reminders':kind==='request'?'Create request':'Create chore';
 }
 async function quickComplete(task:Chore){
- if(!identity||busy||!live)return;
+ if(!identity||busy||!live||!queueReady(task,day()))return;
  const actor=identity,key=`${task.id}:${task.version}:${actor}`;
  if(!quickRequests.has(key))quickRequests.set(key,crypto.randomUUID());
  busy=true;
@@ -136,7 +137,7 @@ async function undoQuick(task:Chore,actor:Member,request:string){
 }
 function queueView(){
  const mine=view==='mine',selectedStatus=mine?myStatusFilter:statusFilter;
- const candidates=(ledger?.tasks||[]).filter(t=>!t.projected&&(typeFilter==='all'||taskKind(t)===typeFilter)).filter(t=>mine?(t.assignee===identity||!t.assignee):(householdFilter==='all'||(householdFilter==='anyone'?!t.assignee:t.assignee===householdFilter))).filter(t=>selectedStatus==='active'?activeChore(t):selectedStatus==='all'?true:t.status===selectedStatus);
+ const candidates=(ledger?.tasks||[]).filter(t=>!t.projected&&(typeFilter==='all'||taskKind(t)===typeFilter)).filter(t=>mine?(t.assignee===identity||!t.assignee):(householdFilter==='all'||(householdFilter==='anyone'?!t.assignee:t.assignee===householdFilter))).filter(t=>selectedStatus==='active'?activeChore(t)&&queueReady(t,day()):selectedStatus==='all'?true:t.status===selectedStatus);
  candidates.sort(selectedStatus==='active'?queueOrder(day()):(a,b)=>(b.completion?.completed_at||b.created_at).localeCompare(a.completion?.completed_at||a.created_at));
  const heading=mine?identity?`${name(identity)}’s ${selectedStatus==='active'?'queue':'history'}`:'Your corner of the household':'The household board';
  const copy=mine?(selectedStatus==='active'?'Your assigned chores, plus muted requests open to anyone. Pinned first.':'Your assigned chores and unassigned requests, including their history.'):`${candidates.length} ${householdFilter==='anyone'?'unassigned ':''}chore${candidates.length===1?'':'s'} · ${householdFilter==='anyone'?'anyone can lend a hand.':householdFilter==='all'?'across the whole household.':'assigned to '+name(householdFilter)+'.'}`;
@@ -172,6 +173,11 @@ function renderChosenIcon(){
  $('#chore-selected-icon').innerHTML=choreIcon(chosenIcon);
  document.querySelectorAll<HTMLElement>('[data-chore-icon]').forEach(b=>b.setAttribute('aria-pressed',String(manualIcon&&b.dataset.choreIcon===chosenIcon)));
 }
+function updateQueueTiming(){
+ const required=taskMode!=='log'&&input('chore-queue').value==='due_date';
+ input('chore-due').required=required;
+ $('#chore-task-form label[for="chore-due"] .quiet').hidden=required;
+}
 function openTask(mode:string,task?:Chore){
  if(!live||busy)return;
  if(!identity){pendingTask=mode;errorText('chore-identity-error','Choose your name before '+(mode==='log'?'logging a completion.':'requesting a chore.'));$('#chore-identity').scrollIntoView({block:'center',behavior:'smooth'});$('#chore-identity button').focus({preventScroll:true});return;}
@@ -184,6 +190,10 @@ function openTask(mode:string,task?:Chore){
  $<HTMLDetailsElement>('#chore-scheduling').open=!!task?.expires_on||!!task?.pinned;
  input('chore-title').value=task?.title||'';input('chore-note').value=task?.note||'';input('chore-effort').value=String(task?.points??1);input('chore-preset').value=task?.preset_id||'';input('chore-effort').disabled=!!task?.preset_id;
  $<HTMLInputElement>(`input[name="chore-assignee"][value="${task?.assignee||''}"]`).checked=true;
+ input('chore-queue').value=task?queueVisibility(task):'immediately';
+ input('chore-queue').querySelector('option[value=immediately]')!.textContent=task?.routine_id?'At cycle start':'Immediately';
+ $('#chore-queue-fields').hidden=mode==='log';
+ updateQueueTiming();
  input('chore-due').value=task?.due_on||'';input('chore-time').value=task?.due_time||'';input('chore-pinned').checked=task?.pinned||false;
  input('chore-expiry').value=task?.expires_on||'';input('chore-expiry-time').value=task?.expires_time||'';
  input('chore-tonight').checked=false;$<HTMLDetailsElement>('#chore-expiry-details').open=!!task?.expires_on;
@@ -191,12 +201,12 @@ function openTask(mode:string,task?:Chore){
  $('#chore-log-fields').hidden=mode!=='log';input('chore-log-time').required=mode==='log';$('#chore-shortcuts').hidden=!!task;
  $('#chore-task-actor').textContent=`${task?'Editing':'Adding'} as ${name(identity)}${task?.routine_id?' · only this occurrence changes':''}.`;
  $('#chore-task-save').textContent=mode==='log'?'Log completion':'Save chore';
- $('#chore-task-done').hidden=!task||task.state==='cancelled';$('#chore-task-done').textContent=task?.completion?'Correct completion':'Mark done';
+ $('#chore-task-done').hidden=!task||task.state==='cancelled'||(!task.completion&&!queueReady(task,day()));$('#chore-task-done').textContent=task?.completion?'Correct completion':'Mark done';
  $('#chore-task-history').innerHTML=task?history(task):'';
  updateTaskKind();renderChosenIcon();show('chore-task');
 }
 function openCompletion(task:Chore){
- if(!identity||!live||busy)return;completionTask=task;
+ if(!identity||!live||busy||(!task.completion&&!queueReady(task,day())))return;completionTask=task;
  $<HTMLFormElement>('#chore-complete-form').reset();
  $('#chore-complete-summary').innerHTML=`${choreIcon(task.icon_id)}<div><h3>${esc(task.title)}</h3><p>${task.points===0?'This is a reminder. Completing it earns no points.':task.completion?'Update this completion. Credit will be recalculated.':'A little effort makes a difference.'}</p></div>`;
  setChecks('chore-contributor',task.completion?.contributors||[identity]);
@@ -223,12 +233,12 @@ async function save(id:string,fn:string,p:Record<string,unknown>){
  catch(error){errorText(id+'-error',error instanceof Error?error.message:'Could not save. Please try again.');}
  finally{busy=false;fields.forEach((el,i)=>el.disabled=states[i]);await refreshChores();}
 }
-function newStep():RoutineStep{return{kind:'chore',id:crypto.randomUUID(),title:'',icon_id:'tidy',note:'',points:1,weekday:0,time:null};}
+function newStep():RoutineStep{return{queue_visibility:'due_date',kind:'chore',id:crypto.randomUUID(),title:'',icon_id:'tidy',note:'',points:1,weekday:0,time:null};}
 // Older grouped routines retain their item IDs and offsets. New routines have
 // one item with offset zero, so their selected date is also the actual due date.
 const routineWeekday=(start:string,offset=0)=>new Intl.DateTimeFormat('en-US',{weekday:'long',timeZone:'UTC'}).format(new Date(addDays(start,offset)+'T12:00:00Z'));
 function readRoutineItems(){
- steps=steps.map(s=>{const row=$<HTMLElement>(`[data-routine-item="${s.id}"]`);const value=(key:string)=>row.querySelector<HTMLInputElement|HTMLSelectElement>(`[data-routine-field="${key}"]`)!.value;return{...s,preset_id:value('kind')==='chore'?value('preset_id')||null:null,title:steps.length===1?input('routine-title').value.trim():value('title'),note:value('note'),icon_id:value('icon_id'),kind:value('kind') as TaskKind,points:value('kind')==='chore'?Number(value('points')):0,weekday:steps.length===1?s.weekday:Number(value('weekday')),time:value('time')||null};});
+ steps=steps.map(s=>{const row=$<HTMLElement>(`[data-routine-item="${s.id}"]`);const value=(key:string)=>row.querySelector<HTMLInputElement|HTMLSelectElement>(`[data-routine-field="${key}"]`)!.value;return{...s,queue_visibility:value('queue_visibility') as QueueVisibility,preset_id:value('kind')==='chore'?value('preset_id')||null:null,title:steps.length===1?input('routine-title').value.trim():value('title'),note:value('note'),icon_id:value('icon_id'),kind:value('kind') as TaskKind,points:value('kind')==='chore'?Number(value('points')):0,weekday:steps.length===1?s.weekday:Number(value('weekday')),time:value('time')||null};});
 }
 function renderRoutineItems(){
  const grouped=steps.length>1;
@@ -236,6 +246,7 @@ function renderRoutineItems(){
   const prefix=`routine-item-${i}`;
   return `<${grouped?'fieldset class="routine-item"':'div'} data-routine-item="${s.id}">${grouped?`<legend>Item ${i+1}</legend><label for="${prefix}-title">Task</label><input id="${prefix}-title" data-routine-field="title" value="${esc(s.title)}" maxlength="120" required><label for="${prefix}-day">Day</label><select id="${prefix}-day" data-routine-field="weekday">${Array.from({length:7},(_,n)=>`<option value="${n}" ${n===s.weekday?'selected':''}>${routineWeekday(routineDraft!.start_week,n)}</option>`).join('')}</select>`:''}
   <div class="chore-two-fields"><div><label for="${prefix}-kind">Type</label><select id="${prefix}-kind" data-routine-field="kind">${['chore','reminder','request'].map(k=>`<option value="${k}" ${k===taskKind(s)?'selected':''}>${name(k)}</option>`).join('')}</select></div><div data-routine-points ${taskKind(s)!=='chore'?'hidden':''}><label for="${prefix}-preset">Household job</label><select id="${prefix}-preset" data-routine-field="preset_id">${presetOptions(s.preset_id)}</select><label for="${prefix}-points">Effort</label><select id="${prefix}-points" data-routine-field="points" ${taskKind(s)!=='chore'||s.preset_id?'disabled':''}>${[[0,'No points'],[0.5,'Quick · 0.5 points'],[1,'Small · 1 point'],[2,'Medium · 2 points'],[3,'Large · 3 points']].map(([value,label])=>`<option value="${value}" ${value===s.points?'selected':''}>${label}</option>`).join('')}</select></div></div>
+  <label for="${prefix}-queue">Show in queue</label><select id="${prefix}-queue" data-routine-field="queue_visibility"><option value="due_date" ${s.queue_visibility!=='immediately'?'selected':''}>On due date</option><option value="immediately" ${s.queue_visibility==='immediately'?'selected':''}>At cycle start</option></select>
   <details class="form-details routine-context"><summary><span data-routine-icon>${choreIcon(s.icon_id)}</span> Time, illustration & context</summary><div class="chore-two-fields"><div><label for="${prefix}-time">Time (optional)</label><input id="${prefix}-time" data-routine-field="time" type="time" value="${s.time||''}"></div><div><label for="${prefix}-icon">Illustration</label><select id="${prefix}-icon" data-routine-field="icon_id">${CHORE_ICONS.map(icon=>`<option value="${icon.id}" ${icon.id===s.icon_id?'selected':''}>${icon.label}</option>`).join('')}</select></div></div><label for="${prefix}-note">Context (optional)</label><textarea id="${prefix}-note" data-routine-field="note" maxlength="1000" rows="2">${esc(s.note)}</textarea></details></${grouped?'fieldset':'div'}>`;
  }).join('');
 }
@@ -277,6 +288,7 @@ function bind(){
  $('#chore-content').addEventListener('toggle',event=>{const el=event.target as HTMLDetailsElement;if(el.open&&el.matches('[data-task-details]'))fillTaskHistory(el);},true);
  $('#chore-preset').addEventListener('change',()=>{const p=pointPreset(input('chore-preset').value);input('chore-effort').disabled=!!p;if(p){input('chore-title').value=p.title;input('chore-effort').value=String(p.points);chosenIcon=p.icon;manualIcon=true;renderChosenIcon();}});
  $('#chore-kind').addEventListener('change',()=>updateTaskKind(true));
+ $('#chore-queue').addEventListener('change',updateQueueTiming);
  $('#chore-task-save').insertAdjacentHTML('beforebegin','<button id="chore-task-done" type="button" class="button secondary" hidden>Mark done</button>');
  $('#chore-task-actor').insertAdjacentHTML('afterend','<div id="chore-task-history"></div>');
  $('#chores-page').addEventListener('click',event=>{
@@ -300,7 +312,7 @@ function bind(){
  $('#chore-task-form').addEventListener('submit',event=>{
   event.preventDefault();try{
    const kind=input('chore-kind').value as TaskKind;
-   const p={kind,id:taskId,actor:identity,action:taskDraft?'edit':'create',expected_version:taskDraft?.version||0,title:input('chore-title').value.trim(),icon_id:chosenIcon,note:input('chore-note').value,assignee:$<HTMLInputElement>('input[name="chore-assignee"]:checked').value||null,preset_id:kind==='chore'?input('chore-preset').value||null:null,points:kind==='chore'?Number(input('chore-effort').value):0,pinned:input('chore-pinned').checked,due_on:input('chore-due').value||null,due_time:input('chore-time').value||null,expires_on:input('chore-expiry').value||null,expires_time:input('chore-expiry-time').value||null,...(taskMode==='log'?{completion:{contributors:selectedContributors('chore-log-contributor'),completed_at:input('chore-log-time').value}}:{})};
+   const p={kind,queue_visibility:input('chore-queue').value,id:taskId,actor:identity,action:taskDraft?'edit':'create',expected_version:taskDraft?.version||0,title:input('chore-title').value.trim(),icon_id:chosenIcon,note:input('chore-note').value,assignee:$<HTMLInputElement>('input[name="chore-assignee"]:checked').value||null,preset_id:kind==='chore'?input('chore-preset').value||null:null,points:kind==='chore'?Number(input('chore-effort').value):0,pinned:input('chore-pinned').checked,due_on:input('chore-due').value||null,due_time:input('chore-time').value||null,expires_on:input('chore-expiry').value||null,expires_time:input('chore-expiry-time').value||null,...(taskMode==='log'?{completion:{contributors:selectedContributors('chore-log-contributor'),completed_at:input('chore-log-time').value}}:{})};
    if(kind==='reminder'&&!taskDraft&&taskMode!=='log'){const recipients=selectedContributors('reminder-recipient');void save('chore-task','save_reminders',{...p,recipients});}
    else void save('chore-task','save_chore',p);
   }catch(error){errorText('chore-task-error',(error as Error).message);}
