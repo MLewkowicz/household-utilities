@@ -1,7 +1,7 @@
 import {test,expect,type Page} from '@playwright/test';
 import {mkdir} from 'node:fs/promises';
 const rpc=async(page:Page,name:string,p?:unknown)=>{const response=await page.request.post('/rest/v1/rpc/utilities_'+name,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(response.ok(),await response.text()).toBeTruthy();return response.json();};
-async function home(page:Page){await page.addInitScript(()=>localStorage.setItem('household-person','michal'));await page.goto('/');await expect(page.locator('#personal-add')).toBeEnabled();await expect(page.locator('#main')).toHaveAttribute('aria-busy','false');}
+async function home(page:Page){await page.addInitScript(()=>localStorage.setItem('household-person','michal'));await page.goto('/#chores');await expect(page.locator('#personal-add')).toBeEnabled();await expect(page.locator('#main')).toHaveAttribute('aria-busy','false');}
 const personal=async(page:Page,title:string)=>rpc(page,'save_personal_task',{id:crypto.randomUUID(),request_id:crypto.randomUUID(),actor:'michal',action:'create',title});
 const shared=async(page:Page,title:string,extra={})=>rpc(page,'save_chore',{id:crypto.randomUUID(),request_id:crypto.randomUUID(),actor:'rina',action:'create',title,icon_id:'bicycle',kind:'reminder',points:0,pinned:false,assignee:'michal',...extra});
 test('My tasks default combines only assigned tasks, quick entry, completion, undo, history, deletion and export',async({page})=>{
@@ -19,7 +19,7 @@ test('My tasks default combines only assigned tasks, quick entry, completion, un
  await page.locator('#home-history').check();await expect(edited).toBeVisible();await expect(edited).toContainText('Deleted');await edited.locator('summary.chore-corner-tab').click();await expect(edited.locator('.entry-updated')).toContainText('Deleted by Michal');await expect(edited.getByText(/History ·/)).toHaveCount(0);const stored=await rpc(page,'personal_tasks',{member:'michal'});expect(stored.history.filter((t:any)=>t.title===title||t.title===title+' edited')).toHaveLength(6);
  await page.locator('[data-home-filter=assigned]').click();await expect(edited).toHaveCount(0);await expect(page.locator(`[data-home-key="shared:${assigned.id}"]`)).toBeVisible();
  const download=page.waitForEvent('download');await page.locator('#export').click();const file=await download;expect(file.suggestedFilename()).toContain('household-tasks-michal');
- await page.locator('.brand').click();await expect(page).toHaveURL(/#chores$/);
+ await page.locator('.brand').click();await expect(page).toHaveURL(/#home$/);await expect(page.locator('#feature-area')).toBeHidden();
 });
 test('Task ordering persists across sessions and sources fail independently without erasing drafts',async({page,browser})=>{
  const a=await personal(page,'Order A '+crypto.randomUUID()),b=await personal(page,'Order B '+crypto.randomUUID()),assigned=await shared(page,'Assigned outage '+crypto.randomUUID());await home(page);
@@ -46,11 +46,13 @@ test('personal saves retry once, stale edits keep drafts, filters and identity d
  const card=page.locator(`[data-personal-id="${t.id}"]`);await card.locator('summary.chore-corner-tab').click();await card.getByRole('button',{name:'Edit',exact:true}).click();await page.locator('#personal-edit-title').fill('Retain my edit');
  await rpc(page,'save_personal_task',{id:t.id,actor:'michal',expected_version:t.version,action:'pin',pinned:true,request_id:crypto.randomUUID()});await page.locator('#personal-save').click();await expect(page.locator('#personal-error')).toContainText('changed');await expect(page.locator('#personal-edit-title')).toHaveValue('Retain my edit');await page.keyboard.press('Escape');
  await page.locator('#chore-switch').click();await page.locator('[data-chore-person=rina]').click();await expect(page.locator('#personal-add')).toBeEnabled();await expect(card).toHaveCount(0);
- await page.goto('/#nonsense');await expect(page.locator('#my-tasks')).toBeVisible();await expect(page).toHaveTitle(/To-dos/);
+ await page.goto('/#nonsense');await expect(page.locator('#feature-area')).toBeHidden();await expect(page).toHaveTitle(/Home/);
 });
 test('dragging persists only within a priority group and refresh preserves typing on small screens',async({page})=>{
  const a=await personal(page,'Drag A '+crypto.randomUUID()),b=await personal(page,'Drag B '+crypto.randomUUID()),pin=await personal(page,'Pinned '+crypto.randomUUID());await rpc(page,'save_personal_task',{id:pin.id,actor:'michal',expected_version:pin.version,action:'pin',pinned:true,request_id:crypto.randomUUID()});await home(page);await page.setViewportSize({width:390,height:844});
- const entry=(id:string)=>page.locator(`[data-home-key="personal:${id}"]`);const drag=async(from:string,to:string)=>{await entry(from).scrollIntoViewIfNeeded();const handle=(await entry(from).locator('h3').boundingBox())!;const target=(await entry(to).boundingBox())!;await page.mouse.move(handle.x+12,handle.y+12);await page.mouse.down();await expect(page.locator('.task-drag-preview')).toBeVisible();await page.mouse.move(target.x+target.width/2,target.y+35,{steps:10});await page.mouse.up();};
+ // Saving the previous drag replaces the cards after the RPC has committed.
+ // Retry scrolling through that repaint before measuring the next drag.
+ const entry=(id:string)=>page.locator(`[data-home-key="personal:${id}"]`);const drag=async(from:string,to:string)=>{await expect(async()=>{await entry(from).scrollIntoViewIfNeeded();}).toPass({timeout:5000});const handle=(await entry(from).locator('h3').boundingBox())!;const target=(await entry(to).boundingBox())!;await page.mouse.move(handle.x+12,handle.y+12);await page.mouse.down();await expect(page.locator('.task-drag-preview')).toBeVisible();await page.mouse.move(target.x+target.width/2,target.y+35,{steps:10});await page.mouse.up();};
  await drag(a.id,b.id);await expect.poll(async()=>{const d=await rpc(page,'home_order',{member:'michal'});return d.keys.indexOf('personal:'+a.id)<d.keys.indexOf('personal:'+b.id);}).toBeTruthy();
  const before=await rpc(page,'home_order',{member:'michal'});await drag(a.id,pin.id);expect((await rpc(page,'home_order',{member:'michal'})).keys).toEqual(before.keys);
  await page.locator('#personal-title').fill('Still typing');await page.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));await expect(page.locator('#personal-title')).toBeFocused();await expect(page.locator('#personal-title')).toHaveValue('Still typing');

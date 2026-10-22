@@ -26,7 +26,7 @@ async function mock(page:Page,platform='android',granted:boolean|'denied'=false)
  return mutations;
 }
 test('iPhone browser explains the required Home Screen installation',async({page})=>{
- await mock(page,'iphone');await page.setViewportSize({width:390,height:844});await page.goto('/');
+ await mock(page,'iphone');await page.setViewportSize({width:390,height:844});await page.goto('/#chores');
  await page.getByRole('button',{name:'Phone notifications',exact:true}).click();
  await expect(page.locator('#push-install')).toBeVisible();await expect(page.locator('#push-enable')).toBeDisabled();
  await expect(page.locator('#push-install')).toContainText('Add to Home Screen');
@@ -48,7 +48,7 @@ test('Android opts in directly, retains its person across dashboard switches, an
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
 });
 test('installed iPhone has an explicit opt-in and theme-aware settings',async({page})=>{
- await mock(page,'installed-iphone');await page.goto('/');
+ await mock(page,'installed-iphone');await page.goto('/#chores');
  await page.getByLabel('Color theme').selectOption('dark');
  await page.getByRole('button',{name:'Phone notifications',exact:true}).click();
  await expect(page.locator('#push-install')).toBeHidden();await expect(page.locator('#push-enable')).toBeEnabled();
@@ -58,18 +58,18 @@ test('installed iPhone has an explicit opt-in and theme-aware settings',async({p
  await page.getByRole('button',{name:'Phone notifications',exact:true}).click();await expect(page.locator('#push-status')).toContainText('Ohm');
 });
 test('unconfigured backend leaves ledgers usable',async({page})=>{
- await page.goto('/');await page.getByRole('button',{name:'Phone notifications',exact:true}).click();
+ await page.goto('/#chores');await page.getByRole('button',{name:'Phone notifications',exact:true}).click();
  await expect(page.locator('#push-status')).toContainText('awaiting household setup');await expect(page.locator('#push-enable')).toBeDisabled();
  await page.locator('#push-close').click();await page.getByRole('link',{name:'Bulletin',exact:true}).click();await expect(page.locator('#bulletin-status')).toHaveText('Shared notes · up to date');
 });
 test('denied permissions explain how to recover and never enroll a device',async({page})=>{
- const mutations=await mock(page,'android','denied');await page.goto('/');
+ const mutations=await mock(page,'android','denied');await page.goto('/#chores');
  await page.getByRole('button',{name:'Phone notifications',exact:true}).click();
  await expect(page.locator('#push-status')).toContainText('Notifications are blocked');
  await expect(page.locator('#push-enable')).toBeDisabled();expect(mutations).toHaveLength(0);
 });
 test('real service worker registers locally without caching or requesting permission',async({page})=>{
- await page.goto('/');await page.getByRole('button',{name:'Phone notifications',exact:true}).click();
+ await page.goto('/#chores');await page.getByRole('button',{name:'Phone notifications',exact:true}).click();
  await expect(page.locator('#push-message')).toHaveText('');
  const state=await page.evaluate(async()=>({scope:(await navigator.serviceWorker.ready).scope,permission:Notification.permission,caches:await caches.keys()}));
  expect(state.scope).toBe('http://127.0.0.1:4174/');expect(state.permission).toBe('default');expect(state.caches).toEqual([]);

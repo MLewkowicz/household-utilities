@@ -9,7 +9,9 @@
     "dev": "npm run build && node scripts/serve.mjs",
     "test:browser": "playwright test",
     "preview:reactions": "node scripts/preview-reactions.mjs",
-    "deploy": "node scripts/publish.mjs"
+    "deploy": "node scripts/publish.mjs",
+    "test:house": "playwright test -c playwright.house.config.ts",
+    "measure:house": "node scripts/measure-house.mjs"
   },
   "engines": {
     "node": ">=22"
@@ -21,6 +23,10 @@
     "esbuild": "^0.28.2",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "web-push": "3.6.7"
+    "web-push": "3.6.7",
+    "@types/three": "0.180.0"
+  },
+  "dependencies": {
+    "three": "0.180.0"
   }
 }
