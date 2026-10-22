@@ -5,6 +5,7 @@ import { HOUSE, houseShell } from './cottage-sets';
 import { dispose } from './scene-geometry';
 import { stages, type StageId, type StageState } from './stage-data';
 import { getTheme, observeTheme } from './appearance';
+import { createEnvironment } from './environment';
 
 type Turn = { from: StageId; to: StageId; startYaw: number; direction: number; progress: number; start: number; end: number; began: number; duration: number; dragging: boolean; incoming: boolean };
 export async function mountStagePlayer(container: HTMLElement, initial: StageId, onScene: (id: StageId) => void) {
@@ -12,13 +13,10 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   let turn: Turn | null = null, yaw = 0, turnDuration = 1800, lastSwap: { progress: number; angle: number; direction: number } | null = null;
   const media = matchMedia('(prefers-reduced-motion: reduce)');
   const states = Object.fromEntries(stages.map(s => [s.id, { boostUntil: 0, variation: 0, still: false }])) as Record<StageId, StageState>;
-  let pixelBudget=1_400_000;
-  const pixelRatio=()=>Math.min(devicePixelRatio,container.clientWidth<700?1:1.25,Math.sqrt(pixelBudget/Math.max(1,container.clientWidth*container.clientHeight)));
+  // Keep at least one rendered pixel per CSS pixel, even in software previews.
+  // Limit supersampling on Retina displays without softening the whole scene.
+  const pixelRatio=()=>Math.max(1,Math.min(devicePixelRatio,1.5));
   const metrics = { frames: 0, fps: 0, calls: 0, triangles: 0, textures: 0, geometries: 0, active: false, pixelRatio:pixelRatio(), shadowSize:container.clientWidth<700?512:1024, renderer: 'unavailable' };
-  function panelLighting(value: number) {
-    container.parentElement?.style.setProperty('--night-level', String(value));
-    container.parentElement?.style.setProperty('--night-mix', `${value * 100}%`);
-  }
   const showFallback = (message: string) => {
     container.querySelector('.fallback')?.remove(); const panel = document.createElement('div'); panel.className = 'fallback';
     panel.innerHTML = `<span aria-hidden="true">⌂</span><strong>${message}</strong><p>Choose a section using the tabs above.</p><button>Try again</button>`;
@@ -27,13 +25,15 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   let renderer: T.WebGLRenderer, faces: Faces;
   try {
     if (new URLSearchParams(location.search).get('webgl') === '0') throw new Error('WebGL unavailable');
-    renderer = new T.WebGLRenderer({ alpha: true, antialias: false, powerPreference: 'low-power' });
+    // Supersampling already smooths Retina edges. Avoid stacking multisample
+    // antialiasing on top of it; keep MSAA for ordinary-density screens.
+    renderer = new T.WebGLRenderer({ alpha: true, antialias: pixelRatio()<1.5, powerPreference: 'default' });
     try { faces = await loadBitmojis(); } catch (error) { renderer.dispose(); throw error; }
   } catch {
     container.replaceChildren(); showFallback('The scene couldn’t load.');
     return {
-      setScene(id: StageId) { requested = displayed = id; panelLighting(Number(id === 'events')); onScene(id); },
-      jumpTo(id: StageId) { requested = displayed = id; panelLighting(Number(id === 'events')); },
+      setScene(id: StageId) { requested = displayed = id; onScene(id); },
+      jumpTo(id: StageId) { requested = displayed = id; },
       setPaused(value: boolean) { paused = value; }, setTurnDuration(_value: number) {}, action() { states[requested].variation++; }, reset() {},
       diagnostics: () => ({ ...metrics, requested, displayed, paused, transitioning: false, actors: [], bitmojis: [], state: states[requested] }),
       destroy() { container.replaceChildren(); },
@@ -46,22 +46,21 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   // input, replay and still views. Decimating it leaves shadows at an old angle.
   renderer.shadowMap.autoUpdate = true;
   const gl = renderer.getContext(), info = gl.getExtension('WEBGL_debug_renderer_info'); metrics.renderer = info ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER);
-  // Remote previews may rasterize WebGL on the CPU. Keep the HTML/SVG crisp,
-  // but start the 3D canvas at a smaller budget on a known software renderer.
-  if(/SwiftShader|llvmpipe|Software/i.test(metrics.renderer)){pixelBudget=500_000;metrics.shadowSize=512;}
   const canvas = renderer.domElement; canvas.className = 'stage-canvas'; canvas.tabIndex = 0; canvas.setAttribute('role', 'group');
   canvas.setAttribute('aria-label', 'Rotating household. Drag horizontally to turn and release to reveal a room. Left and right arrows change sections. Tap the house or press Enter to play its scene effect. Scroll down to enter the selected section. Home returns to this menu.');
   container.replaceChildren(canvas);
-  const scene = new T.Scene(), camera = new T.OrthographicCamera(-6, 6, 5, -5, .1, 90);
-  camera.position.set(6, 10.2, 25); camera.lookAt(0, 3.95, .1);
+  const scene = new T.Scene(), camera = new T.OrthographicCamera(-6, 6, 5, -5, .1, 200);
+  // Same orthographic view, with enough distance for the foreground lawn on
+  // tall phones to remain in front of the near clipping plane.
+  camera.position.set(24,28.95,99.7); camera.lookAt(0,3.95,.1);
   const cameraAzimuth = Math.atan2(6, 24.9);
   const ambient = new T.HemisphereLight('#fff2dc', '#a2b2bb', 2.5); scene.add(ambient);
   const key = new T.DirectionalLight('#fff1d6', 2.25); key.position.set(-5, 12, 8); key.castShadow = true;
-  key.shadow.mapSize.set(metrics.shadowSize,metrics.shadowSize); key.shadow.camera.left=-8; key.shadow.camera.right=8; key.shadow.camera.top=10; key.shadow.camera.bottom=-8;
-  key.shadow.camera.near=.5; key.shadow.camera.far=40;
+  key.shadow.mapSize.set(metrics.shadowSize,metrics.shadowSize); key.shadow.camera.left=-14; key.shadow.camera.right=14; key.shadow.camera.top=18; key.shadow.camera.bottom=-14;
+  key.shadow.camera.near=.5; key.shadow.camera.far=55;
   key.shadow.normalBias=.08; key.shadow.bias=-.0003; scene.add(key);
   const fill = new T.DirectionalLight('#b0cce3', .8); fill.position.set(5, 5, -2); scene.add(fill);
-  const floor = new T.Mesh(new T.PlaneGeometry(50,50),new T.ShadowMaterial({ color:'#52644e', opacity:.14 })); floor.rotation.x=-Math.PI/2; floor.position.y=-.39; floor.receiveShadow=true; scene.add(floor);
+  const environment=createEnvironment(scene,camera);
   const pivot = new T.Group(); pivot.name='house-turn-pivot'; scene.add(pivot);
   const shell = houseShell(); pivot.add(shell);
   const cache = new Map<StageId,HouseStage>();
@@ -69,16 +68,15 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   let current = get(initial); pivot.add(current.root);
   let notified=initial;
   function notifySelection(){if(displayed!==notified){notified=displayed;onScene(displayed);}}
-  let raf=0, last=0, sampleTime=performance.now(), samples=0, slowSamples=0;
+  let raf=0, last=0, sampleTime=performance.now(), samples=0;
   let night=Number(current.dark), darkTheme=getTheme()==='dark';
-  const warm=new T.Color('#fff2dc'), dusk=new T.Color('#dce6f2'), cool=new T.Color('#a6bcea'), warmKey=new T.Color('#fff1d6'), coolKey=new T.Color('#b0c8ff');
+  let themeBlend=Number(darkTheme),themeFrom=themeBlend,themeTarget=themeBlend,themeBegan=elapsed;
+  const warm=new T.Color('#fff2dc'), dusk=new T.Color('#a8c0e1'), cool=new T.Color('#a6bcea'), warmKey=new T.Color('#fff1d6'), coolKey=new T.Color('#b0c8ff');
   const portraitTint=new T.Color(), portraitWhite=new T.Color('#ffffff'), portraitNight=new T.Color('#a4b4d1');
   const canAnimate=()=>!destroyed&&!lost&&!paused&&!media.matches&&!document.hidden&&visible;
   function lighting(value: number) {
-    night=value; ambient.intensity=T.MathUtils.lerp(darkTheme?1.8:2.5,.75,value); key.intensity=T.MathUtils.lerp(darkTheme?1.65:2.25,.55,value); fill.intensity=T.MathUtils.lerp(.8,.55,value);
-    ambient.color.copy(darkTheme?dusk:warm).lerp(cool,value); key.color.copy(warmKey).lerp(coolKey,value);
-    floor.material.color.set(darkTheme?'#080f1b':'#52644e'); floor.material.opacity=T.MathUtils.lerp(darkTheme?.22:.14,.25,value);
-    panelLighting(value);
+    night=value; ambient.intensity=T.MathUtils.lerp(T.MathUtils.lerp(2.5,1.05,themeBlend),.75,value); key.intensity=T.MathUtils.lerp(T.MathUtils.lerp(2.25,1.1,themeBlend),.55,value); fill.intensity=T.MathUtils.lerp(T.MathUtils.lerp(.8,.45,themeBlend),.4,value);
+    ambient.color.copy(warm).lerp(dusk,themeBlend).lerp(cool,value); key.color.copy(warmKey).lerp(coolKey,Math.max(themeBlend,value));
   }
   function projection() {
     const aspect=container.clientWidth/Math.max(1,container.clientHeight);
@@ -109,9 +107,12 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   function draw() {
     if(destroyed||lost||!visible||document.hidden) return;
     applyTurn();
+    const themeProgress=T.MathUtils.smoothstep((elapsed-themeBegan)/4.5,0,1);
+    themeBlend=media.matches?themeTarget:T.MathUtils.lerp(themeFrom,themeTarget,themeProgress);
+    lighting(night);environment.tick(elapsed,themeBlend,night,media.matches);
     const state=states[displayed]; state.still=media.matches;
     current.tick(elapsed,state);
-    faceCamera(current.people,camera,portraitTint.copy(portraitWhite).lerp(portraitNight,night).getStyle());
+    faceCamera(current.people,camera,portraitTint.copy(portraitWhite).lerp(portraitNight,Math.max(night,themeBlend*.22)).getStyle());
     // Clear captions before the walls cross the opening; reveal them again
     // only in the final few degrees, including when a short drag rolls back.
     const speechOpacity=turn
@@ -168,16 +169,9 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
         if(p>=1) finish();
       }
       if(now-sampleTime>1200) {
-        metrics.fps=Math.round(samples*1000/(now-sampleTime)); slowSamples=metrics.fps<24?slowSamples+1:0;
-        if(slowSamples>=2) {
-          pixelBudget=Math.max(450_000,Math.min(pixelBudget,container.clientWidth*container.clientHeight*metrics.pixelRatio**2*Math.min(.8,metrics.fps/28)));
-          const next=pixelRatio();if(next!==metrics.pixelRatio){metrics.pixelRatio=next;renderer.setPixelRatio(next);}
-          if(metrics.shadowSize>512) { metrics.shadowSize=512;key.shadow.map?.dispose();key.shadow.map=null;key.shadow.mapSize.set(512,512); }
-        }
+        metrics.fps=Math.round(samples*1000/(now-sampleTime));
         samples=0; sampleTime=now;
       }
-      // Resizing clears the drawing buffer, so apply quality changes before
-      // this frame's render rather than exposing an empty canvas for one frame.
       draw();
     }
     raf=requestAnimationFrame(frame);
@@ -247,7 +241,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   media.addEventListener('change',refresh); document.addEventListener('visibilitychange',refresh);
   const ro=new ResizeObserver(resize); ro.observe(container);
   const io=new IntersectionObserver(([entry])=>{ visible=entry.isIntersecting&&entry.intersectionRatio>0; refresh(); },{threshold:.01}); io.observe(container);
-  const stopTheme=observeTheme(theme=>{ darkTheme=theme==='dark'; lighting(night); draw(); });
+  const stopTheme=observeTheme(theme=>{ darkTheme=theme==='dark';themeFrom=themeBlend;themeTarget=Number(darkTheme);themeBegan=elapsed;if(!canAnimate())themeFrom=themeBlend=themeTarget;draw(); });
   lighting(Number(current.dark)); resize();
   function speechDetails() {
     const bubbles: { speaker: string; message: string; visible: boolean; opacity: number }[] = [];
@@ -266,12 +260,12 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     setPaused(value:boolean) { paused=value; refresh(); },
     setTurnDuration(value:number) { turnDuration=value; },
     reset() { states[requested]={ boostUntil:0,variation:0,still:media.matches }; elapsed=0; settle(); refresh(); },
-    diagnostics:()=>({ ...metrics,requested,displayed,paused,reducedMotion:media.matches,transitioning:!!turn,cachedStages:cache.size,theme:darkTheme?'dark':'light',actors:current.people.map(p=>p.id).sort(),bitmojis:current.people.map(p=>p.head.material.map!.image?.src),actorPoses:current.people.map(p=>({id:p.id,position:p.root.getWorldPosition(new T.Vector3()).toArray(),visible:p.root.visible})),entry:current.root.userData.entry,dark:current.dark,state:{...states[requested]},elapsed,night,seatCount:current.root.userData.seatCount,sceneDetails:{...current.root.userData},speech:speechDetails(),house:{shell:shell.uuid,pivotYaw:pivot.rotation.y,footprint:[HOUSE.width,HOUSE.depth],eave:HOUSE.eave,contentYaw:current.root.rotation.y,turn:turn?{progress:turn.progress,direction:turn.direction,dragging:turn.dragging,incoming:turn.incoming,from:turn.from,to:turn.to,swapAt:.5+cameraAzimuth/(turn.direction*Math.PI)}:null,lastSwap,turnDuration}}),
+    diagnostics:()=>({ ...metrics,requested,displayed,paused,reducedMotion:media.matches,transitioning:!!turn,cachedStages:cache.size,theme:darkTheme?'dark':'light',themeBlend,environment:environment.diagnostics(),actors:current.people.map(p=>p.id).sort(),bitmojis:current.people.map(p=>p.head.material.map!.image?.src),actorPoses:current.people.map(p=>({id:p.id,position:p.root.getWorldPosition(new T.Vector3()).toArray(),visible:p.root.visible})),entry:current.root.userData.entry,dark:current.dark,state:{...states[requested]},elapsed,night,seatCount:current.root.userData.seatCount,sceneDetails:{...current.root.userData},speech:speechDetails(),house:{shell:shell.uuid,pivotYaw:pivot.rotation.y,footprint:[HOUSE.width,HOUSE.depth],eave:HOUSE.eave,contentYaw:current.root.rotation.y,turn:turn?{progress:turn.progress,direction:turn.direction,dragging:turn.dragging,incoming:turn.incoming,from:turn.from,to:turn.to,swapAt:.5+cameraAzimuth/(turn.direction*Math.PI)}:null,lastSwap,turnDuration}}),
     destroy() {
       destroyed=true; stopTheme(); clearTurn(); cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); media.removeEventListener('change',refresh); document.removeEventListener('visibilitychange',refresh);
       window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',up); canvas.removeEventListener('pointercancel',cancelPointer); canvas.removeEventListener('pointerdown',down); canvas.removeEventListener('keydown',keyboard);
       canvas.removeEventListener('webglcontextlost',contextLost); canvas.removeEventListener('webglcontextrestored',contextRestored);
-      cache.forEach(stage=>dispose(stage.root)); cache.clear(); Object.values(faces).forEach(texture=>texture.dispose()); dispose(scene); renderer.dispose(); renderer.forceContextLoss(); container.replaceChildren();
+      cache.forEach(stage=>dispose(stage.root)); cache.clear(); Object.values(faces).forEach(texture=>texture.dispose()); environment.destroy();dispose(scene); renderer.dispose(); renderer.forceContextLoss(); container.replaceChildren();
     },
   };
 }

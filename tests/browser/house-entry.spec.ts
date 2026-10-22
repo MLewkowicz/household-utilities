@@ -87,7 +87,7 @@ test('a shortcut during a turn wins over the old scene and Back/Forward remains 
 for(const width of [320,390])test(`${width}px floating tabs fit and vertical swipes scroll without changing the selected section`,async({browser})=>{
  const context=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true,colorScheme:'dark'}),page=await context.newPage();
  await page.addInitScript(()=>localStorage.setItem('household-person','michal'));await page.goto(new URL('/',test.info().project.use.baseURL as string).href);await ready(page);await page.locator('.stage-canvas').focus();await page.keyboard.press('ArrowLeft');await expect(page).toHaveURL(/#utilities$/,{timeout:5000});
- expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);expect((await diag(page)).pixelRatio).toBe(1.5);
  const links=await page.locator('[data-ledger]').evaluateAll(links=>links.map(link=>({width:link.getBoundingClientRect().width,height:link.getBoundingClientRect().height})));
  for(const link of links){expect(link.width).toBeGreaterThanOrEqual(90);expect(link.height).toBeGreaterThanOrEqual(52);}
  expect((await page.locator('.house-navigation').boundingBox())!.height).toBeGreaterThan(100);
@@ -140,19 +140,34 @@ test('a tap on the house triggers its effect; swiping, scrolling and blank space
 test('Home exposes notifications and the shared System/Light/Dark landscape control',async({page})=>{
  await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});await page.goto('/');await ready(page);
  await expect(page.locator('#theme-select')).toBeVisible();await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
- await expect(page.locator('.landscape-stars')).toHaveCSS('opacity','1');await expect(page.locator('.landscape-sun')).toHaveCSS('opacity','0');
- await expect(page.locator('.shooting-star-one')).toHaveCSS('display','none');
+ expect((await diag(page)).environment.sunVisible).toBe(false);expect((await diag(page)).environment.moonVisible).toBe(true);expect((await diag(page)).environment.starsOpacity).toBeGreaterThan(.5);
+ expect((await diag(page)).environment.meteorVisible).toBe(false);await expect(page.locator('#house-hero img,#house-hero svg')).toHaveCount(0);
  await page.locator('#notifications').click();await expect(page.locator('#push-dialog')).toBeVisible();await expect.poll(async()=>(await diag(page)).paused).toBe(true);await expect(page.locator('#house-hero')).toHaveAttribute('data-sky-paused','true');await page.locator('#push-close').click();await expect.poll(async()=>(await diag(page)).paused).toBe(false);
  await page.locator('#theme-select').selectOption('light');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
- await expect(page.locator('.landscape-stars')).toHaveCSS('opacity','0');await expect(page.locator('.landscape-sun')).toHaveCSS('opacity','1');
+ expect((await diag(page)).environment.starsOpacity).toBe(0);expect((await diag(page)).environment.sunVisible).toBe(true);expect((await diag(page)).environment.moonVisible).toBe(false);
  expect((await diag(page)).theme).toBe('light');
  await page.locator('#theme-select').selectOption('system');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
  await page.emulateMedia({colorScheme:'light'});await expect(page.locator('html')).toHaveAttribute('data-theme','light');
 });
 
-test('pointer bursts are coalesced into the frame loop and the canvas respects its pixel budget',async({page})=>{
+test('pointer bursts are coalesced and the house keeps full resolution',async({page})=>{
  await page.goto('/');await ready(page);await page.mouse.move(1000,500);await page.mouse.down();
- const result=await page.evaluate(()=>{const before=(window as any).__houseDiagnostics().frames;for(let i=1;i<=24;i++)window.dispatchEvent(new PointerEvent('pointermove',{pointerId:1,buttons:1,clientX:1000-i*5,clientY:500}));const canvas=document.querySelector<HTMLCanvasElement>('.stage-canvas')!;return {synchronousDraws:(window as any).__houseDiagnostics().frames-before,pixels:canvas.width*canvas.height};});
- expect(result.synchronousDraws).toBe(0);expect(result.pixels).toBeLessThanOrEqual(1_400_000);
+ const result=await page.evaluate(()=>{const before=(window as any).__houseDiagnostics().frames;for(let i=1;i<=24;i++)window.dispatchEvent(new PointerEvent('pointermove',{pointerId:1,buttons:1,clientX:1000-i*5,clientY:500}));const canvas=document.querySelector<HTMLCanvasElement>('.stage-canvas')!;return {synchronousDraws:(window as any).__houseDiagnostics().frames-before,width:canvas.width,height:canvas.height,cssWidth:canvas.clientWidth,cssHeight:canvas.clientHeight,antialias:canvas.getContext('webgl2')!.getContextAttributes()!.antialias};});
+ expect(result.synchronousDraws).toBe(0);expect(result.width).toBeGreaterThanOrEqual(result.cssWidth);expect(result.height).toBeGreaterThanOrEqual(result.cssHeight);expect(result.antialias).toBe(true);
  await page.mouse.up();await expect.poll(async()=>(await diag(page)).transitioning).toBe(false);expect((await diag(page)).selected).toBe('home');
+});
+
+
+test('day and night interpolate through shared scene lighting and reverse without changing rooms',async({page})=>{
+ await page.emulateMedia({colorScheme:'light'});await page.goto('/');await ready(page);
+ expect((await diag(page)).themeBlend).toBe(0);
+ await page.locator('#theme-select').selectOption('dark');
+ await expect.poll(async()=>(await diag(page)).themeBlend).toBeGreaterThan(.1);
+ const middle=await diag(page);expect(middle.themeBlend).toBeLessThan(1);expect(middle.displayed).toBe('home');
+ await page.locator('#theme-select').selectOption('light');
+ await expect.poll(async()=>(await diag(page)).themeBlend,{timeout:10000}).toBe(0);
+ expect((await diag(page)).displayed).toBe('home');expect((await diag(page)).pixelRatio).toBeGreaterThanOrEqual(1);
+ await page.locator('#theme-select').selectOption('dark');
+ await expect.poll(async()=>(await diag(page)).themeBlend,{timeout:10000}).toBe(1);
+ expect((await diag(page)).environment.moonVisible).toBe(true);expect((await diag(page)).environment.sunVisible).toBe(false);
 });
