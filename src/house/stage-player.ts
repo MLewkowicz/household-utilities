@@ -50,8 +50,8 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   canvas.setAttribute('aria-label', 'Rotating household. Drag horizontally to turn and release to reveal a room. Left and right arrows change sections. Tap the house or press Enter to play its scene effect. Scroll down to enter the selected section. Home returns to this menu.');
   container.replaceChildren(canvas);
   const scene = new T.Scene(), landscapeScene=new T.Scene(), camera = new T.OrthographicCamera(-6, 6, 5, -5, .1, 200);
-  // Separate light rigs, but one camera and depth buffer: the house retains its
-  // scene lighting while the surroundings change from daylight to moonlight.
+  // Separate light rigs, but one camera and depth buffer: the rooms retain
+  // their scene lighting while the surroundings change to moonlight.
   renderer.autoClear=false;renderer.info.autoReset=false;
   // Same orthographic view, with enough distance for the foreground lawn on
   // tall phones to remain in front of the near clipping plane.
@@ -73,8 +73,43 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   contact.rotation.x=-Math.PI/2;contact.position.y=-.362;contact.receiveShadow=true;scene.add(contact);
   const pivot = new T.Group(); pivot.name='house-turn-pivot'; scene.add(pivot);
   const shell = houseShell(); pivot.add(shell);
+  // Tint only outer surfaces in linear light before tone mapping. Keeping them
+  // in the house pass preserves shared shadows/occlusion with no extra pass.
+  const exteriorLight={value:new T.Vector3(1,1,1)},interiorOpen={value:Number(initial!=='home')};
+  function lightExterior(root:T.Group) {
+    root.traverse(object=>{
+      if(!(object instanceof T.Mesh))return;
+      const position=object.geometry.getAttribute('position'),normal=object.geometry.getAttribute('normal');
+      const exposure=new Float32Array(position.count).fill(1);
+      if(root===shell)for(let i=0;i<position.count;i++) {
+        // The inner faces of the shared side walls belong to the lit rooms.
+        // Use the shell's unrotated geometry so this holds throughout a turn.
+        const x=position.getX(i),y=position.getY(i);
+        if(Math.abs(x)>=HOUSE.width/2-.2&&Math.abs(x)<=HOUSE.width/2&&y<HOUSE.eave&&normal.getX(i)*Math.sign(x)<-.9)exposure[i]=0;
+      }
+      object.geometry.setAttribute('exteriorExposure',new T.BufferAttribute(exposure,1));
+      for(const material of Array.isArray(object.material)?object.material:[object.material]) {
+        if(!(material instanceof T.MeshLambertMaterial))continue;
+        material.onBeforeCompile=shader=>{
+          shader.uniforms.exteriorLight=exteriorLight;
+          shader.uniforms.interiorOpen=interiorOpen;
+          shader.vertexShader=`attribute float exteriorExposure;\nvarying float vExteriorExposure;\n${shader.vertexShader}`.replace('#include <begin_vertex>','#include <begin_vertex>\nvExteriorExposure = exteriorExposure;');
+          shader.fragmentShader=`uniform vec3 exteriorLight;\nuniform float interiorOpen;\nvarying float vExteriorExposure;\n${shader.fragmentShader}`.replace('#include <tonemapping_fragment>','float outdoorExposure = mix(1.0, vExteriorExposure, interiorOpen);\ngl_FragColor.rgb *= mix(vec3(1.0), exteriorLight, outdoorExposure);\n#include <tonemapping_fragment>');
+        };
+        material.customProgramCacheKey=()=>'house-exterior-moonlight';
+      }
+    });
+  }
+  lightExterior(shell);
   const cache = new Map<StageId,HouseStage>();
-  function get(id: StageId) { if (!cache.has(id)) cache.set(id,createStage(id,faces)); return cache.get(id)!; }
+  function get(id: StageId) {
+    if(!cache.has(id)) {
+      const stage=createStage(id,faces);
+      if(stage.exterior)lightExterior(stage.exterior);
+      cache.set(id,stage);
+    }
+    return cache.get(id)!;
+  }
   let current = get(initial); pivot.add(current.root);
   let notified=initial;
   function notifySelection(){if(displayed!==notified){notified=displayed;onScene(displayed);}}
@@ -86,6 +121,8 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   const canAnimate=()=>!destroyed&&!lost&&!paused&&!media.matches&&!document.hidden&&visible;
   function lighting(value: number) {
     night=value;
+    exteriorLight.value.set(1-.77*themeBlend,1-.69*themeBlend,1-.54*themeBlend);
+    interiorOpen.value=Number(displayed!=='home');
     ambient.intensity=T.MathUtils.lerp(2.5,.75,value);key.intensity=T.MathUtils.lerp(2.25,.55,value);fill.intensity=T.MathUtils.lerp(.8,.4,value);
     ambient.color.copy(warm).lerp(cool,value);key.color.copy(warmKey).lerp(coolKey,value);
     outsideAmbient.intensity=T.MathUtils.lerp(T.MathUtils.lerp(2.5,1.05,themeBlend),.75,value);

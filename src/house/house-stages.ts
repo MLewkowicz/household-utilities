@@ -6,6 +6,7 @@ import { members, type StageId, type StageState } from './stage-data';
 
 export interface HouseStage {
   id: StageId; root: T.Group; people: CastMember[]; dark: boolean;
+  exterior?: T.Group;
   tick(time: number, state: StageState): void;
 }
 function make(id: StageId, root: T.Group, people: CastMember[], tick: HouseStage['tick'], dark = false): HouseStage {
@@ -17,11 +18,13 @@ function sleeveWave(person: CastMember, t: number, intensity = 1) {
   person.leftArm.rotation.z = -.14; person.root.rotation.z = Math.sin(t * 1.8) * .025;
 }
 function home(faces: Faces) {
-  const root = new T.Group(), door = cottageExterior(root);
+  // Keep the facade separate when batching so moonlight can dim the building
+  // without dimming the people or any of the independent room scenes.
+  const root = new T.Group(), exterior = group(root, 0, 0, 0, true), door = cottageExterior(exterior);
   const waitingX = [-2.50, -1.45, 1.45, 2.50];
   const people = members.map((id, i) => actor(root, faces, id, waitingX[i], 3.35, { scale: .83 }));
   const ease = (value: number) => T.MathUtils.smoothstep(value, 0, 1);
-  return make('home', root, people, (time, state) => {
+  const stage = make('home', root, people, (time, state) => {
     const loop = time % 45, returning = loop > 22.5;
     const cycle = returning ? 45 - loop : loop;
     const slot = cycle % 5.3;
@@ -54,6 +57,8 @@ function home(faces: Faces) {
     });
     root.userData.entry = { doorAngle: door.rotation.y, thresholdZ: 1.88, openingWidth: 1.3, direction: returning ? 'out' : 'in', loopSeconds: 45 };
   });
+  stage.exterior = exterior;
+  return stage;
 }
 function utilities(faces: Faces) {
   const root = new T.Group();
@@ -146,8 +151,9 @@ function utilities(faces: Faces) {
     roomLight.value = on ? 1 : 0;
     root.userData.utilities = { loungeLit: on };
     shade.material.color.set(on ? '#ffe296' : '#a79978'); pool.material.opacity = on ? .27 : 0;
-    rocker.updateWorldMatrix(true, true); reach(rina, rina.rightArm, rocker.localToWorld(new T.Vector3(0, 0, .1 + Math.max(0, Math.sin(t * 4.5)) * .13)));
     rina.leftArm.rotation.z = -.22 - Math.max(0, Math.sin(t * 4.5)) * .6; rina.root.rotation.z = Math.sin(t * 2.25) * .04;
+    // Pose the body before solving the hand reach, including the first still frame.
+    rocker.updateWorldMatrix(true, true); reach(rina, rina.rightArm, rocker.localToWorld(new T.Vector3(0, 0, .1 + Math.max(0, Math.sin(t * 4.5)) * .13)));
     bucket.updateWorldMatrix(true, true); reach(rohil, rohil.rightArm, bucket.localToWorld(new T.Vector3(-.24, .48, 0)));
     drop.position.y = 2.30 - (t * .8 % 1) * 1.70; bubble.visible = state.still || boost || Math.floor(t / 3) % 4 === 2;
   });

@@ -172,20 +172,25 @@ test('day and night interpolate through landscape lighting and reverse without c
  expect((await diag(page)).environment.moonVisible).toBe(true);expect((await diag(page)).environment.sunVisible).toBe(false);
 });
 
-test('changing the landscape theme preserves house, portrait and theater lighting',async({page})=>{
+test('night dims the roof and facade while preserving room, portrait and theater lighting',async({page})=>{
  await page.emulateMedia({colorScheme:'light',reducedMotion:'reduce'});await page.goto('/');await ready(page);
- // Compare the rendered pixels, with animation paused so poses stay identical.
- // Both crops are inside the house/portraits, clear of the changing landscape.
- const wall={x:550,y:350,width:240,height:200},portraits={x:480,y:670,width:400,height:85};
- const lightWall=await page.screenshot({clip:wall}),lightPortraits=await page.screenshot({clip:portraits});
+ // Compare actual rendered pixels with animation paused and clear of the sky.
+ const roof={x:550,y:250,width:240,height:70},facade={x:550,y:400,width:220,height:120};
+ const dayRoof=await page.screenshot({clip:roof}),dayFacade=await page.screenshot({clip:facade});
  await page.locator('#theme-select').selectOption('dark');
- expect((await page.screenshot({clip:wall})).equals(lightWall)).toBe(true);
- expect((await page.screenshot({clip:portraits})).equals(lightPortraits)).toBe(true);
- await page.locator('.stage-canvas').focus();
- for(let i=0;i<3;i++)await page.keyboard.press('ArrowRight');
- expect((await diag(page)).displayed).toBe('events');expect((await diag(page)).dark).toBe(true);
- const theater=await page.screenshot({clip:wall});
+ expect((await page.screenshot({clip:roof})).equals(dayRoof)).toBe(false);
+ expect((await page.screenshot({clip:facade})).equals(dayFacade)).toBe(false);
+ await page.locator('.stage-canvas').focus();await page.keyboard.press('ArrowLeft');
+ const rooms=[{x:490,y:385,width:200,height:115},{x:760,y:388,width:125,height:115},
+  {x:530,y:580,width:135,height:140},{x:745,y:620,width:140,height:115}];
+ const atNight=[];for(const clip of rooms)atNight.push(await page.screenshot({clip}));
  await page.locator('#theme-select').selectOption('light');
- expect((await page.screenshot({clip:wall})).equals(theater)).toBe(true);
- expect(theater.equals(lightWall)).toBe(false);
+ for(const [i,clip] of rooms.entries())expect((await page.screenshot({clip})).equals(atNight[i])).toBe(true);
+ await page.locator('.stage-canvas').focus();
+ for(let i=0;i<2;i++)await page.keyboard.press('ArrowLeft');
+ expect((await diag(page)).displayed).toBe('events');expect((await diag(page)).dark).toBe(true);
+ const theater=await page.screenshot({clip:rooms[0]});
+ await page.locator('#theme-select').selectOption('dark');
+ expect((await page.screenshot({clip:rooms[0]})).equals(theater)).toBe(true);
+ expect(theater.equals(atNight[0])).toBe(false);
 });
