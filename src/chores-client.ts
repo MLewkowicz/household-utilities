@@ -1,3 +1,4 @@
+import {entryMeta,latestRevision} from './entry-meta';
 import {initMyTasks,renderMyTasks,resetMyTasks,refreshMyTasks,reconcileMyTaskOrder,setMyTaskFilter,myTasksInUse,personalAvailable,personalExportAvailable,createPersonalTask,exportMyTasks,focusMyTaskNotification} from './my-tasks-client';
 import {choreSource,onChoresChange,loadChores,saveSharedTask,completeSharedTask} from './chore-store';
 import {pointPreset,presetOptions} from './point-presets';
@@ -37,7 +38,6 @@ const disabled=()=>!identity||!live?'disabled':'';
 const day=()=>ledger?.local_day||today();
 const noResults=(title:string,copy:string)=>`<div class="chore-empty"><span class="chore-empty-art">${choreIcon('plant')}</span><h3>${title}</h3><p>${copy}</p></div>`;
 const localStamp=(value:string)=>new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}).format(new Date(value));
-const deadline=(t:Chore)=>t.due_on?`${date(t.due_on)}${t.due_time?' · '+t.due_time:' · end of day'}`:'No deadline';
 function dialog(id:string,title:string,body:string,submit:string){return `<dialog id="${id}-dialog" class="chore-dialog" aria-labelledby="${id}-heading"><form id="${id}-form"><div class="dialog-top"><h2 id="${id}-heading" tabindex="-1" autofocus>${title}</h2><button type="button" class="icon-button" data-chore-close="${id}" aria-label="Close">×</button></div>${body}<p class="form-error" id="${id}-error" role="alert" hidden></p><div class="dialog-actions"><button type="button" class="button secondary" data-chore-close="${id}">Cancel</button><button type="submit" id="${id}-save" class="button primary">${submit}</button></div></form></dialog>`;}
 const contributors=(id:string)=>`<fieldset class="chore-contributors"><legend>Who helped?</legend><p class="field-help">Any points are shared equally between the people who did it.</p><div class="chore-member-options">${MEMBERS.map(m=>`<label class="chore-check-tile member-${m}"><input type="checkbox" name="${id}" value="${m}">${avatar(m)}${name(m)}</label>`).join('')}</div></fieldset>`;
 export function initChores(){
@@ -86,7 +86,7 @@ export function initChoreDialogs(){
  <div id="chore-queue-fields"><label for="chore-queue">Show in queue</label><select id="chore-queue"><option value="immediately">Immediately</option><option value="due_date">On due date</option></select><p class="field-help">On due date: available from midnight in New York. Upcoming tasks appear in Week.</p></div>
  <details id="chore-scheduling" class="form-details"><summary>Priority & expiry</summary><label class="chore-inline-check"><input id="chore-pinned" type="checkbox"> Pin as high priority</label>
  <label class="chore-inline-check"><input id="chore-tonight" type="checkbox"> Expire tonight</label>
- <details id="chore-expiry-details"><summary>Choose another expiry</summary><div class="chore-two-fields"><div><label for="chore-expiry">Expiry date</label><input id="chore-expiry" type="date"></div><div><label for="chore-expiry-time">Expiry time <span class="quiet">(optional)</span></label><input id="chore-expiry-time" type="time"></div></div></details><p class="field-help">Expired tasks leave the queue and remain in history.</p></details>
+ <details id="chore-expiry-details"><summary>Choose another expiry</summary><div class="chore-two-fields"><div><label for="chore-expiry">Expiry date</label><input id="chore-expiry" type="date"></div><div><label for="chore-expiry-time">Expiry time <span class="quiet">(optional)</span></label><input id="chore-expiry-time" type="time"></div></div></details><p class="field-help">Expired tasks appear under Household → Expired.</p></details>
  <div id="chore-log-fields" hidden>${contributors('chore-log-contributor')}<label for="chore-log-time">When was it done? · New York time</label><input id="chore-log-time" type="datetime-local"></div></div><p id="chore-task-actor" class="field-help"></p><p id="task-source-notice" class="ledger-notice" role="status" hidden></p>`,'Save chore')+
  dialog('chore-complete','Complete task',`<div id="chore-complete-summary" class="chore-complete-summary"></div>${contributors('chore-contributor')}${effort('chore-complete-effort')}<label for="chore-completed-at">When was it done? · New York time</label><input id="chore-completed-at" type="datetime-local" required><label for="chore-completion-note">Change note <span class="quiet">(optional)</span></label><input id="chore-completion-note" maxlength="500">`,'Save completion')+
  dialog('chore-action','Update chore',`<p id="chore-action-copy" class="section-copy"></p><label for="chore-action-note">A note for the household <span class="quiet">(optional)</span></label><textarea id="chore-action-note" maxlength="500" rows="2"></textarea>`,'Confirm')+
@@ -101,7 +101,6 @@ function render(){
  if(dragging){pendingRender=true;return;}pendingRender=false;
  const content=$('#chore-content');
  const openDetails=[...content.querySelectorAll<HTMLDetailsElement>('[data-task-details][open]')].map(el=>el.dataset.taskDetails);
- const openHistory=[...content.querySelectorAll<HTMLDetailsElement>('.chore-history[open]')].map(el=>el.closest<HTMLElement>('[data-chore-id]')?.dataset.choreId);
  const openScores=[...content.querySelectorAll<HTMLDetailsElement>('.chore-score[open]')].map(el=>el.dataset.scoreMember);
  const focused=document.activeElement as HTMLElement|null;
  const focusedId=focused&&content.contains(focused)?focused.id:'';
@@ -110,22 +109,12 @@ function render(){
  if(view==='mine'){$('#chore-content').replaceChildren();return;}
  if(busy||document.querySelector('dialog[open]'))return;
  $('#chore-content').innerHTML=view==='week'?weekView():view==='leaderboard'?leaderboardView():queueView();restoreFilters();
- content.querySelectorAll<HTMLDetailsElement>('[data-task-details]').forEach(el=>{if(openDetails.includes(el.dataset.taskDetails)){el.open=true;fillTaskHistory(el);}});
- content.querySelectorAll<HTMLDetailsElement>('.chore-history').forEach(el=>el.open=openHistory.includes(el.closest<HTMLElement>('[data-chore-id]')?.dataset.choreId));
+ content.querySelectorAll<HTMLDetailsElement>('[data-task-details]').forEach(el=>{if(openDetails.includes(el.dataset.taskDetails)){el.open=true;}});
  content.querySelectorAll<HTMLDetailsElement>('.chore-score').forEach(el=>el.open=openScores.includes(el.dataset.scoreMember));
  if(focusedId)document.getElementById(focusedId)?.focus({preventScroll:true});
  else if(weekShift!==undefined)content.querySelector<HTMLElement>(`[data-week-shift="${weekShift}"]`)?.focus({preventScroll:true});
 }
-function history(t:Chore){
- const revisions=ledger?.history.filter(h=>h.id===t.id)||[];
- return `<details class="chore-history"><summary>${revisions.length?'History · '+revisions.length:'Routine schedule'}</summary><div>${t.routine_id?`<p>From ${esc(t.routine_title)} · cycle of ${date(t.cycle_start!)}.</p>`:''}${revisions.map(h=>`<div class="chore-revision"><p><strong>${esc(({create:'Added',edit:'Edited',claim:'Claimed',hand_back:'Handed back',complete:'Completion saved',undo:'Completion undone',cancel:'Cancelled',reopen:'Reopened'} as Record<string,string>)[h.action]||h.action)}</strong> by ${memberChip(h.actor)} · ${localStamp(h.created_at)}</p><p>${esc(h.title)} · ${effortLabel(h.points)} · ${h.assignee?name(h.assignee):'Unassigned'} · ${deadline(h)}</p>${h.completion?`<p>Done ${localStamp(h.completion.completed_at)} by ${h.completion.contributors.map(name).join(', ')}.</p>`:''}${h.pinned?'<p>Pinned as high priority.</p>':''}${h.expires_at?`<p>Expires ${localStamp(h.expires_at)}.</p>`:''}${h.note?`<p>${esc(h.note)}</p>`:''}${h.change_note?`<p class="chore-change-note">${esc(h.change_note)}</p>`:''}</div>`).join('')}</div></details>`;
-}
-function card(t:Chore){return choreCard(t,{identity,live,day:day()});}
-function fillTaskHistory(details:HTMLDetailsElement){
- const target=details.querySelector<HTMLElement>('[data-task-history]');
- if(!target||target.childElementCount)return;
- const task=ledger?.tasks.find(t=>t.id===target.dataset.taskHistory);if(task)target.innerHTML=history(task);
-}
+function card(t:Chore){return choreCard(t,{identity,live,day:day(),revision:latestRevision(ledger?.history||[],t.id)});}
 function updateTaskAvailability(){
  const personal=input('chore-kind').value==='personal',available=personal?personalAvailable():live;
  $('#chore-task-save').toggleAttribute('disabled',busy||!available);
@@ -153,7 +142,7 @@ async function quickComplete(task:Chore){if(identity)await completeSharedTask(ta
 function queueView(){
  const candidates=(ledger?.tasks||[]).filter(t=>!t.projected&&(typeFilter==='all'||taskKind(t)===typeFilter)).filter(t=>householdFilter==='all'||(householdFilter==='anyone'?!t.assignee:t.assignee===householdFilter)).filter(t=>statusFilter==='active'?activeChore(t)&&queueReady(t,day()):statusFilter==='all'?true:t.status===statusFilter);
  candidates.sort(statusFilter==='active'?queueOrder(day()):(a,b)=>(b.completion?.completed_at||b.created_at).localeCompare(a.completion?.completed_at||a.created_at));
- return `<div class="chore-section-top"><h2>Household</h2><div class="chore-filters"><label>Type<select id="chore-type-filter">${[["all","All types"],["reminder","Reminders"],["request","Requests"],["chore","Chores"]].map(([v,l])=>`<option value="${v}" ${typeFilter===v?"selected":""}>${l}</option>`).join("")}</select></label><label>Assignee<select id="chore-household-filter">${options(true)}</select></label><label>Show<select id="chore-status-filter">${[['active','To do'],['all','All history'],['completed','Completed'],['missed','Missed'],['expired','Expired'],['cancelled','Cancelled']].map(([v,l])=>`<option value="${v}" ${v===statusFilter?'selected':''}>${l}</option>`).join('')}</select></label></div></div>${candidates.length?`<div class="chore-grid">${candidates.map(t=>card(t)).join('')}</div>`:noResults('No tasks in this view.',householdFilter==='anyone'?'Choose Everyone or a roommate to see assigned tasks.':'')}`;
+ return `<div class="chore-section-top"><h2>Household</h2><div class="chore-filters"><label>Type<select id="chore-type-filter">${[["all","All types"],["reminder","Reminders"],["request","Requests"],["chore","Chores"]].map(([v,l])=>`<option value="${v}" ${typeFilter===v?"selected":""}>${l}</option>`).join("")}</select></label><label>Assignee<select id="chore-household-filter">${options(true)}</select></label><label>Show<select id="chore-status-filter">${[['active','To do'],['all','All tasks'],['completed','Completed'],['missed','Missed'],['expired','Expired'],['cancelled','Cancelled']].map(([v,l])=>`<option value="${v}" ${v===statusFilter?'selected':''}>${l}</option>`).join('')}</select></label></div></div>${candidates.length?`<div class="chore-grid">${candidates.map(t=>card(t)).join('')}</div>`:noResults('No tasks in this view.',householdFilter==='anyone'?'Choose Everyone or a roommate to see assigned tasks.':'')}`;
 }
 function weekView(){
  const days=Array.from({length:7},(_,i)=>addDays(week,i));
@@ -219,7 +208,6 @@ function openTask(mode:string,task?:Chore){
  $('#chore-task-actor').textContent=`${task?'Editing':'Adding'} as ${name(identity)}${task?.routine_id?' · only this occurrence changes':''}.`;
  $('#chore-task-save').textContent=mode==='log'?'Log completion':'Save chore';
  $('#chore-task-done').hidden=!task||task.state==='cancelled'||(!task.completion&&!queueReady(task,day()));$('#chore-task-done').textContent=task?.completion?'Correct completion':'Mark done';
- $('#chore-task-history').innerHTML=task?history(task):'';
  updateTaskKind();renderTaskIcons();renderChosenIcon();show('chore-task');
 }
 function openCompletion(task:Chore){
@@ -237,7 +225,7 @@ function updateCompletionHint(){
 }
 function openAction(task:Chore,action:string){
  if(!identity||!live||busy)return;actionTask=task;actionKind=action;
- const labels:Record<string,[string,string]>={hand_back:['Hand this back?',`“${task.title}” will be unassigned so someone else can claim it.`],claim:['Lend a hand?',`Assign “${task.title}” to ${name(identity)}.`],cancel:['Cancel this chore?',`“${task.title}” will leave the queue and remain in history.`],undo:['Undo this completion?',`Credit for “${task.title}” will be reversed. Its deadline and expiry still apply.`],reopen:['Reopen this chore?',`“${task.title}” will return to its scheduled status. Its deadline and expiry still apply.`]};
+ const labels:Record<string,[string,string]>={hand_back:['Hand this back?',`“${task.title}” will be unassigned so someone else can claim it.`],claim:['Lend a hand?',`Assign “${task.title}” to ${name(identity)}.`],cancel:['Cancel this chore?',`“${task.title}” will move to Household → Cancelled.`],undo:['Undo this completion?',`Credit for “${task.title}” will be reversed. Its deadline and expiry still apply.`],reopen:['Reopen this chore?',`“${task.title}” will return to its scheduled status. Its deadline and expiry still apply.`]};
  $('#chore-action-heading').textContent=labels[action][0];$('#chore-action-copy').textContent=labels[action][1];input('chore-action-note').value='';show('chore-action');
 }
 async function save(id:string,fn:string,p:Record<string,unknown>){
@@ -307,11 +295,10 @@ async function savePersonal(){
  finally{busy=false;fields.forEach((el,i)=>el.disabled=states[i]);render();}
 }
 function renderRoutineList(){
- $('#chore-routine-list').innerHTML=ledger?.routines.length?ledger.routines.map(r=>`<article class="routine-summary"><div><h3>${esc(r.title)}</h3><p class="section-copy">Every ${r.interval_weeks===1?'week':r.interval_weeks+' weeks'} · ${r.owners.map(name).join(' → ')}</p><p class="quiet">${r.effective_on>day()?`${r.enabled?'Changes start':'Pauses'} ${date(r.effective_on)}`:r.enabled?'Running':'Paused'}</p></div><button class="text-button" data-edit-routine="${r.id}">Edit routine</button><details><summary>Schedule & history</summary><ul>${r.steps.map(s=>`<li>${routineWeekday(r.start_week,s.weekday)}${s.time?' '+s.time:''} · ${esc(s.title)} · ${effortLabel(s.points)}</li>`).join('')}</ul>${ledger!.routine_history.filter(h=>h.id===r.id).map(h=>`<div class="chore-revision"><p>Version ${h.version} · ${memberChip(h.actor)} · ${localStamp(h.created_at)}</p><p>Effective ${date(h.effective_on)} · ${h.enabled?'running':'paused'} · ${h.owners.map(name).join(' → ')}</p><p>Starts with ${name(h.owners[h.start_index])} at ${date(h.start_week)}.</p><ul>${h.steps.map(s=>`<li>${routineWeekday(h.start_week,s.weekday)} ${s.time||'end of day'} · ${esc(s.title)} · ${effortLabel(s.points)}${s.note?' · '+esc(s.note):''}</li>`).join('')}</ul></div>`).join('')}</details></article>`).join(''):noResults('No routines yet.','Add a weekly routine and choose who takes turns.');
+ $('#chore-routine-list').innerHTML=ledger?.routines.length?ledger.routines.map(r=>`<article class="routine-summary"><div><h3>${esc(r.title)}</h3><p class="section-copy">Every ${r.interval_weeks===1?'week':r.interval_weeks+' weeks'} · ${r.owners.map(name).join(' → ')}</p><p class="quiet">${r.effective_on>day()?`${r.enabled?'Changes start':'Pauses'} ${date(r.effective_on)}`:r.enabled?'Running':'Paused'}</p></div><button class="text-button" data-edit-routine="${r.id}">Edit routine</button><details><summary>Schedule</summary><p>Starts with ${name(r.owners[r.start_index])} on ${date(r.start_week)}.</p><ul>${r.steps.map(step=>`<li>${routineWeekday(r.start_week,step.weekday)}${step.time?' '+step.time:''} · ${esc(step.title)} · ${effortLabel(step.points)}${step.note?' · '+esc(step.note):''}</li>`).join('')}</ul>${entryMeta(r)}</details></article>`).join(''):noResults('No routines yet.','Add a weekly routine and choose who takes turns.');
 }
 function bindBoard(){
  bindCompletionSwipe($('#chore-content'),id=>{const task=ledger?.tasks.find(t=>t.id===id);if(task)void quickComplete(task);},value=>{dragging=value;if(!value)queueMicrotask(()=>{if(pendingRender&&!busy)render();});});
- $('#chore-content').addEventListener('toggle',event=>{const el=event.target as HTMLDetailsElement;if(el.open&&el.matches('[data-task-details]'))fillTaskHistory(el);},true);
  $('#chores-page').addEventListener('click',event=>{
   const b=(event.target as HTMLElement).closest<HTMLElement>('button');if(!b||b.hasAttribute('disabled')||busy)return;
   if(b.dataset.chorePerson){setIdentity(b.dataset.chorePerson as Member);const next=pendingTask;pendingTask=null;if(next)openTask(next);return;}
@@ -331,7 +318,6 @@ function bindEditor(){
  $('#chore-kind').addEventListener('change',()=>updateTaskKind(true));
  $('#chore-queue').addEventListener('change',updateQueueTiming);
  $('#chore-task-save').insertAdjacentHTML('beforebegin','<button id="chore-task-done" type="button" class="button secondary" hidden>Mark done</button>');
- $('#chore-task-actor').insertAdjacentHTML('afterend','<div id="chore-task-history"></div>');
  document.querySelectorAll<HTMLDialogElement>('.chore-dialog').forEach(d=>d.addEventListener('cancel',event=>{if(busy)event.preventDefault();}));
  document.querySelectorAll<HTMLButtonElement>('[data-chore-close]').forEach(b=>b.addEventListener('click',()=>{if(!busy)$<HTMLDialogElement>('#'+b.dataset.choreClose+'-dialog').close();}));
  $('#chore-task-done').addEventListener('click',()=>{if(taskDraft){$<HTMLDialogElement>('#chore-task-dialog').close();openCompletion(taskDraft);}});

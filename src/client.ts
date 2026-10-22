@@ -1,3 +1,4 @@
+import {entryMeta} from './entry-meta';
 import {avatar} from './people';
 import { MEMBERS, UTILITIES, type Member, type Payment, type StoredBill, type Allocation, type Utility, dateDays } from './ledger';
 type Config = { url: string; key: string };
@@ -12,7 +13,7 @@ export function focusUtilityNotification(id:string){
 }
 const title = (u: Utility) => u === 'wifi' ? 'Wi-Fi' : name(u);
 const id = (): string => crypto.randomUUID();
-let ledger: RawLedger, selected: Member | 'all' = 'all', historyTab = 'payments', live = false;
+let ledger: RawLedger, selected: Member | 'all' = 'all', showDeletedPayments = false, live = false;
 let loading = false, mutationInFlight = false;
 const expanded = new Set<string>();
 let paymentRequest = id(), paymentId = id(), lastPaymentPayload = '', deleteRequest = id();
@@ -79,19 +80,12 @@ function renderMonths() {
   $('#monthly-total').innerHTML=`<tr><td>Total charges <span class="month-sub">Before reimbursements</span></td>${UTILITIES.map(u=>`<td>${money(months.reduce((s,m)=>s+sumMonth(m,u),0))}</td>`).join('')}<td>${money(months.reduce((s,m)=>s+sumMonth(m),0))}</td><td></td></tr>`;
 }
 function renderHistory() {
-  const payments=latestPayments().filter(p=>selected==='all'||p.member_id===selected);
-  const active=payments.filter(p=>!p.deleted);
-  if(historyTab==='payments') {
-    $('#history').innerHTML=active.length?`<div class="payment-list">${active.map(p=>paymentRow(p,true)).join('')}</div>`:`<div class="empty-state"><div class="empty-icon" aria-hidden="true">↔</div><h3>No payments recorded${selected!=='all'?` for ${name(selected)}`:' yet'}</h3></div>`;
-  } else {
-    const bills=(ledger.bill_history||[]).filter(b=>b.version>1);
-    $('#history').innerHTML=payments.length||bills.length?`<div class="payment-list">${payments.map(p=>`<details class="history-group member-${p.member_id}"><summary><span class="history-summary">${avatar(p.member_id)}<span>${name(p.member_id)} · ${money(p.amount_cents)} · ${p.version} ${p.version===1?'event':'events'}</span>${p.deleted?'<span class="deleted-label">DELETED</span>':''}</span></summary>${ledger.history.filter(e=>e.payment_id===p.payment_id).sort((a,b)=>b.version-a.version).map(e=>paymentRow(e,false)).join('')}</details>`).join('')}${bills.map(b=>`<div class="payment-row member-michal">${avatar('michal')}<div class="payment-main"><div class="payment-title">${title(b.data.utility)} bill ${b.deleted?'reconciled':'revised'}</div><div class="payment-meta">${b.data.start_date?date(b.data.start_date,true):'Opening charge'} · revision ${b.version} · Michal · ${date(b.created_at,true)}</div></div></div>`).join('')}</div>`:'<div class="empty-state"><div class="empty-icon" aria-hidden="true">≡</div><h3>No changes yet</h3></div>';
-  }
+  const payments=latestPayments().filter(p=>(selected==='all'||p.member_id===selected)&&(showDeletedPayments||!p.deleted));
+  $('#history').innerHTML=payments.length?`<div class="payment-list">${payments.map(paymentRow).join('')}</div>`:`<div class="empty-state"><div class="empty-icon" aria-hidden="true">↔</div><h3>No payments recorded${selected!=='all'?` for ${name(selected)}`:' yet'}</h3></div>`;
 }
-function paymentRow(p: Payment, actions: boolean) {
+function paymentRow(p: Payment) {
   const method=p.method==='other'?p.other:name(p.method);
-  const action=p.deleted?'Deleted':p.version===1?'Recorded':'Edited';
-  return `<div class="payment-row member-${p.member_id}">${avatar(p.member_id)}<div class="payment-main"><div class="payment-title">${name(p.member_id)} <span class="quiet">to Michal</span>${p.deleted?'<span class="deleted-label">DELETED</span>':''}</div><div class="payment-meta">${esc(method)} · ${date(p.paid_on,true)}${actions?'':`<br>${action} by <span class="actor-chip member-${p.actor}">${name(p.actor)}</span> · ${new Date(p.created_at).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})} · v${p.version}`}</div></div><span class="payment-amount">${money(p.amount_cents)}</span>${actions&&live?`<div class="payment-actions"><button class="text-button" data-edit="${esc(p.payment_id)}" aria-label="Edit ${name(p.member_id)} payment of ${money(p.amount_cents)}">Edit</button><button class="text-button" data-delete="${esc(p.payment_id)}" aria-label="Delete ${name(p.member_id)} payment of ${money(p.amount_cents)}">Delete</button></div>`:''}</div>`;
+  return `<div class="payment-row member-${p.member_id}">${avatar(p.member_id)}<div class="payment-main"><div class="payment-title">${name(p.member_id)} <span class="quiet">to Michal</span>${p.deleted?'<span class="deleted-label">DELETED</span>':''}</div><div class="payment-meta">${esc(method)} · ${date(p.paid_on,true)}</div>${entryMeta(p)}</div><span class="payment-amount">${money(p.amount_cents)}</span>${!p.deleted&&live?`<div class="payment-actions"><button class="text-button" data-edit="${esc(p.payment_id)}" aria-label="Edit ${name(p.member_id)} payment of ${money(p.amount_cents)}">Edit</button><button class="text-button" data-delete="${esc(p.payment_id)}" aria-label="Delete ${name(p.member_id)} payment of ${money(p.amount_cents)}">Delete</button></div>`:''}</div>`;
 }
 function render() { renderCards();renderMonths();renderHistory();$('#new-payment').toggleAttribute('disabled',!live);$('#bottom-payment').toggleAttribute('disabled',!live);if(!location.hash||location.hash==='#utilities')$('#export').removeAttribute('disabled'); }
 async function refresh() {
@@ -157,7 +151,7 @@ $('#delete-form').addEventListener('submit',async event=>{
 });
 for(const dialog of ['#payment-dialog','#delete-dialog']) $(dialog).addEventListener('cancel',event=>{if(mutationInFlight)event.preventDefault();});
 $('#person-filter').addEventListener('click',event=>{const b=(event.target as HTMLElement).closest<HTMLButtonElement>('button');if(!b||!ledger)return;selected=b.dataset.person as Member|'all';document.querySelectorAll('#person-filter button').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));render();});
-$('#history-tabs').addEventListener('click',event=>{const b=(event.target as HTMLElement).closest<HTMLButtonElement>('button');if(!b||!ledger)return;historyTab=b.dataset.history!;document.querySelectorAll('#history-tabs button').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));renderHistory();});
+$('#show-deleted-payments').addEventListener('change',()=>{showDeletedPayments=$<HTMLInputElement>('#show-deleted-payments').checked;renderHistory();});
 $('#months').addEventListener('click',event=>{const b=(event.target as HTMLElement).closest<HTMLButtonElement>('[data-month]');if(!b)return;const month=b.dataset.month!;expanded.has(month)?expanded.delete(month):expanded.add(month);renderMonths();$<HTMLButtonElement>(`[data-month="${month}"]`).focus();});
 export { refresh as refreshUtilities };
 export function exportUtilities() { if(ledger) download({...ledger,exported_at:new Date().toISOString()},'utilities-ledger'); }

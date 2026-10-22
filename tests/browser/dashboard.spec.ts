@@ -30,10 +30,8 @@ test('dark dashboard, monthly proration, and shared payment lifecycle',async({pa
  await page.getByRole('button',{name:'Delete Rina payment of $12.34'}).click();
  await page.getByRole('button',{name:'Delete payment',exact:true}).click();
  await expect(page.locator('#delete-dialog')).not.toBeVisible();await expect(rinaCard.locator('.balance-amount')).toHaveText(initial!);
- await page.getByRole('button',{name:'All activity'}).click();
- await page.locator('.history-group summary').first().click();
- await expect(page.locator('.history-group').first()).toContainText('Edited by Michal');
- await expect(page.locator('.history-group').first()).toContainText('DELETED');
+ await page.locator('#show-deleted-payments').check();await expect(page.locator('.payment-row').first()).toContainText('DELETED');await expect(page.locator('.history-group')).toHaveCount(0);
+ const exported=await page.request.post('/rest/v1/rpc/utilities_dashboard',{headers:{apikey:'local-public'},data:{}});expect((await exported.json()).history).toHaveLength(3);
  await other.close();expect(errors).toEqual([]);
 });
 test('mobile layout and unavailable backend preserve a clearly labeled snapshot',async({page})=>{

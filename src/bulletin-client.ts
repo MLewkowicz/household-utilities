@@ -1,3 +1,4 @@
+import {entryMeta} from './entry-meta';
 import {cornerTab} from './tile-corner';
 import {NOTE_REACTIONS,expressionLabel,reactionPortrait,paintReactionThumbnails,animateReaction,stopReactionAnimation,setReactionsPaused,type NoteExpression} from './note-reactions';
 import {avatar} from './people';
@@ -88,10 +89,6 @@ function render(){
  boardCharacters.sync();paintReactionThumbnails(content);updateAvatarActivity();
  if(focusId)document.getElementById(focusId)?.focus({preventScroll:true});
 }
-function history(note:BulletinNote){
- const revisions=ledger?.history.filter(h=>h.id===note.id)||[];
- return `<details class="bulletin-history" id="note-history-${esc(note.id)}"><summary>History${revisions.length>1?' · '+revisions.length:''}</summary>${revisions.map(h=>`<div class="bulletin-revision"><p><strong>${({create:'Pinned',edit:'Edited',delete:'Deleted',restore:'Restored'} as Record<string,string>)[h.action]||'Updated'}</strong> by ${chip(h.actor)} <time datetime="${esc(h.created_at)}">${stamp(h.created_at)}</time></p><p>${tempText(h.temperature)} · To ${h.recipients.map(name).join(', ')}</p><p class="bulletin-revision-body">${esc(h.body)}</p></div>`).join('')}</details>`;
-}
 function noteCard(note:BulletinNote){
  const p=notePlacement(note.id),writable=!!identity&&live;
  // Long pieces of paper need a gentler angle to stay within their column.
@@ -103,7 +100,7 @@ function noteCard(note:BulletinNote){
  <details class="note-tools" id="note-tools-${esc(note.id)}">${cornerTab('note by '+name(note.author)).replace('class="chore-corner-tab"',`class="chore-corner-tab note-fold" id="note-fold-${esc(note.id)}"`)}<div class="note-tools-panel">
  <p class="note-extra">${note.deleted?'Taken down · ':''}${tempText(note.temperature)}<br>${temperatureLabel(note.temperature)}</p>
  ${writable?`<div class="note-actions">${note.deleted?'<button class="text-button" data-bulletin-command="restore">Restore</button>':'<button class="text-button" data-bulletin-command="edit">Edit note</button><button class="text-button" data-bulletin-command="delete">Delete note</button>'}</div>`:!identity&&live?'<p class="note-extra">Choose your name above to edit this note.</p>':''}
- ${history(note)}</div></details></article>`;
+ ${entryMeta(note)}</div></details></article>`;
 }
 function noteResponses(note:BulletinNote){
  const reactions=(ledger?.reactions||[]).filter(r=>r.note_id===note.id&&r.expression);
@@ -165,7 +162,7 @@ function openNote(note?:BulletinNote){
 function openAction(note:BulletinNote,next:string){
  if(!identity||!live||busy)return;actionNote=note;action=next;
  $('#bulletin-action-heading').textContent=next==='delete'?'Take this note down?':'Pin this note back up?';
- $('#bulletin-action-copy').textContent=next==='delete'?'This note will leave the board and the counts. You can still find it and its history under Show deleted.':'This note will return to the board with its original date and count toward the charts again.';
+ $('#bulletin-action-copy').textContent=next==='delete'?'This note will leave the board and the counts. You can still find it under Show deleted.':'This note will return to the board with its original date and count toward the charts again.';
  $('#bulletin-action-save').textContent=next==='delete'?'Delete note':'Restore note';show('bulletin-action');
 }
 function show(id:string){retry=null;error(id+'-error','');$<HTMLDialogElement>('#'+id+'-dialog').showModal();$('#'+id+'-heading').focus({preventScroll:true});updateAvatarActivity();}

@@ -1,3 +1,4 @@
+import {entryMeta,latestRevision} from './entry-meta';
 import {$,esc,name,rpc,toast,download} from './ui';
 import {type Member} from './ledger';
 import {identity} from './identity';
@@ -19,7 +20,6 @@ const inUse=()=>busy||dragging||!!document.querySelector('dialog[open]')||!!docu
 const entries=()=>identity?combinedFeed(identity,personal?.tasks||[],choreSource.ledger,showHistory):[];
 const sorted=()=>orderedFeed(entries(),orderDraft||order?.keys||[]);
 const matchesFilter=(e:FeedEntry)=>filter==='all'||(filter==='personal'?e.source==='personal':e.source==='shared');
-const stamp=(s:string)=>new Date(s).toLocaleString('en-US',{timeZone:'America/New_York',dateStyle:'medium',timeStyle:'short'});
 
 type GroupMove={id:string;expected_version:number;group_name:string|null};
 let pendingGroupMove:GroupMove|undefined,cancelDrag=()=>{};
@@ -32,7 +32,7 @@ export function initMyTasks(onChange:()=>void){
  $('#my-tasks').innerHTML=` <form id="home-quick" class="home-quick"><label class="sr-only" for="personal-title">Personal task</label><input id="personal-title" maxlength="120" required placeholder="Add a personal task…" autocomplete="off">${groupField('personal-quick-group')}<button id="personal-add" class="button primary">Add</button></form>
  <datalist id="personal-groups"></datalist><p id="home-personal-notice" class="ledger-notice" role="status" hidden></p>
  <p id="home-order-notice" class="ledger-notice" role="status" hidden></p><button id="home-order-retry" class="text-button" hidden>Retry saving order</button>
- <div class="home-toolbar"><div class="segmented" role="group" aria-label="Task sources">${['all','personal','assigned'].map(f=>`<button data-home-filter="${f}" aria-pressed="${f==='all'}">${name(f)}</button>`).join('')}</div><label class="chore-inline-check"><input id="home-history" type="checkbox"> Completed & history</label></div>
+ <div class="home-toolbar"><div class="segmented" role="group" aria-label="Task sources">${['all','personal','assigned'].map(f=>`<button data-home-filter="${f}" aria-pressed="${f==='all'}">${name(f)}</button>`).join('')}</div><label class="chore-inline-check"><input id="home-history" type="checkbox"> Completed & removed</label></div>
  <div id="home-feed" aria-live="polite"></div>`;
  document.body.insertAdjacentHTML('beforeend',`<dialog id="personal-dialog" aria-labelledby="personal-heading"><form id="personal-form"><div class="dialog-top"><h2 id="personal-heading">Edit personal task</h2><button class="icon-button" type="button" data-personal-close aria-label="Close">×</button></div><label for="personal-edit-title">Title</label><input id="personal-edit-title" maxlength="120" required>${groupField('personal-edit-group')}<p id="personal-error" class="form-error" role="alert" hidden></p><div class="dialog-actions"><button type="button" class="button secondary" data-personal-close>Cancel</button><button class="button primary" id="personal-save">Save changes</button></div></form></dialog>`);
  document.body.insertAdjacentHTML('beforeend',`<dialog id="group-rename-dialog" aria-labelledby="group-rename-heading"><form id="group-rename-form"><div class="dialog-top"><h2 id="group-rename-heading">Rename group</h2><button class="icon-button" type="button" data-group-rename-close aria-label="Close">×</button></div><label for="group-rename-name">Group name</label><input id="group-rename-name" maxlength="60" required autocomplete="off"><p id="group-rename-error" class="form-error" role="alert" hidden></p><div class="dialog-actions"><button type="button" class="button secondary" data-group-rename-close>Cancel</button><button class="button primary" id="group-rename-save">Rename group</button></div></form></dialog>`);
@@ -68,13 +68,9 @@ export function renderMyTasks(){
  const all=sorted(),visible=all.filter(matchesFilter),groups=groupedFeed(visible),hasGroups=visible.some(e=>taskGroup(e));
  feed.innerHTML=!identity?'':visible.length?groups.map(section=>`<section class="home-task-group" data-task-group="${esc(section.name)}" data-pinned="${section.pinned}">${hasGroups||section.pinned?`<div class="home-group-header"><h2 class="home-group-heading">${esc(section.name|| (section.pinned?'Pinned':'Other tasks'))}${section.pinned&&section.name?'<span>Pinned</span>':''}</h2>${section.name?`<button class="text-button home-group-rename" data-rename-group="${esc(section.name)}" aria-label="Rename ${esc(section.name)} group" ${!personalLive||!(personal?.group_rename_version)||busy?'disabled':''}>Rename</button>`:''}</div>`:''}<div class="home-group-list">${section.entries.map(e=>{
   const group=section.entries,index=group.indexOf(e),movable=orderLive&&!showHistory&&!busy;
-  return `<div class="home-entry" data-home-key="${esc(e.key)}" data-pinned="${e.task.pinned}" data-source="${e.source}" data-group-editable="${e.source==='personal'&&personalLive}" data-reorderable="${movable}">${e.source==='personal'?personalCard(e.task):choreCard(e.task,{identity,live:choreSource.live,day:choreSource.ledger!.local_day})}${!showHistory?`<div class="home-moves"><button class="text-button" data-home-move="-1" aria-label="Move ${esc(e.task.title)} up" ${!movable||index===0?'disabled':''}>↑ Move up</button><button class="text-button" data-home-move="1" aria-label="Move ${esc(e.task.title)} down" ${!movable||index===group.length-1?'disabled':''}>↓ Move down</button></div>`:''}</div>`;
+  return `<div class="home-entry" data-home-key="${esc(e.key)}" data-pinned="${e.task.pinned}" data-source="${e.source}" data-group-editable="${e.source==='personal'&&personalLive}" data-reorderable="${movable}">${e.source==='personal'?personalCard(e.task):choreCard(e.task,{identity,live:choreSource.live,day:choreSource.ledger!.local_day,revision:latestRevision(choreSource.ledger!.history,e.task.id)})}${!showHistory?`<div class="home-moves"><button class="text-button" data-home-move="-1" aria-label="Move ${esc(e.task.title)} up" ${!movable||index===0?'disabled':''}>↑ Move up</button><button class="text-button" data-home-move="1" aria-label="Move ${esc(e.task.title)} down" ${!movable||index===group.length-1?'disabled':''}>↓ Move down</button></div>`:''}</div>`;
  }).join('')}</div></section>`).join(''):'<p class="home-empty">No tasks in this view.</p>';
  feed.querySelectorAll<HTMLDetailsElement>('details').forEach(d=>{if(opened.includes(d.dataset.homeDetails||d.dataset.taskDetails))d.open=true;});
- feed.querySelectorAll<HTMLElement>('[data-task-history]').forEach(el=>{
-  const rows=choreSource.ledger?.history.filter(h=>h.id===el.dataset.taskHistory)||[];
-  el.innerHTML=`<details><summary>History · ${rows.length}</summary>${rows.map(h=>`<p>${esc(name(h.action))} by ${name(h.actor)} · ${stamp(h.created_at)}<br>${esc(h.title)}</p>`).join('')}</details>`;
- });
  if(focusKey&&focusMove){
   const row=feed.querySelector<HTMLElement>(`[data-home-key="${CSS.escape(focusKey)}"]`),button=row?.querySelector<HTMLButtonElement>(`[data-home-move="${focusMove}"]`);
   (button&&!button.disabled?button:row?.querySelector<HTMLElement>('[data-home-move]:not(:disabled)'))?.focus({preventScroll:true});
@@ -82,10 +78,9 @@ export function renderMyTasks(){
 }
 function personalCard(t:PersonalTask){
  const enabled=personalLive&&!busy&&identity===t.owner;
- const history=personal?.history.filter(h=>h.id===t.id)||[];
  return `<article class="chore-card member-${t.owner} ${t.pinned?'is-pinned':''}" data-personal-id="${esc(t.id)}"><div class="chore-tags"><span>Personal</span>${t.pinned?'<span>↑ Pinned</span>':''}${t.deleted?'<span>Deleted</span>':t.completed_at?'<span>✓ Completed</span>':''}</div><h3>${esc(t.title)}</h3>
  ${!t.deleted&&!t.completed_at?`<div class="completion-track"><span>Slide to complete</span><button class="completion-handle" data-swipe-complete="${esc(t.id)}" aria-label="Complete ${esc(t.title)}" title="Drag across, or press Enter" ${!enabled?'disabled':''}>»</button></div>`:''}
- <details class="tile-details chore-details" data-home-details="${esc(t.id)}">${cornerTab(t.title)}<div class="tile-details-body"><div class="chore-card-actions">${t.deleted?`<button class="text-button" data-personal-action="restore" ${!enabled?'disabled':''}>Restore</button>`:`<button class="text-button" data-personal-action="edit" ${!enabled?'disabled':''}>Edit</button><button class="text-button" data-personal-action="pin" ${!enabled?'disabled':''}>${t.pinned?'Unpin':'Pin'}</button><button class="text-button" data-personal-action="${t.completed_at?'undo':'complete'}" ${!enabled?'disabled':''}>${t.completed_at?'Undo':'Mark done'}</button><button class="text-button" data-personal-action="delete" ${!enabled?'disabled':''}>Delete</button>`}</div><details data-home-details="history-${esc(t.id)}"><summary>History · ${history.length}</summary>${history.map(h=>`<p>${esc(h.action==='rename_group'?'Group renamed':name(h.action))} by ${name(h.actor)} · ${stamp(h.created_at)}<br>${esc(h.title)}${h.group_name?` · ${esc(h.group_name)}`:''}</p>`).join('')}</details></div></details></article>`;
+ <details class="tile-details chore-details" data-home-details="${esc(t.id)}">${cornerTab(t.title)}<div class="tile-details-body"><div class="chore-card-actions">${t.deleted?`<button class="text-button" data-personal-action="restore" ${!enabled?'disabled':''}>Restore</button>`:`<button class="text-button" data-personal-action="edit" ${!enabled?'disabled':''}>Edit</button><button class="text-button" data-personal-action="pin" ${!enabled?'disabled':''}>${t.pinned?'Unpin':'Pin'}</button><button class="text-button" data-personal-action="${t.completed_at?'undo':'complete'}" ${!enabled?'disabled':''}>${t.completed_at?'Undo':'Mark done'}</button><button class="text-button" data-personal-action="delete" ${!enabled?'disabled':''}>Delete</button>`}</div>${entryMeta(t)}</div></details></article>`;
 }
 async function loadPersonal(member:Member,version:number){
  try{const data=await rpc<PersonalLedger>('personal_tasks',{p:{member}});if(identity!==member||version!==readVersion)return;personal=data;personalLive=true;personalNotice='';}
@@ -133,7 +128,7 @@ async function changePersonal(task:PersonalTask,action:string,extra:Record<strin
   const result=await rpc<PersonalTask>('save_personal_task',{p:{...p,request_id:keyFor(p)}});
   if(editing)$<HTMLDialogElement>('#personal-dialog').close();
   if(action==='complete')toast('✓ '+task.title,{label:'Undo',run:()=>void changePersonal(result,'undo')});
-  else toast(action==='delete'?'Task deleted; history retained.':'Personal task updated.');
+  else toast(action==='delete'?'Task deleted.':'Personal task updated.');
  }catch(error){if(editing)notice('personal-error',(error as Error).message);else toast((error as Error).message,{label:'Retry',run:()=>void changePersonal(task,action,extra)});}
  finally{busy=false;$('#personal-save').removeAttribute('disabled');$<HTMLInputElement>('#personal-edit-title').disabled=false;await loadPersonal(actor,readVersion);renderMyTasks();}
 }

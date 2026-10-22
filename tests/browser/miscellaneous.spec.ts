@@ -32,7 +32,7 @@ test('name-first expenses, custom shares, icons, history and pair repayments sta
  await page.getByLabel('What did you buy?').fill('Paper towels and milk');await expect(page.locator('#chosen-icon-label')).toHaveText('Milk');
  await page.locator('#save-expense').click();await expect(page.locator('#expense-dialog')).not.toBeVisible();
  await expect(card).toContainText('Edited');await expect(page.locator('#misc-feed .expense-card')).toHaveCount(1);
- await expand(card);await card.locator('.entry-history > summary').click();await expect(card.locator('.entry-history')).toContainText('Edited by Rina');await expect(card.locator('.entry-history')).toContainText('Rohil');
+ await expand(card);await expect(card.locator('.entry-history')).toHaveCount(0);await expect(card.locator('.entry-updated')).toContainText('Updated by Rina');await expect(card.locator('.entry-shares')).toContainText('Ohm $10.00');expect((await rpc(page,'misc_dashboard')).expense_history.some((e:any)=>e.description==='Paper towels <b>for home</b>'&&e.participants.includes('rohil'))).toBeTruthy();
  await page.locator('.pair-card').filter({hasText:'Ohm owes Rina'}).getByRole('button').click();
  await expect(page.locator('#settlement-amount')).toHaveValue('10.00');
  await expect(page.locator('#settlement-title')).toBeFocused();
@@ -45,7 +45,7 @@ test('name-first expenses, custom shares, icons, history and pair repayments sta
  await page.locator('#confirm-misc-delete').click();await expect(page.locator('#misc-delete-dialog')).not.toBeVisible();
  await expect(page.locator('#misc-pairs')).toContainText('No outstanding balances');
  await page.locator('#misc-page').getByLabel('Show deleted').check();await expect(page.locator('#misc-feed .expense-card')).toHaveCount(2);
- await expand(card);await card.locator('.entry-history > summary').click();await expect(card.locator('.entry-history')).toContainText('Deleted by Rina');
+ await expand(card);await expect(card.locator('.entry-updated')).toContainText('Deleted by Rina');
  const utilityAfter=await rpc(page,'dashboard');for(const key of ['bills','allocations','history','bill_history'])expect(utilityAfter[key]).toEqual(utilityBefore[key]);
  expect(errors).toEqual([]);
 });

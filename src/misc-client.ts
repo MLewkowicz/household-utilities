@@ -1,3 +1,4 @@
+import {entryMeta} from './entry-meta';
 import {balanceSplit} from './expense-split';
 import {cornerTab} from './tile-corner';
 import {avatar} from './people';
@@ -56,7 +57,7 @@ export function initMisc() {
    <label>Repayment date<input id="settlement-date" type="date" required></label><fieldset><legend>Sent with</legend><div class="method-options">${['venmo','zelle','other'].map(m=>`<label><input type="radio" name="settlement-method" value="${m}" ${m==='venmo'?'checked':''}><span>${name(m)}</span></label>`).join('')}</div></fieldset><label id="settlement-other-label" hidden>How was it sent?<input id="settlement-other" maxlength="80" placeholder="e.g. cash"><small>Don’t include account or contact details.</small></label>
    <div id="settlement-error" class="form-error" role="alert" hidden></div><button type="button" id="reload-settlement" class="text-button" hidden>Load latest version</button><div class="dialog-actions"><button type="button" class="button secondary" data-close="settlement-dialog">Cancel</button><button id="save-settlement" class="button primary" type="submit">Save repayment</button></div><p id="settlement-actor" class="dialog-footnote"></p>
   </form></dialog>
-  <dialog id="misc-delete-dialog" aria-labelledby="misc-delete-title"><form id="misc-delete-form"><h2 id="misc-delete-title">Delete this entry?</h2><p id="misc-delete-description" class="dialog-description"></p><p class="dialog-description">It will be removed from balances. The entry and its history stay available under Show deleted.</p><div id="misc-delete-error" class="form-error" role="alert" hidden></div><div class="dialog-actions"><button type="button" class="button secondary" data-close="misc-delete-dialog">Keep entry</button><button id="confirm-misc-delete" class="button danger" type="submit">Delete entry</button></div><p id="misc-delete-actor" class="dialog-footnote"></p></form></dialog>`);
+  <dialog id="misc-delete-dialog" aria-labelledby="misc-delete-title"><form id="misc-delete-form"><h2 id="misc-delete-title">Delete this entry?</h2><p id="misc-delete-description" class="dialog-description"></p><p class="dialog-description">It will be removed from balances. You can still find the entry under Show deleted.</p><div id="misc-delete-error" class="form-error" role="alert" hidden></div><div class="dialog-actions"><button type="button" class="button secondary" data-close="misc-delete-dialog">Keep entry</button><button id="confirm-misc-delete" class="button danger" type="submit">Delete entry</button></div><p id="misc-delete-actor" class="dialog-footnote"></p></form></dialog>`);
  initCalculator();bindEvents();renderIdentity();renderIconGrid();
 }
 
@@ -78,37 +79,9 @@ function render() {
  renderFeed();if(location.hash==='#miscellaneous')$('#export').removeAttribute('disabled');
 }
 
-function entryHistory(entry:Expense|Settlement) {
- const history=isExpense(entry)?ledger!.expense_history:ledger!.settlement_history;
- const revisions=history.filter(e=>e.id===entry.id).sort((a,b)=>b.version-a.version);
- return `<details class="entry-history"><summary>History · ${entry.version} ${entry.version===1?'entry':'revisions'}</summary><ol>${revisions.map(e=>{
-  const previous=revisions.find(r=>r.version===e.version-1);
-  const changes=previous&&!e.deleted?changesBetween(previous,e):[];
-  const verb=e.deleted?'Deleted':e.version===1?'Added':'Edited';
-  return `<li><div>${verb} by ${memberChip(e.actor)} <span class="quiet">· ${esc(new Date(e.created_at).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'}))}</span></div>${changes.length?`<ul>${changes.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>`:`<p>${esc(isExpense(e)?`${e.description} · ${money(e.amount_cents)} paid by ${name(e.payer)} · ${Object.entries(e.shares).map(([m,c])=>name(m)+' '+money(c!)).join(', ')}`:`${name(e.sender)} → ${name(e.recipient)} · ${money(e.amount_cents)} · ${e.method==='other'?e.other:name(e.method)}`)}</p>`}</li>`;
- }).join('')}</ol></details>`;
-}
-function changesBetween(before:Expense|Settlement,after:Expense|Settlement):string[] {
- const labels:Record<string,string>={description:'Description',icon_id:'Icon',amount_cents:'Amount',paid_on:'Date',payer:'Paid by',split_mode:'Split',participants:'People',shares:'Shares',sender:'Sender',recipient:'Recipient',method:'Method',other:'Method detail'};
- const a=before as unknown as Record<string,unknown>,b=after as unknown as Record<string,unknown>;
- function format(k:string,v:unknown):string {
-  if(k==='amount_cents')return money(v as number);
-  if(k==='icon_id')return getIcon(v as string).label;
-  if(k==='participants')return (v as string[]).map(name).join(', ');
-  if(k==='shares')return Object.entries(v as Shares).map(([m,c])=>`${name(m)} ${money(c!)}`).join(', ');
-  if(['payer','sender','recipient','method','split_mode'].includes(k))return name(String(v));
-  return String(v||'—');
- }
- return Object.keys(labels).filter(k=>JSON.stringify(a[k])!==JSON.stringify(b[k])).map(k=>`${labels[k]}: ${format(k,a[k])} → ${format(k,b[k])}`);
-}
-function fillEntryHistory(details:HTMLDetailsElement){
- const target=details.querySelector<HTMLElement>('[data-entry-history]');if(!target||target.childElementCount||!ledger)return;
- const entry=[...ledger.expenses,...ledger.settlements].find(e=>e.id===target.dataset.entryHistory);if(entry)target.innerHTML=entryHistory(entry);
-}
 function renderFeed() {
  if(!ledger)return;
  const openDetails=[...document.querySelectorAll<HTMLElement>('#misc-feed .tile-details[open]')].map(el=>el.closest<HTMLElement>('[data-entry-id]')!.dataset.entryId);
- const openHistory=[...document.querySelectorAll<HTMLElement>('#misc-feed .entry-history[open]')].map(el=>el.closest<HTMLElement>('[data-entry-id]')!.dataset.entryId);
  const entries: (Expense|Settlement)[]=[...(feedType==='settlement'?[]:ledger.expenses),...(feedType==='expense'?[]:ledger.settlements)]
   .filter(e=>(showDeleted||!e.deleted)&&(person==='all'||(isExpense(e)?e.payer===person||e.participants.includes(person):e.sender===person||e.recipient===person)))
   .sort((a,b)=>b.paid_on.localeCompare(a.paid_on)||b.created_at.localeCompare(a.created_at)||a.id.localeCompare(b.id));
@@ -117,11 +90,11 @@ function renderFeed() {
   const purchase=isExpense(e),payer=purchase?e.payer:e.sender,kind=purchase?'expense':'settlement';
   const thisMonth=e.paid_on.slice(0,7);let heading='';
   if(month!==thisMonth){month=thisMonth;heading=`<h3 class="feed-month">${new Date(month+'-01T12:00Z').toLocaleDateString('en-US',{month:'long',year:'numeric',timeZone:'UTC'})}</h3>`;}
-  return `${heading}<article class="expense-card ${purchase?"member-"+payer:"settlement-card"} ${e.deleted?'entry-deleted':''}" data-entry-id="${e.id}"><div class="expense-card-main"><span class="entry-illustration">${purchase?iconSvg(e.icon_id):'<span class="repayment-symbol" aria-hidden="true">↗</span>'}</span><div class="entry-description"><h3>${purchase?esc(e.description):`${name(e.sender)} → ${name(e.recipient)}`}</h3><p>${purchase?`${memberChip(e.payer)} paid`:`Repayment · ${esc(e.method==='other'?e.other:name(e.method))}`} · ${date(e.paid_on)} ${e.deleted?'<span class="deleted-label">DELETED</span>':e.version>1?'<span class="edited-label">Edited</span>':''}</p></div><strong class="entry-amount">${money(e.amount_cents)}</strong></div><details class="tile-details expense-details">${cornerTab(purchase?e.description:'repayment')}<div class="tile-details-body">${purchase?`<div class="entry-shares">${e.participants.map(m=>`<span class="share-chip member-${m}">${name(m)} <strong>${money(e.shares[m]||0)}</strong></span>`).join('')}</div>`:''}<div class="entry-bottom"><div data-entry-history="${e.id}"></div>${!e.deleted&&live&&identity?`<div class="entry-actions"><button class="text-button" data-misc-edit="${e.id}" data-kind="${kind}" aria-label="Edit ${purchase?esc(e.description):'repayment'}">Edit</button><button class="text-button" data-misc-delete="${e.id}" data-kind="${kind}" aria-label="Delete ${purchase?esc(e.description):'repayment'}">Delete</button></div>`:''}</div></div></details></article>`;
+  return `${heading}<article class="expense-card ${purchase?"member-"+payer:"settlement-card"} ${e.deleted?'entry-deleted':''}" data-entry-id="${e.id}"><div class="expense-card-main"><span class="entry-illustration">${purchase?iconSvg(e.icon_id):'<span class="repayment-symbol" aria-hidden="true">↗</span>'}</span><div class="entry-description"><h3>${purchase?esc(e.description):`${name(e.sender)} → ${name(e.recipient)}`}</h3><p>${purchase?`${memberChip(e.payer)} paid`:`Repayment · ${esc(e.method==='other'?e.other:name(e.method))}`} · ${date(e.paid_on)} ${e.deleted?'<span class="deleted-label">DELETED</span>':e.version>1?'<span class="edited-label">Edited</span>':''}</p></div><strong class="entry-amount">${money(e.amount_cents)}</strong></div><details class="tile-details expense-details">${cornerTab(purchase?e.description:'repayment')}<div class="tile-details-body">${purchase?`<div class="entry-shares">${e.participants.map(m=>`<span class="share-chip member-${m}">${name(m)} <strong>${money(e.shares[m]||0)}</strong></span>`).join('')}</div>`:''}<div class="entry-bottom">${entryMeta(e)}${!e.deleted&&live&&identity?`<div class="entry-actions"><button class="text-button" data-misc-edit="${e.id}" data-kind="${kind}" aria-label="Edit ${purchase?esc(e.description):'repayment'}">Edit</button><button class="text-button" data-misc-delete="${e.id}" data-kind="${kind}" aria-label="Delete ${purchase?esc(e.description):'repayment'}">Delete</button></div>`:''}</div></div></details></article>`;
  }).join('')||`<div class="empty-state misc-empty"><span class="empty-illustration">${iconSvg('groceries')}${iconSvg('paper-towels')}${iconSvg('pizza')}</span><h3>${ledger.expenses.length||ledger.settlements.length?'Nothing in this view yet.':'No expenses yet.'}</h3><p>${ledger.expenses.length||ledger.settlements.length?'Try another filter or include deleted entries.':'Add an expense to begin.'}</p></div>`;
  document.querySelectorAll<HTMLDetailsElement>('#misc-feed .tile-details').forEach(details=>{
   const id=details.closest<HTMLElement>('[data-entry-id]')!.dataset.entryId;
-  if(openDetails.includes(id)){details.open=true;fillEntryHistory(details);const history=details.querySelector<HTMLDetailsElement>('.entry-history');if(history)history.open=openHistory.includes(id);}
+  if(openDetails.includes(id)){details.open=true;}
  });
 }
 
@@ -315,7 +288,6 @@ async function deleteEntry(event:Event) {
 }
 
 function bindEvents() {
- $('#misc-feed').addEventListener('toggle',event=>{const el=event.target as HTMLDetailsElement;if(el.open&&el.matches('.tile-details'))fillEntryHistory(el);},true);
  $('#guest-split-open').addEventListener('click',async()=>{
   if(busy||!live)return;
   const {openGuestSplit}=await import('./guest-split-ui');
