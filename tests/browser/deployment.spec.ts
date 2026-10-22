@@ -1,3 +1,4 @@
+import {setTheme} from './settings';
 import { test, expect } from '@playwright/test';
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
@@ -53,14 +54,14 @@ test('a returning visitor gets working navigation and themes after a deployment'
     await expect(page.locator('#misc-page')).toBeVisible();
     await expect(page.locator('#misc-status')).toHaveText('Shared purchases · up to date');
     await expect(page.locator('#utilities-page')).toBeHidden();
-    expect(await page.locator('.house-navigation').evaluate(el => getComputedStyle(el).display)).toBe('flex');
+    expect(await page.locator('.house-navigation').evaluate(el => getComputedStyle(el).display)).toBe('grid');
 
-    await page.getByLabel('Color theme').selectOption('light');
+    await setTheme(page,'light');
     const light = await page.locator('html').evaluate(el => getComputedStyle(el).backgroundColor);
-    await page.getByLabel('Color theme').selectOption('dark');
+    await setTheme(page,'dark');
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     await expect.poll(()=>page.locator('html').evaluate(el => getComputedStyle(el).backgroundColor)).not.toBe(light);
-    await page.getByLabel('Color theme').selectOption('system');
+    await setTheme(page,'system');
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
     await page.emulateMedia({ colorScheme: 'dark' });
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');

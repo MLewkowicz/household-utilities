@@ -1,3 +1,4 @@
+import {setTheme} from './settings';
 import {test,expect,type Page,type Locator} from '@playwright/test';
 const rpc=async(page:Page,name:string,p?:unknown)=>(await page.request.post(`/rest/v1/rpc/utilities_${name}`,{headers:{apikey:'local-public'},data:p?{p}:{}})).json();
 async function expand(card:Locator){const details=card.locator(':scope > .tile-details');if(!await details.evaluate(el=>el.hasAttribute('open')))await details.locator(':scope > summary').click();}
@@ -53,11 +54,11 @@ test('name-first expenses, custom shares, icons, history and pair repayments sta
 test('themes, identity, hash navigation and icon browsing work on phones and persist',async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});
  await open(page,'michal');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
- await page.getByLabel('Color theme').selectOption('light');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+ await setTheme(page,'light');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
  await page.getByRole('link',{name:'Utilities',exact:true}).click();await expect(page.locator('#utilities-page')).toBeVisible();
  await page.goBack();await expect(page.locator('#misc-page')).toBeVisible();await page.reload();
  await expect(page.locator('#identity-name')).toContainText('You’re Michal');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
- await page.getByLabel('Color theme').selectOption('system');await page.emulateMedia({colorScheme:'light'});await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+ await setTheme(page,'system');await page.emulateMedia({colorScheme:'light'});await expect(page.locator('html')).toHaveAttribute('data-theme','light');
  await page.emulateMedia({colorScheme:'dark'});await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
  await page.locator('#new-expense').click();await page.getByLabel('What did you buy?').fill('Milk');await page.getByLabel('Purchase amount',{exact:true}).fill('9.99');
  await page.getByLabel('Include my share').uncheck();await expect(page.locator('#self-share')).not.toBeVisible();

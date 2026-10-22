@@ -22,6 +22,7 @@
 </head>
 <body>
   <header class="house-chrome">
+  <div class="house-bar">
   <nav class="house-navigation" aria-label="Household sections">
     <a href="#home" data-ledger="home" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3Z M9 20v-7h6v7"/></svg><span>Home</span></a>
     <a href="#chores" data-ledger="chores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5V3h6v2 M5 5h14v16H5Z m3 8 3 3 5-6"/></svg><span>To-dos</span><span id="chore-badge" class="chore-nav-badge" hidden></span></a>
@@ -30,17 +31,19 @@
     <a href="#bulletin" data-ledger="bulletin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16v14H9l-5 4Z M8 8h8m-8 4h5"/></svg><span>Bulletin</span></a>
     <a href="#utilities" data-ledger="utilities"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-8 12h6l-1 8 9-13h-7Z"/></svg><span>Utilities</span></a>
   </nav>
-  <div class="house-controls"><label class="theme-control"><span class="sr-only">Color theme</span><select id="theme-select" aria-label="Color theme"><option value="system">◐ System</option><option value="light">☀ Light</option><option value="dark">☾ Dark</option></select></label><button id="notifications" class="icon-button" title="Phone notifications" aria-label="Phone notifications"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></button></div>
+  <div class="house-controls">
+    <button id="theme-toggle" class="icon-button" type="button" aria-label="Switch to dark mode">
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/></svg>
+    </button>
+    <button id="settings-open" class="icon-button" type="button" title="Settings" aria-label="Settings" aria-haspopup="dialog" aria-controls="settings-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 3-.7 2.5-2.4 1L3.5 6l-2 3.5 1.8 1.8v2l-1.8 1.8 2 3.5 2.4-.5 2.4 1L9 22h4l.7-2.5 2.4-1 2.4.5 2-3.5-1.8-1.8v-2l1.8-1.8-2-3.5-2.4.5-2.4-1L13 3Z" transform="translate(1 -0.5) scale(.96)"/><circle cx="12" cy="12" r="3.3"/></svg></button>
+  </div>
+  </div>
   </header>
   <section id="house-hero" aria-label="Explore the household" data-sky-paused="true">
     <div id="house-stage"></div><span id="house-current" class="sr-only" aria-live="polite">Home</span>
   </section>
   <div id="feature-area" class="shell feature-shell" hidden>
-    <header class="topbar">
-      <a class="brand" href="#home" aria-label="Household Home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>household<span class="brand-period">.</span></a>
-      <div class="topbar-right"><button id="refresh" class="icon-button" title="Refresh" aria-label="Refresh">↻</button></div>
-    </header>
-
     <main id="main" tabindex="-1">
       <div id="utilities-page" hidden>
       <section class="intro">
@@ -64,6 +67,14 @@
     </main>
     <footer><span>Shared ledger · Entries are self-reported</span><button id="export" class="text-button" disabled>Export ledger ↓</button></footer>
   </div>
+  <dialog id="settings-dialog" aria-labelledby="settings-title">
+    <div class="dialog-top"><h2 id="settings-title" tabindex="-1" autofocus>Settings</h2><button id="settings-close" type="button" class="icon-button" aria-label="Close settings">×</button></div>
+    <label for="theme-select">Color theme</label><select id="theme-select"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select>
+    <div class="settings-options">
+      <button id="notifications" type="button" class="settings-option"><span>Notifications<small>Choose alerts for this device</small></span><span aria-hidden="true">›</span></button>
+      <button id="refresh" type="button" class="settings-option" aria-label="Refresh"><span>Refresh this section</span><span aria-hidden="true">↻</span></button>
+    </div>
+  </dialog>
   <dialog id="payment-dialog" aria-labelledby="payment-title"><form id="payment-form"><div class="dialog-top"><div class="eyebrow">SENT TO MICHAL</div><button type="button" class="icon-button" id="close-dialog" aria-label="Close payment form">×</button></div><h2 id="payment-title">Record a payment</h2><p class="dialog-description">Add the amount you’ve already sent.</p><input type="hidden" name="payment_id"><input type="hidden" name="version"><div class="form-row"><label>Who paid?<select name="member_id" required><option value="rina">Rina</option><option value="ohm">Ohm</option><option value="rohil">Rohil</option></select></label><label>Payment date<input type="date" name="paid_on" required></label></div><label>Amount<span class="amount-input"><span>$</span><input name="amount" aria-label="Amount" type="text" inputmode="decimal" placeholder="0.00" autocomplete="off" required pattern="[0-9]+(\.[0-9]{1,2})?"></span></label><fieldset><legend>Paid with</legend><div class="method-options"><label><input type="radio" name="method" value="venmo" checked><span>Venmo</span></label><label><input type="radio" name="method" value="zelle"><span>Zelle</span></label><label><input type="radio" name="method" value="other"><span>Other</span></label></div></fieldset><label id="other-label" hidden>How did you pay?<input name="other" maxlength="80" placeholder="e.g. cash or bank transfer"><small>Keep it brief; don’t include account or contact details.</small></label><label id="actor-label" hidden>Changed by<select name="actor"><option value="michal">Michal</option><option value="rina">Rina</option><option value="ohm">Ohm</option><option value="rohil">Rohil</option></select></label><div id="payment-error" class="form-error" role="alert" hidden></div><div class="dialog-actions"><button type="button" class="button secondary" id="cancel-dialog">Cancel</button><button type="submit" class="button primary" id="save-payment">Confirm payment</button></div><p class="dialog-footnote">Your balance updates when this entry is saved.</p></form></dialog>
   <dialog id="delete-dialog" aria-labelledby="delete-title"><form id="delete-form"><h2 id="delete-title">Delete this payment?</h2><p id="delete-description"></p><label>Changed by<select name="actor"><option value="michal">Michal</option><option value="rina">Rina</option><option value="ohm">Ohm</option><option value="rohil">Rohil</option></select></label><p class="dialog-description">The balance will increase by this amount. You can still find this payment under Show deleted.</p><div id="delete-error" class="form-error" role="alert" hidden></div><div class="dialog-actions"><button type="button" class="button secondary" id="cancel-delete">Keep payment</button><button type="submit" class="button danger" id="confirm-delete">Delete payment</button></div></form></dialog>
   <div id="toast" role="status" hidden></div>

@@ -15,7 +15,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   const states = Object.fromEntries(stages.map(s => [s.id, { boostUntil: 0, variation: 0, still: false }])) as Record<StageId, StageState>;
   // Keep at least one rendered pixel per CSS pixel, even in software previews.
   // Limit supersampling on Retina displays without softening the whole scene.
-  const pixelRatio=()=>Math.max(1,Math.min(devicePixelRatio,1.5));
+  const pixelRatio=()=>Math.max(1,Math.min(devicePixelRatio,2));
   const metrics = { frames: 0, fps: 0, calls: 0, triangles: 0, textures: 0, geometries: 0, active: false, pixelRatio:pixelRatio(), shadowSize:container.clientWidth<700?512:1024, renderer: 'unavailable' };
   const showFallback = (message: string) => {
     container.querySelector('.fallback')?.remove(); const panel = document.createElement('div'); panel.className = 'fallback';
@@ -182,7 +182,9 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   }
   function begin(id: StageId,direction=directionTo(id),dragging=false) {
     get(id); // Prepare the destination before starting the timed movement.
-    turn={ from:displayed,to:id,startYaw:yaw,direction,progress:0,start:0,end:1,began:performance.now(),duration:turnDuration,dragging,incoming:false };
+    // A leftward drag advances the tab order while the front of the house
+    // follows the finger left. Logical navigation and physical yaw are opposite.
+    turn={ from:displayed,to:id,startYaw:yaw,direction:-direction,progress:0,start:0,end:1,began:performance.now(),duration:turnDuration,dragging,incoming:false };
     container.setAttribute('aria-busy','true');
   }
   function clearTurn() { turn=null; container.removeAttribute('aria-busy'); canvas.classList.remove('dragging'); }
@@ -192,16 +194,15 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     yaw=(t.startYaw+(committed?t.direction*Math.PI:0))%(Math.PI*2);
     clearTurn(); pivot.rotation.y=yaw; mount(committed?t.to:t.from,-yaw); lighting(Number(current.dark)); projection();
     notifySelection();
-    if(requested!==displayed) begin(requested);
   }
   function settle() {
     if(turn) yaw=(turn.startYaw+(requested===turn.from?0:turn.direction*Math.PI))%(Math.PI*2);
     clearTurn(); pivot.rotation.y=yaw; mount(requested,-yaw); lighting(Number(current.dark)); projection(); notifySelection();
   }
   function setScene(id: StageId,direction?: number) {
+    if(turn) return;
     requested=id;
     if(!canAnimate()) { settle(); draw(); return; }
-    if(turn) return;
     if(displayed!==id) begin(id,direction); draw();
   }
   function animateTo(end: number) {
@@ -240,7 +241,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     renderer.setPixelRatio(metrics.pixelRatio);projection(); renderer.setSize(width,height); refresh();
   }
   function neighbor(id: StageId,direction: number) { const index=stages.findIndex(s=>s.id===id); return stages[(index+direction+stages.length)%stages.length].id; }
-  function adjacent(direction: number) { setScene(neighbor(requested,direction),direction); }
+  function adjacent(direction: number) { if(!turn)setScene(neighbor(displayed,direction),direction); }
   function action() { states[requested].boostUntil=elapsed+4; states[requested].variation++; draw(); }
   const tapRay=new T.Raycaster(),tapPoint=new T.Vector2();
   function hitsHouse(x:number,y:number) {
@@ -251,7 +252,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   }
   let pointer: {x:number;y:number;id:number;dragging:boolean;direction:number;at:number} | null=null;
   function down(event: PointerEvent) {
-    if(event.button!==0) return;
+    if(event.button!==0||turn||pointer) return;
     pointer={x:event.clientX,y:event.clientY,id:event.pointerId,dragging:false,direction:1,at:event.timeStamp};
   }
   function move(event: PointerEvent) {
@@ -283,7 +284,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     if(turn?.dragging) { requested=turn.from; animateTo(0); }
   }
   function keyboard(event: KeyboardEvent) {
-    if(event.key==='ArrowLeft'||event.key==='ArrowRight') { event.preventDefault(); adjacent(event.key==='ArrowRight'?1:-1); }
+    if(event.key==='ArrowLeft'||event.key==='ArrowRight') { event.preventDefault(); if(!event.repeat)adjacent(event.key==='ArrowRight'?1:-1); }
     if(event.key==='Enter'||event.key===' ') { event.preventDefault(); if(!turn) action(); }
   }
   function contextLost(event: Event) { event.preventDefault(); lost=true; refresh(); canvas.style.visibility='hidden'; showFallback('The scene needs a moment.'); }

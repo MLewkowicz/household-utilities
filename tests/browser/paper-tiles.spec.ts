@@ -1,3 +1,4 @@
+import {setTheme} from './settings';
 import {test,expect,type Page} from '@playwright/test';
 import {mkdir} from 'node:fs/promises';
 const rpc=async(page:Page,fn:string,p?:unknown)=>{const r=await page.request.post('/rest/v1/rpc/utilities_'+fn,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(r.ok(),await r.text()).toBeTruthy();return r.json();};
@@ -31,7 +32,7 @@ test('continuous corners render in themes, pixel ratios, Week, purchases and til
   const context=await browser.newContext({deviceScaleFactor,reducedMotion:'reduce'});await context.addInitScript(()=>localStorage.setItem('household-person','michal'));const p=await context.newPage();
   const errors:string[]=[];p.on('pageerror',e=>errors.push(e.message));
   for(const width of [390,1280])for(const theme of ['light','dark']){
-   await p.setViewportSize({width,height:900});await p.goto('/#chores');await expect(p.locator('#personal-add')).toBeEnabled();await p.locator('#theme-select').selectOption(theme);
+   await p.setViewportSize({width,height:900});await p.goto('/#chores');await expect(p.locator('#personal-add')).toBeEnabled();await setTheme(p,theme);
    for(const view of ['mine','household','week']){
     await p.locator(`[data-chore-view=${view}]`).click();const tile=p.locator(`[data-chore-id="${t.id}"]`);await expect(tile.locator('.paper-outline')).toBeVisible();await expect(p.locator('#main')).toHaveAttribute('aria-busy','false');
     await tile.screenshot({path:`.local/paper-review/${view}-${width}-${theme}-${deviceScaleFactor}.png`});

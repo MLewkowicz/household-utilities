@@ -1,3 +1,4 @@
+import {setTheme,refreshSection} from './settings';
 import {test,expect,type Page} from '@playwright/test';
 import {mkdir} from 'node:fs/promises';
 const rpc=async(page:Page,name:string,p?:unknown)=>{const response=await page.request.post('/rest/v1/rpc/utilities_'+name,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(response.ok(),await response.text()).toBeTruthy();return response.json();};
@@ -19,7 +20,7 @@ test('My tasks default combines only assigned tasks, quick entry, completion, un
  await page.locator('#home-history').check();await expect(edited).toBeVisible();await expect(edited).toContainText('Deleted');await edited.locator('summary.chore-corner-tab').click();await expect(edited.locator('.entry-updated')).toContainText('Deleted by Michal');await expect(edited.getByText(/History ·/)).toHaveCount(0);const stored=await rpc(page,'personal_tasks',{member:'michal'});expect(stored.history.filter((t:any)=>t.title===title||t.title===title+' edited')).toHaveLength(6);
  await page.locator('[data-home-filter=assigned]').click();await expect(edited).toHaveCount(0);await expect(page.locator(`[data-home-key="shared:${assigned.id}"]`)).toBeVisible();
  const download=page.waitForEvent('download');await page.locator('#export').click();const file=await download;expect(file.suggestedFilename()).toContain('household-tasks-michal');
- await page.locator('.brand').click();await expect(page).toHaveURL(/#home$/);await expect(page.locator('#feature-area')).toBeHidden();
+ await page.locator('[data-ledger=home]').click();await expect(page).toHaveURL(/#home$/);await expect(page.locator('#feature-area')).toBeHidden();
 });
 test('Task ordering persists across sessions and sources fail independently without erasing drafts',async({page,browser})=>{
  const a=await personal(page,'Order A '+crypto.randomUUID()),b=await personal(page,'Order B '+crypto.randomUUID()),assigned=await shared(page,'Assigned outage '+crypto.randomUUID());await home(page);
@@ -27,8 +28,8 @@ test('Task ordering persists across sessions and sources fail independently with
  await entry(a.id).getByRole('button',{name:/Move .* up/}).focus();await page.keyboard.press('Enter');await expect(entry(a.id).getByRole('button',{name:/Move .* down/})).toBeFocused();
  const saved=await rpc(page,'home_order',{member:'michal'});expect(saved.keys.indexOf('personal:'+a.id)).toBeLessThan(saved.keys.indexOf('personal:'+b.id));
  const second=await browser.newPage();await home(second);const keys=await second.locator('[data-home-key]').evaluateAll(els=>els.map(e=>e.getAttribute('data-home-key')));expect(keys.indexOf('personal:'+a.id)).toBeLessThan(keys.indexOf('personal:'+b.id));await second.close();
- await page.route('**/utilities_personal_tasks',route=>route.abort());await page.locator('#refresh').click();await expect(page.locator('#home-personal-notice')).toContainText('offline');await expect(page.locator('#personal-add')).toBeDisabled();await expect(page.locator(`[data-home-key="shared:${assigned.id}"]`)).toBeVisible();await expect(page.locator('#chore-new')).toBeEnabled();
- await page.unroute('**/utilities_personal_tasks');await page.route('**/utilities_chores_dashboard',route=>route.abort());await page.locator('#refresh').click();await expect(page.locator('#chores-notice')).toContainText('offline');await expect(page.locator('#personal-add')).toBeEnabled();await expect(page.locator('#chore-new')).toBeEnabled();
+ await page.route('**/utilities_personal_tasks',route=>route.abort());await refreshSection(page);await expect(page.locator('#home-personal-notice')).toContainText('offline');await expect(page.locator('#personal-add')).toBeDisabled();await expect(page.locator(`[data-home-key="shared:${assigned.id}"]`)).toBeVisible();await expect(page.locator('#chore-new')).toBeEnabled();
+ await page.unroute('**/utilities_personal_tasks');await page.route('**/utilities_chores_dashboard',route=>route.abort());await refreshSection(page);await expect(page.locator('#chores-notice')).toContainText('offline');await expect(page.locator('#personal-add')).toBeEnabled();await expect(page.locator('#chore-new')).toBeEnabled();
  await page.locator('#personal-title').fill('Keep this draft');await page.route('**/utilities_save_personal_task',route=>route.abort());await page.locator('#personal-add').click();await expect(page.locator('#toast')).toContainText(/fetch/i);await expect(page.locator('#personal-title')).toHaveValue('Keep this draft');
 });
 test('Bluebikes reminder uses full catalog, keeps manual icons and never writes an expense',async({page})=>{
@@ -40,7 +41,7 @@ test('personal saves retry once, stale edits keep drafts, filters and identity d
  await home(page);const title='Retry personal '+crypto.randomUUID();
  await page.route('**/utilities_save_personal_task',async route=>{await route.fetch();await route.abort();},{times:1});
  await page.locator('#personal-title').fill(title);await page.locator('#personal-add').click();await expect(page.locator('#personal-title')).toHaveValue(title);await expect(page.locator('#toast')).toContainText(/fetch/i);
- await page.locator('#refresh').click();await expect(page.locator('#personal-add')).toBeEnabled();
+ await refreshSection(page);await expect(page.locator('#personal-add')).toBeEnabled();
  await page.locator('#personal-add').click();await expect(page.locator('#personal-title')).toHaveValue('');
  const d=await rpc(page,'personal_tasks',{member:'michal'}),t=d.tasks.find((t:any)=>t.title===title);expect(d.history.filter((h:any)=>h.id===t.id)).toHaveLength(1);
  const card=page.locator(`[data-personal-id="${t.id}"]`);await card.locator('summary.chore-corner-tab').click();await card.getByRole('button',{name:'Edit',exact:true}).click();await page.locator('#personal-edit-title').fill('Retain my edit');
@@ -57,5 +58,5 @@ test('dragging persists only within a priority group and refresh preserves typin
  const before=await rpc(page,'home_order',{member:'michal'});await drag(a.id,pin.id);expect((await rpc(page,'home_order',{member:'michal'})).keys).toEqual(before.keys);
  await page.locator('#personal-title').fill('Still typing');await page.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));await expect(page.locator('#personal-title')).toBeFocused();await expect(page.locator('#personal-title')).toHaveValue('Still typing');
  await mkdir('.local/refresh-review',{recursive:true});
- for(const width of [320,390,1280]){await page.setViewportSize({width,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();for(const theme of ['light','dark']){await page.locator('#theme-select').selectOption(theme);await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:`.local/refresh-review/home-${width}-${theme}.png`});}}
+ for(const width of [320,390,1280]){await page.setViewportSize({width,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();for(const theme of ['light','dark']){await setTheme(page,theme);await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:`.local/refresh-review/home-${width}-${theme}.png`});}}
 });

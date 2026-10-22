@@ -13,7 +13,6 @@
 .push-categories small{display:block;font-size:12px;line-height:1.5;font-weight:400;color:var(--muted);margin-top:4px}
 .push-test{width:100%;margin-top:12px}
 .notification-target{outline:3px solid var(--green);outline-offset:5px;scroll-margin:24px}
-#notifications{display:grid;place-items:center;flex-shrink:0}
 @media(max-width:480px){.topbar-right{gap:8px!important}.brand{font-size:23px}.push-dialog .dialog-actions{flex-wrap:wrap;gap:16px}}
 body{margin:0}
 button,input,select{font:inherit}

@@ -1,3 +1,4 @@
+import {refreshSection} from './settings';
 import {test,expect,type Page} from '@playwright/test';
 const rpc=async(page:Page,fn:string,p?:unknown)=>{const r=await page.request.post('/rest/v1/rpc/utilities_'+fn,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(r.ok(),await r.text()).toBeTruthy();return r.json();};
 test('one task destination preserves old routes, navigation, notification focus and creation drafts',async({page})=>{
@@ -7,7 +8,7 @@ test('one task destination preserves old routes, navigation, notification focus 
  expect(await page.locator('[data-ledger]').evaluateAll(els=>els.map(el=>el.getAttribute('data-ledger')))).toEqual(['home','chores','miscellaneous','events','bulletin','utilities']);
  await expect(page.locator('#home-page')).toHaveCount(0);await expect(page.locator('[data-home-filter=personal]')).toHaveAttribute('aria-pressed','true');
  await page.locator('[data-chore-view=week]').click();await expect(page.locator('.chore-week')).toBeVisible();await page.locator('[data-chore-view=household]').click();await expect(page.locator('#chore-household-filter')).toHaveValue('all');
- await page.goBack();await expect(page.locator('.chore-week')).toBeVisible();await page.locator('.brand').click();await expect(page.locator('#feature-area')).toBeHidden();await expect(page).toHaveTitle(/Home/);await page.locator('[data-ledger=chores]').click();
+ await page.goBack();await expect(page.locator('.chore-week')).toBeVisible();await page.locator('[data-ledger=home]').click();await expect(page.locator('#feature-area')).toBeHidden();await expect(page).toHaveTitle(/Home/);await page.locator('[data-ledger=chores]').click();
  await page.locator('#chore-new').click();await expect(page.locator('#chore-kind')).toHaveValue('personal');await expect(page.locator('#shared-task-fields')).toBeHidden();
  const title='Unified personal '+crypto.randomUUID();await page.locator('#chore-title').fill(title);
  for(const kind of ['reminder','request','chore','personal']){await page.locator('#chore-kind').selectOption(kind);await expect(page.locator('#chore-title')).toHaveValue(title);}
@@ -26,6 +27,6 @@ test('unified Add task disables only the unavailable source',async({page})=>{
  await page.route('**/utilities_personal_tasks',r=>r.abort());await page.goto('/#chores');await expect(page.locator('#chore-new')).toBeEnabled();
  await page.locator('#chore-new').click();await expect(page.locator('#chore-task-save')).toBeDisabled();await expect(page.locator('#task-source-notice')).toContainText('Personal tasks unavailable');
  await page.locator('#chore-kind').selectOption('request');await expect(page.locator('#chore-task-save')).toBeEnabled();await page.keyboard.press('Escape');
- await page.unroute('**/utilities_personal_tasks');await page.route('**/utilities_chores_dashboard',r=>r.abort());await page.locator('#refresh').click();await expect(page.locator('#personal-add')).toBeEnabled();await expect(page.locator('#chores-notice')).toContainText('offline');
+ await page.unroute('**/utilities_personal_tasks');await page.route('**/utilities_chores_dashboard',r=>r.abort());await refreshSection(page);await expect(page.locator('#personal-add')).toBeEnabled();await expect(page.locator('#chores-notice')).toContainText('offline');
  await page.locator('#chore-new').click();await expect(page.locator('#chore-task-save')).toBeEnabled();await page.locator('#chore-kind').selectOption('reminder');await expect(page.locator('#chore-task-save')).toBeDisabled();await expect(page.locator('#task-source-notice')).toContainText('Shared tasks unavailable');
 });

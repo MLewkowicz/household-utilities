@@ -1,6 +1,7 @@
-import {$,saved,remember,rpc,toast} from './ui';
+import {$,rpc,toast} from './ui';
 import {identity,onIdentityChange} from './identity';
 import {initNotifications,missingNotification} from './notifications';
+import {initSettings} from './settings';
 import {initAvatarFallback} from './people';
 import {initPaperTiles} from './tile-corner';
 import type {Member} from './ledger';
@@ -24,11 +25,7 @@ function load(route:Route):Promise<Page>{
  }
  return pending;
 }
-initNotifications();initAvatarFallback();initPaperTiles();
-const systemTheme=matchMedia('(prefers-color-scheme: dark)'),selector=$<HTMLSelectElement>('#theme-select');
-const preference=saved('household-theme');selector.value=preference==='light'||preference==='dark'?preference:'system';
-function applyTheme(){document.documentElement.dataset.theme=selector.value==='system'?(systemTheme.matches?'dark':'light'):selector.value;}
-selector.addEventListener('change',()=>{remember('household-theme',selector.value);applyTheme();});systemTheme.addEventListener('change',applyTheme);applyTheme();
+initSettings();initNotifications();initAvatarFallback();initPaperTiles();
 let active:Section='home',routeVersion=0;
 const house=mountHouseEntry(section=>navigate(section,'house'));
 const refreshing=new Map<Route,Promise<Page>>();

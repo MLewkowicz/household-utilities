@@ -1,3 +1,4 @@
+import {setTheme} from './settings';
 import {test,expect,type Page,type Locator} from '@playwright/test';
 import {mkdir} from 'node:fs/promises';
 const rpc=async(page:Page,operation:string,p?:unknown)=>{const r=await page.request.post('/rest/v1/rpc/utilities_'+operation,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(r.ok(),await r.text()).toBeTruthy();return r.json();};
@@ -20,7 +21,7 @@ test('expanded tiles show current details and the last update without revision l
  const note=await rpc(page,'save_bulletin_note',{...base(),body:'Compact note details.',temperature:30,recipients:['rina']});
  const eventPayload={...base(),title:'Compact event',description:'Bring snacks.',location:'Living room',starts_local:day+'T19:00',ends_local:day+'T21:00'},event=await rpc(page,'save_event',eventPayload);
  for(const width of [320,390,1280])for(const theme of ['light','dark']){
-  await page.setViewportSize({width,height:900});await page.goto('/#chores/personal');await expect(page.locator('#personal-add')).toBeEnabled();await page.locator('#theme-select').selectOption(theme);
+  await page.setViewportSize({width,height:900});await page.goto('/#chores/personal');await expect(page.locator('#personal-add')).toBeEnabled();await setTheme(page,theme);
   const mine=page.locator(`[data-personal-id="${personal.id}"]`);await expand(mine);await compact(mine);await expect(mine.getByRole('button',{name:'Edit',exact:true})).toBeVisible();
   const wrapper=mine.locator('..');expect(await wrapper.evaluate(el=>el.getBoundingClientRect().height-el.querySelector('article')!.getBoundingClientRect().height)).toBeLessThan(2);
   await mine.screenshot({path:`.local/compact-tiles-review/personal-${width}-${theme}.png`});

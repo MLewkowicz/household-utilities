@@ -54,7 +54,7 @@ export function initNotifications(){
  <div class="dialog-top"><h2 id="push-heading" tabindex="-1" autofocus>A little heads-up.</h2><button type="button" id="push-close" class="icon-button" aria-label="Close notifications">×</button></div>
  <p class="dialog-description">Chores, new bills, and notes for you. No account needed.</p>
  <p id="push-status" class="push-status" role="status"></p>
- <div id="push-install" class="push-install" hidden><strong>Add household to your Home Screen</strong><ol><li>Open this site in Safari and tap Share.</li><li>Choose Add to Home Screen, then Add.</li><li>Open the new household icon, tap the bell, and enable notifications.</li></ol></div>
+ <div id="push-install" class="push-install" hidden><strong>Add household to your Home Screen</strong><ol><li>Open this site in Safari and tap Share.</li><li>Choose Add to Home Screen, then Add.</li><li>Open the new household icon, open Settings, then Notifications, and enable alerts.</li></ol></div>
  <p id="push-platform-help" class="field-help"></p>
  <label for="push-person">Whose alerts should this device receive?</label><select id="push-person" required><option value="">Choose your name</option>${MEMBERS.map(m=>`<option value="${m}">${name(m)}</option>`).join('')}</select>
  <p class="field-help">This stays the same when you switch whose dashboard you’re viewing.</p>

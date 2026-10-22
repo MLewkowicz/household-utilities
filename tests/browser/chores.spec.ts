@@ -1,3 +1,4 @@
+import {setTheme,refreshSection} from './settings';
 import {test,expect,type Page,type Locator} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 import {addDays,weekStart} from '../../src/chores';
@@ -28,10 +29,10 @@ test('requests, urgency, hand-back and shared identity work across tabs on a pho
  await view(page,'household');
  await expand(request);await request.getByRole('button',{name:'Claim',exact:true}).click();await page.locator('#chore-action-save').click();await expect(page.locator('#chore-action-dialog')).not.toBeVisible();
  await view(page,'mine');await expect(request).toBeVisible();await expand(request);await expect(request.locator('.chore-history')).toHaveCount(0);await expect(request.locator('.entry-updated')).toContainText('Updated by Michal');expect((await rpc(page,'chores_dashboard')).history.some((h:any)=>h.change_note==='Could someone cover today?')).toBeTruthy();
- await page.locator('#refresh').click();await expect(request.locator(':scope > .tile-details')).toHaveAttribute('open','');
+ await refreshSection(page);await expect(request.locator(':scope > .tile-details')).toHaveAttribute('open','');
  await page.getByRole('link',{name:'Expenses',exact:true}).click();await expect(page.locator('#identity-name')).toContainText('You’re Michal');
  await page.locator('#switch-person').click();await page.locator('[data-identity=rina]').click();await page.getByRole('link',{name:/^To-dos/}).click();await expect(page.locator('#chore-identity-name')).toContainText('You’re Rina');
- await page.getByLabel('Color theme').selectOption('dark');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');await page.getByLabel('Color theme').selectOption('light');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+ await setTheme(page,'dark');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');await setTheme(page,'light');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
  await page.reload();await expect(page.locator('#chore-identity-name')).toContainText('You’re Rina');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();expect(errors).toEqual([]);
 });
@@ -174,7 +175,7 @@ test('future trash remains in Week after editing, without early completion contr
  const saved=await rpc(page,'chores_dashboard');expect(saved.tasks.filter((t:any)=>ids.includes(t.routine_id)&&t.cycle_start===start).map((t:any)=>t.projected).sort()).toEqual([false,true]);
  // Simulate the next dashboard response after New York midnight on the due day.
  await page.route('**/utilities_chores_dashboard',route=>route.fulfill({json:{...saved,local_day:start,tasks:saved.tasks.map((t:any)=>ids.includes(t.routine_id)&&t.cycle_start===start?{...t,projected:false}:t)}}));
- await page.locator('#refresh').click();
+ await refreshSection(page);
  const due=page.locator('.chore-grid .chore-card').filter({has:page.getByRole('heading',{name:/Queue test (trash out|new bag)/})});
  await expect(due).toHaveCount(2);await expect(due.locator('[data-swipe-complete]')).toHaveCount(2);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();

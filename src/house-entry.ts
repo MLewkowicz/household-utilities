@@ -5,6 +5,8 @@ type Player=Awaited<ReturnType<typeof import('./house/stage-player').mountStageP
 export function mountHouseEntry(onNavigate:(section:Section)=>void) {
   const container=document.querySelector<HTMLElement>('#house-stage')!;
   const hero=document.querySelector<HTMLElement>('#house-hero')!;
+  const chrome=document.querySelector<HTMLElement>('.house-chrome')!;
+  const syncChrome=()=>chrome.classList.toggle('is-docked',Boolean(hero.hidden)||scrollY>8);
   let selected:Section='home',player:Player|undefined,loading=false,inView=false,syncPending=true;
   const modalOpen=()=>Boolean(document.querySelector('dialog[open]'));
   const skyVisibility=()=>{hero.dataset.skyPaused=String(!inView||document.hidden||modalOpen());};
@@ -17,6 +19,7 @@ export function mountHouseEntry(onNavigate:(section:Section)=>void) {
   function featureMode(value:boolean) {
     if(hero.hidden===value)return;
     hero.hidden=value;
+    syncChrome();
     if(value)inView=false;
     skyVisibility();
     player?.setPaused(value||modalOpen());
@@ -30,7 +33,8 @@ export function mountHouseEntry(onNavigate:(section:Section)=>void) {
     window.scrollTo({top:position,behavior:'instant'});
     if(container.contains(document.activeElement))document.querySelector<HTMLElement>('#main')?.focus({preventScroll:true});
   }
-  window.addEventListener('scroll',finishEntering,{passive:true});
+  function onScroll(){finishEntering();syncChrome();}
+  window.addEventListener('scroll',onScroll,{passive:true});syncChrome();
   async function start() {
     if(loading||player)return;
     loading=true;
@@ -65,6 +69,6 @@ export function mountHouseEntry(onNavigate:(section:Section)=>void) {
       const current=document.querySelector<HTMLElement>('#house-current');
       if(current)current.textContent=HOUSE_SECTIONS.find(item=>item.route===section)!.label;
     },
-    destroy(){window.removeEventListener('scroll',finishEntering);document.removeEventListener('visibilitychange',skyVisibility);observer.disconnect();dialogs.disconnect();player?.destroy();},
+    destroy(){window.removeEventListener('scroll',onScroll);document.removeEventListener('visibilitychange',skyVisibility);observer.disconnect();dialogs.disconnect();player?.destroy();},
   };
 }

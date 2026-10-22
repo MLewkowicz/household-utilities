@@ -1,3 +1,4 @@
+import {setTheme,refreshSection} from './settings';
 import {test,expect,type Page} from '@playwright/test';
 const rpc=async(page:Page,name:string,p?:unknown)=>{const r=await page.request.post(`/rest/v1/rpc/utilities_${name}`,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(r.ok()).toBeTruthy();return r.json();};
 const task=(extra={})=>({id:crypto.randomUUID(),request_id:crypto.randomUUID(),actor:'rohil',action:'create',title:'Swipe test '+crypto.randomUUID(),icon_id:'tidy',note:'Only visible in details',points:2,assignee:null,pinned:false,...extra});
@@ -44,7 +45,7 @@ test('inactive sections do not initialize or fetch; unavailable badges do not bl
  expect(requests.some(p=>/utilities_(chores|misc|bulletin)_dashboard/.test(p))).toBeFalsy();expect(requests).not.toContain('/thumbtack.svg');
  await page.getByRole('link',{name:'Expenses',exact:true}).click();await expect(page.locator('#new-expense')).toBeEnabled();await expect(page.locator('#chore-task-dialog')).toHaveCount(0);
  await page.getByRole('link',{name:/^To-dos/}).click();await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');
- await page.getByLabel('Color theme').selectOption('dark');const tile=page.locator('.chore-card').first();if(await tile.count())expect(await tile.evaluate(el=>getComputedStyle(el).backgroundColor)).not.toBe('rgb(24, 34, 27)');
+ await setTheme(page,'dark');const tile=page.locator('.chore-card').first();if(await tile.count())expect(await tile.evaluate(el=>getComputedStyle(el).backgroundColor)).not.toBe('rgb(24, 34, 27)');
 });
 
 test('utility page has no explanatory info controls and retains payment guidance',async({page})=>{
@@ -55,7 +56,7 @@ test('a delayed read cannot restore a task after quick completion',async({page})
  const t=await rpc(page,'save_chore',task());await chores(page);
  let release!:()=>void,received!:()=>void;const held=new Promise<void>(resolve=>release=resolve),started=new Promise<void>(resolve=>received=resolve);
  await page.route('**/utilities_chores_dashboard',async route=>{const response=await route.fetch();received();await held;await route.fulfill({response});},{times:1});
- await page.locator('#refresh').click();await started;
+ await refreshSection(page);await started;
  const card=page.locator(`[data-chore-id="${t.id}"]`);await card.locator('[data-swipe-complete]').focus();await page.keyboard.press('Enter');await expect(page.locator('#toast')).toContainText('✓');
  const fresh=page.waitForResponse(async response=>response.url().endsWith('/utilities_chores_dashboard')&&response.status()===200&&(await response.json()).tasks.some((x:any)=>x.id===t.id&&x.state==='completed'));
  release();await fresh;await expect(card).toHaveCount(0);const d=await rpc(page,'chores_dashboard');expect(d.tasks.find((x:any)=>x.id===t.id).state).toBe('completed');

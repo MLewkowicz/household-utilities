@@ -1,3 +1,4 @@
+import {setTheme,refreshSection} from './settings';
 import {test,expect,type Page,type Locator} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 const rpc=async(page:Page,fn:string,p?:unknown)=>{const r=await page.request.post(`/rest/v1/rpc/utilities_${fn}`,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(r.ok()).toBeTruthy();return r.json();};
@@ -25,7 +26,7 @@ test('pinned notes, temperature, attribution, revisions, deletion and counts wor
  await page.locator('#bulletin-switch').click();await page.locator('[data-bulletin-person=rohil]').click();await lift(card);await card.getByRole('button',{name:'Edit note',exact:true}).click();
  await expect(page.locator('#bulletin-actor')).toContainText('Originally pinned by Michal');await page.locator('#bulletin-body').fill('Thanks for washing everything!');await page.locator('#bulletin-temperature').fill('100');await page.locator('#bulletin-note-save').click();await expect(page.locator('#bulletin-note-dialog')).not.toBeVisible();
  await selectView(page,'compliment');const changed=note(page,'Thanks for washing everything!');await expect(changed).toHaveClass(/note-member-michal/);await lift(changed);await expect(changed.locator('.entry-updated')).toContainText('Edited by Rohil');await expect(changed).not.toContainText('Please wash the dishes <b>tonight</b>.');
- await page.locator('#refresh').click();await expect(changed.locator('.note-tools')).toHaveAttribute('open','');await expect(changed.locator('.entry-updated')).toBeVisible();
+ await refreshSection(page);await expect(changed.locator('.note-tools')).toHaveAttribute('open','');await expect(changed.locator('.entry-updated')).toBeVisible();
  d=await rpc(page,'bulletin_dashboard');expect(d.notes[0].posted_at).toBe(saved.posted_at);expect(d.notes[0].author).toBe('michal');expect(d.stats.find((s:any)=>s.period==='all'&&s.direction==='written'&&s.member==='michal')).toMatchObject({complaints:0,compliments:1});
  await selectView(page,'activity');await expect(page.locator('.bulletin-chart').first().getByRole('img',{name:'Michal: 0 complaints and 1 compliments written'})).toBeVisible();
  await selectView(page,'all');await page.locator('#bulletin-kind-filter').selectOption('all');await lift(changed);await changed.getByRole('button',{name:'Delete note',exact:true}).click();await page.locator('#bulletin-action-save').click();await expect(page.locator('#bulletin-action-dialog')).not.toBeVisible();await expect(changed).toHaveCount(0);
@@ -42,7 +43,7 @@ test('Post-its grow the page to the bottom and remain legible on phones in both 
  for(const width of [1280,390]){
   await page.setViewportSize({width,height:844});
   for(const theme of ['light','dark']){
-   await page.getByLabel('Color theme').selectOption(theme);
+   await setTheme(page,theme);
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
    expect(await page.locator('.bulletin-board').evaluate(el=>el.scrollHeight<=el.clientHeight+2)).toBeTruthy();
    await page.locator('.bulletin-end').scrollIntoViewIfNeeded();await expect(page.locator('.bulletin-end')).toBeInViewport();await expect(page.locator('.bulletin-grass')).toBeInViewport();expect(await page.locator('.bulletin-post').evaluate(el=>el.getBoundingClientRect().top>=document.querySelector('.bulletin-board')!.getBoundingClientRect().bottom-5)).toBeTruthy();
