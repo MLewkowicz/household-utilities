@@ -20,7 +20,7 @@ test('My tasks default combines only assigned tasks, quick entry, completion, un
  await page.locator('#home-history').check();await expect(edited).toBeVisible();await expect(edited).toContainText('Deleted');await edited.locator('summary.chore-corner-tab').click();await expect(edited.locator('.entry-updated')).toContainText('Deleted by Michal');await expect(edited.getByText(/History ·/)).toHaveCount(0);const stored=await rpc(page,'personal_tasks',{member:'michal'});expect(stored.history.filter((t:any)=>t.title===title||t.title===title+' edited')).toHaveLength(6);
  await page.locator('[data-home-filter=assigned]').click();await expect(edited).toHaveCount(0);await expect(page.locator(`[data-home-key="shared:${assigned.id}"]`)).toBeVisible();
  const download=page.waitForEvent('download');await page.locator('#export').click();const file=await download;expect(file.suggestedFilename()).toContain('household-tasks-michal');
- await page.locator('[data-ledger=home]').click();await expect(page).toHaveURL(/#home$/);await expect(page.locator('#feature-area')).toBeHidden();
+ await page.locator('[data-ledger=home]').click();await expect(page).toHaveURL(/#home$/);await expect(page.locator('#feature-area')).not.toBeInViewport();
 });
 test('Task ordering persists across sessions and sources fail independently without erasing drafts',async({page,browser})=>{
  const a=await personal(page,'Order A '+crypto.randomUUID()),b=await personal(page,'Order B '+crypto.randomUUID()),assigned=await shared(page,'Assigned outage '+crypto.randomUUID());await home(page);
@@ -47,7 +47,7 @@ test('personal saves retry once, stale edits keep drafts, filters and identity d
  const card=page.locator(`[data-personal-id="${t.id}"]`);await card.locator('summary.chore-corner-tab').click();await card.getByRole('button',{name:'Edit',exact:true}).click();await page.locator('#personal-edit-title').fill('Retain my edit');
  await rpc(page,'save_personal_task',{id:t.id,actor:'michal',expected_version:t.version,action:'pin',pinned:true,request_id:crypto.randomUUID()});await page.locator('#personal-save').click();await expect(page.locator('#personal-error')).toContainText('changed');await expect(page.locator('#personal-edit-title')).toHaveValue('Retain my edit');await page.keyboard.press('Escape');
  await page.locator('#chore-switch').click();await page.locator('[data-chore-person=rina]').click();await expect(page.locator('#personal-add')).toBeEnabled();await expect(card).toHaveCount(0);
- await page.goto('/#nonsense');await expect(page.locator('#feature-area')).toBeHidden();await expect(page).toHaveTitle(/Home/);
+ await page.goto('/#nonsense');await expect(page.locator('#feature-area')).not.toBeInViewport();await expect(page).toHaveTitle(/Home/);
 });
 test('dragging persists only within a priority group and refresh preserves typing on small screens',async({page})=>{
  const a=await personal(page,'Drag A '+crypto.randomUUID()),b=await personal(page,'Drag B '+crypto.randomUUID()),pin=await personal(page,'Pinned '+crypto.randomUUID());await rpc(page,'save_personal_task',{id:pin.id,actor:'michal',expected_version:pin.version,action:'pin',pinned:true,request_id:crypto.randomUUID()});await home(page);await page.setViewportSize({width:390,height:844});

@@ -3,6 +3,7 @@ import { actor, reach, speech, type CastMember, type Faces } from './bitmoji-cas
 import { ball, batch, box, cylinder, group, line, mesh, movable, ring } from './scene-geometry';
 import { bookcase, chair, cottageExterior, framedPicture, loft, plant, roomSet, sofa, utilityHouse, window as houseWindow } from './cottage-sets';
 import { members, type StageId, type StageState } from './stage-data';
+import { ohmBedroom, rohilShower } from './utility-downstairs';
 
 export interface HouseStage {
   id: StageId; root: T.Group; people: CastMember[]; dark: boolean;
@@ -62,7 +63,7 @@ function home(faces: Faces) {
 }
 function utilities(faces: Faces) {
   const root = new T.Group();
-  const [bath, lounge, boiler, laundry] = utilityHouse(root);
+  const [bath, lounge, bedroom, shower] = utilityHouse(root);
   // Upstairs bathroom: tiles, washbasin, towel, toilet and a tiny medicine cabinet.
   box(bath, '#b4cfc1', 3.80, .02, 3.35, 0, .012, -.05);
   for (let x = 0; x < 6; x++) for (let z = 0; z < 5; z++) box(bath, (x + z) % 2 ? '#e8edda' : '#a7c5b7', .60, .012, .62, -1.55 + x * .62, .03, -1.34 + z * .65);
@@ -99,43 +100,8 @@ function utilities(faces: Faces) {
   const pool = movable(mesh(lounge, new T.CircleGeometry(.9, 28), '#f9d673', .95, .055, .52)); pool.rotation.x = -Math.PI / 2;
   pool.material.transparent = true; pool.material.opacity = .2; pool.material.depthWrite = false; pool.castShadow = false;
   plant(lounge, 1.45, -1.20, .1, .8);
-  // Downstairs boiler room: copper runs, meter, storage, toolbox and the suspect valve.
-  cylinder(boiler, '#acb9b1', .40, 1.52, -.90, .82, -1.12); ball(boiler, '#d6d8c6', .4, .14, .4, -.90, 1.58, -1.12);
-  box(boiler, '#5d7c79', .32, .43, .05, -.90, 1.04, -.70);
-  line(boiler, '#b18c62', [[-.90,1.7,-1.12],[-.90,2.28,-1.12],[.10,2.28,-1.12],[.1,.50,-1.12]], .065);
-  const valve = group(boiler, .10, 1.29, -.95, true); ring(valve, '#a2694a', .17, .028);
-  box(valve, '#a2694a', .32, .025, .025); box(valve, '#a2694a', .025, .32, .025);
-  cylinder(boiler, '#d6ceaf', .14, .06, -.89, 1.28, -.69).rotation.x = Math.PI / 2;
-  line(boiler, '#514f47', [[-.89,1.28,-.65],[-.83,1.35,-.65]], .012);
-  const ohm = actor(boiler, faces, 'ohm', .14, .70);
-  // The grip sits in the palm; the shaft and open jaw extend beyond the fingers,
-  // away from the wrist. Keep the assembly attached to the moving hand.
-  const wrench = group(ohm.rightArm, 0, -.405, .06, true); wrench.name = 'ohm-wrench';
-  box(wrench, '#81999b', .055, .30, .05, 0, -.15);
-  box(wrench, '#afbeb5', .023, .22, .008, 0, -.15, .029);
-  const jaw = mesh(wrench, new T.TorusGeometry(.09, .028, 6, 12, Math.PI * 1.5), '#9eb0ad', 0, -.37); jaw.rotation.z = -Math.PI / 4;
-  const puffs = Array.from({ length: 4 }, () => { const puff = movable(ball(boiler, '#b6ca8d', .10, .12, .1)); puff.material.transparent = true; puff.material.depthWrite = false; puff.castShadow = false; return puff; });
-  box(boiler, '#9a7651', 1.2, .12, .45, .94, 1.93, -1.49);
-  for (let i = 0; i < 3; i++) box(boiler, '#c2a47a', .30, .28 + i * .06, .34, .52 + i * .36, 2.13, -1.49);
-  box(boiler, '#a96149', .62, .28, .36, -1.10, .18, .75); line(boiler, '#6d5c4b', [[-1.29,.33,.75],[-1.29,.46,.75],[-.91,.46,.75],[-.91,.33,.75]], .026);
-  // Laundry beneath the living room: washer, folded towels, sink and a ceiling leak.
-  const washer = group(laundry, 1.03, .02, -.98);
-  box(washer, '#e9e3ce', 1.0, 1.12, .82, 0, .57);
-  ring(washer, '#a4b8b0', .31, .06, 0, .54, .44);
-  cylinder(washer, '#779caa', .26, .03, 0, .54, .45).rotation.x = Math.PI / 2;
-  for (let i = 0; i < 3; i++) box(washer, ['#bac6ac','#d8c39d','#c9ac91'][i], .71, .09, .48, 0, 1.19 + i * .09);
-  for (const x of [-.28,.28]) ball(washer, '#8b9d99', .045, .045, .03, x, 1.02, .44);
-  box(laundry, '#b7a484', .91, .76, .58, -.82, .41, -1.28);
-  ball(laundry, '#f0e8d3', .50, .07, .35, -.82, .83, -1.28);
-  line(laundry, '#8e9c97', [[-.82,.85,-1.5],[-.82,1.15,-1.5],[-.82,1.15,-1.25]], .03);
-  houseWindow(laundry, .9, 2.06, -1.75, .88, .65);
-  const rohil = actor(laundry, faces, 'rohil', -.66, .80);
-  const bucket = group(laundry, .20, .06, .92, true); cylinder(bucket, '#6d9499', .27, .42, 0, .21, 0, .34);
-  const handle = ring(bucket, '#c0b895', .28, .018, 0, .49); handle.scale.y = .7;
-  line(laundry, '#80989a', [[.23,2.65,-1.75],[.23,2.65,.92],[.23,2.35,.92]], .035);
-  const drop = movable(ball(laundry, '#7dbbc9', .035, .07, .035, .23, 1.6, .92));
-  const bubble = speech(laundry, 'I brought the bucket.', rohil, 2.7);
-  const people = [michal, rina, ohm, rohil];
+  const downstairsBedroom = ohmBedroom(bedroom, faces), downstairsShower = rohilShower(shower, faces);
+  const people = [michal, rina, downstairsBedroom.person, downstairsShower.person];
   const roomLight = { value: 1 };
   const stage = make('utilities', root, people, (time, state) => {
     const t = state.still ? 1.4 : time, boost = time < state.boostUntil;
@@ -144,18 +110,15 @@ function utilities(faces: Faces) {
     plunger.updateWorldMatrix(true, true);
     reach(michal, michal.leftArm, plunger.localToWorld(new T.Vector3(-.035, .58, 0)));
     reach(michal, michal.rightArm, plunger.localToWorld(new T.Vector3(.035, .44, 0)));
-    ohm.rightArm.rotation.x = -.85 + Math.sin(t * 2.4) * .12; ohm.rightArm.rotation.z = .38 + Math.sin(t * 1.2) * .06;
-    ohm.root.rotation.z = Math.sin(t) * .04; valve.rotation.z = Math.sin(t * 1.3) * .2;
-    puffs.forEach((puff, i) => { const p = (t * .45 + i / 4) % 1; puff.position.set(.10 + p * .3, 1.65 + p * .6, -.90); puff.material.opacity = (1 - p) * .4; });
+    downstairsBedroom.tick(t, state); downstairsShower.tick(t, state);
     const on = state.still || Math.floor(t / .72) % 2 === 0; rocker.rotation.x = on ? -.3 : .3;
     roomLight.value = on ? 1 : 0;
-    root.userData.utilities = { loungeLit: on };
+    root.userData.utilities = { loungeLit: on, bedroom: downstairsBedroom.details(), shower: downstairsShower.details() };
     shade.material.color.set(on ? '#ffe296' : '#a79978'); pool.material.opacity = on ? .27 : 0;
     rina.leftArm.rotation.z = -.22 - Math.max(0, Math.sin(t * 4.5)) * .6; rina.root.rotation.z = Math.sin(t * 2.25) * .04;
     // Pose the body before solving the hand reach, including the first still frame.
     rocker.updateWorldMatrix(true, true); reach(rina, rina.rightArm, rocker.localToWorld(new T.Vector3(0, 0, .1 + Math.max(0, Math.sin(t * 4.5)) * .13)));
-    bucket.updateWorldMatrix(true, true); reach(rohil, rohil.rightArm, bucket.localToWorld(new T.Vector3(-.24, .48, 0)));
-    drop.position.y = 2.30 - (t * .8 % 1) * 1.70; bubble.visible = state.still || boost || Math.floor(t / 3) % 4 === 2;
+
   });
   // Apply after batching, including the original portrait. Multiplying the final
   // room shading removes all light locally, without changing any global light.

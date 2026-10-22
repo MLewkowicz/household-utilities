@@ -2,7 +2,7 @@ import {HOUSE_SECTIONS,sceneFor,routeFor,type Section} from './house-navigation'
 type Player=Awaited<ReturnType<typeof import('./house/stage-player').mountStagePlayer>>;
 
 /** The ordinary router stays usable before WebGL loads, and if it fails. */
-export function mountHouseEntry(onNavigate:(section:Section)=>void) {
+export function mountHouseEntry(onNavigate:(section:Section)=>void,onEnter:(section:Section)=>void) {
   const container=document.querySelector<HTMLElement>('#house-stage')!;
   const hero=document.querySelector<HTMLElement>('#house-hero')!;
   const chrome=document.querySelector<HTMLElement>('.house-chrome')!;
@@ -25,12 +25,13 @@ export function mountHouseEntry(onNavigate:(section:Section)=>void) {
     player?.setPaused(value||modalOpen());
   }
   function finishEntering() {
-    if(hero.hidden||selected==='home'||hero.getBoundingClientRect().bottom>0)return;
+    if(hero.hidden||hero.getBoundingClientRect().bottom>0)return;
     const position=Math.max(0,scrollY-hero.offsetHeight);
     syncPending=true;
     featureMode(true);
     history.replaceState({...history.state,houseView:false},'');
     window.scrollTo({top:position,behavior:'instant'});
+    onEnter(selected==='home'?'chores':selected);
     if(container.contains(document.activeElement))document.querySelector<HTMLElement>('#main')?.focus({preventScroll:true});
   }
   function onScroll(){finishEntering();syncChrome();}

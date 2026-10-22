@@ -8,10 +8,34 @@ const sections=['home','chores','miscellaneous','events','bulletin','utilities']
 test.use({viewport:{width:1440,height:900}});
 test.beforeEach(async({page})=>{await page.addInitScript(()=>localStorage.setItem('household-person','michal'));});
 
+test('downstairs utilities animate continuously, cycle Rohil’s lyrics and keep all four portraits',async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');await ready(page);
+ const canvas=page.locator('.stage-canvas');await canvas.focus();await page.keyboard.press('ArrowLeft');
+ const still=await diag(page),utilities=still.sceneDetails.utilities;
+ expect(still.actors).toEqual(['michal','ohm','rina','rohil']);
+ expect(utilities.bedroom.airConditioners).toBe(3);expect(utilities.bedroom.lounging).toBe(true);
+ expect(utilities.shower.waterDrops).toBe(48);expect(utilities.shower.musicalNotes).toBe(5);
+ const lyrics=['Fuck me in the shower','I don’t misbehave','I’m such a good little boy'];
+ for(const lyric of lyrics){
+  const bubbles=(await diag(page)).speech.filter((bubble:any)=>bubble.visible&&bubble.opacity>0);
+  expect(bubbles.map((bubble:any)=>[bubble.speaker,bubble.message])).toEqual([['rohil',lyric]]);
+  await page.keyboard.press('Enter');
+ }
+ await page.emulateMedia({reducedMotion:'no-preference'});
+ await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.shower.waterY).not.toBe(utilities.shower.waterY);
+ await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.bedroom.fanAngle).not.toBe(utilities.bedroom.fanAngle);
+ const current=(await diag(page)).sceneDetails.utilities.shower.lyric;
+ await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.shower.lyric,{timeout:8000}).not.toBe(current);
+ // Speech fades before the room passes behind the common house shell.
+ await page.keyboard.press('ArrowRight');
+ await expect.poll(async()=>(await diag(page)).speech.filter((bubble:any)=>bubble.visible&&bubble.opacity>.05).length).toBe(0);
+ await expect(page).toHaveURL(/#home$/,{timeout:5000});
+});
+
 test('Home is a full-viewport house and floating shortcuts, with no gallery chrome',async({page})=>{
  await page.goto('/');await ready(page);
  expect(await page.locator('[data-ledger]').evaluateAll(links=>links.map(link=>link.getAttribute('data-ledger')))).toEqual(sections);
- await expect(page.locator('#feature-area')).toBeHidden();await expect(page.locator('.topbar')).toBeHidden();
+ await expect(page.locator('#feature-area')).not.toBeInViewport();await expect(page.locator('.topbar')).toBeHidden();
  expect((await page.locator('#house-hero').boundingBox())!.height).toBe(900);
  const navigation=(await page.locator('.house-navigation').boundingBox())!;
  expect(navigation.y).toBeLessThan(40);expect(navigation.width).toBeGreaterThan(700);expect(navigation.height).toBe(120);
@@ -38,7 +62,7 @@ test('drags commit only on release, short drags cancel, and a quick swipe advanc
  await expect.poll(async()=>(await diag(page)).transitioning).toBe(false);expect((await diag(page)).selected).toBe('home');
  await page.mouse.move(x,y);await page.mouse.down();await page.mouse.move(x-rect.width*.3,y,{steps:6});
  await expect.poll(async()=>(await diag(page)).house.pivotYaw).toBeLessThan(0);
- expect((await diag(page)).selected).toBe('home');await expect(page.locator('#feature-area')).toBeHidden();
+ expect((await diag(page)).selected).toBe('home');await expect(page.locator('#feature-area')).not.toBeInViewport();
  await page.mouse.up();await expect(page).toHaveURL(/#chores$/,{timeout:5000});expect(await page.evaluate(()=>scrollY)).toBe(0);
  await expect(page.locator('#feature-area')).toBeVisible();expect((await page.locator('#feature-area').boundingBox())!.y).toBe(900);
  // 60px is below the distance threshold on desktop, but a quick swipe commits.
@@ -121,7 +145,7 @@ test('legacy personal-task links still open To-dos directly',async({page})=>{
  await page.locator('#personal-title').fill('Keep this draft');await page.locator('[data-ledger=events]').click();await page.locator('[data-ledger=chores]').click();await expect(page.locator('#personal-title')).toHaveValue('Keep this draft');
 });
 
-test('scrolling beyond the house keeps the feature open until Home is chosen',async({page})=>{
+test('scrolling beyond the house docks the feature and an edge gesture returns to the previous section',async({page})=>{
  await page.goto('/');await ready(page);await page.locator('.stage-canvas').focus();await page.keyboard.press('ArrowLeft');await expect(page).toHaveURL(/#utilities$/,{timeout:5000});
  await expect(page.locator('#main')).toHaveAttribute('aria-busy','false');
  await page.evaluate(()=>scrollTo(0,innerHeight-100));await expect(page.locator('#house-hero')).toBeVisible();
@@ -131,7 +155,7 @@ test('scrolling beyond the house keeps the feature open until Home is chosen',as
  await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(120);
  await expect.poll(async()=>(await diag(page)).active).toBe(false);const frozen=(await diag(page)).frames;
  await page.waitForTimeout(200);expect((await diag(page)).frames).toBe(frozen);
- await page.evaluate(()=>scrollTo(0,0));await page.mouse.wheel(0,-600);expect((await page.locator('.house-chrome').boundingBox())!.y).toBe(0);await expect(page.locator('#house-hero')).toBeHidden();await expect(page).toHaveURL(/#utilities$/);
+ await page.evaluate(()=>scrollTo(0,0));await page.mouse.move(20,500);await page.mouse.wheel(0,-600);await expect(page).toHaveURL(/#bulletin$/);expect((await page.locator('.house-chrome').boundingBox())!.y).toBe(0);await expect(page.locator('#house-hero')).toBeHidden();
  await page.locator('[data-ledger=events]').click();await expect(page.locator('#event-new')).toBeEnabled();await expect(page.locator('#house-hero')).toBeHidden();
  await page.locator('[data-ledger=home]').click();await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(async()=>(await diag(page)).displayed).toBe('home');expect(await page.evaluate(()=>scrollY)).toBe(0);
 });

@@ -489,6 +489,20 @@
       "expression": "mogging"
     },
     {
+      "member": "michal",
+      "note_id": "e40073a9-d341-4abb-af1e-3b259221c18c",
+      "version": 2,
+      "created_at": "2026-10-22T03:49:45.52742+00:00",
+      "expression": null
+    },
+    {
+      "member": "ohm",
+      "note_id": "e40073a9-d341-4abb-af1e-3b259221c18c",
+      "version": 1,
+      "created_at": "2026-10-22T03:49:40.362147+00:00",
+      "expression": "vomit"
+    },
+    {
       "member": "rohil",
       "note_id": "e40073a9-d341-4abb-af1e-3b259221c18c",
       "version": 1,
@@ -503,10 +517,31 @@
       "expression": "gentle-laughing"
     }
   ],
-  "updated_at": "2026-10-22T03:42:05.639155+00:00",
-  "exported_at": "2026-10-22T03:42:05.639155+00:00",
+  "updated_at": "2026-10-22T04:35:43.724829+00:00",
+  "exported_at": "2026-10-22T04:35:43.724829+00:00",
   "format_version": 2,
   "reaction_history": [
+    {
+      "member": "michal",
+      "note_id": "e40073a9-d341-4abb-af1e-3b259221c18c",
+      "version": 2,
+      "created_at": "2026-10-22T03:49:45.52742+00:00",
+      "expression": null
+    },
+    {
+      "member": "michal",
+      "note_id": "e40073a9-d341-4abb-af1e-3b259221c18c",
+      "version": 1,
+      "created_at": "2026-10-22T03:49:41.831238+00:00",
+      "expression": "gasp"
+    },
+    {
+      "member": "ohm",
+      "note_id": "e40073a9-d341-4abb-af1e-3b259221c18c",
+      "version": 1,
+      "created_at": "2026-10-22T03:49:40.362147+00:00",
+      "expression": "vomit"
+    },
     {
       "member": "rina",
       "note_id": "79feccd9-ba85-4473-958d-f5e995797fe1",

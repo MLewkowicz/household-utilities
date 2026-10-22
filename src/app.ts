@@ -7,6 +7,7 @@ import {initPaperTiles} from './tile-corner';
 import type {Member} from './ledger';
 import {mountHouseEntry} from './house-entry';
 import {sectionFromHash,type Section,type Feature} from './house-navigation';
+import {bindSectionScroll} from './section-scroll';
 
 type Route=Feature;
 type Page={refresh:()=>Promise<void>;export:()=>void;focus?:(id:string)=>boolean};
@@ -27,7 +28,8 @@ function load(route:Route):Promise<Page>{
 }
 initSettings();initNotifications();initAvatarFallback();initPaperTiles();
 let active:Section='home',routeVersion=0;
-const house=mountHouseEntry(section=>navigate(section,'house'));
+const house=mountHouseEntry(section=>navigate(section,'house'),section=>{if(active==='home')navigate(section,'entry');});
+bindSectionScroll(()=>({section:active,featureOnly:Boolean($('#house-hero').hidden),ready:$('#main').getAttribute('aria-busy')!=='true'}),(section,direction)=>navigate(section,'scroll',direction));
 const refreshing=new Map<Route,Promise<Page>>();
 function refreshPage(route:Route){
  let pending=refreshing.get(route);
@@ -57,32 +59,47 @@ async function refresh(){
  }catch(error){toast('Could not load this section. '+(error as Error).message,{label:'Retry',run:()=>void refresh()});}
  finally{if(version===routeVersion){$('#main').setAttribute('aria-busy','false');$('#refresh').removeAttribute('disabled');}}
 }
-type NavigationSource='initial'|'house'|'shortcut'|'history';
-function route(source:NavigationSource='history'){
+// Home has To-dos below it, loaded only as that content enters the viewport.
+let previewPending=false;
+const previewObserver=new IntersectionObserver(entries=>{
+ if(active!=='home'||previewPending||!entries.some(entry=>entry.isIntersecting&&entry.intersectionRatio>0))return;
+ previewPending=true;
+ void refreshPage('chores').catch(()=>{/* Entering the section uses the normal retry UI. */}).finally(()=>{previewPending=false;});
+},{threshold:.01});
+previewObserver.observe($('#feature-area'));
+type NavigationSource='initial'|'house'|'shortcut'|'history'|'scroll'|'entry';
+function route(source:NavigationSource='history',direction:1|-1=1){
  // Preserve the old task deep links; the bare Home route is now the exterior.
  if(/^#home\/(personal|assigned)$/.test(location.hash)||location.hash==='#home'&&new URL(location.href).searchParams.has('notice'))history.replaceState(history.state,'',location.href.replace(/#home/, '#chores'));
  active=sectionFromHash(location.hash);routeVersion++;
- $('#feature-area').hidden=active==='home';
- for(const [key,id] of Object.entries({utilities:'utilities-page',miscellaneous:'misc-page',chores:'chores-page',bulletin:'bulletin-page',events:'events-page'}))$('#'+id).hidden=key!==active;
+ $('#feature-area').hidden=false;
+ const content=active==='home'?'chores':active;
+ for(const [key,id] of Object.entries({utilities:'utilities-page',miscellaneous:'misc-page',chores:'chores-page',bulletin:'bulletin-page',events:'events-page'}))$('#'+id).hidden=key!==content;
  document.querySelectorAll<HTMLAnchorElement>('[data-ledger]').forEach(link=>{if(link.dataset.ledger===active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
  const label=active==='home'?'Home':active==='utilities'?'Utilities':active==='chores'?'To-dos':active==='events'?'Events':active==='bulletin'?'Bulletin':'Expenses';
  document.title=`Household · ${label}`;
  const showHouse=active==='home'||source==='house'||source==='history'&&history.state?.houseView===true;
  house.select(active,source==='house',!showHouse);
  $('#export').setAttribute('disabled','');$('#main').setAttribute('aria-busy',active==='home'?'false':'true');
- // Shortcuts enter the feature directly. Scrolling beyond a scene also removes
- // the house from the scroll path; Home restores the animation menu.
- if(source==='shortcut'||source==='initial'){
-  if(active==='home')window.scrollTo({top:0,behavior:'instant'});
-  else $('#feature-area').scrollIntoView({block:'start',behavior:'instant'});
+ // Shortcuts and forward section gestures land at the top. A backward gesture
+ // lands at the preceding section's bottom, after its content has loaded.
+ if(active==='home'){
+  // A notification's focused card and smooth scroll can survive a hash change.
+  // Move focus out of the feature, then finish landing after the new layout.
+  if($('#feature-area').contains(document.activeElement))document.querySelector<HTMLElement>('[data-ledger=home]')?.focus({preventScroll:true});
+  window.scrollTo({top:0,behavior:'instant'});
+  const landingVersion=routeVersion;
+  requestAnimationFrame(()=>{if(routeVersion===landingVersion&&active==='home')window.scrollTo({top:0,behavior:'instant'});});
  }
- void refresh();
+ else if(source==='shortcut'||source==='initial'||source==='scroll')$('#feature-area').scrollIntoView({block:'start',behavior:'instant'});
+ const version=routeVersion,pending=refresh();
+ if(source==='scroll'&&direction===-1&&active!=='home')void pending.then(()=>{if(version===routeVersion)window.scrollTo({top:document.documentElement.scrollHeight-innerHeight,behavior:'instant'});});
 }
-function navigate(section:Section,source:'house'|'shortcut'){
+function navigate(section:Section,source:'house'|'shortcut'|'scroll'|'entry',direction:1|-1=1){
  const hash='#'+section;
  if(location.hash!==hash)history.pushState({houseView:source==='house'},'',hash);
- route(source);
- if(source==='shortcut'&&section!=='home')$('#main').focus({preventScroll:true});
+ route(source,direction);
+ if((source==='shortcut'||source==='scroll')&&section!=='home')$('#main').focus({preventScroll:true});
 }
 document.addEventListener('click',event=>{
  const link=(event.target as HTMLElement).closest<HTMLAnchorElement>('[data-ledger],.brand');

@@ -139,7 +139,7 @@ export function roomSet(parent: T.Object3D, options: { dark?: boolean; floor?: s
 export function utilityHouse(parent: T.Object3D) {
   roomSet(parent);
   const rooms = [group(parent,-2,3.08,0,true),group(parent,2,3.08,0,true),group(parent,-2,.08,0,true),group(parent,2,.08,0,true)];
-  ['bathroom','sitting-room','boiler-room','laundry'].forEach((name,i) => rooms[i].name = name);
+  ['bathroom','sitting-room','ohm-bedroom','rohil-shower'].forEach((name,i) => rooms[i].name = name);
   for (const y of [0,3]) {
     if (y) box(parent, '#b69a76', 8.08, .20, 4.6, 0, y -.07, -.57);
     box(parent, '#ebe0c6', .16, 2.83, 1.15, 0, y + 1.5, -1.38);

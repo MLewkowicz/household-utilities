@@ -205,10 +205,10 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     if(!canAnimate()) { settle(); draw(); return; }
     if(displayed!==id) begin(id,direction); draw();
   }
-  function animateTo(end: number) {
+  function animateTo(end: number,touch=false) {
     if(!turn) return;
     turn.dragging=false; turn.start=turn.progress; turn.end=end; turn.began=performance.now();
-    turn.duration=Math.max(280,turnDuration*Math.abs(end-turn.progress));
+    turn.duration=touch?Math.max(220,Math.min(650,turnDuration*Math.abs(end-turn.progress))):Math.max(280,turnDuration*Math.abs(end-turn.progress));
     canvas.classList.remove('dragging');
   }
   function frame(now: number) {
@@ -250,33 +250,35 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     tapRay.setFromCamera(tapPoint,camera);
     return tapRay.intersectObject(pivot,true).length>0;
   }
-  let pointer: {x:number;y:number;id:number;dragging:boolean;direction:number;at:number} | null=null;
+  let pointer: {x:number;y:number;id:number;dragging:boolean;direction:number;at:number;touch:boolean} | null=null;
   function down(event: PointerEvent) {
     if(event.button!==0||turn||pointer) return;
-    pointer={x:event.clientX,y:event.clientY,id:event.pointerId,dragging:false,direction:1,at:event.timeStamp};
+    pointer={x:event.clientX,y:event.clientY,id:event.pointerId,dragging:false,direction:1,at:event.timeStamp,touch:event.pointerType==='touch'};
   }
   function move(event: PointerEvent) {
     if(!pointer||pointer.id!==event.pointerId) return;
     const dx=event.clientX-pointer.x,dy=event.clientY-pointer.y;
     if(!pointer.dragging) {
-      if(Math.abs(dy)>12&&Math.abs(dy)>Math.abs(dx)) { pointer=null; return; }
-      if(Math.abs(dx)<12||Math.abs(dx)<Math.abs(dy)*1.5||turn||!canAnimate()) return;
+      if(Math.abs(dy)>12&&Math.abs(dy)>Math.abs(dx)*(pointer.touch?1.2:1)) { pointer=null; return; }
+      if(Math.abs(dx)<(pointer.touch?8:12)||Math.abs(dx)<Math.abs(dy)*(pointer.touch?1.15:1.5)||turn||!canAnimate()) return;
       pointer.dragging=true; pointer.direction=dx<0?1:-1;
       const id=neighbor(displayed,pointer.direction); begin(id,pointer.direction,true); requested=id;
       canvas.setPointerCapture(event.pointerId); canvas.classList.add('dragging');
     }
-    if(turn?.dragging) turn.progress=T.MathUtils.clamp(-dx*pointer.direction/(container.clientWidth*.65),0,1);
+    if(turn?.dragging) turn.progress=T.MathUtils.clamp(-dx*pointer.direction/(container.clientWidth*(pointer.touch ? .5 : .65)),0,1);
   }
   function up(event: PointerEvent) {
     if(!pointer||pointer.id!==event.pointerId) return;
     const p=pointer,dx=event.clientX-p.x,dy=event.clientY-p.y; pointer=null;
     if(canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
     if(p.dragging&&turn) {
-      const fling=Math.abs(dx)>=44 && Math.abs(dx)/Math.max(1,event.timeStamp-p.at)>.35;
-      const commit=turn.progress>.25||fling;
+      const distance=-dx*p.direction;
+      const fling=distance>=(p.touch?28:44) && distance/Math.max(1,event.timeStamp-p.at)>(p.touch ? .25 : .35);
+      // Dragging back past the starting point cancels the original turn.
+      const commit=distance>0&&(turn.progress>.25||fling||p.touch&&distance>=Math.max(28,Math.min(44,container.clientWidth*.1)));
       if(!commit) { requested=turn.from; }
-      animateTo(commit?1:0);
-    } else if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.5) adjacent(dx<0?1:-1);
+      animateTo(commit?1:0,p.touch);
+    } else if(Math.abs(dx)>(p.touch?28:45)&&Math.abs(dx)>Math.abs(dy)*(p.touch?1.15:1.5)) adjacent(dx<0?1:-1);
     else if(Math.hypot(dx,dy)<10&&event.timeStamp-p.at<500&&!turn&&hitsHouse(event.clientX,event.clientY)) action();
   }
   function cancelPointer() {
