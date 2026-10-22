@@ -2,7 +2,7 @@ import {HOUSE_SECTIONS,type Section,type Feature} from './house-navigation';
 
 type State={section:Section;featureOnly:boolean;ready:boolean};
 type Edge={section:Section;top:boolean;bottom:boolean};
-type Options={page:(section:Feature)=>HTMLElement;prefetch:(section:Feature)=>void};
+type Options={page:(section:Feature)=>HTMLElement;prefetch:(section:Feature)=>Promise<unknown>};
 const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
 const settle='cubic-bezier(.2,.8,.2,1)';
 /**
@@ -41,7 +41,9 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
   if(section==='home'||reduced())return null;
   const page=options.page(section),landing=main.getBoundingClientRect().top+scrollY;
   const gap=Math.max(0,area.getBoundingClientRect().bottom-main.getBoundingClientRect().bottom);
-  page.hidden=false;page.classList.add('section-peek');
+  // Its own compositor layer keeps each frame of the drag to a transform. A
+  // warmed page is already laid out, so revealing it only paints.
+  area.style.willChange='transform';page.hidden=false;page.classList.remove('section-staged');page.classList.add('section-peek');
   const height=page.offsetHeight,mainTop=main.getBoundingClientRect().top;
   let target:number;
   if(direction===1){
@@ -52,11 +54,24 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
    page.style.top=-(height+gap)+'px';target=Math.min(innerHeight-gap,landing+height)-(mainTop-gap);
   }
   peek={section,direction,page,target:Math.max(1,target),pull:0,settling:false};
-  options.prefetch(section);
+  void options.prefetch(section).catch(()=>{/* Landing retries visibly. */});
   return peek;
  }
- function setPull(pull:number,ms=0,then?:()=>void){
+ // Mouse-wheel notches ease toward their total instead of jumping per notch.
+ let glide=0,goal=0;
+ function glideTo(pull:number){
+  goal=pull;if(glide)return;
+  const step=()=>{
+   glide=0;if(!peek||peek.settling)return;
+   const next=peek.pull+(goal-peek.pull)*.35;
+   if(Math.abs(goal-next)<.5){setPull(goal);return;}
+   setPull(next,0,undefined,true);glide=requestAnimationFrame(step);
+  };
+  glide=requestAnimationFrame(step);
+ }
+ function setPull(pull:number,ms=0,then?:()=>void,gliding=false){
   if(!peek)return;
+  if(!gliding&&glide){cancelAnimationFrame(glide);glide=0;}
   peek.pull=Math.max(0,Math.min(peek.target,pull));
   area.style.transition=ms?`transform ${ms}ms ${settle}`:'';
   area.style.transform=peek.pull?`translate3d(0,${-peek.direction*peek.pull}px,0)`:'';
@@ -68,9 +83,10 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
  function clearPeek(){
   if(!peek)return;
   const {page,section}=peek;peek=null;
-  area.style.transition='';area.style.transform='';
+  area.style.transition='';area.style.transform='';area.style.willChange='';
   page.classList.remove('section-peek');page.style.top='';
-  if(state().section!==section)page.hidden=true;
+  // A peek that sprang back stays warm for the next attempt.
+  if(state().section!==section)page.classList.add('section-staged');
  }
  function springBack(){if(peek&&!peek.settling)setPull(0,220,clearPeek);}
  function commit(){
@@ -104,9 +120,8 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
   const direction=touch.dy>0?1:-1,section=destination(touch.edge,direction);
   if(!section){if(peek&&peek.direction!==direction)setPull(0);return;}
   if(event.cancelable)event.preventDefault();
-  // Resistance grows after the first stretch so the peek feels attached.
-  const distance=Math.abs(touch.dy),free=innerHeight*.4;
-  if(openPeek(section,direction))setPull(distance<free?distance*.85:free*.85+(distance-free)*.45);
+  // The peek follows the finger exactly, like ordinary scrolling.
+  if(openPeek(section,direction))setPull(Math.abs(touch.dy)-6);
  }
  function touchEnd(event:TouchEvent){
   const ended=touch;touch=null;if(!ended||!event.changedTouches.length)return;
@@ -140,7 +155,7 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
    if(pulled>=72){wheel.used=true;navigate(section,direction);}
    return;
   }
-  setPull(pulled);
+  glideTo(pulled);
   // A fast flick at the edge is an aggressive scroll and commits outright.
   const velocity=pulled/Math.max(16,now-wheel.began);
   if(pulled>=innerHeight*.35||pulled>=120&&velocity>3){wheel.used=true;commit();return;}
@@ -162,7 +177,20 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
   const index=HOUSE_SECTIONS.findIndex(item=>item.route===current.section),rest=document.documentElement.scrollHeight-innerHeight-scrollY;
   for(const [near,offset] of [[rest<innerHeight,1],[scrollY<innerHeight,-1]] as const){
    const next=HOUSE_SECTIONS[index+offset]?.route;
-   if(near&&next&&next!=='home'&&!prefetched.has(next)){prefetched.add(next);options.prefetch(next);}
+   if(near&&next&&next!=='home'&&!prefetched.has(next)){prefetched.add(next);void options.prefetch(next).catch(()=>{/* The peek loads it on demand instead. */});}
+  }
+ }
+ // After landing, both neighbours load and lay out invisibly in idle time, so
+ // a peek reveals finished pages instead of building them mid-gesture.
+ function warm(){
+  const current=state();if(!current.featureOnly||reduced())return;
+  const index=HOUSE_SECTIONS.findIndex(item=>item.route===current.section);
+  for(const offset of [1,-1]){
+   const next=HOUSE_SECTIONS[index+offset]?.route;if(!next||next==='home')continue;
+   void options.prefetch(next).then(()=>{
+    const now=state();if(now.section!==current.section||!now.featureOnly||peek?.section===next)return;
+    const page=options.page(next);page.classList.add('section-staged');page.hidden=false;
+   }).catch(()=>{/* The peek loads it on demand instead. */});
   }
  }
  document.addEventListener('touchstart',touchStart,{passive:true});
@@ -172,5 +200,5 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
  document.addEventListener('wheel',onWheel,{passive:false});
  document.addEventListener('keydown',key);
  window.addEventListener('scroll',onScroll,{passive:true});
- return ()=>{clearPeek();document.removeEventListener('touchstart',touchStart);document.removeEventListener('touchmove',touchMove);document.removeEventListener('touchend',touchEnd);document.removeEventListener('touchcancel',cancel);document.removeEventListener('wheel',onWheel);document.removeEventListener('keydown',key);window.removeEventListener('scroll',onScroll);};
+ return {warm,destroy:()=>{clearPeek();document.removeEventListener('touchstart',touchStart);document.removeEventListener('touchmove',touchMove);document.removeEventListener('touchend',touchEnd);document.removeEventListener('touchcancel',cancel);document.removeEventListener('wheel',onWheel);document.removeEventListener('keydown',key);window.removeEventListener('scroll',onScroll);}};
 }

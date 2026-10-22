@@ -130,7 +130,8 @@ export function rohilShower(room: T.Group, faces: Faces) {
   cylinder(rohil.root, '#e6dcc5', .25, .58, 0, .59, 0, .22);
   box(rohil.root, '#c4bca5', .035, .48, .024, .09, .58, .236);
   const lyrics = ['Fuck me in the shower', 'I don’t misbehave', 'I’m such a good little boy'];
-  const bubbles = lyrics.map(text => speech(room, text, rohil, 2.7));
+  // One-line captions may overlap the upstairs floor edge but stop short of the room above.
+  const bubbles = lyrics.map(text => speech(room, text, rohil, 2.7, { y: 2.96, z: 1.3 }));
   // One instanced draw for the continuous stream; no per-frame texture uploads.
   const waterCount = 48;
   const water = movable(new T.InstancedMesh(new T.CylinderGeometry(.016,.016,1,4), new T.MeshBasicMaterial({ color: '#74bfcd', transparent: true, opacity: .8, depthWrite: false }), waterCount));

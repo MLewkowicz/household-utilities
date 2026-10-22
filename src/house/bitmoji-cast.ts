@@ -72,30 +72,39 @@ export function reach(person: CastMember, arm: T.Group, world: T.Vector3) {
   arm.quaternion.setFromUnitVectors(new T.Vector3(0, -1, 0), direction.clone().normalize());
   arm.scale.y = direction.length() / .4;
 }
-export function speech(parent: T.Object3D, message: string, speaker: CastMember, width = 2.8) {
-  const canvas = document.createElement('canvas'); canvas.width = 512;
-  const ctx = canvas.getContext('2d')!, fontSize = 52;
-  ctx.font = `600 ${fontSize}px sans-serif`;
+/**
+ * A caption above a speaker. `ceiling` (room-local height and front edge) keeps
+ * it inside a low room: it renders on one line and shrinks rather than crossing
+ * into the floor above.
+ */
+export function speech(parent: T.Object3D, message: string, speaker: CastMember, width = 2.8, ceiling?: { y: number; z: number }) {
+  const canvas = document.createElement('canvas'), measure = canvas.getContext('2d')!, fontSize = 52;
+  measure.font = `600 ${fontSize}px sans-serif`;
+  canvas.width = ceiling ? Math.max(512, Math.ceil(measure.measureText(message).width) + 64) : 512;
+  const ctx = canvas.getContext('2d')!; ctx.font = `600 ${fontSize}px sans-serif`;
   const lines: string[] = []; let line = '';
   for (const word of message.split(' ')) {
     const next = line ? `${line} ${word}` : word;
-    if (line && ctx.measureText(next).width > 448) { lines.push(line); line = word; } else line = next;
+    if (line && ctx.measureText(next).width > canvas.width - 64) { lines.push(line); line = word; } else line = next;
   }
   if (line) lines.push(line);
   canvas.height = lines.length * 62 + 70;
+  const middle = canvas.width / 2;
   ctx.fillStyle = '#fff8e7';
-  ctx.beginPath(); ctx.roundRect(4, 4, 504, canvas.height - 31, 25); ctx.fill();
-  ctx.beginPath(); ctx.moveTo(224, canvas.height - 32); ctx.lineTo(256, canvas.height - 3); ctx.lineTo(282, canvas.height - 32); ctx.fill();
+  ctx.beginPath(); ctx.roundRect(4, 4, canvas.width - 8, canvas.height - 31, 25); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(middle - 32, canvas.height - 32); ctx.lineTo(middle, canvas.height - 3); ctx.lineTo(middle + 26, canvas.height - 32); ctx.fill();
   ctx.fillStyle = '#35434a'; ctx.font = `600 ${fontSize}px sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  lines.forEach((line,i) => ctx.fillText(line, 256, 34 + 31 + i * 62));
+  lines.forEach((line,i) => ctx.fillText(line, middle, 34 + 31 + i * 62));
+  // The world width keeps the same text size as a standard 512px caption.
+  width *= canvas.width / 512;
   const texture = new T.CanvasTexture(canvas); texture.colorSpace = T.SRGBColorSpace;
   const bubble = new T.Sprite(new T.SpriteMaterial({ map: texture, transparent: true, depthWrite: false, depthTest: false, toneMapped: false }));
-  bubble.userData = { message, speaker: speaker.id, baseWidth: width, fontRatio: fontSize / canvas.width, aspect: canvas.height / canvas.width };
+  bubble.userData = { message, speaker: speaker.id, baseWidth: width, fontRatio: fontSize / canvas.width, aspect: canvas.height / canvas.width, ceiling };
   bubble.center.set(.5,0); bubble.scale.set(width, width * canvas.height / canvas.width, 1); bubble.renderOrder = 10; parent.add(bubble); return bubble;
 }
 
 const speechAnchor = new T.Vector3(), cameraUp = new T.Vector3(), cameraRight = new T.Vector3();
-const otherTop = new T.Vector3(), otherBottom = new T.Vector3(), otherScale = new T.Vector3();
+const otherTop = new T.Vector3(), otherBottom = new T.Vector3(), otherScale = new T.Vector3(), roof = new T.Vector3();
 export function placeSpeech(root: T.Group, people: CastMember[], camera: T.OrthographicCamera, viewportHeight: number, opacity = 1) {
   const unitsPerPixel = (camera.top-camera.bottom) / viewportHeight;
   cameraUp.set(0,1,0).applyQuaternion(camera.quaternion);
@@ -106,12 +115,19 @@ export function placeSpeech(root: T.Group, people: CastMember[], camera: T.Ortho
     const speaker = people.find(person => person.id === object.userData.speaker); if (!speaker) return;
     const { baseWidth, fontRatio, aspect } = object.userData;
     const naturalFont = baseWidth * fontRatio / unitsPerPixel;
-    const width = baseWidth * T.MathUtils.clamp(naturalFont,12,17) / naturalFont;
-    object.scale.set(width, width * aspect, 1); object.material.opacity = opacity;
+    let width = baseWidth * T.MathUtils.clamp(naturalFont,12,17) / naturalFont;
     // Captions overlay the settled view; the player fades them away during turns.
     // Anchor the tail to the portrait in screen space without a sideways offset.
     speechAnchor.set(0,.86,0); speaker.head.localToWorld(speechAnchor);
     speechAnchor.addScaledVector(cameraUp,8*unitsPerPixel);
+    const { ceiling } = object.userData;
+    if (ceiling) {
+      // Shrink (to a 10px floor) instead of rising past the floor above.
+      roof.set(speaker.root.position.x, ceiling.y, ceiling.z); object.parent!.localToWorld(roof);
+      const room = roof.dot(cameraUp) - speechAnchor.dot(cameraUp) - 3 * unitsPerPixel;
+      width = Math.max(Math.min(width, room / aspect), baseWidth * 10 / naturalFont);
+    }
+    object.scale.set(width, width * aspect, 1); object.material.opacity = opacity;
     // A front-row speaker's caption must also clear the faces behind them.
     // Lift vertically only, preserving the tail's horizontal link to its speaker.
     for (let pass=0; object.userData.avoidCrowd && pass<people.length; pass++) {

@@ -81,3 +81,5 @@
 .updates-footnote{margin:0 0 4px;color:var(--muted);font-size:12px}
 #updates-dialog .dialog-actions{margin:8px 26px 24px}
 @media(prefers-reduced-motion:reduce){#updates-dialog[open],#updates-dialog[open] #updates-list,#updates-dialog[open] .dialog-actions{animation:none}}
+/* Warmed neighbours are laid out but take no space and cannot be reached. */
+.section-staged{position:absolute;left:0;right:0;top:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none}

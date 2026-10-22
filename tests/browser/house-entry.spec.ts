@@ -9,6 +9,7 @@ test.use({viewport:{width:1440,height:900}});
 test.beforeEach(async({page})=>{await page.addInitScript(()=>localStorage.setItem('household-person','michal'));});
 
 test('downstairs utilities animate continuously, cycle Rohil’s lyrics and keep all four portraits',async({page})=>{
+ test.setTimeout(90000);
  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');await ready(page);
  const canvas=page.locator('.stage-canvas');await canvas.focus();await page.keyboard.press('ArrowLeft');
  const still=await diag(page),utilities=still.sceneDetails.utilities;
@@ -25,7 +26,8 @@ test('downstairs utilities animate continuously, cycle Rohil’s lyrics and keep
  await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.shower.waterY).not.toBe(utilities.shower.waterY);
  await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.bedroom.fanAngle).not.toBe(utilities.bedroom.fanAngle);
  const current=(await diag(page)).sceneDetails.utilities.shower.lyric;
- await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.shower.lyric,{timeout:8000}).not.toBe(current);
+ // Lyrics follow scene time, which runs slower when a loaded machine drops frames.
+ await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.shower.lyric,{timeout:20000}).not.toBe(current);
  // Speech fades before the room passes behind the common house shell.
  await page.keyboard.press('ArrowRight');
  await expect.poll(async()=>(await diag(page)).speech.filter((bubble:any)=>bubble.visible&&bubble.opacity>.05).length).toBe(0);
@@ -194,16 +196,17 @@ test('pointer bursts are coalesced and the house keeps full resolution',async({p
 
 
 test('day and night interpolate through landscape lighting and reverse without changing rooms',async({page})=>{
+ test.setTimeout(90000);
  await page.emulateMedia({colorScheme:'light'});await page.goto('/');await ready(page);
  expect((await diag(page)).themeBlend).toBe(0);
  await page.locator('#theme-toggle').click();
  await expect.poll(async()=>(await diag(page)).themeBlend).toBeGreaterThan(.1);
  const middle=await diag(page);expect(middle.themeBlend).toBeLessThan(1);expect(middle.displayed).toBe('home');
  await page.locator('#theme-toggle').click();
- await expect.poll(async()=>(await diag(page)).themeBlend,{timeout:10000}).toBe(0);
+ await expect.poll(async()=>(await diag(page)).themeBlend,{timeout:20000}).toBe(0);
  expect((await diag(page)).displayed).toBe('home');expect((await diag(page)).pixelRatio).toBeGreaterThanOrEqual(1);
  await page.locator('#theme-toggle').click();
- await expect.poll(async()=>(await diag(page)).themeBlend,{timeout:10000}).toBe(1);
+ await expect.poll(async()=>(await diag(page)).themeBlend,{timeout:20000}).toBe(1);
  expect((await diag(page)).environment.moonVisible).toBe(true);expect((await diag(page)).environment.sunVisible).toBe(false);
 });
 

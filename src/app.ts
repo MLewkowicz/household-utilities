@@ -30,14 +30,18 @@ initSettings();initNotifications();initAvatarFallback();initPaperTiles();
 let active:Section='home',routeVersion=0;
 const house=mountHouseEntry(section=>navigate(section,'house'),section=>{if(active==='home')navigate(section,'entry');});
 const PAGE_IDS:Record<Route,string>={utilities:'utilities-page',miscellaneous:'misc-page',chores:'chores-page',bulletin:'bulletin-page',events:'events-page'};
-bindSectionScroll(()=>({section:active,featureOnly:Boolean($('#house-hero').hidden),ready:$('#main').getAttribute('aria-busy')!=='true'}),(section,direction)=>navigate(section,'scroll',direction),{
+const sections=bindSectionScroll(()=>({section:active,featureOnly:Boolean($('#house-hero').hidden),ready:$('#main').getAttribute('aria-busy')!=='true'}),(section,direction)=>navigate(section,'scroll',direction),{
  page:section=>$('#'+PAGE_IDS[section]),
- prefetch:section=>void refreshPage(section).catch(()=>{/* Entering the section retries visibly. */}),
+ prefetch:section=>refreshPage(section,20000),
 });
 const refreshing=new Map<Route,Promise<Page>>();
-function refreshPage(route:Route){
+// A section peeked or prefetched moments ago is already current; re-rendering
+// it as the gesture lands would stall the settle animation.
+const freshAt=new Map<Route,number>();
+function refreshPage(route:Route,maxAge=0){
  let pending=refreshing.get(route);
- if(!pending){pending=load(route).then(async page=>{await page.refresh();return page;}).finally(()=>refreshing.delete(route));refreshing.set(route,pending);}
+ if(!pending&&maxAge&&performance.now()-(freshAt.get(route)??-Infinity)<maxAge)return load(route);
+ if(!pending){pending=load(route).then(async page=>{await page.refresh();freshAt.set(route,performance.now());return page;}).finally(()=>refreshing.delete(route));refreshing.set(route,pending);}
  return pending;
 }
 async function refreshBadge(){
@@ -50,16 +54,18 @@ async function refreshBadge(){
   $('#chore-badge').textContent=String(count);$('#chore-badge').hidden=!count;$('#chore-badge').removeAttribute('title');
  }catch{$('#chore-badge').title='Count unavailable. Open To-dos to refresh.';}
 }
-async function refresh(){
+async function refresh(maxAge=0){
  if(active==='home'){$('#main').setAttribute('aria-busy','false');$('#refresh').setAttribute('disabled','');void refreshBadge();return;}
  const route=active,version=routeVersion;
  try{
-  const page=await refreshPage(route);
+  const page=await refreshPage(route,maxAge);
   if(version!==routeVersion)return;
   const url=new URL(location.href),item=url.searchParams.get('notice');
   if(item){if(!page.focus?.(item))missingNotification();url.hash=location.hash;url.searchParams.delete('notice');history.replaceState(null,'',url);}
   // The active page never waits for the background badge request.
   void refreshBadge();
+  const idle=window.requestIdleCallback??((run:()=>void)=>setTimeout(run,200));
+  idle(()=>{if(version===routeVersion)sections.warm();});
  }catch(error){toast('Could not load this section. '+(error as Error).message,{label:'Retry',run:()=>void refresh()});}
  finally{if(version===routeVersion){$('#main').setAttribute('aria-busy','false');$('#refresh').removeAttribute('disabled');}}
 }
@@ -78,7 +84,7 @@ function route(source:NavigationSource='history',direction:1|-1=1){
  active=sectionFromHash(location.hash);routeVersion++;
  $('#feature-area').hidden=false;
  const content=active==='home'?'chores':active;
- for(const [key,id] of Object.entries(PAGE_IDS))$('#'+id).hidden=key!==content;
+ for(const [key,id] of Object.entries(PAGE_IDS)){const page=$('#'+id);page.hidden=key!==content;page.classList.remove('section-staged');}
  document.querySelectorAll<HTMLAnchorElement>('[data-ledger]').forEach(link=>{if(link.dataset.ledger===active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
  const label=active==='home'?'Home':active==='utilities'?'Utilities':active==='chores'?'To-dos':active==='events'?'Events':active==='bulletin'?'Bulletin':'Expenses';
  document.title=`Household · ${label}`;
@@ -109,7 +115,7 @@ function route(source:NavigationSource='history',direction:1|-1=1){
  else if(source==='shortcut'||source==='initial'||source==='scroll')$('#feature-area').scrollIntoView({block:'start',behavior:'instant'});
  // Tab-to-tab shortcuts rise the new page in, matching the gesture settle.
  if(source==='shortcut'&&wasFeature&&active!=='home'){const main=$('#main');main.classList.remove('is-entering');void main.offsetWidth;main.classList.add('is-entering');}
- const version=routeVersion,pending=refresh();
+ const version=routeVersion,pending=refresh(source==='scroll'?20000:0);
  // A backward gesture lands at the bottom immediately (the peek already showed
  // it there) and stays pinned if fresh data lengthens the page.
  if(source==='scroll'&&direction===-1&&active!=='home'){
