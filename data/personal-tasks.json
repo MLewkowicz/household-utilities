@@ -1,6 +1,20 @@
 {
   "tasks": [
     {
+      "id": "8840fdd8-fa7c-44b1-bd1f-2b3416581fe7",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Email Roberto to coordinate meet time",
+      "action": "complete",
+      "pinned": false,
+      "deleted": false,
+      "version": 2,
+      "added_at": "2026-10-22T11:48:11.882105+00:00",
+      "created_at": "2026-10-22T16:00:06.992986+00:00",
+      "group_name": "MIT",
+      "completed_at": "2026-10-22T16:00:06.992986+00:00"
+    },
+    {
       "id": "7b8227e6-8bd2-4a1a-9fd3-01da672c35d9",
       "actor": "michal",
       "owner": "michal",
@@ -60,6 +74,7 @@
   "orders": [
     {
       "keys": [
+        "personal:8840fdd8-fa7c-44b1-bd1f-2b3416581fe7",
         "shared:e1175002-64d7-457f-a935-9ee02a5a5bf9",
         "personal:7b8227e6-8bd2-4a1a-9fd3-01da672c35d9",
         "shared:27559331-b057-49c7-8dae-c67e1633fd70_michal",
@@ -68,8 +83,8 @@
         "personal:64b0df69-f90f-4e10-92cd-abd9dcb56bb7"
       ],
       "member": "michal",
-      "version": 17,
-      "created_at": "2026-10-22T03:18:43.904051+00:00"
+      "version": 18,
+      "created_at": "2026-10-22T11:48:22.531437+00:00"
     },
     {
       "keys": [
@@ -81,6 +96,34 @@
     }
   ],
   "history": [
+    {
+      "id": "8840fdd8-fa7c-44b1-bd1f-2b3416581fe7",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Email Roberto to coordinate meet time",
+      "action": "complete",
+      "pinned": false,
+      "deleted": false,
+      "version": 2,
+      "added_at": "2026-10-22T11:48:11.882105+00:00",
+      "created_at": "2026-10-22T16:00:06.992986+00:00",
+      "group_name": "MIT",
+      "completed_at": "2026-10-22T16:00:06.992986+00:00"
+    },
+    {
+      "id": "8840fdd8-fa7c-44b1-bd1f-2b3416581fe7",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Email Roberto to coordinate meet time",
+      "action": "create",
+      "pinned": false,
+      "deleted": false,
+      "version": 1,
+      "added_at": "2026-10-22T11:48:11.882105+00:00",
+      "created_at": "2026-10-22T11:48:11.882105+00:00",
+      "group_name": "MIT",
+      "completed_at": null
+    },
     {
       "id": "7b8227e6-8bd2-4a1a-9fd3-01da672c35d9",
       "actor": "michal",
@@ -222,8 +265,8 @@
       "completed_at": null
     }
   ],
-  "updated_at": "2026-10-22T04:35:44.419797+00:00",
-  "exported_at": "2026-10-22T04:35:44.419797+00:00",
+  "updated_at": "2026-10-22T20:51:25.599677+00:00",
+  "exported_at": "2026-10-22T20:51:25.599677+00:00",
   "format_version": 2,
   "group_rename_version": 1
 }
