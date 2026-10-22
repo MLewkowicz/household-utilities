@@ -3,7 +3,7 @@ const config=JSON.parse(await readFile('config.public.json','utf8'));
 const checks=[
  ['personal_tasks',{p:{member:'michal'}},d=>d.format_version>=2&&d.group_rename_version>=1&&Array.isArray(d.tasks),'021_personal_group_rename.sql'],
  ['home_order',{p:{member:'michal'}},d=>Number.isInteger(d.version)&&Array.isArray(d.keys),'017_home_personal_tasks.sql'],
- ['events_dashboard',{},d=>d.format_version>=2,'018_event_icons.sql'],
+ ['events_dashboard',{},d=>d.format_version>=3&&Array.isArray(d.availability),'022_event_availability.sql'],
  ['bulletin_dashboard',{},d=>d.reaction_library_version>=2,'019_reaction_library.sql'],
 ];
 const results=await Promise.all(checks.map(async([operation,body,valid,migration])=>{

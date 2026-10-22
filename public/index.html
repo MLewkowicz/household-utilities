@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="referrer" content="no-referrer">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#14151b">
+  <meta name="theme-color" content="#f5f2e9">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="apple-touch-icon" href="./icon-192.png">
@@ -41,7 +41,7 @@
   </div>
   </header>
   <section id="house-hero" aria-label="Explore the household" data-sky-paused="true">
-    <div id="house-stage"></div><span id="house-current" class="sr-only" aria-live="polite">Home</span>
+    <div id="house-stage"></div><button id="updates-board-button" class="updates-board-button" type="button" aria-haspopup="dialog" aria-controls="updates-dialog" hidden>What’s new: see the latest updates</button><span id="house-current" class="sr-only" aria-live="polite">Home</span>
   </section>
   <div id="feature-area" class="shell feature-shell" hidden>
     <main id="main" tabindex="-1">
@@ -72,8 +72,14 @@
     <label for="theme-select">Color theme</label><select id="theme-select"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select>
     <div class="settings-options">
       <button id="notifications" type="button" class="settings-option"><span>Notifications<small>Choose alerts for this device</small></span><span aria-hidden="true">›</span></button>
+      <button id="whats-new" type="button" class="settings-option" aria-haspopup="dialog" aria-controls="updates-dialog"><span>What’s new<small>See what’s changed in recent updates</small></span><span aria-hidden="true">›</span></button>
       <button id="refresh" type="button" class="settings-option" aria-label="Refresh"><span>Refresh this section</span><span aria-hidden="true">↻</span></button>
     </div>
+  </dialog>
+  <dialog id="updates-dialog" aria-labelledby="updates-title">
+    <div class="updates-header"><h2 id="updates-title" tabindex="-1" autofocus>What’s new</h2><button id="updates-close" type="button" class="icon-button" aria-label="Close what’s new">×</button></div>
+    <div id="updates-list"></div>
+    <div class="dialog-actions"><button id="updates-done" type="button" class="button primary">Got it</button></div>
   </dialog>
   <dialog id="payment-dialog" aria-labelledby="payment-title"><form id="payment-form"><div class="dialog-top"><div class="eyebrow">SENT TO MICHAL</div><button type="button" class="icon-button" id="close-dialog" aria-label="Close payment form">×</button></div><h2 id="payment-title">Record a payment</h2><p class="dialog-description">Add the amount you’ve already sent.</p><input type="hidden" name="payment_id"><input type="hidden" name="version"><div class="form-row"><label>Who paid?<select name="member_id" required><option value="rina">Rina</option><option value="ohm">Ohm</option><option value="rohil">Rohil</option></select></label><label>Payment date<input type="date" name="paid_on" required></label></div><label>Amount<span class="amount-input"><span>$</span><input name="amount" aria-label="Amount" type="text" inputmode="decimal" placeholder="0.00" autocomplete="off" required pattern="[0-9]+(\.[0-9]{1,2})?"></span></label><fieldset><legend>Paid with</legend><div class="method-options"><label><input type="radio" name="method" value="venmo" checked><span>Venmo</span></label><label><input type="radio" name="method" value="zelle"><span>Zelle</span></label><label><input type="radio" name="method" value="other"><span>Other</span></label></div></fieldset><label id="other-label" hidden>How did you pay?<input name="other" maxlength="80" placeholder="e.g. cash or bank transfer"><small>Keep it brief; don’t include account or contact details.</small></label><label id="actor-label" hidden>Changed by<select name="actor"><option value="michal">Michal</option><option value="rina">Rina</option><option value="ohm">Ohm</option><option value="rohil">Rohil</option></select></label><div id="payment-error" class="form-error" role="alert" hidden></div><div class="dialog-actions"><button type="button" class="button secondary" id="cancel-dialog">Cancel</button><button type="submit" class="button primary" id="save-payment">Confirm payment</button></div><p class="dialog-footnote">Your balance updates when this entry is saved.</p></form></dialog>
   <dialog id="delete-dialog" aria-labelledby="delete-title"><form id="delete-form"><h2 id="delete-title">Delete this payment?</h2><p id="delete-description"></p><label>Changed by<select name="actor"><option value="michal">Michal</option><option value="rina">Rina</option><option value="ohm">Ohm</option><option value="rohil">Rohil</option></select></label><p class="dialog-description">The balance will increase by this amount. You can still find this payment under Show deleted.</p><div id="delete-error" class="form-error" role="alert" hidden></div><div class="dialog-actions"><button type="button" class="button secondary" id="cancel-delete">Keep payment</button><button type="submit" class="button danger" id="confirm-delete">Delete payment</button></div></form></dialog>

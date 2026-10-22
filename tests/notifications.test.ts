@@ -155,3 +155,48 @@ test('a completed task cancels a held assignment and financial/board exports nev
   const data=JSON.stringify(await rpc(fn));assert.ok(!data.includes('subscription'));assert.ok(!data.includes('token_hash'));assert.ok(!data.includes('fcm.googleapis.com'));
  }
 });
+const outing=(extra={})=>({id:randomUUID(),request_id:randomUUID(),actor:'rina',action:'create',title:'Dinner together',starts_local:'2027-01-08T19:00',ends_local:'2027-01-08T21:00',...extra});
+test('events alert everyone but the actor when posted, locked in, moved or cancelled',async()=>{
+ const devices=await Promise.all(['michal','rina','ohm'].map(m=>register(m)));
+ assert.ok((await rpc('push_device',{token:devices[0].token,action:'status'})).categories.includes('events'));
+ const e=await rpc('save_event',outing());
+ await normalize();let jobs=await claim();
+ assert.deepEqual(jobs.map((j:any)=>j.payload.tab).sort(),['events','events']);
+ assert.equal(jobs[0].payload.item,e.id);assert.equal(jobs[0].payload.body,'Rina posted “Dinner together” · Fri, Jan 8, 7:00 PM');
+ for(const job of jobs)await finish(job);
+ // A title edit is quiet; a new time and a cancellation are not.
+ const renamed=await rpc('save_event',{...outing(),id:e.id,action:'edit',expected_version:1,request_id:randomUUID(),title:'Dinner'});
+ await normalize();assert.deepEqual(await claim(),[]);
+ const moved=await rpc('save_event',{...outing(),id:e.id,action:'edit',expected_version:renamed.version,request_id:randomUUID(),title:'Dinner',starts_local:'2027-01-09T18:00',ends_local:'2027-01-09T20:00'});
+ await normalize();jobs=await claim();assert.equal(jobs.length,2);assert.equal(jobs[0].payload.body,'“Dinner” moved to Sat, Jan 9, 6:00 PM.');
+ for(const job of jobs)await finish(job);
+ await rpc('save_event',{id:e.id,actor:'rina',action:'cancel',expected_version:moved.version,request_id:randomUUID()});
+ await normalize();jobs=await claim();assert.equal(jobs.length,2);assert.equal(jobs[0].payload.body,'Rina cancelled “Dinner”.');
+});
+test('event polls invite marking days, availability is quiet, and lock-in announces the time',async()=>{
+ await register('michal');await register('ohm');
+ const poll=await rpc('save_event',{id:randomUUID(),request_id:randomUUID(),actor:'rina',action:'create_poll',title:'Ski trip',window_start:'2027-01-10',window_end:'2027-01-20'});
+ await normalize();let jobs=await claim();assert.equal(jobs.length,2);assert.equal(jobs[0].payload.body,'Rina is planning “Ski trip”. Mark the days that work for you.');
+ for(const job of jobs)await finish(job);
+ await rpc('save_event_availability',{id:poll.id,actor:'michal',request_id:randomUUID(),poll_version:1,expected_version:0,days:{'2027-01-12':'yes'}});
+ await normalize();assert.deepEqual(await claim(),[]);
+ // Opting out of events silences the rest for that phone only.
+ const ohm=(await db.query("SELECT token_hash FROM ledger_private.push_devices WHERE member='ohm'")).rows[0];
+ await db.query(`UPDATE ledger_private.push_devices SET categories='["chores"]' WHERE token_hash=$1`,[ohm.token_hash]);
+ await rpc('save_event',{id:poll.id,actor:'rina',action:'lock_in',expected_version:1,request_id:randomUUID(),starts_local:'2027-01-12T08:00',ends_local:'2027-01-12T17:00'});
+ await normalize();jobs=await claim();assert.equal(jobs.length,1);assert.equal(jobs[0].payload.body,'“Ski trip” is set for Tue, Jan 12, 8:00 AM.');
+});
+test('event reminders reach Yes and Maybe two hours ahead, after quiet hours, and only for the current time',async()=>{
+ await register('michal');await register('ohm');await register('rohil');
+ const e=await rpc('save_event',outing());await db.exec('DELETE FROM ledger_private.push_events');
+ for(const [actor,response] of [['michal','yes'],['ohm','no'],['rohil','maybe']])await rpc('save_event_response',{id:e.id,actor,request_id:randomUUID(),interval_version:1,expected_version:0,response});
+ assert.deepEqual(await claim('2027-01-08T21:30:00Z'),[]);
+ const jobs=await claim('2027-01-08T22:05:00Z');
+ assert.deepEqual(jobs.map((j:any)=>j.payload.body),['“Dinner together” starts at 7:00 PM.','“Dinner together” starts at 7:00 PM.']);
+ for(const job of jobs)await finish(job);assert.deepEqual(await claim('2027-01-08T22:30:00Z'),[]);
+ // A morning event's reminder waits for quiet hours to end, and is dropped once it has started.
+ const early=await rpc('save_event',outing({starts_local:'2027-01-09T08:30',ends_local:'2027-01-09T09:30'}));await db.exec("DELETE FROM ledger_private.push_events WHERE kind<>'event_reminder'");
+ await rpc('save_event_response',{id:early.id,actor:'michal',request_id:randomUUID(),interval_version:1,expected_version:0,response:'yes'});
+ assert.deepEqual(await claim('2027-01-09T12:00:00Z'),[]);
+ assert.equal((await claim('2027-01-09T13:00:00Z')).length,1);
+});

@@ -71,7 +71,8 @@ All four characters are approved and integrated. Hashed, allowlisted WebP deriva
 - [x] One changeable character reaction per person per note, six expressions, still cached thumbnails and brief selection animation. Author temperature is unchanged.
 - [x] New migrations 013–015 rehearsed against the actual backup; original IDs, revision history, dates, owners, and completions preserved. User completed live schema setup.
 - [x] Live historical scores verified, five fallback exports refreshed, and frontend release checks passed. Publication uses the existing Pages workflow; smoke checks make no live test entries.
-- [ ] Later: alternate-time polling/when2meet, recurring events, external event guests, and opt-in event notifications.
+- [x] Day-availability polls (drag-to-paint grid, host lock-in) and opt-in event notifications with a two-hour reminder (migrations 022–023).
+- [ ] Later: recurring events and external event guests.
 - [ ] Later: utility-credit rewards after budget, eligibility, ties, and funding are agreed.
 
 ## Independent artwork track

@@ -47,7 +47,7 @@ export function initMyTasks(onChange:()=>void){
  document.querySelectorAll('[data-group-rename-close]').forEach(b=>b.addEventListener('click',()=>{if(!busy)$<HTMLDialogElement>('#group-rename-dialog').close();}));
  $('#group-rename-dialog').addEventListener('cancel',e=>{if(busy)e.preventDefault();});
  document.addEventListener('close',()=>{if(pending&&!inUse()&&!$('#my-tasks').hidden)renderMyTasks();},true);
- bindCompletionSwipe($('#home-feed'),id=>{const e=entries().find(e=>e.task.id===id);if(e?.source==='personal')void changePersonal(e.task,'complete');else if(e&&identity)void completeSharedTask(e.task,identity);},value=>{dragging=value;if(!value)queueMicrotask(()=>{if(pending&&!inUse())renderMyTasks();});});
+ bindCompletionSwipe($('#home-feed'),id=>{const e=entries().find(e=>e.task.id===id);if(e?.source==='personal')return changePersonal(e.task,'complete');if(e&&identity)return completeSharedTask(e.task,identity);},value=>{dragging=value;if(!value)queueMicrotask(()=>{if(pending&&!inUse())renderMyTasks();});});
  cancelDrag=bindTaskReorder($('#home-feed'),{enabled:()=>orderLive&&!showHistory&&!busy,active:value=>{dragging=value;if(!value)queueMicrotask(()=>{if(pending&&!inUse())renderMyTasks();});},commit:(key,keys,group)=>void dropTask(key,keys,group)});
 
  renderMyTasks();

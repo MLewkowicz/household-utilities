@@ -28,7 +28,9 @@ The app now has **Utilities, Expenses, To-dos, Events, and Bulletin**. Existing 
 - All 86 Node/database tests, 8 Python tests, and 43 browser scenarios pass. A rehearsal against the actual private backup confirmed preserved source revisions, IDs, dates, assignees, and completions. Mobile screenshots cover both themes, all 24 reactions, and 320px navigation without overflow. Final build/privacy checks also pass.
 - Release state: live migrations and historical adoption are verified. Four existing tasks and three routine definitions adopted the catalog, preserving original revisions. Exact score deltas are Michal +1/3, Rina +1/3, Rohil −1/6, Ohm unchanged. Both financial ledgers, notes, and events are unchanged. Five fallback snapshots are refreshed; frontend release checks pass. Publication uses the existing GitHub Pages workflow. Recovery: ignored `.local/backups/point-policy-20261021T022259Z.json`.
 
-Remaining product iterations: alternate event times/when2meet, recurring events, external guests for events, event notifications, and an agreed utility-credit reward policy. `docs/events-prototype.html` is an older design artifact, not the production implementation.
+- 2026-10-22 polish pass: continuous tab-to-tab peeks (`src/section-scroll.ts`), animated lawn ↔ tab transitions (`animateScroll` in `src/ui.ts`), one view-transition cross-fade for theme changes, minimal payment rows with the paper corner, haptic swipe-to-complete (`src/haptics.ts`), day-availability event polls (migration 022, `src/event-availability.ts`) and event notifications (migration 023, which replaces `push_device`, `push_event_valid`, `push_payload` and `push_claim` from 008).
+
+Remaining product iterations: recurring events, external guests for events, and an agreed utility-credit reward policy. `docs/events-prototype.html` is an older design artifact, not the production implementation.
 
 ## Project and current state
 

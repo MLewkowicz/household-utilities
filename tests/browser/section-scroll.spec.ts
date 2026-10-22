@@ -28,17 +28,17 @@ test('Home lazily reveals To-dos below the house without rotating first',async({
 test('fresh upward and downward swipes traverse every section and return to the house',async({page})=>{
  await page.goto('/#chores');await ready(page);await page.locator('#personal-title').fill('Keep my task draft');
  for(const section of ['miscellaneous','events','bulletin','utilities']){
-  await bottom(page);await swipe(page,-100);await expect(page).toHaveURL(new RegExp('#'+section+'$'));await ready(page);
+  await bottom(page);await swipe(page,-260,360,560);await expect(page).toHaveURL(new RegExp('#'+section+'$'));await ready(page);
   expect(await page.evaluate(()=>scrollY)).toBe(0);await expect(page.locator('.house-chrome')).toHaveClass(/is-docked/);
  }
  await bottom(page);await swipe(page,-100);await expect(page).toHaveURL(/#utilities$/);
  for(const section of ['bulletin','events','miscellaneous','chores']){
-  await page.evaluate(()=>scrollTo(0,0));await swipe(page,100);await expect(page).toHaveURL(new RegExp('#'+section+'$'));await ready(page);
+  await page.evaluate(()=>scrollTo(0,0));await swipe(page,260,360,200);await expect(page).toHaveURL(new RegExp('#'+section+'$'));await ready(page);
   await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollHeight-innerHeight-scrollY)).toBeLessThan(4);
  }
  await expect(page.locator('#personal-title')).toHaveValue('Keep my task draft');
  await page.evaluate(()=>scrollTo(0,0));await swipe(page,100);await expect(page).toHaveURL(/#home$/);await expect(page.locator('#house-hero')).toBeVisible();
- expect(await page.evaluate(()=>scrollY)).toBe(0);
+ await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
 });
 
 test('reaching the bottom during a swipe does not skip the section',async({page})=>{
@@ -47,14 +47,28 @@ test('reaching the bottom during a swipe does not skip the section',async({page}
  await page.evaluate(()=>scrollTo(0,document.documentElement.scrollHeight-innerHeight-50));
  await swipe(page,-180);await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollHeight-innerHeight-scrollY)).toBeLessThan(4);
  await expect(page).toHaveURL(/#chores$/);await page.waitForTimeout(300);
- await swipe(page,-100);await expect(page).toHaveURL(/#miscellaneous$/);
+ // A slow short drag only peeks; a full drag carries into the next section.
+ await swipe(page,-100);await expect.poll(()=>page.evaluate(()=>getComputedStyle(document.querySelector('#feature-area')!).transform)).toBe('none');await expect(page).toHaveURL(/#chores$/);
+ await swipe(page,-260,360,560);await expect(page).toHaveURL(/#miscellaneous$/);
+});
+
+const wheel=(page:Page,deltaY:number,count=1)=>page.evaluate(([deltaY,count])=>{for(let i=0;i<count;i++)document.querySelector('#main')!.dispatchEvent(new WheelEvent('wheel',{deltaY,bubbles:true,cancelable:true}));},[deltaY,count]);
+const pull=(page:Page)=>page.evaluate(()=>getComputedStyle(document.querySelector('#feature-area')!).transform);
+
+test('a short edge scroll peeks the next section and springs back',async({page})=>{
+ await page.goto('/#chores');await ready(page);await bottom(page);
+ await wheel(page,90);await expect(page.locator('#misc-page')).toHaveClass(/section-peek/);expect(await pull(page)).not.toBe('none');
+ await expect(page.locator('#misc-page')).toBeHidden();await expect.poll(()=>pull(page)).toBe('none');await expect(page).toHaveURL(/#chores$/);
+ // Mouse-wheel notches keep extending one open peek until it commits.
+ for(let i=0;i<4;i++){await wheel(page,90);await page.waitForTimeout(120);}
+ await expect(page).toHaveURL(/#miscellaneous$/);await ready(page);expect(await page.evaluate(()=>scrollY)).toBe(0);
 });
 
 test('wheel momentum cannot advance multiple sections and reverse scrolling returns to the previous bottom',async({page})=>{
  await page.goto('/#chores');await ready(page);await bottom(page);
- await page.evaluate(()=>{for(let i=0;i<20;i++)document.querySelector('#main')!.dispatchEvent(new WheelEvent('wheel',{deltaY:90,bubbles:true,cancelable:true}));});
+ await wheel(page,90,20);
  await expect(page).toHaveURL(/#miscellaneous$/);await ready(page);expect(await page.evaluate(()=>scrollY)).toBe(0);
- await page.waitForTimeout(260);await page.evaluate(()=>document.querySelector('#main')!.dispatchEvent(new WheelEvent('wheel',{deltaY:-90,bubbles:true,cancelable:true})));
+ await page.waitForTimeout(500);await wheel(page,-90,6);
  await expect(page).toHaveURL(/#chores$/);await ready(page);
  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollHeight-innerHeight-scrollY)).toBeLessThan(4);
  await page.goBack();await expect(page).toHaveURL(/#miscellaneous$/);await page.goBack();await expect(page).toHaveURL(/#chores$/);

@@ -40,7 +40,7 @@ test('Android opts in directly, retains its person across dashboard switches, an
  await expect(page.locator('#push-platform-help')).toContainText('Android');
  await page.locator('#push-person').selectOption('michal');await page.locator('[name=push-category][value=bills]').uncheck();await page.locator('#push-enable').click();
  await expect(page.locator('#push-status')).toContainText('Receiving alerts for Michal');
- expect(mutations.find(p=>p.action==='register').categories).toEqual(['chores','notes']);
+ expect(mutations.find(p=>p.action==='register').categories).toEqual(['chores','notes','events']);
  await page.locator('#push-close').click();await page.locator('[data-chore-person=rina]').click();
  await openNotifications(page);await expect(page.locator('#push-person')).toHaveValue('michal');
  await page.locator('#push-test').click();await expect(page.locator('#push-message')).toContainText('Test queued');
@@ -84,4 +84,7 @@ test('notification links open bill details and handle missing items gracefully',
  expect(new URL(page.url()).searchParams.has('notice')).toBe(false);
  await page.goto('/?notice=missing-note#bulletin');
  await expect(page.locator('#toast')).toContainText('no longer available');
+ const event=await (await page.request.post('/rest/v1/rpc/utilities_save_event',{headers:{apikey:'local-public'},data:{p:{id:crypto.randomUUID(),request_id:crypto.randomUUID(),action:'create_poll',actor:'rina',title:'Notice dinner',window_start:'2099-01-01',window_end:'2099-01-07'}}})).json();
+ await page.goto(`/?notice=${event.id}#events`);
+ await expect(page.locator(`.notification-target[data-event-id="${event.id}"]`)).toBeVisible();
 });

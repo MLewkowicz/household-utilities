@@ -50,3 +50,32 @@ test('six presets have illustrations and event icons persist through edits, hist
  assert.equal(eventIconSvg(undefined),eventIconSvg('calendar'));
  assert.equal(eventIconSvg('unknown'),eventIconSvg('calendar'));
 });
+
+test('polls collect day availability, validate the window and lock in one day with history intact',async()=>{
+ const id=randomUUID(),poll={id,request_id:randomUUID(),action:'create_poll',actor:'rina',title:'Ski trip',icon_id:'skis',window_start:'2027-02-01',window_end:'2027-02-14',time_hint:'Weekend'};
+ const created=await call('save_event',poll);assert.equal(created.state,'polling');assert.equal(created.starts_at,null);assert.equal(created.poll_version,1);
+ assert.deepEqual(await call('save_event',poll),created);
+ await assert.rejects(call('save_event',{...poll,id:randomUUID(),request_id:randomUUID(),window_end:'2027-04-01'}),/six weeks/);
+ await assert.rejects(call('save_event',{...poll,id:randomUUID(),request_id:randomUUID(),window_end:'2027-01-01'}),/on or after/);
+ const mark=(actor:string,days:Record<string,string>,expected=0,extra={})=>call('save_event_availability',{id,actor,request_id:randomUUID(),poll_version:1,expected_version:expected,days,...extra});
+ const first=await mark('ohm',{'2027-02-06':'yes','2027-02-07':'maybe'});assert.equal(first.version,1);
+ await mark('michal',{'2027-02-06':'yes'});
+ await assert.rejects(mark('ohm',{'2027-02-06':'yes'}),/changed/);
+ await assert.rejects(mark('ohm',{'2027-03-01':'yes'},1),/inside the poll/);
+ await assert.rejects(mark('ohm',{'2027-02-06':'no'},1),/Works or If needed/);
+ await assert.rejects(call('save_event_response',{id,actor:'ohm',request_id:randomUUID(),interval_version:1,expected_version:0,response:'yes'}),/days that work/);
+ await assert.rejects(call('save_event',{id,actor:'rina',action:'confirm',expected_version:1,request_id:randomUUID()}),/Lock in/);
+ await assert.rejects(call('save_event',{id,actor:'ohm',action:'lock_in',expected_version:1,request_id:randomUUID(),starts_local:'2027-02-06T09:00',ends_local:'2027-02-06T17:00'}),/host/);
+ await assert.rejects(call('save_event',{id,actor:'rina',action:'lock_in',expected_version:1,request_id:randomUUID(),starts_local:'2027-02-20T09:00',ends_local:'2027-02-20T17:00'}),/from the poll/);
+ // A window change reopens marking, like a new time reopens responses.
+ const moved=await call('save_event',{...poll,action:'edit',expected_version:1,request_id:randomUUID(),window_end:'2027-02-21'});assert.equal(moved.poll_version,2);
+ await assert.rejects(mark('ohm',{'2027-02-06':'yes'},1),/poll days changed/);
+ await mark('ohm',{'2027-02-20':'yes'},1,{poll_version:2});
+ const locked=await call('save_event',{id,actor:'rina',action:'lock_in',expected_version:2,request_id:randomUUID(),starts_local:'2027-02-20T09:00',ends_local:'2027-02-20T17:00'});
+ assert.equal(locked.state,'confirmed');assert.equal(locked.window_start,'2027-02-01');assert.equal(new Date(locked.starts_at).toISOString(),'2027-02-20T14:00:00.000Z');
+ await assert.rejects(mark('michal',{'2027-02-20':'yes'},1,{poll_version:2}),/closed/);
+ assert.equal((await call('save_event_response',{id,actor:'ohm',request_id:randomUUID(),interval_version:1,expected_version:0,response:'yes'})).response,'yes');
+ const d=await call('export_events');assert.equal(d.format_version,3);
+ assert.equal(d.availability.filter((a:any)=>a.id===id).length,2);assert.equal(d.availability_history.filter((a:any)=>a.id===id).length,3);
+ assert.deepEqual(d.history.filter((h:any)=>h.id===id).map((h:any)=>h.action),['lock_in','edit','create_poll']);
+});

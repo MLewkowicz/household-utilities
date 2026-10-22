@@ -24,11 +24,13 @@ export function initPaperTiles(){
  function sync(){
   queued=false;
   for(const [tile,svg] of frames)if(!tile.isConnected){resize.unobserve(tile);frames.delete(tile);svg.remove();}
-  document.querySelectorAll<HTMLElement>('.chore-card,.expense-card,.bulletin-note').forEach(tile=>{
+  document.querySelectorAll<HTMLElement>('.chore-card,.expense-card,.bulletin-note,.payment-row').forEach(tile=>{
    if(frames.has(tile)||!tile.querySelector('.chore-corner-tab'))return;
    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg'),id='paper-texture-'+(++serial);
    svg.classList.add('paper-frame');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
-   svg.innerHTML=`<defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2=".3"><stop stop-color="#fff9e4" stop-opacity=".14"/><stop offset=".4" stop-opacity="0"/><stop offset="1" stop-color="#846b44" stop-opacity=".06"/></linearGradient></defs><path class="paper-fill" data-paper-shape/><path class="paper-texture" data-paper-shape fill="url(#${id})"/><path class="paper-curl"/><path class="paper-crease"/><path class="paper-outline" data-paper-shape/>`;
+   // Payment rows keep their member wash inside the curled outline.
+   const tint=tile.matches('.payment-row')?`<linearGradient id="${id}-tint" x1="0" y1="0" x2="1" y2=".18"><stop class="paper-tint" stop-opacity=".09"/><stop class="paper-tint" offset=".75" stop-opacity="0"/></linearGradient>`:'';
+   svg.innerHTML=`<defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2=".3"><stop stop-color="#fff9e4" stop-opacity=".14"/><stop offset=".4" stop-opacity="0"/><stop offset="1" stop-color="#846b44" stop-opacity=".06"/></linearGradient>${tint}</defs><path class="paper-fill" data-paper-shape/>${tint?`<path class="paper-tint-fill" data-paper-shape fill="url(#${id}-tint)"/>`:''}<path class="paper-texture" data-paper-shape fill="url(#${id})"/><path class="paper-curl"/><path class="paper-crease"/><path class="paper-outline" data-paper-shape/>`;
    tile.classList.add('paper-tile');tile.prepend(svg);frames.set(tile,svg);draw(tile,svg);resize.observe(tile);
   });
  }

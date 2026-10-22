@@ -39,7 +39,9 @@ test('Home is a full-viewport house and floating shortcuts, with no gallery chro
  expect((await page.locator('#house-hero').boundingBox())!.height).toBe(900);
  const navigation=(await page.locator('.house-navigation').boundingBox())!;
  expect(navigation.y).toBeLessThan(40);expect(navigation.width).toBeGreaterThan(700);expect(navigation.height).toBe(120);
- await expect(page.locator('#house-hero h1,#house-hero h2,#house-hero button,.scene-description,.scene-toolbar')).toHaveCount(0);
+ await expect(page.locator('#house-hero h1,#house-hero h2,#house-hero button:not(#updates-board-button),.scene-description,.scene-toolbar')).toHaveCount(0);
+ // The What’s new shortcut is for keyboards only and stays invisible until focused.
+ expect(await page.locator('#updates-board-button').evaluate(button=>getComputedStyle(button).opacity)).toBe('0');
  expect(await page.evaluate(()=>scrollY)).toBe(0);
  expect((await diag(page)).displayed).toBe('home');
 });
@@ -106,7 +108,7 @@ test('a shortcut during a turn wins over the old scene and Back/Forward remains 
  await page.locator('[data-ledger=bulletin]').click();await expect(page.locator('#bulletin-page')).toBeVisible();await expect(page).toHaveURL(/#bulletin$/);
  await page.waitForTimeout(2000);await expect(page).toHaveURL(/#bulletin$/);
  await page.evaluate(()=>scrollTo(0,0));await expect(page.locator('#house-hero')).toBeHidden();
- await page.locator('[data-ledger=home]').click();await expect(page).toHaveURL(/#home$/);expect(await page.evaluate(()=>scrollY)).toBe(0);
+ await page.locator('[data-ledger=home]').click();await expect(page).toHaveURL(/#home$/);await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
  await page.goBack();await expect(page).toHaveURL(/#bulletin$/);await expect.poll(async()=>(await diag(page)).selected).toBe('bulletin');await expect(page.locator('#house-hero')).toBeHidden();
  await page.goForward();await expect(page).toHaveURL(/#home$/);await expect.poll(async()=>(await diag(page)).displayed).toBe('home');
 });
@@ -157,7 +159,7 @@ test('scrolling beyond the house docks the feature and an edge gesture returns t
  await page.waitForTimeout(200);expect((await diag(page)).frames).toBe(frozen);
  await page.evaluate(()=>scrollTo(0,0));await page.mouse.move(20,500);await page.mouse.wheel(0,-600);await expect(page).toHaveURL(/#bulletin$/);expect((await page.locator('.house-chrome').boundingBox())!.y).toBe(0);await expect(page.locator('#house-hero')).toBeHidden();
  await page.locator('[data-ledger=events]').click();await expect(page.locator('#event-new')).toBeEnabled();await expect(page.locator('#house-hero')).toBeHidden();
- await page.locator('[data-ledger=home]').click();await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(async()=>(await diag(page)).displayed).toBe('home');expect(await page.evaluate(()=>scrollY)).toBe(0);
+ await page.locator('[data-ledger=home]').click();await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(async()=>(await diag(page)).displayed).toBe('home');await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
 });
 
 test('a tap on the house triggers its effect; swiping, scrolling and blank space do not',async({page})=>{
@@ -262,4 +264,37 @@ test('Settings pauses the scene, restores focus and keeps explicit theme choices
  await openNotifications(page);await page.locator('#push-close').click();await expect(page.locator('#settings-open')).toBeFocused();
  await setTheme(page,'system');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
  await page.emulateMedia({colorScheme:'dark'});await expect(page.getByRole('button',{name:'Switch to light mode'})).toBeVisible();
+});
+
+test('the lawn notice board opens What’s new once per release, and Settings keeps the history',async({page})=>{
+ await page.goto('/');await ready(page);
+ const board=async()=>(await diag(page)).updatesBoard,dialog=page.locator('#updates-dialog');
+ await expect.poll(async()=>(await board()).visible).toBe(true);
+ await expect(page.locator('#updates-board-button')).toBeAttached();expect(await page.locator('#updates-board-button').isHidden()).toBe(false);
+ const [x,y]=(await board()).screen;
+ // A drag that starts on the board turns the house instead, and returning to the start cancels it.
+ await page.mouse.move(x,y);await page.mouse.down();await page.mouse.move(x-160,y,{steps:6});await page.mouse.move(x,y,{steps:6});await page.mouse.up();
+ await expect.poll(async()=>(await diag(page)).transitioning).toBe(false);
+ await expect(dialog).toBeHidden();expect((await diag(page)).selected).toBe('home');expect((await diag(page)).state.variation).toBe(0);
+ await page.mouse.click(x,y);
+ await expect(dialog).toBeVisible();await expect(dialog.locator('h2')).toHaveText('What’s new');
+ await expect(dialog.locator('li')).toHaveCount(5);await expect(dialog.locator('li').first()).toContainText('Keep scrolling past the end of a page');
+ expect((await diag(page)).state.variation).toBe(0);
+ expect(await page.evaluate(()=>localStorage.getItem('household-updates-seen'))).toBe('2026-10-polish');
+ await page.getByRole('button',{name:'Got it'}).click();await expect(dialog).toBeHidden();
+ await expect.poll(async()=>(await board()).state).toBe('hidden');expect((await board()).visible).toBe(false);
+ await expect(page.locator('#updates-board-button')).toBeHidden();
+ await page.reload();await ready(page);
+ expect(await board()).toEqual({visible:false,state:'hidden'});await expect(page.locator('#updates-board-button')).toBeHidden();
+ await page.getByRole('button',{name:'Settings',exact:true}).click();await page.locator('#whats-new').click();
+ await expect(page.locator('#settings-dialog')).toBeHidden();await expect(dialog).toBeVisible();
+ await expect(dialog.locator('h2')).toHaveText('Update history');await expect(dialog.locator('.updates-release')).toHaveCount(1);
+ await expect(dialog.locator('time').first()).toHaveText('Oct 22, 2026');await expect(dialog.locator('li')).toHaveCount(5);
+ await page.getByRole('button',{name:'Close what’s new'}).click();await expect(dialog).toBeHidden();
+ // An older seen release brings the board back for the newest one.
+ await page.evaluate(()=>localStorage.setItem('household-updates-seen','2026-01-earlier'));await page.reload();await ready(page);
+ await expect.poll(async()=>(await board()).visible).toBe(true);
+ // Keyboards reach the board through a shortcut that appears on focus.
+ await page.locator('#updates-board-button').focus();await expect(page.locator('#updates-board-button')).toHaveCSS('opacity','1');
+ await page.keyboard.press('Enter');await expect(dialog).toBeVisible();await expect(dialog.locator('li')).toHaveCount(5);
 });

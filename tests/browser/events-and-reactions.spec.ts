@@ -3,7 +3,7 @@ const rpc=async(page:Page,name:string,p?:unknown)=>{const r=await page.request.p
 const identify=async(page:Page,member='michal')=>page.addInitScript(m=>localStorage.setItem('household-person',m),member);
 test('invitation cards vote, confirm and reopen on rescheduling on a phone',async({page})=>{
  await identify(page);await page.setViewportSize({width:390,height:844});await page.goto('/#events');await expect(page.locator('#event-new')).toBeEnabled();
- await page.locator('#event-new').click();await page.locator('#event-title').fill('Dinner browser test');await page.locator('#event-start').fill('2027-07-13T19:00');await page.locator('#event-end').fill('2027-07-13T22:00');await page.getByRole('button',{name:'Save event',exact:true}).click();await expect(page.locator('#event-dialog')).not.toBeVisible();
+ await page.locator('#event-new').click();await page.getByRole('radio',{name:'I know the time'}).click();await page.locator('#event-title').fill('Dinner browser test');await page.locator('#event-start').fill('2027-07-13T19:00');await page.locator('#event-end').fill('2027-07-13T22:00');await page.getByRole('button',{name:'Save event',exact:true}).click();await expect(page.locator('#event-dialog')).not.toBeVisible();
  const card=page.locator('.event-card').filter({hasText:'Dinner browser test'});await expect(card).toBeVisible();await card.getByRole('button',{name:'✓ Yes',exact:true}).click();await expect(card.getByRole('button',{name:'✓ Yes',exact:true})).toHaveAttribute('aria-pressed','true');await expect(card.locator('.event-guests .avatar')).toHaveCount(1);
  await card.locator('.event-details>summary').click();await card.getByRole('button',{name:'Confirm event',exact:true}).click();await expect(card).toHaveClass(/event-confirmed/);
  await card.locator('.event-details>summary').click();await card.getByRole('button',{name:'Edit',exact:true}).click();await page.locator('#event-end').fill('2027-07-13T23:00');await page.getByRole('button',{name:'Save event',exact:true}).click();await expect(page.locator('#event-dialog')).not.toBeVisible();await expect(card).toHaveClass(/event-proposed/);await expect(card.locator('.event-guests .avatar')).toHaveCount(0);
@@ -24,7 +24,7 @@ test('presets set task values and remain fixed through completion',async({page})
 });
 
 test('event presets create editable drafts and preserve an independent illustration',async({page})=>{
- await identify(page);await page.setViewportSize({width:390,height:844});await page.goto('/#events');await page.locator('#event-new').click();
+ await identify(page);await page.setViewportSize({width:390,height:844});await page.goto('/#events');await page.locator('#event-new').click();await page.getByRole('radio',{name:'I know the time'}).click();
  const start=await page.locator('#event-start').inputValue(),end=await page.locator('#event-end').inputValue();
  await expect(page.locator('[data-event-preset]')).toHaveCount(6);
  for(const [id,title,icon] of [['movie-night','Movie night','movie'],['board-games','Board games','board-game'],['walk','Go for a walk','walking'],['skiing','Skiing','skis'],['eat-out','Eat out','restaurant'],['cook-together','Cook together','cooking']]){
@@ -36,4 +36,34 @@ test('event presets create editable drafts and preserve an independent illustrat
  const d=await rpc(page,'export_events'),e=d.events.find((e:any)=>e.title==='Cooking with a movie preset test');expect(e.icon_id).toBe('movie');
  const card=page.locator(`[data-event-id="${e.id}"]`);await expect(card.locator('.event-illustration')).toBeVisible();await card.locator('.event-details>summary').click();await card.getByRole('button',{name:'Edit',exact:true}).click();await expect(page.locator('#event-icon')).toHaveValue('movie');
  await expect(page.locator('#event-presets')).toBeHidden();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+});
+
+test('a day poll lets roommates paint availability and the host lock in a valid day',async({browser})=>{
+ const phone={viewport:{width:390,height:844},hasTouch:true,isMobile:true};
+ const title='Poll browser test '+Date.now(),host=await browser.newPage(phone);await identify(host,'rina');await host.goto('/#events');await expect(host.locator('#event-new')).toBeEnabled();
+ await host.locator('#event-new').click();await expect(host.getByRole('radio',{name:'Find a day together'})).toHaveAttribute('aria-checked','true');await expect(host.locator('#event-start')).toBeHidden();
+ await host.locator('#event-title').fill(title);await host.locator('#event-window-start').fill('2099-03-02');await host.locator('#event-window-end').fill('2099-03-08');await host.locator('#event-time-hint').fill('Evening');
+ await host.getByRole('button',{name:'Save event',exact:true}).click();await expect(host.locator('#event-dialog')).not.toBeVisible();
+ const card=host.locator('.event-card').filter({hasText:title});await expect(card).toHaveClass(/event-polling/);await expect(card.locator('[data-avail-day]')).toHaveCount(7);
+ await expect(card.getByRole('button',{name:'✓ Yes'})).toHaveCount(0);
+ // Drag across three days with the Works brush.
+ await card.locator('.avail-grid').scrollIntoViewIfNeeded();
+ const box=async(day:string)=>(await card.locator(`[data-avail-day="${day}"]`).boundingBox())!;
+ const a=await box('2099-03-04'),b=await box('2099-03-06');
+ await host.mouse.move(a.x+a.width/2,a.y+a.height/2);await host.mouse.down();await host.mouse.move(b.x+b.width/2,b.y+b.height/2,{steps:8});await host.mouse.up();
+ for(const day of ['2099-03-04','2099-03-05','2099-03-06'])await expect(card.locator(`[data-avail-day="${day}"]`)).toHaveAttribute('data-mark','yes');
+ await expect(host).toHaveURL(/#events$/);
+ // The other three mark one shared day; it becomes valid for everyone.
+ const d=await rpc(host,'events_dashboard'),poll=d.events.find((e:any)=>e.title===title);
+ await expect.poll(async()=>(await rpc(host,'events_dashboard')).availability.filter((x:any)=>x.id===poll.id).length).toBe(1);
+ for(const member of ['michal','ohm','rohil'])await rpc(host,'save_event_availability',{id:poll.id,actor:member,request_id:crypto.randomUUID(),poll_version:1,expected_version:0,days:{'2099-03-05':member==='ohm'?'maybe':'yes'}});
+ await host.reload();await expect(card.locator('[data-avail-day="2099-03-05"]')).toHaveClass(/valid/);await expect(card.locator('.avail-best')).toContainText('Everyone can make');
+ // Tapping a marked day with the same brush clears it; keyboard toggles too.
+ await card.locator('[data-avail-day="2099-03-06"]').click();await expect(card.locator('[data-avail-day="2099-03-06"]')).toHaveAttribute('data-mark','');
+ await card.getByRole('radio',{name:'If needed'}).click();await card.locator('[data-avail-day="2099-03-07"]').focus();await host.keyboard.press('Enter');await expect(card.locator('[data-avail-day="2099-03-07"]')).toHaveAttribute('data-mark','maybe');
+ await card.getByRole('button',{name:'Lock in a day'}).click();await expect(host.locator('#event-lock-day')).toHaveValue('2099-03-05');
+ await host.locator('#event-lock-start').fill('18:30');await host.locator('#event-lock-end').fill('21:00');await host.getByRole('button',{name:'Lock it in'}).click();
+ await expect(host.locator('#event-lock-dialog')).not.toBeVisible();await expect(card).toHaveClass(/event-confirmed/);await expect(card.getByRole('button',{name:'✓ Yes',exact:true})).toBeVisible();
+ expect(await host.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+ await host.close();
 });

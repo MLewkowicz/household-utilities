@@ -298,7 +298,7 @@ function renderRoutineList(){
  $('#chore-routine-list').innerHTML=ledger?.routines.length?ledger.routines.map(r=>`<article class="routine-summary"><div><h3>${esc(r.title)}</h3><p class="section-copy">Every ${r.interval_weeks===1?'week':r.interval_weeks+' weeks'} · ${r.owners.map(name).join(' → ')}</p><p class="quiet">${r.effective_on>day()?`${r.enabled?'Changes start':'Pauses'} ${date(r.effective_on)}`:r.enabled?'Running':'Paused'}</p></div><button class="text-button" data-edit-routine="${r.id}">Edit routine</button><details><summary>Schedule</summary><p>Starts with ${name(r.owners[r.start_index])} on ${date(r.start_week)}.</p><ul>${r.steps.map(step=>`<li>${routineWeekday(r.start_week,step.weekday)}${step.time?' '+step.time:''} · ${esc(step.title)} · ${effortLabel(step.points)}${step.note?' · '+esc(step.note):''}</li>`).join('')}</ul>${entryMeta(r)}</details></article>`).join(''):noResults('No routines yet.','Add a weekly routine and choose who takes turns.');
 }
 function bindBoard(){
- bindCompletionSwipe($('#chore-content'),id=>{const task=ledger?.tasks.find(t=>t.id===id);if(task)void quickComplete(task);},value=>{dragging=value;if(!value)queueMicrotask(()=>{if(pendingRender&&!busy)render();});});
+ bindCompletionSwipe($('#chore-content'),id=>{const task=ledger?.tasks.find(t=>t.id===id);if(task)return quickComplete(task);},value=>{dragging=value;if(!value)queueMicrotask(()=>{if(pendingRender&&!busy)render();});});
  $('#chores-page').addEventListener('click',event=>{
   const b=(event.target as HTMLElement).closest<HTMLElement>('button');if(!b||b.hasAttribute('disabled')||busy)return;
   if(b.dataset.chorePerson){setIdentity(b.dataset.chorePerson as Member);const next=pendingTask;pendingTask=null;if(next)openTask(next);return;}

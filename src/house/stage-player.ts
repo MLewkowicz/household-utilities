@@ -6,6 +6,8 @@ import { dispose } from './scene-geometry';
 import { stages, type StageId, type StageState } from './stage-data';
 import { getTheme, observeTheme } from './appearance';
 import { createEnvironment } from './environment';
+import { createNoticeBoard } from './notice-board';
+import { hasUnseenUpdates, onUpdatesSeen, openUpdates } from '../updates';
 
 type Turn = { from: StageId; to: StageId; startYaw: number; direction: number; progress: number; start: number; end: number; began: number; duration: number; dragging: boolean; incoming: boolean };
 export async function mountStagePlayer(container: HTMLElement, initial: StageId, onScene: (id: StageId) => void) {
@@ -67,6 +69,8 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   outsideKey.shadow.camera.left=-14;outsideKey.shadow.camera.right=14;outsideKey.shadow.camera.top=18;outsideKey.shadow.camera.bottom=-14;outsideKey.shadow.camera.far=55;outsideKey.shadow.camera.updateProjectionMatrix();
   landscapeScene.add(outsideAmbient,outsideKey,outsideFill);
   const environment=createEnvironment(landscapeScene,camera);
+  // Only a device that hasn't opened the latest release notes builds the board.
+  const board=hasUnseenUpdates()?createNoticeBoard(landscapeScene):null;
   // The house's shadow still lands on the lawn, even though its light is
   // independent. This transparent receiver sits just above the modeled ground.
   const contact=new T.Mesh(new T.PlaneGeometry(45,45),new T.ShadowMaterial({color:'#253a32',opacity:.22}));
@@ -161,7 +165,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     applyTurn();
     const themeProgress=T.MathUtils.smoothstep((elapsed-themeBegan)/4.5,0,1);
     themeBlend=media.matches?themeTarget:T.MathUtils.lerp(themeFrom,themeTarget,themeProgress);
-    lighting(night);environment.tick(elapsed,themeBlend,night,media.matches);
+    lighting(night);environment.tick(elapsed,themeBlend,night,media.matches);board?.tick(elapsed,camera);
     const state=states[displayed]; state.still=media.matches;
     current.tick(elapsed,state);
     faceCamera(current.people,camera,portraitTint.copy(portraitWhite).lerp(portraitNight,night).getStyle());
@@ -244,12 +248,14 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   function adjacent(direction: number) { if(!turn)setScene(neighbor(displayed,direction),direction); }
   function action() { states[requested].boostUntil=elapsed+4; states[requested].variation++; draw(); }
   const tapRay=new T.Raycaster(),tapPoint=new T.Vector2();
-  function hitsHouse(x:number,y:number) {
+  function aim(x:number,y:number) {
     const rect=canvas.getBoundingClientRect();
     tapPoint.set((x-rect.left)/rect.width*2-1,1-(y-rect.top)/rect.height*2);
-    tapRay.setFromCamera(tapPoint,camera);
-    return tapRay.intersectObject(pivot,true).length>0;
+    tapRay.setFromCamera(tapPoint,camera); return tapRay;
   }
+  const hitsHouse=(x:number,y:number)=>aim(x,y).intersectObject(pivot,true).length>0;
+  const hitsBoard=(x:number,y:number)=>!!board?.hits(aim(x,y));
+  function hover(event: PointerEvent) { if(!pointer&&board) canvas.classList.toggle('over-board',event.pointerType==='mouse'&&hitsBoard(event.clientX,event.clientY)); }
   let pointer: {x:number;y:number;id:number;dragging:boolean;direction:number;at:number;touch:boolean} | null=null;
   function down(event: PointerEvent) {
     if(event.button!==0||turn||pointer) return;
@@ -279,7 +285,11 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
       if(!commit) { requested=turn.from; }
       animateTo(commit?1:0,p.touch);
     } else if(Math.abs(dx)>(p.touch?28:45)&&Math.abs(dx)>Math.abs(dy)*(p.touch?1.15:1.5)) adjacent(dx<0?1:-1);
-    else if(Math.hypot(dx,dy)<10&&event.timeStamp-p.at<500&&!turn&&hitsHouse(event.clientX,event.clientY)) action();
+    // Only a short, still press counts as a tap; the board takes it before the house.
+    else if(Math.hypot(dx,dy)<10&&event.timeStamp-p.at<500&&!turn) {
+      if(hitsBoard(event.clientX,event.clientY)) { canvas.classList.remove('over-board'); openUpdates(); }
+      else if(hitsHouse(event.clientX,event.clientY)) action();
+    }
   }
   function cancelPointer() {
     pointer=null;
@@ -291,13 +301,17 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   }
   function contextLost(event: Event) { event.preventDefault(); lost=true; refresh(); canvas.style.visibility='hidden'; showFallback('The scene needs a moment.'); }
   function contextRestored() { lost=false; canvas.style.visibility=''; container.querySelector('.fallback')?.remove(); refresh(); }
-  canvas.addEventListener('pointerdown',down); window.addEventListener('pointermove',move); window.addEventListener('pointerup',up); canvas.addEventListener('pointercancel',cancelPointer); canvas.addEventListener('keydown',keyboard);
+  canvas.addEventListener('pointerdown',down); window.addEventListener('pointermove',move); window.addEventListener('pointerup',up); canvas.addEventListener('pointercancel',cancelPointer); canvas.addEventListener('keydown',keyboard); canvas.addEventListener('pointermove',hover);
   canvas.addEventListener('webglcontextlost',contextLost); canvas.addEventListener('webglcontextrestored',contextRestored);
   media.addEventListener('change',refresh); document.addEventListener('visibilitychange',refresh);
   const ro=new ResizeObserver(resize); ro.observe(container);
   const io=new IntersectionObserver(([entry])=>{ visible=entry.isIntersecting&&entry.intersectionRatio>0; refresh(); },{threshold:.01}); io.observe(container);
   const stopTheme=observeTheme(theme=>{ darkTheme=theme==='dark';themeFrom=themeBlend;themeTarget=Number(darkTheme);themeBegan=elapsed;if(!canAnimate())themeFrom=themeBlend=themeTarget;draw(); });
   lighting(Number(current.dark)); resize();
+  // Wait a task so closing the dialog has unpaused the scene before the board leaves.
+  const stopUpdates=onUpdatesSeen(()=>setTimeout(()=>{ board?.dismiss(canAnimate()); draw(); }));
+  // CSS pixel position of a world point, so tests can tap modeled props.
+  function onScreen(point:T.Vector3) { const rect=canvas.getBoundingClientRect(); point.project(camera); return [rect.left+(point.x+1)/2*rect.width,rect.top+(1-point.y)/2*rect.height]; }
   function speechDetails() {
     const bubbles: { speaker: string; message: string; visible: boolean; opacity: number }[] = [];
     current.root.traverse(object => {
@@ -315,9 +329,9 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     setPaused(value:boolean) { paused=value; refresh(); },
     setTurnDuration(value:number) { turnDuration=value; },
     reset() { states[requested]={ boostUntil:0,variation:0,still:media.matches }; elapsed=0; settle(); refresh(); },
-    diagnostics:()=>({ ...metrics,requested,displayed,paused,reducedMotion:media.matches,transitioning:!!turn,cachedStages:cache.size,theme:darkTheme?'dark':'light',themeBlend,environment:environment.diagnostics(),actors:current.people.map(p=>p.id).sort(),bitmojis:current.people.map(p=>p.head.material.map!.image?.src),actorPoses:current.people.map(p=>({id:p.id,position:p.root.getWorldPosition(new T.Vector3()).toArray(),visible:p.root.visible})),entry:current.root.userData.entry,dark:current.dark,state:{...states[requested]},elapsed,night,seatCount:current.root.userData.seatCount,sceneDetails:{...current.root.userData},speech:speechDetails(),house:{shell:shell.uuid,pivotYaw:pivot.rotation.y,footprint:[HOUSE.width,HOUSE.depth],eave:HOUSE.eave,contentYaw:current.root.rotation.y,turn:turn?{progress:turn.progress,direction:turn.direction,dragging:turn.dragging,incoming:turn.incoming,from:turn.from,to:turn.to,swapAt:.5+cameraAzimuth/(turn.direction*Math.PI)}:null,lastSwap,turnDuration}}),
+    diagnostics:()=>({ ...metrics,requested,displayed,paused,reducedMotion:media.matches,transitioning:!!turn,cachedStages:cache.size,theme:darkTheme?'dark':'light',themeBlend,environment:environment.diagnostics(),actors:current.people.map(p=>p.id).sort(),bitmojis:current.people.map(p=>p.head.material.map!.image?.src),actorPoses:current.people.map(p=>({id:p.id,position:p.root.getWorldPosition(new T.Vector3()).toArray(),visible:p.root.visible})),entry:current.root.userData.entry,dark:current.dark,state:{...states[requested]},elapsed,night,seatCount:current.root.userData.seatCount,sceneDetails:{...current.root.userData},speech:speechDetails(),updatesBoard:board?{...board.diagnostics(),screen:onScreen(board.center())}:{visible:false,state:'hidden'},house:{shell:shell.uuid,pivotYaw:pivot.rotation.y,footprint:[HOUSE.width,HOUSE.depth],eave:HOUSE.eave,contentYaw:current.root.rotation.y,turn:turn?{progress:turn.progress,direction:turn.direction,dragging:turn.dragging,incoming:turn.incoming,from:turn.from,to:turn.to,swapAt:.5+cameraAzimuth/(turn.direction*Math.PI)}:null,lastSwap,turnDuration}}),
     destroy() {
-      destroyed=true; stopTheme(); clearTurn(); cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); media.removeEventListener('change',refresh); document.removeEventListener('visibilitychange',refresh);
+      destroyed=true; stopTheme(); stopUpdates(); canvas.removeEventListener('pointermove',hover); clearTurn(); cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); media.removeEventListener('change',refresh); document.removeEventListener('visibilitychange',refresh);
       window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',up); canvas.removeEventListener('pointercancel',cancelPointer); canvas.removeEventListener('pointerdown',down); canvas.removeEventListener('keydown',keyboard);
       canvas.removeEventListener('webglcontextlost',contextLost); canvas.removeEventListener('webglcontextrestored',contextRestored);
       cache.forEach(stage=>dispose(stage.root)); cache.clear(); Object.values(faces).forEach(texture=>texture.dispose()); environment.destroy();dispose(landscapeScene);dispose(scene);key.shadow.dispose();outsideKey.shadow.dispose();renderer.dispose(); renderer.forceContextLoss(); container.replaceChildren();

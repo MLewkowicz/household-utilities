@@ -4,7 +4,7 @@
 #house-stage canvas{display:block;width:100%;height:100%;touch-action:pan-y pinch-zoom;cursor:grab;outline-offset:-5px}
 #house-stage canvas.dragging{cursor:grabbing}
 #house-stage:focus-within{outline:0}
-.house-chrome{position:absolute;inset:0 0 auto;z-index:50;padding:max(16px,env(safe-area-inset-top)) 24px 0}
+.house-chrome{position:absolute;inset:0 0 auto;z-index:50;padding:max(16px,env(safe-area-inset-top)) 24px 0;border-bottom:1px solid transparent;transition:background-color .24s,border-color .24s}
 .house-chrome.is-docked{position:fixed;padding-top:max(8px,env(safe-area-inset-top));padding-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
 .house-bar{display:grid;grid-template-columns:minmax(0,1fr) 48px;gap:12px;width:min(800px,100%);margin:0 auto}
 .house-navigation{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;min-width:0;padding:0;border:0;background:none}
@@ -46,5 +46,38 @@
 /* Shared palette follows the lighting of the modeled environment. */
 :root{--bg:#f5f2e9;--paper:#fffdf7;--pale:#e9eddf;--line:#d9dfd1;--field:#fffdf8;--surface-muted:#eeeee3}
 :root[data-theme="dark"]{--bg:#182437;--paper:#223247;--ink:#e7edf2;--body:#c4d2df;--muted:#a7b9c9;--line:#40556b;--green:#b6d6ce;--pale:#304b53;--accent-ink:#142c30;--accent-hover:#cde4db;--field:#1c2b40;--surface-muted:#1d2c40;--tile-muted:#a7b9c9}
-:root,body{transition:background-color 1.8s,color 1.5s}
-@media(prefers-reduced-motion:reduce){:root,body{transition:none}}
+/* Theme changes cross-fade as one snapshot; otherwise every painted surface
+   shares the same timing while .theme-fade is set. */
+::view-transition-old(root),::view-transition-new(root){animation-duration:.45s;animation-timing-function:ease}
+:root.theme-fade,.theme-fade :is(.house-chrome,.house-controls .icon-button,.house-navigation a,.card,.chore-card,.expense-card,.payment-row,.bulletin-note,.paper-frame path){transition:background-color .45s,color .45s,border-color .45s,fill .45s,stroke .45s}
+@media(prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}}
+
+/* Section peeks share the page column and follow one transform. */
+#main{position:relative}
+.section-peek{position:absolute;left:0;right:0;pointer-events:none}
+#main.is-entering{animation:section-enter .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes section-enter{from{opacity:0;transform:translateY(12px)}}
+@media(prefers-reduced-motion:reduce){#main.is-entering{animation:none}}
+
+/* "What's new" notice: the lawn board opens a scroll that unrolls from its header. */
+#house-stage canvas.over-board{cursor:pointer}
+.updates-board-button{position:absolute;right:16px;bottom:max(16px,env(safe-area-inset-bottom));z-index:5;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit;font-weight:550;opacity:0;pointer-events:none}
+.updates-board-button:focus-visible{opacity:1;pointer-events:auto}
+#updates-dialog{width:min(460px,calc(100% - 32px));padding:0;overflow-x:hidden}
+#updates-dialog[open]{animation:updates-unroll .35s cubic-bezier(.2,.75,.25,1) both}
+#updates-dialog[open] #updates-list,#updates-dialog[open] .dialog-actions{animation:updates-ink .35s .12s ease both}
+@keyframes updates-unroll{from{clip-path:inset(0 0 calc(100% - 64px) 0 round 20px)}to{clip-path:inset(0 0 0 0 round 20px)}}
+@keyframes updates-ink{from{opacity:0;transform:translateY(-6px)}}
+.updates-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px 14px 26px;background:linear-gradient(180deg,#a87b52,#8f6643);border-bottom:3px solid #6f4e33;color:#fbf6ea}
+.updates-header h2{margin:0;font:700 24px Georgia,"Times New Roman",serif;color:inherit;text-shadow:0 1px 0 #5e432b}
+.updates-header .icon-button{color:inherit}
+#updates-list{padding:8px 26px 0}
+.updates-release{padding:18px 0;border-bottom:1px solid var(--line)}
+.updates-release:last-child{border-bottom:0}
+.updates-release h3{margin:0;color:var(--ink);font-size:17px}
+.updates-release time{display:block;margin-top:4px;color:var(--muted);font-size:12px}
+.updates-release ul{display:grid;gap:10px;margin:14px 0 0;padding-left:20px;line-height:1.45}
+.updates-release li::marker{color:var(--green)}
+.updates-footnote{margin:0 0 4px;color:var(--muted);font-size:12px}
+#updates-dialog .dialog-actions{margin:8px 26px 24px}
+@media(prefers-reduced-motion:reduce){#updates-dialog[open],#updates-dialog[open] #updates-list,#updates-dialog[open] .dialog-actions{animation:none}}

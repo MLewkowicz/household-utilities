@@ -30,7 +30,7 @@ function render(){
   needsInstall?'One small setup step on iPhone.':!available?'This browser does not support phone notifications. Try a current version of Safari on iPhone or Chrome on Android.':
   config?.enabled?'Choose your name and enable notifications.':'Phone notifications are awaiting household setup.';
  $<HTMLSelectElement>('#push-person').value=device.member||identity||'';
- document.querySelectorAll<HTMLInputElement>('[name="push-category"]').forEach(el=>el.checked=(device.categories||['bills','chores','notes']).includes(el.value));
+ document.querySelectorAll<HTMLInputElement>('[name="push-category"]').forEach(el=>el.checked=(device.categories||['bills','chores','notes','events']).includes(el.value));
  $('#push-enable').textContent=enabled?'Save notification settings':'Enable notifications';
  $('#push-enable').toggleAttribute('disabled',busy||!available||!config?.enabled||permission()==='denied');
  $('#push-test').hidden=!enabled;$('#push-disable').hidden=!device.registered;
@@ -52,13 +52,13 @@ async function load(){
 export function initNotifications(){
  document.body.insertAdjacentHTML('beforeend',`<dialog id="push-dialog" class="push-dialog" aria-labelledby="push-heading"><form id="push-form">
  <div class="dialog-top"><h2 id="push-heading" tabindex="-1" autofocus>A little heads-up.</h2><button type="button" id="push-close" class="icon-button" aria-label="Close notifications">×</button></div>
- <p class="dialog-description">Chores, new bills, and notes for you. No account needed.</p>
+ <p class="dialog-description">Chores, new bills, notes and household plans. No account needed.</p>
  <p id="push-status" class="push-status" role="status"></p>
  <div id="push-install" class="push-install" hidden><strong>Add household to your Home Screen</strong><ol><li>Open this site in Safari and tap Share.</li><li>Choose Add to Home Screen, then Add.</li><li>Open the new household icon, open Settings, then Notifications, and enable alerts.</li></ol></div>
  <p id="push-platform-help" class="field-help"></p>
  <label for="push-person">Whose alerts should this device receive?</label><select id="push-person" required><option value="">Choose your name</option>${MEMBERS.map(m=>`<option value="${m}">${name(m)}</option>`).join('')}</select>
  <p class="field-help">This stays the same when you switch whose dashboard you’re viewing.</p>
- <fieldset class="push-categories"><legend>Keep me in the loop about</legend>${[['chores','My chores','Assignments and one reminder when due.'],['bills','New utility bills','A heads-up when your share is ready.'],['notes','Notes for me','Only the sender appears in the alert.']].map(([value,label,help])=>`<label><input type="checkbox" name="push-category" value="${value}" checked><span>${label}<small>${help}</small></span></label>`).join('')}</fieldset>
+ <fieldset class="push-categories"><legend>Keep me in the loop about</legend>${[['chores','My chores','Assignments and one reminder when due.'],['bills','New utility bills','A heads-up when your share is ready.'],['notes','Notes for me','Only the sender appears in the alert.'],['events','Events','New plans, a set or changed time, cancellations, and a reminder before things you’re going to.']].map(([value,label,help])=>`<label><input type="checkbox" name="push-category" value="${value}" checked><span>${label}<small>${help}</small></span></label>`).join('')}</fieldset>
  <p class="field-help">Quiet from 10 p.m. to 8 a.m. New York time. Date-only chores remind you at 9 a.m. Your phone’s Focus settings still apply.</p>
  <p id="push-message" class="form-error" role="status" aria-live="polite"></p><p id="push-delivery" class="field-help"></p>
  <div class="dialog-actions"><button type="button" id="push-disable" class="text-button" hidden>Disable on this device</button><button type="submit" id="push-enable" class="button primary" disabled>Enable notifications</button></div>

@@ -1,16 +1,24 @@
-import {HOUSE_SECTIONS,type Section} from './house-navigation';
+import {HOUSE_SECTIONS,type Section,type Feature} from './house-navigation';
 
 type State={section:Section;featureOnly:boolean;ready:boolean};
 type Edge={section:Section;top:boolean;bottom:boolean};
-/** A new gesture at an edge changes section; arriving at the edge never does. */
-export function bindSectionScroll(state:()=>State,navigate:(section:Section,direction:1|-1)=>void){
+type Options={page:(section:Feature)=>HTMLElement;prefetch:(section:Feature)=>void};
+const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+const settle='cubic-bezier(.2,.8,.2,1)';
+/**
+ * A new gesture at an edge changes section; arriving at the edge never does.
+ * The neighbouring section follows the gesture in as a peek, then either
+ * springs back or settles where ordinary scrolling would have put it.
+ */
+export function bindSectionScroll(state:()=>State,navigate:(section:Section,direction:1|-1)=>void,options:Options){
+ const area=document.querySelector<HTMLElement>('#feature-area')!,main=document.querySelector<HTMLElement>('#main')!;
  const blocked=()=>Boolean(document.querySelector('dialog[open]'))||document.body.classList.contains('task-reordering')||(window.visualViewport?.scale??1)>1.01;
  function edge(target:EventTarget|null):Edge|null{
   const current=state();
   if(!current.featureOnly||!current.ready||blocked()||!(target instanceof Element))return null;
   // A swipe may start on a regular button without becoming a tap. Text fields,
   // sliders and navigation controls retain their own interactions.
-  if(target.closest('.house-chrome,input,textarea,select,[contenteditable="true"],[data-swipe-complete]'))return null;
+  if(target.closest('.house-chrome,input,textarea,select,[contenteditable="true"],[data-swipe-complete],[data-availability-grid]'))return null;
   // Tables, calendars, pickers and other nested scrollers own their gestures.
   for(let el:Element|null=target;el&&el!==document.body;el=el.parentElement){
    const css=getComputedStyle(el);
@@ -25,46 +33,137 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
   const index=HOUSE_SECTIONS.findIndex(item=>item.route===start.section);
   return HOUSE_SECTIONS[index+direction]?.route;
  }
- let touch:{id:number;x:number;y:number;dx:number;dy:number;edge:Edge}|null=null;
+
+ // The peek is the neighbour's real page, laid out beside the current one.
+ let peek:{section:Feature;direction:1|-1;page:HTMLElement;target:number;pull:number;settling:boolean}|null=null;
+ function openPeek(section:Section,direction:1|-1){
+  if(peek)return peek.section===section&&peek.direction===direction?peek:null;
+  if(section==='home'||reduced())return null;
+  const page=options.page(section),landing=main.getBoundingClientRect().top+scrollY;
+  const gap=Math.max(0,area.getBoundingClientRect().bottom-main.getBoundingClientRect().bottom);
+  page.hidden=false;page.classList.add('section-peek');
+  const height=page.offsetHeight,mainTop=main.getBoundingClientRect().top;
+  let target:number;
+  if(direction===1){
+   // Below the footer; settles at the landing position of a fresh section.
+   const top=area.getBoundingClientRect().bottom-mainTop;page.style.top=top+'px';target=mainTop+top-landing;
+  }else{
+   // Above the current page; settles where a scroll to its bottom would land.
+   page.style.top=-(height+gap)+'px';target=Math.min(innerHeight-gap,landing+height)-(mainTop-gap);
+  }
+  peek={section,direction,page,target:Math.max(1,target),pull:0,settling:false};
+  options.prefetch(section);
+  return peek;
+ }
+ function setPull(pull:number,ms=0,then?:()=>void){
+  if(!peek)return;
+  peek.pull=Math.max(0,Math.min(peek.target,pull));
+  area.style.transition=ms?`transform ${ms}ms ${settle}`:'';
+  area.style.transform=peek.pull?`translate3d(0,${-peek.direction*peek.pull}px,0)`:'';
+  if(!then)return;
+  peek.settling=true;let done=false;
+  const finish=(event?:Event)=>{if(done||event&&event.target!==area)return;done=true;area.removeEventListener('transitionend',finish);then();};
+  area.addEventListener('transitionend',finish);setTimeout(()=>finish(),ms+80);
+ }
+ function clearPeek(){
+  if(!peek)return;
+  const {page,section}=peek;peek=null;
+  area.style.transition='';area.style.transform='';
+  page.classList.remove('section-peek');page.style.top='';
+  if(state().section!==section)page.hidden=true;
+ }
+ function springBack(){if(peek&&!peek.settling)setPull(0,220,clearPeek);}
+ function commit(){
+  if(!peek||peek.settling)return;
+  const {section,direction,target}=peek,start=state().section;
+  setPull(target,Math.round(180+120*(1-peek.pull/target)),()=>{
+   // Swap in the same frame the transform is removed so nothing jumps.
+   clearPeek();if(state().section===start)navigate(section,direction);
+  });
+ }
+ // Commit thresholds scale with the viewport so phones and desktops feel alike.
+ const committed=(pull:number,velocity=0)=>pull>innerHeight*.28||(pull>24&&velocity>.45);
+
+ let touch:{id:number;x:number;y:number;dx:number;dy:number;edge:Edge;samples:[number,number][]}|null=null;
+ // Release speed over the last ~100ms, so one slow frame does not decide a flick.
+ const velocity=(samples:[number,number][])=>{const [t1,d1]=samples.at(-1)!,[t0,d0]=samples.find(([t])=>t1-t<=100)!;return t1>t0?Math.abs(d1-d0)/(t1-t0):0;};
  function touchStart(event:TouchEvent){
-  touch=null;if(event.touches.length!==1)return;
+  touch=null;if(event.touches.length!==1||peek?.settling)return;
   const start=edge(event.target),point=event.touches[0];
-  if(start)touch={id:point.identifier,x:point.clientX,y:point.clientY,dx:0,dy:0,edge:start};
+  if(start)touch={id:point.identifier,x:point.clientX,y:point.clientY,dx:0,dy:0,edge:start,samples:[[performance.now(),0]]};
  }
  function touchMove(event:TouchEvent){
   if(!touch)return;
-  if(event.touches.length!==1||event.defaultPrevented||blocked()){touch=null;return;}
+  if(event.touches.length!==1||event.defaultPrevented||blocked()){touch=null;springBack();return;}
   const point=[...event.touches].find(point=>point.identifier===touch!.id);if(!point)return;
+  const now=performance.now();
   touch.dx=point.clientX-touch.x;touch.dy=touch.y-point.clientY;
-  if(Math.abs(touch.dx)>12&&Math.abs(touch.dx)>Math.abs(touch.dy)){touch=null;return;}
-  if(Math.abs(touch.dy)>6&&Math.abs(touch.dy)>Math.abs(touch.dx)*1.2&&destination(touch.edge,touch.dy>0?1:-1)&&event.cancelable)event.preventDefault();
+  touch.samples.push([now,touch.dy]);if(touch.samples.length>12)touch.samples.shift();
+  if(!peek&&Math.abs(touch.dx)>12&&Math.abs(touch.dx)>Math.abs(touch.dy)){touch=null;return;}
+  if(Math.abs(touch.dy)<=6||Math.abs(touch.dy)<=Math.abs(touch.dx)*1.2&&!peek)return;
+  const direction=touch.dy>0?1:-1,section=destination(touch.edge,direction);
+  if(!section){if(peek&&peek.direction!==direction)setPull(0);return;}
+  if(event.cancelable)event.preventDefault();
+  // Resistance grows after the first stretch so the peek feels attached.
+  const distance=Math.abs(touch.dy),free=innerHeight*.4;
+  if(openPeek(section,direction))setPull(distance<free?distance*.85:free*.85+(distance-free)*.45);
  }
  function touchEnd(event:TouchEvent){
-  const ended=touch;touch=null;if(!ended||!event.changedTouches.length||blocked())return;
-  const point=[...event.changedTouches].find(point=>point.identifier===ended.id);if(!point)return;
+  const ended=touch;touch=null;if(!ended||!event.changedTouches.length)return;
+  if(blocked()){springBack();return;}
+  const point=[...event.changedTouches].find(point=>point.identifier===ended.id);if(!point){springBack();return;}
   const dx=point.clientX-ended.x,dy=ended.y-point.clientY,direction=dy>0?1:-1;
+  if(peek){if(peek.direction===direction&&committed(peek.pull,velocity(ended.samples)))commit();else springBack();return;}
+  // Without a peek (the house above To-dos, or reduced motion) keep the one-shot swipe.
   if(Math.abs(dy)<48||Math.abs(dy)<Math.abs(dx)*1.2)return;
   const section=destination(ended.edge,direction);if(section)navigate(section,direction);
  }
- const cancel=()=>{touch=null;};
- let wheel:{at:number;edge:Edge|null;distance:number;used:boolean}|undefined;
+ const cancel=()=>{touch=null;springBack();};
+
+ let wheel:{at:number;began:number;edge:Edge|null;distance:number;used:boolean}|undefined,idle:ReturnType<typeof setTimeout>|undefined;
  function onWheel(event:WheelEvent){
   const now=performance.now();
-  if(!wheel||now-wheel.at>240)wheel={at:now,edge:edge(event.target),distance:0,used:false};
+  // An open peek keeps collecting slower mouse-wheel notches.
+  if(!wheel||now-wheel.at>(peek&&!peek.settling?400:240))wheel={at:now,began:now,edge:edge(event.target),distance:0,used:false};
   wheel.at=now;
   if(blocked()||event.ctrlKey||event.defaultPrevented||Math.abs(event.deltaX)>Math.abs(event.deltaY)||!wheel.edge)return;
-  if(wheel.used){if(event.cancelable)event.preventDefault();return;}
-  const direction=event.deltaY>0?1:-1,section=destination(wheel.edge,direction);if(!section)return;
+  if(wheel.used||peek?.settling){if(event.cancelable)event.preventDefault();return;}
   const amount=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?innerHeight:1);
-  wheel.distance=Math.sign(amount)===Math.sign(wheel.distance)?wheel.distance+amount:amount;
+  const direction=(peek?Math.sign(wheel.distance+amount)||peek.direction:Math.sign(amount)) as 1|-1;
+  const section=destination(wheel.edge,direction);
+  if(!section){if(peek){wheel.distance=0;setPull(0,160,clearPeek);}return;}
+  wheel.distance=peek||Math.sign(amount)===Math.sign(wheel.distance)?wheel.distance+amount:amount;
   if(event.cancelable)event.preventDefault();
-  if(Math.abs(wheel.distance)>=72){wheel.used=true;navigate(section,direction);}
+  clearTimeout(idle);
+  const pulled=Math.abs(wheel.distance),open=openPeek(section,direction);
+  if(!open){
+   if(pulled>=72){wheel.used=true;navigate(section,direction);}
+   return;
+  }
+  setPull(pulled);
+  // A fast flick at the edge is an aggressive scroll and commits outright.
+  const velocity=pulled/Math.max(16,now-wheel.began);
+  if(pulled>=innerHeight*.35||pulled>=120&&velocity>3){wheel.used=true;commit();return;}
+  idle=setTimeout(()=>{if(peek&&!peek.settling){wheel=undefined;springBack();}},400);
  }
  function key(event:KeyboardEvent){
   if(event.repeat||event.defaultPrevented||!['PageDown','PageUp'].includes(event.key))return;
   const start=edge(event.target);if(!start)return;
   const direction=event.key==='PageDown'?1:-1,section=destination(start,direction);
-  if(section){event.preventDefault();navigate(section,direction);}
+  if(!section)return;
+  event.preventDefault();
+  if(openPeek(section,direction))commit();else navigate(section,direction);
+ }
+ // The neighbour loads while the reader approaches an edge, so its peek is filled.
+ let prefetched=new Set<string>(),seen:Section|undefined;
+ function onScroll(){
+  const current=state();if(!current.featureOnly||!current.ready)return;
+  if(seen!==current.section){seen=current.section;prefetched=new Set();}
+  const index=HOUSE_SECTIONS.findIndex(item=>item.route===current.section),rest=document.documentElement.scrollHeight-innerHeight-scrollY;
+  for(const [near,offset] of [[rest<innerHeight,1],[scrollY<innerHeight,-1]] as const){
+   const next=HOUSE_SECTIONS[index+offset]?.route;
+   if(near&&next&&next!=='home'&&!prefetched.has(next)){prefetched.add(next);options.prefetch(next);}
+  }
  }
  document.addEventListener('touchstart',touchStart,{passive:true});
  document.addEventListener('touchmove',touchMove,{passive:false});
@@ -72,5 +171,6 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
  document.addEventListener('touchcancel',cancel,{passive:true});
  document.addEventListener('wheel',onWheel,{passive:false});
  document.addEventListener('keydown',key);
- return ()=>{document.removeEventListener('touchstart',touchStart);document.removeEventListener('touchmove',touchMove);document.removeEventListener('touchend',touchEnd);document.removeEventListener('touchcancel',cancel);document.removeEventListener('wheel',onWheel);document.removeEventListener('keydown',key);};
+ window.addEventListener('scroll',onScroll,{passive:true});
+ return ()=>{clearPeek();document.removeEventListener('touchstart',touchStart);document.removeEventListener('touchmove',touchMove);document.removeEventListener('touchend',touchEnd);document.removeEventListener('touchcancel',cancel);document.removeEventListener('wheel',onWheel);document.removeEventListener('keydown',key);window.removeEventListener('scroll',onScroll);};
 }

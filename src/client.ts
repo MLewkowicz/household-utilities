@@ -1,4 +1,5 @@
 import {entryMeta} from './entry-meta';
+import {cornerTab} from './tile-corner';
 import {avatar} from './people';
 import { MEMBERS, UTILITIES, type Member, type Payment, type StoredBill, type Allocation, type Utility, dateDays } from './ledger';
 type Config = { url: string; key: string };
@@ -81,11 +82,14 @@ function renderMonths() {
 }
 function renderHistory() {
   const payments=latestPayments().filter(p=>(selected==='all'||p.member_id===selected)&&(showDeletedPayments||!p.deleted));
-  $('#history').innerHTML=payments.length?`<div class="payment-list">${payments.map(paymentRow).join('')}</div>`:`<div class="empty-state"><div class="empty-icon" aria-hidden="true">↔</div><h3>No payments recorded${selected!=='all'?` for ${name(selected)}`:' yet'}</h3></div>`;
+  // Lifted corners stay open across the periodic refresh.
+  const open=new Set([...document.querySelectorAll<HTMLElement>('#history .payment-details[open]')].map(el=>el.closest<HTMLElement>('[data-payment-id]')!.dataset.paymentId));
+  $('#history').innerHTML=payments.length?`<div class="payment-list">${payments.map(p=>paymentRow(p,open.has(p.payment_id))).join('')}</div>`:`<div class="empty-state"><div class="empty-icon" aria-hidden="true">↔</div><h3>No payments recorded${selected!=='all'?` for ${name(selected)}`:' yet'}</h3></div>`;
 }
-function paymentRow(p: Payment) {
-  const method=p.method==='other'?p.other:name(p.method);
-  return `<div class="payment-row member-${p.member_id}">${avatar(p.member_id)}<div class="payment-main"><div class="payment-title">${name(p.member_id)} <span class="quiet">to Michal</span>${p.deleted?'<span class="deleted-label">DELETED</span>':''}</div><div class="payment-meta">${esc(method)} · ${date(p.paid_on,true)}</div>${entryMeta(p)}</div><span class="payment-amount">${money(p.amount_cents)}</span>${!p.deleted&&live?`<div class="payment-actions"><button class="text-button" data-edit="${esc(p.payment_id)}" aria-label="Edit ${name(p.member_id)} payment of ${money(p.amount_cents)}">Edit</button><button class="text-button" data-delete="${esc(p.payment_id)}" aria-label="Delete ${name(p.member_id)} payment of ${money(p.amount_cents)}">Delete</button></div>`:''}</div>`;
+function paymentRow(p: Payment, open=false) {
+  const method=p.method==='other'?p.other:name(p.method),label=`${name(p.member_id)} payment of ${money(p.amount_cents)}`;
+  const actions=!p.deleted&&live?`<div class="payment-actions"><button class="text-button" data-edit="${esc(p.payment_id)}" aria-label="Edit ${label}">Edit</button><button class="text-button" data-delete="${esc(p.payment_id)}" aria-label="Delete ${label}">Delete</button></div>`:'';
+  return `<article class="payment-row member-${p.member_id}${p.deleted?' entry-deleted':''}" data-payment-id="${esc(p.payment_id)}"><div class="payment-line">${avatar(p.member_id)}<div class="payment-main"><div class="payment-title">${name(p.member_id)} <span class="quiet">to Michal</span>${p.deleted?'<span class="deleted-label">DELETED</span>':''}</div><div class="payment-meta">${date(p.paid_on,true)}</div></div><span class="payment-amount">${money(p.amount_cents)}</span></div><details class="tile-details payment-details"${open?' open':''}>${cornerTab(label)}<div class="tile-details-body"><p class="payment-method">Paid by ${esc(method)}</p>${entryMeta(p)}${actions}</div></details></article>`;
 }
 function render() { renderCards();renderMonths();renderHistory();$('#new-payment').toggleAttribute('disabled',!live);$('#bottom-payment').toggleAttribute('disabled',!live);if(!location.hash||location.hash==='#utilities')$('#export').removeAttribute('disabled'); }
 async function refresh() {

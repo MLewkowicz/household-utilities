@@ -22,12 +22,14 @@ test('dark dashboard, monthly proration, and shared payment lifecycle',async({pa
  await expect(rinaCard.locator('.balance-amount')).toHaveText('$113.40');
  const other=await browser.newPage();await other.goto('http://127.0.0.1:4174/#utilities');
  await expect(other.locator('.payment-row')).toContainText('$13.37');
+ const row=page.locator('.payment-row').first();await expect(row.locator('.payment-actions')).toBeHidden();await expect(row.locator('.payment-method')).toBeHidden();
+ await row.locator('summary.chore-corner-tab').click();await expect(row).toContainText('Paid by cash');
  await page.getByRole('button',{name:'Edit Rina payment of $13.37'}).click();
  await page.getByLabel('Amount',{exact:true}).fill('12.34');await page.locator('#payment-dialog').getByLabel('Changed by').selectOption('michal');
  await page.getByRole('button',{name:'Save changes'}).click();await expect(page.locator('#payment-dialog')).not.toBeVisible();
  await expect(page.locator('.payment-row')).toContainText('$12.34');
  await expect(rinaCard.locator('.balance-amount')).toHaveText('$114.43');
- await page.getByRole('button',{name:'Delete Rina payment of $12.34'}).click();
+ await expect(row.locator('.payment-details')).toHaveAttribute('open','');await page.getByRole('button',{name:'Delete Rina payment of $12.34'}).click();
  await page.getByRole('button',{name:'Delete payment',exact:true}).click();
  await expect(page.locator('#delete-dialog')).not.toBeVisible();await expect(rinaCard.locator('.balance-amount')).toHaveText(initial!);
  await page.locator('#show-deleted-payments').check();await expect(page.locator('.payment-row').first()).toContainText('DELETED');await expect(page.locator('.history-group')).toHaveCount(0);

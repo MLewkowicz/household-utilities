@@ -70,6 +70,8 @@ export function mountHouseEntry(onNavigate:(section:Section)=>void,onEnter:(sect
       const current=document.querySelector<HTMLElement>('#house-current');
       if(current)current.textContent=HOUSE_SECTIONS.find(item=>item.route===section)!.label;
     },
+    // Mounting the scene blocks the main thread, so only a loaded scene glides in.
+    ready:()=>Boolean(player),
     destroy(){window.removeEventListener('scroll',onScroll);document.removeEventListener('visibilitychange',skyVisibility);observer.disconnect();dialogs.disconnect();player?.destroy();},
   };
 }

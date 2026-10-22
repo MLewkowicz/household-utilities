@@ -4,7 +4,7 @@ self.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));
 self.addEventListener('push',event=>{
  let data={};
  try{data=event.data?.json()||{};}catch{/* Always show a visible fallback. */}
- const tab=['utilities','chores','bulletin'].includes(data.tab)?data.tab:'utilities';
+ const tab=['utilities','chores','bulletin','events'].includes(data.tab)?data.tab:'utilities';
  const url=new URL(self.registration.scope);
  if(typeof data.item==='string'&&data.item.length<=180&&data.item)url.searchParams.set('notice',data.item);
  url.hash=tab;

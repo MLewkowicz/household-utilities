@@ -1,4 +1,4 @@
-import {$,rpc,toast} from './ui';
+import {$,rpc,toast,animateScroll} from './ui';
 import {identity,onIdentityChange} from './identity';
 import {initNotifications,missingNotification} from './notifications';
 import {initSettings} from './settings';
@@ -19,7 +19,7 @@ function load(route:Route):Promise<Page>{
    if(route==='utilities'){const m=await import('./client');return{refresh:m.refreshUtilities,export:m.exportUtilities,focus:m.focusUtilityNotification};}
    if(route==='miscellaneous'){const m=await import('./misc-client');m.initMisc();return{refresh:m.refreshMisc,export:m.exportMisc};}
    if(route==='chores'){const m=await import('./chores-client');m.initChores();return{refresh:m.refreshChores,export:m.exportChores,focus:m.focusChoreNotification};}
-   if(route==='events'){const m=await import('./events-client');m.initEvents();return{refresh:m.refreshEvents,export:m.exportEvents};}
+   if(route==='events'){const m=await import('./events-client');m.initEvents();return{refresh:m.refreshEvents,export:m.exportEvents,focus:m.focusEventNotification};}
    const m=await import('./bulletin-client');m.initBulletin();return{refresh:m.refreshBulletin,export:m.exportBulletin,focus:m.focusBulletinNotification};
   })().catch(error=>{pages.delete(route);throw error;});
   pages.set(route,pending);
@@ -29,7 +29,11 @@ function load(route:Route):Promise<Page>{
 initSettings();initNotifications();initAvatarFallback();initPaperTiles();
 let active:Section='home',routeVersion=0;
 const house=mountHouseEntry(section=>navigate(section,'house'),section=>{if(active==='home')navigate(section,'entry');});
-bindSectionScroll(()=>({section:active,featureOnly:Boolean($('#house-hero').hidden),ready:$('#main').getAttribute('aria-busy')!=='true'}),(section,direction)=>navigate(section,'scroll',direction));
+const PAGE_IDS:Record<Route,string>={utilities:'utilities-page',miscellaneous:'misc-page',chores:'chores-page',bulletin:'bulletin-page',events:'events-page'};
+bindSectionScroll(()=>({section:active,featureOnly:Boolean($('#house-hero').hidden),ready:$('#main').getAttribute('aria-busy')!=='true'}),(section,direction)=>navigate(section,'scroll',direction),{
+ page:section=>$('#'+PAGE_IDS[section]),
+ prefetch:section=>void refreshPage(section).catch(()=>{/* Entering the section retries visibly. */}),
+});
 const refreshing=new Map<Route,Promise<Page>>();
 function refreshPage(route:Route){
  let pending=refreshing.get(route);
@@ -74,26 +78,45 @@ function route(source:NavigationSource='history',direction:1|-1=1){
  active=sectionFromHash(location.hash);routeVersion++;
  $('#feature-area').hidden=false;
  const content=active==='home'?'chores':active;
- for(const [key,id] of Object.entries({utilities:'utilities-page',miscellaneous:'misc-page',chores:'chores-page',bulletin:'bulletin-page',events:'events-page'}))$('#'+id).hidden=key!==content;
+ for(const [key,id] of Object.entries(PAGE_IDS))$('#'+id).hidden=key!==content;
  document.querySelectorAll<HTMLAnchorElement>('[data-ledger]').forEach(link=>{if(link.dataset.ledger===active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
  const label=active==='home'?'Home':active==='utilities'?'Utilities':active==='chores'?'To-dos':active==='events'?'Events':active==='bulletin'?'Bulletin':'Expenses';
  document.title=`Household · ${label}`;
- const showHouse=active==='home'||source==='house'||source==='history'&&history.state?.houseView===true;
+ const hero=$('#house-hero'),wasFeature=hero.hidden;
+ // A shortcut taken from the lawn glides down into the section rather than cutting.
+ const glideIn=!wasFeature&&source==='shortcut'&&active!=='home';
+ const showHouse=active==='home'||glideIn||source==='house'||source==='history'&&history.state?.houseView===true;
  house.select(active,source==='house',!showHouse);
  $('#export').setAttribute('disabled','');$('#main').setAttribute('aria-busy',active==='home'?'false':'true');
  // Shortcuts and forward section gestures land at the top. A backward gesture
- // lands at the preceding section's bottom, after its content has loaded.
+ // lands at the preceding section's bottom.
  if(active==='home'){
   // A notification's focused card and smooth scroll can survive a hash change.
   // Move focus out of the feature, then finish landing after the new layout.
   if($('#feature-area').contains(document.activeElement))document.querySelector<HTMLElement>('[data-ledger=home]')?.focus({preventScroll:true});
-  window.scrollTo({top:0,behavior:'instant'});
   const landingVersion=routeVersion;
-  requestAnimationFrame(()=>{if(routeVersion===landingVersion&&active==='home')window.scrollTo({top:0,behavior:'instant'});});
+  if(wasFeature&&source!=='initial'&&house.ready()){
+   // Keep the section where it was, then let the lawn descend over it. One
+   // pixel of hero stays visible so the entry handler does not re-enter.
+   window.scrollTo({top:hero.offsetHeight-1,behavior:'instant'});
+   requestAnimationFrame(()=>{if(routeVersion===landingVersion&&active==='home')void animateScroll(0,520);});
+  }else{
+   window.scrollTo({top:0,behavior:'instant'});
+   requestAnimationFrame(()=>{if(routeVersion===landingVersion&&active==='home')window.scrollTo({top:0,behavior:'instant'});});
+  }
  }
+ else if(glideIn)void animateScroll(hero.offsetHeight,460);
  else if(source==='shortcut'||source==='initial'||source==='scroll')$('#feature-area').scrollIntoView({block:'start',behavior:'instant'});
+ // Tab-to-tab shortcuts rise the new page in, matching the gesture settle.
+ if(source==='shortcut'&&wasFeature&&active!=='home'){const main=$('#main');main.classList.remove('is-entering');void main.offsetWidth;main.classList.add('is-entering');}
  const version=routeVersion,pending=refresh();
- if(source==='scroll'&&direction===-1&&active!=='home')void pending.then(()=>{if(version===routeVersion)window.scrollTo({top:document.documentElement.scrollHeight-innerHeight,behavior:'instant'});});
+ // A backward gesture lands at the bottom immediately (the peek already showed
+ // it there) and stays pinned if fresh data lengthens the page.
+ if(source==='scroll'&&direction===-1&&active!=='home'){
+  const toBottom=()=>window.scrollTo({top:document.documentElement.scrollHeight-innerHeight,behavior:'instant'});
+  toBottom();const placed=scrollY;
+  void pending.then(()=>{if(version===routeVersion&&Math.abs(scrollY-placed)<4)toBottom();});
+ }
 }
 function navigate(section:Section,source:'house'|'shortcut'|'scroll'|'entry',direction:1|-1=1){
  const hash='#'+section;
