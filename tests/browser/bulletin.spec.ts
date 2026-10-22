@@ -1,4 +1,4 @@
-import {setTheme,refreshSection} from './settings';
+import {setTheme,refreshSection,openSettings} from './settings';
 import {test,expect,type Page,type Locator} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 const rpc=async(page:Page,fn:string,p?:unknown)=>{const r=await page.request.post(`/rest/v1/rpc/utilities_${fn}`,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(r.ok()).toBeTruthy();return r.json();};
@@ -32,7 +32,7 @@ test('pinned notes, temperature, attribution, revisions, deletion and counts wor
  await selectView(page,'all');await page.locator('#bulletin-kind-filter').selectOption('all');await lift(changed);await changed.getByRole('button',{name:'Delete note',exact:true}).click();await page.locator('#bulletin-action-save').click();await expect(page.locator('#bulletin-action-dialog')).not.toBeVisible();await expect(changed).toHaveCount(0);
  d=await rpc(page,'bulletin_dashboard');expect(d.stats.every((s:any)=>s.complaints===0&&s.compliments===0)).toBeTruthy();
  await page.locator('#bulletin-show-deleted').check();await expect(changed).toHaveClass(/note-deleted/);await lift(changed);await changed.getByRole('button',{name:'Restore'}).click();await page.locator('#bulletin-action-save').click();await expect(page.locator('#bulletin-action-dialog')).not.toBeVisible();await expect(changed).not.toHaveClass(/note-deleted/);
- const downloading=page.waitForEvent('download');await page.locator('#export').click();const download=await downloading;const exported=JSON.parse(await readFile((await download.path())!,'utf8'));expect(exported.history).toHaveLength(4);expect(exported.bills).toBeUndefined();
+ const downloading=page.waitForEvent('download');await openSettings(page);await page.locator('#export').click();const download=await downloading;const exported=JSON.parse(await readFile((await download.path())!,'utf8'));expect(exported.history).toHaveLength(4);expect(exported.bills).toBeUndefined();
  const after=await Promise.all(['dashboard','misc_dashboard','chores_dashboard'].map(fn=>rpc(page,fn)));after.forEach((d,i)=>expect(values(d)).toEqual(values(before[i])));expect(errors).toEqual([]);
 });
 

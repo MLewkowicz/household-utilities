@@ -40,18 +40,20 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
   if(peek)return peek.section===section&&peek.direction===direction?peek:null;
   if(section==='home'||reduced())return null;
   const page=options.page(section),landing=main.getBoundingClientRect().top+scrollY;
-  const gap=Math.max(0,area.getBoundingClientRect().bottom-main.getBoundingClientRect().bottom);
+  // A plain gap separates the two pages; `trailing` is the space ordinary
+  // scrolling leaves below a section's last item.
+  const trailing=Math.max(0,area.getBoundingClientRect().bottom-main.getBoundingClientRect().bottom),gap=48;
   // Its own compositor layer keeps each frame of the drag to a transform. A
   // warmed page is already laid out, so revealing it only paints.
   area.style.willChange='transform';page.hidden=false;page.classList.remove('section-staged');page.classList.add('section-peek');
   const height=page.offsetHeight,mainTop=main.getBoundingClientRect().top;
   let target:number;
   if(direction===1){
-   // Below the footer; settles at the landing position of a fresh section.
-   const top=area.getBoundingClientRect().bottom-mainTop;page.style.top=top+'px';target=mainTop+top-landing;
+   // Just below this page; settles at the landing position of a fresh section.
+   const top=main.offsetHeight+gap;page.style.top=top+'px';target=mainTop+top-landing;
   }else{
    // Above the current page; settles where a scroll to its bottom would land.
-   page.style.top=-(height+gap)+'px';target=Math.min(innerHeight-gap,landing+height)-(mainTop-gap);
+   page.style.top=-(height+gap)+'px';target=Math.min(innerHeight-trailing,landing+height)-(mainTop-gap);
   }
   peek={section,direction,page,target:Math.max(1,target),pull:0,settling:false};
   void options.prefetch(section).catch(()=>{/* Landing retries visibly. */});

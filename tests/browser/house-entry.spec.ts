@@ -23,8 +23,8 @@ test('downstairs utilities animate continuously, cycle Rohil’s lyrics and keep
   await page.keyboard.press('Enter');
  }
  await page.emulateMedia({reducedMotion:'no-preference'});
- await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.shower.waterY).not.toBe(utilities.shower.waterY);
- await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.bedroom.fanAngle).not.toBe(utilities.bedroom.fanAngle);
+ await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.shower.waterY,{timeout:20000}).not.toBe(utilities.shower.waterY);
+ await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.bedroom.fanAngle,{timeout:20000}).not.toBe(utilities.bedroom.fanAngle);
  const current=(await diag(page)).sceneDetails.utilities.shower.lyric;
  // Lyrics follow scene time, which runs slower when a loaded machine drops frames.
  await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.shower.lyric,{timeout:20000}).not.toBe(current);

@@ -126,9 +126,6 @@ svg.utility-symbol{width:18px;height:18px}
 .how-it-works h3{font-size:12px;font-weight:600;margin-bottom:6px}
 .how-it-works p{font-size:11px;color:var(--muted);line-height:1.8;max-width:580px}
 .how-it-works .button{margin-left:auto}
-footer{padding:24px 0 30px;display:flex;align-items:center;gap:25px;font-size:9px;color:var(--muted)}
-.footer-brand{margin-right:auto;color:var(--muted);font-size:11px}
-footer .text-button{font-size:9px}
 dialog{background:var(--paper);max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain;border:1px solid var(--line);border-radius:20px;padding:30px;max-width:440px;width:calc(100% - 32px);color:var(--body);box-shadow:0 30px 100px #17332230}
 dialog::backdrop{background:#1b302459;backdrop-filter:blur(3px)}
 dialog h2{font-size:27px;margin:5px 0 12px}
@@ -208,9 +205,6 @@ h2{font-size:23px}
 .how-it-works{align-items:flex-start;flex-wrap:wrap;margin-top:32px;gap:13px}
 .how-it-works>div:nth-child(2){flex:1}
 .how-it-works .button{margin-left:52px}
-footer{flex-wrap:wrap;gap:10px 15px}
-.footer-brand{width:100%;margin-right:0}
-footer .text-button{margin-left:auto}
 dialog{padding:24px}
 .dialog-actions .button{flex:1}
 .mobile-break{display:block}

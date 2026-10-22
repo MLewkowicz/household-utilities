@@ -18,7 +18,7 @@
 .house-navigation a[aria-current=page]{color:var(--ink);background:var(--pale);border-color:var(--green);box-shadow:0 5px 22px #1735210c}
 .house-navigation svg{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .house-navigation .chore-nav-badge{position:absolute;right:-4px;top:-5px;min-width:18px;height:18px;font-size:10px;background:var(--green);color:var(--accent-ink);border:2px solid var(--bg)}
-.feature-shell{min-height:100svh;width:min(1200px,100%);max-width:none;margin:0 auto;padding:calc(152px + env(safe-area-inset-top)) 40px 0;scroll-margin-top:0}
+.feature-shell{min-height:100svh;width:min(1200px,100%);max-width:none;margin:0 auto;padding:calc(152px + env(safe-area-inset-top)) 40px calc(56px + env(safe-area-inset-bottom));scroll-margin-top:0}
 #main:focus{outline:none}
 #house-stage .fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;padding:24px;text-align:center;color:var(--body)}
 #house-stage .fallback>span{font-size:76px;color:var(--muted)}
@@ -38,7 +38,7 @@
  .house-controls .icon-button{width:44px;border-radius:14px}
  .house-navigation a{gap:5px;min-height:52px;padding:12px 5px;border-radius:14px;font-size:12px}
  .house-navigation svg{width:18px;height:18px}
- .feature-shell{padding:calc(144px + env(safe-area-inset-top)) 24px 0}
+ .feature-shell{padding:calc(144px + env(safe-area-inset-top)) 24px calc(48px + env(safe-area-inset-bottom))}
 }
 @media(max-width:360px){.house-chrome{padding-left:10px;padding-right:10px}.house-bar,.house-navigation,.house-controls{gap:6px}.house-navigation a{font-size:11.5px;gap:4px;padding-left:3px;padding-right:3px}.house-navigation svg{width:16px;height:16px}.feature-shell{padding-left:16px;padding-right:16px}}
 @media(prefers-reduced-motion:reduce){.house-navigation a{transition:none}}
@@ -83,3 +83,5 @@
 @media(prefers-reduced-motion:reduce){#updates-dialog[open],#updates-dialog[open] #updates-list,#updates-dialog[open] .dialog-actions{animation:none}}
 /* Warmed neighbours are laid out but take no space and cannot be reached. */
 .section-staged{position:absolute;left:0;right:0;top:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none}
+/* The lawn fades into the page colour instead of ending at a hard edge. */
+#house-hero::after{content:'';position:absolute;inset:auto 0 0;height:clamp(72px,14svh,140px);background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--bg) 70%,transparent) 55%,var(--bg));pointer-events:none;z-index:1}

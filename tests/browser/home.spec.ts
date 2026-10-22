@@ -1,4 +1,4 @@
-import {setTheme,refreshSection} from './settings';
+import {setTheme,refreshSection,openSettings} from './settings';
 import {test,expect,type Page} from '@playwright/test';
 import {mkdir} from 'node:fs/promises';
 const rpc=async(page:Page,name:string,p?:unknown)=>{const response=await page.request.post('/rest/v1/rpc/utilities_'+name,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(response.ok(),await response.text()).toBeTruthy();return response.json();};
@@ -19,7 +19,7 @@ test('My tasks default combines only assigned tasks, quick entry, completion, un
  const edited=page.locator('#home-feed .chore-card').filter({has:page.getByRole('heading',{name:title+' edited',exact:true})});await edited.getByRole('button',{name:'Delete',exact:true}).click();await expect(edited).toHaveCount(0);
  await page.locator('#home-history').check();await expect(edited).toBeVisible();await expect(edited).toContainText('Deleted');await edited.locator('summary.chore-corner-tab').click();await expect(edited.locator('.entry-updated')).toContainText('Deleted by Michal');await expect(edited.getByText(/History ·/)).toHaveCount(0);const stored=await rpc(page,'personal_tasks',{member:'michal'});expect(stored.history.filter((t:any)=>t.title===title||t.title===title+' edited')).toHaveLength(6);
  await page.locator('[data-home-filter=assigned]').click();await expect(edited).toHaveCount(0);await expect(page.locator(`[data-home-key="shared:${assigned.id}"]`)).toBeVisible();
- const download=page.waitForEvent('download');await page.locator('#export').click();const file=await download;expect(file.suggestedFilename()).toContain('household-tasks-michal');
+ const download=page.waitForEvent('download');await openSettings(page);await page.locator('#export').click();const file=await download;expect(file.suggestedFilename()).toContain('household-tasks-michal');
  await page.locator('[data-ledger=home]').click();await expect(page).toHaveURL(/#home$/);await expect(page.locator('#feature-area')).not.toBeInViewport();
 });
 test('Task ordering persists across sessions and sources fail independently without erasing drafts',async({page,browser})=>{

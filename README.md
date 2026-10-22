@@ -55,7 +55,7 @@ Anyone can edit or delete entries. Each card shows its latest version, with an e
 
 For an explicitly requested permanent cleanup, `./remove-deleted-expense.sh EXPENSE_ID --expected-version VERSION` removes only an already-deleted expense and its revisions. It requires a Supabase personal access token entered locally, saves a private recovery copy, checks the latest version, and verifies that other ledger data and balances are unchanged in the same transaction. It is not exposed to website visitors. Refresh the saved snapshots after cleanup.
 
-**Export ledger** downloads the currently selected tab, including its history. To refresh all six separate website snapshots and save a private combined backup locally:
+**Settings → Export ledger** downloads the currently selected tab, including its history. To refresh all six separate website snapshots and save a private combined backup locally:
 
 ```bash
 ./export-ledgers.sh          # live ledgers, read-only database access

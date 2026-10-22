@@ -1,4 +1,4 @@
-import {setTheme,refreshSection} from './settings';
+import {setTheme,refreshSection,openSettings} from './settings';
 import {test,expect,type Page,type Locator} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 import {addDays,weekStart} from '../../src/chores';
@@ -15,7 +15,7 @@ async function choosePerson(page:Page,who:string){await page.locator('#chore-swi
 test('requests, urgency, hand-back and shared identity work across tabs on a phone',async({page})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.setViewportSize({width:390,height:844});
  await open(page,'rohil');
- await expect(page.locator('#export')).toBeEnabled();const downloadEvent=page.waitForEvent('download');await page.locator('#export').click();const download=await downloadEvent;const exported=JSON.parse(await readFile((await download.path())!,'utf8'));expect(exported.tasks).toEqual([]);expect(exported.history).toEqual([]);expect(exported.bills).toBeUndefined();
+ await openSettings(page);await expect(page.locator('#export')).toBeEnabled();const downloadEvent=page.waitForEvent('download');await page.locator('#export').click();const download=await downloadEvent;const exported=JSON.parse(await readFile((await download.path())!,'utf8'));expect(exported.tasks).toEqual([]);expect(exported.history).toEqual([]);expect(exported.bills).toBeUndefined();
  await page.locator('#chore-new').click();await page.locator('#chore-kind').selectOption('chore');
  await page.locator('[data-chore-shortcut=bananas]').click();await expect(page.locator('#chore-title')).toHaveValue('Pick up bananas');
  await page.locator('#chore-title').fill('Bananas <b>for everyone</b>');

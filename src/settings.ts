@@ -30,7 +30,7 @@ export function initSettings() {
  $('#settings-open').addEventListener('click',()=>dialog.showModal());
  $('#settings-close').addEventListener('click',()=>dialog.close());
  // Close this modal before opening Notifications or refreshing the section.
- for(const id of ['#notifications','#refresh','#whats-new'])$(id).addEventListener('click',()=>dialog.close());
+ for(const id of ['#notifications','#refresh','#whats-new','#export'])$(id).addEventListener('click',()=>dialog.close());
  $('#whats-new').addEventListener('click',()=>openUpdates(true));
  initUpdates();
 }
