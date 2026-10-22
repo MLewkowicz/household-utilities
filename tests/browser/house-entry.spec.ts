@@ -158,7 +158,7 @@ test('pointer bursts are coalesced and the house keeps full resolution',async({p
 });
 
 
-test('day and night interpolate through shared scene lighting and reverse without changing rooms',async({page})=>{
+test('day and night interpolate through landscape lighting and reverse without changing rooms',async({page})=>{
  await page.emulateMedia({colorScheme:'light'});await page.goto('/');await ready(page);
  expect((await diag(page)).themeBlend).toBe(0);
  await page.locator('#theme-select').selectOption('dark');
@@ -170,4 +170,22 @@ test('day and night interpolate through shared scene lighting and reverse withou
  await page.locator('#theme-select').selectOption('dark');
  await expect.poll(async()=>(await diag(page)).themeBlend,{timeout:10000}).toBe(1);
  expect((await diag(page)).environment.moonVisible).toBe(true);expect((await diag(page)).environment.sunVisible).toBe(false);
+});
+
+test('changing the landscape theme preserves house, portrait and theater lighting',async({page})=>{
+ await page.emulateMedia({colorScheme:'light',reducedMotion:'reduce'});await page.goto('/');await ready(page);
+ // Compare the rendered pixels, with animation paused so poses stay identical.
+ // Both crops are inside the house/portraits, clear of the changing landscape.
+ const wall={x:550,y:350,width:240,height:200},portraits={x:480,y:670,width:400,height:85};
+ const lightWall=await page.screenshot({clip:wall}),lightPortraits=await page.screenshot({clip:portraits});
+ await page.locator('#theme-select').selectOption('dark');
+ expect((await page.screenshot({clip:wall})).equals(lightWall)).toBe(true);
+ expect((await page.screenshot({clip:portraits})).equals(lightPortraits)).toBe(true);
+ await page.locator('.stage-canvas').focus();
+ for(let i=0;i<3;i++)await page.keyboard.press('ArrowRight');
+ expect((await diag(page)).displayed).toBe('events');expect((await diag(page)).dark).toBe(true);
+ const theater=await page.screenshot({clip:wall});
+ await page.locator('#theme-select').selectOption('light');
+ expect((await page.screenshot({clip:wall})).equals(theater)).toBe(true);
+ expect(theater.equals(lightWall)).toBe(false);
 });

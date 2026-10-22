@@ -49,18 +49,28 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   const canvas = renderer.domElement; canvas.className = 'stage-canvas'; canvas.tabIndex = 0; canvas.setAttribute('role', 'group');
   canvas.setAttribute('aria-label', 'Rotating household. Drag horizontally to turn and release to reveal a room. Left and right arrows change sections. Tap the house or press Enter to play its scene effect. Scroll down to enter the selected section. Home returns to this menu.');
   container.replaceChildren(canvas);
-  const scene = new T.Scene(), camera = new T.OrthographicCamera(-6, 6, 5, -5, .1, 200);
+  const scene = new T.Scene(), landscapeScene=new T.Scene(), camera = new T.OrthographicCamera(-6, 6, 5, -5, .1, 200);
+  // Separate light rigs, but one camera and depth buffer: the house retains its
+  // scene lighting while the surroundings change from daylight to moonlight.
+  renderer.autoClear=false;renderer.info.autoReset=false;
   // Same orthographic view, with enough distance for the foreground lawn on
   // tall phones to remain in front of the near clipping plane.
   camera.position.set(24,28.95,99.7); camera.lookAt(0,3.95,.1);
   const cameraAzimuth = Math.atan2(6, 24.9);
   const ambient = new T.HemisphereLight('#fff2dc', '#a2b2bb', 2.5); scene.add(ambient);
   const key = new T.DirectionalLight('#fff1d6', 2.25); key.position.set(-5, 12, 8); key.castShadow = true;
-  key.shadow.mapSize.set(metrics.shadowSize,metrics.shadowSize); key.shadow.camera.left=-14; key.shadow.camera.right=14; key.shadow.camera.top=18; key.shadow.camera.bottom=-14;
-  key.shadow.camera.near=.5; key.shadow.camera.far=55;
+  key.shadow.mapSize.set(metrics.shadowSize,metrics.shadowSize); key.shadow.camera.left=-8; key.shadow.camera.right=8; key.shadow.camera.top=10; key.shadow.camera.bottom=-8;
+  key.shadow.camera.near=.5; key.shadow.camera.far=40;
   key.shadow.normalBias=.08; key.shadow.bias=-.0003; scene.add(key);
   const fill = new T.DirectionalLight('#b0cce3', .8); fill.position.set(5, 5, -2); scene.add(fill);
-  const environment=createEnvironment(scene,camera);
+  const outsideAmbient=ambient.clone(),outsideKey=key.clone(),outsideFill=fill.clone();
+  outsideKey.shadow.camera.left=-14;outsideKey.shadow.camera.right=14;outsideKey.shadow.camera.top=18;outsideKey.shadow.camera.bottom=-14;outsideKey.shadow.camera.far=55;outsideKey.shadow.camera.updateProjectionMatrix();
+  landscapeScene.add(outsideAmbient,outsideKey,outsideFill);
+  const environment=createEnvironment(landscapeScene,camera);
+  // The house's shadow still lands on the lawn, even though its light is
+  // independent. This transparent receiver sits just above the modeled ground.
+  const contact=new T.Mesh(new T.PlaneGeometry(45,45),new T.ShadowMaterial({color:'#253a32',opacity:.22}));
+  contact.rotation.x=-Math.PI/2;contact.position.y=-.362;contact.receiveShadow=true;scene.add(contact);
   const pivot = new T.Group(); pivot.name='house-turn-pivot'; scene.add(pivot);
   const shell = houseShell(); pivot.add(shell);
   const cache = new Map<StageId,HouseStage>();
@@ -75,8 +85,13 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   const portraitTint=new T.Color(), portraitWhite=new T.Color('#ffffff'), portraitNight=new T.Color('#a4b4d1');
   const canAnimate=()=>!destroyed&&!lost&&!paused&&!media.matches&&!document.hidden&&visible;
   function lighting(value: number) {
-    night=value; ambient.intensity=T.MathUtils.lerp(T.MathUtils.lerp(2.5,1.05,themeBlend),.75,value); key.intensity=T.MathUtils.lerp(T.MathUtils.lerp(2.25,1.1,themeBlend),.55,value); fill.intensity=T.MathUtils.lerp(T.MathUtils.lerp(.8,.45,themeBlend),.4,value);
-    ambient.color.copy(warm).lerp(dusk,themeBlend).lerp(cool,value); key.color.copy(warmKey).lerp(coolKey,Math.max(themeBlend,value));
+    night=value;
+    ambient.intensity=T.MathUtils.lerp(2.5,.75,value);key.intensity=T.MathUtils.lerp(2.25,.55,value);fill.intensity=T.MathUtils.lerp(.8,.4,value);
+    ambient.color.copy(warm).lerp(cool,value);key.color.copy(warmKey).lerp(coolKey,value);
+    outsideAmbient.intensity=T.MathUtils.lerp(T.MathUtils.lerp(2.5,1.05,themeBlend),.75,value);
+    outsideKey.intensity=T.MathUtils.lerp(T.MathUtils.lerp(2.25,1.1,themeBlend),.55,value);
+    outsideFill.intensity=T.MathUtils.lerp(T.MathUtils.lerp(.8,.45,themeBlend),.4,value);
+    outsideAmbient.color.copy(warm).lerp(dusk,themeBlend).lerp(cool,value);outsideKey.color.copy(warmKey).lerp(coolKey,Math.max(themeBlend,value));
   }
   function projection() {
     const aspect=container.clientWidth/Math.max(1,container.clientHeight);
@@ -112,7 +127,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     lighting(night);environment.tick(elapsed,themeBlend,night,media.matches);
     const state=states[displayed]; state.still=media.matches;
     current.tick(elapsed,state);
-    faceCamera(current.people,camera,portraitTint.copy(portraitWhite).lerp(portraitNight,Math.max(night,themeBlend*.22)).getStyle());
+    faceCamera(current.people,camera,portraitTint.copy(portraitWhite).lerp(portraitNight,night).getStyle());
     // Clear captions before the walls cross the opening; reveal them again
     // only in the final few degrees, including when a short drag rolls back.
     const speechOpacity=turn
@@ -120,7 +135,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
         : 1-T.MathUtils.smoothstep(turn.progress,0,.035)
       : 1;
     placeSpeech(current.root,current.people,camera,container.clientHeight,speechOpacity);
-    renderer.render(scene,camera); metrics.frames++; samples++;
+    renderer.info.reset();renderer.clear();renderer.render(landscapeScene,camera);renderer.render(scene,camera);metrics.frames++;samples++;
     metrics.calls=renderer.info.render.calls; metrics.triangles=renderer.info.render.triangles;
     metrics.textures=renderer.info.memory.textures; metrics.geometries=renderer.info.memory.geometries;
   }
@@ -265,7 +280,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
       destroyed=true; stopTheme(); clearTurn(); cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); media.removeEventListener('change',refresh); document.removeEventListener('visibilitychange',refresh);
       window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',up); canvas.removeEventListener('pointercancel',cancelPointer); canvas.removeEventListener('pointerdown',down); canvas.removeEventListener('keydown',keyboard);
       canvas.removeEventListener('webglcontextlost',contextLost); canvas.removeEventListener('webglcontextrestored',contextRestored);
-      cache.forEach(stage=>dispose(stage.root)); cache.clear(); Object.values(faces).forEach(texture=>texture.dispose()); environment.destroy();dispose(scene); renderer.dispose(); renderer.forceContextLoss(); container.replaceChildren();
+      cache.forEach(stage=>dispose(stage.root)); cache.clear(); Object.values(faces).forEach(texture=>texture.dispose()); environment.destroy();dispose(landscapeScene);dispose(scene);key.shadow.dispose();outsideKey.shadow.dispose();renderer.dispose(); renderer.forceContextLoss(); container.replaceChildren();
     },
   };
 }

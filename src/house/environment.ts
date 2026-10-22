@@ -8,7 +8,7 @@ export function createEnvironment(scene:T.Scene,camera:T.OrthographicCamera) {
   const root=new T.Group();root.name='house-landscape-3d';scene.add(root);
   // Align the clearing with the view, while retaining the house's own azimuth.
   const land=group(root);land.rotation.y=Math.atan2(6,24.9);
-  const stationary=group(land),ranges=group(land,0,-.8,6,true),wind:{crown:T.Group;phase:number}[]=[];
+  const stationary=group(land),ranges=group(land,0,-2.1,0,true),wind:{crown:T.Group;phase:number}[]=[];
   const ground=mesh(stationary,new T.PlaneGeometry(180,180),'#82986c',0,-.365,68);
   ground.rotation.x=-Math.PI/2;ground.castShadow=false;
 
@@ -19,27 +19,45 @@ export function createEnvironment(scene:T.Scene,camera:T.OrthographicCamera) {
   }
   function mountain(x:number,z:number,width:number,height:number,seed:number) {
     const vertices:number[]=[],colors:number[]=[],uv:number[]=[];
-    const shades=['#9bafa9','#a7b5b0','#b9c1b7','#c7c9ba','#e0dacc'].map(c=>new T.Color(c));
-    const rings=[{r:1,y:0},{r:.81,y:.17},{r:.71,y:.34},{r:.53,y:.56},{r:.33,y:.79},{r:0,y:1}];
+    const stone=['#7c9082','#8c9b8d','#a49f91','#8a999d','#a7b0ac'].map(c=>new T.Color(c));
+    const snow=new T.Color('#eff2ec'),snowShade=new T.Color('#d5e2e7');
+    const sides=14,snowy=height>=3.9,snowline=Math.max(.62,3.4/height);
+    const radii=[1,.86,.72,.57,.43,.30,.16,0];
+    const drift=(random(seed+45)-.5)*width*.42;
     const point=(ring:number,side:number)=>{
-      const angle=side*Math.PI/4,level=rings[ring],jitter=1+(random(seed+side*7)-.5)*.30;
-      return new T.Vector3(Math.cos(angle)*width*level.r*jitter+(ring/5)*width*.14,
-        level.y*height*(1+(random(seed+(ring===5?0:side*3)+ring)-.5)*.13),Math.sin(angle)*width*.65*level.r*jitter);
+      const angle=side*Math.PI*2/sides;
+      // Alternating spurs and gullies run down each face. The snow boundary
+      // follows those gullies instead of forming a horizontal painted stripe.
+      const line=T.MathUtils.clamp(snowline+Math.sin(angle*3+seed)*.07+Math.cos(angle*5-seed)*.045,.57,.88);
+      const levels=[0,.13,.28,.42,.51,line,(line+1)/2,1];
+      const t=levels[ring],rib=1+(side%2?.10:-.09);
+      const radius=radii[ring]*rib*(.91+random(seed+side*7)*.18);
+      const shoulder=ring>0&&ring<5?(random(seed+side*3)-.5)*.065:0;
+      return new T.Vector3(Math.cos(angle)*width*radius+drift*t*t,
+        height*(t+shoulder),Math.sin(angle)*width*.47*radius+width*.09*Math.sin(seed)*t);
     };
-    for(let r=0;r<5;r++)for(let side=0;side<8;side++) {
-      const a=point(r,side),b=point(r,(side+1)%8),c=point(r+1,(side+1)%8),d=point(r+1,side);
-      for(const triangle of [[a,d,b],[b,d,c]]){
-        const shade=shades[r].clone().multiplyScalar(.90+random(seed+side*13+r)*.16);
+    for(let r=0;r<radii.length-1;r++)for(let side=0;side<sides;side++) {
+      const a=point(r,side),b=point(r,(side+1)%sides),c=point(r+1,(side+1)%sides),d=point(r+1,side);
+      // One fan at the summit avoids duplicate, zero-area triangles.
+      const triangles=r===radii.length-2?[[a,d,b]]:[[a,d,b],[b,d,c]];
+      for(const triangle of triangles){
+        const shade=snowy&&r>=5?snow.clone().lerp(snowShade,(side%4)*.13):stone[r<2?r:2+Math.floor((side+seed)%6/2)].clone();
+        shade.multiplyScalar(.96+random(seed+side*13+r)*.08);
         for(const p of triangle){vertices.push(p.x,p.y,p.z);colors.push(shade.r,shade.g,shade.b);uv.push(0,0);}
       }
     }
     const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geometry.setAttribute('color',new T.Float32BufferAttribute(colors,3));geometry.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geometry.computeVertexNormals();
     const peak=new T.Mesh(geometry,new T.MeshLambertMaterial({vertexColors:true}));peak.position.set(x,-.40,z);ranges.add(peak);
   }
-  // Broad shoulders, shelves and pale stone summits, rather than flat triangles.
-  [[-25,-27,7,3.6],[-16,-26,6.4,4.8],[-8,-25,5.6,4.2],[0,-28,6.8,3.3],[8,-26,6.4,5.1],[17,-28,7.4,4.0],[27,-27,8,4.9]].forEach(([x,z,w,h],i)=>mountain(x,z,w,h,20+i));
+  // Unequal summits and lower side ridges make a continuous range. All snow
+  // and rock faces are joined in one mesh, with no overlaid texture or shell.
+  const summits=[[-27,-28,7,5.2],[-17,-27,6.3,5.9],[-6.6,-26,5.6,5.2],[.4,-29,5.9,4.2],[7.2,-27,5.8,5.7],[17,-29,7.2,5.3],[28,-28,7.8,6.1]];
+  const shoulders=[[-11,-25,3.2,3.6],[-3.8,-26,2.9,4.1],[4.6,-26,3.1,4.3],[12,-27,3.8,3.7]];
+  [...summits,...shoulders].forEach(([x,z,w,h],i)=>mountain(x,z,w,h,20+i));
   batch(ranges);
-  for(let i=0;i<12;i++)rock(stationary,i%2?'#91a385':'#879c82',-32+i*6,-.5,-19-random(i)*3,5.2,1.2+random(i+20),3.1,i);
+  // Keep the front of the mountain/foothill geometry behind the treeline.
+  // Their previous footprints overlapped, cutting through the left pines.
+  for(let i=0;i<12;i++)rock(stationary,i%2?'#91a385':'#879c82',-32+i*6,-.5,-23-random(i)*2,5.2,1.2+random(i+20),2.6,i);
 
   function tree(x:number,z:number,height:number,seed:number,pine:boolean,animated=false) {
     const trunk=group(stationary,x,-.35,z);
@@ -69,7 +87,7 @@ export function createEnvironment(scene:T.Scene,camera:T.OrthographicCamera) {
   // Trees frame the clearing without occupying the space swept by the house.
   [[-7.5,-5,4.8,0],[-8.7,-9,5.7,1],[-6.5,-12,3.8,1],[7.9,-6.5,5.1,1],[7,-11,3.9,0],[10,-10,5.6,1]].forEach(([x,z,h,pine],i)=>tree(x,z,h,i+1,!!pine,i<4));
   for(let i=0;i<22;i++){
-    const x=-26+i*2.5,z=-16-random(i+40)*3;
+    const x=-26+i*2.5,z=-13.8-random(i+40)*1.4;
     tree(x,z,1.1+random(i+90)*1.8,40+i,i%4!==0);
   }
   // Small ground details have the same quiet bevels and facets as the house.
@@ -129,12 +147,12 @@ export function createEnvironment(scene:T.Scene,camera:T.OrthographicCamera) {
     }
     // Keep the ridge visible above the roof on tall screens. Its base stays
     // planted behind the same foothills; only the distant summit heights vary.
-    ranges.scale.y=T.MathUtils.lerp(.95,1.7,T.MathUtils.smoothstep(span,16,29));
+    ranges.scale.y=T.MathUtils.lerp(.95,1.45,T.MathUtils.smoothstep(span,16,29));
     const passing=(time+7)%23;
     meteor.visible=!still&&night>.9&&passing<1.2;
     if(meteor.visible){screenPosition(meteor,.5+passing*.27,.79-passing*.18,skyDepth+4);meteor.quaternion.copy(camera.quaternion);meteor.rotateZ(-2.2);meteorMaterial.opacity=Math.sin(passing/1.2*Math.PI)*.6;}
     clouds.forEach((cloud,i)=>{screenPosition(cloud,cloudPositions[i][0]+(still?0:Math.sin(time*.025+i)*.045),cloudPositions[i][1],skyDepth-2);cloud.quaternion.copy(camera.quaternion);});
     wind.forEach(({crown,phase})=>{crown.rotation.z=still?0:Math.sin(time*.55+phase)*.012;});
   }
-  return {tick,destroy(){stars.dispose();},diagnostics:()=>({kind:'modeled-3d',trees:28,mountains:7,groundY:-.365,windTrees:wind.length,sunVisible:sun.visible,moonVisible:moon.visible,starsOpacity:starsMaterial.opacity,meteorVisible:meteor.visible})};
+  return {tick,destroy(){stars.dispose();},diagnostics:()=>({kind:'modeled-3d',trees:28,mountains:summits.length+shoulders.length,groundY:-.365,windTrees:wind.length,sunVisible:sun.visible,moonVisible:moon.visible,starsOpacity:starsMaterial.opacity,meteorVisible:meteor.visible})};
 }
