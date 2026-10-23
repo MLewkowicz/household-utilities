@@ -35,22 +35,23 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
  }
 
  // The peek is the neighbour's real page, laid out beside the current one.
- let peek:{section:Feature;direction:1|-1;page:HTMLElement;target:number;pull:number;settling:boolean}|null=null;
+ let peek:{section:Feature;direction:1|-1;page:HTMLElement;target:number;pull:number;settling:boolean;returning?:boolean}|null=null;
  function openPeek(section:Section,direction:1|-1){
   if(peek)return peek.section===section&&peek.direction===direction?peek:null;
   if(section==='home'||reduced())return null;
   const page=options.page(section),landing=main.getBoundingClientRect().top+scrollY;
-  // A plain gap separates the two pages; `trailing` is the space ordinary
+  // A plain gap separates the two pages; `trailing` is the padding ordinary
   // scrolling leaves below a section's last item.
-  const trailing=Math.max(0,area.getBoundingClientRect().bottom-main.getBoundingClientRect().bottom),gap=48;
+  const trailing=parseFloat(getComputedStyle(area).paddingBottom)||0,gap=48;
   // Its own compositor layer keeps each frame of the drag to a transform. A
   // warmed page is already laid out, so revealing it only paints.
   area.style.willChange='transform';page.hidden=false;page.classList.remove('section-staged');page.classList.add('section-peek');
   const height=page.offsetHeight,mainTop=main.getBoundingClientRect().top;
   let target:number;
   if(direction===1){
-   // Just below this page; settles at the landing position of a fresh section.
-   const top=main.offsetHeight+gap;page.style.top=top+'px';target=mainTop+top-landing;
+   // Below this page, from the bottom of the screen when the page is short;
+   // settles at the landing position of a fresh section.
+   const top=Math.max(main.offsetHeight+gap,area.getBoundingClientRect().bottom-mainTop);page.style.top=top+'px';target=mainTop+top-landing;
   }else{
    // Above the current page; settles where a scroll to its bottom would land.
    page.style.top=-(height+gap)+'px';target=Math.min(innerHeight-trailing,landing+height)-(mainTop-gap);
@@ -78,8 +79,9 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
   area.style.transition=ms?`transform ${ms}ms ${settle}`:'';
   area.style.transform=peek.pull?`translate3d(0,${-peek.direction*peek.pull}px,0)`:'';
   if(!then)return;
-  peek.settling=true;let done=false;
-  const finish=(event?:Event)=>{if(done||event&&event.target!==area)return;done=true;area.removeEventListener('transitionend',finish);then();};
+  peek.settling=true;let done=false;const current=peek;
+  // A peek replaced mid-animation must not be torn down by the old one finishing.
+  const finish=(event?:Event)=>{if(done||event&&event.target!==area)return;done=true;area.removeEventListener('transitionend',finish);if(peek===current)then();};
   area.addEventListener('transitionend',finish);setTimeout(()=>finish(),ms+80);
  }
  function clearPeek(){
@@ -90,7 +92,7 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
   // A peek that sprang back stays warm for the next attempt.
   if(state().section!==section)page.classList.add('section-staged');
  }
- function springBack(){if(peek&&!peek.settling)setPull(0,220,clearPeek);}
+ function springBack(){if(peek&&!peek.settling){peek.returning=true;setPull(0,220,clearPeek);}}
  function commit(){
   if(!peek||peek.settling)return;
   const {section,direction,target}=peek,start=state().section;
@@ -106,6 +108,8 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
  // Release speed over the last ~100ms, so one slow frame does not decide a flick.
  const velocity=(samples:[number,number][])=>{const [t1,d1]=samples.at(-1)!,[t0,d0]=samples.find(([t])=>t1-t<=100)!;return t1>t0?Math.abs(d1-d0)/(t1-t0):0;};
  function touchStart(event:TouchEvent){
+  // A new touch cuts a spring-back short instead of being ignored.
+  if(peek?.returning)clearPeek();
   touch=null;if(event.touches.length!==1||peek?.settling)return;
   const start=edge(event.target),point=event.touches[0];
   if(start)touch={id:point.identifier,x:point.clientX,y:point.clientY,dx:0,dy:0,edge:start,samples:[[performance.now(),0]]};
@@ -144,6 +148,7 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
   if(!wheel||now-wheel.at>(peek&&!peek.settling?400:240))wheel={at:now,began:now,edge:edge(event.target),distance:0,used:false};
   wheel.at=now;
   if(blocked()||event.ctrlKey||event.defaultPrevented||Math.abs(event.deltaX)>Math.abs(event.deltaY)||!wheel.edge)return;
+  if(peek?.returning&&!wheel.used)clearPeek();
   if(wheel.used||peek?.settling){if(event.cancelable)event.preventDefault();return;}
   const amount=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?innerHeight:1);
   const direction=(peek?Math.sign(wheel.distance+amount)||peek.direction:Math.sign(amount)) as 1|-1;
