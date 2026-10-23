@@ -1,4 +1,4 @@
-import {$,rpc,toast,animateScroll} from './ui';
+import {$,rpc,toast} from './ui';
 import {identity,onIdentityChange} from './identity';
 import {initNotifications,missingNotification} from './notifications';
 import {initSettings} from './settings';
@@ -88,10 +88,7 @@ function route(source:NavigationSource='history',direction:1|-1=1){
  document.querySelectorAll<HTMLAnchorElement>('[data-ledger]').forEach(link=>{if(link.dataset.ledger===active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
  const label=active==='home'?'Home':active==='utilities'?'Utilities':active==='chores'?'To-dos':active==='events'?'Events':active==='bulletin'?'Bulletin':'Expenses';
  document.title=`Household · ${label}`;
- const hero=$('#house-hero'),wasFeature=hero.hidden;
- // A shortcut taken from the lawn glides down into the section rather than cutting.
- const glideIn=!wasFeature&&source==='shortcut'&&active!=='home';
- const showHouse=active==='home'||glideIn||source==='house'||source==='history'&&history.state?.houseView===true;
+ const showHouse=active==='home'||source==='house'||source==='history'&&history.state?.houseView===true;
  house.select(active,source==='house',!showHouse);
  $('#export').setAttribute('disabled','');$('#main').setAttribute('aria-busy',active==='home'?'false':'true');
  // Shortcuts and forward section gestures land at the top. A backward gesture
@@ -100,29 +97,16 @@ function route(source:NavigationSource='history',direction:1|-1=1){
   // A notification's focused card and smooth scroll can survive a hash change.
   // Move focus out of the feature, then finish landing after the new layout.
   if($('#feature-area').contains(document.activeElement))document.querySelector<HTMLElement>('[data-ledger=home]')?.focus({preventScroll:true});
+  window.scrollTo({top:0,behavior:'instant'});
   const landingVersion=routeVersion;
-  if(wasFeature&&source!=='initial'&&house.ready()){
-   // Keep the section where it was, then let the lawn descend over it. One
-   // pixel of hero stays visible so the entry handler does not re-enter.
-   window.scrollTo({top:hero.offsetHeight-1,behavior:'instant'});
-   requestAnimationFrame(()=>{if(routeVersion===landingVersion&&active==='home')void animateScroll(0,520);});
-  }else{
-   window.scrollTo({top:0,behavior:'instant'});
-   requestAnimationFrame(()=>{if(routeVersion===landingVersion&&active==='home')window.scrollTo({top:0,behavior:'instant'});});
-  }
+  requestAnimationFrame(()=>{if(routeVersion===landingVersion&&active==='home')window.scrollTo({top:0,behavior:'instant'});});
  }
- else if(glideIn)void animateScroll(hero.offsetHeight,460);
  else if(source==='shortcut'||source==='initial'||source==='scroll')$('#feature-area').scrollIntoView({block:'start',behavior:'instant'});
- // Tab-to-tab shortcuts rise the new page in, matching the gesture settle.
- if(source==='shortcut'&&wasFeature&&active!=='home'){const main=$('#main');main.classList.remove('is-entering');void main.offsetWidth;main.classList.add('is-entering');}
- const version=routeVersion,pending=refresh(source==='scroll'?20000:0);
- // A backward gesture lands at the bottom immediately (the peek already showed
- // it there) and stays pinned if fresh data lengthens the page.
- if(source==='scroll'&&direction===-1&&active!=='home'){
-  const toBottom=()=>window.scrollTo({top:document.documentElement.scrollHeight-innerHeight,behavior:'instant'});
-  toBottom();const placed=scrollY;
-  void pending.then(()=>{if(version===routeVersion&&Math.abs(scrollY-placed)<4)toBottom();});
- }
+ // Shortcuts rise the new page in briefly instead of cutting.
+ if(source==='shortcut'&&active!=='home'){const main=$('#main');main.classList.remove('is-entering');void main.offsetWidth;main.classList.add('is-entering');}
+ void refresh(source==='scroll'?20000:0);
+ // A backward gesture lands at the bottom, where the peek already showed it.
+ if(source==='scroll'&&direction===-1&&active!=='home')window.scrollTo({top:document.documentElement.scrollHeight-innerHeight,behavior:'instant'});
 }
 function navigate(section:Section,source:'house'|'shortcut'|'scroll'|'entry',direction:1|-1=1){
  const hash='#'+section;

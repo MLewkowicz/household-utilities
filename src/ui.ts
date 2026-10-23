@@ -49,21 +49,3 @@ export function rpc<T>(functionName:string,params:Record<string,unknown>={}):Pro
  }
  return pending as Promise<T>;
 }
-let scrollTween=0;
-/** Eased programmatic scroll that yields to the reader's own wheel or touch. */
-export function animateScroll(to:number,ms:number):Promise<boolean>{
- const from=scrollY,id=++scrollTween,began=performance.now();
- if(matchMedia('(prefers-reduced-motion: reduce)').matches||Math.abs(to-from)<2){window.scrollTo({top:to,behavior:'instant'});return Promise.resolve(true);}
- return new Promise(resolve=>{
-  const stop=()=>{if(scrollTween===id)scrollTween++;};
-  const events=['wheel','touchstart','keydown'] as const;
-  events.forEach(type=>addEventListener(type,stop,{passive:true,once:true}));
-  const frame=(now:number)=>{
-   if(scrollTween!==id){events.forEach(type=>removeEventListener(type,stop));resolve(false);return;}
-   const t=Math.min(1,(now-began)/ms),eased=t<.5?4*t*t*t:1-(-2*t+2)**3/2;
-   window.scrollTo({top:from+(to-from)*eased,behavior:'instant'});
-   if(t<1)requestAnimationFrame(frame);else{scrollTween++;events.forEach(type=>removeEventListener(type,stop));resolve(true);}
-  };
-  requestAnimationFrame(frame);
- });
-}

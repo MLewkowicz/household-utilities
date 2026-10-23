@@ -160,6 +160,14 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     lighting(T.MathUtils.lerp(Number(get(t.from).dark),Number(get(t.to).dark),T.MathUtils.smoothstep(t.progress,.12,.88)));
     projection();
   }
+  // The page below the hero starts from the lawn's real colour, read from the
+  // bottom-centre pixel about once a second, so day and night meet it without a seam.
+  let lawnAt=-Infinity;const lawnPixel=new Uint8Array(4);
+  function sampleLawn() {
+    const now=performance.now(); if(now-lawnAt<1000) return; lawnAt=now;
+    const gl=renderer.getContext(); gl.readPixels(gl.drawingBufferWidth>>1,1,1,1,gl.RGBA,gl.UNSIGNED_BYTE,lawnPixel);
+    document.documentElement.style.setProperty('--lawn-color',`rgb(${lawnPixel[0]} ${lawnPixel[1]} ${lawnPixel[2]})`);
+  }
   function draw() {
     if(destroyed||lost||!visible||document.hidden) return;
     applyTurn();
@@ -176,7 +184,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
         : 1-T.MathUtils.smoothstep(turn.progress,0,.035)
       : 1;
     placeSpeech(current.root,current.people,camera,container.clientHeight,speechOpacity);
-    renderer.info.reset();renderer.clear();renderer.render(landscapeScene,camera);renderer.render(scene,camera);metrics.frames++;samples++;
+    renderer.info.reset();renderer.clear();renderer.render(landscapeScene,camera);renderer.render(scene,camera);sampleLawn();metrics.frames++;samples++;
     metrics.calls=renderer.info.render.calls; metrics.triangles=renderer.info.render.triangles;
     metrics.textures=renderer.info.memory.textures; metrics.geometries=renderer.info.memory.geometries;
   }

@@ -60,21 +60,8 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
   void options.prefetch(section).catch(()=>{/* Landing retries visibly. */});
   return peek;
  }
- // Mouse-wheel notches ease toward their total instead of jumping per notch.
- let glide=0,goal=0;
- function glideTo(pull:number){
-  goal=pull;if(glide)return;
-  const step=()=>{
-   glide=0;if(!peek||peek.settling)return;
-   const next=peek.pull+(goal-peek.pull)*.35;
-   if(Math.abs(goal-next)<.5){setPull(goal);return;}
-   setPull(next,0,undefined,true);glide=requestAnimationFrame(step);
-  };
-  glide=requestAnimationFrame(step);
- }
- function setPull(pull:number,ms=0,then?:()=>void,gliding=false){
+ function setPull(pull:number,ms=0,then?:()=>void){
   if(!peek)return;
-  if(!gliding&&glide){cancelAnimationFrame(glide);glide=0;}
   peek.pull=Math.max(0,Math.min(peek.target,pull));
   area.style.transition=ms?`transform ${ms}ms ${settle}`:'';
   area.style.transform=peek.pull?`translate3d(0,${-peek.direction*peek.pull}px,0)`:'';
@@ -162,7 +149,7 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
    if(pulled>=72){wheel.used=true;navigate(section,direction);}
    return;
   }
-  glideTo(pulled);
+  setPull(pulled);
   // A fast flick at the edge is an aggressive scroll and commits outright.
   const velocity=pulled/Math.max(16,now-wheel.began);
   if(pulled>=innerHeight*.35||pulled>=120&&velocity>3){wheel.used=true;commit();return;}
@@ -175,17 +162,6 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
   if(!section)return;
   event.preventDefault();
   if(openPeek(section,direction))commit();else navigate(section,direction);
- }
- // The neighbour loads while the reader approaches an edge, so its peek is filled.
- let prefetched=new Set<string>(),seen:Section|undefined;
- function onScroll(){
-  const current=state();if(!current.featureOnly||!current.ready)return;
-  if(seen!==current.section){seen=current.section;prefetched=new Set();}
-  const index=HOUSE_SECTIONS.findIndex(item=>item.route===current.section),rest=document.documentElement.scrollHeight-innerHeight-scrollY;
-  for(const [near,offset] of [[rest<innerHeight,1],[scrollY<innerHeight,-1]] as const){
-   const next=HOUSE_SECTIONS[index+offset]?.route;
-   if(near&&next&&next!=='home'&&!prefetched.has(next)){prefetched.add(next);void options.prefetch(next).catch(()=>{/* The peek loads it on demand instead. */});}
-  }
  }
  // After landing, both neighbours load and lay out invisibly in idle time, so
  // a peek reveals finished pages instead of building them mid-gesture.
@@ -206,6 +182,5 @@ export function bindSectionScroll(state:()=>State,navigate:(section:Section,dire
  document.addEventListener('touchcancel',cancel,{passive:true});
  document.addEventListener('wheel',onWheel,{passive:false});
  document.addEventListener('keydown',key);
- window.addEventListener('scroll',onScroll,{passive:true});
- return {warm,destroy:()=>{clearPeek();document.removeEventListener('touchstart',touchStart);document.removeEventListener('touchmove',touchMove);document.removeEventListener('touchend',touchEnd);document.removeEventListener('touchcancel',cancel);document.removeEventListener('wheel',onWheel);document.removeEventListener('keydown',key);window.removeEventListener('scroll',onScroll);}};
+ return {warm,destroy:()=>{clearPeek();document.removeEventListener('touchstart',touchStart);document.removeEventListener('touchmove',touchMove);document.removeEventListener('touchend',touchEnd);document.removeEventListener('touchcancel',cancel);document.removeEventListener('wheel',onWheel);document.removeEventListener('keydown',key);}};
 }
