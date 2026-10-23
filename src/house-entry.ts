@@ -34,8 +34,11 @@ export function mountHouseEntry(onNavigate:(section:Section)=>void,onEnter:(sect
     onEnter(selected==='home'?'chores':selected);
     if(container.contains(document.activeElement))document.querySelector<HTMLElement>('#main')?.focus({preventScroll:true});
   }
-  function onScroll(){finishEntering();syncChrome();}
-  window.addEventListener('scroll',onScroll,{passive:true});syncChrome();
+  // At rest the lawn reaches the bottom of the screen; it fades into the page
+  // only as the reader starts scrolling toward the section below.
+  const fadeLawn=()=>hero.style.setProperty('--lawn-fade',String(Math.min(1,Math.max(0,scrollY/(innerHeight*.25)))));
+  function onScroll(){finishEntering();syncChrome();fadeLawn();}
+  window.addEventListener('scroll',onScroll,{passive:true});syncChrome();fadeLawn();
   async function start() {
     if(loading||player)return;
     loading=true;

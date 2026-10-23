@@ -83,5 +83,5 @@
 @media(prefers-reduced-motion:reduce){#updates-dialog[open],#updates-dialog[open] #updates-list,#updates-dialog[open] .dialog-actions{animation:none}}
 /* Warmed neighbours are laid out but take no space and cannot be reached. */
 .section-staged{position:absolute;left:0;right:0;top:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none}
-/* The lawn fades into the page colour instead of ending at a hard edge. */
-#house-hero::after{content:'';position:absolute;inset:auto 0 0;height:clamp(72px,14svh,140px);background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--bg) 70%,transparent) 55%,var(--bg));pointer-events:none;z-index:1}
+/* Once scrolling starts, the lawn fades into the page colour instead of ending at a hard edge. */
+#house-hero::after{content:'';position:absolute;inset:auto 0 0;height:clamp(72px,14svh,140px);background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--bg) 70%,transparent) 55%,var(--bg));pointer-events:none;z-index:1;opacity:var(--lawn-fade,0)}
