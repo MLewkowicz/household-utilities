@@ -91,7 +91,7 @@ function paymentRow(p: Payment, open=false) {
   const actions=!p.deleted&&live?`<div class="payment-actions"><button class="text-button" data-edit="${esc(p.payment_id)}" aria-label="Edit ${label}">Edit</button><button class="text-button" data-delete="${esc(p.payment_id)}" aria-label="Delete ${label}">Delete</button></div>`:'';
   return `<article class="payment-row member-${p.member_id}${p.deleted?' entry-deleted':''}" data-payment-id="${esc(p.payment_id)}"><div class="payment-line">${avatar(p.member_id)}<div class="payment-main"><div class="payment-title">${name(p.member_id)} <span class="quiet">to Michal</span>${p.deleted?'<span class="deleted-label">DELETED</span>':''}</div><div class="payment-meta">${date(p.paid_on,true)}</div></div><span class="payment-amount">${money(p.amount_cents)}</span></div><details class="tile-details payment-details"${open?' open':''}>${cornerTab(label)}<div class="tile-details-body"><p class="payment-method">Paid by ${esc(method)}</p>${entryMeta(p)}${actions}</div></details></article>`;
 }
-function render() { renderCards();renderMonths();renderHistory();$('#new-payment').toggleAttribute('disabled',!live);$('#bottom-payment').toggleAttribute('disabled',!live);if(!location.hash||location.hash==='#utilities')$('#export').removeAttribute('disabled'); }
+function render() { renderCards();renderMonths();renderHistory();$('#new-payment').toggleAttribute('disabled',!live);if(!location.hash||location.hash==='#utilities')$('#export').removeAttribute('disabled'); }
 async function refresh() {
   if(loading||mutationInFlight) return; loading=true;$('#refresh').setAttribute('disabled','');
   try {
@@ -124,7 +124,7 @@ function openPayment(payment?: Payment) {
   $<HTMLDialogElement>('#payment-dialog').showModal();setTimeout(()=>field('amount').focus(),0);
 }
 function formError(selector: string, error: unknown) {$(selector).textContent=error instanceof Error?error.message:'Could not save. Please try again.';$(selector).hidden=false;}
-$('#new-payment').addEventListener('click',()=>openPayment());$('#bottom-payment').addEventListener('click',()=>openPayment());
+$('#new-payment').addEventListener('click',()=>openPayment());
 for(const btn of ['#close-dialog','#cancel-dialog']) $(btn).addEventListener('click',()=>{if(!mutationInFlight)$<HTMLDialogElement>('#payment-dialog').close();});
 $('#payment-form').addEventListener('change',setOther);
 $('#payment-form').addEventListener('submit',async event=>{

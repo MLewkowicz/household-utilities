@@ -121,11 +121,6 @@ svg.utility-symbol{width:18px;height:18px}
 .text-button{background:none;border:0;color:var(--muted);font-size:11px;padding:6px;text-decoration:underline;text-underline-offset:3px}
 .text-button:hover{color:var(--green)}
 .deleted-label{color:var(--error);font-size:9px;border:1px solid var(--error);border-radius:4px;padding:2px 5px;margin-left:5px}
-.how-it-works{margin-top:45px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:25px 0;display:flex;align-items:center;gap:18px}
-.small-mark{width:39px;height:39px;flex:none;border-radius:11px;background:var(--pale);display:grid;place-items:center;color:var(--green);font-size:22px}
-.how-it-works h3{font-size:12px;font-weight:600;margin-bottom:6px}
-.how-it-works p{font-size:11px;color:var(--muted);line-height:1.8;max-width:580px}
-.how-it-works .button{margin-left:auto}
 dialog{background:var(--paper);max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain;border:1px solid var(--line);border-radius:20px;padding:30px;max-width:440px;width:calc(100% - 32px);color:var(--body);box-shadow:0 30px 100px #17332230}
 dialog::backdrop{background:#1b302459;backdrop-filter:blur(3px)}
 dialog h2{font-size:27px;margin:5px 0 12px}
@@ -202,9 +197,6 @@ h2{font-size:23px}
 .history-section{margin-top:32px}
 .history-section .segmented{width:auto}
 .payment-row{padding:16px 14px}
-.how-it-works{align-items:flex-start;flex-wrap:wrap;margin-top:32px;gap:13px}
-.how-it-works>div:nth-child(2){flex:1}
-.how-it-works .button{margin-left:52px}
 dialog{padding:24px}
 .dialog-actions .button{flex:1}
 .mobile-break{display:block}
@@ -213,10 +205,6 @@ dialog{padding:24px}
 
 .mobile-table-hint{display:none}
 @media(max-width:650px){.mobile-table-hint{display:block;margin:-4px 0 10px;font-size:10px;color:var(--muted)}
-.how-it-works{display:grid;grid-template-columns:39px minmax(0,1fr);column-gap:13px;row-gap:15px}
-.how-it-works .button{grid-column:2;justify-self:start;margin-left:0}
-.how-it-works p{max-width:none}
-.how-it-works>div:nth-child(2){min-width:0}
 }
 
 
@@ -559,3 +547,12 @@ dialog{padding:24px}
 .avail-best{margin:10px 0 0;font-size:12px;color:var(--body)}
 .event-mode{display:flex;width:100%;margin:4px 0 14px}.event-mode button{flex:1}
 .event-mode button{font-size:12px;min-height:38px}.event-mode button[aria-checked=true]{color:var(--ink);background:var(--paper);box-shadow:0 1px 4px #233c3210}
+/* Event time: day and time chips, a length slider, and a plain-language summary. */
+.event-chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}
+.event-chips button{min-height:36px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--body);font:inherit;font-size:12px;cursor:pointer}
+.event-chips button[aria-pressed=true]{border-color:var(--green);background:var(--pale);color:var(--ink);font-weight:600}
+.event-duration-label{display:flex;justify-content:space-between;align-items:baseline}
+.event-duration-label output{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+input.event-duration{width:100%;min-height:36px;padding:0;border:0;background:none;accent-color:var(--green)}
+.event-when-summary{margin:6px 0 4px;padding:10px 12px;border-radius:10px;background:var(--pale);color:var(--ink);font-size:13px;font-weight:550}
+.event-when-summary:empty{display:none}

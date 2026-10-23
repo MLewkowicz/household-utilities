@@ -1,4 +1,5 @@
 import type {Member} from './ledger';
+import {localDateTime} from './chores';
 export type EventResponse={id:string;member:Member;version:number;interval_version:number;response:'yes'|'maybe'|'no'|null;created_at:string};
 export type HouseholdEvent={id:string;version:number;title:string;description:string;location:string;icon_id?:string|null;host:Member;starts_at:string;ends_at:string;interval_version:number;state:'polling'|'proposed'|'confirmed'|'cancelled';window_start?:string|null;window_end?:string|null;time_hint?:string;poll_version?:number|null};
 /** Days a roommate marked in a poll: "yes" works, "maybe" if needed. */
@@ -25,4 +26,31 @@ export function pollSummary(e:HouseholdEvent,marks:EventAvailability[],members:r
  });
  const ranked=[...days].filter(d=>d.score>0).sort((a,b)=>Number(b.valid)-Number(a.valid)||b.score-a.score||b.yes.length-a.yes.length||a.day.localeCompare(b.day));
  return {days,ranked,answered:current.filter(m=>Object.keys(m.days).length).map(m=>m.member)};
+}
+/** A local day, start time and length become the interval the server stores. */
+export function eventSpan(day:string,time:string,minutes:number){
+ const [y,m,d]=day.split('-').map(Number),[h,mi]=time.split(':').map(Number),start=Date.UTC(y,m-1,d,h,mi);
+ const local=(t:number)=>new Date(t).toISOString().slice(0,16);
+ return {starts_local:local(start),ends_local:local(start+minutes*60000)};
+}
+export const eventMinutes=(e:HouseholdEvent)=>Math.round((Date.parse(e.ends_at)-Date.parse(e.starts_at))/60000);
+export function durationLabel(minutes:number){
+ const h=Math.floor(minutes/60),m=minutes%60;
+ return h&&m?`${h}h ${m}m`:h?`${h}h`:`${m}m`;
+}
+export const clockLabel=(time:string)=>{const [h,m]=time.split(':').map(Number);return `${h%12||12}${m?':'+String(m).padStart(2,'0'):''} ${h<12?'AM':'PM'}`;};
+/** "Tonight at 7 PM", "Tomorrow at 10 AM", "Sat at 2 PM", or a date further out. */
+export function dayAndTime(day:string,time:string,today:string){
+ const diff=Math.round((Date.parse(day+'T12:00:00Z')-Date.parse(today+'T12:00:00Z'))/864e5),at=clockLabel(time),hour=Number(time.slice(0,2));
+ const date=new Date(day+'T12:00:00Z');
+ if(diff===0)return `${hour>=17?'Tonight':'Today'} at ${at}`;
+ if(diff===1)return `Tomorrow at ${at}`;
+ if(diff>1&&diff<7)return `${date.toLocaleDateString('en-US',{weekday:'long',timeZone:'UTC'})} at ${at}`;
+ return `${date.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:'UTC'})} at ${at}`;
+}
+/** The card's headline time, in New York time, e.g. "Starts tonight at 7 PM · 2h 30m". */
+export function startsLabel(e:HouseholdEvent,now=Date.now()){
+ const start=localDateTime(e.starts_at),when=dayAndTime(start.slice(0,10),start.slice(11,16),eventDay(new Date(now).toISOString()));
+ const verb=Date.parse(e.ends_at)<=now?'Was':Date.parse(e.starts_at)<=now?'Started':'Starts';
+ return `${verb} ${when.replace(/^(Tonight|Today|Tomorrow)/,s=>s.toLowerCase())} · ${durationLabel(eventMinutes(e))}`;
 }

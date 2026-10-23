@@ -3,10 +3,10 @@ const rpc=async(page:Page,name:string,p?:unknown)=>{const r=await page.request.p
 const identify=async(page:Page,member='michal')=>page.addInitScript(m=>localStorage.setItem('household-person',m),member);
 test('invitation cards vote, confirm and reopen on rescheduling on a phone',async({page})=>{
  await identify(page);await page.setViewportSize({width:390,height:844});await page.goto('/#events');await expect(page.locator('#event-new')).toBeEnabled();
- await page.locator('#event-new').click();await page.getByRole('radio',{name:'I know the time'}).click();await page.locator('#event-title').fill('Dinner browser test');await page.locator('#event-start').fill('2027-07-13T19:00');await page.locator('#event-end').fill('2027-07-13T22:00');await page.getByRole('button',{name:'Save event',exact:true}).click();await expect(page.locator('#event-dialog')).not.toBeVisible();
- const card=page.locator('.event-card').filter({hasText:'Dinner browser test'});await expect(card).toBeVisible();await card.getByRole('button',{name:'✓ Yes',exact:true}).click();await expect(card.getByRole('button',{name:'✓ Yes',exact:true})).toHaveAttribute('aria-pressed','true');await expect(card.locator('.event-guests .avatar')).toHaveCount(1);
+ await page.locator('#event-new').click();await page.getByRole('radio',{name:'I know the time'}).click();await page.locator('#event-title').fill('Dinner browser test');await page.locator('#event-day').fill('2027-07-13');await page.locator('#event-time').fill('19:00');await page.locator('#event-duration').fill('180');await expect(page.locator('#event-summary')).toHaveText('Tue, Jul 13 at 7 PM – 10 PM · 3h');await page.getByRole('button',{name:'Save event',exact:true}).click();await expect(page.locator('#event-dialog')).not.toBeVisible();
+ const card=page.locator('.event-card').filter({hasText:'Dinner browser test'});await expect(card).toBeVisible();await expect(card.locator('.event-time')).toHaveText('Starts Tue, Jul 13 at 7 PM · 3h');await card.getByRole('button',{name:'✓ Yes',exact:true}).click();await expect(card.getByRole('button',{name:'✓ Yes',exact:true})).toHaveAttribute('aria-pressed','true');await expect(card.locator('.event-guests .avatar')).toHaveCount(1);
  await card.locator('.event-details>summary').click();await card.getByRole('button',{name:'Confirm event',exact:true}).click();await expect(card).toHaveClass(/event-confirmed/);
- await card.locator('.event-details>summary').click();await card.getByRole('button',{name:'Edit',exact:true}).click();await page.locator('#event-end').fill('2027-07-13T23:00');await page.getByRole('button',{name:'Save event',exact:true}).click();await expect(page.locator('#event-dialog')).not.toBeVisible();await expect(card).toHaveClass(/event-proposed/);await expect(card.locator('.event-guests .avatar')).toHaveCount(0);
+ await card.locator('.event-details>summary').click();await card.getByRole('button',{name:'Edit',exact:true}).click();await expect(page.locator('#event-duration')).toHaveValue('180');await page.locator('#event-duration').fill('240');await page.getByRole('button',{name:'Save event',exact:true}).click();await expect(page.locator('#event-dialog')).not.toBeVisible();await expect(card).toHaveClass(/event-proposed/);await expect(card.locator('.event-guests .avatar')).toHaveCount(0);
  await page.getByRole('button',{name:'Calendar',exact:true}).click();await expect(page.locator('.event-calendar>button')).toHaveCount(42);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
 });
@@ -25,14 +25,17 @@ test('presets set task values and remain fixed through completion',async({page})
 
 test('event presets create editable drafts and preserve an independent illustration',async({page})=>{
  await identify(page);await page.setViewportSize({width:390,height:844});await page.goto('/#events');await page.locator('#event-new').click();await page.getByRole('radio',{name:'I know the time'}).click();
- const start=await page.locator('#event-start').inputValue(),end=await page.locator('#event-end').inputValue();
+ const day=await page.locator('#event-day').inputValue(),time=await page.locator('#event-time').inputValue();
  await expect(page.locator('[data-event-preset]')).toHaveCount(6);
  for(const [id,title,icon] of [['movie-night','Movie night','movie'],['board-games','Board games','board-game'],['walk','Go for a walk','walking'],['skiing','Skiing','skis'],['eat-out','Eat out','restaurant'],['cook-together','Cook together','cooking']]){
   await page.locator(`[data-event-preset="${id}"]`).click();await expect(page.locator('#event-title')).toHaveValue(title);await expect(page.locator('#event-icon')).toHaveValue(icon);
-  await expect(page.locator('#event-start')).toHaveValue(start);await expect(page.locator('#event-end')).toHaveValue(end);await expect(page.locator('#event-dialog')).toBeVisible();
+  await expect(page.locator('#event-day')).toHaveValue(day);await expect(page.locator('#event-time')).toHaveValue(time);await expect(page.locator('#event-dialog')).toBeVisible();
  }
  await page.locator('#event-icon').selectOption('movie');await page.locator('#event-title').fill('Cooking with a movie preset test');await expect(page.locator('#event-icon')).toHaveValue('movie');
- await page.locator('#event-start').fill('2027-08-15T19:00');await page.locator('#event-end').fill('2027-08-15T22:00');await page.getByRole('button',{name:'Save event',exact:true}).click();await expect(page.locator('#event-dialog')).not.toBeVisible();
+ // Each preset suggests a length; Cook together, chosen last, suggests 2½ hours.
+ await expect(page.locator('#event-duration-out')).toHaveText('2h 30m');
+ await page.getByRole('button',{name:'Evening',exact:true}).click();await expect(page.locator('#event-time')).toHaveValue('19:00');
+ await page.locator('#event-day').fill('2027-08-15');await page.locator('#event-duration').fill('180');await page.getByRole('button',{name:'Save event',exact:true}).click();await expect(page.locator('#event-dialog')).not.toBeVisible();
  const d=await rpc(page,'export_events'),e=d.events.find((e:any)=>e.title==='Cooking with a movie preset test');expect(e.icon_id).toBe('movie');
  const card=page.locator(`[data-event-id="${e.id}"]`);await expect(card.locator('.event-illustration')).toBeVisible();await card.locator('.event-details>summary').click();await card.getByRole('button',{name:'Edit',exact:true}).click();await expect(page.locator('#event-icon')).toHaveValue('movie');
  await expect(page.locator('#event-presets')).toBeHidden();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
@@ -62,7 +65,7 @@ test('a day poll lets roommates paint availability and the host lock in a valid 
  await card.locator('[data-avail-day="2099-03-06"]').click();await expect(card.locator('[data-avail-day="2099-03-06"]')).toHaveAttribute('data-mark','');
  await card.getByRole('radio',{name:'If needed'}).click();await card.locator('[data-avail-day="2099-03-07"]').focus();await host.keyboard.press('Enter');await expect(card.locator('[data-avail-day="2099-03-07"]')).toHaveAttribute('data-mark','maybe');
  await card.getByRole('button',{name:'Lock in a day'}).click();await expect(host.locator('#event-lock-day')).toHaveValue('2099-03-05');
- await host.locator('#event-lock-start').fill('18:30');await host.locator('#event-lock-end').fill('21:00');await host.getByRole('button',{name:'Lock it in'}).click();
+ await expect(host.locator('#event-lock-time')).toHaveValue('19:00');await host.locator('#event-lock-time').fill('18:30');await host.locator('#event-lock-duration').fill('150');await expect(host.locator('#event-lock-summary')).toContainText('6:30 PM – 9 PM · 2h 30m');await host.getByRole('button',{name:'Lock it in'}).click();
  await expect(host.locator('#event-lock-dialog')).not.toBeVisible();await expect(card).toHaveClass(/event-confirmed/);await expect(card.getByRole('button',{name:'✓ Yes',exact:true})).toBeVisible();
  expect(await host.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
  await host.close();

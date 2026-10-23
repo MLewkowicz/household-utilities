@@ -1,12 +1,13 @@
 import {getIcon} from './icons';
 
+// Each preset suggests a typical length; the duration slider can change it.
 export const EVENT_PRESETS=[
- {id:'movie-night',title:'Movie night',icon:'movie'},
- {id:'board-games',title:'Board games',icon:'board-game'},
- {id:'walk',title:'Go for a walk',icon:'walking'},
- {id:'skiing',title:'Skiing',icon:'skis'},
- {id:'eat-out',title:'Eat out',icon:'restaurant'},
- {id:'cook-together',title:'Cook together',icon:'cooking'},
+ {id:'movie-night',title:'Movie night',icon:'movie',minutes:150},
+ {id:'board-games',title:'Board games',icon:'board-game',minutes:180},
+ {id:'walk',title:'Go for a walk',icon:'walking',minutes:60},
+ {id:'skiing',title:'Skiing',icon:'skis',minutes:480},
+ {id:'eat-out',title:'Eat out',icon:'restaurant',minutes:120},
+ {id:'cook-together',title:'Cook together',icon:'cooking',minutes:150},
 ] as const;
 const art:Record<string,{label:string;art:string}>={
  calendar:{label:'Calendar',art:'<rect x="8" y="10" width="32" height="31" rx="5" fill="#eee8d9"/><path fill="#c2b5e0" d="M8 15q0-5 5-5h22q5 0 5 5v6H8z"/><path d="M16 6v9M32 6v9M15 28h3m6 0h3m6 0h1m-19 6h3m6 0h3"/>'},

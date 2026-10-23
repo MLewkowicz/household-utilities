@@ -2,6 +2,7 @@ import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 import {EVENT_PRESETS,eventIconSvg} from '../src/event-icons';
+import {eventSpan,durationLabel,dayAndTime,startsLabel,eventMinutes} from '../src/events';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
 let db:any;const call=(fn:string,p?:any)=>callRpc(db,fn,p?{p}:{});
 const draft=(extra={})=>({id:randomUUID(),request_id:randomUUID(),action:'create',actor:'rina',title:'Dinner together',starts_local:'2027-06-15T19:00',ends_local:'2027-06-15T21:00',...extra});
@@ -78,4 +79,20 @@ test('polls collect day availability, validate the window and lock in one day wi
  const d=await call('export_events');assert.equal(d.format_version,3);
  assert.equal(d.availability.filter((a:any)=>a.id===id).length,2);assert.equal(d.availability_history.filter((a:any)=>a.id===id).length,3);
  assert.deepEqual(d.history.filter((h:any)=>h.id===id).map((h:any)=>h.action),['lock_in','edit','create_poll']);
+});
+
+test('a day, start time and length make the interval and read naturally on the card',()=>{
+ assert.deepEqual(eventSpan('2027-06-15','19:00',150),{starts_local:'2027-06-15T19:00',ends_local:'2027-06-15T21:30'});
+ assert.deepEqual(eventSpan('2027-06-15','23:00',120),{starts_local:'2027-06-15T23:00',ends_local:'2027-06-16T01:00'});
+ assert.deepEqual([45,60,150,480].map(durationLabel),['45m','1h','2h 30m','8h']);
+ assert.equal(dayAndTime('2027-06-15','19:00','2027-06-15'),'Tonight at 7 PM');
+ assert.equal(dayAndTime('2027-06-15','10:30','2027-06-15'),'Today at 10:30 AM');
+ assert.equal(dayAndTime('2027-06-16','12:00','2027-06-15'),'Tomorrow at 12 PM');
+ assert.equal(dayAndTime('2027-06-19','14:00','2027-06-15'),'Saturday at 2 PM');
+ assert.equal(dayAndTime('2027-07-01','19:00','2027-06-15'),'Thu, Jul 1 at 7 PM');
+ const e:any={starts_at:'2027-06-15T23:00:00Z',ends_at:'2027-06-16T01:30:00Z'};
+ assert.equal(eventMinutes(e),150);
+ assert.equal(startsLabel(e,Date.parse('2027-06-15T16:00:00Z')),'Starts tonight at 7 PM · 2h 30m');
+ assert.equal(startsLabel(e,Date.parse('2027-06-15T23:30:00Z')),'Started tonight at 7 PM · 2h 30m');
+ assert.deepEqual(EVENT_PRESETS.map(p=>p.minutes),[150,180,60,480,120,150]);
 });
