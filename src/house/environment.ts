@@ -129,14 +129,22 @@ export function createEnvironment(scene:T.Scene,camera:T.OrthographicCamera) {
   function screenPosition(object:T.Object3D,x:number,y:number,depth:number) {
     object.position.copy(camera.position).addScaledVector(forward,depth).addScaledVector(right,x*(camera.right-camera.left)/2).addScaledVector(up,y*(camera.top-camera.bottom)/2);
   }
+  const twilight=new T.Color('#e9ad83');
   let lastSpan=0,lastWidth=0;
-  function tick(time:number,night:number,cinema:number,still:boolean) {
+  function tick(time:number,night:number,cinema:number,still:boolean,hour?:number) {
     const shade=Math.max(night,cinema*.78),span=camera.top-camera.bottom,width=camera.right-camera.left,portrait=span>18;
     camera.getWorldDirection(forward);right.setFromMatrixColumn(camera.matrixWorld,0);up.setFromMatrixColumn(camera.matrixWorld,1);
     skyMaterial.uniforms.top.value.copy(skyDay).lerp(skyNight,shade);
     skyMaterial.uniforms.bottom.value.copy(horizonDay).lerp(horizonNight,shade);
-    screenPosition(sun,-.73,(portrait?.47:.67)-T.MathUtils.smoothstep(night,0,.60)*1.1,skyDepth);
-    screenPosition(moon,-.73,(portrait?.47:.67)-(1-T.MathUtils.smoothstep(night,.40,1))*1.1,skyDepth);moon.quaternion.copy(camera.quaternion);
+    const dayProgress=hour===undefined?0:Math.max(0,Math.min(1,(hour-6)/13));
+    const moonProgress=hour===undefined?0:((hour+5)%24)/11;
+    const sunX=hour===undefined?-.73:T.MathUtils.lerp(-.82,.82,dayProgress);
+    const moonX=hour===undefined?-.73:T.MathUtils.lerp(-.82,.82,Math.min(1,moonProgress));
+    const sunHeight=(portrait?.47:.67)-(hour===undefined?0:(1-Math.sin(dayProgress*Math.PI))*.22);
+    const moonHeight=(portrait?.47:.67)-(hour===undefined?0:(1-Math.sin(Math.min(1,moonProgress)*Math.PI))*.22);
+    if(hour!==undefined)skyMaterial.uniforms.bottom.value.lerp(twilight,Math.sin(night*Math.PI)*.55);
+    screenPosition(sun,sunX,sunHeight-T.MathUtils.smoothstep(night,0,.60)*1.1,skyDepth);
+    screenPosition(moon,moonX,moonHeight-(1-T.MathUtils.smoothstep(night,.40,1))*1.1,skyDepth);moon.quaternion.copy(camera.quaternion);
     sun.visible=night<.60;moon.visible=night>.40;
     starsMaterial.opacity=T.MathUtils.smoothstep(shade,.35,1)*.78;stars.visible=starsMaterial.opacity>0;
     if(lastSpan!==span||lastWidth!==width){

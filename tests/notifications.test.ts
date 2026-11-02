@@ -164,9 +164,9 @@ test('events alert everyone but the actor when posted, locked in, moved or cance
  assert.deepEqual(jobs.map((j:any)=>j.payload.tab).sort(),['events','events']);
  assert.equal(jobs[0].payload.item,e.id);assert.equal(jobs[0].payload.body,'Rina posted “Dinner together” · Fri, Jan 8, 7:00 PM');
  for(const job of jobs)await finish(job);
- // A title edit is quiet; a new time and a cancellation are not.
+ // A title edit alerts recipients without clearing their event responses.
  const renamed=await rpc('save_event',{...outing(),id:e.id,action:'edit',expected_version:1,request_id:randomUUID(),title:'Dinner'});
- await normalize();assert.deepEqual(await claim(),[]);
+ await normalize();jobs=await claim();assert.equal(jobs.length,2);assert.equal(jobs[0].payload.body,'Rina updated “Dinner”. Tap to see the changes.');for(const job of jobs)await finish(job);
  const moved=await rpc('save_event',{...outing(),id:e.id,action:'edit',expected_version:renamed.version,request_id:randomUUID(),title:'Dinner',starts_local:'2027-01-09T18:00',ends_local:'2027-01-09T20:00'});
  await normalize();jobs=await claim();assert.equal(jobs.length,2);assert.equal(jobs[0].payload.body,'“Dinner” moved to Sat, Jan 9, 6:00 PM.');
  for(const job of jobs)await finish(job);
@@ -199,4 +199,21 @@ test('event reminders reach Yes and Maybe two hours ahead, after quiet hours, an
  await rpc('save_event_response',{id:early.id,actor:'michal',request_id:randomUUID(),interval_version:1,expected_version:0,response:'yes'});
  assert.deepEqual(await claim('2027-01-09T12:00:00Z'),[]);
  assert.equal((await claim('2027-01-09T13:00:00Z')).length,1);
+});
+test('detail and poll edits notify once, preserve responses, and superseded edits expire',async()=>{
+ await register('michal');
+ let e=await rpc('save_event',outing());await db.exec('DELETE FROM ledger_private.push_events');
+ await rpc('save_event_response',{id:e.id,actor:'michal',request_id:randomUUID(),interval_version:1,expected_version:0,response:'yes'});
+ const p={...outing(),id:e.id,action:'edit',expected_version:e.version,request_id:randomUUID(),location:'Kitchen',description:'Bring snacks'};
+ e=await rpc('save_event',p);assert.deepEqual(await rpc('save_event',p),e);
+ await normalize();let jobs=await claim();assert.equal(jobs.length,1);assert.match(jobs[0].payload.body,/updated/);await finish(jobs[0]);
+ const events=await rpc('events_dashboard');assert.equal(events.responses.find((r:any)=>r.id===e.id&&r.member==='michal').response,'yes');
+ e=await rpc('save_event',{...p,expected_version:e.version,request_id:randomUUID()});await normalize();assert.deepEqual(await claim(),[]);
+ // A queued edit is invalidated by a later cancellation.
+ e=await rpc('save_event',{...p,location:'Dining room',expected_version:e.version,request_id:randomUUID()});
+ await rpc('save_event',{id:e.id,actor:'rina',action:'cancel',expected_version:e.version,request_id:randomUUID()});await normalize();jobs=await claim();assert.equal(jobs.length,1);assert.match(jobs[0].payload.body,/cancelled/);await finish(jobs[0]);
+ const pollDraft={id:randomUUID(),request_id:randomUUID(),actor:'rina',action:'create_poll',title:'Trip',window_start:'2027-01-10',window_end:'2027-01-20'};
+ const poll=await rpc('save_event',pollDraft);await db.exec('DELETE FROM ledger_private.push_deliveries; DELETE FROM ledger_private.push_events');
+ await rpc('save_event',{...pollDraft,action:'edit',expected_version:poll.version,request_id:randomUUID(),window_end:'2027-01-22',time_hint:'Afternoon'});
+ await normalize();jobs=await claim();assert.equal(jobs.length,1);assert.equal(jobs[0].payload.body,'Rina updated “Trip”. Tap to see the changes.');
 });

@@ -1,14 +1,29 @@
 import {$,saved,remember} from './ui';
+import {householdDaylight} from './daylight';
 import {initUpdates,openUpdates} from './updates';
 
 export function initSettings() {
  const dialog=$<HTMLDialogElement>('#settings-dialog'),toggle=$<HTMLButtonElement>('#theme-toggle');
  const systemTheme=matchMedia('(prefers-color-scheme: dark)'),selector=$<HTMLSelectElement>('#theme-select');
- const preference=saved('household-theme');selector.value=preference==='light'||preference==='dark'?preference:'system';
+ const preference=saved('household-theme');selector.value=['light','dark','daylight'].includes(preference||'')?preference!:'system';
  let fading:ReturnType<typeof setTimeout>|undefined;
  function applyTheme(animate=false){
-  const theme=selector.value==='system'?(systemTheme.matches?'dark':'light'):selector.value;
+  const {hour,night}=householdDaylight(),clock=selector.value==='system'||selector.value==='daylight';
+  const theme=selector.value==='daylight'?(night>=.6?'dark':'light'):selector.value==='system'?(systemTheme.matches?'dark':'light'):selector.value;
   const root=document.documentElement;
+  root.dataset.houseNight=String(clock?night:Number(theme==='dark'));
+  root.dataset.houseHour=String(hour);root.dataset.houseClock=String(clock);
+  // Interpolate the whole interface only when Time of day is selected.
+  const palette:Record<string,[string,string]>={bg:['#f5f2e9','#182437'],paper:['#fffdf7','#223247'],line:['#d9dfd1','#40556b'],pale:['#e9eddf','#304b53'],field:['#fffdf8','#1c2b40'],'surface-muted':['#eeeee3','#1d2c40']};
+  // Foregrounds must not blend through the same middle gray as the surfaces.
+  for(const key of ['ink','body','muted','tile-muted']){
+   if(selector.value==='daylight')root.style.setProperty('--'+key,night>=.6?'#f7fbff':'#101712');
+   else root.style.removeProperty('--'+key);
+  }
+  for(const [key,[day,dark]] of Object.entries(palette)){
+   if(selector.value==='daylight')root.style.setProperty('--'+key,`color-mix(in srgb,${day},${dark} ${night*100}%)`);
+   else root.style.removeProperty('--'+key);
+  }
   if(root.dataset.theme!==theme){
    // In a section one snapshot cross-fade keeps the docked nav, cards and page in
    // step. Over the lawn the live scene blends its own lighting, so surfaces
@@ -26,7 +41,9 @@ export function initSettings() {
  function saveTheme(){remember('household-theme',selector.value);applyTheme(true);}
  selector.addEventListener('change',saveTheme);
  toggle.addEventListener('click',()=>{selector.value=document.documentElement.dataset.theme==='dark'?'light':'dark';saveTheme();});
- systemTheme.addEventListener('change',()=>applyTheme(true));applyTheme();
+ systemTheme.addEventListener('change',()=>applyTheme(true));
+ setInterval(()=>{if(!document.hidden)applyTheme();},60000);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)applyTheme();});applyTheme();
  $('#settings-open').addEventListener('click',()=>dialog.showModal());
  $('#settings-close').addEventListener('click',()=>dialog.close());
  // Close this modal before opening Notifications or refreshing the section.

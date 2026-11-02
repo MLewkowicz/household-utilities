@@ -7,7 +7,8 @@ export function mountHouseEntry(onNavigate:(section:Section)=>void,onEnter:(sect
   const hero=document.querySelector<HTMLElement>('#house-hero')!;
   const chrome=document.querySelector<HTMLElement>('.house-chrome')!;
   const syncChrome=()=>chrome.classList.toggle('is-docked',Boolean(hero.hidden)||scrollY>8);
-  let selected:Section='home',player:Player|undefined,loading=false,inView=false,syncPending=true;
+  let selected:Section='home',player:Player|undefined,loading=false,inView=false,syncPending=true,returning=false;
+  let returnIdle:ReturnType<typeof setTimeout>|undefined;
   const modalOpen=()=>Boolean(document.querySelector('dialog[open]'));
   const skyVisibility=()=>{hero.dataset.skyPaused=String(!inView||document.hidden||modalOpen());};
   document.addEventListener('visibilitychange',skyVisibility);
@@ -25,7 +26,7 @@ export function mountHouseEntry(onNavigate:(section:Section)=>void,onEnter:(sect
     player?.setPaused(value||modalOpen());
   }
   function finishEntering() {
-    if(hero.hidden||hero.getBoundingClientRect().bottom>0)return;
+    if(returning||hero.hidden||hero.getBoundingClientRect().bottom>0)return;
     const position=Math.max(0,scrollY-hero.offsetHeight);
     syncPending=true;
     featureMode(true);
@@ -34,7 +35,14 @@ export function mountHouseEntry(onNavigate:(section:Section)=>void,onEnter:(sect
     onEnter(selected==='home'?'chores':selected);
     if(container.contains(document.activeElement))document.querySelector<HTMLElement>('#main')?.focus({preventScroll:true});
   }
-  function onScroll(){finishEntering();syncChrome();}
+  function onScroll(){
+    if(returning){
+      clearTimeout(returnIdle);
+      if(scrollY<=1)returning=false;
+      else returnIdle=setTimeout(()=>{returning=false;finishEntering();},180);
+    }
+    finishEntering();syncChrome();
+  }
   window.addEventListener('scroll',onScroll,{passive:true});syncChrome();
   async function start() {
     if(loading||player)return;
@@ -62,14 +70,27 @@ export function mountHouseEntry(onNavigate:(section:Section)=>void,onEnter:(sect
   observer.observe(container);
   Object.assign(window,{__houseDiagnostics:()=>({selected,loaded:!!player,featureOnly:hero.hidden,...player?.diagnostics()})});
   return {
+    returnToScene() {
+      if(!hero.hidden||returning)return;
+      // Reinsert the scene above the same content position before scrolling.
+      // Suppress entry detection until the return has reached the lawn.
+      returning=true;syncPending=true;
+      const position=scrollY;
+      featureMode(false);
+      history.pushState({...history.state,houseView:true},'');
+      window.scrollTo({top:hero.offsetHeight+position,behavior:'instant'});
+      if(container.contains(document.activeElement)===false)document.querySelector<HTMLElement>('[data-ledger="'+selected+'"]')?.focus({preventScroll:true});
+      window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+      if(scrollY<=1)returning=false;
+    },
     select(section:Section,fromHouse=false,featureOnly=false) {
-      selected=section;
+      returning=false;selected=section;
       syncPending=!fromHouse;
       featureMode(featureOnly);
       if(!fromHouse&&!featureOnly&&inView&&player){player.jumpTo(sceneFor(section));syncPending=false;}
       const current=document.querySelector<HTMLElement>('#house-current');
       if(current)current.textContent=HOUSE_SECTIONS.find(item=>item.route===section)!.label;
     },
-    destroy(){window.removeEventListener('scroll',onScroll);document.removeEventListener('visibilitychange',skyVisibility);observer.disconnect();dialogs.disconnect();player?.destroy();},
+    destroy(){clearTimeout(returnIdle);window.removeEventListener('scroll',onScroll);document.removeEventListener('visibilitychange',skyVisibility);observer.disconnect();dialogs.disconnect();player?.destroy();},
   };
 }

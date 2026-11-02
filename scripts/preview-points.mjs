@@ -29,7 +29,7 @@ export function previewPoints(snapshot,policy){
   if(before!==after)changes.push({id:task.id,version:task.version,title:task.title,completed_on:day,contributors:people,before_points:before,proposed_points:after});
  }
  for(const total of Object.values(totals))total.delta_units=total.after_units-total.before_units;
- return{preview_only:true,from:policy.from,through:policy.through,units_per_point:12,requires_expanded_point_range:changes.some(c=>![0,0.5,1,2,3].includes(c.proposed_points)),totals,changes};
+ return{preview_only:true,from:policy.from,through:policy.through,units_per_point:12,requires_expanded_point_range:changes.some(c=>![0,0.25,0.5,1,2,3].includes(c.proposed_points)),totals,changes};
 }
 if(import.meta.url===pathToFileURL(resolve(process.argv[1]||'')).href){
  try{

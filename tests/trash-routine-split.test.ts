@@ -29,7 +29,7 @@ test('half-point chores retain exact credit for one to four helpers, edits, corr
  }
  assert.equal(suggestChoreIcon('Put in new trash bag'),'trash-bag');
  assert.equal(suggestChoreIcon('Take out the trash'),'trash');
- for(const points of [0.25,0.75,1.5,'0.5',-0.5])await assert.rejects(call('save_chore',task({points})));
+ for(const points of [0.75,1.5,'0.5',-0.5])await assert.rejects(call('save_chore',task({points})));
  await assert.rejects(call('save_chore',task({kind:'request'})),/no points/);
  const d=await call('chores_dashboard');assert.doesNotThrow(()=>previewPoints(d,{from:day,through:day}));
 });

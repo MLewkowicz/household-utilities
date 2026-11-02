@@ -4,7 +4,7 @@ import { createStage, type HouseStage } from './house-stages';
 import { HOUSE, houseShell } from './cottage-sets';
 import { dispose } from './scene-geometry';
 import { stages, type StageId, type StageState } from './stage-data';
-import { getTheme, observeTheme } from './appearance';
+import { getTheme, getNight, getHour, observeTheme } from './appearance';
 import { createEnvironment } from './environment';
 import { createNoticeBoard } from './notice-board';
 import { hasUnseenUpdates, onUpdatesSeen, openUpdates } from '../updates';
@@ -119,7 +119,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   function notifySelection(){if(displayed!==notified){notified=displayed;onScene(displayed);}}
   let raf=0, last=0, sampleTime=performance.now(), samples=0;
   let night=Number(current.dark), darkTheme=getTheme()==='dark';
-  let themeBlend=Number(darkTheme),themeFrom=themeBlend,themeTarget=themeBlend,themeBegan=elapsed;
+  let themeBlend=getNight(),themeFrom=themeBlend,themeTarget=themeBlend,themeBegan=elapsed;
   const warm=new T.Color('#fff2dc'), dusk=new T.Color('#a8c0e1'), cool=new T.Color('#a6bcea'), warmKey=new T.Color('#fff1d6'), coolKey=new T.Color('#b0c8ff');
   const portraitTint=new T.Color(), portraitWhite=new T.Color('#ffffff'), portraitNight=new T.Color('#a4b4d1');
   const canAnimate=()=>!destroyed&&!lost&&!paused&&!media.matches&&!document.hidden&&visible;
@@ -173,7 +173,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     applyTurn();
     const themeProgress=T.MathUtils.smoothstep((elapsed-themeBegan)/4.5,0,1);
     themeBlend=media.matches?themeTarget:T.MathUtils.lerp(themeFrom,themeTarget,themeProgress);
-    lighting(night);environment.tick(elapsed,themeBlend,night,media.matches);board?.tick(elapsed,camera);
+    lighting(night);environment.tick(elapsed,themeBlend,night,media.matches,getHour());board?.tick(elapsed,camera);
     const state=states[displayed]; state.still=media.matches;
     current.tick(elapsed,state);
     faceCamera(current.people,camera,portraitTint.copy(portraitWhite).lerp(portraitNight,night).getStyle());
@@ -314,7 +314,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   media.addEventListener('change',refresh); document.addEventListener('visibilitychange',refresh);
   const ro=new ResizeObserver(resize); ro.observe(container);
   const io=new IntersectionObserver(([entry])=>{ visible=entry.isIntersecting&&entry.intersectionRatio>0; refresh(); },{threshold:.01}); io.observe(container);
-  const stopTheme=observeTheme(theme=>{ darkTheme=theme==='dark';themeFrom=themeBlend;themeTarget=Number(darkTheme);themeBegan=elapsed;if(!canAnimate())themeFrom=themeBlend=themeTarget;draw(); });
+  const stopTheme=observeTheme(theme=>{ darkTheme=theme==='dark';themeFrom=themeBlend;themeTarget=getNight();themeBegan=elapsed;if(!canAnimate())themeFrom=themeBlend=themeTarget;draw(); });
   lighting(Number(current.dark)); resize();
   // Wait a task so closing the dialog has unpaused the scene before the board leaves.
   const stopUpdates=onUpdatesSeen(()=>setTimeout(()=>{ board?.dismiss(canAnimate()); draw(); }));

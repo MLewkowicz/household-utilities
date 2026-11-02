@@ -3,6 +3,13 @@ import {$,esc,date,saved,remember} from './ui';
 export type Release={id:string;date:string;title:string;items:string[]};
 /** Newest first. A new id here brings the lawn notice board back on every device. */
 export const RELEASES:Release[]=[
+ {id:'2026-11-todos',date:'2026-11-02',title:'Clearer tasks and flexible turns',items:[
+  'Scroll up from a page to return to its matching house scene.',
+  'See assigned and unassigned work in My tasks. Compare Compact and Cards using Layout.',
+  'Routine tasks can repeat as needed, passing the turn when completed.',
+  'Starting the dishwasher earns 0.25 points; emptying it earns 1. Event detail edits now send notifications.',
+  'The home follows New York time. Choose Time of day in Settings to blend the app colors too.',
+ ]},
  {id:'2026-10-polish',date:'2026-10-22',title:'Smoother pages and shared plans',items:[
   'Keep scrolling past the end of a page to slide into the next one.',
   'Plan events together: mark the days that work for you, and the host picks the best one.',

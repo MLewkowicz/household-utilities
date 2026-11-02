@@ -25,53 +25,44 @@ test('Home lazily reveals To-dos below the house without rotating first',async({
  expect(await page.evaluate(()=>scrollY)).toBe(0);await expect(page.locator('[data-ledger=chores]')).toHaveAttribute('aria-current','page');
 });
 
-test('fresh upward and downward swipes traverse every section and return to the house',async({page})=>{
- await page.goto('/#chores');await ready(page);await page.locator('#personal-title').fill('Keep my task draft');
- for(const section of ['miscellaneous','events','bulletin','utilities']){
-  await bottom(page);await swipe(page,-260,360,560);await expect(page).toHaveURL(new RegExp('#'+section+'$'));await ready(page);
-  expect(await page.evaluate(()=>scrollY)).toBe(0);await expect(page.locator('.house-chrome')).toHaveClass(/is-docked/);
+test('scrolling up from every feature smoothly returns to its matching house scene',async({page})=>{
+ for(const section of ['chores','miscellaneous','events','bulletin','utilities']){
+  await page.goto('/?webgl=0#'+section);await ready(page);
+  await page.evaluate(()=>scrollTo(0,0));await swipe(page,140,360,250);
+  await expect(page.locator('#house-hero')).toBeVisible();await expect(page).toHaveURL(new RegExp('#'+section+'$'));
+  await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
+  expect(await page.evaluate(()=>(window as any).__houseDiagnostics().selected)).toBe(section);
+  await page.evaluate(()=>scrollTo(0,document.querySelector<HTMLElement>('#house-hero')!.offsetHeight));
+  await expect(page.locator('#house-hero')).toBeHidden();await expect(page).toHaveURL(new RegExp('#'+section+'$'));
  }
- await bottom(page);await swipe(page,-100);await expect(page).toHaveURL(/#utilities$/);
- for(const section of ['bulletin','events','miscellaneous','chores']){
-  await page.evaluate(()=>scrollTo(0,0));await swipe(page,260,360,200);await expect(page).toHaveURL(new RegExp('#'+section+'$'));await ready(page);
-  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollHeight-innerHeight-scrollY)).toBeLessThan(4);
- }
- await expect(page.locator('#personal-title')).toHaveValue('Keep my task draft');
- await page.evaluate(()=>scrollTo(0,0));await swipe(page,100);await expect(page).toHaveURL(/#home$/);await expect(page.locator('#house-hero')).toBeVisible();
- await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
 });
 
-test('reaching the bottom during a swipe does not skip the section',async({page})=>{
+test('scrolling past the bottom stays on the feature and never preloads a neighbouring page',async({page})=>{
+ const requests:string[]=[];page.on('request',r=>requests.push(r.url()));
  await page.goto('/#chores');await ready(page);
  await page.addStyleTag({content:'#feature-area{min-height:2400px}'});
- await page.evaluate(()=>scrollTo(0,document.documentElement.scrollHeight-innerHeight-50));
- await swipe(page,-180);await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollHeight-innerHeight-scrollY)).toBeLessThan(4);
- await expect(page).toHaveURL(/#chores$/);await page.waitForTimeout(300);
- // A slow short drag only peeks; a full drag carries into the next section.
- await swipe(page,-100);await expect.poll(()=>page.evaluate(()=>getComputedStyle(document.querySelector('#feature-area')!).transform)).toBe('none');await expect(page).toHaveURL(/#chores$/);
- await swipe(page,-260,360,560);await expect(page).toHaveURL(/#miscellaneous$/);
+ await bottom(page);await swipe(page,-200);await swipe(page,-200);
+ await expect(page).toHaveURL(/#chores$/);await expect(page.locator('#house-hero')).toBeHidden();
+ expect(requests.some(url=>url.endsWith('utilities_misc_dashboard'))).toBe(false);
 });
 
 const wheel=(page:Page,deltaY:number,count=1)=>page.evaluate(([deltaY,count])=>{for(let i=0;i<count;i++)document.querySelector('#main')!.dispatchEvent(new WheelEvent('wheel',{deltaY,bubbles:true,cancelable:true}));},[deltaY,count]);
-const pull=(page:Page)=>page.evaluate(()=>getComputedStyle(document.querySelector('#feature-area')!).transform);
 
-test('a short edge scroll peeks the next section and springs back',async({page})=>{
- await page.goto('/#chores');await ready(page);await bottom(page);
- await wheel(page,90);await expect(page.locator('#misc-page')).toHaveClass(/section-peek/);expect(await pull(page)).not.toBe('none');
- await expect(page.locator('#misc-page')).toBeHidden();await expect.poll(()=>pull(page)).toBe('none');await expect(page).toHaveURL(/#chores$/);
- // Mouse-wheel notches keep extending one open peek until it commits.
- for(let i=0;i<4;i++){await wheel(page,90);await page.waitForTimeout(120);}
- await expect(page).toHaveURL(/#miscellaneous$/);await ready(page);expect(await page.evaluate(()=>scrollY)).toBe(0);
+test('the return scroll has intermediate positions and same-route history restores the feature',async({page})=>{
+ await page.goto('/?webgl=0#chores');await ready(page);
+ await page.evaluate(()=>{(window as any).returnPositions=[];addEventListener('scroll',()=>{(window as any).returnPositions.push(scrollY);});});
+ await wheel(page,-90,20);await expect(page.locator('#house-hero')).toBeVisible();
+ await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
+ const positions=await page.evaluate(()=>(window as any).returnPositions as number[]);
+ expect(positions.some(y=>y>20&&y<550)).toBe(true);await expect(page).toHaveURL(/#chores$/);
+ await page.goBack();await expect(page.locator('#house-hero')).toBeHidden();
+ await page.goForward();await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
 });
 
-test('wheel momentum cannot advance multiple sections and reverse scrolling returns to the previous bottom',async({page})=>{
- await page.goto('/#chores');await ready(page);await bottom(page);
- await wheel(page,90,20);
- await expect(page).toHaveURL(/#miscellaneous$/);await ready(page);expect(await page.evaluate(()=>scrollY)).toBe(0);
- await page.waitForTimeout(500);await wheel(page,-90,6);
- await expect(page).toHaveURL(/#chores$/);await ready(page);
- await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollHeight-innerHeight-scrollY)).toBeLessThan(4);
- await page.goBack();await expect(page).toHaveURL(/#miscellaneous$/);await page.goBack();await expect(page).toHaveURL(/#chores$/);
+test('arriving at the top mid-gesture does not leave the feature and PageUp returns to its scene',async({page})=>{
+ await page.goto('/?webgl=0#events');await ready(page);await page.addStyleTag({content:'#feature-area{min-height:2400px}'});
+ await page.evaluate(()=>scrollTo(0,80));await swipe(page,180);await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);await expect(page.locator('#house-hero')).toBeHidden();
+ await page.locator('#main').evaluate(el=>(el as HTMLElement).focus({preventScroll:true}));await page.keyboard.press('PageUp');await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);await expect(page).toHaveURL(/#events$/);
 });
 
 test('dialogs, nested scrollers and active task drags keep their own gestures',async({page})=>{

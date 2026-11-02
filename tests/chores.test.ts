@@ -75,7 +75,7 @@ test('weekly grouped chores rotate on schedule, missed weeks are retained, and c
   const pair=tasks.filter((t:any)=>t.cycle_start===addDays(monday,cycle));assert.equal(pair.length,2);assert.ok(pair.every((t:any)=>t.assignee===owner));
   if(cycle<0)assert.ok(pair.every((t:any)=>t.status==='missed'));
  }
- const nowTask=tasks.find((t:any)=>t.cycle_start===monday);
+ const nowTask=tasks.find((t:any)=>t.cycle_start===monday&&t.step_id==='out');
  await edit(nowTask,'complete',{points:2,completion:completion(['michal','rohil'])});
  d=await dash();assert.equal(d.tasks.find((t:any)=>t.routine_id===r.id&&t.cycle_start===addDays(monday,7)).assignee,'rohil');
  const count=d.tasks.length;await dash();assert.equal((await dash()).tasks.length,count);

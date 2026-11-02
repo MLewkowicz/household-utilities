@@ -5,11 +5,13 @@ const rpc=async(page:Page,name:string,p?:unknown)=>{const response=await page.re
 async function home(page:Page){await page.addInitScript(()=>localStorage.setItem('household-person','michal'));await page.goto('/#chores');await expect(page.locator('#personal-add')).toBeEnabled();await expect(page.locator('#main')).toHaveAttribute('aria-busy','false');}
 const personal=async(page:Page,title:string)=>rpc(page,'save_personal_task',{id:crypto.randomUUID(),request_id:crypto.randomUUID(),actor:'michal',action:'create',title});
 const shared=async(page:Page,title:string,extra={})=>rpc(page,'save_chore',{id:crypto.randomUUID(),request_id:crypto.randomUUID(),actor:'rina',action:'create',title,icon_id:'bicycle',kind:'reminder',points:0,pinned:false,assignee:'michal',...extra});
-test('My tasks default combines only assigned tasks, quick entry, completion, undo, history, deletion and export',async({page})=>{
+test('My tasks default combines assigned and unassigned tasks, quick entry, completion, undo, history, deletion and export',async({page})=>{
  const title='Home personal '+crypto.randomUUID(),assigned=await shared(page,'Pay Michal for Bluebikes '+crypto.randomUUID());
  const unassigned=await shared(page,'Unassigned '+crypto.randomUUID(),{assignee:null});
  await home(page);await expect(page.locator('#my-tasks')).toBeVisible();await expect(page.locator('#chore-content')).toBeEmpty();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();
- await expect(page.locator(`[data-home-key="shared:${assigned.id}"]`)).toBeVisible();await expect(page.locator(`[data-home-key="shared:${unassigned.id}"]`)).toHaveCount(0);
+ await expect(page.locator(`[data-home-key="shared:${assigned.id}"]`)).toBeVisible();await expect(page.locator(`[data-home-key="shared:${unassigned.id}"]`)).toBeVisible();
+ const assignedCard=page.locator(`[data-home-key="shared:${assigned.id}"]`);await expect(assignedCard.locator('.chore-recipient')).toContainText('Assigned to Michal');await expect(assignedCard.locator('.chore-recipient .avatar')).toHaveCount(1);await expect(assignedCard.locator('.chore-sender')).toHaveCount(0);
+ await page.locator('[data-home-filter=unassigned]').click();await expect(assignedCard).toHaveCount(0);await expect(page.locator(`[data-home-key="shared:${unassigned.id}"]`)).toBeVisible();await page.locator('[data-home-filter=all]').click();
  await page.locator('#personal-title').fill(title);await page.locator('#personal-title').press('Enter');
  const card=page.locator('#home-feed .chore-card').filter({has:page.getByRole('heading',{name:title,exact:true})});await expect(card).toBeVisible();await expect(page.locator('#personal-title')).toHaveValue('');
  await card.locator('[data-swipe-complete]').focus();await page.keyboard.press('Enter');await expect(card).toHaveCount(0);

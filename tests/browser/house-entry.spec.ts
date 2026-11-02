@@ -149,7 +149,7 @@ test('legacy personal-task links still open To-dos directly',async({page})=>{
  await page.locator('#personal-title').fill('Keep this draft');await page.locator('[data-ledger=events]').click();await page.locator('[data-ledger=chores]').click();await expect(page.locator('#personal-title')).toHaveValue('Keep this draft');
 });
 
-test('scrolling beyond the house docks the feature and an edge gesture returns to the previous section',async({page})=>{
+test('scrolling beyond the house docks the feature and an edge gesture returns to the matching scene',async({page})=>{
  await page.goto('/');await ready(page);await page.locator('.stage-canvas').focus();await page.keyboard.press('ArrowLeft');await expect(page).toHaveURL(/#utilities$/,{timeout:5000});
  await expect(page.locator('#main')).toHaveAttribute('aria-busy','false');
  await page.evaluate(()=>scrollTo(0,innerHeight-100));await expect(page.locator('#house-hero')).toBeVisible();
@@ -159,7 +159,7 @@ test('scrolling beyond the house docks the feature and an edge gesture returns t
  await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(120);
  await expect.poll(async()=>(await diag(page)).active).toBe(false);const frozen=(await diag(page)).frames;
  await page.waitForTimeout(200);expect((await diag(page)).frames).toBe(frozen);
- await page.evaluate(()=>scrollTo(0,0));await page.mouse.move(20,500);await page.mouse.wheel(0,-600);await expect(page).toHaveURL(/#bulletin$/);expect((await page.locator('.house-chrome').boundingBox())!.y).toBe(0);await expect(page.locator('#house-hero')).toBeHidden();
+ await page.evaluate(()=>scrollTo(0,0));await page.mouse.move(20,500);await page.mouse.wheel(0,-600);await expect(page).toHaveURL(/#utilities$/);await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);await expect.poll(async()=>(await diag(page)).displayed).toBe('utilities');
  await page.locator('[data-ledger=events]').click();await expect(page.locator('#event-new')).toBeEnabled();await expect(page.locator('#house-hero')).toBeHidden();
  await page.locator('[data-ledger=home]').click();await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(async()=>(await diag(page)).displayed).toBe('home');await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
 });
@@ -197,7 +197,7 @@ test('pointer bursts are coalesced and the house keeps full resolution',async({p
 
 test('day and night interpolate through landscape lighting and reverse without changing rooms',async({page})=>{
  test.setTimeout(90000);
- await page.emulateMedia({colorScheme:'light'});await page.goto('/');await ready(page);
+ await page.emulateMedia({colorScheme:'light'});await page.addInitScript(()=>localStorage.setItem('household-theme','light'));await page.goto('/');await ready(page);
  expect((await diag(page)).themeBlend).toBe(0);
  await page.locator('#theme-toggle').click();
  await expect.poll(async()=>(await diag(page)).themeBlend).toBeGreaterThan(.1);
@@ -281,9 +281,9 @@ test('the lawn notice board opens What’s new once per release, and Settings ke
  await expect(dialog).toBeHidden();expect((await diag(page)).selected).toBe('home');expect((await diag(page)).state.variation).toBe(0);
  await page.mouse.click(x,y);
  await expect(dialog).toBeVisible();await expect(dialog.locator('h2')).toHaveText('What’s new');
- await expect(dialog.locator('li')).toHaveCount(5);await expect(dialog.locator('li').first()).toContainText('Keep scrolling past the end of a page');
+ await expect(dialog.locator('li')).toHaveCount(5);await expect(dialog.locator('li').first()).toContainText('Scroll up from a page');
  expect((await diag(page)).state.variation).toBe(0);
- expect(await page.evaluate(()=>localStorage.getItem('household-updates-seen'))).toBe('2026-10-polish');
+ expect(await page.evaluate(()=>localStorage.getItem('household-updates-seen'))).toBe('2026-11-todos');
  await page.getByRole('button',{name:'Got it'}).click();await expect(dialog).toBeHidden();
  await expect.poll(async()=>(await board()).state).toBe('hidden');expect((await board()).visible).toBe(false);
  await expect(page.locator('#updates-board-button')).toBeHidden();
@@ -291,8 +291,8 @@ test('the lawn notice board opens What’s new once per release, and Settings ke
  expect(await board()).toEqual({visible:false,state:'hidden'});await expect(page.locator('#updates-board-button')).toBeHidden();
  await page.getByRole('button',{name:'Settings',exact:true}).click();await page.locator('#whats-new').click();
  await expect(page.locator('#settings-dialog')).toBeHidden();await expect(dialog).toBeVisible();
- await expect(dialog.locator('h2')).toHaveText('Update history');await expect(dialog.locator('.updates-release')).toHaveCount(1);
- await expect(dialog.locator('time').first()).toHaveText('Oct 22, 2026');await expect(dialog.locator('li')).toHaveCount(5);
+ await expect(dialog.locator('h2')).toHaveText('Update history');await expect(dialog.locator('.updates-release')).toHaveCount(2);
+ await expect(dialog.locator('time').first()).toHaveText('Nov 2, 2026');await expect(dialog.locator('li')).toHaveCount(10);
  await page.getByRole('button',{name:'Close what’s new'}).click();await expect(dialog).toBeHidden();
  // An older seen release brings the board back for the newest one.
  await page.evaluate(()=>localStorage.setItem('household-updates-seen','2026-01-earlier'));await page.reload();await ready(page);

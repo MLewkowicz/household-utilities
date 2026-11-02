@@ -556,3 +556,41 @@ dialog{padding:24px}
 input.event-duration{width:100%;min-height:36px;padding:0;border:0;background:none;accent-color:var(--green)}
 .event-when-summary{margin:6px 0 4px;padding:10px 12px;border-radius:10px;background:var(--pale);color:var(--ink);font-size:13px;font-weight:550}
 .event-when-summary:empty{display:none}
+
+/* The recipient owns the color and portrait; requests without an owner are neutral. */
+.chore-recipient{display:inline-flex;align-items:center;gap:6px;color:var(--ink);font-weight:550}
+.chore-recipient .avatar{width:26px;height:26px;flex:none}
+.chore-requester{font-size:12px;color:var(--muted);margin-bottom:10px}
+.chore-card.is-unassigned{--member-color:var(--muted);--member-surface:var(--surface-muted)}
+.todo-display{display:flex;align-items:center;justify-content:flex-end;gap:8px;font-size:12px}
+.todo-display label{margin:0}.todo-display select{width:auto;min-height:44px;margin:0;padding:8px 28px 8px 10px}
+/* Compact keeps completion and the expandable corner reachable in a single row. */
+#chores-page[data-layout=compact] .home-group-list,#chores-page[data-layout=compact] .chore-grid{grid-template-columns:1fr;gap:8px}
+#chores-page[data-layout=compact] #home-feed{gap:18px}
+#chores-page[data-layout=compact] :is(.home-entry,.chore-grid)>.chore-card{display:grid;grid-template-columns:minmax(0,1fr) 160px;align-items:center;column-gap:16px;padding:12px 54px 12px 14px;min-height:88px}
+#chores-page[data-layout=compact] :is(.home-entry,.chore-grid)>.chore-card>.chore-card-top{grid-column:1;grid-row:1}
+#chores-page[data-layout=compact] :is(.home-entry,.chore-grid)>.chore-card>.chore-tags{grid-column:1;grid-row:1}
+#chores-page[data-layout=compact] :is(.home-entry,.chore-grid)>.chore-card h3{margin:4px 0;font-size:14px}
+#chores-page[data-layout=compact] :is(.home-entry,.chore-grid)>.chore-card>h3{grid-column:1;grid-row:2}
+#chores-page[data-layout=compact] :is(.home-entry,.chore-grid)>.chore-card>.chore-card-people{grid-column:1;grid-row:2;margin:4px 0 0 42px;min-height:22px;font-size:11px}
+#chores-page[data-layout=compact] :is(.home-entry,.chore-grid)>.chore-card>.completion-track{grid-column:2;grid-row:1 / span 2;width:100%;margin:0}
+#chores-page[data-layout=compact] :is(.home-entry,.chore-grid)>.chore-card>.chore-details{grid-column:1 / -1}
+#chores-page[data-layout=compact] :is(.home-entry,.chore-grid) .entry-illustration{width:32px;height:32px;flex:none}
+#chores-page[data-layout=compact] :is(.home-entry,.chore-grid) .entry-illustration svg{width:26px;height:26px}
+#chores-page[data-layout=compact] .chore-recipient .avatar{width:22px;height:22px}
+#chores-page[data-layout=compact] .intro{padding:18px 0 16px}
+#chores-page[data-layout=compact] .chore-views{margin:6px 0 12px;padding-bottom:6px}
+#chores-page[data-layout=compact] .home-quick{margin-bottom:12px}
+#chores-page[data-layout=compact] .home-toolbar{margin:12px 0;gap:6px 12px}
+@media(max-width:650px){
+ #chores-page[data-layout=compact] :is(.home-entry,.chore-grid)>.chore-card{grid-template-columns:minmax(0,1fr);padding-right:44px;row-gap:4px}
+ #chores-page[data-layout=compact] :is(.home-entry,.chore-grid)>.chore-card>.completion-track{grid-column:1;grid-row:3;width:min(180px,100%);margin:3px 0 0}
+ #chores-page[data-layout=compact] :is(.home-entry,.chore-grid) .entry-illustration{display:none}
+ #chores-page[data-layout=compact] :is(.home-entry,.chore-grid)>.chore-card>.chore-card-people{margin-left:0}
+ .home-toolbar .segmented{display:flex;flex-wrap:wrap;max-width:100%}.home-toolbar .segmented button{padding:8px 10px;font-size:12px}
+}
+
+#chore-identity-bar .todo-display{margin-left:auto;flex:none}
+#chores-page[data-layout=compact] .home-quick .personal-group-input{display:none}
+#chores-page[data-layout=compact] .home-quick:focus-within .personal-group-input,#chores-page[data-layout=compact] .home-quick .personal-group-input:not(:placeholder-shown){display:block}
+@media(max-width:380px){#chore-identity-bar{flex-wrap:wrap;gap:6px}#chore-identity-bar .todo-display select{padding-left:6px;padding-right:18px;font-size:11px}}

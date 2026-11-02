@@ -6,7 +6,7 @@ export type HomeOrder={member:Member;version:number;keys:string[]};
 export type FeedEntry={source:'personal';key:string;task:PersonalTask}|{source:'shared';key:string;task:Chore};
 export function combinedFeed(member:Member,personal:PersonalTask[],shared:ChoreLedger|undefined,history=false):FeedEntry[]{
  const own=personal.filter(t=>t.owner===member&&(history?true:!t.deleted&&!t.completed_at)).map(task=>({source:'personal' as const,key:'personal:'+task.id,task}));
- const assigned=(shared?.tasks||[]).filter(t=>t.assignee===member&&!t.projected&&(history?true:activeChore(t)&&queueReady(t,shared!.local_day))).map(task=>({source:'shared' as const,key:'shared:'+task.id,task}));
+ const assigned=(shared?.tasks||[]).filter(t=>(t.assignee===member||!t.assignee)&&!t.projected&&(history?true:activeChore(t)&&queueReady(t,shared!.local_day))).map(task=>({source:'shared' as const,key:'shared:'+task.id,task}));
  return [...own,...assigned].sort((a,b)=>Number(b.task.pinned)-Number(a.task.pinned)||(a.source==='personal'&&b.source==='personal'?b.task.added_at.localeCompare(a.task.added_at)||a.key.localeCompare(b.key):a.source==='shared'&&b.source==='shared'?queueOrder(shared!.local_day)(a.task,b.task):a.source==='personal'?-1:1));
 }
 // Unknown arrivals enter the top of their priority group. Retained keys preserve

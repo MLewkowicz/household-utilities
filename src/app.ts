@@ -27,16 +27,12 @@ function load(route:Route):Promise<Page>{
  return pending;
 }
 initSettings();initNotifications();initAvatarFallback();initPaperTiles();
-let active:Section='home',routeVersion=0;
+let active:Section='home',routeVersion=0,routedHash='';
 const house=mountHouseEntry(section=>navigate(section,'house'),section=>{if(active==='home')navigate(section,'entry');});
 const PAGE_IDS:Record<Route,string>={utilities:'utilities-page',miscellaneous:'misc-page',chores:'chores-page',bulletin:'bulletin-page',events:'events-page'};
-const sections=bindSectionScroll(()=>({section:active,featureOnly:Boolean($('#house-hero').hidden),ready:$('#main').getAttribute('aria-busy')!=='true'}),(section,direction)=>navigate(section,'scroll',direction),{
- page:section=>$('#'+PAGE_IDS[section]),
- prefetch:section=>refreshPage(section,20000),
-});
+bindSectionScroll(()=>({section:active,featureOnly:Boolean($('#house-hero').hidden),ready:$('#main').getAttribute('aria-busy')!=='true'}),()=>house.returnToScene());
 const refreshing=new Map<Route,Promise<Page>>();
-// A section peeked or prefetched moments ago is already current; re-rendering
-// it as the gesture lands would stall the settle animation.
+// Reuse recently loaded content when entering from its house scene.
 const freshAt=new Map<Route,number>();
 function refreshPage(route:Route,maxAge=0){
  let pending=refreshing.get(route);
@@ -64,8 +60,6 @@ async function refresh(maxAge=0){
   if(item){if(!page.focus?.(item))missingNotification();url.hash=location.hash;url.searchParams.delete('notice');history.replaceState(null,'',url);}
   // The active page never waits for the background badge request.
   void refreshBadge();
-  const idle=window.requestIdleCallback??((run:()=>void)=>setTimeout(run,200));
-  idle(()=>{if(version===routeVersion)sections.warm();});
  }catch(error){toast('Could not load this section. '+(error as Error).message,{label:'Retry',run:()=>void refresh()});}
  finally{if(version===routeVersion){$('#main').setAttribute('aria-busy','false');$('#refresh').removeAttribute('disabled');}}
 }
@@ -77,22 +71,21 @@ const previewObserver=new IntersectionObserver(entries=>{
  void refreshPage('chores').catch(()=>{/* Entering the section uses the normal retry UI. */}).finally(()=>{previewPending=false;});
 },{threshold:.01});
 previewObserver.observe($('#feature-area'));
-type NavigationSource='initial'|'house'|'shortcut'|'history'|'scroll'|'entry';
-function route(source:NavigationSource='history',direction:1|-1=1){
+type NavigationSource='initial'|'house'|'shortcut'|'history'|'entry';
+function route(source:NavigationSource='history'){
  // Preserve the old task deep links; the bare Home route is now the exterior.
  if(/^#home\/(personal|assigned)$/.test(location.hash)||location.hash==='#home'&&new URL(location.href).searchParams.has('notice'))history.replaceState(history.state,'',location.href.replace(/#home/, '#chores'));
- active=sectionFromHash(location.hash);routeVersion++;
+ routedHash=location.hash;active=sectionFromHash(location.hash);routeVersion++;
  $('#feature-area').hidden=false;
  const content=active==='home'?'chores':active;
- for(const [key,id] of Object.entries(PAGE_IDS)){const page=$('#'+id);page.hidden=key!==content;page.classList.remove('section-staged');}
+ for(const [key,id] of Object.entries(PAGE_IDS)){const page=$('#'+id);page.hidden=key!==content;}
  document.querySelectorAll<HTMLAnchorElement>('[data-ledger]').forEach(link=>{if(link.dataset.ledger===active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
  const label=active==='home'?'Home':active==='utilities'?'Utilities':active==='chores'?'To-dos':active==='events'?'Events':active==='bulletin'?'Bulletin':'Expenses';
  document.title=`Household · ${label}`;
  const showHouse=active==='home'||source==='house'||source==='history'&&history.state?.houseView===true;
  house.select(active,source==='house',!showHouse);
  $('#export').setAttribute('disabled','');$('#main').setAttribute('aria-busy',active==='home'?'false':'true');
- // Shortcuts and forward section gestures land at the top. A backward gesture
- // lands at the preceding section's bottom.
+ // Direct navigation opens the feature; a history entry can restore its scene.
  if(active==='home'){
   // A notification's focused card and smooth scroll can survive a hash change.
   // Move focus out of the feature, then finish landing after the new layout.
@@ -101,25 +94,25 @@ function route(source:NavigationSource='history',direction:1|-1=1){
   const landingVersion=routeVersion;
   requestAnimationFrame(()=>{if(routeVersion===landingVersion&&active==='home')window.scrollTo({top:0,behavior:'instant'});});
  }
- else if(source==='shortcut'||source==='initial'||source==='scroll')$('#feature-area').scrollIntoView({block:'start',behavior:'instant'});
+ else if(showHouse)window.scrollTo({top:0,behavior:'instant'});
+ else if(source==='shortcut'||source==='initial'||source==='history')$('#feature-area').scrollIntoView({block:'start',behavior:'instant'});
  // Shortcuts rise the new page in briefly instead of cutting.
  if(source==='shortcut'&&active!=='home'){const main=$('#main');main.classList.remove('is-entering');void main.offsetWidth;main.classList.add('is-entering');}
- void refresh(source==='scroll'?20000:0);
- // A backward gesture lands at the bottom, where the peek already showed it.
- if(source==='scroll'&&direction===-1&&active!=='home')window.scrollTo({top:document.documentElement.scrollHeight-innerHeight,behavior:'instant'});
+ void refresh(source==='entry'?20000:0);
 }
-function navigate(section:Section,source:'house'|'shortcut'|'scroll'|'entry',direction:1|-1=1){
+function navigate(section:Section,source:'house'|'shortcut'|'entry'){
  const hash='#'+section;
  if(location.hash!==hash)history.pushState({houseView:source==='house'},'',hash);
- route(source,direction);
- if((source==='shortcut'||source==='scroll')&&section!=='home')$('#main').focus({preventScroll:true});
+ route(source);
+ if(source==='shortcut'&&section!=='home')$('#main').focus({preventScroll:true});
 }
 document.addEventListener('click',event=>{
  const link=(event.target as HTMLElement).closest<HTMLAnchorElement>('[data-ledger],.brand');
  if(!link||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
  event.preventDefault();navigate(sectionFromHash(link.hash),'shortcut');
 });
-window.addEventListener('hashchange',()=>route('history'));
+window.addEventListener('popstate',()=>route('history'));
+window.addEventListener('hashchange',()=>{if(location.hash!==routedHash)route('history');});
 $('#refresh').addEventListener('click',()=>void refresh());
 $('#export').addEventListener('click',()=>{if(active==='home')return;void load(active).then(page=>page.export()).catch(()=>toast('Open the section again to export.'));});
 onIdentityChange(()=>void refreshBadge());

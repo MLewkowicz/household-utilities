@@ -9,15 +9,16 @@ import {choreIcon} from './chore-icons';
 export function choreCard(t:Chore, context:{identity:Member|null;live:boolean;day:string;revision?:ChoreRevision}) {
  const {identity,live,day}=context;
  const ready=queueReady(t,day),opens=queueOpensOn(t);
- const writable=!!identity&&live,quick=writable&&activeChore(t)&&ready&&!t.projected&&(!t.assignee||t.assignee===identity);
- const kind=taskKind(t),owner=t.assignee||t.requester;
+ const writable=!!identity&&live&&!t.rotation_withdrawn,quick=writable&&activeChore(t)&&ready&&!t.projected&&(!t.assignee||t.assignee===identity);
+ const kind=taskKind(t);
  const due=t.due_on===day?'today':t.due_on?date(t.due_on):'';
  const status=activeChore(t)?'':t.status==='completed'?'✓ Completed':name(t.status);
- return `<article class="chore-card member-${owner} ${t.pinned?'is-pinned':''} ${!t.assignee?'is-unassigned':''}" data-chore-id="${esc(t.id)}">
-  <div class="chore-card-top"><span class="entry-illustration">${choreIcon(t.icon_id)}</span><div class="chore-card-title"><div class="chore-tags"><span>${name(kind)}</span>${t.points?`<span class="chore-points">${t.points} pt${t.points===1?'':'s'}</span>`:''}${t.pinned?'<span class="chore-pin">↑ Pinned</span>':''}${due?`<span class="chore-due ${t.status==='overdue'?'is-overdue':''}">${t.status==='overdue'?'Overdue ·':'Due'} <time datetime="${t.due_on}">${due}</time>${t.due_time?' · '+esc(t.due_time):''}</span>`:''}</div><h3>${esc(t.title)}</h3></div></div>
-  <div class="chore-card-people"><span class="chore-recipient">${t.assignee?`For ${name(t.assignee)}`:'Unassigned'}</span><span class="chore-sender member-${t.requester}">${avatar(t.requester)}<span>From ${name(t.requester)}</span></span>${status?`<span class="chore-state state-${t.status}">${status}</span>`:''}</div>
+ return `<article class="chore-card ${t.assignee?'member-'+t.assignee:''} ${t.pinned?'is-pinned':''} ${!t.assignee?'is-unassigned':''}" data-chore-id="${esc(t.id)}">
+  <div class="chore-card-top"><span class="entry-illustration">${choreIcon(t.icon_id)}</span><div class="chore-card-title"><div class="chore-tags"><span>${t.schedule==='as_needed'?'Next turn':name(kind)}</span>${t.points?`<span class="chore-points">${t.points} pt${t.points===1?'':'s'}</span>`:''}${t.pinned?'<span class="chore-pin">↑ Pinned</span>':''}${due?`<span class="chore-due ${t.status==='overdue'?'is-overdue':''}">${t.status==='overdue'?'Overdue ·':'Due'} <time datetime="${t.due_on}">${due}</time>${t.due_time?' · '+esc(t.due_time):''}</span>`:''}</div><h3>${esc(t.title)}</h3></div></div>
+  <div class="chore-card-people"><span class="chore-recipient">${t.assignee?`${avatar(t.assignee)}<span>Assigned to ${name(t.assignee)}</span>`:'Unassigned · anyone can help'}</span>${status?`<span class="chore-state state-${t.status}">${status}</span>`:''}</div>
   ${quick?`<div class="completion-track"><span>Slide to complete</span><button class="completion-handle" data-swipe-complete="${esc(t.id)}" aria-label="Complete ${esc(t.title)}" title="Drag across, or press Enter"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 6l4 4-4 4m5-8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>`:''}
   <details class="tile-details chore-details" data-task-details="${esc(t.id)}">${cornerTab(t.title)}<div class="tile-details-body">
+   <p class="chore-requester">Requested by ${name(t.requester)}</p>
    ${t.routine_id||t.reminder_group_id?`<p class="quiet">${t.routine_id?esc(t.routine_title||'Routine')+' · by '+name(t.requester):'Your own reminder'}</p>`:''}
    ${t.note?`<p class="chore-description">${esc(t.note)}</p>`:''}
    ${context.revision?.change_note?`<p class="chore-description">${esc(context.revision.change_note)}</p>`:''}
@@ -31,7 +32,7 @@ export function choreCard(t:Chore, context:{identity:Member|null;live:boolean;da
     ${ready&&activeChore(t)&&!t.assignee?'<button class="text-button" data-chore-command="claim">Claim</button>':''}
     <button class="text-button" data-chore-command="edit">Edit</button>
     ${ready&&activeChore(t)&&t.assignee?'<button class="text-button" data-chore-command="hand_back">Hand back</button>':''}
-    ${t.status==='cancelled'?'<button class="text-button" data-chore-command="reopen">Reopen</button>':t.status!=='completed'?'<button class="text-button" data-chore-command="cancel">Cancel chore</button>':''}
+    ${t.status==='cancelled'?'<button class="text-button" data-chore-command="reopen">Reopen</button>':t.status!=='completed'?`<button class="text-button" data-chore-command="cancel">${t.schedule==='as_needed'?'Skip turn':'Cancel chore'}</button>`:''}
    </div>`:''}${!t.projected?entryMeta(context.revision||{...t,version:1,actor:t.requester}):''}
   </div></details>
  </article>`;

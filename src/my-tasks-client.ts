@@ -19,7 +19,7 @@ const keyFor=(p:Record<string,unknown>)=>{const fingerprint=JSON.stringify(p);if
 const inUse=()=>busy||dragging||!!document.querySelector('dialog[open]')||!!document.activeElement?.closest('#home-quick');
 const entries=()=>identity?combinedFeed(identity,personal?.tasks||[],choreSource.ledger,showHistory):[];
 const sorted=()=>orderedFeed(entries(),orderDraft||order?.keys||[]);
-const matchesFilter=(e:FeedEntry)=>filter==='all'||(filter==='personal'?e.source==='personal':e.source==='shared');
+const matchesFilter=(e:FeedEntry)=>filter==='all'||(filter==='personal'?e.source==='personal':e.source==='shared'&&(filter==='unassigned'?!e.task.assignee:e.task.assignee===identity));
 
 type GroupMove={id:string;expected_version:number;group_name:string|null};
 let pendingGroupMove:GroupMove|undefined,cancelDrag=()=>{};
@@ -32,7 +32,7 @@ export function initMyTasks(onChange:()=>void){
  $('#my-tasks').innerHTML=` <form id="home-quick" class="home-quick"><label class="sr-only" for="personal-title">Personal task</label><input id="personal-title" maxlength="120" required placeholder="Add a personal task…" autocomplete="off">${groupField('personal-quick-group')}<button id="personal-add" class="button primary">Add</button></form>
  <datalist id="personal-groups"></datalist><p id="home-personal-notice" class="ledger-notice" role="status" hidden></p>
  <p id="home-order-notice" class="ledger-notice" role="status" hidden></p><button id="home-order-retry" class="text-button" hidden>Retry saving order</button>
- <div class="home-toolbar"><div class="segmented" role="group" aria-label="Task sources">${['all','personal','assigned'].map(f=>`<button data-home-filter="${f}" aria-pressed="${f==='all'}">${name(f)}</button>`).join('')}</div><label class="chore-inline-check"><input id="home-history" type="checkbox"> Completed & removed</label></div>
+ <div class="home-toolbar"><div class="segmented" role="group" aria-label="Task sources">${['all','personal','assigned','unassigned'].map(f=>`<button data-home-filter="${f}" aria-pressed="${f==='all'}">${name(f)}</button>`).join('')}</div><label class="chore-inline-check"><input id="home-history" type="checkbox"> Completed & removed</label></div>
  <div id="home-feed" aria-live="polite"></div>`;
  document.body.insertAdjacentHTML('beforeend',`<dialog id="personal-dialog" aria-labelledby="personal-heading"><form id="personal-form"><div class="dialog-top"><h2 id="personal-heading">Edit personal task</h2><button class="icon-button" type="button" data-personal-close aria-label="Close">×</button></div><label for="personal-edit-title">Title</label><input id="personal-edit-title" maxlength="120" required>${groupField('personal-edit-group')}<p id="personal-error" class="form-error" role="alert" hidden></p><div class="dialog-actions"><button type="button" class="button secondary" data-personal-close>Cancel</button><button class="button primary" id="personal-save">Save changes</button></div></form></dialog>`);
  document.body.insertAdjacentHTML('beforeend',`<dialog id="group-rename-dialog" aria-labelledby="group-rename-heading"><form id="group-rename-form"><div class="dialog-top"><h2 id="group-rename-heading">Rename group</h2><button class="icon-button" type="button" data-group-rename-close aria-label="Close">×</button></div><label for="group-rename-name">Group name</label><input id="group-rename-name" maxlength="60" required autocomplete="off"><p id="group-rename-error" class="form-error" role="alert" hidden></p><div class="dialog-actions"><button type="button" class="button secondary" data-group-rename-close>Cancel</button><button class="button primary" id="group-rename-save">Rename group</button></div></form></dialog>`);
@@ -97,7 +97,8 @@ async function loadOrder(member:Member,version:number){
 export function setMyTaskFilter(value:string){filter=value;}
 export function personalAvailable(){return personalLive;}
 export function personalExportAvailable(){return !!identity&&!!(personal||choreSource.ledger);}
-export const myTasksInUse=inUse;
+// Typing a quick personal task must not block incoming shared assignments.
+export const myTasksInUse=()=>busy||dragging||!!document.querySelector('dialog[open]');
 export function resetMyTasks(){
  cancelDrag();pendingGroupMove=undefined;orderAttempt=undefined;groupDraft=undefined;$<HTMLInputElement>('#personal-quick-group').value='';
  readVersion++;personal=undefined;order=undefined;orderDraft=undefined;personalLive=false;orderLive=false;personalNotice='';orderNotice='';quickId=crypto.randomUUID();$<HTMLInputElement>('#personal-title').value='';renderMyTasks();

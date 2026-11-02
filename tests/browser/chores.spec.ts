@@ -22,7 +22,7 @@ test('requests, urgency, hand-back and shared identity work across tabs on a pho
  await page.locator('input[name=chore-assignee][value=michal]').check();await page.locator('#chore-scheduling > summary').click();await page.locator('#chore-pinned').check();await page.locator('#chore-tonight').check();
  expect(await page.locator('#chore-task-dialog').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBeTruthy();
  await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();
- await choosePerson(page,'michal');const request=card(page,'Bananas <b>for everyone</b>');await expect(request).toContainText('From Rohil');await expect(request).toContainText('Pinned');await expect(request.locator('h3 b')).toHaveCount(0);
+ await choosePerson(page,'michal');const request=card(page,'Bananas <b>for everyone</b>');await expect(request).toContainText('Requested by Rohil');await expect(request).toContainText('Pinned');await expect(request.locator('h3 b')).toHaveCount(0);
  await expect(page.locator('#chore-badge')).toHaveText('1');
  await expand(request);await request.getByRole('button',{name:'Hand back',exact:true}).click();await expect(page.locator('#chore-action-heading')).toBeFocused();
  await page.locator('#chore-action-note').fill('Could someone cover today?');await page.locator('#chore-action-save').click();await expect(page.locator('#chore-action-dialog')).not.toBeVisible();await expect(request).toHaveClass(/is-unassigned/);await expect(request).toContainText('Unassigned');
@@ -132,7 +132,7 @@ test('requesting without an identity explains how to continue, and unassigned wo
  await page.locator('#chore-new').click();await expect(page.locator('#chore-identity-error')).toContainText('Choose your name before adding');await expect(page.locator('[data-chore-person=michal]')).toBeFocused();
  await page.locator('[data-chore-person=rohil]').click();await expect(page.locator('#chore-task-dialog')).toBeVisible();await expect(page.locator('#chore-task-heading')).toBeFocused();await page.locator('#chore-kind').selectOption('chore');
  await page.locator('#chore-title').fill('An open invitation to help');await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();
- await page.locator('#chore-household-filter').selectOption('anyone');const task=card(page,'An open invitation to help');await expect(task).toHaveClass(/is-unassigned/);await expect(task).toContainText('From Rohil');
+ await page.locator('#chore-household-filter').selectOption('anyone');const task=card(page,'An open invitation to help');await expect(task).toHaveClass(/is-unassigned/);await expect(task).toContainText('Requested by Rohil');
  for(const who of ['rina','ohm','michal']){await choosePerson(page,who);await expect(task).toBeVisible();await expect(task).toHaveClass(/is-unassigned/);}
  await expand(task);await task.getByRole('button',{name:'Claim',exact:true}).click();await page.locator('#chore-action-save').click();await expect(page.locator('#chore-action-dialog')).not.toBeVisible();await expect(task).toHaveCount(0);
  await view(page,'household');await expect(task).toHaveCount(0);await expect(page.locator('#chore-household-filter')).toHaveValue('anyone');await page.locator('#chore-household-filter').selectOption('all');await expect(task).toBeVisible();await page.locator('#chore-household-filter').selectOption('rina');await expect(task).toHaveCount(0);await page.locator('#chore-household-filter').selectOption('michal');await expect(task).toBeVisible();

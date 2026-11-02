@@ -41,13 +41,13 @@ test('per-member Home ordering rejects stale/conflicting writes and survives dup
  await assert.rejects(call('home_order',{member:'nobody'}),/whose/);
  assert.equal((await call('export_personal_tasks',{})).orders.length,1);
 });
-test('combined feed excludes other owners, unassigned work, projections, and unavailable routines',()=>{
+test('combined feed includes unassigned work but excludes other owners, projections, and unavailable routines',()=>{
  const personal=[{id:'a',owner:'michal',pinned:false,added_at:'2026-10-20',completed_at:null,deleted:false},{id:'b',owner:'rina',added_at:'2026-10-20'},{id:'c',owner:'michal',completed_at:'2026-10-20'}] as PersonalTask[];
- const shared:any={local_day:'2026-10-21',tasks:[{id:'now',assignee:'michal',status:'active',created_at:'2026-10-21',pinned:true},{id:'future',assignee:'michal',status:'active',routine_id:'r',due_on:'2026-10-22',cycle_start:'2026-10-21'},{id:'anyone',assignee:null,status:'active'},{id:'preview',assignee:'michal',status:'active',projected:true}]};
- const feed=combinedFeed('michal',personal,shared);assert.deepEqual(feed.map(e=>e.key),['shared:now','personal:a']);
- const arrivals=[...feed,{...feed[1],key:'personal:new'}];assert.deepEqual(orderedFeed(arrivals,['personal:a','shared:now']).map(e=>e.key),['shared:now','personal:new','personal:a']);
- assert.deepEqual(reconcileOrder(arrivals,['personal:a','shared:now','shared:missing']),['personal:new','personal:a','shared:now','shared:missing']);
- assert.equal(moveEntry(arrivals,'personal:a','shared:now'),null);assert.deepEqual(moveEntry(arrivals,'personal:a','personal:new'),['shared:now','personal:new','personal:a']);
+ const shared:any={local_day:'2026-10-21',tasks:[{id:'now',assignee:'michal',status:'active',created_at:'2026-10-21',pinned:true},{id:'future',assignee:'michal',status:'active',routine_id:'r',due_on:'2026-10-22',cycle_start:'2026-10-21'},{id:'anyone',assignee:null,status:'active',created_at:'2026-10-21',pinned:false},{id:'preview',assignee:'michal',status:'active',projected:true}]};
+ const feed=combinedFeed('michal',personal,shared);assert.deepEqual(feed.map(e=>e.key),['shared:now','personal:a','shared:anyone']);
+ const arrivals=[...feed,{...feed[1],key:'personal:new'}];assert.deepEqual(orderedFeed(arrivals,['personal:a','shared:now']).map(e=>e.key),['shared:now','shared:anyone','personal:new','personal:a']);
+ assert.deepEqual(reconcileOrder(arrivals,['personal:a','shared:now','shared:missing']),['shared:anyone','personal:new','personal:a','shared:now','shared:missing']);
+ assert.equal(moveEntry(arrivals,'personal:a','shared:now'),null);assert.deepEqual(moveEntry(arrivals,'personal:a','personal:new'),['shared:now','shared:anyone','personal:new','personal:a']);
 });
 
 test('named groups survive cached edits, completion and exports, and reject malformed metadata',async()=>{
