@@ -25,7 +25,7 @@ export async function saveSharedTask(p:Record<string,unknown>,operation='save_ch
 const quickRequests=new Map<string,string>();
 const saving=new Set<string>();
 export async function completeSharedTask(task:Chore,actor:Member){
- if(!choreSource.live||saving.has(task.id)||!queueReady(task,choreSource.ledger?.local_day||today()))return;
+ if(!choreSource.live||saving.has(task.id)||!queueReady(task,choreSource.ledger?.local_day||today()))return false;
  const key=`${task.id}:${task.version}:${actor}`;
  if(!quickRequests.has(key))quickRequests.set(key,crypto.randomUUID());saving.add(task.id);
  try{
@@ -33,10 +33,11 @@ export async function completeSharedTask(task:Chore,actor:Member){
   if(choreSource.ledger)choreSource.ledger.tasks=choreSource.ledger.tasks.map(t=>t.id===result.id?{...t,...result,status:'completed',projected:false}:t);
   emit();quickRequests.delete(key);const request=crypto.randomUUID();
   toast('✓ '+task.title,{label:'Undo',run:()=>void undoSharedTask(result,actor,request)});
- }catch(error){toast((error as Error).message,{label:'Retry',run:()=>void completeSharedTask(task,actor)});}
+  return true;
+ }catch(error){toast((error as Error).message,{label:'Retry',run:()=>void completeSharedTask(task,actor)});return false;}
  finally{saving.delete(task.id);}
 }
-async function undoSharedTask(task:Chore,actor:Member,request:string){
+export async function undoSharedTask(task:Chore,actor:Member,request:string){
  try{await saveSharedTask({id:task.id,expected_version:task.version,actor,action:'undo',request_id:request});toast('Completion undone.');}
  catch(error){toast((error as Error).message,{label:'Retry',run:()=>void undoSharedTask(task,actor,request)});}
 }

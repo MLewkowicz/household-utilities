@@ -8,10 +8,29 @@
     {
       "sender": "ohm",
       "recipient": "rina",
-      "amount_cents": 1183
+      "amount_cents": 1333
     }
   ],
   "expenses": [
+    {
+      "id": "c7d6cff4-482d-4ef0-8c5b-204f10300740",
+      "actor": "rina",
+      "payer": "rina",
+      "shares": {
+        "ohm": 150
+      },
+      "deleted": false,
+      "icon_id": "bread",
+      "paid_on": "2026-11-03",
+      "version": 1,
+      "created_at": "2026-11-03T19:59:25.061159+00:00",
+      "split_mode": "custom",
+      "description": "Bread",
+      "amount_cents": 150,
+      "participants": [
+        "ohm"
+      ]
+    },
     {
       "id": "42947e2a-96ff-42ce-9e04-40a80437da21",
       "actor": "ohm",
@@ -170,8 +189,8 @@
       ]
     }
   ],
-  "updated_at": "2026-11-02T23:26:48.328176+00:00",
-  "exported_at": "2026-11-02T23:26:48.328176+00:00",
+  "updated_at": "2026-11-03T22:25:57.901205+00:00",
+  "exported_at": "2026-11-03T22:25:57.901205+00:00",
   "settlements": [
     {
       "id": "e80cd69a-b751-48a1-911f-baa189d04efb",
@@ -254,6 +273,25 @@
   ],
   "format_version": 1,
   "expense_history": [
+    {
+      "id": "c7d6cff4-482d-4ef0-8c5b-204f10300740",
+      "actor": "rina",
+      "payer": "rina",
+      "shares": {
+        "ohm": 150
+      },
+      "deleted": false,
+      "icon_id": "bread",
+      "paid_on": "2026-11-03",
+      "version": 1,
+      "created_at": "2026-11-03T19:59:25.061159+00:00",
+      "split_mode": "custom",
+      "description": "Bread",
+      "amount_cents": 150,
+      "participants": [
+        "ohm"
+      ]
+    },
     {
       "id": "036bbafa-7e10-4e17-baae-da1f7d44ee3b",
       "actor": "rina",

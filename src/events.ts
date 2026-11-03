@@ -18,13 +18,13 @@ export function pollDays(e:HouseholdEvent){
  return days;
 }
 /** Everyone's current marks for this poll, and the days that suit the household. */
-export function pollSummary(e:HouseholdEvent,marks:EventAvailability[],members:readonly Member[]){
+export function pollSummary(e:HouseholdEvent,marks:EventAvailability[],members:readonly Member[],today=eventDay(new Date().toISOString())){
  const current=marks.filter(m=>m.id===e.id&&m.poll_version===e.poll_version);
  const days=pollDays(e).map(day=>{
   const yes=current.filter(m=>m.days[day]==='yes').map(m=>m.member),maybe=current.filter(m=>m.days[day]==='maybe').map(m=>m.member);
-  return {day,yes,maybe,score:yes.length+maybe.length/2,valid:members.every(m=>yes.includes(m)||maybe.includes(m))};
+  return {day,past:day<today,yes,maybe,score:yes.length+maybe.length/2,valid:members.every(m=>yes.includes(m)||maybe.includes(m))};
  });
- const ranked=[...days].filter(d=>d.score>0).sort((a,b)=>Number(b.valid)-Number(a.valid)||b.score-a.score||b.yes.length-a.yes.length||a.day.localeCompare(b.day));
+ const ranked=[...days].filter(d=>!d.past&&d.score>0).sort((a,b)=>Number(b.valid)-Number(a.valid)||b.score-a.score||b.yes.length-a.yes.length||a.day.localeCompare(b.day));
  return {days,ranked,answered:current.filter(m=>Object.keys(m.days).length).map(m=>m.member)};
 }
 /** A local day, start time and length become the interval the server stores. */

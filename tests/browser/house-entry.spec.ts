@@ -175,6 +175,7 @@ test('a tap on the house triggers its effect; swiping, scrolling and blank space
 });
 
 test('Home exposes theme controls and Settings contains notifications and the System preference',async({page})=>{
+ await page.clock.setFixedTime(new Date('2026-11-03T05:00:00Z'));
  await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});await page.goto('/');await ready(page);
  await expect(page.locator('#theme-toggle')).toBeVisible();await expect(page.locator('#theme-select')).toBeHidden();await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
  expect((await diag(page)).environment.sunVisible).toBe(false);expect((await diag(page)).environment.moonVisible).toBe(true);expect((await diag(page)).environment.starsOpacity).toBeGreaterThan(.5);
@@ -202,6 +203,9 @@ test('day and night interpolate through landscape lighting and reverse without c
  await page.locator('#theme-toggle').click();
  await expect.poll(async()=>(await diag(page)).themeBlend).toBeGreaterThan(.1);
  const middle=await diag(page);expect(middle.themeBlend).toBeLessThan(1);expect(middle.displayed).toBe('home');
+ // The header now includes Time of day between explicit Dark and Light.
+ await page.locator('#theme-toggle').click();
+ await expect(page.locator('html')).toHaveAttribute('data-theme-preference','daylight');
  await page.locator('#theme-toggle').click();
  await expect.poll(async()=>(await diag(page)).themeBlend,{timeout:20000}).toBe(0);
  expect((await diag(page)).displayed).toBe('home');expect((await diag(page)).pixelRatio).toBeGreaterThanOrEqual(1);
@@ -257,16 +261,16 @@ test('rapid swipes and held arrow keys cannot queue extra rotations',async({page
 
 test('Settings pauses the scene, restores focus and keeps explicit theme choices across reloads',async({page})=>{
  await page.emulateMedia({colorScheme:'light'});await page.goto('/');await ready(page);
- await expect(page.getByRole('button',{name:'Switch to dark mode'})).toBeVisible();
+ await expect(page.getByRole('button',{name:/Switch to Dark$/})).toBeVisible();
  await page.locator('#settings-open').click();await expect.poll(async()=>(await diag(page)).paused).toBe(true);
  await expect(page.locator('#refresh')).toBeDisabled();await page.keyboard.press('Escape');
  await expect(page.locator('#settings-open')).toBeFocused();await expect.poll(async()=>(await diag(page)).paused).toBe(false);
- await page.getByRole('button',{name:'Switch to dark mode'}).click();
- await expect(page.getByRole('button',{name:'Switch to light mode'})).toBeVisible();
+ await page.getByRole('button',{name:/Switch to Dark$/}).click();
+ await expect(page.locator('#theme-toggle')).toHaveAccessibleName('Color theme: Dark. Switch to Time of day');
  await page.reload();await ready(page);await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
  await openNotifications(page);await page.locator('#push-close').click();await expect(page.locator('#settings-open')).toBeFocused();
  await setTheme(page,'system');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
- await page.emulateMedia({colorScheme:'dark'});await expect(page.getByRole('button',{name:'Switch to light mode'})).toBeVisible();
+ await page.emulateMedia({colorScheme:'dark'});await expect(page.getByRole('button',{name:/Switch to Light$/})).toBeVisible();
 });
 
 test('the lawn notice board opens What’s new once per release, and Settings keeps the history',async({page})=>{

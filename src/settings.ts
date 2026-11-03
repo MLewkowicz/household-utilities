@@ -7,10 +7,13 @@ export function initSettings() {
  const systemTheme=matchMedia('(prefers-color-scheme: dark)'),selector=$<HTMLSelectElement>('#theme-select');
  const preference=saved('household-theme');selector.value=['light','dark','daylight'].includes(preference||'')?preference!:'system';
  let fading:ReturnType<typeof setTimeout>|undefined;
+ const labels:Record<string,string>={system:'System',light:'Light',dark:'Dark',daylight:'Time of day'};
+ const nextTheme=()=>selector.value==='dark'?'daylight':selector.value==='daylight'?'light':selector.value==='light'?'dark':document.documentElement.dataset.theme==='dark'?'light':'dark';
  function applyTheme(animate=false){
   const {hour,night}=householdDaylight(),clock=selector.value==='system'||selector.value==='daylight';
   const theme=selector.value==='daylight'?(night>=.6?'dark':'light'):selector.value==='system'?(systemTheme.matches?'dark':'light'):selector.value;
   const root=document.documentElement;
+  root.dataset.themePreference=selector.value;
   root.dataset.houseNight=String(clock?night:Number(theme==='dark'));
   root.dataset.houseHour=String(hour);root.dataset.houseClock=String(clock);
   // Interpolate the whole interface only when Time of day is selected.
@@ -35,12 +38,12 @@ export function initSettings() {
    else{clearTimeout(fading);root.classList.add('theme-fade');swap();fading=setTimeout(()=>root.classList.remove('theme-fade'),500);}
   }
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='dark'?'#182437':'#f5f2e9');
-  const action=theme==='dark'?'Switch to light mode':'Switch to dark mode';
+  const action=`Color theme: ${labels[selector.value]}. Switch to ${labels[nextTheme()]}`;
   toggle.setAttribute('aria-label',action);toggle.title=action;
  }
  function saveTheme(){remember('household-theme',selector.value);applyTheme(true);}
  selector.addEventListener('change',saveTheme);
- toggle.addEventListener('click',()=>{selector.value=document.documentElement.dataset.theme==='dark'?'light':'dark';saveTheme();});
+ toggle.addEventListener('click',()=>{selector.value=nextTheme();saveTheme();});
  systemTheme.addEventListener('change',()=>applyTheme(true));
  setInterval(()=>{if(!document.hidden)applyTheme();},60000);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)applyTheme();});applyTheme();

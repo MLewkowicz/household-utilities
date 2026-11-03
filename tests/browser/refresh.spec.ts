@@ -4,7 +4,7 @@ const rpc=async(page:Page,name:string,p?:unknown)=>{const r=await page.request.p
 const task=(extra={})=>({id:crypto.randomUUID(),request_id:crypto.randomUUID(),actor:'rohil',action:'create',title:'Swipe test '+crypto.randomUUID(),icon_id:'tidy',note:'Only visible in details',points:2,assignee:null,pinned:false,...extra});
 async function chores(page:Page){await page.goto('/#chores/household');await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');await page.locator('[data-chore-person=michal]').click();await page.locator('#chore-household-filter').selectOption('all');}
 
-test('a deliberate swipe claims and completes, with keyboard undo and independent typed reminders',async({page})=>{
+test('a deliberate swipe confirms contributors and completes, with keyboard undo and independent typed reminders',async({page})=>{
  await page.setViewportSize({width:390,height:844});const t=await rpc(page,'save_chore',task());await chores(page);
  const card=page.locator(`[data-chore-id="${t.id}"]`);await expect(card.locator('.chore-description')).not.toBeVisible();
  const surface=await card.evaluate(el=>getComputedStyle(el).backgroundColor);expect(surface).not.toBe('rgb(255, 255, 255)');
@@ -14,9 +14,9 @@ test('a deliberate swipe claims and completes, with keyboard undo and independen
  await page.mouse.move(handle.x+20,handle.y+20);await page.mouse.down();await page.mouse.move(handle.x+35,handle.y+20);await page.mouse.up();
  expect((await rpc(page,'chores_dashboard')).tasks.find((x:any)=>x.id===t.id).state).toBe('active');
  await page.mouse.move(handle.x+20,handle.y+20);await page.mouse.down();await page.mouse.move(bounds.x+bounds.width-12,handle.y+20,{steps:12});await page.mouse.up();
- await expect(card).toHaveCount(0);let d=await rpc(page,'chores_dashboard');const done=d.tasks.find((x:any)=>x.id===t.id);expect(done.assignee).toBe('michal');expect(done.completion.contributors).toEqual(['michal']);
+ await expect(page.locator('#chore-complete-dialog')).toBeVisible();await page.locator('#chore-complete-save').click();await expect(card).toHaveCount(0);let d=await rpc(page,'chores_dashboard');const done=d.tasks.find((x:any)=>x.id===t.id);expect(done.assignee).toBeNull();expect(done.completion.contributors).toEqual(['michal']);
  await page.locator('#toast').getByRole('button',{name:'Undo',exact:true}).click();await expect(card).toBeVisible();
- await button.focus();await page.keyboard.press('Enter');await expect(card).toHaveCount(0);
+ await button.focus();await page.keyboard.press('Enter');await page.locator('#chore-complete-save').click();await expect(card).toHaveCount(0);
  await page.locator('#chore-new').click();await page.locator('#chore-kind').selectOption('reminder');await page.locator('#chore-title').fill('Register today independently');
  await page.locator('[name=reminder-recipient][value=rina]').check();await page.locator('[name=reminder-recipient][value=ohm]').check();
  await expect(page.locator('#chore-points-fields')).not.toBeVisible();await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();
@@ -53,7 +53,7 @@ test('utility page has no explanatory info controls and retains payment guidance
 });
 
 test('a delayed read cannot restore a task after quick completion',async({page})=>{
- const t=await rpc(page,'save_chore',task());await chores(page);
+ const t=await rpc(page,'save_chore',task({kind:'reminder',points:0}));await chores(page);
  let release!:()=>void,received!:()=>void;const held=new Promise<void>(resolve=>release=resolve),started=new Promise<void>(resolve=>received=resolve);
  await page.route('**/utilities_chores_dashboard',async route=>{const response=await route.fetch();received();await held;await route.fulfill({response});},{times:1});
  await refreshSection(page);await started;

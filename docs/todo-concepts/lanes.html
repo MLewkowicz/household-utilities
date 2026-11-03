@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Category lanes · To-do concept</title>
+  <link rel="stylesheet" href="./lanes.css">
+  <script src="./shared.js" defer></script>
+  <script src="./lanes.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <a class="wordmark" href="./index.html?concept=lanes">⌂ <span>Household</span></a>
+      <span class="study-label">Category lanes / Study 04</span>
+      <span class="person"><span class="avatar">M</span> Michal</span>
+    </header>
+    <div class="page-heading">
+      <div><p class="eyebrow">A little room to think</p><h1>To-dos<span>.</span></h1></div>
+      <span class="preview-tag">Interactive concept</span>
+    </div>
+
+    <form id="quick-add" class="composer" aria-label="Quick add">
+      <div class="entry-line">
+        <label class="sr-only" for="quick-title">What needs doing?</label>
+        <input id="quick-title" maxlength="120" required placeholder="What needs doing?" autocomplete="off">
+        <button class="primary" type="submit" id="quick-save">Add task</button>
+      </div>
+      <div class="composer-tools">
+        <div class="mode-switch" role="group" aria-label="Add as">
+          <button type="button" data-mode="task" aria-pressed="true">Task</button>
+          <button type="button" data-mode="reminder" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 13h12l-1.5-2V8a4.5 4.5 0 0 0-9 0v3L4 13Zm4 3h4"/></svg> Remind me</button>
+        </div>
+        <label id="group-field" class="group-field">Group <input id="quick-group" list="personal-groups" placeholder="Optional" maxlength="40" autocomplete="off"></label>
+        <span id="reminder-owner" class="composer-hint" hidden>For you</span>
+      </div>
+      <div id="reminder-options" hidden>
+        <div class="schedule-fields">
+          <label>On<input id="quick-date" type="date" value="2026-11-04"></label>
+          <label>At<input id="quick-time" type="time" value="09:00"></label>
+          <label>Repeat<select id="quick-repeat"><option value="0">Just once</option><option value="7">Every week</option><option value="14">Every 2 weeks</option></select></label>
+        </div>
+        <p id="schedule-summary" class="composer-hint"></p>
+      </div>
+      <datalist id="personal-groups"></datalist>
+    </form>
+
+    <div class="board-tools">
+      <p id="task-summary"></p>
+      <label class="history-toggle"><input id="show-history" type="checkbox"> Completed & removed</label>
+      <label class="sample-picker">Sample day <select id="sample-day"><option value="typical">Typical</option><option value="busy">Lots of personal tasks</option><option value="quiet">Only personal tasks</option></select></label>
+    </div>
+    <p id="gesture-hint" class="gesture-hint">Swipe to finish. Lift a corner for details & actions.</p>
+    <div id="lanes" class="lanes"></div>
+    <section id="completion-receipt" class="completion-receipt" aria-label="Last completion" hidden></section>
+    <footer class="app-footer">
+      <p>Sample day: Tue, November 3. Changes reset on reload.<br>Preview only · No alerts are sent. The milk rotation is illustrative.</p>
+      <button type="button" id="reset-sample">Reset sample</button>
+    </footer>
+  </main>
+  <dialog id="task-dialog" aria-labelledby="dialog-title"></dialog>
+  <div id="toast" class="toast" role="status" hidden><span></span><button id="undo" type="button" hidden>Undo</button></div>
+</body>
+</html>

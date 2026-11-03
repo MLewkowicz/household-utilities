@@ -148,7 +148,7 @@ test('the trash liner has its own icon and half-point recurring work completes a
  await page.setViewportSize({width:390,height:844});await open(page);
  const before=await rpc(page,'chores_dashboard');await page.locator('#chore-new').click();await page.locator('#chore-kind').selectOption('chore');await page.locator('#chore-title').fill('Put in new trash bag');await page.locator('#chore-effort').selectOption('0.5');
  await page.locator('#chore-kind').selectOption('routine');await expect(page.locator('[data-routine-field=points]')).toHaveValue('0.5');await page.locator('.routine-context > summary').click();await expect(page.locator('[data-routine-field=icon_id]')).toHaveValue('trash-bag');
- await page.locator('#chore-routine-save').click();await expect(page.locator('#chore-routine-dialog')).not.toBeVisible();const c=card(page,'Put in new trash bag');await expect(c).toContainText('0.5 pts');await c.locator('.completion-handle').focus();await page.keyboard.press('Enter');await expect(c).toHaveCount(0);
+ await page.locator('#chore-routine-save').click();await expect(page.locator('#chore-routine-dialog')).not.toBeVisible();const c=card(page,'Put in new trash bag');await expect(c).toContainText('0.5 pts');await c.locator('.completion-handle').focus();await page.keyboard.press('Enter');await page.locator('#chore-complete-save').click();await expect(c).toHaveCount(0);
  const d=await rpc(page,'chores_dashboard'),routine=d.routines.find((r:any)=>r.title==='Put in new trash bag'),done=d.tasks.find((t:any)=>t.routine_id===routine.id&&!t.projected);expect(done.points).toBe(0.5);expect(done.state).toBe('completed');expect(done.icon_id).toBe('trash-bag');
  const score=(ledger:any)=>ledger.leaderboard.find((r:any)=>r.period==='all'&&r.member==='michal').units;expect(score(d)-score(before)).toBe(6);
  await page.locator('#chore-status-filter').selectOption('completed');await expand(c);await c.getByRole('button',{name:'Correct completion',exact:true}).click();await expect(page.locator('#chore-complete-effort')).toHaveValue('0.5');await page.keyboard.press('Escape');
@@ -192,6 +192,6 @@ test('a due-day-only task can be configured and edited without losing its queue 
  const c=page.locator(`[data-chore-id="${t.id}"]`);await expand(c);await c.getByRole('button',{name:'Edit',exact:true}).click();
  await expect(page.locator('#chore-queue')).toHaveValue('due_date');await page.locator('#chore-due').fill(d.local_day);
  await page.locator('#chore-task-save').click();await expect(page.locator('#chore-task-dialog')).not.toBeVisible();await view(page,'household');await page.locator('#chore-household-filter').selectOption('all');
- await expect(c).toBeVisible();await c.locator('[data-swipe-complete]').focus();await page.keyboard.press('Enter');await expect(c).toHaveCount(0);
+ await expect(c).toBeVisible();await c.locator('[data-swipe-complete]').focus();await page.keyboard.press('Enter');await page.locator('#chore-complete-save').click();await expect(c).toHaveCount(0);
  expect((await rpc(page,'chores_dashboard')).tasks.find((x:any)=>x.id===t.id).state).toBe('completed');
 });

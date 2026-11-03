@@ -1,6 +1,34 @@
 {
   "tasks": [
     {
+      "id": "fd71d785-f46d-4ad6-bd70-a0161460e65c",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Format NVMe drives",
+      "action": "complete",
+      "pinned": false,
+      "deleted": false,
+      "version": 2,
+      "added_at": "2026-11-03T03:57:41.639467+00:00",
+      "created_at": "2026-11-03T03:57:46.2446+00:00",
+      "group_name": "MIT",
+      "completed_at": "2026-11-03T03:57:46.2446+00:00"
+    },
+    {
+      "id": "baabc1de-0e44-424b-b4fe-e764f99d6f34",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Get Andreea videos of base policy failure",
+      "action": "pin",
+      "pinned": false,
+      "deleted": false,
+      "version": 5,
+      "added_at": "2026-11-03T03:31:30.370046+00:00",
+      "created_at": "2026-11-03T21:38:04.596104+00:00",
+      "group_name": "MIT",
+      "completed_at": null
+    },
+    {
       "id": "6f3ae4f7-cfcd-410d-9222-0e5cb7d00d7f",
       "actor": "michal",
       "owner": "michal",
@@ -256,6 +284,8 @@
   "orders": [
     {
       "keys": [
+        "personal:baabc1de-0e44-424b-b4fe-e764f99d6f34",
+        "shared:605d27a3-9827-4e25-8fc3-d9b587a56f98",
         "shared:2c7a7534-ca39-4bd4-8257-f02e75f20583",
         "personal:6f3ae4f7-cfcd-410d-9222-0e5cb7d00d7f",
         "personal:7413329d-32ca-48d1-bbe7-b8d8829f613f",
@@ -281,28 +311,128 @@
         "shared:e1175002-64d7-457f-a935-9ee02a5a5bf9"
       ],
       "member": "michal",
-      "version": 34,
-      "created_at": "2026-11-02T17:52:36.630186+00:00"
+      "version": 36,
+      "created_at": "2026-11-03T03:31:31.541668+00:00"
     },
     {
       "keys": [
+        "shared:41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-02:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
         "shared:bb347c52-8158-4a8c-bed3-a0afb3b359af_rina"
       ],
       "member": "rina",
-      "version": 1,
-      "created_at": "2026-10-25T15:15:39.211983+00:00"
+      "version": 2,
+      "created_at": "2026-11-03T18:29:11.789917+00:00"
     },
     {
       "keys": [
+        "shared:605d27a3-9827-4e25-8fc3-d9b587a56f98",
         "shared:41526915-8c8f-41d9-8340-dc5980c8ce00:2026-10-26:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
         "shared:952286c6-8a12-4606-ac1b-f47ca92ff2b8"
       ],
       "member": "rohil",
-      "version": 2,
-      "created_at": "2026-10-27T20:36:43.564727+00:00"
+      "version": 3,
+      "created_at": "2026-11-03T00:30:03.333344+00:00"
     }
   ],
   "history": [
+    {
+      "id": "baabc1de-0e44-424b-b4fe-e764f99d6f34",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Get Andreea videos of base policy failure",
+      "action": "pin",
+      "pinned": false,
+      "deleted": false,
+      "version": 5,
+      "added_at": "2026-11-03T03:31:30.370046+00:00",
+      "created_at": "2026-11-03T21:38:04.596104+00:00",
+      "group_name": "MIT",
+      "completed_at": null
+    },
+    {
+      "id": "baabc1de-0e44-424b-b4fe-e764f99d6f34",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Get Andreea videos of base policy failure",
+      "action": "pin",
+      "pinned": true,
+      "deleted": false,
+      "version": 4,
+      "added_at": "2026-11-03T03:31:30.370046+00:00",
+      "created_at": "2026-11-03T21:38:00.761096+00:00",
+      "group_name": "MIT",
+      "completed_at": null
+    },
+    {
+      "id": "baabc1de-0e44-424b-b4fe-e764f99d6f34",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Get Andreea videos of base policy failure",
+      "action": "undo",
+      "pinned": false,
+      "deleted": false,
+      "version": 3,
+      "added_at": "2026-11-03T03:31:30.370046+00:00",
+      "created_at": "2026-11-03T21:37:56.671017+00:00",
+      "group_name": "MIT",
+      "completed_at": null
+    },
+    {
+      "id": "baabc1de-0e44-424b-b4fe-e764f99d6f34",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Get Andreea videos of base policy failure",
+      "action": "complete",
+      "pinned": false,
+      "deleted": false,
+      "version": 2,
+      "added_at": "2026-11-03T03:31:30.370046+00:00",
+      "created_at": "2026-11-03T21:37:55.412355+00:00",
+      "group_name": "MIT",
+      "completed_at": "2026-11-03T21:37:55.412355+00:00"
+    },
+    {
+      "id": "fd71d785-f46d-4ad6-bd70-a0161460e65c",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Format NVMe drives",
+      "action": "complete",
+      "pinned": false,
+      "deleted": false,
+      "version": 2,
+      "added_at": "2026-11-03T03:57:41.639467+00:00",
+      "created_at": "2026-11-03T03:57:46.2446+00:00",
+      "group_name": "MIT",
+      "completed_at": "2026-11-03T03:57:46.2446+00:00"
+    },
+    {
+      "id": "fd71d785-f46d-4ad6-bd70-a0161460e65c",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Format NVMe drives",
+      "action": "create",
+      "pinned": false,
+      "deleted": false,
+      "version": 1,
+      "added_at": "2026-11-03T03:57:41.639467+00:00",
+      "created_at": "2026-11-03T03:57:41.639467+00:00",
+      "group_name": "MIT",
+      "completed_at": null
+    },
+    {
+      "id": "baabc1de-0e44-424b-b4fe-e764f99d6f34",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Get Andreea videos of base policy failure",
+      "action": "create",
+      "pinned": false,
+      "deleted": false,
+      "version": 1,
+      "added_at": "2026-11-03T03:31:30.370046+00:00",
+      "created_at": "2026-11-03T03:31:30.370046+00:00",
+      "group_name": "MIT",
+      "completed_at": null
+    },
     {
       "id": "597e49ac-8d59-4277-bfd1-de07b45493a3",
       "actor": "michal",
@@ -780,8 +910,8 @@
       "completed_at": null
     }
   ],
-  "updated_at": "2026-11-02T23:26:50.553055+00:00",
-  "exported_at": "2026-11-02T23:26:50.553055+00:00",
+  "updated_at": "2026-11-03T22:25:59.739358+00:00",
+  "exported_at": "2026-11-03T22:25:59.739358+00:00",
   "format_version": 2,
   "group_rename_version": 1
 }

@@ -16,6 +16,7 @@ export function initPaperTiles(){
   const width=tile.offsetWidth,height=tile.offsetHeight;if(!width||!height)return;
   const radius=tile.matches('.bulletin-note')?1:parseFloat(getComputedStyle(tile).borderRadius)||12;
   const {outer,curl,flap}=paperGeometry(width,height,radius);
+  if(tile.matches('.todo-tile'))tile.style.setProperty('--swipe-travel',Math.max(0,width-60)+'px');
   svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
   svg.querySelectorAll('[data-paper-shape]').forEach(p=>p.setAttribute('d',outer));
   svg.querySelector('.paper-curl')!.setAttribute('d',flap);svg.querySelector('.paper-crease')!.setAttribute('d',curl);
@@ -30,7 +31,7 @@ export function initPaperTiles(){
    svg.classList.add('paper-frame');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
    // Payment rows keep their member wash inside the curled outline.
    const tint=tile.matches('.payment-row')?`<linearGradient id="${id}-tint" x1="0" y1="0" x2="1" y2=".18"><stop class="paper-tint" stop-opacity=".09"/><stop class="paper-tint" offset=".75" stop-opacity="0"/></linearGradient>`:'';
-   svg.innerHTML=`<defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2=".3"><stop stop-color="#fff9e4" stop-opacity=".14"/><stop offset=".4" stop-opacity="0"/><stop offset="1" stop-color="#846b44" stop-opacity=".06"/></linearGradient>${tint}</defs><path class="paper-fill" data-paper-shape/>${tint?`<path class="paper-tint-fill" data-paper-shape fill="url(#${id}-tint)"/>`:''}<path class="paper-texture" data-paper-shape fill="url(#${id})"/><path class="paper-curl"/><path class="paper-crease"/><path class="paper-outline" data-paper-shape/>`;
+   svg.innerHTML=`<defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2=".3"><stop stop-color="#fff9e4" stop-opacity=".14"/><stop offset=".4" stop-opacity="0"/><stop offset="1" stop-color="#846b44" stop-opacity=".06"/></linearGradient>${tint}</defs><path class="paper-fill" data-paper-shape/>${tint?`<path class="paper-tint-fill" data-paper-shape fill="url(#${id}-tint)"/>`:''}<path class="paper-texture" data-paper-shape fill="url(#${id})"/>${tile.matches('.todo-tile')?'<path class="paper-progress" data-paper-shape/>':''}<path class="paper-curl"/><path class="paper-crease"/><path class="paper-outline" data-paper-shape/>`;
    tile.classList.add('paper-tile');tile.prepend(svg);frames.set(tile,svg);draw(tile,svg);resize.observe(tile);
   });
  }

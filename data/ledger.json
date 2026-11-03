@@ -1,6 +1,26 @@
 {
   "bills": [
     {
+      "id": "gas:2026-08-01:2026-08-20",
+      "note": "Service dates confirmed by household; amount carried forward on the next statement.",
+      "actor": "michal",
+      "charges": [
+        {
+          "kind": "recurring",
+          "label": "Service and applicable taxes",
+          "amount_cents": 3098
+        }
+      ],
+      "deleted": false,
+      "utility": "gas",
+      "version": 1,
+      "end_date": "2026-08-20",
+      "created_at": "2026-10-18T21:04:31.352402+00:00",
+      "start_date": "2026-08-01",
+      "source_hash": "5170bd6ff5e267dac6293844237a7c1d169922a39e5b5da559c0798d37363231",
+      "opening_before": null
+    },
+    {
       "id": "electricity:2026-08-01:2026-08-20",
       "note": "Service dates confirmed by household; amount carried forward on the next statement.",
       "actor": "michal",
@@ -38,26 +58,6 @@
       "created_at": "2026-10-18T20:46:14.85054+00:00",
       "start_date": "2026-08-01",
       "source_hash": "a29665ea24f025165e9412b80af56ab139dbb6c68ac47b40093c7dd9d3232599",
-      "opening_before": null
-    },
-    {
-      "id": "gas:2026-08-01:2026-08-20",
-      "note": "Service dates confirmed by household; amount carried forward on the next statement.",
-      "actor": "michal",
-      "charges": [
-        {
-          "kind": "recurring",
-          "label": "Service and applicable taxes",
-          "amount_cents": 3098
-        }
-      ],
-      "deleted": false,
-      "utility": "gas",
-      "version": 1,
-      "end_date": "2026-08-20",
-      "created_at": "2026-10-18T21:04:31.352402+00:00",
-      "start_date": "2026-08-01",
-      "source_hash": "5170bd6ff5e267dac6293844237a7c1d169922a39e5b5da559c0798d37363231",
       "opening_before": null
     },
     {
@@ -121,6 +121,46 @@
       "opening_before": null
     },
     {
+      "id": "gas:2026-09-18:2026-10-21",
+      "note": "",
+      "actor": "michal",
+      "charges": [
+        {
+          "kind": "recurring",
+          "label": "Service and applicable taxes",
+          "amount_cents": 18019
+        }
+      ],
+      "deleted": false,
+      "utility": "gas",
+      "version": 1,
+      "end_date": "2026-10-21",
+      "created_at": "2026-11-03T20:29:54.849072+00:00",
+      "start_date": "2026-09-18",
+      "source_hash": "5ee42607af09635935e183fc1a32b1b5b431c4a28e16f52d9ec90002d5e34801",
+      "opening_before": null
+    },
+    {
+      "id": "electricity:2026-09-18:2026-10-21",
+      "note": "",
+      "actor": "michal",
+      "charges": [
+        {
+          "kind": "recurring",
+          "label": "Service and applicable taxes",
+          "amount_cents": 9558
+        }
+      ],
+      "deleted": false,
+      "utility": "electricity",
+      "version": 1,
+      "end_date": "2026-10-21",
+      "created_at": "2026-11-03T20:29:54.849072+00:00",
+      "start_date": "2026-09-18",
+      "source_hash": "9176a50f59c1dd2d45fef55a5c320da9027ac36a97350713a6838ea255582eb7",
+      "opening_before": null
+    },
+    {
       "id": "wifi:2026-10-01:2026-10-31",
       "note": "",
       "actor": "michal",
@@ -179,7 +219,7 @@
       "amount_cents": 12679
     }
   ],
-  "updated_at": "2026-11-02T23:26:47.855569+00:00",
+  "updated_at": "2026-11-03T22:25:57.464209+00:00",
   "allocations": [
     {
       "cents": 3352,
@@ -371,10 +411,115 @@
       "charge_index": 0
     },
     {
-      "cents": 1274,
+      "cents": 1476,
       "month": "2026-10",
       "member": "rohil",
-      "bill_id": "wifi:2026-10-01:2026-10-31",
+      "bill_id": "electricity:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 1476,
+      "month": "2026-10",
+      "member": "michal",
+      "bill_id": "electricity:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 1476,
+      "month": "2026-10",
+      "member": "rina",
+      "bill_id": "electricity:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 1476,
+      "month": "2026-10",
+      "member": "ohm",
+      "bill_id": "electricity:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 914,
+      "month": "2026-09",
+      "member": "rohil",
+      "bill_id": "electricity:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 914,
+      "month": "2026-09",
+      "member": "michal",
+      "bill_id": "electricity:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 913,
+      "month": "2026-09",
+      "member": "rina",
+      "bill_id": "electricity:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 913,
+      "month": "2026-09",
+      "member": "ohm",
+      "bill_id": "electricity:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 1723,
+      "month": "2026-09",
+      "member": "rina",
+      "bill_id": "gas:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 1723,
+      "month": "2026-09",
+      "member": "ohm",
+      "bill_id": "gas:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 1723,
+      "month": "2026-09",
+      "member": "rohil",
+      "bill_id": "gas:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 1722,
+      "month": "2026-09",
+      "member": "michal",
+      "bill_id": "gas:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 2782,
+      "month": "2026-10",
+      "member": "michal",
+      "bill_id": "gas:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 2782,
+      "month": "2026-10",
+      "member": "rina",
+      "bill_id": "gas:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 2782,
+      "month": "2026-10",
+      "member": "ohm",
+      "bill_id": "gas:2026-09-18:2026-10-21",
+      "charge_index": 0
+    },
+    {
+      "cents": 2782,
+      "month": "2026-10",
+      "member": "rohil",
+      "bill_id": "gas:2026-09-18:2026-10-21",
       "charge_index": 0
     },
     {
@@ -385,7 +530,7 @@
       "charge_index": 0
     },
     {
-      "cents": 1273,
+      "cents": 1274,
       "month": "2026-10",
       "member": "rina",
       "bill_id": "wifi:2026-10-01:2026-10-31",
@@ -397,10 +542,61 @@
       "member": "ohm",
       "bill_id": "wifi:2026-10-01:2026-10-31",
       "charge_index": 0
+    },
+    {
+      "cents": 1273,
+      "month": "2026-10",
+      "member": "rohil",
+      "bill_id": "wifi:2026-10-01:2026-10-31",
+      "charge_index": 0
     }
   ],
-  "exported_at": "2026-11-02T23:26:47.855569+00:00",
+  "exported_at": "2026-11-03T22:25:57.464209+00:00",
   "bill_history": [
+    {
+      "data": {
+        "id": "electricity:2026-09-18:2026-10-21",
+        "note": "",
+        "charges": [
+          {
+            "kind": "recurring",
+            "label": "Service and applicable taxes",
+            "amount_cents": 9558
+          }
+        ],
+        "utility": "electricity",
+        "end_date": "2026-10-21",
+        "start_date": "2026-09-18",
+        "source_hash": "9176a50f59c1dd2d45fef55a5c320da9027ac36a97350713a6838ea255582eb7",
+        "opening_before": null
+      },
+      "bill_id": "electricity:2026-09-18:2026-10-21",
+      "deleted": false,
+      "version": 1,
+      "created_at": "2026-11-03T20:29:54.849072+00:00"
+    },
+    {
+      "data": {
+        "id": "gas:2026-09-18:2026-10-21",
+        "note": "",
+        "charges": [
+          {
+            "kind": "recurring",
+            "label": "Service and applicable taxes",
+            "amount_cents": 18019
+          }
+        ],
+        "utility": "gas",
+        "end_date": "2026-10-21",
+        "start_date": "2026-09-18",
+        "source_hash": "5ee42607af09635935e183fc1a32b1b5b431c4a28e16f52d9ec90002d5e34801",
+        "opening_before": null
+      },
+      "bill_id": "gas:2026-09-18:2026-10-21",
+      "deleted": false,
+      "version": 1,
+      "created_at": "2026-11-03T20:29:54.849072+00:00"
+    },
     {
       "data": {
         "id": "opening-electricity",
@@ -491,28 +687,6 @@
     },
     {
       "data": {
-        "id": "wifi:2026-10-01:2026-10-31",
-        "note": "",
-        "charges": [
-          {
-            "kind": "recurring",
-            "label": "Service and applicable taxes",
-            "amount_cents": 5094
-          }
-        ],
-        "utility": "wifi",
-        "end_date": "2026-10-31",
-        "start_date": "2026-10-01",
-        "source_hash": "7a0e7b6fcd51fbe6ac08df5631524cb462fcc1797fed5880174b8891e67ce555",
-        "opening_before": null
-      },
-      "bill_id": "wifi:2026-10-01:2026-10-31",
-      "deleted": false,
-      "version": 1,
-      "created_at": "2026-10-18T20:46:14.85054+00:00"
-    },
-    {
-      "data": {
         "id": "electricity:2026-08-21:2026-09-17",
         "note": "",
         "charges": [
@@ -551,28 +725,6 @@
         "opening_before": "2026-08-21"
       },
       "bill_id": "opening-gas",
-      "deleted": false,
-      "version": 1,
-      "created_at": "2026-10-18T20:46:14.85054+00:00"
-    },
-    {
-      "data": {
-        "id": "opening-electricity",
-        "note": "Prior balance; exact service dates unavailable.",
-        "charges": [
-          {
-            "kind": "opening",
-            "label": "Pre-September opening charge",
-            "amount_cents": 10054
-          }
-        ],
-        "utility": "electricity",
-        "end_date": null,
-        "start_date": null,
-        "source_hash": "3193bb4e4c33f477c1240971ce8d1cb5577e06ac108a6af0edf3c6463313bde5",
-        "opening_before": "2026-08-21"
-      },
-      "bill_id": "opening-electricity",
       "deleted": false,
       "version": 1,
       "created_at": "2026-10-18T20:46:14.85054+00:00"
@@ -639,6 +791,50 @@
         "opening_before": null
       },
       "bill_id": "wifi:2026-09-01:2026-09-30",
+      "deleted": false,
+      "version": 1,
+      "created_at": "2026-10-18T20:46:14.85054+00:00"
+    },
+    {
+      "data": {
+        "id": "wifi:2026-10-01:2026-10-31",
+        "note": "",
+        "charges": [
+          {
+            "kind": "recurring",
+            "label": "Service and applicable taxes",
+            "amount_cents": 5094
+          }
+        ],
+        "utility": "wifi",
+        "end_date": "2026-10-31",
+        "start_date": "2026-10-01",
+        "source_hash": "7a0e7b6fcd51fbe6ac08df5631524cb462fcc1797fed5880174b8891e67ce555",
+        "opening_before": null
+      },
+      "bill_id": "wifi:2026-10-01:2026-10-31",
+      "deleted": false,
+      "version": 1,
+      "created_at": "2026-10-18T20:46:14.85054+00:00"
+    },
+    {
+      "data": {
+        "id": "opening-electricity",
+        "note": "Prior balance; exact service dates unavailable.",
+        "charges": [
+          {
+            "kind": "opening",
+            "label": "Pre-September opening charge",
+            "amount_cents": 10054
+          }
+        ],
+        "utility": "electricity",
+        "end_date": null,
+        "start_date": null,
+        "source_hash": "3193bb4e4c33f477c1240971ce8d1cb5577e06ac108a6af0edf3c6463313bde5",
+        "opening_before": "2026-08-21"
+      },
+      "bill_id": "opening-electricity",
       "deleted": false,
       "version": 1,
       "created_at": "2026-10-18T20:46:14.85054+00:00"

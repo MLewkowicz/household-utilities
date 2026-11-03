@@ -12,6 +12,7 @@ let ledger:EventsLedger|undefined,live=false,busy=false,loading=false,again=fals
 let brush:Mark='yes',mode:'poll'|'time'='poll';
 let view='agenda',past=false,month=today().slice(0,7),selectedDay=today(),editing:HouseholdEvent|undefined;
 let request:string=crypto.randomUUID(),eventId:string=crypto.randomUUID(),fingerprint='';
+let renderedDay=today();
 const retries=new Map<string,{fingerprint:string;request:string}>();
 const field=(id:string)=>$<HTMLInputElement>('#event-'+id);
 const dialog=()=>$<HTMLDialogElement>('#event-dialog');
@@ -22,7 +23,7 @@ const mine=(id:string)=>({...(ledger?.availability||[]).find(a=>a.id===id&&a.mem
 function pollCard(e:HouseholdEvent){
  const marks=ledger!.availability||[],host=identity===e.host,open=eventOpen(e),best=pollSummary(e,marks,MEMBERS).ranked.slice(0,3);
  const short=(day:string)=>new Date(day+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',timeZone:'UTC'});
- return `<article class="event-card event-polling" data-event-id="${e.id}"><div class="event-date">${eventIconSvg(e.icon_id)}<span>${short(e.window_start!)}</span><strong>?</strong><span>Poll</span></div><div class="event-body"><div class="event-kicker"><span>Finding a day</span><span>Hosted by ${name(e.host)}</span></div><h3>${esc(e.title)}</h3><p class="event-time">${date(e.window_start!)} – ${date(e.window_end!)}${e.time_hint?` · ${esc(e.time_hint)}`:''}</p>${place(e)}${availabilityGrid(e,marks,identity,brush,Boolean(identity)&&live&&open&&!busy)}${best.length?`<p class="avail-best">${[['Everyone can make',best.filter(d=>d.valid)],[best[0].valid?'Next best':'Best so far',best.filter(d=>!d.valid)]].filter(([,days])=>days.length).map(([label,days])=>`<strong>${label}:</strong> ${(days as typeof best).map(d=>`${date(d.day)}${d.valid?'':` (${d.yes.length+d.maybe.length} of ${MEMBERS.length})`}`).join(', ')}`).join(' · ')}</p>`:''}${host&&open&&live?`<div class="event-actions"><button class="button primary" data-event-action="lock" ${busy?'disabled':''}>Lock in a day</button></div>`:''}<details class="event-details"><summary>Details${host?' & hosting':''}</summary>${e.description?`<p>${esc(e.description)}</p>`:''}${host&&e.state!=='cancelled'?`<div class="event-actions"><button class="text-button" data-event-action="edit">Edit</button><button class="text-button" data-event-action="cancel">Cancel event</button></div>`:''}${entryMeta(latestRevision(ledger!.history,e.id))}</details></div></article>`;
+ return `<article class="event-card event-polling" data-event-id="${e.id}"><div class="event-date">${eventIconSvg(e.icon_id)}<span>${short(e.window_start!)}</span><strong>?</strong><span>Poll</span></div><div class="event-body"><div class="event-kicker"><span>Finding a day</span><span>Hosted by ${name(e.host)}</span></div><h3>${esc(e.title)}</h3><p class="event-time">${date(e.window_start!)} – ${date(e.window_end!)}${e.time_hint?` · ${esc(e.time_hint)}`:''}</p>${place(e)}${availabilityGrid(e,marks,identity,brush,Boolean(identity)&&live&&open,busy)}${best.length?`<p class="avail-best">${[['Everyone can make',best.filter(d=>d.valid)],[best[0].valid?'Next best':'Best so far',best.filter(d=>!d.valid)]].filter(([,days])=>days.length).map(([label,days])=>`<strong>${label}:</strong> ${(days as typeof best).map(d=>`${date(d.day)}${d.valid?'':` (${d.yes.length+d.maybe.length} of ${MEMBERS.length})`}`).join(', ')}`).join(' · ')}</p>`:''}${host&&open&&live?`<div class="event-actions"><button class="button primary" data-event-action="lock" ${busy?'disabled':''}>Lock in a day</button></div>`:''}<details class="event-details"><summary>Details${host?' & hosting':''}</summary>${e.description?`<p>${esc(e.description)}</p>`:''}${host&&e.state!=='cancelled'?`<div class="event-actions"><button class="text-button" data-event-action="edit">Edit</button><button class="text-button" data-event-action="cancel">Cancel event</button></div>`:''}${entryMeta(latestRevision(ledger!.history,e.id))}</details></div></article>`;
 }
 function card(e:HouseholdEvent){
  if(polling(e))return pollCard(e);
@@ -36,12 +37,16 @@ function calendar(){
  return `<div class="event-calendar-tools"><button class="icon-button" data-event-month="-1" aria-label="Previous month">←</button><h2>${new Date(first+'T12:00Z').toLocaleDateString('en-US',{month:'long',year:'numeric',timeZone:'UTC'})}</h2><button class="icon-button" data-event-month="1" aria-label="Next month">→</button></div><div class="event-calendar">${['M','T','W','T','F','S','S'].map((s,i)=>`<span aria-label="${['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'][i]}">${s}</span>`).join('')}${Array.from({length:42},(_,i)=>{const day=addDays(start,i),items=events.filter(e=>onEventDay(e,day));return `<button data-event-day="${day}" class="${day.startsWith(month)?'':'outside'} ${day===today()?'today':''}" aria-pressed="${selectedDay===day}" aria-label="${date(day,true)}, ${items.length} events"><span>${Number(day.slice(-2))}</span><span class="event-dots">${items.slice(0,4).map(e=>`<i class="${e.state}"></i>`).join('')}</span></button>`;}).join('')}</div><h3 class="event-day-title">${date(selectedDay,true)}</h3>`;
 }
 function render(){
+ renderedDay=today();
+ const focused=document.activeElement as HTMLElement|null,focusedEvent=focused?.closest<HTMLElement>('[data-event-id]')?.dataset.eventId;
+ const focusSelector=focusedEvent&&focused?.dataset.availDay?`[data-event-id="${CSS.escape(focusedEvent)}"] [data-avail-day="${focused.dataset.availDay}"]:not(:disabled)`:focusedEvent&&focused?.dataset.availBrush?`[data-event-id="${CSS.escape(focusedEvent)}"] [data-avail-brush="${focused.dataset.availBrush}"]`:null;
  $('#events-identity').innerHTML=identity?`<span>${avatar(identity)} You’re ${name(identity)}</span><button class="text-button" data-event-person="">Switch person</button>`:`<span>Choose your name</span>${MEMBERS.map(m=>`<button class="text-button" data-event-person="${m}">${avatar(m)}${name(m)}</button>`).join('')}`;
  $('#event-new').toggleAttribute('disabled',!live||!identity||busy);
  if(!ledger)return;
  let events=ledger.events.filter(e=>view==='calendar'?e.state!=='cancelled'&&!polling(e)&&onEventDay(e,selectedDay):past?!eventOpen(e):eventOpen(e));
  events=events.sort((a,b)=>(past?-1:1)*(eventSortKey(a)-eventSortKey(b)));
  $('#events-content').innerHTML=(view==='calendar'?calendar():'')+`<div class="event-grid">${events.map(card).join('')||'<p class="empty-state">No events.</p>'}</div>`;
+ if(focusSelector)document.querySelector<HTMLElement>(focusSelector)?.focus({preventScroll:true});
  document.querySelectorAll<HTMLElement>('[data-event-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.eventView===view)));
  $('#event-history-label').hidden=view==='calendar';
  if(location.hash==='#events')$('#export').removeAttribute('disabled');
@@ -100,17 +105,26 @@ function setMode(next:'poll'|'time',choosable=true){
  $('#event-poll-fields').hidden=mode!=='poll';$('#event-time-fields').hidden=mode!=='time';
  for(const id of ['day','time'])field(id).required=mode==='time';for(const id of ['window-start','window-end'])field(id).required=mode==='poll';
 }
-function openLock(e:HouseholdEvent){
- if(!live||busy||identity!==e.host)return;editing=e;request=crypto.randomUUID();fingerprint='';
- const {days,ranked}=pollSummary(e,ledger!.availability||[],MEMBERS),order=[...ranked,...days.filter(d=>!d.score)];
+function updateLockDays(e:HouseholdEvent){
+ const select=$<HTMLSelectElement>('#event-lock-day'),selected=select.value;
+ const {days,ranked}=pollSummary(e,ledger!.availability||[],MEMBERS),order=[...ranked,...days.filter(d=>!d.past&&!d.score)];
  $('#event-lock-day').innerHTML=order.map(d=>`<option value="${d.day}">${date(d.day)} · ${d.valid?'everyone':d.score?`${d.yes.length+d.maybe.length} of ${MEMBERS.length}`:'nobody marked'}</option>`).join('');
+ if(order.some(d=>d.day===selected))select.value=selected;
+ $('#event-lock-form button[type="submit"]').toggleAttribute('disabled',!order.length);
+ if(!order.length){$('#event-lock-error').textContent='All poll days have passed. Edit the event to choose a new date window.';$('#event-lock-error').hidden=false;}
+}
+function openLock(e:HouseholdEvent){
+ if(!live||busy||identity!==e.host||!eventOpen(e))return;editing=e;request=crypto.randomUUID();fingerprint='';
+ $('#event-lock-day').innerHTML='';$('#event-lock-error').hidden=true;updateLockDays(e);
  $('#event-lock-title').textContent=`Lock in ${e.title}`;const hint=(e.time_hint||'').toLowerCase();setWhen('event-lock',/morning|all day/.test(hint)?'10:00':/afternoon|lunch/.test(hint)?'14:00':'19:00',/all day/.test(hint)?480:120);$('#event-lock-error').hidden=true;$<HTMLDialogElement>('#event-lock-dialog').showModal();
 }
 async function mutate(fn:string,p:Record<string,unknown>,key:string){
  const serial=JSON.stringify(p),prior=retries.get(key),id=prior?.fingerprint===serial?prior.request:crypto.randomUUID();retries.set(key,{fingerprint:serial,request:id});
+ const focused=document.activeElement as HTMLElement|null,focusedEvent=focused?.closest<HTMLElement>('[data-event-id]')?.dataset.eventId;
+ const focusSelector=focusedEvent&&focused?.dataset.availDay?`[data-event-id="${CSS.escape(focusedEvent)}"] [data-avail-day="${focused.dataset.availDay}"]:not(:disabled)`:null;
  busy=true;render();
  try{await rpc(fn,{p:{...p,request_id:id}});retries.delete(key);}
- finally{busy=false;await refreshEvents();}
+ finally{busy=false;await refreshEvents();if(focusSelector&&document.activeElement===document.body)document.querySelector<HTMLElement>(focusSelector)?.focus({preventScroll:true});}
 }
 export function initEvents(){
  $('#events-page').innerHTML=`<section class="intro"><div><h1>Events</h1></div><div class="intro-side"><span id="events-status" class="status">Loading events</span><button id="event-new" class="button primary" disabled>＋ Add event</button></div></section><div id="events-notice" class="ledger-notice" role="status" hidden></div><div id="events-identity" class="identity-bar"></div><div class="event-toolbar"><nav class="chore-views" aria-label="Event views"><button data-event-view="agenda" aria-pressed="true">Agenda</button><button data-event-view="calendar" aria-pressed="false">Calendar</button></nav><label id="event-history-label" class="inline-check"><input id="event-history" type="checkbox"> Past & cancelled</label></div><div id="events-content"></div>`;
@@ -129,6 +143,7 @@ export function initEvents(){
  $('#event-lock-form').addEventListener('submit',async e=>{
   e.preventDefault();const event=editing;if(busy||!live||!identity||!event)return;
   const day=$<HTMLSelectElement>('#event-lock-day').value;
+  if(!day||day<today()){updateLockDays(event);updateWhen('event-lock');$('#event-lock-error').textContent='That day has passed. Choose a remaining day or edit the poll window.';$('#event-lock-error').hidden=false;return;}
   const p={id:event.id,actor:identity,action:'lock_in',expected_version:event.version,...eventSpan(day,field('lock-time').value,Number(field('lock-duration').value))};
   const serial=JSON.stringify(p);if(fingerprint&&serial!==fingerprint)request=crypto.randomUUID();fingerprint=serial;
   busy=true;try{await rpc('save_event',{p:{...p,request_id:request}});$<HTMLDialogElement>('#event-lock-dialog').close();toast(`${event.title} is on for ${date(day)}.`);}
@@ -136,7 +151,7 @@ export function initEvents(){
   finally{busy=false;await refreshEvents();}
  });
  bindAvailability($('#events-page'),{brush:()=>brush,mine:id=>mine(id),commit:(id,days)=>{
-  const e=ledger?.events.find(x=>x.id===id);if(!e||!identity||!live||busy)return;
+  const e=ledger?.events.find(x=>x.id===id);if(!e||!identity||!live||busy||!polling(e)||!eventOpen(e))return;
   const list=ledger!.availability||(ledger!.availability=[]),old=list.find(a=>a.id===id&&a.member===identity);
   // Show the new marks immediately; a failed save refreshes back to the server's.
   const optimistic={id,member:identity,version:old?.version||0,poll_version:e.poll_version!,days,created_at:new Date().toISOString()};
@@ -149,9 +164,10 @@ export function initEvents(){
  $('#events-identity').onclick=e=>{const b=(e.target as HTMLElement).closest<HTMLElement>('[data-event-person]');if(b&&!busy)setIdentity((b.dataset.eventPerson||null) as Member|null);};onIdentityChange(render);
  $('#event-history').onchange=()=>{past=$<HTMLInputElement>('#event-history').checked;render();};
  $('#events-page').addEventListener('click',async e=>{
- const b=(e.target as HTMLElement).closest<HTMLElement>('button');if(!b||busy)return;
+ const b=(e.target as HTMLElement).closest<HTMLElement>('button');if(!b)return;
+ if(b.dataset.availBrush){brush=b.dataset.availBrush as Mark;document.querySelectorAll<HTMLElement>('[data-avail-brush]').forEach(button=>button.setAttribute('aria-checked',String(button.dataset.availBrush===brush)));return;}
+ if(busy)return;
  if(b.dataset.eventView){view=b.dataset.eventView;render();return;}
- if(b.dataset.availBrush){brush=b.dataset.availBrush as Mark;render();document.querySelector<HTMLElement>(`[data-event-id="${b.closest<HTMLElement>('[data-event-id]')?.dataset.eventId}"] [data-avail-brush="${brush}"]`)?.focus();return;}
  if(b.dataset.eventMonth){const d=new Date(month+'-01T12:00Z');d.setUTCMonth(d.getUTCMonth()+Number(b.dataset.eventMonth));month=d.toISOString().slice(0,7);selectedDay=month+'-01';render();return;}
  if(b.dataset.eventDay){selectedDay=b.dataset.eventDay;render();return;}
  const id=b.closest<HTMLElement>('[data-event-id]')?.dataset.eventId,event=ledger?.events.find(x=>x.id===id);if(!event||!live||!identity)return;
@@ -170,5 +186,9 @@ export function initEvents(){
  busy=true;const inputs=Array.from(dialog().querySelectorAll<HTMLInputElement>('input,textarea,select,button'));inputs.forEach(i=>i.disabled=true);
  try{await rpc('save_event',{p:{...p,request_id:request}});dialog().close();toast(editing?'Event updated.':mode==='poll'?'Poll posted. Mark your days!':'Event added.');}catch(error){$('#event-form-error').textContent=(error as Error).message;$('#event-form-error').hidden=false;}
  finally{busy=false;inputs.forEach(i=>i.disabled=false);await refreshEvents();}
- });render();
+ });
+ // Refresh date eligibility even while a dialog is open or the network is offline.
+ const refreshDay=()=>{if(document.hidden||renderedDay===today())return;render();if($<HTMLDialogElement>('#event-lock-dialog').open&&editing){updateLockDays(editing);updateWhen('event-lock');}};
+ setInterval(refreshDay,30000);document.addEventListener('visibilitychange',refreshDay);window.addEventListener('focus',refreshDay);
+ render();
 }

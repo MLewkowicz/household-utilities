@@ -1,0 +1,8 @@
+import {esc,name} from './ui';
+type Revision={version:number;created_at:string;actor?:string;action?:string;title:string;group_name?:string|null;change_note?:string;assignee?:string|null;pinned?:boolean;completion?:{contributors:string[]}|null};
+export function showTaskHistory(title:string,history:Revision[]){
+ let dialog=document.querySelector<HTMLDialogElement>('#todo-history-dialog');
+ if(!dialog){dialog=document.createElement('dialog');dialog.id='todo-history-dialog';dialog.className='chore-dialog';dialog.setAttribute('aria-labelledby','todo-history-heading');document.body.append(dialog);}
+ dialog.innerHTML=`<div class="dialog-top"><h2 id="todo-history-heading" tabindex="-1">Task history</h2><button type="button" class="icon-button" aria-label="Close">×</button></div><p>${esc(title)}</p><ol class="todo-history">${[...history].sort((a,b)=>b.version-a.version).map(r=>`<li><strong>${esc(name(r.action||'Updated'))}${r.actor?' · '+esc(name(r.actor)):''}</strong><time datetime="${esc(r.created_at)}">${esc(new Date(r.created_at).toLocaleString('en-US',{timeZone:'America/New_York',dateStyle:'medium',timeStyle:'short'}))}</time><p>${esc(r.title)}${r.group_name?' · '+esc(r.group_name):''}${r.pinned?' · Pinned':''}${r.assignee?' · Assigned to '+esc(name(r.assignee)):''}</p>${r.completion?`<p>Completed by ${r.completion.contributors.map(p=>esc(name(p))).join(', ')}</p>`:''}${r.change_note?`<p>${esc(r.change_note)}</p>`:''}</li>`).join('')||'<li>No revisions available.</li>'}</ol>`;
+ dialog.querySelector('button')!.addEventListener('click',()=>dialog!.close());dialog.showModal();dialog.querySelector<HTMLElement>('h2')!.focus();
+}

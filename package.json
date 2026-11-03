@@ -9,6 +9,7 @@
     "dev": "npm run build && node scripts/serve.mjs",
     "test:browser": "playwright test",
     "preview:reactions": "node scripts/preview-reactions.mjs",
+    "preview:todos": "node scripts/preview-todos.mjs",
     "deploy": "node scripts/publish.mjs",
     "test:house": "playwright test -c playwright.house.config.ts",
     "measure:house": "node scripts/measure-house.mjs"
