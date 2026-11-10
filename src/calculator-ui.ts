@@ -7,7 +7,7 @@ const expression=()=>$<HTMLInputElement>('#calculator-expression');
 
 export function initCalculator() {
  document.body.insertAdjacentHTML('beforeend',`<dialog id="calculator-dialog" class="calculator-dialog" aria-labelledby="calculator-title"><form id="calculator-form">
-  <div class="dialog-top"><div class="eyebrow">A LITTLE LESS MATH</div><button type="button" id="calculator-close" class="icon-button" aria-label="Close calculator">×</button></div>
+  <div class="dialog-top"><div class="eyebrow">CALCULATOR</div><button type="button" id="calculator-close" class="icon-button" aria-label="Close calculator">×</button></div>
   <h2 id="calculator-title" tabindex="-1" autofocus>Calculator</h2>
   <div id="calculator-modes" class="segmented" role="group" aria-label="Calculation type"><button type="button" data-calc-mode="amount">Dollar amount</button><button type="button" data-calc-mode="share">Fraction / %</button></div>
   <label class="sr-only" for="calculator-expression">Calculation</label><input id="calculator-expression" inputmode="decimal" autocomplete="off" spellcheck="false" maxlength="120" aria-describedby="calculator-help">

@@ -101,7 +101,17 @@ export function createEnvironment(scene:T.Scene,camera:T.OrthographicCamera) {
   batch(stationary);
 
   // Sky is rendered with the same WebGL frame, without a bitmap or CSS overlay.
-  const skyMaterial=new T.ShaderMaterial({depthTest:false,depthWrite:false,toneMapped:false,uniforms:{top:{value:new T.Color('#bfd5d9')},bottom:{value:new T.Color('#f0dfbd')}},vertexShader:'varying vec2 vUv; void main(){vUv=uv;gl_Position=vec4(position.xy,1.0,1.0);}',fragmentShader:'uniform vec3 top;uniform vec3 bottom;varying vec2 vUv;void main(){gl_FragColor=vec4(mix(bottom,top,smoothstep(0.2,1.0,vUv.y)),1.0);\n#include <colorspace_fragment>\n}'});
+  const skyMaterial=new T.ShaderMaterial({depthTest:false,depthWrite:false,toneMapped:false,uniforms:{top:{value:new T.Color('#bfd5d9')},middle:{value:new T.Color('#d8e0d6')},bottom:{value:new T.Color('#f0dfbd')},twilight:{value:0},sunX:{value:.5},clock:{value:0}},vertexShader:'varying vec2 vUv; void main(){vUv=uv;gl_Position=vec4(position.xy,1.0,1.0);}',fragmentShader:`uniform vec3 top;uniform vec3 middle;uniform vec3 bottom;uniform float twilight;uniform float sunX;uniform float clock;varying vec2 vUv;
+   void main(){
+    vec3 sky=mix(bottom,middle,smoothstep(mix(0.15,0.62,twilight),mix(0.62,0.84,twilight),vUv.y));sky=mix(sky,top,smoothstep(mix(0.55,0.82,twilight),1.0,vUv.y));
+    float glow=exp(-8.0*length((vUv-vec2(sunX,mix(0.39,0.78,twilight)))*vec2(0.6,1.7)))*twilight;
+    sky=mix(sky,bottom,glow*0.7);
+    float ribbon=sin(vUv.y*83.0+sin(vUv.x*5.0+clock*0.012)*2.0);
+    float clouds=smoothstep(0.83,1.0,ribbon)*smoothstep(0.44,0.65,vUv.y)*(1.0-smoothstep(0.77,0.95,vUv.y));
+    sky=mix(sky,middle,clouds*twilight*0.25);
+    gl_FragColor=vec4(sky,1.0);
+    #include <colorspace_fragment>
+   }`});
   const sky=new T.Mesh(new T.PlaneGeometry(2,2),skyMaterial);sky.frustumCulled=false;sky.renderOrder=-100;root.add(sky);
   const skyDay=new T.Color('#bfd5d9'),horizonDay=new T.Color('#f0dfbd'),skyNight=new T.Color('#14243c'),horizonNight=new T.Color('#596479');
   const sunMaterial=new T.MeshBasicMaterial({color:'#ffe7a1',toneMapped:false});
@@ -129,23 +139,31 @@ export function createEnvironment(scene:T.Scene,camera:T.OrthographicCamera) {
   function screenPosition(object:T.Object3D,x:number,y:number,depth:number) {
     object.position.copy(camera.position).addScaledVector(forward,depth).addScaledVector(right,x*(camera.right-camera.left)/2).addScaledVector(up,y*(camera.top-camera.bottom)/2);
   }
-  const twilight=new T.Color('#e9ad83');
+  const sunset=[new T.Color('#291644'),new T.Color('#b63550'),new T.Color('#ff9b42')];
+  const sunrise=[new T.Color('#352354'),new T.Color('#789bd0'),new T.Color('#c1e4f4')];
+  const cloudTint=new T.Color();
   let lastSpan=0,lastWidth=0;
   function tick(time:number,night:number,cinema:number,still:boolean,hour?:number) {
     const shade=Math.max(night,cinema*.78),span=camera.top-camera.bottom,width=camera.right-camera.left,portrait=span>18;
     camera.getWorldDirection(forward);right.setFromMatrixColumn(camera.matrixWorld,0);up.setFromMatrixColumn(camera.matrixWorld,1);
     skyMaterial.uniforms.top.value.copy(skyDay).lerp(skyNight,shade);
     skyMaterial.uniforms.bottom.value.copy(horizonDay).lerp(horizonNight,shade);
+    skyMaterial.uniforms.middle.value.copy(skyMaterial.uniforms.bottom.value).lerp(skyMaterial.uniforms.top.value,.5);
     const dayProgress=hour===undefined?0:Math.max(0,Math.min(1,(hour-6)/13));
     const moonProgress=hour===undefined?0:((hour+5)%24)/11;
     const sunX=hour===undefined?-.73:T.MathUtils.lerp(-.82,.82,dayProgress);
     const moonX=hour===undefined?-.73:T.MathUtils.lerp(-.82,.82,Math.min(1,moonProgress));
     const sunHeight=(portrait?.47:.67)-(hour===undefined?0:(1-Math.sin(dayProgress*Math.PI))*.22);
     const moonHeight=(portrait?.47:.67)-(hour===undefined?0:(1-Math.sin(Math.min(1,moonProgress)*Math.PI))*.22);
-    if(hour!==undefined)skyMaterial.uniforms.bottom.value.lerp(twilight,Math.sin(night*Math.PI)*.55);
-    screenPosition(sun,sunX,sunHeight-T.MathUtils.smoothstep(night,0,.60)*1.1,skyDepth);
+    const transition=hour===undefined?0:Math.pow(Math.sin(night*Math.PI),.65)*(1-cinema),palette=hour!==undefined&&hour<12?sunrise:sunset;
+    for(const [i,key] of ['top','middle','bottom'].entries())skyMaterial.uniforms[key].value.lerp(palette[i],transition);
+    skyMaterial.uniforms.twilight.value=transition;skyMaterial.uniforms.sunX.value=(sunX+1)/2;skyMaterial.uniforms.clock.value=still?0:time;
+    sunMaterial.color.set('#ffe7a1').lerp(palette[2],transition);sun.scale.setScalar(1+transition*.35);
+    cloudTint.set('#e4e3d4').lerp(palette[1],transition*.65);
+    for(const cloud of clouds)cloud.traverse(object=>{if(object instanceof T.Mesh){const materials=Array.isArray(object.material)?object.material:[object.material];for(const material of materials)if('color' in material)(material as T.MeshLambertMaterial).color.copy(cloudTint);}});
+    screenPosition(sun,sunX,sunHeight-T.MathUtils.smoothstep(night,hour===undefined?0:.55,hour===undefined?.60:1)*1.1,skyDepth);
     screenPosition(moon,moonX,moonHeight-(1-T.MathUtils.smoothstep(night,.40,1))*1.1,skyDepth);moon.quaternion.copy(camera.quaternion);
-    sun.visible=night<.60;moon.visible=night>.40;
+    sun.visible=night<(hour===undefined?.60:.94);moon.visible=night>.40;
     starsMaterial.opacity=T.MathUtils.smoothstep(shade,.35,1)*.78;stars.visible=starsMaterial.opacity>0;
     if(lastSpan!==span||lastWidth!==width){
       for(let i=0;i<54;i++){

@@ -70,6 +70,7 @@ export function mountHouseEntry(onNavigate:(section:Section)=>void,onEnter:(sect
   observer.observe(container);
   Object.assign(window,{__houseDiagnostics:()=>({selected,loaded:!!player,featureOnly:hero.hidden,...player?.diagnostics()})});
   return {
+    setSkyLift(amount:number){player?.setSkyLift(amount);},
     returnToScene() {
       if(!hero.hidden||returning)return;
       // Reinsert the scene above the same content position before scrolling.
@@ -89,7 +90,7 @@ export function mountHouseEntry(onNavigate:(section:Section)=>void,onEnter:(sect
       featureMode(featureOnly);
       if(!fromHouse&&!featureOnly&&inView&&player){player.jumpTo(sceneFor(section));syncPending=false;}
       const current=document.querySelector<HTMLElement>('#house-current');
-      if(current)current.textContent=HOUSE_SECTIONS.find(item=>item.route===section)!.label;
+      if(current)current.textContent=section==='games'?'Games':HOUSE_SECTIONS.find(item=>item.route===section)!.label;
     },
     destroy(){clearTimeout(returnIdle);window.removeEventListener('scroll',onScroll);document.removeEventListener('visibilitychange',skyVisibility);observer.disconnect();dialogs.disconnect();player?.destroy();},
   };

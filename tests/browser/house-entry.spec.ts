@@ -1,7 +1,7 @@
 import {setTheme,openNotifications} from './settings';
 import {test,expect,type Page} from '@playwright/test';
-import {readdirSync,statSync} from 'node:fs';
-const houseChunk=readdirSync('dist').filter(file=>file.endsWith('.js')).sort((a,b)=>statSync('dist/'+b).size-statSync('dist/'+a).size)[0];
+import {readdirSync,readFileSync} from 'node:fs';
+const houseChunk=readdirSync('dist').find(file=>file.endsWith('.js')&&readFileSync('dist/'+file,'utf8').includes('house-landscape-3d'))!;
 const diag=(page:Page)=>page.evaluate(()=>(window as any).__houseDiagnostics());
 const ready=(page:Page)=>expect(page.locator('#house-stage')).toHaveAttribute('data-ready','true',{timeout:20000});
 const sections=['home','chores','miscellaneous','events','bulletin','utilities'];
@@ -41,7 +41,7 @@ test('Home is a full-viewport house and floating shortcuts, with no gallery chro
  expect((await page.locator('#house-hero').boundingBox())!.height).toBe(900);
  const navigation=(await page.locator('.house-navigation').boundingBox())!;
  expect(navigation.y).toBeLessThan(40);expect(navigation.width).toBeGreaterThan(700);expect(navigation.height).toBe(120);
- await expect(page.locator('#house-hero h1,#house-hero h2,#house-hero button:not(#updates-board-button),.scene-description,.scene-toolbar')).toHaveCount(0);
+ await expect(page.locator('#house-hero h1,#house-hero h2,#house-hero button:not(#updates-board-button):not(#sky-games-launch),.scene-description,.scene-toolbar')).toHaveCount(0);
  // The What’s new shortcut is for keyboards only and stays invisible until focused.
  expect(await page.locator('#updates-board-button').evaluate(button=>getComputedStyle(button).opacity)).toBe('0');
  expect(await page.evaluate(()=>scrollY)).toBe(0);
@@ -215,7 +215,7 @@ test('day and night interpolate through landscape lighting and reverse without c
 });
 
 test('night dims the roof and facade while preserving room, portrait and theater lighting',async({page})=>{
- await page.emulateMedia({colorScheme:'light',reducedMotion:'reduce'});await page.goto('/');await ready(page);
+ await page.emulateMedia({colorScheme:'light',reducedMotion:'reduce'});await page.addInitScript(()=>localStorage.setItem('household-theme','light'));await page.goto('/');await ready(page);
  // Compare actual rendered pixels with animation paused and clear of the sky.
  const roof={x:550,y:250,width:240,height:70},facade={x:550,y:400,width:220,height:120};
  const dayRoof=await page.screenshot({clip:roof}),dayFacade=await page.screenshot({clip:facade});

@@ -10,7 +10,14 @@ ROOT = Path(__file__).resolve().parent.parent
 violations = []
 avatar_manifest = json.loads((ROOT / 'public/avatars/v1/manifest.json').read_text())
 approved_avatars = {f'avatars/v1/{name}': info for name, info in avatar_manifest['files'].items()}
+globe_manifest = json.loads((ROOT / 'public/globe/manifest.json').read_text())
+approved_globe = {f'globe/{name}': info for name, info in globe_manifest['files'].items()}
 for p in (ROOT / "dist").rglob("*"):
+    if p.is_file() and p.relative_to(ROOT / 'dist').as_posix() in approved_globe:
+        info = approved_globe[p.relative_to(ROOT / 'dist').as_posix()]
+        if hashlib.sha256(p.read_bytes()).hexdigest() != info['sha256']:
+            violations.append(f"Globe checksum mismatch: {p.relative_to(ROOT)}")
+        continue
     if p.is_file() and p.relative_to(ROOT / 'dist').as_posix() in approved_avatars:
         info = approved_avatars[p.relative_to(ROOT / 'dist').as_posix()]
         if hashlib.sha256(p.read_bytes()).hexdigest() != info['sha256']:

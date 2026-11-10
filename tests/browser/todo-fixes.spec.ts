@@ -25,7 +25,7 @@ test('the existing routine form offers as-needed turns without date fields',asyn
 });
 test('time-of-day colors follow New York while explicit light and dark still override',async({page})=>{
  await page.clock.setFixedTime(new Date('2026-11-02T23:00:00Z'));await page.goto('/?webgl=0#chores');await openSettings(page);await page.locator('#theme-select').selectOption('daylight');
- await expect(page.locator('html')).toHaveAttribute('data-house-night','0.5');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+ await expect(page.locator('html')).toHaveAttribute('data-house-night','0.5');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');await expect(page.locator('html')).toHaveAttribute('data-day-phase','dusk');
  const dusk=await page.locator('html').evaluate(el=>getComputedStyle(el).backgroundColor);await page.locator('#settings-close').click();
  await page.clock.setFixedTime(new Date('2026-11-03T05:00:00Z'));await page.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));await expect(page.locator('html')).toHaveAttribute('data-house-night','1');expect(await page.locator('html').evaluate(el=>getComputedStyle(el).backgroundColor)).not.toBe(dusk);
  await openSettings(page);await page.locator('#theme-select').selectOption('light');await expect(page.locator('html')).toHaveAttribute('data-house-night','0');await expect(page.locator('html')).toHaveAttribute('data-theme','light');

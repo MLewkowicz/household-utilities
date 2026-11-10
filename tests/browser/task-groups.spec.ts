@@ -37,7 +37,8 @@ test('touch scroll remains native before a hold; held touch drag persists withou
  const touch=async(type:string,x:number,y:number)=>session.send('Input.dispatchTouchEvent',{type,touchPoints:type==='touchEnd'?[]:[{x,y}]});
  await entry(phone,b.id).locator('h3').scrollIntoViewIfNeeded();let r=(await entry(phone,b.id).locator('h3').boundingBox())!;const scroll=await phone.evaluate(()=>scrollY);
  await touch('touchStart',r.x+15,r.y+10);await touch('touchMove',r.x+15,r.y-70);await touch('touchEnd',0,0);await expect(phone.locator('.task-drag-preview')).toHaveCount(0);await expect.poll(()=>phone.evaluate(()=>scrollY)).toBeGreaterThan(scroll);
- await phone.evaluate(()=>scrollTo(0,0));await entry(phone,a.id).locator('.todo-face').scrollIntoViewIfNeeded();r=(await entry(phone,a.id).locator('.todo-face').boundingBox())!;const target=(await entry(phone,b.id).boundingBox())!;
+ // Let the preceding native fling finish before measuring a new touch target.
+ await phone.waitForTimeout(500);await phone.evaluate(()=>scrollTo(0,0));await entry(phone,a.id).locator('.todo-face').scrollIntoViewIfNeeded();r=(await entry(phone,a.id).locator('.todo-face').boundingBox())!;const target=(await entry(phone,b.id).boundingBox())!;
  await touch('touchStart',r.x+r.width/2,r.y+r.height/2);await expect(phone.locator('.task-drag-preview')).toBeVisible();await touch('touchMove',target.x+target.width/2,target.y+35);await expect(phone.locator('[data-task-group="Touch group"] [data-home-key]').first()).toHaveAttribute('data-home-key','personal:'+a.id);await touch('touchEnd',0,0);
  await expect.poll(async()=>{const d=await rpc(phone,'home_order',{member:'ohm'});return d.keys.indexOf('personal:'+a.id)<d.keys.indexOf('personal:'+b.id);}).toBeTruthy();const tasks=(await rpc(phone,'personal_tasks',{member:'ohm'})).tasks;expect(tasks.find((t:any)=>t.id===a.id).completed_at).toBeNull();
  // The completion handle retains its own gesture even when held before sliding.

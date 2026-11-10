@@ -7,9 +7,13 @@ export const POINT_PRESETS=[
  {id:'bins-out',title:'Take out bins',points:0.5,icon:'bins'},
  {id:'dishwasher-start',title:'Start dishwasher',points:0.25,icon:'dishes'},
  {id:'dishwasher-empty',title:'Empty dishwasher',points:1,icon:'dishes'},
- {id:'sweep-kitchen',title:'Sweep kitchen',points:2,icon:'sweep'},
- {id:'sweep-living-room',title:'Sweep living room',points:2,icon:'sweep'},
+ {id:'sweep-kitchen',title:'Sweep kitchen',points:1,icon:'sweep'},
+ {id:'sweep-living-room',title:'Sweep living room',points:1,icon:'sweep'},
  {id:'sweep-corridor',title:'Sweep corridor',points:1,icon:'sweep'},
+ {id:'sweep-kitchen-living-room',title:'Sweep kitchen + living room',points:2,icon:'sweep'},
+ {id:'sweep-kitchen-corridor',title:'Sweep kitchen + corridor',points:2,icon:'sweep'},
+ {id:'sweep-living-room-corridor',title:'Sweep living room + corridor',points:2,icon:'sweep'},
+ {id:'sweep-kitchen-living-room-corridor',title:'Sweep kitchen + living room + corridor',points:3,icon:'sweep'},
  {id:'bananas',title:'Collect bananas',points:1,icon:'bananas'},
  {id:'shared-groceries',title:'Pick up shared groceries',points:2,icon:'groceries'},
  {id:'furniture-pickup',title:'Pick up furniture',points:3,icon:'furniture'},
@@ -17,3 +21,7 @@ export const POINT_PRESETS=[
 ] as const;
 export const pointPreset=(id?:string|null)=>POINT_PRESETS.find(p=>p.id===id);
 export const presetOptions=(selected?:string|null)=>`<option value="">Custom effort</option>${POINT_PRESETS.map(p=>`<option value="${p.id}" ${p.id===selected?'selected':''}>${p.title} · ${p.points} pt${p.points===1?'':'s'}</option>`).join('')}`;
+
+export const SWEEP_SPACES=[{id:'kitchen',label:'Kitchen'},{id:'living-room',label:'Living room'},{id:'corridor',label:'Corridor'}] as const;
+export const sweepPreset=(spaces:string[])=>pointPreset('sweep-'+SWEEP_SPACES.filter(s=>spaces.includes(s.id)).map(s=>s.id).join('-'));
+export const presetSpaces=(id:string)=>id.startsWith('sweep-')?SWEEP_SPACES.filter(s=>id.includes(s.id)).map(s=>s.id):[];

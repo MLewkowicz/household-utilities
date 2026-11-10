@@ -7,12 +7,12 @@ export const HOUSE_SECTIONS = [
   {route:'bulletin',scene:'bulletin',label:'Bulletin'},
   {route:'utilities',scene:'utilities',label:'Utilities'},
 ] as const;
-export type Section = typeof HOUSE_SECTIONS[number]['route'];
+export type Section = typeof HOUSE_SECTIONS[number]['route']|'games';
 export type Feature = Exclude<Section,'home'>;
 export type Scene = typeof HOUSE_SECTIONS[number]['scene'];
-export const sceneFor = (route:Section) => HOUSE_SECTIONS.find(s=>s.route===route)!.scene;
+export const sceneFor = (route:Section) => route==='games'?'home':HOUSE_SECTIONS.find(s=>s.route===route)!.scene;
 export const routeFor = (scene:Scene) => HOUSE_SECTIONS.find(s=>s.scene===scene)!.route;
 export function sectionFromHash(hash:string):Section {
   const key=hash.replace(/^#/,'').split('/')[0];
-  return HOUSE_SECTIONS.find(s=>s.route===key)?.route ?? 'home';
+  return key==='games'?'games':HOUSE_SECTIONS.find(s=>s.route===key)?.route ?? 'home';
 }

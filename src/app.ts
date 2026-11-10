@@ -8,6 +8,7 @@ import type {Member} from './ledger';
 import {mountHouseEntry} from './house-entry';
 import {sectionFromHash,type Section,type Feature} from './house-navigation';
 import {bindSectionScroll} from './section-scroll';
+import {mountSkyPortal} from './sky-portal';
 
 type Route=Feature;
 type Page={refresh:()=>Promise<void>;export:()=>void;focus?:(id:string)=>boolean};
@@ -19,6 +20,7 @@ function load(route:Route):Promise<Page>{
    if(route==='utilities'){const m=await import('./client');return{refresh:m.refreshUtilities,export:m.exportUtilities,focus:m.focusUtilityNotification};}
    if(route==='miscellaneous'){const m=await import('./misc-client');m.initMisc();return{refresh:m.refreshMisc,export:m.exportMisc};}
    if(route==='chores'){const m=await import('./chores-client');m.initChores();return{refresh:m.refreshChores,export:m.exportChores,focus:m.focusChoreNotification};}
+   if(route==='games'){const m=await import('./games-client');await m.initGames();return{refresh:m.refreshGames,export:m.exportGames};}
    if(route==='events'){const m=await import('./events-client');m.initEvents();return{refresh:m.refreshEvents,export:m.exportEvents,focus:m.focusEventNotification};}
    const m=await import('./bulletin-client');m.initBulletin();return{refresh:m.refreshBulletin,export:m.exportBulletin,focus:m.focusBulletinNotification};
   })().catch(error=>{pages.delete(route);throw error;});
@@ -29,8 +31,9 @@ function load(route:Route):Promise<Page>{
 initSettings();initNotifications();initAvatarFallback();initPaperTiles();
 let active:Section='home',routeVersion=0,routedHash='';
 const house=mountHouseEntry(section=>navigate(section,'house'),section=>{if(active==='home')navigate(section,'entry');});
-const PAGE_IDS:Record<Route,string>={utilities:'utilities-page',miscellaneous:'misc-page',chores:'chores-page',bulletin:'bulletin-page',events:'events-page'};
-bindSectionScroll(()=>({section:active,featureOnly:Boolean($('#house-hero').hidden),ready:$('#main').getAttribute('aria-busy')!=='true'}),()=>house.returnToScene());
+const PAGE_IDS:Record<Route,string>={utilities:'utilities-page',miscellaneous:'misc-page',chores:'chores-page',bulletin:'bulletin-page',events:'events-page',games:'games-page'};
+const sky=mountSkyPortal(()=>({section:active,homeVisible:!$('#house-hero').hidden,ready:$('#main').getAttribute('aria-busy')!=='true'}),async()=>{await load('games');},()=>{navigate('games','sky');void import('./games-client').then(m=>m.enterGames());},amount=>house.setSkyLift(amount));
+bindSectionScroll(()=>({section:active,featureOnly:Boolean($('#house-hero').hidden),ready:$('#main').getAttribute('aria-busy')!=='true'}),()=>{if(active!=='games')house.returnToScene();});
 const refreshing=new Map<Route,Promise<Page>>();
 // Reuse recently loaded content when entering from its house scene.
 const freshAt=new Map<Route,number>();
@@ -71,19 +74,21 @@ const previewObserver=new IntersectionObserver(entries=>{
  void refreshPage('chores').catch(()=>{/* Entering the section uses the normal retry UI. */}).finally(()=>{previewPending=false;});
 },{threshold:.01});
 previewObserver.observe($('#feature-area'));
-type NavigationSource='initial'|'house'|'shortcut'|'history'|'entry';
+type NavigationSource='initial'|'house'|'shortcut'|'history'|'entry'|'sky';
 function route(source:NavigationSource='history'){
+ if(source!=='sky'&&sky.running)sky.cancel();
  // Preserve the old task deep links; the bare Home route is now the exterior.
  if(/^#home\/(personal|assigned)$/.test(location.hash)||location.hash==='#home'&&new URL(location.href).searchParams.has('notice'))history.replaceState(history.state,'',location.href.replace(/#home/, '#chores'));
  routedHash=location.hash;active=sectionFromHash(location.hash);routeVersion++;
+ document.body.classList.toggle('is-in-orbit',active==='games');
  $('#feature-area').hidden=false;
  const content=active==='home'?'chores':active;
  for(const [key,id] of Object.entries(PAGE_IDS)){const page=$('#'+id);page.hidden=key!==content;}
  document.querySelectorAll<HTMLAnchorElement>('[data-ledger]').forEach(link=>{if(link.dataset.ledger===active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
- const label=active==='home'?'Home':active==='utilities'?'Utilities':active==='chores'?'To-dos':active==='events'?'Events':active==='bulletin'?'Bulletin':'Expenses';
+ const label=active==='home'?'Home':active==='utilities'?'Utilities':active==='chores'?'To-dos':active==='events'?'Events':active==='games'?'Games':active==='bulletin'?'Bulletin':'Expenses';
  document.title=`Household · ${label}`;
- const showHouse=active==='home'||source==='house'||source==='history'&&history.state?.houseView===true;
- house.select(active,source==='house',!showHouse);
+ const showHouse=active!=='games'&&(active==='home'||source==='house'||source==='history'&&history.state?.houseView===true);
+ house.select(active,source==='house',!showHouse);sky.sync();
  $('#export').setAttribute('disabled','');$('#main').setAttribute('aria-busy',active==='home'?'false':'true');
  // Direct navigation opens the feature; a history entry can restore its scene.
  if(active==='home'){
@@ -95,12 +100,12 @@ function route(source:NavigationSource='history'){
   requestAnimationFrame(()=>{if(routeVersion===landingVersion&&active==='home')window.scrollTo({top:0,behavior:'instant'});});
  }
  else if(showHouse)window.scrollTo({top:0,behavior:'instant'});
- else if(source==='shortcut'||source==='initial'||source==='history')$('#feature-area').scrollIntoView({block:'start',behavior:'instant'});
+ else if(source==='shortcut'||source==='initial'||source==='history'||source==='sky')$('#feature-area').scrollIntoView({block:'start',behavior:'instant'});
  // Shortcuts rise the new page in briefly instead of cutting.
  if(source==='shortcut'&&active!=='home'){const main=$('#main');main.classList.remove('is-entering');void main.offsetWidth;main.classList.add('is-entering');}
  void refresh(source==='entry'?20000:0);
 }
-function navigate(section:Section,source:'house'|'shortcut'|'entry'){
+function navigate(section:Section,source:'house'|'shortcut'|'entry'|'sky'){
  const hash='#'+section;
  if(location.hash!==hash)history.pushState({houseView:source==='house'},'',hash);
  route(source);

@@ -183,6 +183,18 @@
   ],
   "history": [
     {
+      "actor": "rina",
+      "other": "",
+      "method": "venmo",
+      "deleted": false,
+      "paid_on": "2026-11-03",
+      "version": 1,
+      "member_id": "rina",
+      "created_at": "2026-11-04T03:56:58.638801+00:00",
+      "payment_id": "5b8991ce-f46d-4d37-a4c4-d237b5f6f905",
+      "amount_cents": 6893
+    },
+    {
       "actor": "ohm",
       "other": "",
       "method": "zelle",
@@ -219,7 +231,7 @@
       "amount_cents": 12679
     }
   ],
-  "updated_at": "2026-11-03T22:25:57.464209+00:00",
+  "updated_at": "2026-11-10T01:37:14.304515+00:00",
   "allocations": [
     {
       "cents": 3352,
@@ -551,7 +563,7 @@
       "charge_index": 0
     }
   ],
-  "exported_at": "2026-11-03T22:25:57.464209+00:00",
+  "exported_at": "2026-11-10T01:37:14.304515+00:00",
   "bill_history": [
     {
       "data": {

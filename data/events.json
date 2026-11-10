@@ -37,11 +37,11 @@
     {
       "id": "c8fe2d09-babd-45e1-ab76-ea41a5a048d7",
       "host": "michal",
-      "state": "proposed",
+      "state": "confirmed",
       "title": "You Can See Everything",
       "ends_at": "2026-11-11T05:30:00+00:00",
       "icon_id": "movie",
-      "version": 4,
+      "version": 5,
       "location": "Movie theater",
       "starts_at": "2026-11-11T02:00:00+00:00",
       "time_hint": "",
@@ -50,9 +50,58 @@
       "poll_version": null,
       "window_start": null,
       "interval_version": 2
+    },
+    {
+      "id": "e1d1db7d-85c8-4873-be41-1fe3d58cfe98",
+      "host": "rina",
+      "state": "proposed",
+      "title": "Potluck with Jocelyn and co",
+      "ends_at": "2026-11-15T19:00:00+00:00",
+      "icon_id": "restaurant",
+      "version": 1,
+      "location": "",
+      "starts_at": "2026-11-15T17:00:00+00:00",
+      "time_hint": "",
+      "window_end": null,
+      "description": "",
+      "poll_version": null,
+      "window_start": null,
+      "interval_version": 1
     }
   ],
   "history": [
+    {
+      "id": "e1d1db7d-85c8-4873-be41-1fe3d58cfe98",
+      "host": "rina",
+      "actor": "rina",
+      "state": "proposed",
+      "title": "Potluck with Jocelyn and co",
+      "action": "create",
+      "ends_at": "2026-11-15T19:00:00+00:00",
+      "icon_id": "restaurant",
+      "version": 1,
+      "location": "",
+      "starts_at": "2026-11-15T17:00:00+00:00",
+      "created_at": "2026-11-07T22:41:12.184686+00:00",
+      "description": "",
+      "interval_version": 1
+    },
+    {
+      "id": "c8fe2d09-babd-45e1-ab76-ea41a5a048d7",
+      "host": "michal",
+      "actor": "michal",
+      "state": "confirmed",
+      "title": "You Can See Everything",
+      "action": "confirm",
+      "ends_at": "2026-11-11T05:30:00+00:00",
+      "icon_id": "movie",
+      "version": 5,
+      "location": "Movie theater",
+      "starts_at": "2026-11-11T02:00:00+00:00",
+      "created_at": "2026-11-05T14:35:37.499835+00:00",
+      "description": "",
+      "interval_version": 2
+    },
     {
       "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
       "host": "rina",
@@ -206,9 +255,9 @@
     {
       "id": "c8fe2d09-babd-45e1-ab76-ea41a5a048d7",
       "member": "michal",
-      "version": 2,
+      "version": 4,
       "response": "yes",
-      "created_at": "2026-10-28T03:19:42.500951+00:00",
+      "created_at": "2026-11-05T14:35:45.734036+00:00",
       "interval_version": 2
     },
     {
@@ -222,34 +271,132 @@
     {
       "id": "c8fe2d09-babd-45e1-ab76-ea41a5a048d7",
       "member": "rina",
-      "version": 1,
-      "response": "no",
-      "created_at": "2026-10-23T02:05:56.190986+00:00",
-      "interval_version": 1
+      "version": 2,
+      "response": "yes",
+      "created_at": "2026-11-05T03:01:23.792186+00:00",
+      "interval_version": 2
     },
     {
       "id": "c8fe2d09-babd-45e1-ab76-ea41a5a048d7",
       "member": "rohil",
+      "version": 2,
+      "response": "yes",
+      "created_at": "2026-11-05T02:28:24.781304+00:00",
+      "interval_version": 2
+    },
+    {
+      "id": "e1d1db7d-85c8-4873-be41-1fe3d58cfe98",
+      "member": "michal",
       "version": 1,
       "response": "yes",
-      "created_at": "2026-10-25T16:38:53.184093+00:00",
+      "created_at": "2026-11-09T22:47:07.167776+00:00",
+      "interval_version": 1
+    },
+    {
+      "id": "e1d1db7d-85c8-4873-be41-1fe3d58cfe98",
+      "member": "rina",
+      "version": 1,
+      "response": "yes",
+      "created_at": "2026-11-07T22:41:18.666396+00:00",
       "interval_version": 1
     }
   ],
-  "updated_at": "2026-11-03T22:25:59.305224+00:00",
-  "exported_at": "2026-11-03T22:25:59.305224+00:00",
+  "updated_at": "2026-11-10T01:37:16.206372+00:00",
+  "exported_at": "2026-11-10T01:37:16.206372+00:00",
   "availability": [
     {
       "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
-      "days": {},
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
       "member": "michal",
-      "version": 44,
-      "created_at": "2026-11-03T22:11:47.255616+00:00",
+      "version": 96,
+      "created_at": "2026-11-07T23:37:55.155923+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-14": "yes"
+      },
+      "member": "rina",
+      "version": 7,
+      "created_at": "2026-11-05T03:04:13.373953+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "maybe",
+        "2026-11-07": "yes",
+        "2026-11-14": "yes"
+      },
+      "member": "rohil",
+      "version": 8,
+      "created_at": "2026-11-05T02:31:30.643794+00:00",
       "poll_version": 1
     }
   ],
   "format_version": 3,
   "response_history": [
+    {
+      "id": "e1d1db7d-85c8-4873-be41-1fe3d58cfe98",
+      "member": "michal",
+      "version": 1,
+      "response": "yes",
+      "created_at": "2026-11-09T22:47:07.167776+00:00",
+      "interval_version": 1
+    },
+    {
+      "id": "e1d1db7d-85c8-4873-be41-1fe3d58cfe98",
+      "member": "rina",
+      "version": 1,
+      "response": "yes",
+      "created_at": "2026-11-07T22:41:18.666396+00:00",
+      "interval_version": 1
+    },
+    {
+      "id": "c8fe2d09-babd-45e1-ab76-ea41a5a048d7",
+      "member": "michal",
+      "version": 4,
+      "response": "yes",
+      "created_at": "2026-11-05T14:35:45.734036+00:00",
+      "interval_version": 2
+    },
+    {
+      "id": "c8fe2d09-babd-45e1-ab76-ea41a5a048d7",
+      "member": "michal",
+      "version": 3,
+      "response": null,
+      "created_at": "2026-11-05T14:35:43.583068+00:00",
+      "interval_version": 2
+    },
+    {
+      "id": "c8fe2d09-babd-45e1-ab76-ea41a5a048d7",
+      "member": "rina",
+      "version": 2,
+      "response": "yes",
+      "created_at": "2026-11-05T03:01:23.792186+00:00",
+      "interval_version": 2
+    },
+    {
+      "id": "c8fe2d09-babd-45e1-ab76-ea41a5a048d7",
+      "member": "rohil",
+      "version": 2,
+      "response": "yes",
+      "created_at": "2026-11-05T02:28:24.781304+00:00",
+      "interval_version": 2
+    },
     {
       "id": "c8fe2d09-babd-45e1-ab76-ea41a5a048d7",
       "member": "ohm",
@@ -332,6 +479,977 @@
     }
   ],
   "availability_history": [
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 96,
+      "created_at": "2026-11-07T23:37:55.155923+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 95,
+      "created_at": "2026-11-07T23:37:54.16361+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 94,
+      "created_at": "2026-11-07T23:37:52.282353+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 93,
+      "created_at": "2026-11-05T14:35:30.844345+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes"
+      },
+      "member": "michal",
+      "version": 92,
+      "created_at": "2026-11-05T14:35:29.846878+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 91,
+      "created_at": "2026-11-05T14:35:27.896725+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes"
+      },
+      "member": "michal",
+      "version": 90,
+      "created_at": "2026-11-05T14:35:21.612182+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 89,
+      "created_at": "2026-11-05T14:35:20.219778+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-12": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 88,
+      "created_at": "2026-11-05T14:35:19.255484+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-11": "yes",
+        "2026-11-12": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 87,
+      "created_at": "2026-11-05T14:35:18.536395+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-11": "yes",
+        "2026-11-12": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-16": "yes",
+        "2026-11-17": "yes",
+        "2026-11-18": "yes",
+        "2026-11-19": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 86,
+      "created_at": "2026-11-05T14:35:17.437111+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-11": "yes",
+        "2026-11-12": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-16": "yes",
+        "2026-11-17": "yes",
+        "2026-11-18": "yes",
+        "2026-11-19": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes",
+        "2026-11-23": "yes"
+      },
+      "member": "michal",
+      "version": 85,
+      "created_at": "2026-11-05T14:35:15.98819+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 84,
+      "created_at": "2026-11-05T14:35:08.606898+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-10": "maybe",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 83,
+      "created_at": "2026-11-05T14:35:07.581973+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-10": "maybe",
+        "2026-11-11": "maybe",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 82,
+      "created_at": "2026-11-05T14:35:06.660132+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-10": "maybe",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 81,
+      "created_at": "2026-11-05T14:35:05.869958+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-14": "yes"
+      },
+      "member": "rina",
+      "version": 7,
+      "created_at": "2026-11-05T03:04:13.373953+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes"
+      },
+      "member": "rina",
+      "version": 6,
+      "created_at": "2026-11-05T03:04:09.143384+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-14": "yes"
+      },
+      "member": "rina",
+      "version": 5,
+      "created_at": "2026-11-05T03:04:08.228332+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-07": "yes",
+        "2026-11-08": "yes"
+      },
+      "member": "rina",
+      "version": 4,
+      "created_at": "2026-11-05T03:02:40.788525+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-07": "yes"
+      },
+      "member": "rina",
+      "version": 3,
+      "created_at": "2026-11-05T03:02:40.325757+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {},
+      "member": "rina",
+      "version": 2,
+      "created_at": "2026-11-05T03:02:39.542431+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 80,
+      "created_at": "2026-11-05T03:02:33.834205+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 79,
+      "created_at": "2026-11-05T03:02:32.862848+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes"
+      },
+      "member": "michal",
+      "version": 78,
+      "created_at": "2026-11-05T03:02:32.522363+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes"
+      },
+      "member": "michal",
+      "version": 77,
+      "created_at": "2026-11-05T03:02:32.17346+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes"
+      },
+      "member": "rina",
+      "version": 1,
+      "created_at": "2026-11-05T03:02:31.933098+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-15": "yes"
+      },
+      "member": "michal",
+      "version": 76,
+      "created_at": "2026-11-05T03:02:31.550929+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-15": "yes"
+      },
+      "member": "michal",
+      "version": 75,
+      "created_at": "2026-11-05T03:02:31.175159+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-08": "yes",
+        "2026-11-15": "yes"
+      },
+      "member": "michal",
+      "version": 74,
+      "created_at": "2026-11-05T03:02:30.714941+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-08": "yes",
+        "2026-11-15": "yes"
+      },
+      "member": "michal",
+      "version": 73,
+      "created_at": "2026-11-05T03:02:26.138587+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-08": "yes",
+        "2026-11-15": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 72,
+      "created_at": "2026-11-05T03:02:25.523215+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-08": "yes",
+        "2026-11-15": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 71,
+      "created_at": "2026-11-05T03:02:24.677364+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-08": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 70,
+      "created_at": "2026-11-05T03:02:24.317417+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-08": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 69,
+      "created_at": "2026-11-05T03:02:23.952436+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 68,
+      "created_at": "2026-11-05T03:02:23.597643+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 67,
+      "created_at": "2026-11-05T03:02:22.539747+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 66,
+      "created_at": "2026-11-05T03:02:20.967438+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 65,
+      "created_at": "2026-11-05T03:02:17.126672+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "maybe",
+        "2026-11-07": "yes",
+        "2026-11-14": "yes"
+      },
+      "member": "rohil",
+      "version": 8,
+      "created_at": "2026-11-05T02:31:30.643794+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "maybe",
+        "2026-11-14": "yes"
+      },
+      "member": "rohil",
+      "version": 7,
+      "created_at": "2026-11-05T02:31:21.645524+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-14": "yes"
+      },
+      "member": "rohil",
+      "version": 6,
+      "created_at": "2026-11-05T02:31:19.852759+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-14": "yes"
+      },
+      "member": "rohil",
+      "version": 5,
+      "created_at": "2026-11-05T02:31:10.419526+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-14": "yes"
+      },
+      "member": "rohil",
+      "version": 4,
+      "created_at": "2026-11-05T02:30:57.676099+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-14": "yes",
+        "2026-11-15": "yes"
+      },
+      "member": "rohil",
+      "version": 3,
+      "created_at": "2026-11-05T02:30:54.703214+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {},
+      "member": "rohil",
+      "version": 2,
+      "created_at": "2026-11-05T02:29:53.30088+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-09": "yes",
+        "2026-11-16": "yes",
+        "2026-11-23": "yes"
+      },
+      "member": "rohil",
+      "version": 1,
+      "created_at": "2026-11-05T02:29:51.960549+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 64,
+      "created_at": "2026-11-05T02:28:09.15663+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 63,
+      "created_at": "2026-11-05T02:28:08.672446+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 62,
+      "created_at": "2026-11-04T03:54:26.928433+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-17": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 61,
+      "created_at": "2026-11-04T03:54:25.879482+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-10": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-17": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 60,
+      "created_at": "2026-11-04T03:54:23.9534+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-10": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 59,
+      "created_at": "2026-11-04T03:54:22.657022+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes",
+        "2026-11-20": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 58,
+      "created_at": "2026-11-04T03:53:46.972031+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-13": "yes",
+        "2026-11-14": "yes",
+        "2026-11-15": "yes"
+      },
+      "member": "michal",
+      "version": 57,
+      "created_at": "2026-11-04T03:53:46.021717+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes"
+      },
+      "member": "michal",
+      "version": 56,
+      "created_at": "2026-11-04T03:53:36.54681+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes"
+      },
+      "member": "michal",
+      "version": 55,
+      "created_at": "2026-11-04T03:53:35.528371+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes"
+      },
+      "member": "michal",
+      "version": 54,
+      "created_at": "2026-11-04T03:53:34.507305+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {},
+      "member": "michal",
+      "version": 53,
+      "created_at": "2026-11-04T00:21:20.283102+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-07": "yes",
+        "2026-11-14": "yes",
+        "2026-11-21": "yes"
+      },
+      "member": "michal",
+      "version": 52,
+      "created_at": "2026-11-04T00:21:19.330872+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {},
+      "member": "michal",
+      "version": 51,
+      "created_at": "2026-11-04T00:21:17.376278+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-06": "yes",
+        "2026-11-07": "yes",
+        "2026-11-08": "yes",
+        "2026-11-15": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 50,
+      "created_at": "2026-11-04T00:21:16.245509+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {},
+      "member": "michal",
+      "version": 49,
+      "created_at": "2026-11-03T23:12:16.726847+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 48,
+      "created_at": "2026-11-03T23:12:15.724683+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-15": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 47,
+      "created_at": "2026-11-03T23:12:14.732026+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-15": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 46,
+      "created_at": "2026-11-03T23:12:13.342537+00:00",
+      "poll_version": 1
+    },
+    {
+      "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
+      "days": {
+        "2026-11-08": "yes",
+        "2026-11-15": "yes",
+        "2026-11-21": "yes",
+        "2026-11-22": "yes"
+      },
+      "member": "michal",
+      "version": 45,
+      "created_at": "2026-11-03T23:12:11.858112+00:00",
+      "poll_version": 1
+    },
     {
       "id": "a341adee-f6d3-4c0d-a418-5fc1055ce60f",
       "days": {},

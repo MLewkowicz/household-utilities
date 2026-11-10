@@ -23,7 +23,7 @@ export function bindTaskReorder(root:HTMLElement, options:{enabled:()=>boolean;a
    const r=el.getBoundingClientRect(),css=getComputedStyle(el).transform,matrix=new DOMMatrixReadOnly(css==='none'?undefined:css);
    return contains({left:r.left-matrix.m41,right:r.right-matrix.m41,top:r.top-matrix.m42,bottom:r.bottom-matrix.m42});
   });
-  if(!section||!root.contains(section)||section.dataset.pinned!==g.entry.dataset.pinned)return;
+  if(!section||!root.contains(section)||section.dataset.priority!==g.entry.dataset.priority)return;
   if(section.closest<HTMLElement>('[data-task-lane]')?.dataset.taskLane!==g.entry.closest<HTMLElement>('[data-task-lane]')?.dataset.taskLane)return;
   if(g.entry.dataset.source==='shared'&&section.dataset.taskGroup)return;
   if(section.dataset.taskGroup!==g.group&&g.entry.dataset.groupEditable!=='true')return;

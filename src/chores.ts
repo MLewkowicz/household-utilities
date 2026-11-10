@@ -1,3 +1,4 @@
+import {deadlineState} from './task-deadlines';
 import type {Member} from './ledger';
 export type QueueVisibility='immediately'|'due_date';
 export type TaskKind='reminder'|'request'|'chore';
@@ -24,9 +25,9 @@ export function queueOpensOn(task:Pick<Chore,'queue_visibility'|'routine_id'|'cy
  return due&&cycle?(due>cycle?due:cycle):due||cycle;
 }
 export function queueReady(task:Chore,day:string){const opens=queueOpensOn(task);return !opens||opens<=day;}
-export const urgentChore=(task:Chore,day:string)=>activeChore(task)&&queueReady(task,day)&&(task.pinned||task.status==='overdue'||task.due_on===day);
-export function queueOrder(day:string){
- const priority=(t:Chore)=>t.pinned?0:t.status==='overdue'?1:t.due_on===day?2:t.due_at?3:4;
+export const urgentChore=(task:Chore,day:string,now=Date.now())=>activeChore(task)&&queueReady(task,day)&&(task.pinned||task.status==='overdue'||task.due_on===day||!!deadlineState(task,now));
+export function queueOrder(day:string,now=Date.now()){
+ const priority=(t:Chore)=>t.pinned?0:t.status==='overdue'?1:t.due_on===day||deadlineState(t,now)==='soon'?2:t.due_at?3:4;
  return(a:Chore,b:Chore)=>priority(a)-priority(b)||(a.due_at||'z').localeCompare(b.due_at||'z')||a.created_at.localeCompare(b.created_at)||a.id.localeCompare(b.id);
 }
 export const points=(units:number)=>new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(units/12);

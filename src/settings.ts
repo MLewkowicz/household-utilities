@@ -1,5 +1,5 @@
 import {$,saved,remember} from './ui';
-import {householdDaylight} from './daylight';
+import {householdDaylight,daylightPalette} from './daylight';
 import {initUpdates,openUpdates} from './updates';
 
 export function initSettings() {
@@ -11,21 +11,16 @@ export function initSettings() {
  const nextTheme=()=>selector.value==='dark'?'daylight':selector.value==='daylight'?'light':selector.value==='light'?'dark':document.documentElement.dataset.theme==='dark'?'light':'dark';
  function applyTheme(animate=false){
   const {hour,night}=householdDaylight(),clock=selector.value==='system'||selector.value==='daylight';
-  const theme=selector.value==='daylight'?(night>=.6?'dark':'light'):selector.value==='system'?(systemTheme.matches?'dark':'light'):selector.value;
+  const palette=daylightPalette(hour,night);
+  const theme=selector.value==='daylight'?palette.theme:selector.value==='system'?(systemTheme.matches?'dark':'light'):selector.value;
   const root=document.documentElement;
   root.dataset.themePreference=selector.value;
   root.dataset.houseNight=String(clock?night:Number(theme==='dark'));
   root.dataset.houseHour=String(hour);root.dataset.houseClock=String(clock);
-  // Interpolate the whole interface only when Time of day is selected.
-  const palette:Record<string,[string,string]>={bg:['#f5f2e9','#182437'],paper:['#fffdf7','#223247'],line:['#d9dfd1','#40556b'],pale:['#e9eddf','#304b53'],field:['#fffdf8','#1c2b40'],'surface-muted':['#eeeee3','#1d2c40']};
-  // Foregrounds must not blend through the same middle gray as the surfaces.
-  for(const key of ['ink','body','muted','tile-muted']){
-   if(selector.value==='daylight')root.style.setProperty('--'+key,night>=.6?'#f7fbff':'#101712');
-   else root.style.removeProperty('--'+key);
-  }
-  for(const [key,[day,dark]] of Object.entries(palette)){
-   if(selector.value==='daylight')root.style.setProperty('--'+key,`color-mix(in srgb,${day},${dark} ${night*100}%)`);
-   else root.style.removeProperty('--'+key);
+  root.dataset.dayPhase=clock?palette.phase:theme==='dark'?'night':'day';
+  for(const key of ['bg','paper','line','pale','field','surface-muted','ink','body','muted','tile-muted','green','accent-ink','accent-hover']){
+   const color=selector.value==='daylight'&&palette.colors?(palette.colors as Record<string,string>)[key]:null;
+   if(color)root.style.setProperty('--'+key,color);else root.style.removeProperty('--'+key);
   }
   if(root.dataset.theme!==theme){
    // In a section one snapshot cross-fade keeps the docked nav, cards and page in
@@ -37,7 +32,7 @@ export function initSettings() {
    else if('startViewTransition' in document&&$('#house-hero').hidden)document.startViewTransition(swap);
    else{clearTimeout(fading);root.classList.add('theme-fade');swap();fading=setTimeout(()=>root.classList.remove('theme-fade'),500);}
   }
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='dark'?'#182437':'#f5f2e9');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content',selector.value==='daylight'&&palette.colors?palette.colors.bg:theme==='dark'?'#182437':'#f5f2e9');
   const action=`Color theme: ${labels[selector.value]}. Switch to ${labels[nextTheme()]}`;
   toggle.setAttribute('aria-label',action);toggle.title=action;
  }

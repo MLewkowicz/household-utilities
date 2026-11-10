@@ -7,7 +7,7 @@ export function bindSectionScroll(state:()=>State,returnToScene:()=>void){
  function eligible(target:EventTarget|null){
   const current=state();
   if(!current.featureOnly||!current.ready||blocked()||scrollY>3||!(target instanceof Element))return false;
-  if(target.closest('.house-chrome,input,textarea,select,[contenteditable="true"],[data-swipe-complete],[data-availability-grid]'))return false;
+  if(target.closest('.house-chrome,input,textarea,select,[contenteditable="true"],[data-swipe-complete],[data-availability-grid],.atlas-map-frame'))return false;
   for(let el:Element|null=target;el&&el!==document.body&&el!==document.documentElement;el=el.parentElement){
    const css=getComputedStyle(el);
    if(/auto|scroll/.test(css.overflowY+css.overflowX)&&(el.scrollHeight>el.clientHeight+2||el.scrollWidth>el.clientWidth+2))return false;

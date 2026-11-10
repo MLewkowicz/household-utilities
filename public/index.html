@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./events-refresh.css">
   <link rel="stylesheet" href="./house-entry.css">
+  <link rel="stylesheet" href="./games.css">
   <script src="./config.js" defer></script>
   <script src="./app.js" defer></script>
 </head>
@@ -42,7 +43,7 @@
   </div>
   </header>
   <section id="house-hero" aria-label="Explore the household" data-sky-paused="true">
-    <div id="house-stage"></div><button id="updates-board-button" class="updates-board-button" type="button" aria-haspopup="dialog" aria-controls="updates-dialog" hidden>What’s new: see the latest updates</button><span id="house-current" class="sr-only" aria-live="polite">Home</span>
+    <div id="house-stage"></div><button id="sky-games-launch" class="sky-games-launch" type="button" aria-label="Open Games"><span aria-hidden="true">✧ ↑</span><span>Games<small>Scroll up to open</small></span></button><button id="updates-board-button" class="updates-board-button" type="button" aria-haspopup="dialog" aria-controls="updates-dialog" hidden>What’s new: see the latest updates</button><span id="house-current" class="sr-only" aria-live="polite">Home</span>
   </section>
   <div id="feature-area" class="shell feature-shell" hidden>
     <main id="main" tabindex="-1">
@@ -63,6 +64,7 @@
       <section id="misc-page" aria-label="Expenses" hidden></section>
       <section id="chores-page" aria-label="To-dos"></section>
       <section id="events-page" aria-label="Events calendar" hidden></section>
+      <section id="games-page" aria-label="Games" hidden></section>
       <section id="bulletin-page" aria-label="Household bulletin board" hidden></section>
     </main>
   </div>

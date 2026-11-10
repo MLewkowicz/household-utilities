@@ -1,7 +1,7 @@
 import {readFile} from 'node:fs/promises';
 const config=JSON.parse(await readFile('config.public.json','utf8'));
 const checks=[
- ['app_capabilities',{},d=>d.event_edit_notifications&&d.quarter_points&&d.as_needed_routines,'026_as_needed_rotations.sql'],
+ ['app_capabilities',{},d=>d.event_edit_notifications&&d.quarter_points&&d.as_needed_routines&&d.sweeping_spaces&&d.personal_deadlines,'028_personal_deadlines.sql'],
  ['personal_tasks',{p:{member:'michal'}},d=>d.format_version>=2&&d.group_rename_version>=1&&Array.isArray(d.tasks),'021_personal_group_rename.sql'],
  ['home_order',{p:{member:'michal'}},d=>Number.isInteger(d.version)&&Array.isArray(d.keys),'017_home_personal_tasks.sql'],
  ['events_dashboard',{},d=>d.format_version>=3&&Array.isArray(d.availability),'022_event_availability.sql'],
@@ -13,4 +13,4 @@ const results=await Promise.all(checks.map(async([operation,body,valid,migration
 }));
 const missing=[...new Set(results.filter(Boolean))];
 if(missing.length){console.error('Publication stopped: live database capabilities unavailable for '+missing.join(', ')+'. Apply missing migrations with ./configure.sh and retry.');process.exitCode=1;}
-else console.log('Live database supports personal group renaming, task ordering, event edits, quarter-point tasks, as-needed rotations and expanded reactions.');
+else console.log('Live database supports personal group renaming, task ordering, event edits, quarter-point tasks, as-needed rotations, sweeping spaces, personal deadlines and expanded reactions.');

@@ -36,7 +36,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     return {
       setScene(id: StageId) { requested = displayed = id; onScene(id); },
       jumpTo(id: StageId) { requested = displayed = id; },
-      setPaused(value: boolean) { paused = value; }, setTurnDuration(_value: number) {}, action() { states[requested].variation++; }, reset() {},
+      setPaused(value: boolean) { paused = value; }, setTurnDuration(_value: number) {}, setSkyLift(_amount:number) {}, action() { states[requested].variation++; }, reset() {},
       diagnostics: () => ({ ...metrics, requested, displayed, paused, transitioning: false, actors: [], bitmojis: [], state: states[requested] }),
       destroy() { container.replaceChildren(); },
     };
@@ -121,6 +121,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   let night=Number(current.dark), darkTheme=getTheme()==='dark';
   let themeBlend=getNight(),themeFrom=themeBlend,themeTarget=themeBlend,themeBegan=elapsed;
   const warm=new T.Color('#fff2dc'), dusk=new T.Color('#a8c0e1'), cool=new T.Color('#a6bcea'), warmKey=new T.Color('#fff1d6'), coolKey=new T.Color('#b0c8ff');
+  const sunsetAmbient=new T.Color('#b38bcb'),sunsetKey=new T.Color('#ffae72'),sunriseAmbient=new T.Color('#a4b9df'),sunriseKey=new T.Color('#c5e7ff');
   const portraitTint=new T.Color(), portraitWhite=new T.Color('#ffffff'), portraitNight=new T.Color('#a4b4d1');
   const canAnimate=()=>!destroyed&&!lost&&!paused&&!media.matches&&!document.hidden&&visible;
   function lighting(value: number) {
@@ -133,6 +134,8 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     outsideKey.intensity=T.MathUtils.lerp(T.MathUtils.lerp(2.25,1.1,themeBlend),.55,value);
     outsideFill.intensity=T.MathUtils.lerp(T.MathUtils.lerp(.8,.45,themeBlend),.4,value);
     outsideAmbient.color.copy(warm).lerp(dusk,themeBlend).lerp(cool,value);outsideKey.color.copy(warmKey).lerp(coolKey,Math.max(themeBlend,value));
+    const hour=getHour(),twilight=hour===undefined?0:Math.sin(themeBlend*Math.PI)*(1-value);
+    outsideAmbient.color.lerp(hour!==undefined&&hour<12?sunriseAmbient:sunsetAmbient,twilight*.55);outsideKey.color.lerp(hour!==undefined&&hour<12?sunriseKey:sunsetKey,twilight*.75);
   }
   function projection() {
     const aspect=container.clientWidth/Math.max(1,container.clientHeight);
@@ -336,6 +339,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     },
     setPaused(value:boolean) { paused=value; refresh(); },
     setTurnDuration(value:number) { turnDuration=value; },
+    setSkyLift(amount:number){camera.position.set(24,28.95+amount*32,99.7);camera.lookAt(0,3.95+amount*38,.1);if(!canAnimate())draw();},
     reset() { states[requested]={ boostUntil:0,variation:0,still:media.matches }; elapsed=0; settle(); refresh(); },
     diagnostics:()=>({ ...metrics,requested,displayed,paused,reducedMotion:media.matches,transitioning:!!turn,cachedStages:cache.size,theme:darkTheme?'dark':'light',themeBlend,environment:environment.diagnostics(),actors:current.people.map(p=>p.id).sort(),bitmojis:current.people.map(p=>p.head.material.map!.image?.src),actorPoses:current.people.map(p=>({id:p.id,position:p.root.getWorldPosition(new T.Vector3()).toArray(),visible:p.root.visible})),entry:current.root.userData.entry,dark:current.dark,state:{...states[requested]},elapsed,night,seatCount:current.root.userData.seatCount,sceneDetails:{...current.root.userData},speech:speechDetails(),updatesBoard:board?{...board.diagnostics(),screen:onScreen(board.center())}:{visible:false,state:'hidden'},house:{shell:shell.uuid,pivotYaw:pivot.rotation.y,footprint:[HOUSE.width,HOUSE.depth],eave:HOUSE.eave,contentYaw:current.root.rotation.y,turn:turn?{progress:turn.progress,direction:turn.direction,dragging:turn.dragging,incoming:turn.incoming,from:turn.from,to:turn.to,swapAt:.5+cameraAzimuth/(turn.direction*Math.PI)}:null,lastSwap,turnDuration}}),
     destroy() {
