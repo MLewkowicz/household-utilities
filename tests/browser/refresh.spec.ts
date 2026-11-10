@@ -2,7 +2,7 @@ import {setTheme,refreshSection} from './settings';
 import {test,expect,type Page} from '@playwright/test';
 const rpc=async(page:Page,name:string,p?:unknown)=>{const r=await page.request.post(`/rest/v1/rpc/utilities_${name}`,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(r.ok()).toBeTruthy();return r.json();};
 const task=(extra={})=>({id:crypto.randomUUID(),request_id:crypto.randomUUID(),actor:'rohil',action:'create',title:'Swipe test '+crypto.randomUUID(),icon_id:'tidy',note:'Only visible in details',points:2,assignee:null,pinned:false,...extra});
-async function chores(page:Page){await page.goto('/#chores/household');await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');await page.locator('[data-chore-person=michal]').click();await page.locator('#chore-household-filter').selectOption('all');}
+async function chores(page:Page){await page.goto('/#chores/household');await expect(page.locator('#chores-status')).toHaveText('Up to date');await page.locator('[data-chore-person=michal]').click();await page.locator('#chore-household-filter').selectOption('all');}
 
 test('a deliberate swipe confirms contributors and completes, with keyboard undo and independent typed reminders',async({page})=>{
  await page.setViewportSize({width:390,height:844});const t=await rpc(page,'save_chore',task());await chores(page);
@@ -44,7 +44,7 @@ test('inactive sections do not initialize or fetch; unavailable badges do not bl
  await expect(page.locator('#chore-task-dialog')).toHaveCount(0);await expect(page.locator('#expense-dialog')).toHaveCount(0);await expect(page.locator('#bulletin-note-dialog')).toHaveCount(0);
  expect(requests.some(p=>/utilities_(chores|misc|bulletin)_dashboard/.test(p))).toBeFalsy();expect(requests).not.toContain('/thumbtack.svg');
  await page.getByRole('link',{name:'Expenses',exact:true}).click();await expect(page.locator('#new-expense')).toBeEnabled();await expect(page.locator('#chore-task-dialog')).toHaveCount(0);
- await page.getByRole('link',{name:/^To-dos/}).click();await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');
+ await page.getByRole('link',{name:/^To-dos/}).click();await expect(page.locator('#chores-status')).toHaveText('Up to date');
  await setTheme(page,'dark');const tile=page.locator('.chore-card').first();if(await tile.count())expect(await tile.evaluate(el=>getComputedStyle(el).backgroundColor)).not.toBe('rgb(24, 34, 27)');
 });
 

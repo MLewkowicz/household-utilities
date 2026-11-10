@@ -12,7 +12,9 @@ for (const file of await readdir('public')) {
   await copyFile(`public/${file}`, `dist/${file}`);
 }
 const bundle = await build({ entryPoints: ['src/app.ts'], bundle: true, outdir: 'dist', format: 'esm', splitting: true, entryNames: '[name]-[hash]', chunkNames: 'chunk-[hash]', metafile: true, minify: true, target: 'es2022' });
-await writeFile('dist/style.css',(await transform(await readFile('dist/style.css','utf8'),{loader:'css',minify:true,target:'es2022'})).code);
+for(const file of ['style.css','events-refresh.css','house-entry.css','games.css']){
+ await writeFile(`dist/${file}`,(await transform(await readFile(`dist/${file}`,'utf8'),{loader:'css',minify:true,target:'es2022'})).code);
+}
 const config = JSON.parse(await readFile('config.public.json','utf8'));
 if (!config.key.startsWith('sb_publishable_')) throw new Error('Only a Supabase publishable key may enter the frontend.');
 if (!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(config.url)) throw new Error('Invalid Supabase project URL.');
@@ -31,7 +33,7 @@ for(const [route,source] of Object.entries({utilities:'client',miscellaneous:'mi
  function visit(path){if(!path||paths.has(path))return;paths.add(path);for(const item of bundle.metafile.outputs[path].imports)if(item.kind==='import-statement')visit(item.path);}
  visit(start);preload[route]=[...paths].map(path=>'./'+path.replace(/^dist\//,''));
 }
-html=html.replace('</head>',`<script>{const routes=${JSON.stringify(preload)},loaded=new Set();function preload(route){for(const href of routes[route.split('/')[0]]||[]){if(loaded.has(href))continue;loaded.add(href);const link=document.createElement('link');link.rel='modulepreload';link.href=href;document.head.append(link);}}preload(location.hash.slice(1));window.addEventListener('hashchange',()=>preload(location.hash.slice(1)));for(const event of ['pointerover','focusin','pointerdown'])document.addEventListener(event,e=>{const link=e.target.closest?.('[data-ledger]');if(link)preload(link.dataset.ledger);});}</script>\n</head>`);
+html=html.replace('</head>',`<script>{const routes=${JSON.stringify(preload)},loaded=new Set();function preload(route){for(const href of routes[route.split('/')[0]]||[]){if(loaded.has(href))continue;loaded.add(href);const link=document.createElement('link');link.rel='modulepreload';link.href=href;document.head.append(link);}}preload(location.hash.slice(1));window.addEventListener('hashchange',()=>preload(location.hash.slice(1)));for(const event of ['pointerover','focusin','pointerdown'])document.addEventListener(event,e=>{const link=e.target.closest?.('[data-ledger],[data-games-link]');if(link)preload(link.dataset.ledger||'games');});}</script>\n</head>`);
 for (const file of ['style.css', 'events-refresh.css', 'house-entry.css', 'games.css', 'config.js']) {
   const hash = createHash('sha256').update(await readFile(`dist/${file}`)).digest('hex').slice(0, 12);
   const versioned = file.replace(/(\.[^.]+)$/, `-${hash}$1`);

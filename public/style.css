@@ -35,7 +35,7 @@ h1,h2,h3{color:var(--ink)}
 .household-tag{font-size:10px;letter-spacing:1.55px;color:var(--muted);font-weight:600}
 .icon-button{border:0;background:transparent;font-size:25px;min-width:36px;min-height:36px;border-radius:50%;line-height:1}
 .icon-button:hover{background:var(--pale)}
-.intro{display:flex;justify-content:space-between;align-items:end;padding:56px 0 42px}
+.intro{display:flex;justify-content:space-between;align-items:end;padding:12px 0 24px}
 .eyebrow{font-size:10px;letter-spacing:1.7px;font-weight:650;color:var(--muted);margin-bottom:13px}
 h1{font-size:clamp(36px,4.5vw,52px);font-weight:550;letter-spacing:-2.1px;line-height:1.1}
 .intro-copy{color:var(--muted);font-size:14px;line-height:1.7;margin-top:18px}
@@ -165,16 +165,16 @@ label small{display:block;font-size:10px;font-weight:400;color:var(--muted);line
 .balance-amount{font-size:28px}
 .person-tag{display:none}
 .table-wrap{margin-top:6px}
-.intro{padding-top:44px}
+.intro{padding-top:12px}
 }
 @media(max-width:650px){.shell{padding:0 20px}
 .topbar{height:76px}
 .household-tag{display:none}
 .brand{font-size:24px}
-.intro{padding:34px 0 30px;display:block}
+.intro{padding:8px 0 20px;display:block}
 h1{font-size:42px;letter-spacing:-1.7px}
 .intro-copy{font-size:12px;margin-top:14px}
-.intro-side{flex-direction:row-reverse;justify-content:space-between;align-items:center;margin-top:25px;gap:10px}
+.intro-side{flex-direction:row-reverse;justify-content:space-between;align-items:center;margin-top:14px;gap:10px}
 .status{font-size:10px}
 .button{font-size:11px;padding:10px 13px}
 .balance-grid{grid-template-columns:1fr 1fr;gap:10px}

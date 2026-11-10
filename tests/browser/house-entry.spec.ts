@@ -23,6 +23,8 @@ test('downstairs utilities animate continuously, cycle Rohil’s lyrics and keep
   await page.keyboard.press('Enter');
  }
  await page.emulateMedia({reducedMotion:'no-preference'});
+ // Resume on a browser frame before sampling the scene animation.
+ await page.waitForFunction(()=>(window as any).__houseDiagnostics().active);
  await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.shower.waterY,{timeout:20000}).not.toBe(utilities.shower.waterY);
  await expect.poll(async()=>(await diag(page)).sceneDetails.utilities.bedroom.fanAngle,{timeout:20000}).not.toBe(utilities.bedroom.fanAngle);
  const current=(await diag(page)).sceneDetails.utilities.shower.lyric;
@@ -159,7 +161,7 @@ test('scrolling beyond the house docks the feature and an edge gesture returns t
  await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(120);
  await expect.poll(async()=>(await diag(page)).active).toBe(false);const frozen=(await diag(page)).frames;
  await page.waitForTimeout(200);expect((await diag(page)).frames).toBe(frozen);
- await page.evaluate(()=>scrollTo(0,0));await page.mouse.move(20,500);await page.mouse.wheel(0,-600);await expect(page).toHaveURL(/#utilities$/);await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);await expect.poll(async()=>(await diag(page)).displayed).toBe('utilities');
+ await page.evaluate(()=>scrollTo(0,0));await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);await page.mouse.move(20,500);await page.mouse.wheel(0,-600);await page.waitForFunction(()=>scrollY===0);await expect(page).toHaveURL(/#utilities$/);await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);await expect.poll(async()=>(await diag(page)).displayed).toBe('utilities');
  await page.locator('[data-ledger=events]').click();await expect(page.locator('#event-new')).toBeEnabled();await expect(page.locator('#house-hero')).toBeHidden();
  await page.locator('[data-ledger=home]').click();await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(async()=>(await diag(page)).displayed).toBe('home');await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
 });

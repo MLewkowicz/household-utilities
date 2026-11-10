@@ -141,9 +141,9 @@ export function createEnvironment(scene:T.Scene,camera:T.OrthographicCamera) {
   }
   const sunset=[new T.Color('#291644'),new T.Color('#b63550'),new T.Color('#ff9b42')];
   const sunrise=[new T.Color('#352354'),new T.Color('#789bd0'),new T.Color('#c1e4f4')];
-  const cloudTint=new T.Color();
+  const cloudTint=new T.Color(),orbitTop=new T.Color('#071722'),orbitHorizon=new T.Color('#193e50');
   let lastSpan=0,lastWidth=0;
-  function tick(time:number,night:number,cinema:number,still:boolean,hour?:number) {
+  function tick(time:number,night:number,cinema:number,still:boolean,hour?:number,flight=0) {
     const shade=Math.max(night,cinema*.78),span=camera.top-camera.bottom,width=camera.right-camera.left,portrait=span>18;
     camera.getWorldDirection(forward);right.setFromMatrixColumn(camera.matrixWorld,0);up.setFromMatrixColumn(camera.matrixWorld,1);
     skyMaterial.uniforms.top.value.copy(skyDay).lerp(skyNight,shade);
@@ -157,14 +157,16 @@ export function createEnvironment(scene:T.Scene,camera:T.OrthographicCamera) {
     const moonHeight=(portrait?.47:.67)-(hour===undefined?0:(1-Math.sin(Math.min(1,moonProgress)*Math.PI))*.22);
     const transition=hour===undefined?0:Math.pow(Math.sin(night*Math.PI),.65)*(1-cinema),palette=hour!==undefined&&hour<12?sunrise:sunset;
     for(const [i,key] of ['top','middle','bottom'].entries())skyMaterial.uniforms[key].value.lerp(palette[i],transition);
-    skyMaterial.uniforms.twilight.value=transition;skyMaterial.uniforms.sunX.value=(sunX+1)/2;skyMaterial.uniforms.clock.value=still?0:time;
+    const orbit=T.MathUtils.smoothstep(flight,.15,.92);
+    skyMaterial.uniforms.top.value.lerp(orbitTop,orbit);skyMaterial.uniforms.middle.value.lerp(orbitTop,orbit*.9);skyMaterial.uniforms.bottom.value.lerp(orbitHorizon,orbit);
+    skyMaterial.uniforms.twilight.value=transition*(1-orbit);skyMaterial.uniforms.sunX.value=(sunX+1)/2;skyMaterial.uniforms.clock.value=still?0:time;
     sunMaterial.color.set('#ffe7a1').lerp(palette[2],transition);sun.scale.setScalar(1+transition*.35);
     cloudTint.set('#e4e3d4').lerp(palette[1],transition*.65);
     for(const cloud of clouds)cloud.traverse(object=>{if(object instanceof T.Mesh){const materials=Array.isArray(object.material)?object.material:[object.material];for(const material of materials)if('color' in material)(material as T.MeshLambertMaterial).color.copy(cloudTint);}});
     screenPosition(sun,sunX,sunHeight-T.MathUtils.smoothstep(night,hour===undefined?0:.55,hour===undefined?.60:1)*1.1,skyDepth);
     screenPosition(moon,moonX,moonHeight-(1-T.MathUtils.smoothstep(night,.40,1))*1.1,skyDepth);moon.quaternion.copy(camera.quaternion);
-    sun.visible=night<(hour===undefined?.60:.94);moon.visible=night>.40;
-    starsMaterial.opacity=T.MathUtils.smoothstep(shade,.35,1)*.78;stars.visible=starsMaterial.opacity>0;
+    sun.visible=flight<.22&&night<(hour===undefined?.60:.94);moon.visible=flight<.22&&night>.40;
+    starsMaterial.opacity=Math.max(T.MathUtils.smoothstep(shade,.35,1),orbit)*.78;stars.visible=starsMaterial.opacity>0;
     if(lastSpan!==span||lastWidth!==width){
       for(let i=0;i<54;i++){
         screenPosition(dummy,random(i+100)*1.92-.96,.20+random(i+200)*.76,skyDepth+6);dummy.scale.setScalar(.6+random(i+300));dummy.updateMatrix();stars.setMatrixAt(i,dummy.matrix);
@@ -177,7 +179,7 @@ export function createEnvironment(scene:T.Scene,camera:T.OrthographicCamera) {
     const passing=(time+7)%23;
     meteor.visible=!still&&night>.9&&passing<1.2;
     if(meteor.visible){screenPosition(meteor,.5+passing*.27,.79-passing*.18,skyDepth+4);meteor.quaternion.copy(camera.quaternion);meteor.rotateZ(-2.2);meteorMaterial.opacity=Math.sin(passing/1.2*Math.PI)*.6;}
-    clouds.forEach((cloud,i)=>{screenPosition(cloud,cloudPositions[i][0]+(still?0:Math.sin(time*.025+i)*.045),cloudPositions[i][1],skyDepth-2);cloud.quaternion.copy(camera.quaternion);});
+    clouds.forEach((cloud,i)=>{screenPosition(cloud,cloudPositions[i][0]+(still?0:Math.sin(time*.025+i)*.045),cloudPositions[i][1]-flight*3,skyDepth-2);cloud.quaternion.copy(camera.quaternion);});
     wind.forEach(({crown,phase})=>{crown.rotation.z=still?0:Math.sin(time*.55+phase)*.012;});
   }
   return {tick,destroy(){stars.dispose();},diagnostics:()=>({kind:'modeled-3d',trees:28,mountains:summits.length+shoulders.length,groundY:-.365,windTrees:wind.length,sunVisible:sun.visible,moonVisible:moon.visible,starsOpacity:starsMaterial.opacity,meteorVisible:meteor.visible})};

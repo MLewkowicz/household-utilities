@@ -6,12 +6,14 @@ import { dispose } from './scene-geometry';
 import { stages, type StageId, type StageState } from './stage-data';
 import { getTheme, getNight, getHour, observeTheme } from './appearance';
 import { createEnvironment } from './environment';
+import { createSkyJourney } from './sky-journey';
 import { createNoticeBoard } from './notice-board';
 import { hasUnseenUpdates, onUpdatesSeen, openUpdates } from '../updates';
 
 type Turn = { from: StageId; to: StageId; startYaw: number; direction: number; progress: number; start: number; end: number; began: number; duration: number; dragging: boolean; incoming: boolean };
 export async function mountStagePlayer(container: HTMLElement, initial: StageId, onScene: (id: StageId) => void) {
   let requested = initial, displayed = initial, paused = false, visible = true, lost = false, destroyed = false, elapsed = 0;
+  let skyLift=0;
   let turn: Turn | null = null, yaw = 0, turnDuration = 1800, lastSwap: { progress: number; angle: number; direction: number } | null = null;
   const media = matchMedia('(prefers-reduced-motion: reduce)');
   const states = Object.fromEntries(stages.map(s => [s.id, { boostUntil: 0, variation: 0, still: false }])) as Record<StageId, StageState>;
@@ -49,7 +51,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   renderer.shadowMap.autoUpdate = true;
   const gl = renderer.getContext(), info = gl.getExtension('WEBGL_debug_renderer_info'); metrics.renderer = info ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER);
   const canvas = renderer.domElement; canvas.className = 'stage-canvas'; canvas.tabIndex = 0; canvas.setAttribute('role', 'group');
-  canvas.setAttribute('aria-label', 'Rotating household. Drag horizontally to turn and release to reveal a room. Left and right arrows change sections. Tap the house or press Enter to play its scene effect. Scroll down to enter the selected section. Home returns to this menu.');
+  canvas.setAttribute('aria-label', 'Rotating household. Drag horizontally to turn and release to reveal a room. Left and right arrows change sections. Tap the house or press Enter to play its scene effect. Scroll up to enter Games, or down to enter the selected section. Home returns to this menu.');
   container.replaceChildren(canvas);
   const scene = new T.Scene(), landscapeScene=new T.Scene(), camera = new T.OrthographicCamera(-6, 6, 5, -5, .1, 200);
   // Separate light rigs, but one camera and depth buffer: the rooms retain
@@ -69,6 +71,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   outsideKey.shadow.camera.left=-14;outsideKey.shadow.camera.right=14;outsideKey.shadow.camera.top=18;outsideKey.shadow.camera.bottom=-14;outsideKey.shadow.camera.far=55;outsideKey.shadow.camera.updateProjectionMatrix();
   landscapeScene.add(outsideAmbient,outsideKey,outsideFill);
   const environment=createEnvironment(landscapeScene,camera);
+  const skyJourney=createSkyJourney(landscapeScene,camera);
   // Only a device that hasn't opened the latest release notes builds the board.
   const board=hasUnseenUpdates()?createNoticeBoard(landscapeScene):null;
   // The house's shadow still lands on the lawn, even though its light is
@@ -141,7 +144,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     const aspect=container.clientWidth/Math.max(1,container.clientHeight);
     const extra=turn ? Math.sin(turn.progress*Math.PI)*1.4 : 0;
     // Leave room around the silhouette and beneath the floating navigation.
-    const span=Math.max(13.2,(13.4+extra)/aspect);
+    const span=Math.max(13.2,(13.4+extra)/aspect)*(1+skyLift*.38);
     camera.left=-span*aspect/2; camera.right=span*aspect/2; camera.top=span/2; camera.bottom=-span/2; camera.updateProjectionMatrix();
   }
   function mount(id: StageId, orientation: number) {
@@ -167,7 +170,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   // bottom-centre pixel about once a second, so day and night meet it without a seam.
   let lawnAt=-Infinity;const lawnPixel=new Uint8Array(4);
   function sampleLawn() {
-    const now=performance.now(); if(now-lawnAt<1000) return; lawnAt=now;
+    const now=performance.now(); if(skyLift>0||now-lawnAt<1000) return; lawnAt=now;
     const gl=renderer.getContext(); gl.readPixels(gl.drawingBufferWidth>>1,1,1,1,gl.RGBA,gl.UNSIGNED_BYTE,lawnPixel);
     document.documentElement.style.setProperty('--lawn-color',`rgb(${lawnPixel[0]} ${lawnPixel[1]} ${lawnPixel[2]})`);
   }
@@ -176,7 +179,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     applyTurn();
     const themeProgress=T.MathUtils.smoothstep((elapsed-themeBegan)/4.5,0,1);
     themeBlend=media.matches?themeTarget:T.MathUtils.lerp(themeFrom,themeTarget,themeProgress);
-    lighting(night);environment.tick(elapsed,themeBlend,night,media.matches,getHour());board?.tick(elapsed,camera);
+    lighting(night);environment.tick(elapsed,themeBlend,night,media.matches,getHour(),skyLift);skyJourney.update(skyLift);board?.tick(elapsed,camera);
     const state=states[displayed]; state.still=media.matches;
     current.tick(elapsed,state);
     faceCamera(current.people,camera,portraitTint.copy(portraitWhite).lerp(portraitNight,night).getStyle());
@@ -186,7 +189,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
       ? turn.incoming ? T.MathUtils.smoothstep(turn.progress,.965,1)
         : 1-T.MathUtils.smoothstep(turn.progress,0,.035)
       : 1;
-    placeSpeech(current.root,current.people,camera,container.clientHeight,speechOpacity);
+    placeSpeech(current.root,current.people,camera,container.clientHeight,speechOpacity*(1-T.MathUtils.smoothstep(skyLift,0,.16)));
     renderer.info.reset();renderer.clear();renderer.render(landscapeScene,camera);renderer.render(scene,camera);sampleLawn();metrics.frames++;samples++;
     metrics.calls=renderer.info.render.calls; metrics.triangles=renderer.info.render.triangles;
     metrics.textures=renderer.info.memory.textures; metrics.geometries=renderer.info.memory.geometries;
@@ -229,7 +232,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   function frame(now: number) {
     raf=0; metrics.active=canAnimate(); if(!metrics.active) return;
     // Turn input is sampled once per display frame. Ambient motion uses 30 fps.
-    if(now-last>=(turn?15:31)) {
+    if(now-last>=(turn||skyLift?15:31)) {
       elapsed+=Math.min((now-last)/1000,.15); last=now;
       if(turn&&!turn.dragging) {
         const p=T.MathUtils.clamp((now-turn.began)/turn.duration,0,1),ease=p*p*p*(p*(p*6-15)+10);
@@ -269,7 +272,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
   function hover(event: PointerEvent) { if(!pointer&&board) canvas.classList.toggle('over-board',event.pointerType==='mouse'&&hitsBoard(event.clientX,event.clientY)); }
   let pointer: {x:number;y:number;id:number;dragging:boolean;direction:number;at:number;touch:boolean} | null=null;
   function down(event: PointerEvent) {
-    if(event.button!==0||turn||pointer) return;
+    if(event.button!==0||turn||pointer||skyLift>0) return;
     pointer={x:event.clientX,y:event.clientY,id:event.pointerId,dragging:false,direction:1,at:event.timeStamp,touch:event.pointerType==='touch'};
   }
   function move(event: PointerEvent) {
@@ -307,6 +310,7 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     if(turn?.dragging) { requested=turn.from; animateTo(0); }
   }
   function keyboard(event: KeyboardEvent) {
+    if(skyLift>0)return;
     if(event.key==='ArrowLeft'||event.key==='ArrowRight') { event.preventDefault(); if(!event.repeat)adjacent(event.key==='ArrowRight'?1:-1); }
     if(event.key==='Enter'||event.key===' ') { event.preventDefault(); if(!turn) action(); }
   }
@@ -339,9 +343,15 @@ export async function mountStagePlayer(container: HTMLElement, initial: StageId,
     },
     setPaused(value:boolean) { paused=value; refresh(); },
     setTurnDuration(value:number) { turnDuration=value; },
-    setSkyLift(amount:number){camera.position.set(24,28.95+amount*32,99.7);camera.lookAt(0,3.95+amount*38,.1);if(!canAnimate())draw();},
+    setSkyLift(amount:number){
+      skyLift=T.MathUtils.clamp(amount,0,1);
+      const climb=skyLift*skyLift*(3-2*skyLift);
+      camera.position.set(24-climb*3,28.95+climb*30,99.7);
+      camera.lookAt(-climb*1.4,3.95+climb*34,.1);
+      projection();if(!canAnimate())draw();
+    },
     reset() { states[requested]={ boostUntil:0,variation:0,still:media.matches }; elapsed=0; settle(); refresh(); },
-    diagnostics:()=>({ ...metrics,requested,displayed,paused,reducedMotion:media.matches,transitioning:!!turn,cachedStages:cache.size,theme:darkTheme?'dark':'light',themeBlend,environment:environment.diagnostics(),actors:current.people.map(p=>p.id).sort(),bitmojis:current.people.map(p=>p.head.material.map!.image?.src),actorPoses:current.people.map(p=>({id:p.id,position:p.root.getWorldPosition(new T.Vector3()).toArray(),visible:p.root.visible})),entry:current.root.userData.entry,dark:current.dark,state:{...states[requested]},elapsed,night,seatCount:current.root.userData.seatCount,sceneDetails:{...current.root.userData},speech:speechDetails(),updatesBoard:board?{...board.diagnostics(),screen:onScreen(board.center())}:{visible:false,state:'hidden'},house:{shell:shell.uuid,pivotYaw:pivot.rotation.y,footprint:[HOUSE.width,HOUSE.depth],eave:HOUSE.eave,contentYaw:current.root.rotation.y,turn:turn?{progress:turn.progress,direction:turn.direction,dragging:turn.dragging,incoming:turn.incoming,from:turn.from,to:turn.to,swapAt:.5+cameraAzimuth/(turn.direction*Math.PI)}:null,lastSwap,turnDuration}}),
+    diagnostics:()=>({ ...metrics,requested,displayed,paused,reducedMotion:media.matches,transitioning:!!turn,cachedStages:cache.size,theme:darkTheme?'dark':'light',themeBlend,environment:environment.diagnostics(),skyJourney:{progress:skyLift,...skyJourney.diagnostics()},actors:current.people.map(p=>p.id).sort(),bitmojis:current.people.map(p=>p.head.material.map!.image?.src),actorPoses:current.people.map(p=>({id:p.id,position:p.root.getWorldPosition(new T.Vector3()).toArray(),visible:p.root.visible})),entry:current.root.userData.entry,dark:current.dark,state:{...states[requested]},elapsed,night,seatCount:current.root.userData.seatCount,sceneDetails:{...current.root.userData},speech:speechDetails(),updatesBoard:board?{...board.diagnostics(),screen:onScreen(board.center())}:{visible:false,state:'hidden'},house:{shell:shell.uuid,pivotYaw:pivot.rotation.y,footprint:[HOUSE.width,HOUSE.depth],eave:HOUSE.eave,contentYaw:current.root.rotation.y,turn:turn?{progress:turn.progress,direction:turn.direction,dragging:turn.dragging,incoming:turn.incoming,from:turn.from,to:turn.to,swapAt:.5+cameraAzimuth/(turn.direction*Math.PI)}:null,lastSwap,turnDuration}}),
     destroy() {
       destroyed=true; stopTheme(); stopUpdates(); canvas.removeEventListener('pointermove',hover); clearTurn(); cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); media.removeEventListener('change',refresh); document.removeEventListener('visibilitychange',refresh);
       window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',up); canvas.removeEventListener('pointercancel',cancelPointer); canvas.removeEventListener('pointerdown',down); canvas.removeEventListener('keydown',keyboard);

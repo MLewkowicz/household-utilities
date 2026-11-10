@@ -9,6 +9,7 @@ import {mountHouseEntry} from './house-entry';
 import {sectionFromHash,type Section,type Feature} from './house-navigation';
 import {bindSectionScroll} from './section-scroll';
 import {mountSkyPortal} from './sky-portal';
+import {mountGameNavigation} from './game-navigation';
 
 type Route=Feature;
 type Page={refresh:()=>Promise<void>;export:()=>void;focus?:(id:string)=>boolean};
@@ -20,7 +21,7 @@ function load(route:Route):Promise<Page>{
    if(route==='utilities'){const m=await import('./client');return{refresh:m.refreshUtilities,export:m.exportUtilities,focus:m.focusUtilityNotification};}
    if(route==='miscellaneous'){const m=await import('./misc-client');m.initMisc();return{refresh:m.refreshMisc,export:m.exportMisc};}
    if(route==='chores'){const m=await import('./chores-client');m.initChores();return{refresh:m.refreshChores,export:m.exportChores,focus:m.focusChoreNotification};}
-   if(route==='games'){const m=await import('./games-client');await m.initGames();return{refresh:m.refreshGames,export:m.exportGames};}
+   if(route==='games'){const m=await import('./games-client');await m.initGames();gameNavigation.sync(location.hash);return{refresh:m.refreshGames,export:m.exportGames};}
    if(route==='events'){const m=await import('./events-client');m.initEvents();return{refresh:m.refreshEvents,export:m.exportEvents,focus:m.focusEventNotification};}
    const m=await import('./bulletin-client');m.initBulletin();return{refresh:m.refreshBulletin,export:m.exportBulletin,focus:m.focusBulletinNotification};
   })().catch(error=>{pages.delete(route);throw error;});
@@ -30,9 +31,10 @@ function load(route:Route):Promise<Page>{
 }
 initSettings();initNotifications();initAvatarFallback();initPaperTiles();
 let active:Section='home',routeVersion=0,routedHash='';
+const gameNavigation=mountGameNavigation();
 const house=mountHouseEntry(section=>navigate(section,'house'),section=>{if(active==='home')navigate(section,'entry');});
 const PAGE_IDS:Record<Route,string>={utilities:'utilities-page',miscellaneous:'misc-page',chores:'chores-page',bulletin:'bulletin-page',events:'events-page',games:'games-page'};
-const sky=mountSkyPortal(()=>({section:active,homeVisible:!$('#house-hero').hidden,ready:$('#main').getAttribute('aria-busy')!=='true'}),async()=>{await load('games');},()=>{navigate('games','sky');void import('./games-client').then(m=>m.enterGames());},amount=>house.setSkyLift(amount));
+const sky=mountSkyPortal(()=>({section:active,homeVisible:!$('#house-hero').hidden,ready:$('#main').getAttribute('aria-busy')!=='true'}),async()=>{gameNavigation.sync(location.hash);await load('games');},()=>{navigate('games','sky');void import('./games-client').then(m=>m.enterGames());},amount=>house.setSkyLift(amount));
 bindSectionScroll(()=>({section:active,featureOnly:Boolean($('#house-hero').hidden),ready:$('#main').getAttribute('aria-busy')!=='true'}),()=>{if(active!=='games')house.returnToScene();});
 const refreshing=new Map<Route,Promise<Page>>();
 // Reuse recently loaded content when entering from its house scene.
@@ -88,7 +90,7 @@ function route(source:NavigationSource='history'){
  const label=active==='home'?'Home':active==='utilities'?'Utilities':active==='chores'?'To-dos':active==='events'?'Events':active==='games'?'Games':active==='bulletin'?'Bulletin':'Expenses';
  document.title=`Household · ${label}`;
  const showHouse=active!=='games'&&(active==='home'||source==='house'||source==='history'&&history.state?.houseView===true);
- house.select(active,source==='house',!showHouse);sky.sync();
+ house.select(active,source==='house',!showHouse);sky.sync();gameNavigation.sync(location.hash);
  $('#export').setAttribute('disabled','');$('#main').setAttribute('aria-busy',active==='home'?'false':'true');
  // Direct navigation opens the feature; a history entry can restore its scene.
  if(active==='home'){
@@ -105,16 +107,18 @@ function route(source:NavigationSource='history'){
  if(source==='shortcut'&&active!=='home'){const main=$('#main');main.classList.remove('is-entering');void main.offsetWidth;main.classList.add('is-entering');}
  void refresh(source==='entry'?20000:0);
 }
-function navigate(section:Section,source:'house'|'shortcut'|'entry'|'sky'){
- const hash='#'+section;
+function navigate(section:Section,source:'house'|'shortcut'|'entry'|'sky',hash='#'+section){
  if(location.hash!==hash)history.pushState({houseView:source==='house'},'',hash);
  route(source);
  if(source==='shortcut'&&section!=='home')$('#main').focus({preventScroll:true});
 }
 document.addEventListener('click',event=>{
- const link=(event.target as HTMLElement).closest<HTMLAnchorElement>('[data-ledger],.brand');
+ const link=(event.target as HTMLElement).closest<HTMLAnchorElement>('[data-ledger],[data-games-link],[data-game-return],.brand');
  if(!link||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
- event.preventDefault();navigate(sectionFromHash(link.hash),'shortcut');
+ event.preventDefault();
+ if(link.hasAttribute('data-game-return')&&link.dataset.houseReturn==='true'){
+  history.pushState({houseView:true},'',link.hash);route('history');$('#sky-games-launch').focus({preventScroll:true});
+ }else navigate(sectionFromHash(link.hash),'shortcut',link.hash);
 });
 window.addEventListener('popstate',()=>route('history'));
 window.addEventListener('hashchange',()=>{if(location.hash!==routedHash)route('history');});

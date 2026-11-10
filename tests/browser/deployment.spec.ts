@@ -72,7 +72,7 @@ test('a returning visitor gets working navigation and themes after a deployment'
     await expect(page.locator('#misc-page')).toBeVisible();
     await page.getByRole('link', { name: 'To-dos', exact: true }).click();
     await expect(page.locator('#chores-page')).toBeVisible();
-    await expect(page.locator('#chores-status')).toHaveText('Shared to-dos · up to date');
+    await expect(page.locator('#chores-status')).toHaveText('Up to date');
     await page.getByRole('link', { name: 'Bulletin', exact: true }).click();
     await expect(page.locator('#bulletin-status')).toHaveText('Shared notes · up to date');
     expect(assetRequests.filter(path => path === '/app.js')).toHaveLength(1);

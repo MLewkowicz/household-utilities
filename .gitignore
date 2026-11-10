@@ -11,6 +11,9 @@ node_modules/
 dist/
 .wrangler/
 archive/
+# Superseded project documentation is public source, not the private bill archive.
+!docs/archive/
+!docs/archive/**
 bills/
 inbox/
 __pycache__/

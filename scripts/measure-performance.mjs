@@ -13,9 +13,9 @@ try{
  await cdp.send('Emulation.setCPUThrottlingRate',{rate:4});await cdp.send('Network.enable');
  await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:100,downloadThroughput:750000,uploadThroughput:375000});
  const requests=[];page.on('request',r=>requests.push(new URL(r.url()).pathname));
- let started=Date.now();await page.goto(base);await page.locator('#connection-status').filter({hasText:'up to date'}).waitFor();
+ let started=Date.now();const initialURL=new URL(base);initialURL.hash='utilities';await page.goto(initialURL.href);await page.locator('#connection-status').filter({hasText:/up to date/i}).waitFor({state:'attached'});
  const initialReadyMs=Date.now()-started;await page.waitForTimeout(300);const initialRequests=[...requests];requests.length=0;
- started=Date.now();await page.locator('[data-ledger=chores]').click();await page.locator('#chores-status').filter({hasText:'up to date'}).waitFor();
+ started=Date.now();await page.locator('[data-ledger=chores]').click();await page.locator('#chores-status').filter({hasText:/up to date/i}).waitFor({state:'attached'});
  const choreTabReadyMs=Date.now()-started,assets=[];
  for(const file of await readdir('dist'))if(/\.(js|css)$/.test(file)){const data=await readFile('dist/'+file);assets.push({file,bytes:data.length,gzip:gzipSync(data).length});}
  const initialJS=assets.filter(a=>a.file.endsWith('.js')&&initialRequests.includes('/'+a.file)).reduce((s,a)=>s+a.bytes,0);
