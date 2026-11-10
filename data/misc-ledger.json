@@ -1,17 +1,59 @@
 {
   "pairs": [
     {
-      "sender": "michal",
-      "recipient": "rina",
-      "amount_cents": 414
+      "sender": "rina",
+      "recipient": "michal",
+      "amount_cents": 1879
     },
     {
-      "sender": "ohm",
-      "recipient": "rina",
-      "amount_cents": 1433
+      "sender": "rohil",
+      "recipient": "michal",
+      "amount_cents": 1918
     }
   ],
   "expenses": [
+    {
+      "id": "3e57f49d-062d-4909-90ca-37a210192926",
+      "actor": "michal",
+      "payer": "michal",
+      "shares": {
+        "rina": 1918,
+        "rohil": 1918,
+        "michal": 1918
+      },
+      "deleted": false,
+      "icon_id": "movie",
+      "paid_on": "2026-11-10",
+      "version": 1,
+      "created_at": "2026-11-10T19:22:18.588253+00:00",
+      "split_mode": "equal",
+      "description": "Movie (You Can See Everything)",
+      "amount_cents": 5754,
+      "participants": [
+        "michal",
+        "rina",
+        "rohil"
+      ]
+    },
+    {
+      "id": "dab5e23a-5c0a-4fe1-a66c-c03e1f4d4277",
+      "actor": "michal",
+      "payer": "michal",
+      "shares": {
+        "rina": 375
+      },
+      "deleted": false,
+      "icon_id": "receipt",
+      "paid_on": "2026-11-10",
+      "version": 1,
+      "created_at": "2026-11-10T22:19:15.881243+00:00",
+      "split_mode": "equal",
+      "description": "Laundry",
+      "amount_cents": 375,
+      "participants": [
+        "rina"
+      ]
+    },
     {
       "id": "c7d6cff4-482d-4ef0-8c5b-204f10300740",
       "actor": "rina",
@@ -189,9 +231,22 @@
       ]
     }
   ],
-  "updated_at": "2026-11-10T01:37:14.730898+00:00",
-  "exported_at": "2026-11-10T01:37:14.730898+00:00",
+  "updated_at": "2026-11-10T22:44:03.095701+00:00",
+  "exported_at": "2026-11-10T22:44:03.095701+00:00",
   "settlements": [
+    {
+      "id": "36b0feff-98f9-49d1-a011-638608febc88",
+      "actor": "ohm",
+      "other": "",
+      "method": "venmo",
+      "sender": "ohm",
+      "deleted": false,
+      "paid_on": "2026-11-10",
+      "version": 1,
+      "recipient": "rina",
+      "created_at": "2026-11-10T16:16:58.58538+00:00",
+      "amount_cents": 1433
+    },
     {
       "id": "e80cd69a-b751-48a1-911f-baa189d04efb",
       "actor": "rohil",
@@ -273,6 +328,48 @@
   ],
   "format_version": 1,
   "expense_history": [
+    {
+      "id": "dab5e23a-5c0a-4fe1-a66c-c03e1f4d4277",
+      "actor": "michal",
+      "payer": "michal",
+      "shares": {
+        "rina": 375
+      },
+      "deleted": false,
+      "icon_id": "receipt",
+      "paid_on": "2026-11-10",
+      "version": 1,
+      "created_at": "2026-11-10T22:19:15.881243+00:00",
+      "split_mode": "equal",
+      "description": "Laundry",
+      "amount_cents": 375,
+      "participants": [
+        "rina"
+      ]
+    },
+    {
+      "id": "3e57f49d-062d-4909-90ca-37a210192926",
+      "actor": "michal",
+      "payer": "michal",
+      "shares": {
+        "rina": 1918,
+        "rohil": 1918,
+        "michal": 1918
+      },
+      "deleted": false,
+      "icon_id": "movie",
+      "paid_on": "2026-11-10",
+      "version": 1,
+      "created_at": "2026-11-10T19:22:18.588253+00:00",
+      "split_mode": "equal",
+      "description": "Movie (You Can See Everything)",
+      "amount_cents": 5754,
+      "participants": [
+        "michal",
+        "rina",
+        "rohil"
+      ]
+    },
     {
       "id": "c7d6cff4-482d-4ef0-8c5b-204f10300740",
       "actor": "rina",
@@ -546,6 +643,19 @@
   ],
   "rounding_cursor": 0,
   "settlement_history": [
+    {
+      "id": "36b0feff-98f9-49d1-a011-638608febc88",
+      "actor": "ohm",
+      "other": "",
+      "method": "venmo",
+      "sender": "ohm",
+      "deleted": false,
+      "paid_on": "2026-11-10",
+      "version": 1,
+      "recipient": "rina",
+      "created_at": "2026-11-10T16:16:58.58538+00:00",
+      "amount_cents": 1433
+    },
     {
       "id": "e80cd69a-b751-48a1-911f-baa189d04efb",
       "actor": "rohil",

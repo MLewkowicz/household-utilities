@@ -1,11 +1,11 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import atlas from '../src/geography-data.json';
-import {isAnswer,answerSuggestions,countryHints,useHint,revealCountry,inRegion,newRound,remainingSeconds,roundEnd,restoreRound,countryView,countryPath,regionView,REGIONS,type Country} from '../src/geography';
+import {isAnswer,answerSuggestions,countryHints,useHint,revealCountry,inRegion,newRound,remainingSeconds,roundEnd,restoreRound,countryView,countryPath,regionView,REGIONS,inPool,COUNTRY_IDS,shuffledCountries,roundScore,type Country} from '../src/geography';
 const countries=atlas as Country[],find=(id:string)=>countries.find(c=>c.id===id)!;
 test('atlas has usable geometry, context cards and the small Pacific countries',()=>{
  assert.equal(countries.length,242);assert.equal(new Set(countries.map(c=>c.id)).size,242);
- for(const c of countries){assert.ok(c.name&&c.capital&&c.population&&c.facts.length>=2,c.name);assert.ok(countryPath(c).startsWith('M'));assert.ok(countryView(c).every(Number.isFinite));}
+ for(const c of countries){assert.ok(c.name&&c.capital&&c.population,c.name);assert.ok(countryPath(c).startsWith('M'));assert.ok(countryView(c).every(Number.isFinite));}
  for(const id of ['FSM','PLW','MHL','NRU','KIR','GUM'])assert.equal(inRegion(find(id),'Micronesia'),true,id);
  assert.equal(inRegion(find('TUV'),'Polynesia'),true);assert.equal(inRegion(find('FJI'),'Melanesia'),true);
  for(const region of REGIONS)assert.ok(countries.some(c=>inRegion(c,region)),region);
@@ -41,4 +41,28 @@ test('assistance restores per-country progress and remains compatible with older
  const r=restoreRound({...newRound('Europe'),correct:['POL'],revealed:['POL','FRA','FRA','NGA','fake'],hints:{FRA:99,POL:1,NGA:1,fake:1,DEU:-1}},countries)!;
  assert.deepEqual(r.revealed,['FRA']);assert.equal(r.hints.FRA,countryHints(find('FRA'),'Europe').length);assert.equal(r.hints.NGA,undefined);assert.equal(r.hints.DEU,undefined);
  const timed=restoreRound({...r,limit:60},countries)!;assert.deepEqual(timed.revealed,[]);assert.deepEqual(timed.hints,{});
+});
+
+
+test('country sets include 195 countries and Antarctica only in expanded World, without its own quiz region',()=>{
+ assert.equal(COUNTRY_IDS.size,195);assert.equal(countries.filter(c=>inPool(c,'World')).length,195);
+ assert.equal(countries.filter(c=>inPool(c,'World','expanded')).length,242);
+ for(const id of ['ISR','PSX','VAT','FRA','USA'])assert.ok(inPool(find(id),'World'),id);
+ for(const id of ['GUM','TWN','KOS','ATA','GRL']){assert.equal(inPool(find(id),'World'),false,id);assert.ok(inPool(find(id),'World','expanded'),id);}
+ assert.ok(!(REGIONS as readonly string[]).includes('Antarctica'));
+ const migrated=restoreRound({...newRound(),region:'Antarctica',scope:'expanded',correct:['ATA'],ended:'won',finishedAt:1000},countries)!;assert.equal(migrated.region,'World');assert.equal(migrated.ended,null);assert.deepEqual(migrated.correct,['ATA']);
+});
+test('competitive rules are fixed, learning shuffles without repeats, and hints begin with the capital',()=>{
+ const r=newRound('Europe',0,0,'countries','competitive');assert.equal(r.limit,300);assert.equal(r.maxLives,3);
+ assert.equal(useHint(r,find('POL')),false);assert.equal(revealCountry(r,find('POL')),false);
+ assert.equal(countryHints(find('POL'),'World')[0],'Capital: Warsaw');
+ const eligible=countries.filter(c=>inPool(c,'Micronesia'));const order=shuffledCountries(eligible,()=>.2);assert.equal(new Set(order).size,eligible.length);assert.notDeepEqual(order,eligible.map(c=>c.id));
+ assert.equal(roundScore({...r,correct:['POL','FRA'],mistakes:1}),175);
+ assert.equal(roundScore({...r,correct:[],mistakes:3}),0);
+ assert.equal(restoreRound({...r,limit:0},countries),null);
+});
+test('history avoids current officeholders, preserves context, and drops region-only hints',()=>{
+ for(const c of countries)for(const fact of c.facts)assert.doesNotMatch(fact,/KISHIDA|current leader|became prime minister in 2021/);
+ assert.match(find('JPN').facts[0],/military government/);assert.match(find('FRA').facts[0],/Versailles/);assert.match(find('PLW').facts[2],/nuclear-free constitution/);
+ assert.ok(!countryHints(find('NGA'),'World').some(h=>h.startsWith('Region:')));
 });

@@ -12,7 +12,7 @@ test('bundled ETOPO1 grid has real elevations, stable poles and a seamless date 
 });
 test('globe coordinates and regional camera presets handle both hemispheres and small islands',()=>{
  for(const [lon,lat] of [[0,0],[-73,40],[178,-20],[-160,12],[25,-85]]){const actual=sphereCoordinate(...spherePoint(lon,lat,1.03));assert.ok(Math.abs(actual[0]-lon)<1e-8);assert.ok(Math.abs(actual[1]-lat)<1e-8);}
- const world=globeRegionView('World');assert.ok(world.distance>3.4);assert.ok(globeRegionView('Oceania').lon>140);assert.ok(globeRegionView('Antarctica').lat<-70);
+ const world=globeRegionView('World');assert.ok(world.distance>3.4);assert.ok(globeRegionView('Oceania').lon>140);
  const palau=countries.find(c=>c.id==='PLW')!;assert.ok(globeCountryView(palau).distance<1.5);assert.equal(globeCountryView(palau).lon,palau.center[0]);
 });
 test('Games has a direct route without becoming a seventh rotating household destination',()=>{

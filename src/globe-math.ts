@@ -20,13 +20,13 @@ export function sphereCoordinate(x:number,y:number,z:number):[number,number]{ret
 export type GlobeView={lon:number;lat:number;distance:number};
 export const DEFAULT_GLOBE_VIEW:GlobeView={lon:18,lat:18,distance:3.65};
 export function globeRegionView(region:Region):GlobeView{
- const centers:Partial<Record<Region,[number,number,number]>>={Africa:[20,2,2.65],Asia:[95,30,3],Europe:[20,51,2.2],'North America':[-105,40,2.9],'South America':[-60,-20,2.65],Oceania:[160,-14,3],Micronesia:[158,10,2.5],Polynesia:[-150,-10,2.7],Melanesia:[157,-12,2.4],Caribbean:[-72,18,1.7],'Central America':[-86,15,1.7],Antarctica:[0,-80,2.7]};
+ const centers:Partial<Record<Region,[number,number,number]>>={Africa:[20,2,2.65],Asia:[95,30,3],Europe:[20,51,2.2],'North America':[-105,40,2.9],'South America':[-60,-20,2.65],Oceania:[160,-14,3],Micronesia:[158,10,2.5],Polynesia:[-150,-10,2.7],Melanesia:[157,-12,2.4],Caribbean:[-72,18,1.7],'Central America':[-86,15,1.7]};
  const c=centers[region];return c?{lon:c[0],lat:c[1],distance:c[2]}:{...DEFAULT_GLOBE_VIEW};
 }
 export function globeCountryView(c:Country):GlobeView{
  const [lon,lat]=c.center,points=c.rings.flat().filter(p=>Math.abs(wrapLongitude(p[0]-lon))<80&&Math.abs(p[1]-lat)<65);
- const extent=Math.max(1,...points.map(p=>Math.hypot(wrapLongitude(p[0]-lon)*Math.cos(lat*Math.PI/180),p[1]-lat)));
- return {lon,lat:Math.max(-85,Math.min(85,lat)),distance:Math.min(3.2,1.1+extent*.036)};
+ const extent=Math.max(.2,...points.map(p=>Math.hypot(wrapLongitude(p[0]-lon)*Math.cos(lat*Math.PI/180),p[1]-lat)));
+ return {lon,lat:Math.max(-85,Math.min(85,lat)),distance:Math.min(3.2,1.045+extent*.036)};
 }
 export function smallCountry(c:Country){return c.rings.reduce((sum,ring)=>sum+Math.abs(ring.reduce((area,p,i)=>{const q=ring[(i+1)%ring.length];return area+p[0]*q[1]-q[0]*p[1];},0)/2),0)<.4;}
 /** Test the source polygons directly: antialiased texture pixels can mix country IDs at a border. */

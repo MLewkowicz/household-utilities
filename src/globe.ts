@@ -1,10 +1,10 @@
 import * as T from 'three';
 import {createGlobeTerrain} from './globe-terrain';
 import {countryTapSequence} from './globe-borders';
-import {inRegion,type Country,type Region} from './geography';
+import {inPool,type Country,type Region,type CountryScope} from './geography';
 import {elevationAt,reliefRadius,spherePoint,sphereCoordinate,globeRegionView,globeCountryView,smallCountry,wrapLongitude,containsCoordinate,type GlobeView} from './globe-math';
 export type GlobeStyle='terrain'|'paper';
-export type GlobeState={region:Region;correct:string[];revealed:string[];selected?:string;playing:boolean};
+export type GlobeState={region:Region;scope?:CountryScope;label?:string;correct:string[];revealed:string[];selected?:string;playing:boolean};
 export type GlobeSurface={setState:(s:GlobeState)=>void;setStyle:(style:GlobeStyle)=>Promise<void>;reset:()=>void;focusCountry:(c:Country)=>void;zoom:(factor:number)=>void;entrance:()=>void;setActive:(v:boolean)=>void;destroy:()=>void};
 export async function mountGlobe(host:HTMLElement,countries:Country[],onSelect:(c:Country,reveal?:boolean)=>void,initialStyle:GlobeStyle='terrain'):Promise<GlobeSurface>{
  const renderer=new T.WebGLRenderer({alpha:true,antialias:true,powerPreference:'default'});
@@ -13,19 +13,23 @@ export async function mountGlobe(host:HTMLElement,countries:Country[],onSelect:(
  let terrain:Awaited<ReturnType<typeof createGlobeTerrain>>;
  try{terrain=await createGlobeTerrain(renderer,countries,requestDraw,initialStyle);}catch(error){renderer.dispose();throw error;}
  const {grid,earth}=terrain;host.replaceChildren(el);
+ const label=document.createElement('span');label.className='globe-country-label';label.hidden=true;host.append(label);
+ const centers=new Map(countries.map(c=>[c.id,new T.Vector3(...spherePoint(c.center[0],c.center[1],1.005))]));
+ const geographicBounds=new Map(countries.map(c=>{const points=c.rings.flat();return [c.id,{west:Math.min(...points.map(p=>p[0])),east:Math.max(...points.map(p=>p[0])),south:Math.min(...points.map(p=>p[1])),north:Math.max(...points.map(p=>p[1]))}];}));
+
  const scene=new T.Scene(),camera=new T.PerspectiveCamera(36,1,.005,80),planet=new T.Group();scene.add(planet);
  const ambient=new T.AmbientLight(0xe2e9de,1.05);scene.add(ambient);const key=new T.DirectionalLight(0xfff0de,2.6),fill=new T.DirectionalLight(0x8cc7dd,.45);scene.add(key,fill);
  planet.add(earth,terrain.borders,terrain.selectedBorder);
  const glowMaterial=new T.ShaderMaterial({transparent:true,depthWrite:false,blending:T.AdditiveBlending,uniforms:{tint:{value:new T.Color('#6bbbd7')}},vertexShader:'varying vec3 n; varying vec3 v; void main(){vec4 p=modelViewMatrix*vec4(position,1.0);n=normalize(normalMatrix*normal);v=normalize(-p.xyz);gl_Position=projectionMatrix*p;}',fragmentShader:'uniform vec3 tint; varying vec3 n; varying vec3 v; void main(){float rim=pow(1.0-max(0.0,dot(normalize(n),normalize(v))),3.5);gl_FragColor=vec4(tint,rim*0.4);}' });
  const atmosphere=new T.Mesh(new T.SphereGeometry(1.028,96,64),glowMaterial);planet.add(atmosphere);
  const dot=document.createElement('canvas');dot.width=dot.height=32;const dotContext=dot.getContext('2d')!;dotContext.fillStyle='#fff';dotContext.beginPath();dotContext.arc(16,16,12,0,Math.PI*2);dotContext.fill();const dotTexture=new T.CanvasTexture(dot);
- const markerMaterial=new T.PointsMaterial({map:dotTexture,alphaTest:.2,size:6,sizeAttenuation:false,vertexColors:true,transparent:true,opacity:.9,depthWrite:false}),markers=new T.Points(new T.BufferGeometry(),markerMaterial);planet.add(markers);let tiny:Country[]=[];
+ const markerMaterial=new T.PointsMaterial({map:dotTexture,alphaTest:.2,size:8,sizeAttenuation:false,vertexColors:true,transparent:true,opacity:.9,depthWrite:false}),markers=new T.Points(new T.BufferGeometry(),markerMaterial);planet.add(markers);let tiny:Country[]=[];
  let state:GlobeState={region:'World',correct:[],revealed:[],playing:false},view=globeRegionView('World'),active=!host.closest('[hidden]'),visible=true,frame=0,last=0,interacted=false,lost=false;
  let motion:{from:GlobeView;to:GlobeView;at:number;duration:number}|undefined;
  const reduce=matchMedia('(prefers-reduced-motion: reduce)'),ray=new T.Raycaster(),pointer=new T.Vector2();
  function redrawTexture(){
   terrain.paint(state);
-  tiny=countries.filter(c=>inRegion(c,state.region)&&smallCountry(c));const points:number[]=[],colors:number[]=[];
+  tiny=countries.filter(c=>inPool(c,state.region,state.scope)&&smallCountry(c));const points:number[]=[],colors:number[]=[];
   const paper=terrain.style==='paper';
   for(const c of tiny){points.push(...spherePoint(c.center[0],c.center[1],(paper?1:reliefRadius(elevationAt(grid,...c.center as [number,number])))+.004));const color=new T.Color(state.correct.includes(c.id)?(paper?'#276b48':'#72eeac'):state.revealed.includes(c.id)?(paper?'#986326':'#ecc17b'):paper?'#625845':c.id===state.selected?'#ffe3a1':'#d9caa3');colors.push(color.r,color.g,color.b);}
   markers.geometry.dispose();markers.geometry=new T.BufferGeometry();markers.geometry.setAttribute('position',new T.Float32BufferAttribute(points,3));markers.geometry.setAttribute('color',new T.Float32BufferAttribute(colors,3));requestDraw();
@@ -36,29 +40,39 @@ export async function mountGlobe(host:HTMLElement,countries:Country[],onSelect:(
   if(motion){const t=Math.min(1,(now-motion.at)/motion.duration),ease=1-Math.pow(1-t,3);view={lon:motion.from.lon+wrapLongitude(motion.to.lon-motion.from.lon)*ease,lat:T.MathUtils.lerp(motion.from.lat,motion.to.lat,ease),distance:T.MathUtils.lerp(motion.from.distance,motion.to.distance,ease)};if(t===1){view={...motion.to};motion=undefined;}}
   else if(!state.playing&&!interacted&&!reduce.matches&&last)view.lon+=Math.min(50,now-last)*.0018;
   last=now;positionCamera();if(terrain.style==='terrain')terrain.detail.update(view,!motion&&pointers.size===0);renderer.render(scene,camera);
+  const target=state.label&&centers.get(state.label);label.hidden=!target;
+  if(target){const front=target.dot(camera.position.clone().sub(target))>0,p=target.clone().project(camera);label.hidden=!front||Math.abs(p.x)>1||Math.abs(p.y)>1;label.textContent=countries.find(c=>c.id===state.label)!.name;label.style.left=`${(p.x+1)/2*el.clientWidth}px`;label.style.top=`${(1-p.y)/2*el.clientHeight}px`;}
+
   el.dataset.ready='true';el.dataset.longitude=view.lon.toFixed(2);el.dataset.latitude=view.lat.toFixed(2);el.dataset.distance=view.distance.toFixed(3);
   if(motion||!state.playing&&!interacted&&!reduce.matches)requestDraw();
  }
  function requestDraw(){if(!frame&&active&&visible&&!document.hidden&&!lost)frame=requestAnimationFrame(draw);}
  function go(to:GlobeView,duration=700){taps.reset();interacted=true;if(reduce.matches){view={...to};motion=undefined;}else motion={from:{...view},to,at:performance.now(),duration};requestDraw();}
- function resize(){const {width,height}=host.getBoundingClientRect();if(!width||!height)return;renderer.setPixelRatio(Math.min(devicePixelRatio,2.5,Math.sqrt(6000000/(width*height))));renderer.setSize(width,height,false);camera.aspect=width/height;camera.fov=36/Math.min(1,camera.aspect);camera.updateProjectionMatrix();requestDraw();}
+ function resize(){const {width,height}=host.getBoundingClientRect();if(!width||!height)return;renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<=720?1.75:2,Math.sqrt(4000000/(width*height))));renderer.setSize(width,height,false);camera.aspect=width/height;camera.fov=Math.min(75,36/Math.min(1,camera.aspect));camera.updateProjectionMatrix();requestDraw();}
  const ro=new ResizeObserver(resize);ro.observe(host);
  const io=new IntersectionObserver(entries=>{visible=entries.some(e=>e.isIntersecting);if(visible){last=0;requestDraw();}else{cancelAnimationFrame(frame);frame=0;}},{threshold:0});io.observe(host);
  const abort=new AbortController(),signal=abort.signal;
  document.addEventListener('visibilitychange',()=>{last=0;if(document.hidden){cancelAnimationFrame(frame);frame=0;}else requestDraw();},{signal});
  function atPoint(clientX:number,clientY:number){
   const r=el.getBoundingClientRect();pointer.set((clientX-r.left)/r.width*2-1,-(clientY-r.top)/r.height*2+1);ray.setFromCamera(pointer,camera);
-  ray.params.Points!.threshold=Math.max(.002,(view.distance-1)*.012);
-  const point=ray.intersectObject(markers).find(hit=>{const normal=hit.point.clone().normalize();return normal.dot(camera.position.clone().sub(hit.point))>0;});
-  if(point&&point.index!==undefined)return tiny[point.index];
-  const hit=ray.intersectObject(earth)[0];if(!hit)return;
-  const [lon,lat]=sphereCoordinate(hit.point.x,hit.point.y,hit.point.z);
-  return countries.find(c=>inRegion(c,state.region)&&containsCoordinate(c,lon,lat));
+  // Screen-space targets stay easy to tap at every zoom level. Nearest wins.
+  let nearest:Country|undefined,best=matchMedia('(pointer:coarse)').matches?22:16;
+  for(const c of tiny){const center=centers.get(c.id)!;if(center.dot(camera.position.clone().sub(center))<=0)continue;
+   const p=center.clone().project(camera),d=Math.hypot(r.left+(p.x+1)/2*r.width-clientX,r.top+(1-p.y)/2*r.height-clientY);
+   if(d<best){best=d;nearest=c;}
+  }
+  if(nearest)return nearest;
+  // Analytic intersections avoid scanning up to 900,000 terrain triangles per tap.
+  const hit=new T.Vector3(),sphere=new T.Sphere(new T.Vector3(),1);
+  if(!ray.ray.intersectSphere(sphere,hit))return;
+  if(terrain.style==='terrain')for(let i=0;i<3;i++){const [lon,lat]=sphereCoordinate(hit.x,hit.y,hit.z);sphere.radius=reliefRadius(elevationAt(grid,lon,lat));if(!ray.ray.intersectSphere(sphere,hit))return;}
+  const [lon,lat]=sphereCoordinate(hit.x,hit.y,hit.z);
+  return countries.find(c=>{const b=geographicBounds.get(c.id)!;return inPool(c,state.region,state.scope)&&lon>=b.west&&lon<=b.east&&lat>=b.south&&lat<=b.north&&containsCoordinate(c,lon,lat);});
  }
  const taps=countryTapSequence();let tapped:Country|undefined;
  const pointers=new Map<number,{x:number;y:number}>();let drag:{x:number;y:number;lon:number;lat:number}|undefined,moved=false,pinch=0;
  function stopMotion(){motion=undefined;interacted=true;}
- function zoom(factor:number){taps.reset();stopMotion();view.distance=Math.max(1.07,Math.min(6,1+(view.distance-1)*factor));requestDraw();}
+ function zoom(factor:number){taps.reset();stopMotion();view.distance=Math.max(1.04,Math.min(6,1+(view.distance-1)*factor));requestDraw();}
  el.addEventListener('pointerdown',e=>{if(e.button!==0)return;tapped=undefined;stopMotion();el.focus({preventScroll:true});pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});drag={x:e.clientX,y:e.clientY,lon:view.lon,lat:view.lat};moved=pointers.size>1;if(pointers.size===2){const [a,b]=[...pointers.values()];pinch=Math.hypot(a.x-b.x,a.y-b.y);}el.setPointerCapture(e.pointerId);},{signal});
  el.addEventListener('pointermove',e=>{if(!pointers.has(e.pointerId)||!drag)return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2){const [a,b]=[...pointers.values()],d=Math.hypot(a.x-b.x,a.y-b.y);if(d>0&&pinch>0)zoom(pinch/d);pinch=d;moved=true;return;}const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.hypot(dx,dy)>4)moved=true;if(moved){taps.reset();const scale=Math.min(1,(view.distance-1)/2)*180/Math.min(el.clientWidth,el.clientHeight);view.lon=drag.lon-dx*scale;view.lat=Math.max(-85,Math.min(85,drag.lat+dy*scale));requestDraw();}},{signal});
  function end(e:PointerEvent,cancel=false){const tap=!moved&&!cancel;pointers.delete(e.pointerId);if(el.hasPointerCapture(e.pointerId))el.releasePointerCapture(e.pointerId);if(pointers.size){const p=[...pointers.values()][0];drag={x:p.x,y:p.y,lon:view.lon,lat:view.lat};moved=true;}else drag=undefined;requestDraw();if(tap){const c=atPoint(e.clientX,e.clientY);tapped=c;if(c)onSelect(c);else taps.reset();}else{tapped=undefined;taps.reset();}}
@@ -66,8 +80,8 @@ export async function mountGlobe(host:HTMLElement,countries:Country[],onSelect:(
  el.addEventListener('pointerup',e=>end(e),{signal});el.addEventListener('pointercancel',e=>end(e,true),{signal});el.addEventListener('wheel',e=>{e.preventDefault();zoom(Math.exp(Math.max(-.4,Math.min(.4,e.deltaY*.0018))));},{passive:false,signal});
  el.addEventListener('keydown',e=>{taps.reset();if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();stopMotion();const step=Math.max(1,(view.distance-1)*6);view.lon+=(e.key==='ArrowRight'?step:e.key==='ArrowLeft'?-step:0);view.lat=Math.max(-85,Math.min(85,view.lat+(e.key==='ArrowUp'?step:e.key==='ArrowDown'?-step:0)));requestDraw();}else if(e.key==='Home'){e.preventDefault();go(globeRegionView(state.region));}else if(['+','=','-'].includes(e.key)){e.preventDefault();zoom(e.key==='-'?1.25:.8);}else if(e.key==='Enter'||e.key===' '){e.preventDefault();const r=el.getBoundingClientRect(),c=atPoint(r.x+r.width/2,r.y+r.height/2);if(c)onSelect(c);}},{signal});
  el.addEventListener('webglcontextlost',e=>{e.preventDefault();lost=true;cancelAnimationFrame(frame);host.dispatchEvent(new CustomEvent('globe-unavailable'));},{signal});
- Object.assign(window,{__globeDiagnostics:()=>({view:{...view},animating:!!motion,active,visible,region:state.region,correct:[...state.correct],revealed:[...state.revealed],style:terrain.style,borderEdges:terrain.borderEdges,borderSample:Array.from((terrain.borders.geometry.attributes.instanceStart as T.InterleavedBufferAttribute).data.array.slice(0,12)),borderWidth:terrain.borders.material.linewidth,selected:state.selected,triangles:terrain.triangles,textureWidth:terrain.textureWidth,normalWidth:terrain.normalWidth,pixelRatio:renderer.getPixelRatio(),drawCalls:renderer.info.render.calls,frames:renderer.info.render.frame,detail:terrain.detail.diagnostics(),elevation:'ETOPO1',playing:state.playing,project:(id:string)=>{const c=countries.find(c=>c.id===id);if(!c)return null;const p=new T.Vector3(...spherePoint(...c.center as [number,number],1.01)),front=p.dot(camera.position.clone().sub(p))>0;p.project(camera);const r=el.getBoundingClientRect();return {x:r.x+(p.x+1)/2*r.width,y:r.y+(1-p.y)/2*r.height,visible:front&&Math.abs(p.x)<1&&Math.abs(p.y)<1};}})});
+ Object.assign(window,{__globeDiagnostics:()=>({view:{...view},animating:!!motion,active,visible,region:state.region,scope:state.scope,label:state.label,correct:[...state.correct],revealed:[...state.revealed],style:terrain.style,borderEdges:terrain.borderEdges,borderSample:Array.from((terrain.borders.geometry.attributes.instanceStart as T.InterleavedBufferAttribute).data.array.slice(0,12)),borderWidth:terrain.borders.material.linewidth,selected:state.selected,triangles:terrain.triangles,textureWidth:terrain.textureWidth,normalWidth:terrain.normalWidth,pixelRatio:renderer.getPixelRatio(),drawCalls:renderer.info.render.calls,frames:renderer.info.render.frame,detail:terrain.detail.diagnostics(),elevation:'ETOPO1',playing:state.playing,project:(id:string)=>{const c=countries.find(c=>c.id===id);if(!c)return null;const p=new T.Vector3(...spherePoint(...c.center as [number,number],1.01)),front=p.dot(camera.position.clone().sub(p))>0;p.project(camera);const r=el.getBoundingClientRect();return {x:r.x+(p.x+1)/2*r.width,y:r.y+(1-p.y)/2*r.height,visible:front&&Math.abs(p.x)<1&&Math.abs(p.y)<1};}})});
  function updateStyle(){const paper=terrain.style==='paper';atmosphere.visible=!paper;ambient.intensity=paper?1.4:1.05;key.intensity=paper?1.35:2.6;fill.intensity=paper?.2:.45;el.dataset.style=terrain.style;redrawTexture();}
  updateStyle();resize();
- return {async setStyle(style){taps.reset();await terrain.setStyle(style);updateStyle();},setState(next){const paint=next.region!==state.region||next.selected!==state.selected||next.correct.join()!==state.correct.join()||next.revealed.join()!==state.revealed.join();state={...next,correct:[...next.correct],revealed:[...next.revealed]};if(paint)redrawTexture();requestDraw();},reset(){go(globeRegionView(state.region));},focusCountry(c){go(globeCountryView(c));},zoom,entrance(){view={...globeRegionView('World'),distance:8};go(globeRegionView('World'),1900);},setActive(value){active=value;last=0;if(value){resize();requestDraw();}else{terrain.detail.suspend();cancelAnimationFrame(frame);frame=0;}},destroy(){abort.abort();ro.disconnect();io.disconnect();cancelAnimationFrame(frame);terrain.destroy();atmosphere.geometry.dispose();glowMaterial.dispose();markers.geometry.dispose();markerMaterial.dispose();dotTexture.dispose();renderer.dispose();el.remove();}};
+ return {async setStyle(style){taps.reset();await terrain.setStyle(style);updateStyle();},setState(next){const paint=next.region!==state.region||next.scope!==state.scope||next.selected!==state.selected||next.correct.join()!==state.correct.join()||next.revealed.join()!==state.revealed.join();state={...next,correct:[...next.correct],revealed:[...next.revealed]};if(paint)redrawTexture();requestDraw();},reset(){go(globeRegionView(state.region));},focusCountry(c){go(globeCountryView(c));},zoom,entrance(){view={...globeRegionView('World'),distance:8};go(globeRegionView('World'),1900);},setActive(value){active=value;last=0;if(value){resize();requestDraw();}else{terrain.detail.suspend();cancelAnimationFrame(frame);frame=0;}},destroy(){abort.abort();ro.disconnect();io.disconnect();cancelAnimationFrame(frame);terrain.destroy();atmosphere.geometry.dispose();glowMaterial.dispose();markers.geometry.dispose();markerMaterial.dispose();dotTexture.dispose();renderer.dispose();el.remove();label.remove();}};
 }

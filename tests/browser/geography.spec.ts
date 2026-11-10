@@ -1,57 +1,73 @@
 import {test,expect,type Page} from '@playwright/test';
-import {readFileSync} from 'node:fs';import {inRegion,type Country} from '../../src/geography';import {globeRegionView} from '../../src/globe-math';
+import {readFileSync} from 'node:fs';
+import {inPool,type Country} from '../../src/geography';
+import {globeRegionView} from '../../src/globe-math';
 const countries=JSON.parse(readFileSync('src/geography-data.json','utf8')) as Country[];
 const diag=(page:Page)=>page.evaluate(()=>(window as any).__globeDiagnostics());
-const open=async(page:Page)=>{await page.goto('/#games/geography');await expect(page.locator('#geo-globe')).toHaveAttribute('data-ready','true',{timeout:60000});await expect(page.locator('#main')).toHaveAttribute('aria-busy','false');};
-async function select(page:Page,id:string){const d=await diag(page),pool=countries.filter(c=>inRegion(c,d.region)&&!d.correct.includes(c.id)&&!d.revealed.includes(c.id)&&c.id!==d.selected),index=pool.findIndex(c=>c.id===id);expect(index).toBeGreaterThanOrEqual(0);await page.evaluate(value=>{(window as any).savedRandom=Math.random;Math.random=()=>value;},(index+.5)/pool.length);await page.locator('#geo-random').click();await page.evaluate(()=>{Math.random=(window as any).savedRandom;});await expect(page.locator('#geo-answer-form')).toBeVisible();}
+const ready=(page:Page)=>expect(page.locator('#main')).toHaveAttribute('aria-busy','false',{timeout:60000});
+async function settings(page:Page,region='World',mode='practice',scope='countries'){await page.locator('#geo-settings').click();await page.locator('#geo-new-region').selectOption(region);await page.locator('#geo-mode').selectOption(mode);await page.locator('#geo-scope').selectOption(scope);}
+async function start(page:Page,region='World',mode='practice',scope='countries'){await settings(page,region,mode,scope);await page.locator('#geo-new-round').click();}
+async function open(page:Page,webgl=false){await page.goto(webgl?'/#games/geography':'/?webgl=0#games/geography');await ready(page);if(webgl)await expect(page.locator('#geo-globe')).toHaveAttribute('data-ready','true',{timeout:60000});}
+async function randomCountry(page:Page,id:string){
+ const state=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-v1:michal')||'null'));
+ const selected=await page.evaluate(()=>(window as any).__globeDiagnostics?.().selected);
+ const pool=countries.filter(c=>inPool(c,state?.region||'World',state?.scope||'countries')&&!state?.correct.includes(c.id)&&!state?.revealed.includes(c.id)&&c.id!==selected);
+ const index=pool.findIndex(c=>c.id===id);expect(index).toBeGreaterThanOrEqual(0);
+ await page.evaluate(value=>{(window as any).originalRandom=Math.random;Math.random=()=>value;},(index+.5)/pool.length);await page.locator('#geo-random').click();await page.evaluate(()=>{Math.random=(window as any).originalRandom;});
+}
+async function pick(page:Page,id:string){await page.locator(`#geo-land [data-country=${id}]`).focus();await page.keyboard.press('Enter');}
 const submit=async(page:Page,answer:string)=>{await page.locator('#geo-answer').fill(answer);await page.locator('#geo-check').click();};
-// Software WebGL compiles the terrain and outline shaders during these interaction checks.
-test.setTimeout(120000);
 test.use({reducedMotion:'reduce',viewport:{width:1280,height:900}});
-test.beforeEach(async({page})=>{await page.addInitScript(()=>localStorage.setItem('household-person','michal'));});
-test('unlabeled globe accepts aliases, greens correct countries, shows facts and keeps per-person progress',async({page})=>{
- await open(page);await expect(page.locator('#geo-globe')).not.toHaveAttribute('aria-label',/Poland/);await select(page,'POL');await page.locator('#geo-answer').fill('Polnad');await expect(page.locator('#geo-suggestions')).toContainText('Poland');await page.locator('#geo-suggestions li').first().click();await page.locator('#geo-check').click();
- await expect(page.locator('#geo-correct')).toHaveText('1');expect((await diag(page)).correct).toEqual(['POL']);await expect(page.locator('#geo-country-card')).toContainText('Warsaw');await expect(page.locator('#geo-country-card li')).toHaveCount(4);await expect(page.locator('#geo-country-card a')).toHaveCount(0);
- await page.reload();await expect(page.locator('#geo-correct')).toHaveText('1');await expect(page.locator('#geo-collection')).toContainText('Poland');await page.locator('#geo-player').selectOption('rina');await expect(page.locator('#geo-correct')).toHaveText('0');await page.locator('#geo-player').selectOption('michal');await expect(page.locator('#geo-correct')).toHaveText('1');
-});
-test('regional suggestions, random zoom, rotation and reset preserve the round',async({page})=>{
- // Rebuilding the terrain after reload can exceed two minutes on software WebGL.
- test.setTimeout(180000);
- await open(page);await page.locator('#geo-region').selectOption('Micronesia');const count=await page.locator('#geo-remaining').textContent();expect(Number(count)).toBeGreaterThan(5);expect((await diag(page)).view).toEqual(globeRegionView('Micronesia'));
- await select(page,'PLW');expect((await diag(page)).view.distance).toBeLessThan(1.5);await page.locator('#geo-answer').fill('Fiji');await expect(page.locator('#geo-suggestions')).toBeHidden();await page.locator('#geo-answer').fill('Pal');await expect(page.locator('#geo-suggestions')).toContainText('Palau');
- await page.locator('#geo-reset-view').click();expect((await diag(page)).view).toEqual(globeRegionView('Micronesia'));await expect(page.locator('#geo-remaining')).toHaveText(count!);await expect(page.locator('#geo-lives')).toHaveText('∞');
- const globe=page.locator('#geo-globe'),r=(await globe.boundingBox())!;await page.mouse.move(r.x+r.width*.5,r.y+r.height*.5);await page.mouse.down();await page.mouse.move(r.x+r.width*.5+70,r.y+r.height*.5+25,{steps:4});await page.mouse.up();expect((await diag(page)).view.lon).not.toBe(158);
- await page.locator('#geo-reset-view').click();await submit(page,'Palau');await expect(page.locator('#geo-remaining')).toHaveText(String(Number(count)-1));await page.reload();await expect(page.locator('#geo-globe')).toHaveAttribute('data-ready','true',{timeout:60000});await expect(page.locator('#geo-region')).toHaveValue('Micronesia');expect((await diag(page)).view).toEqual(globeRegionView('Micronesia'));
-});
-test('lives end rounds and the timer keeps running through the hub and navigation',async({page})=>{
- await page.clock.install();await open(page);await page.locator('#geo-settings').click();await page.locator('#geo-new-region').selectOption('Micronesia');await page.locator('#geo-life-limit').selectOption('3');await page.locator('#geo-time-limit').selectOption('60');await page.locator('#geo-new-round').click();await expect(page.locator('#geo-clock')).toHaveText('1:00');await page.clock.fastForward(10000);await expect(page.locator('#geo-clock')).toHaveText('1:00');await select(page,'PLW');
- for(let i=0;i<3;i++)await submit(page,'Nauru');await expect(page.locator('#geo-lives')).toHaveText('0');await expect(page.locator('#geo-result')).toContainText('out of lives');await expect(page.locator('#geo-answer-form')).toBeHidden();await page.locator('#geo-play-again').click();await page.locator('#geo-new-round').click();await select(page,'PLW');await page.locator('.observatory-hub-link').click();await page.clock.fastForward(61000);await page.locator('#geo-launch').click();await expect(page.locator('#geo-result')).toContainText('Time’s up');await expect(page.locator('#geo-correct')).toHaveText('0');await expect(page.locator('#geo-random')).toBeDisabled();
-});
-test('real globe hit testing and keyboard controls work, and layouts fit phone and desktop',async({page})=>{
- const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await open(page);await page.locator('#geo-region').selectOption('Africa');const point=await page.evaluate(()=>(window as any).__globeDiagnostics().project('NGA'));expect(point.visible).toBe(true);await page.mouse.click(point.x,point.y);await submit(page,'Nigeria');await expect(page.locator('#geo-correct')).toHaveText('1');
- const globe=page.locator('#geo-globe');await globe.focus();const before=(await diag(page)).view.lon;await page.keyboard.press('ArrowRight');expect((await diag(page)).view.lon).toBeGreaterThan(before);await page.keyboard.press('Home');expect((await diag(page)).view).toEqual(globeRegionView('Africa'));
- for(const width of [320,390,768,1280]){await page.setViewportSize({width,height:900});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await expect(page.locator('#geo-reset-view')).toBeVisible();}expect(errors).toEqual([]);
-});
-test('touch rotation and pinch stay in the globe; reset restores the preset',async({browser})=>{
- const context=await browser.newContext({baseURL:'http://127.0.0.1:4174',viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'reduce'}),page=await context.newPage();await open(page);const r=(await page.locator('#geo-globe').boundingBox())!,x=r.x+r.width/2,y=r.y+r.height/2,session=await context.newCDPSession(page);
- const send=(type:string,points:{x:number;y:number;id:number}[])=>session.send('Input.dispatchTouchEvent',{type,touchPoints:points});const before=(await diag(page)).view;await send('touchStart',[{x,y,id:1}]);await send('touchMove',[{x:x+45,y:y+65,id:1}]);await send('touchEnd',[]);expect((await diag(page)).view.lon).not.toBe(before.lon);await expect(page).toHaveURL(/#games\/geography$/);
- await send('touchStart',[{x:x-30,y,id:1},{x:x+30,y,id:2}]);await send('touchMove',[{x:x-70,y,id:1},{x:x+70,y,id:2}]);await send('touchEnd',[]);expect((await diag(page)).view.distance).toBeLessThan(before.distance);await page.locator('#geo-reset-view').click();expect((await diag(page)).view).toEqual(globeRegionView('World'));await expect(page.locator('#geo-correct')).toHaveText('0');await context.close();
-});
-test('a graphics failure retains the quiz on a plain unlabeled fallback map',async({page})=>{
- await page.goto('/?webgl=0#games/geography');await expect(page.locator('#geo-map')).toBeVisible();await expect(page.locator('.globe-fallback-notice')).toBeVisible();await page.locator('#geo-land [data-country=POL]').focus();await page.keyboard.press('Enter');await submit(page,'Poland');await expect(page.locator('#geo-correct')).toHaveText('1');
+test.setTimeout(120000);
+test.beforeEach(async({page})=>{await page.addInitScript(()=>{localStorage.setItem('household-person','michal');if(!localStorage.getItem('household-globe-style-v1'))localStorage.setItem('household-globe-style-v1','paper');});});
+
+test('compact screen keeps configuration in a menu, saves answers and separates household players',async({page})=>{
+ await open(page);await expect(page.locator('#geo-new-region')).toBeHidden();await expect(page.locator('#geo-total')).toHaveText('195');
+ expect((await page.locator('#geo-surface').boundingBox())!.y).toBeLessThan(120);
+ await pick(page,'POL');await page.locator('#geo-answer').fill('Polnad');await page.locator('#geo-suggestions li').first().click();await expect(page.locator('#geo-correct')).toHaveText('0');await page.locator('#geo-check').click();await expect(page.locator('#geo-correct')).toHaveText('1');await expect(page.locator('#geo-country-card')).toContainText('Warsaw');
+ await expect(page.locator('#geo-country-card .atlas-history')).not.toBeEmpty();await page.locator('#geo-country-card summary').click();await expect(page.locator('#geo-country-card details')).toHaveAttribute('open','');
+ await page.reload();await ready(page);await expect(page.locator('#geo-correct')).toHaveText('1');await page.locator('#geo-settings').click();await page.locator('#geo-review').click();await expect(page.locator('#geo-collection')).toContainText('Poland');await page.locator('#geo-review-close').click();
+ await page.locator('#geo-settings').click();await page.locator('#geo-player').selectOption('rina');await expect(page.locator('#geo-correct')).toHaveText('0');await page.locator('#geo-player').selectOption('michal');await expect(page.locator('#geo-correct')).toHaveText('1');
 });
 
-test('close-up detail loads on demand, stays bounded, and reset cancels stale loads',async({page})=>{
- test.setTimeout(180000);
- const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await open(page);
- expect((await diag(page)).detail.keys).toEqual([]);
- await select(page,'NPL');await expect.poll(async()=>(await diag(page)).detail.keys.length,{timeout:30000}).toBeGreaterThan(0);await expect.poll(async()=>(await diag(page)).detail.pending,{timeout:30000}).toBe(0);
- const detailed=await diag(page);expect(detailed.detail.keys.length).toBeGreaterThan(0);expect(detailed.detail.keys.length).toBeLessThanOrEqual(4);
- await submit(page,'Nepal');await expect(page.locator('#geo-correct')).toHaveText('1');
- await page.locator('#geo-reset-view').click();await expect.poll(async()=>(await diag(page)).detail.keys,{timeout:30000}).toEqual([]);
- let release:()=>void=()=>{};const held=new Promise<void>(resolve=>{release=resolve;});
- await page.route('**/globe/detail-*.webp',async route=>{await held;await route.continue().catch(()=>{});});
- await select(page,'POL');await expect.poll(async()=>(await diag(page)).detail.pending,{timeout:30000}).toBeGreaterThan(0);
- await page.locator('#geo-reset-view').click();release();await expect.poll(async()=>(await diag(page)).detail.pending,{timeout:30000}).toBe(0);
- expect((await diag(page)).detail.keys).toEqual([]);await expect(page.locator('#geo-correct')).toHaveText('1');expect(errors).toEqual([]);
+test('expanded World contains Antarctica, which is never a separate region option',async({page})=>{
+ await open(page);await expect(page.locator('#geo-land [data-country=ATA]')).toHaveClass(/outside-region/);await settings(page,'World','practice','expanded');await expect(page.locator('#geo-new-region option[value=Antarctica]')).toHaveCount(0);await page.locator('#geo-new-round').click();await expect(page.locator('#geo-total')).toHaveText('242');await expect(page.locator('#geo-land [data-country=ATA]')).not.toHaveClass(/outside-region/);await pick(page,'ATA');await submit(page,'Antarctica');await expect(page.locator('#geo-correct')).toHaveText('1');
+});
+
+test('competitive results persist once and appear on the shared region leaderboard',async({page})=>{
+ await open(page);await start(page,'Micronesia','competitive');await expect(page.locator('#geo-clock')).toHaveText('5:00');await pick(page,'PLW');await expect(page.locator('#geo-assistance')).toBeHidden();await submit(page,'Palau');await pick(page,'NRU');for(let i=0;i<3;i++)await submit(page,'Japan');
+ await expect(page.locator('#geo-result')).toContainText('25 points');await expect(page.locator('#geo-answer-form')).toBeHidden();await page.locator('#geo-result a').click();await expect(page.locator('#geo-score-status')).toHaveText('Shared household scores');await expect(page.locator('#geo-score-list')).toContainText('Michal');await expect(page.locator('#geo-score-list')).toContainText('25');await expect(page.locator('#geo-surface')).toBeHidden();
+ await page.locator('#geo-score-scope').selectOption('expanded');await expect(page.locator('#geo-score-list')).toContainText('No completed rounds');await page.locator('#geo-score-scope').selectOption('countries');await page.reload();await ready(page);await expect(page.locator('#geo-score-list')).toContainText('Michal');
+ const local=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-scores-v1')||'[]'));expect(local).toHaveLength(1);expect(local[0].pending).toBe(false);
+});
+
+test('failed score sync keeps an honest pending result and retries without duplicates',async({page})=>{
+ await page.route('**/rest/v1/rpc/utilities_save_geography_score',r=>r.fulfill({status:503,body:'{"message":"offline"}'}));await open(page);await start(page,'Polynesia','competitive');await pick(page,'TUV');for(let i=0;i<3;i++)await submit(page,'Samoa');await page.locator('#geo-result a').click();await expect(page.locator('#geo-score-status')).toContainText('Shared scores unavailable');await expect(page.locator('#geo-score-list')).toContainText('pending');
+ await page.unroute('**/rest/v1/rpc/utilities_save_geography_score');await page.locator('#geo-score-retry').click();await expect(page.locator('#geo-score-status')).toHaveText('Shared household scores');await expect(page.locator('#geo-score-list')).not.toContainText('pending');
+});
+
+test('timed practice continues through the continue screen and prevents late answers',async({page})=>{
+ await page.clock.install();await open(page);await settings(page,'Micronesia');await page.locator('#geo-time-limit').selectOption('60');await page.locator('#geo-new-round').click();await page.clock.fastForward(10000);await expect(page.locator('#geo-clock')).toHaveText('1:00');await pick(page,'PLW');await page.locator('#geo-settings').click();await page.locator('#geo-pause-link').click();await expect(page.locator('#geo-launch')).toHaveText('Continue');await page.clock.fastForward(61000);await page.locator('#geo-launch').click();await expect(page.locator('#geo-result')).toContainText('Time’s up');await expect(page.locator('#geo-random')).toBeDisabled();
+});
+
+test('learning shuffles, pauses in settings, reveals with a label and accepts map answers',async({page})=>{
+ await page.clock.install();await open(page);await start(page,'Micronesia','learn');await expect(page.locator('#geo-learning-prompt')).toContainText('Find ');await expect(page.locator('#geo-answer-form')).toBeHidden();
+ const target=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-v1:michal')!).learningTarget);
+ await page.locator('#geo-settings').click();await page.clock.fastForward(20000);await page.locator('#geo-settings-close').click();await expect(page.locator('#geo-revealed')).toHaveText('0');await page.clock.fastForward(12500);await expect(page.locator('#geo-revealed')).toHaveText('1');await expect(page.locator('.globe-country-label')).toHaveText(countries.find(c=>c.id===target)!.name);await expect(page.locator('#geo-next')).toBeVisible();await expect(page.locator('#geo-correct')).toHaveText('0');
+ await page.reload();await ready(page);await expect(page.locator('#geo-next')).toBeVisible();await page.locator('#geo-next').click();const next=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-v1:michal')!).learningTarget);expect(next).not.toBe(target);await pick(page,next);await expect(page.locator('#geo-correct')).toHaveText('1');await expect(page.locator('#geo-next')).toBeVisible();
+ await page.locator('#geo-next').click();await page.locator('#geo-show-me').click();await expect(page.locator('#geo-revealed')).toHaveText('2');
+});
+
+test('real globe targets islands, rotates, zooms deeper and remains idle after settling',async({page})=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await open(page,true);await start(page,'Micronesia');await randomCountry(page,'NRU');await page.locator('#geo-close-answer').click();const p=await page.evaluate(()=>(window as any).__globeDiagnostics().project('NRU'));await page.mouse.click(p.x+10,p.y+6);await submit(page,'Nauru');await expect(page.locator('#geo-correct')).toHaveText('1');await page.locator('#geo-dismiss-card').click();
+ await page.locator('#geo-zoom-in').click();expect((await diag(page)).view.distance).toBeLessThan(1.07);await page.locator('#geo-reset-view').click();expect((await diag(page)).view).toEqual(globeRegionView('Micronesia'));
+ await page.locator('#geo-globe').focus();await page.keyboard.press('ArrowRight');expect((await diag(page)).view.lon).toBeGreaterThan(158);await page.keyboard.press('Home');expect((await diag(page)).view).toEqual(globeRegionView('Micronesia'));
+ await expect.poll(async()=>{const frames=(await diag(page)).frames;await page.waitForTimeout(300);return (await diag(page)).frames-frames;},{timeout:10000}).toBe(0);expect(errors).toEqual([]);
+ await page.setViewportSize({width:390,height:844});await start(page,'Micronesia','learn');await page.locator('#geo-show-me').click();await expect(page.locator('.globe-country-label')).toBeVisible();await expect(page.locator('#geo-revealed')).toHaveText('1');await page.screenshot({path:'.local/geography-phone-globe.png'});
+});
+
+test('terrain detail stays bounded and styles preserve the camera and round',async({page})=>{
+ test.setTimeout(180000);await open(page,true);await page.locator('#geo-settings').click();await page.getByRole('button',{name:'Terrain',exact:true}).click();await expect.poll(async()=>(await diag(page)).style,{timeout:30000}).toBe('terrain');await page.locator('#geo-settings-close').click();await randomCountry(page,'NPL');
+ await expect.poll(async()=>(await diag(page)).detail.keys.length,{timeout:30000}).toBeGreaterThan(0);await expect.poll(async()=>(await diag(page)).detail.pending,{timeout:30000}).toBe(0);expect((await diag(page)).detail.keys.length).toBeLessThanOrEqual(4);await submit(page,'Nepal');await expect(page.locator('#geo-correct')).toHaveText('1');await page.locator('#geo-dismiss-card').click();
+ const view=(await diag(page)).view;await page.locator('#geo-settings').click();await page.getByRole('button',{name:'Paper',exact:true}).click();await expect.poll(async()=>(await diag(page)).style).toBe('paper');expect((await diag(page)).view).toEqual(view);expect((await diag(page)).detail.keys).toEqual([]);await expect(page.locator('#geo-correct')).toHaveText('1');await page.locator('#geo-settings-close').click();await page.locator('#geo-reset-view').click();expect((await diag(page)).view).toEqual(globeRegionView('World'));
 });

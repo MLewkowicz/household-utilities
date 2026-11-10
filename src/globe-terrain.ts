@@ -7,7 +7,7 @@ import {LineMaterial} from 'three/addons/lines/LineMaterial.js';
 import elevationData from './earth-elevation.json';
 import assets from '../public/globe/manifest.json';
 import {decodeElevation,elevationAt,reliefRadius,spherePoint} from './globe-math';
-import {inRegion,type Country} from './geography';
+import {inPool,type Country} from './geography';
 import type {GlobeState,GlobeStyle} from './globe';
 
 /** Cartographic outlines stay readable over ridges; the far hemisphere is explicitly clipped. */
@@ -98,13 +98,13 @@ export async function createGlobeTerrain(renderer:T.WebGLRenderer,countries:Coun
   state=next;ctx.clearRect(0,0,W,H);const paper=style==='paper';
   countries.forEach((c,i)=>{
    const correct=state.correct.includes(c.id),revealed=state.revealed.includes(c.id),selected=state.selected===c.id;
-   if(!inRegion(c,state.region)){ctx.fillStyle=paper?'#a49b8960':'#152a40a6';ctx.fill(paths[i],'evenodd');}
+   if(!inPool(c,state.region,state.scope)){ctx.fillStyle=paper?'#a49b8960':'#152a40a6';ctx.fill(paths[i],'evenodd');}
    if(correct){ctx.fillStyle=paper?'#66ad828c':'#38bb7c80';ctx.fill(paths[i],'evenodd');}
    else if(revealed){ctx.fillStyle=paper?'#c48a3f66':'#d7a34f66';ctx.fill(paths[i],'evenodd');}
    else if(selected){ctx.fillStyle=paper?'#c5975240':'#ffe1a120';ctx.fill(paths[i],'evenodd');}
   });
   edges.forEach((edge,i)=>{
-   const owners=edge.owners.map(n=>countries[n]),correct=owners.some(c=>state.correct.includes(c.id)),revealed=owners.some(c=>state.revealed.includes(c.id)),inside=owners.some(c=>inRegion(c,state.region));
+   const owners=edge.owners.map(n=>countries[n]),correct=owners.some(c=>state.correct.includes(c.id)),revealed=owners.some(c=>state.revealed.includes(c.id)),inside=owners.some(c=>inPool(c,state.region,state.scope));
    const tint=new T.Color(correct?(paper?'#276b48':'#9feab1'):revealed?(paper?'#986326':'#ecc17b'):paper?(inside?'#625845':'#a59b87'):(inside?'#294e4b':'#29404b')),{start,count}=ranges[i];
    for(let n=start;n<start+count;n+=3){borderColors[n]=tint.r;borderColors[n+1]=tint.g;borderColors[n+2]=tint.b;}
   });

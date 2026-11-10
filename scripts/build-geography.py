@@ -2,6 +2,7 @@
 Downloads are explicit (this script only); the app never depends on these services.
 """
 import html,json,re,math,urllib.request,tarfile,io
+from geography_history import historical_facts,HISTORY
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 CACHE=ROOT/'.local/geography'
@@ -57,12 +58,7 @@ for f in json.loads((CACHE/'countries.geojson').read_text())['features']:
  population=val(d,'People and Society','Population','total') or val(d,'People and Society','Population')
  if not population:population=f"{int(p['POP_EST']):,} ({p['POP_YEAR']} estimate)" if p['POP_EST']>=0 else 'No permanent population'
  background=val(d,'Introduction','Background').replace('U.S.','United States').replace('U.K.','United Kingdom').replace('B.C.','BCE').replace('A.D.','CE')
- sentences=[s.strip() for s in re.split(r'(?<=[.!?])\s+(?=[A-Z0-9“\"])',background) if len(s.strip())>35]
- def rank(pair):
-  i,s=pair
-  return 12*bool(re.search(r'genocide|Holocaust|enslav|slave trade',s,re.I))+7*bool(re.search(r'empire|independen|colonial|coloniz|partition|reunif|revolution|World War',s,re.I))+3*bool(re.search(r'\b\d{3,4}\b',s))+2*(i==0)-len(s)/900
- selected=sorted(sorted(enumerate(sentences),key=rank,reverse=True)[:4])
- facts=[s for i,s in selected]
+ facts=HISTORY.get(code) or historical_facts(background)
  geometry=f['geometry'];polys=geometry['coordinates'] if geometry['type']=='MultiPolygon' else [geometry['coordinates']]
  rings=[[[round(x,3),round(y,3)] for x,y in simplify(ring)] for poly in polys for ring in poly]
  aliases=list(dict.fromkeys([name,p['ADMIN'],p['NAME_LONG'],p['FORMAL_EN'],p['NAME_ALT'],*ALIASES.get(code,[])]));aliases=[a for a in aliases if a and a!='-99']
@@ -75,7 +71,7 @@ OVERRIDES={
 }
 for c in countries:
  if c['id'] in OVERRIDES:c['capital'],c['facts']=OVERRIDES[c['id']];c['background']=' '.join(c['facts']);c['source']='Editorial context; see docs/geography-data.md'
- if not c['facts']:c['facts']=[f"{c['name']} is mapped in {c['region']}.",f"Natural Earth classifies this area as: {c['type'].lower()}."];c['background']=' '.join(c['facts'])
+ # Do not fabricate historical trivia when the source has no suitable episode.
 countries.sort(key=lambda c:c['name'])
 (ROOT/'src/geography-data.json').write_text(json.dumps(countries,ensure_ascii=False,separators=(',',':'))+'\n')
 print('Built',len(countries),'map entities;',sum(len(c['facts']) for c in countries),'historical/context excerpts. Missing Factbook profiles:',missing)
