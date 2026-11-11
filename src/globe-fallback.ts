@@ -3,7 +3,7 @@ import {smallCountry} from './globe-math';
 import {countryTapSequence} from './globe-borders';
 import type {GlobeState,GlobeSurface,GlobeStyle} from './globe';
 /** A plain map retains pinch, pan, island targets and learning when WebGL is unavailable. */
-export function mountGlobeFallback(host:HTMLElement,countries:Country[],onSelect:(c:Country,reveal?:boolean)=>void,initialStyle:GlobeStyle='terrain'):GlobeSurface{
+export function mountGlobeFallback(host:HTMLElement,countries:Country[],onSelect:(c:Country|undefined,reveal?:boolean)=>void,initialStyle:GlobeStyle='terrain'):GlobeSurface{
  let state:GlobeState={region:'World',correct:[],revealed:[],playing:false},view:View=regionView('World'),paintedRegion='';
  host.innerHTML='<svg id="geo-map" role="group" aria-label="Unlabeled world map. Drag to pan, pinch to zoom. Use Tab and Enter to choose a country." xmlns="http://www.w3.org/2000/svg"><g id="geo-land"></g><g id="geo-islands"></g></svg><span class="globe-country-label" hidden></span><p class="globe-fallback-notice">3D graphics are unavailable. You can still play on this map.</p>';
  const svg=host.querySelector<SVGSVGElement>('svg')!,land=svg.querySelector('#geo-land')!,islands=svg.querySelector('#geo-islands')!,label=host.querySelector<HTMLElement>('.globe-country-label')!;
@@ -21,7 +21,7 @@ export function mountGlobeFallback(host:HTMLElement,countries:Country[],onSelect
   }
   host.querySelectorAll<SVGElement>('[data-country],[data-island]').forEach(p=>{const id=p.dataset.country||p.dataset.island!;p.classList.toggle('is-correct',state.correct.includes(id));p.classList.toggle('is-revealed',state.revealed.includes(id));p.classList.toggle('is-selected',state.selected===id);});layout();
  }
- function select(target:EventTarget|null,event?:MouseEvent){const el=(target as Element).closest<SVGElement>('[data-country],[data-island]'),c=countries.find(c=>c.id===(el?.dataset.country||el?.dataset.island));if(c&&inPool(c,state.region,state.scope))onSelect(c,event?taps.tap(c.id,event.clientX,event.clientY,event.timeStamp,event.detail):false);}
+ function select(target:EventTarget|null,event?:MouseEvent){const el=(target as Element).closest<SVGElement>('[data-country],[data-island]'),c=countries.find(c=>c.id===(el?.dataset.country||el?.dataset.island));if(c&&inPool(c,state.region,state.scope)){const reveal=event?taps.tap(c.id,event.clientX,event.clientY,event.timeStamp,event.detail):false;onSelect(c);if(reveal)onSelect(c,true);}else{taps.reset();onSelect(undefined);}}
  let moved=false,pinch=0,drag:{x:number;y:number;view:View}|undefined;const pointers=new Map<number,{x:number;y:number}>();
  svg.addEventListener('click',e=>{if(!moved)select(e.target,e);},{signal});svg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(e.target);}},{signal});
  function zoom(factor:number){taps.reset();const [x,y,w,h]=view,nw=Math.max(2,Math.min(1500,w*factor)),nh=h*nw/w;setView([x+(w-nw)/2,y+(h-nh)/2,nw,nh]);}

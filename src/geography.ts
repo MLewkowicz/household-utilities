@@ -2,7 +2,9 @@ export type Country={id:string;name:string;aliases:string[];continent:string;reg
 export const REGIONS=['World','Africa','Asia','Europe','North America','South America','Oceania','Micronesia','Polynesia','Melanesia','Caribbean','Central America'] as const;
 export type Region=typeof REGIONS[number];
 export type CountryScope='countries'|'expanded';
-export type GameMode='practice'|'competitive'|'learn';
+export type GameMode='practice'|'competitive'|'competitive-find'|'learn';
+export type ScoreChallenge='name'|'find';
+export const isCompetitive=(mode:GameMode)=>mode==='competitive'||mode==='competitive-find';
 // UN members and the Holy See / Palestine observer states; independent of map entity types.
 export const COUNTRY_IDS=new Set('AFG ALB DZA AND AGO ATG ARG ARM AUS AUT AZE BHR BGD BRB BLR BEL BLZ BEN BTN BOL BIH BWA BRA BRN BGR BFA BDI KHM CMR CAN CPV CAF TCD CHL COL COM CRI HRV CUB CYP CZE COD DNK DJI DMA DOM TLS ECU EGY SLV GNQ ERI EST SWZ ETH FSM FJI FIN FRA GAB GEO DEU GHA GRC GRD GTM GIN GNB GUY HTI HND HUN ISL IND IDN IRN IRQ IRL ISR ITA CIV JAM JPN JOR KAZ KEN KIR KWT KGZ LAO LVA LBN LSO LBR LBY LIE LTU LUX MDG MWI MYS MDV MLI MLT MHL MRT MUS MEX MDA MCO MNG MNE MAR MOZ MMR NAM NRU NPL NLD NZL NIC NER NGA PRK MKD NOR OMN PAK PLW PSX PAN PNG PRY CHN PER PHL POL PRT QAT COG ROU RUS RWA KNA LCA VCT WSM SMR SAU SEN SRB SYC SLE SGP SVK SVN SLB SOM ZAF KOR SDS ESP LKA SDN SUR SWE CHE SYR STP TJK TZA THA BHS GMB TGO TON TTO TUN TKM TUV TUR UGA UKR ARE GBR USA URY UZB VUT VAT VEN VNM YEM ZMB ZWE'.split(' '));
 export const inRegion=(country:Country,region:string)=>region==='World'||country.continent===region||country.region===region;
@@ -19,8 +21,8 @@ export function answerSuggestions(countries:Country[],query:string,region:string
  const q=normalizeAnswer(query);if(!q)return [];
  return countries.filter(c=>inRegion(c,region)).map(c=>({country:c,score:Math.min(...c.aliases.map(alias=>{const a=normalizeAnswer(alias);return a===q?0:a.startsWith(q)?1:a.split(' ').some(w=>w.startsWith(q))?2:a.includes(q)?3:4+distance(a,q)/Math.max(a.length,q.length);} ))})).filter(c=>c.score<4||q.length>=3&&c.score<=4.48).sort((a,b)=>a.score-b.score||a.country.name.localeCompare(b.country.name)).slice(0,7).map(c=>c.country);
 }
-export type Round={id:string;mode:GameMode;scope:CountryScope;learningOrder:string[];learningTarget?:string;learningRemaining:number;region:Region;limit:number;maxLives:number;startedAt:number|null;correct:string[];revealed:string[];hints:Record<string,number>;mistakes:number;finishedAt?:number;ended:'won'|'complete'|'time'|'lives'|null};
-export const newRound=(region:Region='World',limit=0,maxLives=0,scope:CountryScope='countries',mode:GameMode='practice'):Round=>({id:crypto.randomUUID(),mode,scope,learningOrder:[],learningRemaining:12000,region,limit:mode==='competitive'?300:mode==='learn'?0:limit,maxLives:mode==='competitive'?3:mode==='learn'?0:maxLives,startedAt:null,correct:[],revealed:[],hints:{},mistakes:0,ended:null});
+export type Round={id:string;mode:GameMode;scope:CountryScope;findOrder:string[];findTarget?:string;missed:string[];learningOrder:string[];learningTarget?:string;learningRemaining:number;region:Region;limit:number;maxLives:number;startedAt:number|null;correct:string[];revealed:string[];hints:Record<string,number>;mistakes:number;finishedAt?:number;ended:'won'|'complete'|'time'|'lives'|null};
+export const newRound=(region:Region='World',limit=0,maxLives=0,scope:CountryScope='countries',mode:GameMode='practice'):Round=>({id:crypto.randomUUID(),mode,scope,findOrder:[],missed:[],learningOrder:[],learningRemaining:12000,region,limit:isCompetitive(mode)?300:mode==='learn'?0:limit,maxLives:isCompetitive(mode)?3:mode==='learn'?0:maxLives,startedAt:null,correct:[],revealed:[],hints:{},mistakes:0,ended:null});
 export function shuffledCountries(countries:Country[],random=Math.random){
  const ids=countries.map(c=>c.id);for(let i=ids.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[ids[i],ids[j]]=[ids[j],ids[i]];}return ids;
 }
@@ -28,15 +30,29 @@ export const roundScore=(round:Pick<Round,'correct'|'mistakes'>)=>Math.max(0,rou
 
 export function remainingSeconds(round:Round,now=Date.now()){return round.limit?Math.max(0,Math.min(round.limit,round.limit-Math.floor(((round.finishedAt??now)-(round.startedAt??now))/1000))):null;}
 export function roundEnd(round:Round,total:number,now=Date.now()):Round['ended']{
- return round.ended|| (round.correct.length>=total?'won':round.correct.length+round.revealed.length>=total?'complete':round.maxLives&&round.mistakes>=round.maxLives?'lives':round.startedAt!==null&&remainingSeconds(round,now)===0?'time':null);
+ return round.ended|| (round.correct.length>=total?'won':round.correct.length+round.revealed.length+(round.mode==='competitive-find'?round.missed.length:0)>=total?'complete':round.maxLives&&round.mistakes>=round.maxLives?'lives':round.startedAt!==null&&remainingSeconds(round,now)===0?'time':null);
+}
+export function prepareFindTarget(round:Round,countries:Country[],now=Date.now()){
+ if(round.mode!=='competitive-find')return;
+ const pool=countries.filter(c=>inPool(c,round.region,round.scope));
+ if(roundEnd(round,pool.length,now)){round.findTarget=undefined;return;}
+ if(!round.findOrder.length)round.findOrder=shuffledCountries(pool);
+ round.findTarget=round.findOrder.find(id=>!round.correct.includes(id)&&!round.missed.includes(id));
+ if(round.startedAt===null)round.startedAt=now;
+}
+export function answerLocation(round:Round,country:Country|undefined,countries:Country[],now=Date.now()){
+ if(round.mode!=='competitive-find'||!round.findTarget||roundEnd(round,countries.filter(c=>inPool(c,round.region,round.scope)).length,now))return;
+ const target=round.findTarget,correct=country?.id===target;
+ if(correct)round.correct.push(target);else{round.missed.push(target);round.mistakes++;}
+ prepareFindTarget(round,countries,now);return {target,correct};
 }
 export function restoreRound(value:unknown,countries:Country[]):Round|null{
  if(!value||typeof value!=='object')return null;
  const raw=value as Partial<Round>;
  const r={...raw,region:(raw.region as string)==='Antarctica'?'World':raw.region,id:raw.id||crypto.randomUUID(),mode:raw.mode||'practice',scope:raw.scope||'expanded'} as Round;
  if((raw.region as string)==='Antarctica'&&['won','complete'].includes(r.ended||'')){r.ended=null;delete r.finishedAt;}
- if(!['practice','competitive','learn'].includes(r.mode)||!['countries','expanded'].includes(r.scope))return null;
- if(r.mode==='competitive'&&(r.limit!==300||r.maxLives!==3))return null;
+ if(!['practice','competitive','competitive-find','learn'].includes(r.mode)||!['countries','expanded'].includes(r.scope))return null;
+ if(isCompetitive(r.mode)&&(r.limit!==300||r.maxLives!==3))return null;
  if(r.mode==='learn'&&(r.limit!==0||r.maxLives!==0))return null;
 
  if(r.finishedAt!==undefined&&(!Number.isFinite(r.finishedAt)||r.finishedAt<0))return null;
@@ -52,7 +68,12 @@ export function restoreRound(value:unknown,countries:Country[]):Round|null{
  const learningOrder=Array.isArray(r.learningOrder)?[...new Set(r.learningOrder)].filter(valid):[];
  const learningTarget=valid(r.learningTarget)?r.learningTarget:undefined;
  const learningRemaining=Number.isFinite(r.learningRemaining)?Math.max(0,Math.min(12000,r.learningRemaining)):12000;
- return {...r,correct,revealed,hints,learningOrder,learningTarget,learningRemaining};
+ const missed=r.mode==='competitive-find'&&Array.isArray(r.missed)?[...new Set(r.missed)].filter(id=>valid(id)&&!correct.includes(id)):[];
+ const findOrder=r.mode==='competitive-find'&&Array.isArray(r.findOrder)?[...new Set(r.findOrder)].filter(valid):[];
+ // Complete a partially saved queue without dropping attempted countries or changing its order.
+ if(r.mode==='competitive-find')findOrder.push(...shuffledCountries(countries.filter(c=>inPool(c,r.region,r.scope)&&!findOrder.includes(c.id))));
+ const findTarget=findOrder.find(id=>!correct.includes(id)&&!missed.includes(id));
+ return {...r,correct,revealed,hints,learningOrder,learningTarget,learningRemaining,missed,findOrder,findTarget};
 }
 export const resolvedCountry=(round:Round,id:string)=>round.correct.includes(id)||round.revealed.includes(id);
 export function countryHints(country:Country,region:Region):string[]{
@@ -63,12 +84,12 @@ export function countryHints(country:Country,region:Region):string[]{
  hints.push(`Name: ${pattern}`);return hints;
 }
 export function useHint(round:Round,country:Country){
- if(round.mode==='competitive'||round.limit||round.ended||!inPool(country,round.region,round.scope)||resolvedCountry(round,country.id))return false;
+ if(isCompetitive(round.mode)||round.limit||round.ended||!inPool(country,round.region,round.scope)||resolvedCountry(round,country.id))return false;
  const count=round.hints[country.id]||0,max=countryHints(country,round.region).length;if(count>=max)return false;
  round.hints[country.id]=count+1;return true;
 }
 export function revealCountry(round:Round,country:Country){
- if(round.mode==='competitive'||round.limit||round.ended||!inPool(country,round.region,round.scope)||resolvedCountry(round,country.id))return false;
+ if(isCompetitive(round.mode)||round.limit||round.ended||!inPool(country,round.region,round.scope)||resolvedCountry(round,country.id))return false;
  round.revealed.push(country.id);return true;
 }
 export const pacificRegion=(region:string)=>['Oceania','Micronesia','Polynesia','Melanesia'].includes(region);

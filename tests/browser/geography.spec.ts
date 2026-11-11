@@ -24,7 +24,7 @@ test.beforeEach(async({page})=>{await page.addInitScript(()=>{localStorage.setIt
 test('compact screen keeps configuration in a menu, saves answers and separates household players',async({page})=>{
  await open(page);await expect(page.locator('#geo-new-region')).toBeHidden();await expect(page.locator('#geo-total')).toHaveText('195');
  expect((await page.locator('#geo-surface').boundingBox())!.y).toBeLessThan(120);
- await pick(page,'POL');await page.locator('#geo-answer').fill('Polnad');await page.locator('#geo-suggestions li').first().click();await expect(page.locator('#geo-correct')).toHaveText('0');await page.locator('#geo-check').click();await expect(page.locator('#geo-correct')).toHaveText('1');await expect(page.locator('#geo-country-card')).toContainText('Warsaw');
+ await pick(page,'POL');await page.locator('#geo-answer').fill('Polnad');await page.locator('#geo-suggestions li').first().click();await expect(page.locator('#geo-correct')).toHaveText('1');await expect(page.locator('#geo-country-card')).toContainText('Warsaw');
  await expect(page.locator('#geo-country-card .atlas-history')).not.toBeEmpty();await page.locator('#geo-country-card summary').click();await expect(page.locator('#geo-country-card details')).toHaveAttribute('open','');
  await page.reload();await ready(page);await expect(page.locator('#geo-correct')).toHaveText('1');await page.locator('#geo-settings').click();await page.locator('#geo-review').click();await expect(page.locator('#geo-collection')).toContainText('Poland');await page.locator('#geo-review-close').click();
  await page.locator('#geo-settings').click();await page.locator('#geo-player').selectOption('rina');await expect(page.locator('#geo-correct')).toHaveText('0');await page.locator('#geo-player').selectOption('michal');await expect(page.locator('#geo-correct')).toHaveText('1');
@@ -70,4 +70,50 @@ test('terrain detail stays bounded and styles preserve the camera and round',asy
  test.setTimeout(180000);await open(page,true);await page.locator('#geo-settings').click();await page.getByRole('button',{name:'Terrain',exact:true}).click();await expect.poll(async()=>(await diag(page)).style,{timeout:30000}).toBe('terrain');await page.locator('#geo-settings-close').click();await randomCountry(page,'NPL');
  await expect.poll(async()=>(await diag(page)).detail.keys.length,{timeout:30000}).toBeGreaterThan(0);await expect.poll(async()=>(await diag(page)).detail.pending,{timeout:30000}).toBe(0);expect((await diag(page)).detail.keys.length).toBeLessThanOrEqual(4);await submit(page,'Nepal');await expect(page.locator('#geo-correct')).toHaveText('1');await page.locator('#geo-dismiss-card').click();
  const view=(await diag(page)).view;await page.locator('#geo-settings').click();await page.getByRole('button',{name:'Paper',exact:true}).click();await expect.poll(async()=>(await diag(page)).style).toBe('paper');expect((await diag(page)).view).toEqual(view);expect((await diag(page)).detail.keys).toEqual([]);await expect(page.locator('#geo-correct')).toHaveText('1');await page.locator('#geo-settings-close').click();await page.locator('#geo-reset-view').click();expect((await diag(page)).view).toEqual(globeRegionView('World'));
+});
+
+test('suggestions submit once by click and keyboard, including wrong answers',async({page})=>{
+ await open(page);await start(page,'Europe','competitive');await pick(page,'POL');
+ await page.locator('#geo-answer').fill('France');await page.getByRole('option',{name:'France',exact:true}).click();await expect(page.locator('#geo-lives')).toHaveText('2');await expect(page.locator('#geo-correct')).toHaveText('0');
+ await page.locator('#geo-answer').fill('Pol');await page.locator('#geo-answer').press('ArrowDown');await page.locator('#geo-answer').press('Enter');await expect(page.locator('#geo-correct')).toHaveText('1');await expect(page.locator('#geo-lives')).toHaveText('2');
+});
+
+test('find competition advances after every guess and saves to its own leaderboard',async({page})=>{
+ const state=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-v1:michal')!));
+ await open(page);await start(page,'Polynesia','competitive-find');const initial=await state();const order=initial.findOrder as string[];
+ await expect(page.locator('#geo-learning-prompt')).toHaveText(`Find ${countries.find(c=>c.id===order[0])!.name}`);await expect(page.locator('#geo-answer-form')).toBeHidden();await expect(page.locator('#geo-next')).toBeHidden();await expect(page.locator('#geo-show-me')).toBeHidden();
+ await page.locator('#geo-settings').click();await expect(page.locator('#geo-study')).toBeDisabled();await page.locator('#geo-settings-close').click();
+ await pick(page,order[1]);await expect(page.locator('#geo-lives')).toHaveText('2');expect((await state()).findTarget).toBe(order[1]);await expect(page.locator('#geo-feedback')).toContainText('Missed');
+ await page.reload();await ready(page);expect((await state()).findTarget).toBe(order[1]);
+ await pick(page,order[1]);await expect(page.locator('#geo-correct')).toHaveText('1');expect((await state()).findTarget).toBe(order[2]);
+ await pick(page,order[1]);await expect(page.locator('#geo-result')).toContainText('50 points');expect((await state()).missed).toEqual([order[0],order[2]]);
+ await page.locator('#geo-result a').click();await expect(page.locator('#geo-score-challenge')).toHaveValue('find');await expect(page.locator('#geo-score-status')).toHaveText('Shared household scores');await expect(page.locator('#geo-score-list')).toContainText('50');
+ await page.locator('#geo-score-challenge').selectOption('name');await expect(page.locator('#geo-score-list')).not.toContainText('1/3');
+});
+
+test('find competition ignores map drags and counts an empty-map click as one miss',async({page})=>{
+ await open(page);await start(page,'Europe','competitive-find');const map=page.locator('#geo-map'),box=(await map.boundingBox())!;
+ await page.mouse.move(box.x+10,box.y+10);await page.mouse.down();await page.mouse.move(box.x+70,box.y+50,{steps:8});await page.mouse.up();await expect(page.locator('#geo-lives')).toHaveText('3');
+ await map.click({position:{x:5,y:5}});await expect(page.locator('#geo-lives')).toHaveText('2');
+ await page.locator('#geo-reset-view').click();await page.locator('#geo-land [data-country=POL]').dblclick({delay:60});const state=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-v1:michal')!));expect(state.missed.length+state.correct.length).toBe(3);
+});
+
+test('study map labels the chosen region and zooms to countries without changing a round',async({page})=>{
+ await page.clock.install();await open(page);await start(page,'Caribbean','learn');const before=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-v1:michal')!));
+ await page.locator('#geo-settings').click();await page.locator('#geo-study').click();await expect(page.locator('#geo-study-dialog')).toBeVisible();await expect(page.locator('#geo-study-region')).toHaveValue('Caribbean');await expect(page.locator('[data-study-label=CUB]')).toHaveText('Cuba');await expect(page.locator('[data-study-label=JAM]')).toHaveText('Jamaica');
+ const view=await page.locator('#geo-study-map').getAttribute('viewBox');await page.locator('#geo-study-country').selectOption('KNA');await expect(page.locator('[data-study-label=KNA]')).toHaveText('Saint Kitts and Nevis');expect(await page.locator('#geo-study-map').getAttribute('viewBox')).not.toBe(view);await page.locator('#geo-study-reset').click();await expect(page.locator('#geo-study-map')).toHaveAttribute('viewBox',view!);
+ await expect(page.locator('#geo-study-country option[value=PRI]')).toHaveCount(0);await page.locator('#geo-study-scope').selectOption('expanded');await expect(page.locator('#geo-study-country option[value=PRI]')).toHaveText('Puerto Rico');
+ await page.setViewportSize({width:390,height:844});await page.locator('#geo-study-country').selectOption('PRI');await expect(page.locator('[data-study-label=PRI]')).toBeVisible();await page.screenshot({path:'.local/geography-study-phone.png'});
+ await page.clock.fastForward(20000);await page.locator('#geo-study-close').click();await page.locator('#geo-settings-close').click();await expect(page.locator('#geo-learning-prompt')).toContainText('Find ');await expect(page.locator('#geo-revealed')).toHaveText('0');
+ const after=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-v1:michal')!));expect(after.id).toBe(before.id);expect(after.learningTarget).toBe(before.learningTarget);expect(after.region).toBe('Caribbean');expect(after.scope).toBe('countries');expect(after.correct).toEqual(before.correct);
+});
+
+
+test('real globe submits each find-mode tap once and does not count rotation as a guess',async({page})=>{
+ await open(page,true);await start(page,'Europe','competitive-find');
+ const canvas=page.locator('#geo-globe'),box=(await canvas.boundingBox())!;
+ await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await page.mouse.move(box.x+box.width/2+45,box.y+box.height/2+20,{steps:8});await page.mouse.up();await expect(page.locator('#geo-lives')).toHaveText('3');await page.locator('#geo-reset-view').click();
+ const target=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-v1:michal')!).findTarget),id=target==='POL'?'FRA':'POL';
+ const p=await page.evaluate(id=>(window as any).__globeDiagnostics().project(id),id);expect(p.visible).toBe(true);await page.mouse.dblclick(p.x,p.y,{delay:60});
+ const state=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-v1:michal')!));expect(state.missed.length+state.correct.length).toBe(2);await expect(page.locator('#geo-result')).toBeHidden();await expect(page.locator('#geo-learning-prompt')).toContainText('Find ');
 });

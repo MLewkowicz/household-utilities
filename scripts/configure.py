@@ -26,7 +26,7 @@ def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
         print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
-        print("Existing projects need migrations 009 through 029 (and any earlier missing migrations); do not rerun installed migrations.")
+        print("Existing projects need migrations 009 through 030 (and any earlier missing migrations); do not rerun installed migrations.")
         print("Phone delivery also needs the normal ./configure.sh flow to deploy its worker, signing keys, and schedule.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
@@ -119,6 +119,7 @@ def main():
             ("027_sweeping_spaces.sql", "ledger_private.is_michal_combined_sweep(jsonb)"),
             ("028_personal_deadlines.sql", "ledger_private.personal_deadlines_version()"),
             ("029_geography_scores.sql", "public.utilities_geography_scores()"),
+            ("030_geography_find_scores.sql", "public.utilities_geography_score_modes()"),
         ]:
             installed = request(base + "/database/query", token, {"query": f"SELECT to_regprocedure('{signature}')::text AS fn"})
             if not installed or not installed[0].get("fn"):

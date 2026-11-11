@@ -1,6 +1,7 @@
 import {readFile} from 'node:fs/promises';
 const config=JSON.parse(await readFile('config.public.json','utf8'));
 const checks=[
+ ['geography_score_modes',{},d=>Array.isArray(d)&&d.includes('name')&&d.includes('find'),'030_geography_find_scores.sql'],
  ['geography_scores',{},Array.isArray,'029_geography_scores.sql'],
  ['app_capabilities',{},d=>d.event_edit_notifications&&d.quarter_points&&d.as_needed_routines&&d.sweeping_spaces&&d.personal_deadlines,'028_personal_deadlines.sql'],
  ['personal_tasks',{p:{member:'michal'}},d=>d.format_version>=2&&d.group_rename_version>=1&&Array.isArray(d.tasks),'021_personal_group_rename.sql'],

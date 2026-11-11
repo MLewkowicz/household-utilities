@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import atlas from '../src/geography-data.json';
-import {isAnswer,answerSuggestions,countryHints,useHint,revealCountry,inRegion,newRound,remainingSeconds,roundEnd,restoreRound,countryView,countryPath,regionView,REGIONS,inPool,COUNTRY_IDS,shuffledCountries,roundScore,type Country} from '../src/geography';
+import {isAnswer,answerSuggestions,countryHints,useHint,revealCountry,inRegion,newRound,remainingSeconds,roundEnd,restoreRound,countryView,countryPath,regionView,REGIONS,inPool,COUNTRY_IDS,shuffledCountries,roundScore,prepareFindTarget,answerLocation,type Country} from '../src/geography';
 const countries=atlas as Country[],find=(id:string)=>countries.find(c=>c.id===id)!;
 test('atlas has usable geometry, context cards and the small Pacific countries',()=>{
  assert.equal(countries.length,242);assert.equal(new Set(countries.map(c=>c.id)).size,242);
@@ -65,4 +65,21 @@ test('history avoids current officeholders, preserves context, and drops region-
  for(const c of countries)for(const fact of c.facts)assert.doesNotMatch(fact,/KISHIDA|current leader|became prime minister in 2021/);
  assert.match(find('JPN').facts[0],/military government/);assert.match(find('FRA').facts[0],/Versailles/);assert.match(find('PLW').facts[2],/nuclear-free constitution/);
  assert.ok(!countryHints(find('NGA'),'World').some(h=>h.startsWith('Region:')));
+});
+
+test('find competition advances after right and wrong guesses, restores its queue, and ends after every country is attempted',()=>{
+ let r=newRound('Polynesia',0,0,'countries','competitive-find');prepareFindTarget(r,countries,100000);
+ const order=[...r.findOrder];assert.equal(order.length,3);assert.equal(r.limit,300);assert.equal(r.maxLives,3);
+ assert.equal(useHint(r,find(order[0])),false);assert.equal(revealCountry(r,find(order[0])),false);
+ assert.deepEqual(answerLocation(r,undefined,countries,101000),{target:order[0],correct:false});assert.equal(r.findTarget,order[1]);assert.equal(r.mistakes,1);
+ r=restoreRound(r,countries)!;assert.deepEqual(r.findOrder,order);assert.equal(r.findTarget,order[1]);assert.deepEqual(r.missed,[order[0]]);
+ answerLocation(r,find(order[1]),countries,102000);assert.equal(r.findTarget,order[2]);assert.deepEqual(r.correct,[order[1]]);
+ answerLocation(r,find('POL'),countries,103000);assert.equal(r.findTarget,undefined);assert.equal(roundEnd(r,3,103000),'complete');assert.equal(roundScore(r),50);
+ assert.equal(answerLocation(r,find(order[2]),countries,104000),undefined);assert.equal(r.mistakes,2);
+});
+test('find competition stops at three mistakes and rejects guesses at the time limit',()=>{
+ const r=newRound('Europe',0,0,'countries','competitive-find');prepareFindTarget(r,countries,100000);
+ for(let i=0;i<3;i++)answerLocation(r,undefined,countries,101000+i);
+ assert.equal(roundEnd(r,r.findOrder.length,102000),'lives');assert.equal(r.missed.length,3);assert.equal(answerLocation(r,undefined,countries,103000),undefined);
+ const timed=newRound('Europe',0,0,'countries','competitive-find');prepareFindTarget(timed,countries,100000);assert.equal(answerLocation(timed,find(timed.findTarget!),countries,400000),undefined);assert.equal(timed.correct.length,0);
 });

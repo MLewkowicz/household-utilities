@@ -7,8 +7,8 @@ test('mobile input stays above the keyboard and suggestion scrolling does not ch
  const before=await page.locator('#geo-answer').inputValue(),list=page.locator('#geo-suggestions'),box=(await list.boundingBox())!;
  const cdp=await page.context().newCDPSession(page),x=box.x+box.width/2,y=box.y+Math.min(box.height-15,130);
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y}]});for(let i=1;i<=6;i++)await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x,y:y-i*13}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
- await expect(page.locator('#geo-answer')).toHaveValue(before);await expect(page.locator('#geo-correct')).toHaveText('0');await expect.poll(()=>list.evaluate(el=>el.scrollTop)).toBeGreaterThan(0);
- await page.locator('#geo-answer').fill('Pol');await page.locator('#geo-suggestions li').first().tap();await expect(page.locator('#geo-answer')).toHaveValue('Poland');await expect(page.locator('#geo-correct')).toHaveText('0');await page.locator('#geo-check').tap();await expect(page.locator('#geo-correct')).toHaveText('1');
+ await expect(page.locator('#geo-answer')).toHaveValue(before);await expect(page.locator('#geo-correct')).toHaveText('0');await expect.poll(()=>list.evaluate(el=>el.scrollTop)).toBeGreaterThan(0);expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-v1:michal')!).mistakes)).toBe(0);
+ await page.locator('#geo-answer').fill('Pol');await page.locator('#geo-suggestions li').first().tap();await expect(page.locator('#geo-correct')).toHaveText('1');await expect(page.locator('#geo-answer-form')).toBeHidden();
  for(const width of [320,390,768,1280]){await page.setViewportSize({width,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();}await page.screenshot({path:'.local/geography-compact.png'});
 });
 test('hints start with a useful capital and reveals stay separate from correct answers',async({page})=>{
