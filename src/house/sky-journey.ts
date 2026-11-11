@@ -17,15 +17,6 @@ export function createSkyJourney(scene:T.Scene,camera:T.OrthographicCamera){
   batch(bank);
   banks.push({root:bank,x:side*(.80+layer*.12),start:1.5+layer*1.5+(side===1?.18:0),depth:35+layer*17,size:1+layer*.12});
  }
- // A few warm, beveled stars carry the house's small brass details into orbit.
- const outline=new T.Shape();
- for(let i=0;i<10;i++){const a=Math.PI/2+i*Math.PI/5,r=i%2?.10:.23,x=Math.cos(a)*r,y=Math.sin(a)*r;if(i)outline.lineTo(x,y);else outline.moveTo(x,y);}
- outline.closePath();
- const stars=group(root);stars.name='flight-stars';
- for(let i=0;i<7;i++){
-  const star=mesh(stars,new T.ExtrudeGeometry(outline,{depth:.08,bevelEnabled:true,bevelThickness:.025,bevelSize:.025,bevelSegments:1,steps:1}),'#e6c790');
-  star.castShadow=false;star.receiveShadow=false;star.userData.phase=i;
- }
  const right=new T.Vector3(),up=new T.Vector3(),forward=new T.Vector3();
  function place(object:T.Object3D,x:number,y:number,depth:number){
   object.position.copy(camera.position).addScaledVector(forward,depth).addScaledVector(right,x*(camera.right-camera.left)/2).addScaledVector(up,y*(camera.top-camera.bottom)/2);
@@ -39,13 +30,7 @@ export function createSkyJourney(scene:T.Scene,camera:T.OrthographicCamera){
    place(bank.root,bank.x,bank.start-travel,bank.depth);
    bank.root.scale.setScalar(span*.105*bank.size*(1+progress*.25));
   }
-  stars.visible=progress>.42;
-  stars.children.forEach((star,i)=>{
-   const phase=i*2.399;
-   place(star,Math.cos(phase)*(.37+i*.065),1.55+(i%3)*.48-progress*2.4,24+i);
-   star.rotateY(Math.sin(progress*1.7+i*.7)*.32);star.rotateZ(i*.43-progress*.35);
-   star.scale.setScalar(T.MathUtils.smoothstep(progress,.42,.64)*span*.045*(.7+(i%3)*.2));
-  });
+
  }
- return {update,diagnostics:()=>({visible:root.visible,cloudBanks:banks.length,stars:stars.children.length})};
+ return {update,diagnostics:()=>({visible:root.visible,cloudBanks:banks.length})};
 }

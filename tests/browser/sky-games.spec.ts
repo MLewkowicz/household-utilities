@@ -60,7 +60,7 @@ test('the modeled cloud ascent leaves a rotated room and cancellation restores i
  await page.locator('#sky-games-launch').click();
  await expect.poll(()=>page.evaluate(()=>(window as any).__houseDiagnostics().skyJourney.progress)).toBeGreaterThan(.1);
  const flight=await page.evaluate(()=>(window as any).__houseDiagnostics().skyJourney);
- expect(flight.visible).toBe(true);expect(flight.cloudBanks).toBe(6);expect(flight.stars).toBe(7);
+ expect(flight.visible).toBe(true);expect(flight.cloudBanks).toBe(6);
  await expect(page.locator('.sky-flight-clouds')).toHaveCount(0);
  await page.keyboard.press('Escape');await expect(page.locator('#sky-flight')).toBeHidden();
  await expect.poll(()=>page.evaluate(()=>(window as any).__houseDiagnostics().skyJourney.progress)).toBe(0);
