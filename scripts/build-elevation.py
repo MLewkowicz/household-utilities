@@ -92,9 +92,11 @@ normals=np.stack([nx/length,ny/length,nz/length],axis=-1)
 normal=Image.fromarray(np.rint((normals*.5+.5)*255).clip(0,255).astype(np.uint8));save(normal,'normal-4k');save(normal.resize((2048,1024),Image.Resampling.LANCZOS),'normal-2k')
 if (root/'manifest.json').exists():
  previous=json.loads((root/'manifest.json').read_text())
- for key in ['detailSource','detailSamples','detailTiles']:
+ for key in ['detailSource','detailSamples','detailTiles','landCover']:
   if key in previous:manifest[key]=previous[key]
- manifest['files'].update({k:v for k,v in previous['files'].items() if k.startswith('detail-')})
+ manifest['files'].update({k:v for k,v in previous['files'].items() if k.startswith(('detail-','cover-'))})
+ for key,value in previous.get('textures',{}).items():
+  if key.startswith('cover-'):manifest['textures'][key]=value
 (root/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 for p in root.glob('*.webp'):
  if not p.name.startswith('detail-') and p.name not in manifest['files']:p.unlink()

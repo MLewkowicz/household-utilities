@@ -1,8 +1,8 @@
 import {readFile} from 'node:fs/promises';
 const config=JSON.parse(await readFile('config.public.json','utf8'));
 const checks=[
- ['trivia_capabilities',{},d=>d.version===3&&d.games===5&&d.groups===true,'033_observatory_games_v3.sql'],
- ['geography_score_modes',{},d=>Array.isArray(d)&&d.includes('name')&&d.includes('find')&&d.includes('places'),'037_geography_major_cities.sql'],
+ ['trivia_capabilities',{},d=>d.version===5&&d.games===5&&d.groups===true&&d.online_sync===true&&d.online_seed===1,'041_trivia_online_seed.sql'],
+ ['geography_score_modes',{},d=>Array.isArray(d)&&d.includes('name')&&d.includes('find')&&d.includes('urban'),'038_geography_urban_catalog.sql'],
  ['geography_route_capabilities',{},d=>d.version===1&&d.puzzles===48,'036_geography_routes.sql'],
  ['geography_scores',{},Array.isArray,'029_geography_scores.sql'],
  ['app_capabilities',{},d=>d.event_edit_notifications&&d.quarter_points&&d.as_needed_routines&&d.sweeping_spaces&&d.personal_deadlines,'028_personal_deadlines.sql'],

@@ -64,6 +64,7 @@ test('competitive rules are fixed, learning shuffles without repeats, and hints 
  assert.equal(restoreRound({...r,limit:0},countries),null);
 });
 test('history avoids current officeholders, preserves context, and drops region-only hints',()=>{
+ assert.equal(find('POL').facts.filter(f=>f.includes('Solidarity')).length,1);assert.doesNotMatch(find('AUS').facts.join(' ')+find('AUS').background,/Abel Tasman/i);assert.ok(find('POL').stories?.some(s=>s.title==='Chapels carved from salt'));
  for(const c of countries)for(const fact of c.facts)assert.doesNotMatch(fact,/KISHIDA|current leader|became prime minister in 2021/);
  assert.match(find('JPN').facts[0],/military government/);assert.match(find('FRA').facts[0],/Versailles/);assert.match(find('PLW').facts[2],/nuclear-free constitution/);
  assert.ok(!countryHints(find('NGA'),'World').some(h=>h.startsWith('Region:')));

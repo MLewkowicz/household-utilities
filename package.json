@@ -13,7 +13,9 @@
     "preview:todos": "node scripts/preview-todos.mjs",
     "deploy": "node scripts/publish.mjs",
     "test:house": "playwright test -c playwright.house.config.ts",
-    "measure:house": "node scripts/measure-house.mjs"
+    "measure:house": "node scripts/measure-house.mjs",
+    "games:sync": "node scripts/trivia/sync.mjs",
+    "games:sync:install": "node scripts/trivia/install-sync.mjs"
   },
   "engines": {
     "node": ">=22"

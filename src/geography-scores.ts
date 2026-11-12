@@ -7,7 +7,7 @@ function store(rows:GeoScore[]){try{localStorage.setItem(key,JSON.stringify(rows
 export function recordScore(round:Round,player:string,total:number){
  if(!isCompetitive(round.mode)||!round.ended||round.startedAt===null)return;
  const rows=local();if(rows.some(s=>s.id===round.id))return;
- const entry:GeoScore={id:round.id,player,region:round.region,scope:round.scope,challenge:round.mode==='competitive-find'?'find':round.mode==='competitive-capitals'?'capitals':round.mode==='competitive-cities'?(round.cityVersion===2?'places':'cities'):'name',correct:round.correct.length,total,mistakes:round.mistakes,elapsed_ms:Math.max(0,Math.min(300000,(round.finishedAt??Date.now())-round.startedAt)),score:roundScore(round),finished_at:new Date(round.finishedAt??Date.now()).toISOString(),pending:player!=='guest'};
+ const entry:GeoScore={id:round.id,player,region:round.region,scope:round.scope,challenge:round.mode==='competitive-find'?'find':round.mode==='competitive-capitals'?'capitals':round.mode==='competitive-cities'?(round.cityVersion===3?'urban':round.cityVersion===2?'places':'cities'):'name',correct:round.correct.length,total,mistakes:round.mistakes,elapsed_ms:Math.max(0,Math.min(300000,(round.finishedAt??Date.now())-round.startedAt)),score:roundScore(round),finished_at:new Date(round.finishedAt??Date.now()).toISOString(),pending:player!=='guest'};
  rows.push(entry);store(rows);return entry;
 }
 export const compareScores=(a:GeoScore,b:GeoScore)=>b.score-a.score||b.correct-a.correct||a.elapsed_ms-b.elapsed_ms||a.finished_at.localeCompare(b.finished_at);

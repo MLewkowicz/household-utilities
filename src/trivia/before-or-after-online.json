@@ -1,0 +1,2202 @@
+[
+  {
+    "id": "timeline-practice-7c82ea2a43-1",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q201771",
+        "label": "Mars Pathfinder launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q210199",
+        "label": "Viking 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q48314",
+        "label": "Battle of Waterloo takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q3176133",
+        "label": "Louvre Abu Dhabi is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q42970",
+        "label": "Amnesty International is founded",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q48314",
+      "Q42970",
+      "Q210199",
+      "Q201771",
+      "Q3176133"
+    ],
+    "reveal": {
+      "Q48314": 1815,
+      "Q3176133": 2017,
+      "Q42970": 1961,
+      "Q210199": 1975,
+      "Q201771": 1996
+    },
+    "explanation": "1815 · Battle of Waterloo takes place\n1961 · Amnesty International is founded\n1975 · Viking 1 launches\n1996 · Mars Pathfinder launches\n2017 · Louvre Abu Dhabi is inaugurated",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q48314",
+      "https://www.wikidata.org/wiki/Q3176133",
+      "https://www.wikidata.org/wiki/Q42970",
+      "https://www.wikidata.org/wiki/Q210199",
+      "https://www.wikidata.org/wiki/Q201771"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-2",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q3134",
+        "label": "Callisto is discovered",
+        "art": "science"
+      },
+      {
+        "id": "Q1526343",
+        "label": "Perseverance’s Mars mission launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q191838",
+        "label": "The Count of Monte Cristo is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q82464",
+        "label": "The Picture of Dorian Gray is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q3797766",
+        "label": "Coronation of Elizabeth II takes place",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q3134",
+      "Q191838",
+      "Q82464",
+      "Q3797766",
+      "Q1526343"
+    ],
+    "reveal": {
+      "Q1526343": 2020,
+      "Q191838": 1844,
+      "Q3797766": 1953,
+      "Q82464": 1890,
+      "Q3134": 1610
+    },
+    "explanation": "1610 · Callisto is discovered\n1844 · The Count of Monte Cristo is first published\n1890 · The Picture of Dorian Gray is first published\n1953 · Coronation of Elizabeth II takes place\n2020 · Perseverance’s Mars mission launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q1526343",
+      "https://www.wikidata.org/wiki/Q191838",
+      "https://www.wikidata.org/wiki/Q3797766",
+      "https://www.wikidata.org/wiki/Q82464",
+      "https://www.wikidata.org/wiki/Q3134"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-3",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q182817",
+        "label": "Velvet Revolution begins",
+        "art": "clock"
+      },
+      {
+        "id": "Q8736",
+        "label": "Treaty of Versailles takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q41542",
+        "label": "Dracula is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q48469",
+        "label": "Voyager 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q24082770",
+        "label": "The Vegetarian is first published",
+        "art": "book"
+      }
+    ],
+    "answer": [
+      "Q41542",
+      "Q8736",
+      "Q48469",
+      "Q182817",
+      "Q24082770"
+    ],
+    "reveal": {
+      "Q24082770": 2007,
+      "Q182817": 1989,
+      "Q48469": 1977,
+      "Q41542": 1897,
+      "Q8736": 1919
+    },
+    "explanation": "1897 · Dracula is first published\n1919 · Treaty of Versailles takes place\n1977 · Voyager 1 launches\n1989 · Velvet Revolution begins\n2007 · The Vegetarian is first published",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q24082770",
+      "https://www.wikidata.org/wiki/Q182817",
+      "https://www.wikidata.org/wiki/Q48469",
+      "https://www.wikidata.org/wiki/Q41542",
+      "https://www.wikidata.org/wiki/Q8736"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-4",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q211761",
+        "label": "Salyut 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q130295",
+        "label": "The Wonderful Wizard of Oz is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q936276",
+        "label": "The Wind in the Willows is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q2565",
+        "label": "Titan is discovered",
+        "art": "science"
+      },
+      {
+        "id": "Q239344",
+        "label": "Salt March takes place",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q2565",
+      "Q130295",
+      "Q936276",
+      "Q239344",
+      "Q211761"
+    ],
+    "reveal": {
+      "Q211761": 1971,
+      "Q936276": 1908,
+      "Q2565": 1655,
+      "Q130295": 1900,
+      "Q239344": 1930
+    },
+    "explanation": "1655 · Titan is discovered\n1900 · The Wonderful Wizard of Oz is first published\n1908 · The Wind in the Willows is first published\n1930 · Salt March takes place\n1971 · Salyut 1 launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q211761",
+      "https://www.wikidata.org/wiki/Q936276",
+      "https://www.wikidata.org/wiki/Q2565",
+      "https://www.wikidata.org/wiki/Q130295",
+      "https://www.wikidata.org/wiki/Q239344"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-5",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q523076",
+        "label": "Little Women is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q1159933",
+        "label": "Luna 9 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q215410",
+        "label": "Adventures of Huckleberry Finn is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q19024",
+        "label": "Boston Tea Party takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q186447",
+        "label": "James Webb Space Telescope launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q19024",
+      "Q523076",
+      "Q215410",
+      "Q1159933",
+      "Q186447"
+    ],
+    "reveal": {
+      "Q215410": 1884,
+      "Q19024": 1773,
+      "Q186447": 2021,
+      "Q523076": 1868,
+      "Q1159933": 1966
+    },
+    "explanation": "1773 · Boston Tea Party takes place\n1868 · Little Women is first published\n1884 · Adventures of Huckleberry Finn is first published\n1966 · Luna 9 launches\n2021 · James Webb Space Telescope launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q215410",
+      "https://www.wikidata.org/wiki/Q19024",
+      "https://www.wikidata.org/wiki/Q186447",
+      "https://www.wikidata.org/wiki/Q523076",
+      "https://www.wikidata.org/wiki/Q1159933"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-6",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q123885",
+        "label": "The Royal Society is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q47272",
+        "label": "Kepler space telescope launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q147787",
+        "label": "Anna Karenina is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q184213",
+        "label": "Akashi Kaikyo Bridge is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q180971",
+        "label": "Apollo 17 launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q123885",
+      "Q147787",
+      "Q180971",
+      "Q184213",
+      "Q47272"
+    ],
+    "reveal": {
+      "Q123885": 1660,
+      "Q180971": 1972,
+      "Q147787": 1877,
+      "Q47272": 2009,
+      "Q184213": 1998
+    },
+    "explanation": "1660 · The Royal Society is founded\n1877 · Anna Karenina is first published\n1972 · Apollo 17 launches\n1998 · Akashi Kaikyo Bridge is inaugurated\n2009 · Kepler space telescope launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q123885",
+      "https://www.wikidata.org/wiki/Q180971",
+      "https://www.wikidata.org/wiki/Q147787",
+      "https://www.wikidata.org/wiki/Q47272",
+      "https://www.wikidata.org/wiki/Q184213"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-7",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q163297",
+        "label": "The Stranger is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q160659",
+        "label": "London Eye is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q6539",
+        "label": "Storming of the Bastille takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q378786",
+        "label": "The God of Small Things is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q48572",
+        "label": "Rosetta launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q6539",
+      "Q163297",
+      "Q378786",
+      "Q160659",
+      "Q48572"
+    ],
+    "reveal": {
+      "Q6539": 1789,
+      "Q163297": 1942,
+      "Q378786": 1997,
+      "Q160659": 1999,
+      "Q48572": 2004
+    },
+    "explanation": "1789 · Storming of the Bastille takes place\n1942 · The Stranger is first published\n1997 · The God of Small Things is first published\n1999 · London Eye is inaugurated\n2004 · Rosetta launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q6539",
+      "https://www.wikidata.org/wiki/Q163297",
+      "https://www.wikidata.org/wiki/Q378786",
+      "https://www.wikidata.org/wiki/Q160659",
+      "https://www.wikidata.org/wiki/Q48572"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-8",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q622400",
+        "label": "Things Fall Apart is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q3797766",
+        "label": "Coronation of Elizabeth II takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q1159933",
+        "label": "Luna 9 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q201771",
+        "label": "Mars Pathfinder launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q74287",
+        "label": "The Hobbit is first published",
+        "art": "book"
+      }
+    ],
+    "answer": [
+      "Q74287",
+      "Q3797766",
+      "Q622400",
+      "Q1159933",
+      "Q201771"
+    ],
+    "reveal": {
+      "Q74287": 1937,
+      "Q622400": 1958,
+      "Q1159933": 1966,
+      "Q201771": 1996,
+      "Q3797766": 1953
+    },
+    "explanation": "1937 · The Hobbit is first published\n1953 · Coronation of Elizabeth II takes place\n1958 · Things Fall Apart is first published\n1966 · Luna 9 launches\n1996 · Mars Pathfinder launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q74287",
+      "https://www.wikidata.org/wiki/Q622400",
+      "https://www.wikidata.org/wiki/Q1159933",
+      "https://www.wikidata.org/wiki/Q201771",
+      "https://www.wikidata.org/wiki/Q3797766"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-9",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q191838",
+        "label": "The Count of Monte Cristo is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q42970",
+        "label": "Amnesty International is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q210199",
+        "label": "Viking 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q3176133",
+        "label": "Louvre Abu Dhabi is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q6539",
+        "label": "Storming of the Bastille takes place",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q6539",
+      "Q191838",
+      "Q42970",
+      "Q210199",
+      "Q3176133"
+    ],
+    "reveal": {
+      "Q42970": 1961,
+      "Q191838": 1844,
+      "Q3176133": 2017,
+      "Q210199": 1975,
+      "Q6539": 1789
+    },
+    "explanation": "1789 · Storming of the Bastille takes place\n1844 · The Count of Monte Cristo is first published\n1961 · Amnesty International is founded\n1975 · Viking 1 launches\n2017 · Louvre Abu Dhabi is inaugurated",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q42970",
+      "https://www.wikidata.org/wiki/Q191838",
+      "https://www.wikidata.org/wiki/Q3176133",
+      "https://www.wikidata.org/wiki/Q210199",
+      "https://www.wikidata.org/wiki/Q6539"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-10",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q3134",
+        "label": "Callisto is discovered",
+        "art": "science"
+      },
+      {
+        "id": "Q74287",
+        "label": "The Hobbit is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q48314",
+        "label": "Battle of Waterloo takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q82464",
+        "label": "The Picture of Dorian Gray is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q182817",
+        "label": "Velvet Revolution begins",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q3134",
+      "Q48314",
+      "Q82464",
+      "Q74287",
+      "Q182817"
+    ],
+    "reveal": {
+      "Q82464": 1890,
+      "Q48314": 1815,
+      "Q74287": 1937,
+      "Q3134": 1610,
+      "Q182817": 1989
+    },
+    "explanation": "1610 · Callisto is discovered\n1815 · Battle of Waterloo takes place\n1890 · The Picture of Dorian Gray is first published\n1937 · The Hobbit is first published\n1989 · Velvet Revolution begins",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q82464",
+      "https://www.wikidata.org/wiki/Q48314",
+      "https://www.wikidata.org/wiki/Q74287",
+      "https://www.wikidata.org/wiki/Q3134",
+      "https://www.wikidata.org/wiki/Q182817"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-11",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q239344",
+        "label": "Salt March takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q180971",
+        "label": "Apollo 17 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q163297",
+        "label": "The Stranger is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q48469",
+        "label": "Voyager 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q215410",
+        "label": "Adventures of Huckleberry Finn is first published",
+        "art": "book"
+      }
+    ],
+    "answer": [
+      "Q215410",
+      "Q239344",
+      "Q163297",
+      "Q180971",
+      "Q48469"
+    ],
+    "reveal": {
+      "Q48469": 1977,
+      "Q215410": 1884,
+      "Q180971": 1972,
+      "Q163297": 1942,
+      "Q239344": 1930
+    },
+    "explanation": "1884 · Adventures of Huckleberry Finn is first published\n1930 · Salt March takes place\n1942 · The Stranger is first published\n1972 · Apollo 17 launches\n1977 · Voyager 1 launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q48469",
+      "https://www.wikidata.org/wiki/Q215410",
+      "https://www.wikidata.org/wiki/Q180971",
+      "https://www.wikidata.org/wiki/Q163297",
+      "https://www.wikidata.org/wiki/Q239344"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-12",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q160659",
+        "label": "London Eye is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q19024",
+        "label": "Boston Tea Party takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q24082770",
+        "label": "The Vegetarian is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q936276",
+        "label": "The Wind in the Willows is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q186447",
+        "label": "James Webb Space Telescope launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q19024",
+      "Q936276",
+      "Q160659",
+      "Q24082770",
+      "Q186447"
+    ],
+    "reveal": {
+      "Q186447": 2021,
+      "Q936276": 1908,
+      "Q160659": 1999,
+      "Q24082770": 2007,
+      "Q19024": 1773
+    },
+    "explanation": "1773 · Boston Tea Party takes place\n1908 · The Wind in the Willows is first published\n1999 · London Eye is inaugurated\n2007 · The Vegetarian is first published\n2021 · James Webb Space Telescope launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q186447",
+      "https://www.wikidata.org/wiki/Q936276",
+      "https://www.wikidata.org/wiki/Q160659",
+      "https://www.wikidata.org/wiki/Q24082770",
+      "https://www.wikidata.org/wiki/Q19024"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-13",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q123885",
+        "label": "The Royal Society is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q378786",
+        "label": "The God of Small Things is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q2565",
+        "label": "Titan is discovered",
+        "art": "science"
+      },
+      {
+        "id": "Q147787",
+        "label": "Anna Karenina is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q211761",
+        "label": "Salyut 1 launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q2565",
+      "Q123885",
+      "Q147787",
+      "Q211761",
+      "Q378786"
+    ],
+    "reveal": {
+      "Q2565": 1655,
+      "Q123885": 1660,
+      "Q147787": 1877,
+      "Q211761": 1971,
+      "Q378786": 1997
+    },
+    "explanation": "1655 · Titan is discovered\n1660 · The Royal Society is founded\n1877 · Anna Karenina is first published\n1971 · Salyut 1 launches\n1997 · The God of Small Things is first published",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q2565",
+      "https://www.wikidata.org/wiki/Q123885",
+      "https://www.wikidata.org/wiki/Q147787",
+      "https://www.wikidata.org/wiki/Q211761",
+      "https://www.wikidata.org/wiki/Q378786"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-14",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q622400",
+        "label": "Things Fall Apart is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q1526343",
+        "label": "Perseverance’s Mars mission launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q8736",
+        "label": "Treaty of Versailles takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q184213",
+        "label": "Akashi Kaikyo Bridge is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q523076",
+        "label": "Little Women is first published",
+        "art": "book"
+      }
+    ],
+    "answer": [
+      "Q523076",
+      "Q8736",
+      "Q622400",
+      "Q184213",
+      "Q1526343"
+    ],
+    "reveal": {
+      "Q622400": 1958,
+      "Q184213": 1998,
+      "Q523076": 1868,
+      "Q1526343": 2020,
+      "Q8736": 1919
+    },
+    "explanation": "1868 · Little Women is first published\n1919 · Treaty of Versailles takes place\n1958 · Things Fall Apart is first published\n1998 · Akashi Kaikyo Bridge is inaugurated\n2020 · Perseverance’s Mars mission launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q622400",
+      "https://www.wikidata.org/wiki/Q184213",
+      "https://www.wikidata.org/wiki/Q523076",
+      "https://www.wikidata.org/wiki/Q1526343",
+      "https://www.wikidata.org/wiki/Q8736"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-15",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q130295",
+        "label": "The Wonderful Wizard of Oz is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q48572",
+        "label": "Rosetta launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q41542",
+        "label": "Dracula is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q3797766",
+        "label": "Coronation of Elizabeth II takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q47272",
+        "label": "Kepler space telescope launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q41542",
+      "Q130295",
+      "Q3797766",
+      "Q48572",
+      "Q47272"
+    ],
+    "reveal": {
+      "Q47272": 2009,
+      "Q48572": 2004,
+      "Q130295": 1900,
+      "Q41542": 1897,
+      "Q3797766": 1953
+    },
+    "explanation": "1897 · Dracula is first published\n1900 · The Wonderful Wizard of Oz is first published\n1953 · Coronation of Elizabeth II takes place\n2004 · Rosetta launches\n2009 · Kepler space telescope launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q47272",
+      "https://www.wikidata.org/wiki/Q48572",
+      "https://www.wikidata.org/wiki/Q130295",
+      "https://www.wikidata.org/wiki/Q41542",
+      "https://www.wikidata.org/wiki/Q3797766"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-16",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q8736",
+        "label": "Treaty of Versailles takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q41542",
+        "label": "Dracula is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q3134",
+        "label": "Callisto is discovered",
+        "art": "science"
+      },
+      {
+        "id": "Q186447",
+        "label": "James Webb Space Telescope launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q239344",
+        "label": "Salt March takes place",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q3134",
+      "Q41542",
+      "Q8736",
+      "Q239344",
+      "Q186447"
+    ],
+    "reveal": {
+      "Q8736": 1919,
+      "Q239344": 1930,
+      "Q41542": 1897,
+      "Q186447": 2021,
+      "Q3134": 1610
+    },
+    "explanation": "1610 · Callisto is discovered\n1897 · Dracula is first published\n1919 · Treaty of Versailles takes place\n1930 · Salt March takes place\n2021 · James Webb Space Telescope launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q8736",
+      "https://www.wikidata.org/wiki/Q239344",
+      "https://www.wikidata.org/wiki/Q41542",
+      "https://www.wikidata.org/wiki/Q186447",
+      "https://www.wikidata.org/wiki/Q3134"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-17",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q48469",
+        "label": "Voyager 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q6539",
+        "label": "Storming of the Bastille takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q210199",
+        "label": "Viking 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q936276",
+        "label": "The Wind in the Willows is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q48314",
+        "label": "Battle of Waterloo takes place",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q6539",
+      "Q48314",
+      "Q936276",
+      "Q210199",
+      "Q48469"
+    ],
+    "reveal": {
+      "Q210199": 1975,
+      "Q6539": 1789,
+      "Q48314": 1815,
+      "Q48469": 1977,
+      "Q936276": 1908
+    },
+    "explanation": "1789 · Storming of the Bastille takes place\n1815 · Battle of Waterloo takes place\n1908 · The Wind in the Willows is first published\n1975 · Viking 1 launches\n1977 · Voyager 1 launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q210199",
+      "https://www.wikidata.org/wiki/Q6539",
+      "https://www.wikidata.org/wiki/Q48314",
+      "https://www.wikidata.org/wiki/Q48469",
+      "https://www.wikidata.org/wiki/Q936276"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-18",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q622400",
+        "label": "Things Fall Apart is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q19024",
+        "label": "Boston Tea Party takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q82464",
+        "label": "The Picture of Dorian Gray is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q211761",
+        "label": "Salyut 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q123885",
+        "label": "The Royal Society is founded",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q123885",
+      "Q19024",
+      "Q82464",
+      "Q622400",
+      "Q211761"
+    ],
+    "reveal": {
+      "Q123885": 1660,
+      "Q211761": 1971,
+      "Q19024": 1773,
+      "Q82464": 1890,
+      "Q622400": 1958
+    },
+    "explanation": "1660 · The Royal Society is founded\n1773 · Boston Tea Party takes place\n1890 · The Picture of Dorian Gray is first published\n1958 · Things Fall Apart is first published\n1971 · Salyut 1 launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q123885",
+      "https://www.wikidata.org/wiki/Q211761",
+      "https://www.wikidata.org/wiki/Q19024",
+      "https://www.wikidata.org/wiki/Q82464",
+      "https://www.wikidata.org/wiki/Q622400"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-19",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q2565",
+        "label": "Titan is discovered",
+        "art": "science"
+      },
+      {
+        "id": "Q184213",
+        "label": "Akashi Kaikyo Bridge is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q523076",
+        "label": "Little Women is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q182817",
+        "label": "Velvet Revolution begins",
+        "art": "clock"
+      },
+      {
+        "id": "Q24082770",
+        "label": "The Vegetarian is first published",
+        "art": "book"
+      }
+    ],
+    "answer": [
+      "Q2565",
+      "Q523076",
+      "Q182817",
+      "Q184213",
+      "Q24082770"
+    ],
+    "reveal": {
+      "Q523076": 1868,
+      "Q184213": 1998,
+      "Q2565": 1655,
+      "Q24082770": 2007,
+      "Q182817": 1989
+    },
+    "explanation": "1655 · Titan is discovered\n1868 · Little Women is first published\n1989 · Velvet Revolution begins\n1998 · Akashi Kaikyo Bridge is inaugurated\n2007 · The Vegetarian is first published",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q523076",
+      "https://www.wikidata.org/wiki/Q184213",
+      "https://www.wikidata.org/wiki/Q2565",
+      "https://www.wikidata.org/wiki/Q24082770",
+      "https://www.wikidata.org/wiki/Q182817"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-20",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q74287",
+        "label": "The Hobbit is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q215410",
+        "label": "Adventures of Huckleberry Finn is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q160659",
+        "label": "London Eye is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q42970",
+        "label": "Amnesty International is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q3176133",
+        "label": "Louvre Abu Dhabi is inaugurated",
+        "art": "tower"
+      }
+    ],
+    "answer": [
+      "Q215410",
+      "Q74287",
+      "Q42970",
+      "Q160659",
+      "Q3176133"
+    ],
+    "reveal": {
+      "Q42970": 1961,
+      "Q74287": 1937,
+      "Q160659": 1999,
+      "Q215410": 1884,
+      "Q3176133": 2017
+    },
+    "explanation": "1884 · Adventures of Huckleberry Finn is first published\n1937 · The Hobbit is first published\n1961 · Amnesty International is founded\n1999 · London Eye is inaugurated\n2017 · Louvre Abu Dhabi is inaugurated",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q42970",
+      "https://www.wikidata.org/wiki/Q74287",
+      "https://www.wikidata.org/wiki/Q160659",
+      "https://www.wikidata.org/wiki/Q215410",
+      "https://www.wikidata.org/wiki/Q3176133"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-21",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q378786",
+        "label": "The God of Small Things is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q1159933",
+        "label": "Luna 9 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q239344",
+        "label": "Salt March takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q163297",
+        "label": "The Stranger is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q47272",
+        "label": "Kepler space telescope launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q239344",
+      "Q163297",
+      "Q1159933",
+      "Q378786",
+      "Q47272"
+    ],
+    "reveal": {
+      "Q1159933": 1966,
+      "Q47272": 2009,
+      "Q163297": 1942,
+      "Q378786": 1997,
+      "Q239344": 1930
+    },
+    "explanation": "1930 · Salt March takes place\n1942 · The Stranger is first published\n1966 · Luna 9 launches\n1997 · The God of Small Things is first published\n2009 · Kepler space telescope launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q1159933",
+      "https://www.wikidata.org/wiki/Q47272",
+      "https://www.wikidata.org/wiki/Q163297",
+      "https://www.wikidata.org/wiki/Q378786",
+      "https://www.wikidata.org/wiki/Q239344"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-22",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q48572",
+        "label": "Rosetta launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q191838",
+        "label": "The Count of Monte Cristo is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q147787",
+        "label": "Anna Karenina is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q48314",
+        "label": "Battle of Waterloo takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q180971",
+        "label": "Apollo 17 launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q48314",
+      "Q191838",
+      "Q147787",
+      "Q180971",
+      "Q48572"
+    ],
+    "reveal": {
+      "Q180971": 1972,
+      "Q48572": 2004,
+      "Q191838": 1844,
+      "Q147787": 1877,
+      "Q48314": 1815
+    },
+    "explanation": "1815 · Battle of Waterloo takes place\n1844 · The Count of Monte Cristo is first published\n1877 · Anna Karenina is first published\n1972 · Apollo 17 launches\n2004 · Rosetta launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q180971",
+      "https://www.wikidata.org/wiki/Q48572",
+      "https://www.wikidata.org/wiki/Q191838",
+      "https://www.wikidata.org/wiki/Q147787",
+      "https://www.wikidata.org/wiki/Q48314"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-23",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q184213",
+        "label": "Akashi Kaikyo Bridge is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q191838",
+        "label": "The Count of Monte Cristo is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q201771",
+        "label": "Mars Pathfinder launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q130295",
+        "label": "The Wonderful Wizard of Oz is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q1526343",
+        "label": "Perseverance’s Mars mission launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q191838",
+      "Q130295",
+      "Q201771",
+      "Q184213",
+      "Q1526343"
+    ],
+    "reveal": {
+      "Q1526343": 2020,
+      "Q130295": 1900,
+      "Q201771": 1996,
+      "Q191838": 1844,
+      "Q184213": 1998
+    },
+    "explanation": "1844 · The Count of Monte Cristo is first published\n1900 · The Wonderful Wizard of Oz is first published\n1996 · Mars Pathfinder launches\n1998 · Akashi Kaikyo Bridge is inaugurated\n2020 · Perseverance’s Mars mission launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q1526343",
+      "https://www.wikidata.org/wiki/Q130295",
+      "https://www.wikidata.org/wiki/Q201771",
+      "https://www.wikidata.org/wiki/Q191838",
+      "https://www.wikidata.org/wiki/Q184213"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-24",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q201771",
+        "label": "Mars Pathfinder launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q74287",
+        "label": "The Hobbit is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q160659",
+        "label": "London Eye is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q47272",
+        "label": "Kepler space telescope launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q523076",
+        "label": "Little Women is first published",
+        "art": "book"
+      }
+    ],
+    "answer": [
+      "Q523076",
+      "Q74287",
+      "Q201771",
+      "Q160659",
+      "Q47272"
+    ],
+    "reveal": {
+      "Q47272": 2009,
+      "Q523076": 1868,
+      "Q201771": 1996,
+      "Q160659": 1999,
+      "Q74287": 1937
+    },
+    "explanation": "1868 · Little Women is first published\n1937 · The Hobbit is first published\n1996 · Mars Pathfinder launches\n1999 · London Eye is inaugurated\n2009 · Kepler space telescope launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q47272",
+      "https://www.wikidata.org/wiki/Q523076",
+      "https://www.wikidata.org/wiki/Q201771",
+      "https://www.wikidata.org/wiki/Q160659",
+      "https://www.wikidata.org/wiki/Q74287"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-25",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q1526343",
+        "label": "Perseverance’s Mars mission launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q8736",
+        "label": "Treaty of Versailles takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q936276",
+        "label": "The Wind in the Willows is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q182817",
+        "label": "Velvet Revolution begins",
+        "art": "clock"
+      },
+      {
+        "id": "Q82464",
+        "label": "The Picture of Dorian Gray is first published",
+        "art": "book"
+      }
+    ],
+    "answer": [
+      "Q82464",
+      "Q936276",
+      "Q8736",
+      "Q182817",
+      "Q1526343"
+    ],
+    "reveal": {
+      "Q82464": 1890,
+      "Q182817": 1989,
+      "Q8736": 1919,
+      "Q1526343": 2020,
+      "Q936276": 1908
+    },
+    "explanation": "1890 · The Picture of Dorian Gray is first published\n1908 · The Wind in the Willows is first published\n1919 · Treaty of Versailles takes place\n1989 · Velvet Revolution begins\n2020 · Perseverance’s Mars mission launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q82464",
+      "https://www.wikidata.org/wiki/Q182817",
+      "https://www.wikidata.org/wiki/Q8736",
+      "https://www.wikidata.org/wiki/Q1526343",
+      "https://www.wikidata.org/wiki/Q936276"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-26",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q622400",
+        "label": "Things Fall Apart is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q1159933",
+        "label": "Luna 9 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q2565",
+        "label": "Titan is discovered",
+        "art": "science"
+      },
+      {
+        "id": "Q24082770",
+        "label": "The Vegetarian is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q19024",
+        "label": "Boston Tea Party takes place",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q2565",
+      "Q19024",
+      "Q622400",
+      "Q1159933",
+      "Q24082770"
+    ],
+    "reveal": {
+      "Q1159933": 1966,
+      "Q622400": 1958,
+      "Q19024": 1773,
+      "Q24082770": 2007,
+      "Q2565": 1655
+    },
+    "explanation": "1655 · Titan is discovered\n1773 · Boston Tea Party takes place\n1958 · Things Fall Apart is first published\n1966 · Luna 9 launches\n2007 · The Vegetarian is first published",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q1159933",
+      "https://www.wikidata.org/wiki/Q622400",
+      "https://www.wikidata.org/wiki/Q19024",
+      "https://www.wikidata.org/wiki/Q24082770",
+      "https://www.wikidata.org/wiki/Q2565"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-27",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q163297",
+        "label": "The Stranger is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q147787",
+        "label": "Anna Karenina is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q48469",
+        "label": "Voyager 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q6539",
+        "label": "Storming of the Bastille takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q42970",
+        "label": "Amnesty International is founded",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q6539",
+      "Q147787",
+      "Q163297",
+      "Q42970",
+      "Q48469"
+    ],
+    "reveal": {
+      "Q163297": 1942,
+      "Q48469": 1977,
+      "Q42970": 1961,
+      "Q6539": 1789,
+      "Q147787": 1877
+    },
+    "explanation": "1789 · Storming of the Bastille takes place\n1877 · Anna Karenina is first published\n1942 · The Stranger is first published\n1961 · Amnesty International is founded\n1977 · Voyager 1 launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q163297",
+      "https://www.wikidata.org/wiki/Q48469",
+      "https://www.wikidata.org/wiki/Q42970",
+      "https://www.wikidata.org/wiki/Q6539",
+      "https://www.wikidata.org/wiki/Q147787"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-28",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q123885",
+        "label": "The Royal Society is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q210199",
+        "label": "Viking 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q130295",
+        "label": "The Wonderful Wizard of Oz is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q215410",
+        "label": "Adventures of Huckleberry Finn is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q186447",
+        "label": "James Webb Space Telescope launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q123885",
+      "Q215410",
+      "Q130295",
+      "Q210199",
+      "Q186447"
+    ],
+    "reveal": {
+      "Q186447": 2021,
+      "Q210199": 1975,
+      "Q123885": 1660,
+      "Q215410": 1884,
+      "Q130295": 1900
+    },
+    "explanation": "1660 · The Royal Society is founded\n1884 · Adventures of Huckleberry Finn is first published\n1900 · The Wonderful Wizard of Oz is first published\n1975 · Viking 1 launches\n2021 · James Webb Space Telescope launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q186447",
+      "https://www.wikidata.org/wiki/Q210199",
+      "https://www.wikidata.org/wiki/Q123885",
+      "https://www.wikidata.org/wiki/Q215410",
+      "https://www.wikidata.org/wiki/Q130295"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-29",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q41542",
+        "label": "Dracula is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q3176133",
+        "label": "Louvre Abu Dhabi is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q378786",
+        "label": "The God of Small Things is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q48572",
+        "label": "Rosetta launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q3797766",
+        "label": "Coronation of Elizabeth II takes place",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q41542",
+      "Q3797766",
+      "Q378786",
+      "Q48572",
+      "Q3176133"
+    ],
+    "reveal": {
+      "Q378786": 1997,
+      "Q48572": 2004,
+      "Q3176133": 2017,
+      "Q3797766": 1953,
+      "Q41542": 1897
+    },
+    "explanation": "1897 · Dracula is first published\n1953 · Coronation of Elizabeth II takes place\n1997 · The God of Small Things is first published\n2004 · Rosetta launches\n2017 · Louvre Abu Dhabi is inaugurated",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q378786",
+      "https://www.wikidata.org/wiki/Q48572",
+      "https://www.wikidata.org/wiki/Q3176133",
+      "https://www.wikidata.org/wiki/Q3797766",
+      "https://www.wikidata.org/wiki/Q41542"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-30",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q3134",
+        "label": "Callisto is discovered",
+        "art": "science"
+      },
+      {
+        "id": "Q523076",
+        "label": "Little Women is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q180971",
+        "label": "Apollo 17 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q211761",
+        "label": "Salyut 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q3797766",
+        "label": "Coronation of Elizabeth II takes place",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q3134",
+      "Q523076",
+      "Q3797766",
+      "Q211761",
+      "Q180971"
+    ],
+    "reveal": {
+      "Q3134": 1610,
+      "Q180971": 1972,
+      "Q211761": 1971,
+      "Q3797766": 1953,
+      "Q523076": 1868
+    },
+    "explanation": "1610 · Callisto is discovered\n1868 · Little Women is first published\n1953 · Coronation of Elizabeth II takes place\n1971 · Salyut 1 launches\n1972 · Apollo 17 launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q3134",
+      "https://www.wikidata.org/wiki/Q180971",
+      "https://www.wikidata.org/wiki/Q211761",
+      "https://www.wikidata.org/wiki/Q3797766",
+      "https://www.wikidata.org/wiki/Q523076"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-31",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q211761",
+        "label": "Salyut 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q2565",
+        "label": "Titan is discovered",
+        "art": "science"
+      },
+      {
+        "id": "Q19024",
+        "label": "Boston Tea Party takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q48572",
+        "label": "Rosetta launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q48314",
+        "label": "Battle of Waterloo takes place",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q2565",
+      "Q19024",
+      "Q48314",
+      "Q211761",
+      "Q48572"
+    ],
+    "reveal": {
+      "Q48314": 1815,
+      "Q19024": 1773,
+      "Q2565": 1655,
+      "Q48572": 2004,
+      "Q211761": 1971
+    },
+    "explanation": "1655 · Titan is discovered\n1773 · Boston Tea Party takes place\n1815 · Battle of Waterloo takes place\n1971 · Salyut 1 launches\n2004 · Rosetta launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q48314",
+      "https://www.wikidata.org/wiki/Q19024",
+      "https://www.wikidata.org/wiki/Q2565",
+      "https://www.wikidata.org/wiki/Q48572",
+      "https://www.wikidata.org/wiki/Q211761"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-32",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q24082770",
+        "label": "The Vegetarian is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q82464",
+        "label": "The Picture of Dorian Gray is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q47272",
+        "label": "Kepler space telescope launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q160659",
+        "label": "London Eye is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q8736",
+        "label": "Treaty of Versailles takes place",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q82464",
+      "Q8736",
+      "Q160659",
+      "Q24082770",
+      "Q47272"
+    ],
+    "reveal": {
+      "Q8736": 1919,
+      "Q24082770": 2007,
+      "Q47272": 2009,
+      "Q160659": 1999,
+      "Q82464": 1890
+    },
+    "explanation": "1890 · The Picture of Dorian Gray is first published\n1919 · Treaty of Versailles takes place\n1999 · London Eye is inaugurated\n2007 · The Vegetarian is first published\n2009 · Kepler space telescope launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q8736",
+      "https://www.wikidata.org/wiki/Q24082770",
+      "https://www.wikidata.org/wiki/Q47272",
+      "https://www.wikidata.org/wiki/Q160659",
+      "https://www.wikidata.org/wiki/Q82464"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-33",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q239344",
+        "label": "Salt March takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q74287",
+        "label": "The Hobbit is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q41542",
+        "label": "Dracula is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q180971",
+        "label": "Apollo 17 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q1526343",
+        "label": "Perseverance’s Mars mission launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q41542",
+      "Q239344",
+      "Q74287",
+      "Q180971",
+      "Q1526343"
+    ],
+    "reveal": {
+      "Q74287": 1937,
+      "Q41542": 1897,
+      "Q180971": 1972,
+      "Q239344": 1930,
+      "Q1526343": 2020
+    },
+    "explanation": "1897 · Dracula is first published\n1930 · Salt March takes place\n1937 · The Hobbit is first published\n1972 · Apollo 17 launches\n2020 · Perseverance’s Mars mission launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q74287",
+      "https://www.wikidata.org/wiki/Q41542",
+      "https://www.wikidata.org/wiki/Q180971",
+      "https://www.wikidata.org/wiki/Q239344",
+      "https://www.wikidata.org/wiki/Q1526343"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-34",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q936276",
+        "label": "The Wind in the Willows is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q48469",
+        "label": "Voyager 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q201771",
+        "label": "Mars Pathfinder launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q3176133",
+        "label": "Louvre Abu Dhabi is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q147787",
+        "label": "Anna Karenina is first published",
+        "art": "book"
+      }
+    ],
+    "answer": [
+      "Q147787",
+      "Q936276",
+      "Q48469",
+      "Q201771",
+      "Q3176133"
+    ],
+    "reveal": {
+      "Q936276": 1908,
+      "Q48469": 1977,
+      "Q147787": 1877,
+      "Q3176133": 2017,
+      "Q201771": 1996
+    },
+    "explanation": "1877 · Anna Karenina is first published\n1908 · The Wind in the Willows is first published\n1977 · Voyager 1 launches\n1996 · Mars Pathfinder launches\n2017 · Louvre Abu Dhabi is inaugurated",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q936276",
+      "https://www.wikidata.org/wiki/Q48469",
+      "https://www.wikidata.org/wiki/Q147787",
+      "https://www.wikidata.org/wiki/Q3176133",
+      "https://www.wikidata.org/wiki/Q201771"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-35",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q3134",
+        "label": "Callisto is discovered",
+        "art": "science"
+      },
+      {
+        "id": "Q6539",
+        "label": "Storming of the Bastille takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q184213",
+        "label": "Akashi Kaikyo Bridge is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q191838",
+        "label": "The Count of Monte Cristo is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q215410",
+        "label": "Adventures of Huckleberry Finn is first published",
+        "art": "book"
+      }
+    ],
+    "answer": [
+      "Q3134",
+      "Q6539",
+      "Q191838",
+      "Q215410",
+      "Q184213"
+    ],
+    "reveal": {
+      "Q215410": 1884,
+      "Q191838": 1844,
+      "Q6539": 1789,
+      "Q3134": 1610,
+      "Q184213": 1998
+    },
+    "explanation": "1610 · Callisto is discovered\n1789 · Storming of the Bastille takes place\n1844 · The Count of Monte Cristo is first published\n1884 · Adventures of Huckleberry Finn is first published\n1998 · Akashi Kaikyo Bridge is inaugurated",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q215410",
+      "https://www.wikidata.org/wiki/Q191838",
+      "https://www.wikidata.org/wiki/Q6539",
+      "https://www.wikidata.org/wiki/Q3134",
+      "https://www.wikidata.org/wiki/Q184213"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-36",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q130295",
+        "label": "The Wonderful Wizard of Oz is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q622400",
+        "label": "Things Fall Apart is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q42970",
+        "label": "Amnesty International is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q210199",
+        "label": "Viking 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q1159933",
+        "label": "Luna 9 launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q130295",
+      "Q622400",
+      "Q42970",
+      "Q1159933",
+      "Q210199"
+    ],
+    "reveal": {
+      "Q42970": 1961,
+      "Q1159933": 1966,
+      "Q130295": 1900,
+      "Q210199": 1975,
+      "Q622400": 1958
+    },
+    "explanation": "1900 · The Wonderful Wizard of Oz is first published\n1958 · Things Fall Apart is first published\n1961 · Amnesty International is founded\n1966 · Luna 9 launches\n1975 · Viking 1 launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q42970",
+      "https://www.wikidata.org/wiki/Q1159933",
+      "https://www.wikidata.org/wiki/Q130295",
+      "https://www.wikidata.org/wiki/Q210199",
+      "https://www.wikidata.org/wiki/Q622400"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-37",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q182817",
+        "label": "Velvet Revolution begins",
+        "art": "clock"
+      },
+      {
+        "id": "Q123885",
+        "label": "The Royal Society is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q378786",
+        "label": "The God of Small Things is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q163297",
+        "label": "The Stranger is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q186447",
+        "label": "James Webb Space Telescope launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q123885",
+      "Q163297",
+      "Q182817",
+      "Q378786",
+      "Q186447"
+    ],
+    "reveal": {
+      "Q123885": 1660,
+      "Q182817": 1989,
+      "Q378786": 1997,
+      "Q163297": 1942,
+      "Q186447": 2021
+    },
+    "explanation": "1660 · The Royal Society is founded\n1942 · The Stranger is first published\n1989 · Velvet Revolution begins\n1997 · The God of Small Things is first published\n2021 · James Webb Space Telescope launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q123885",
+      "https://www.wikidata.org/wiki/Q182817",
+      "https://www.wikidata.org/wiki/Q378786",
+      "https://www.wikidata.org/wiki/Q163297",
+      "https://www.wikidata.org/wiki/Q186447"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-38",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q42970",
+        "label": "Amnesty International is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q622400",
+        "label": "Things Fall Apart is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q24082770",
+        "label": "The Vegetarian is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q1526343",
+        "label": "Perseverance’s Mars mission launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q201771",
+        "label": "Mars Pathfinder launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "Q622400",
+      "Q42970",
+      "Q201771",
+      "Q24082770",
+      "Q1526343"
+    ],
+    "reveal": {
+      "Q201771": 1996,
+      "Q1526343": 2020,
+      "Q24082770": 2007,
+      "Q42970": 1961,
+      "Q622400": 1958
+    },
+    "explanation": "1958 · Things Fall Apart is first published\n1961 · Amnesty International is founded\n1996 · Mars Pathfinder launches\n2007 · The Vegetarian is first published\n2020 · Perseverance’s Mars mission launches",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q201771",
+      "https://www.wikidata.org/wiki/Q1526343",
+      "https://www.wikidata.org/wiki/Q24082770",
+      "https://www.wikidata.org/wiki/Q42970",
+      "https://www.wikidata.org/wiki/Q622400"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-39",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q123885",
+        "label": "The Royal Society is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q211761",
+        "label": "Salyut 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q210199",
+        "label": "Viking 1 launches",
+        "art": "rocket"
+      },
+      {
+        "id": "Q163297",
+        "label": "The Stranger is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q378786",
+        "label": "The God of Small Things is first published",
+        "art": "book"
+      }
+    ],
+    "answer": [
+      "Q123885",
+      "Q163297",
+      "Q211761",
+      "Q210199",
+      "Q378786"
+    ],
+    "reveal": {
+      "Q211761": 1971,
+      "Q378786": 1997,
+      "Q210199": 1975,
+      "Q163297": 1942,
+      "Q123885": 1660
+    },
+    "explanation": "1660 · The Royal Society is founded\n1942 · The Stranger is first published\n1971 · Salyut 1 launches\n1975 · Viking 1 launches\n1997 · The God of Small Things is first published",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q211761",
+      "https://www.wikidata.org/wiki/Q378786",
+      "https://www.wikidata.org/wiki/Q210199",
+      "https://www.wikidata.org/wiki/Q163297",
+      "https://www.wikidata.org/wiki/Q123885"
+    ]
+  },
+  {
+    "id": "timeline-practice-7c82ea2a43-40",
+    "version": 5,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q191838",
+        "label": "The Count of Monte Cristo is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q19024",
+        "label": "Boston Tea Party takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q936276",
+        "label": "The Wind in the Willows is first published",
+        "art": "book"
+      },
+      {
+        "id": "Q3797766",
+        "label": "Coronation of Elizabeth II takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q160659",
+        "label": "London Eye is inaugurated",
+        "art": "tower"
+      }
+    ],
+    "answer": [
+      "Q19024",
+      "Q191838",
+      "Q936276",
+      "Q3797766",
+      "Q160659"
+    ],
+    "reveal": {
+      "Q160659": 1999,
+      "Q3797766": 1953,
+      "Q936276": 1908,
+      "Q19024": 1773,
+      "Q191838": 1844
+    },
+    "explanation": "1773 · Boston Tea Party takes place\n1844 · The Count of Monte Cristo is first published\n1908 · The Wind in the Willows is first published\n1953 · Coronation of Elizabeth II takes place\n1999 · London Eye is inaugurated",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q160659",
+      "https://www.wikidata.org/wiki/Q3797766",
+      "https://www.wikidata.org/wiki/Q936276",
+      "https://www.wikidata.org/wiki/Q19024",
+      "https://www.wikidata.org/wiki/Q191838"
+    ]
+  }
+]

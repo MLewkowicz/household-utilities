@@ -6,6 +6,15 @@ import {newRound,inRound,roundLocations,prepareFindTarget,answerLocation,restore
 import {createRoute,stepRoute,restoreRoute,shortestRoute,routePuzzles,neighbors} from '../src/geography-route';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
 const countries=atlas as Country[];
+test('city catalog keeps urban centers and removes satellite clusters with population context',()=>{
+ const polish=Object.values(globeCities).filter(c=>c.countryId==='POL');
+ assert.deepEqual(polish.map(c=>c.id),['POL','POL_KRAKOW','POL_GDANSK','POL_LODZ','POL_KATOWICE']);
+ assert.ok(globeCities.NLD_ROTTERDAM.note?.includes('major port'));
+ assert.ok(Object.values(globeCities).filter(c=>c.population).length>480);
+ for(const city of Object.values(globeCities))if(city.population){assert.ok(city.population>0);assert.match(city.populationBasis!,/archived.*not city proper/);}
+ const removed='POL_GLIWICE',r=newRound('Europe',0,0,'countries','cities');r.cityVersion=2;r.correct=['POL',removed];r.learningTarget=removed;r.learningOrder=[removed,'POL_KRAKOW'];
+ const restored=restoreRound(r,countries)!;assert.deepEqual(restored.correct,['POL']);assert.notEqual(restored.learningTarget,removed);assert.ok(!restored.learningOrder.includes(removed));
+});
 test('capital dots use actual cities, correct modern capitals and a consistent quiz pool',()=>{
  assert.ok(globeCities.POL.lon>20.9&&globeCities.POL.lon<21.2);assert.ok(globeCities.KIR.lon>170);assert.ok(globeCities.MMR.lat>19&&globeCities.MMR.lat<20);assert.ok(globeCities.GNQ.lon>10);assert.ok(globeCities.BDI.lat<0);assert.ok(globeCities.CYN.lat>globeCities.CYP.lat);
  for(const c of Object.values(globeCities)){assert.ok(c.lat>=-90&&c.lat<=90&&c.lon>=-180&&c.lon<=180);assert.ok(c.source.startsWith('https://'));assert.ok(countries.some(v=>v.id===c.countryId));}
@@ -15,9 +24,9 @@ test('city questions and saved progress distinguish multiple cities in the same 
  const r=newRound('Europe',0,0,'countries','cities'),locations=roundLocations(countries,r),krakow=locations.find(c=>c.id==='POL_KRAKOW')!,warsaw=locations.find(c=>c.id==='POL')!;
  assert.ok(krakow&&warsaw);assert.equal(krakow.name,'Poland');assert.notDeepEqual(krakow.center,warsaw.center);assert.ok(globeCities.USA_NEWYORK&&!globeCities.USA_NEWYORK.capital);assert.ok(globeCities.CHN_SHANGHAI);assert.ok(globeCities.IND_MUMBAI);assert.equal(cityPrompt(globeCities.IND_MUMBAI,countries.find(c=>c.id==='IND')!),'Find Mumbai · India');assert.match(cityPrompt(globeCities.ZAF,countries.find(c=>c.id==='ZAF')!),/administrative capital/);assert.ok(globeCities.NLD_ROTTERDAM);assert.equal(globeCities.ZAF_BLOEMFONTEIN.capitalRole,'judicial');
  r.learningTarget=krakow.id;r.learningOrder=['POL',krakow.id];r.correct=['POL'];const saved=restoreRound(r,countries)!;assert.equal(saved.learningTarget,krakow.id);assert.deepEqual(saved.correct,['POL']);assert.ok(saved.learningOrder.includes('FRA_LYON'));
- const old={...r,cityVersion:undefined,ended:'won' as const};const upgraded=restoreRound(old,countries)!;assert.equal(upgraded.ended,null);assert.equal(upgraded.cityVersion,2);assert.deepEqual(upgraded.correct,['POL']);
+ const old={...r,cityVersion:undefined,ended:'won' as const};const upgraded=restoreRound(old,countries)!;assert.equal(upgraded.ended,null);assert.equal(upgraded.cityVersion,3);assert.deepEqual(upgraded.correct,['POL']);
  const ranked=newRound('Europe',0,0,'countries','competitive-cities');ranked.findOrder=[krakow.id,warsaw.id];prepareFindTarget(ranked,countries,1000);assert.equal(answerLocation(ranked,warsaw,countries,2000)?.correct,false);assert.deepEqual(ranked.missed,[krakow.id]);assert.equal(ranked.correct.length,0);
- const oldRanked=restoreRound({...ranked,cityVersion:undefined},countries)!;assert.notEqual(oldRanked.id,ranked.id);assert.equal(oldRanked.cityVersion,2);assert.equal(oldRanked.mistakes,0);
+ const oldRanked=restoreRound({...ranked,cityVersion:undefined},countries)!;assert.notEqual(oldRanked.id,ranked.id);assert.equal(oldRanked.cityVersion,3);assert.equal(oldRanked.mistakes,0);
 });
 test('route catalog has symmetric land borders and all shortest paths are valid',()=>{
  for(const [a,ns] of Object.entries(neighbors))for(const b of ns)assert.ok(neighbors[b].includes(a),a+'-'+b);

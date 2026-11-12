@@ -15,7 +15,7 @@ test('shared scores validate completed rounds, retry idempotently and retain one
  const db=await openDatabase();try{
   const ledger=await callRpc(db,'dashboard');
   const catalog=await db.query('SELECT * FROM ledger_private.geography_catalog ORDER BY id');
-  assert.deepEqual(catalog.rows,atlas.map(c=>({id:c.id,continent:c.continent,region:c.region,official:COUNTRY_IDS.has(c.id),has_capital:hasCapital(c),has_city:!!globeCities[c.id],city_count:Object.values(globeCities).filter(city=>city.countryId===c.id).length})).sort((a,b)=>a.id.localeCompare(b.id)));
+  assert.deepEqual(catalog.rows.map(({city_count,...c})=>c),atlas.map(c=>({id:c.id,continent:c.continent,region:c.region,official:COUNTRY_IDS.has(c.id),has_capital:hasCapital(c),has_city:!!globeCities[c.id],urban_count:Object.values(globeCities).filter(city=>city.countryId===c.id).length})).sort((a,b)=>a.id.localeCompare(b.id)));
   const sizes=await db.query("SELECT count(*)::integer AS n FROM ledger_private.geography_catalog WHERE official AND continent='Europe'");
   const p={id:'geography-score-0001',player:'michal',region:'Europe',scope:'countries',correct:5,total:sizes.rows[0].n,mistakes:3,elapsed_ms:60000};
   const result=await callRpc(db,'save_geography_score',{p});assert.equal(result.score,425);
@@ -29,7 +29,7 @@ test('shared scores validate completed rounds, retry idempotently and retain one
   await callRpc(db,'save_geography_score',{p:{...p,id:'geography-score-0002',elapsed_ms:40000}});
   await callRpc(db,'save_geography_score',{p:{...p,id:'geography-score-0003',correct:6,player:'rina'}});
   const rows=await callRpc(db,'geography_scores');assert.equal(rows.length,2);assert.equal(rows[0].player,'rina');assert.equal(rows[1].id,'geography-score-0002');
-  assert.deepEqual(await callRpc(db,'geography_score_modes'),['name','find','capitals','cities','places']);
+  assert.deepEqual(await callRpc(db,'geography_score_modes'),['name','find','capitals','cities','places','urban']);
   const location={...p,id:'location-score-0001',challenge:'find',region:'Polynesia',total:3,correct:1,mistakes:2};
   const saved=await callRpc(db,'save_geography_score',{p:location});assert.equal(saved.challenge,'find');assert.equal(saved.score,50);
   assert.deepEqual(await callRpc(db,'save_geography_score',{p:location}),saved);
@@ -44,8 +44,13 @@ test('shared scores validate completed rounds, retry idempotently and retain one
   const city=await callRpc(db,'save_geography_score',{p:{...p,id:'city-score-00000001',challenge:'cities',region:'Polynesia',total:3,correct:1,mistakes:2}});assert.equal(city.challenge,'cities');assert.equal(city.score,50);
   await assert.rejects(callRpc(db,'save_geography_score',{p:{...p,id:'city-score-00000002',challenge:'cities',region:'Micronesia',total:5}}),/Country set/);
   const placesTotal=Object.values(globeCities).filter(city=>COUNTRY_IDS.has(city.countryId)&&atlas.find(c=>c.id===city.countryId)?.continent==='Europe').length;
-  const places=await callRpc(db,'save_geography_score',{p:{...p,id:'major-city-score-0001',challenge:'places',total:placesTotal}});assert.equal(places.challenge,'places');assert.ok(places.total>capitalTotal);
-  await assert.rejects(callRpc(db,'save_geography_score',{p:{...p,id:'major-city-score-0002',challenge:'places',total:capitalTotal}}),/Country set/);
+  const places=await callRpc(db,'save_geography_score',{p:{...p,id:'major-city-score-0001',challenge:'urban',total:placesTotal}});assert.equal(places.challenge,'urban');assert.ok(places.total>capitalTotal);
+  await assert.rejects(callRpc(db,'save_geography_score',{p:{...p,id:'major-city-score-0002',challenge:'urban',total:capitalTotal}}),/Country set/);
+  const previousTotal=(await db.query("SELECT sum(city_count)::integer AS n FROM ledger_private.geography_catalog WHERE official AND continent='Europe'")).rows[0].n;
+  assert.ok(previousTotal>placesTotal);
+  const pending={...p,id:'previous-city-retry-01',challenge:'places',total:previousTotal};
+  const previous=await callRpc(db,'save_geography_score',{p:pending});assert.equal(previous.challenge,'places');assert.deepEqual(await callRpc(db,'save_geography_score',{p:pending}),previous);
+  await assert.rejects(callRpc(db,'save_geography_score',{p:{...pending,id:'previous-pool-urban-01',challenge:'urban'}}),/Country set/);
   const after=await callRpc(db,'dashboard');delete after.updated_at;delete ledger.updated_at;assert.deepEqual(after,ledger);
   await assert.rejects(db.transaction(async tx=>{await tx.exec('SET LOCAL ROLE anon');await tx.query('SELECT * FROM ledger_private.geography_scores');}),/permission denied/);
  }finally{await db.close();}

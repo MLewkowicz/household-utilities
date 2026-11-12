@@ -40,7 +40,9 @@ const refreshing=new Map<Route,Promise<Page>>();
 // Reuse recently loaded content when entering from its house scene.
 const freshAt=new Map<Route,number>();
 function refreshPage(route:Route,maxAge=0){
- let pending=refreshing.get(route);
+ // Game subroutes share a shell but must update it immediately, even while
+ // another game's renderer is loading. Its route version guards late work.
+ let pending=route==='games'?undefined:refreshing.get(route);
  if(!pending&&maxAge&&performance.now()-(freshAt.get(route)??-Infinity)<maxAge)return load(route);
  if(!pending){pending=load(route).then(async page=>{await page.refresh();freshAt.set(route,performance.now());return page;}).finally(()=>refreshing.delete(route));refreshing.set(route,pending);}
  return pending;

@@ -66,6 +66,20 @@ HISTORY = {
  ],
 }
 
+def expanded_history(code, background):
+ """Add episodes without repeating the existing editorial paraphrases."""
+ facts=list(HISTORY.get(code,[]))
+ stop=set('the and that with from were this into after before their under became more over than which when been have until among'.split())
+ def words(s):return {w for w in re.findall(r'\b[\w]+\b',s.lower()) if len(w)>3 and w not in stop}
+ for candidate in historical_facts(background):
+  a=words(candidate)
+  duplicate=False
+  for prior in facts:
+   b=words(prior);common=a&b;overlap=len(common)/max(1,min(len(a),len(b)))
+   if overlap>.6 or overlap>.32 and any(re.search(r'\d',w) for w in common):duplicate=True;break
+  if not duplicate:facts.append(candidate)
+ return facts[:7]
+
 def historical_facts(background):
  sentences=[s.strip() for s in re.split(r'(?<=[.!?])\s+(?=[A-Z0-9“\"])',background) if len(s.strip())>35]
  candidates=[]
@@ -80,11 +94,14 @@ def historical_facts(background):
   if re.search(r'\b[A-Z]{4,}\b',s) and not re.search(r'king|queen|emperor|explorer|navigator|leader|general|dynasty|led by|under|colonial|genocide|Holocaust',s,re.I):continue
   historic=re.search(r'ancient|centur|millenn|BCE|empire|dynast|kingdom|settle|settlement|voyag|trade|trading|canal|railway|construct|independen|colon|revolution|slave|slavery|genocide|Holocaust|World War|WWII|civil war|partition|unif|annex|explor',s,re.I)
   if not historic and not years:continue
+  # A list of peoples or ancestors is not an episode with a cause and consequence.
+  if re.search(r'ethnic|descend|tribes|tribal|inhabited|inhabitants|Bantu|Polynesian',s,re.I) and not re.search(r'canal|rail|built|construct|revolt|revolution|abolish|trade|voyage|invasion|independence',s,re.I):continue
   if len(s)>550:continue
-  score=8*bool(re.search(r'ancient|centur|millenn|BCE|dynast|settlement|voyag|trade|trading|canal|construct|slavery|slave trade',s,re.I))+5*bool(re.search(r'genocide|Holocaust|independen|empire|revolution',s,re.I))+2*(i<4)-len(s)/180
+  score=14*bool(re.search(r'canal|railway|built|construct|voyage|navigation|printing|university|abolish|trade route|gold|spice|earthquake|revolution',s,re.I))+8*bool(re.search(r'ancient|centur|millenn|BCE|dynast|settlement|voyag|trade|trading|canal|construct|slavery|slave trade',s,re.I))+5*bool(re.search(r'genocide|Holocaust|independen|empire|revolution',s,re.I))+2*(i<4)-len(s)/180
   candidates.append((score,i,s))
- # Preserve chronology within selected episodes, with a maximum of three.
- chosen=sorted(sorted(candidates,reverse=True)[:3],key=lambda x:x[1])
+ # Lead with the most concrete episode, then offer a longer chronological read.
+ ranked=sorted(candidates,reverse=True)[:6]
+ chosen=ranked[:1]+sorted(ranked[1:],key=lambda x:x[1])
  facts=[s for _,_,s in chosen]
  # Keep historical people legible and explain their role when an excerpt omits it.
  contexts={'under ASHOKA':'under Emperor Ashoka','under MINDAUGAS':'under the ruler Mindaugas','under Maurice BISHOP':'under the revolutionary leader Maurice Bishop','under the strong hand of Josip Broz, aka TITO':'under the communist leader Josip Broz Tito','in 1865, Seru Epenisa CAKOBAU':'in 1865, the Fijian chief Seru Epenisa Cakobau'}

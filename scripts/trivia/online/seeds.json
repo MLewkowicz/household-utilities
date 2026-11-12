@@ -1,0 +1,574 @@
+{
+  "schema": 1,
+  "timeline": [
+    {
+      "property": "P619",
+      "art": "rocket",
+      "verb": "launches",
+      "titles": [
+        "Sputnik 1",
+        "Sputnik 2",
+        "Explorer 1",
+        "Vostok 1",
+        "Vostok 6",
+        "Apollo 8",
+        "Apollo 11",
+        "Apollo 13",
+        "Apollo 17",
+        "Voyager 1",
+        "Voyager 2",
+        "Pioneer 10",
+        "Pioneer 11",
+        "Mariner 2",
+        "Mariner 4",
+        "Viking 1",
+        "Viking 2",
+        "Venera 7",
+        "Luna 2",
+        "Luna 3",
+        "Luna 9",
+        "Lunokhod 1",
+        "Skylab",
+        "Salyut 1",
+        "Mir",
+        "Hubble Space Telescope",
+        "Cassini–Huygens",
+        "New Horizons",
+        "Rosetta (spacecraft)",
+        "Juno (spacecraft)",
+        "Kepler space telescope",
+        "James Webb Space Telescope",
+        "Mars Pathfinder",
+        "Mars Science Laboratory",
+        "Mars 2020",
+        "Chandrayaan-1",
+        "Hayabusa",
+        "Hayabusa2"
+      ]
+    },
+    {
+      "property": "P577",
+      "art": "book",
+      "verb": "is first published",
+      "titles": [
+        "Pride and Prejudice",
+        "Frankenstein",
+        "Dracula",
+        "Jane Eyre",
+        "Wuthering Heights",
+        "Moby-Dick",
+        "A Tale of Two Cities",
+        "Great Expectations",
+        "Alice's Adventures in Wonderland",
+        "Little Women",
+        "Adventures of Huckleberry Finn",
+        "The Wonderful Wizard of Oz",
+        "The Tale of Peter Rabbit",
+        "The Hobbit",
+        "Nineteen Eighty-Four",
+        "Animal Farm",
+        "Brave New World",
+        "Fahrenheit 451",
+        "To Kill a Mockingbird",
+        "One Hundred Years of Solitude",
+        "Things Fall Apart",
+        "The Little Prince",
+        "The Alchemist (novel)",
+        "The Name of the Rose",
+        "Beloved (novel)",
+        "The Handmaid's Tale",
+        "Midnight's Children",
+        "The Wind in the Willows",
+        "The Secret Garden",
+        "The Time Machine",
+        "The War of the Worlds",
+        "The Picture of Dorian Gray",
+        "The Adventures of Sherlock Holmes",
+        "The Hound of the Baskervilles",
+        "Twenty Thousand Leagues Under the Seas",
+        "Around the World in Eighty Days",
+        "Journey to the Center of the Earth",
+        "The Three Musketeers",
+        "The Count of Monte Cristo",
+        "Les Misérables",
+        "Madame Bovary",
+        "Anna Karenina",
+        "Crime and Punishment",
+        "The Brothers Karamazov",
+        "War and Peace",
+        "The Metamorphosis",
+        "The Trial",
+        "Siddhartha (novel)",
+        "The Old Man and the Sea",
+        "The Stranger (Camus novel)",
+        "The Great Gatsby",
+        "Their Eyes Were Watching God",
+        "Invisible Man",
+        "The Color Purple",
+        "The House of the Spirits",
+        "The God of Small Things",
+        "Persepolis (comics)",
+        "Norwegian Wood (novel)",
+        "The Vegetarian",
+        "Half of a Yellow Sun",
+        "The Kite Runner",
+        "The Book Thief",
+        "The Hunger Games (novel)",
+        "The Martian (Weir novel)"
+      ]
+    },
+    {
+      "property": "P1619",
+      "art": "tower",
+      "verb": "is inaugurated",
+      "titles": [
+        "Eiffel Tower",
+        "Sydney Opera House",
+        "Golden Gate Bridge",
+        "Brooklyn Bridge",
+        "Tower Bridge",
+        "Panama Canal",
+        "Suez Canal",
+        "Burj Khalifa",
+        "Empire State Building",
+        "Petronas Towers",
+        "Taipei 101",
+        "CN Tower",
+        "Gateway Arch",
+        "Atomium",
+        "London Eye",
+        "Channel Tunnel",
+        "Akashi Kaikyo Bridge",
+        "Øresund Bridge",
+        "Christ the Redeemer (statue)",
+        "Tate Modern",
+        "Guggenheim Museum Bilbao",
+        "Louvre Abu Dhabi",
+        "Oslo Opera House",
+        "Millau Viaduct",
+        "Palm Jumeirah",
+        "Space Needle",
+        "Shinkansen",
+        "London Underground"
+      ]
+    },
+    {
+      "property": "P585",
+      "art": "clock",
+      "verb": "takes place",
+      "titles": [
+        "Battle of Hastings",
+        "Battle of Waterloo",
+        "Storming of the Bastille",
+        "Fall of the Berlin Wall",
+        "Boston Tea Party",
+        "Great Fire of London",
+        "March on Washington for Jobs and Freedom",
+        "Woodstock",
+        "Live Aid",
+        "Salt March",
+        "Dandi March",
+        "Coronation of Elizabeth II",
+        "First inauguration of Nelson Mandela",
+        "Treaty of Versailles",
+        "Treaty of Waitangi",
+        "Seneca Falls Convention",
+        "First Continental Congress"
+      ]
+    },
+    {
+      "property": "P575",
+      "art": "science",
+      "verb": "is discovered",
+      "titles": [
+        "Uranus",
+        "Neptune",
+        "Pluto",
+        "Ceres (dwarf planet)",
+        "Titan (moon)",
+        "Triton (moon)",
+        "Eris (dwarf planet)",
+        "Haumea",
+        "Makemake",
+        "Deimos (moon)",
+        "Phobos (moon)",
+        "Callisto (moon)",
+        "Europa (moon)",
+        "Ganymede (moon)",
+        "Io (moon)"
+      ]
+    },
+    {
+      "property": "P571",
+      "art": "clock",
+      "verb": "is founded",
+      "titles": [
+        "United Nations",
+        "UNESCO",
+        "World Health Organization",
+        "International Red Cross and Red Crescent Movement",
+        "League of Nations",
+        "Royal Society",
+        "Smithsonian Institution",
+        "Bauhaus",
+        "Amnesty International",
+        "Greenpeace",
+        "Médecins Sans Frontières",
+        "African Union",
+        "Association of Southeast Asian Nations",
+        "European Space Agency",
+        "CERN",
+        "NASA",
+        "Indian Space Research Organisation",
+        "Nobel Foundation",
+        "National Geographic Society",
+        "International Olympic Committee"
+      ]
+    },
+    {
+      "property": "P580",
+      "art": "clock",
+      "verb": "begins",
+      "titles": [
+        "Montgomery bus boycott",
+        "Haitian Revolution",
+        "Mexican Revolution",
+        "French Revolution",
+        "Meiji Restoration",
+        "Indian Rebellion of 1857",
+        "Russian Revolution",
+        "Industrial Revolution",
+        "Xinhai Revolution",
+        "Prague Spring",
+        "Velvet Revolution",
+        "Carnation Revolution",
+        "Salt March",
+        "Iranian Revolution",
+        "Polish Round Table Agreement"
+      ]
+    }
+  ],
+  "landmarks": {
+    "FRA": [
+      "Eiffel Tower",
+      "Mont-Saint-Michel",
+      "Palace of Versailles",
+      "Pont du Gard",
+      "Lascaux"
+    ],
+    "GBR": [
+      "Stonehenge",
+      "Tower of London",
+      "Giant's Causeway",
+      "Forth Bridge",
+      "Hadrian's Wall"
+    ],
+    "ITA": [
+      "Colosseum",
+      "Leaning Tower of Pisa",
+      "Pompeii",
+      "Trevi Fountain",
+      "Pantheon, Rome"
+    ],
+    "ESP": [
+      "Sagrada Família",
+      "Alhambra",
+      "Park Güell",
+      "Aqueduct of Segovia"
+    ],
+    "PRT": [
+      "Belém Tower",
+      "Pena Palace",
+      "Jerónimos Monastery"
+    ],
+    "DEU": [
+      "Brandenburg Gate",
+      "Cologne Cathedral",
+      "Neuschwanstein Castle"
+    ],
+    "POL": [
+      "Wieliczka Salt Mine",
+      "Malbork Castle",
+      "Wawel Castle"
+    ],
+    "CZE": [
+      "Charles Bridge",
+      "Prague Castle",
+      "Sedlec Ossuary"
+    ],
+    "AUT": [
+      "Schönbrunn Palace",
+      "Hofburg",
+      "Melk Abbey"
+    ],
+    "HUN": [
+      "Buda Castle",
+      "Fisherman's Bastion",
+      "Széchenyi Chain Bridge"
+    ],
+    "GRC": [
+      "Parthenon",
+      "Meteora",
+      "Delphi"
+    ],
+    "TUR": [
+      "Hagia Sophia",
+      "Göbekli Tepe",
+      "Pamukkale",
+      "Ephesus"
+    ],
+    "EGY": [
+      "Great Pyramid of Giza",
+      "Abu Simbel",
+      "Karnak",
+      "Valley of the Kings"
+    ],
+    "JOR": [
+      "Petra",
+      "Wadi Rum",
+      "Jerash"
+    ],
+    "IRN": [
+      "Persepolis",
+      "Naqsh-e Jahan Square",
+      "Golestan Palace"
+    ],
+    "IND": [
+      "Taj Mahal",
+      "Hawa Mahal",
+      "Qutb Minar",
+      "Ajanta Caves",
+      "Konark Sun Temple"
+    ],
+    "LKA": [
+      "Sigiriya",
+      "Temple of the Tooth",
+      "Dambulla cave temple"
+    ],
+    "NPL": [
+      "Boudhanath",
+      "Swayambhunath",
+      "Lumbini"
+    ],
+    "CHN": [
+      "Forbidden City",
+      "Terracotta Army",
+      "Temple of Heaven",
+      "Potala Palace",
+      "Mogao Caves"
+    ],
+    "JPN": [
+      "Himeji Castle",
+      "Kinkaku-ji",
+      "Itsukushima Shrine",
+      "Fushimi Inari-taisha"
+    ],
+    "KOR": [
+      "Gyeongbokgung",
+      "Bulguksa",
+      "Changdeokgung"
+    ],
+    "KHM": [
+      "Angkor Wat",
+      "Bayon",
+      "Ta Prohm"
+    ],
+    "THA": [
+      "Wat Arun",
+      "Wat Pho",
+      "Sukhothai Historical Park"
+    ],
+    "IDN": [
+      "Borobudur",
+      "Prambanan",
+      "Tanah Lot"
+    ],
+    "VNM": [
+      "Hạ Long Bay",
+      "Mỹ Sơn",
+      "Imperial City of Huế"
+    ],
+    "MYS": [
+      "Petronas Towers",
+      "Batu Caves",
+      "Mount Kinabalu"
+    ],
+    "AUS": [
+      "Sydney Opera House",
+      "Uluru",
+      "Great Barrier Reef"
+    ],
+    "NZL": [
+      "Milford Sound",
+      "Waitomo Glowworm Caves",
+      "Tongariro National Park"
+    ],
+    "USA": [
+      "Statue of Liberty",
+      "Grand Canyon",
+      "Golden Gate Bridge",
+      "Gateway Arch",
+      "Mount Rushmore"
+    ],
+    "CAN": [
+      "CN Tower",
+      "Banff National Park",
+      "Château Frontenac"
+    ],
+    "MEX": [
+      "Chichen Itza",
+      "Teotihuacan",
+      "Palenque",
+      "Uxmal"
+    ],
+    "PER": [
+      "Machu Picchu",
+      "Nazca Lines",
+      "Chan Chan"
+    ],
+    "BRA": [
+      "Christ the Redeemer (statue)",
+      "Sugarloaf Mountain",
+      "Lençóis Maranhenses National Park"
+    ],
+    "CHL": [
+      "Rapa Nui National Park",
+      "Torres del Paine National Park",
+      "Valle de la Luna (Chile)"
+    ],
+    "ARG": [
+      "Perito Moreno Glacier",
+      "Casa Rosada",
+      "Teatro Colón"
+    ],
+    "COL": [
+      "Salt Cathedral of Zipaquirá",
+      "Ciudad Perdida",
+      "San Agustín Archaeological Park"
+    ],
+    "MAR": [
+      "Hassan II Mosque",
+      "Aït Benhaddou",
+      "Jemaa el-Fnaa"
+    ],
+    "TUN": [
+      "Amphitheatre of El Jem",
+      "Dougga",
+      "Great Mosque of Kairouan"
+    ],
+    "ETH": [
+      "Rock-Hewn Churches, Lalibela",
+      "Fasil Ghebbi",
+      "Simien Mountains National Park"
+    ],
+    "ZAF": [
+      "Table Mountain",
+      "Robben Island",
+      "Cradle of Humankind"
+    ],
+    "KEN": [
+      "Maasai Mara",
+      "Mount Kenya",
+      "Fort Jesus"
+    ],
+    "TZA": [
+      "Mount Kilimanjaro",
+      "Ngorongoro Conservation Area",
+      "Stone Town"
+    ],
+    "SEN": [
+      "Gorée",
+      "Lake Retba",
+      "Djoudj National Bird Sanctuary"
+    ],
+    "GHA": [
+      "Cape Coast Castle",
+      "Elmina Castle",
+      "Kakum National Park"
+    ],
+    "UZB": [
+      "Registan",
+      "Itchan Kala",
+      "Gur-e-Amir"
+    ],
+    "PAK": [
+      "Mohenjo-daro",
+      "Badshahi Mosque",
+      "Lahore Fort"
+    ],
+    "BGD": [
+      "Lalbagh Fort",
+      "Somapura Mahavihara",
+      "Sixty Dome Mosque"
+    ],
+    "OMN": [
+      "Sultan Qaboos Grand Mosque",
+      "Bahla Fort",
+      "Nizwa Fort"
+    ],
+    "ARE": [
+      "Burj Khalifa",
+      "Sheikh Zayed Grand Mosque",
+      "Louvre Abu Dhabi"
+    ],
+    "NOR": [
+      "Bryggen",
+      "Nidaros Cathedral",
+      "Urnes Stave Church"
+    ],
+    "SWE": [
+      "Vasa Museum",
+      "Drottningholm Palace",
+      "Icehotel (Jukkasjärvi)"
+    ],
+    "DNK": [
+      "Kronborg",
+      "Rosenborg Castle",
+      "The Little Mermaid (statue)"
+    ],
+    "IRL": [
+      "Newgrange",
+      "Rock of Cashel",
+      "Cliffs of Moher"
+    ],
+    "ROU": [
+      "Bran Castle",
+      "Peleș Castle",
+      "Palace of the Parliament"
+    ],
+    "HRV": [
+      "Diocletian's Palace",
+      "Plitvice Lakes National Park",
+      "Pula Arena"
+    ]
+  },
+  "dateChecks": {
+    "Pioneer 10": 1972,
+    "Taipei 101": 2004,
+    "The Tale of Peter Rabbit": 1901
+  },
+  "dateCheckSources": {
+    "Pioneer 10": "https://science.nasa.gov/mission/pioneer-10/",
+    "The Secret Garden": "https://www.read.gov/books/secret-garden.html",
+    "Taipei 101": "https://www.taipei-101.com.tw/tw/corporate/about",
+    "The Tale of Peter Rabbit": "https://www.vam.ac.uk/articles/peter-rabbit-the-tale-of-the-tale"
+  },
+  "excluded": {
+    "Industrial Revolution": "An approximate period cannot be given a single quiz year.",
+    "Haumea": "Observation, discovery and announcement dates differ.",
+    "Eris (dwarf planet)": "Observation, discovery and announcement dates differ.",
+    "African Union": "Founding declaration and formal establishment dates differ.",
+    "League of Nations": "Covenant signing and formal establishment dates differ.",
+    "The Secret Garden": "Serial and book publication dates differ; the available edition claims do not identify the earliest publication."
+  },
+  "labels": {
+    "Indian Rebellion of 1857": "The Indian Rebellion",
+    "Mars 2020": "Perseverance’s Mars mission",
+    "Polish Round Table Agreement": "Polish Round Table talks",
+    "NASA": "NASA",
+    "Royal Society": "The Royal Society"
+  },
+  "verbs": {
+    "Polish Round Table Agreement": "begin"
+  }
+}

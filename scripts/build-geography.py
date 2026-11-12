@@ -2,7 +2,7 @@
 Downloads are explicit (this script only); the app never depends on these services.
 """
 import html,json,re,math,urllib.request,tarfile,io
-from geography_history import historical_facts,HISTORY
+from geography_history import expanded_history
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 CACHE=ROOT/'.local/geography'
@@ -58,7 +58,10 @@ for f in json.loads((CACHE/'countries.geojson').read_text())['features']:
  population=val(d,'People and Society','Population','total') or val(d,'People and Society','Population')
  if not population:population=f"{int(p['POP_EST']):,} ({p['POP_YEAR']} estimate)" if p['POP_EST']>=0 else 'No permanent population'
  background=val(d,'Introduction','Background').replace('U.S.','United States').replace('U.K.','United Kingdom').replace('B.C.','BCE').replace('A.D.','CE')
- facts=HISTORY.get(code) or historical_facts(background)
+ # Correct the archive's known Janszoon/Tasman attribution before exposing
+ # either selected episodes or the longer background (reference in the docs).
+ if code=='AUS':background=background.replace('Dutch navigators led by Abel TASMAN were the first Europeans to land in Australia in 1606, and they mapped the western and northern coasts.','Dutch navigators began mapping Australia in the 1600s. In 1606, Willem Janszoon made the first documented European landing, on Cape York.')
+ facts=expanded_history(code,background)
  geometry=f['geometry'];polys=geometry['coordinates'] if geometry['type']=='MultiPolygon' else [geometry['coordinates']]
  rings=[[[round(x,3),round(y,3)] for x,y in simplify(ring)] for poly in polys for ring in poly]
  aliases=list(dict.fromkeys([name,p['ADMIN'],p['NAME_LONG'],p['FORMAL_EN'],p['NAME_ALT'],*ALIASES.get(code,[])]));aliases=[a for a in aliases if a and a!='-99']
@@ -72,6 +75,9 @@ OVERRIDES={
 for c in countries:
  if c['id'] in OVERRIDES:c['capital'],c['facts']=OVERRIDES[c['id']];c['background']=' '.join(c['facts']);c['source']='Editorial context; see docs/geography-data.md'
  # Do not fabricate historical trivia when the source has no suitable episode.
+stories=json.loads((ROOT/'scripts/geography-stories.json').read_text())
+for c in countries:
+ if c['id'] in stories:c['stories']=stories[c['id']]
 countries.sort(key=lambda c:c['name'])
 (ROOT/'src/geography-data.json').write_text(json.dumps(countries,ensure_ascii=False,separators=(',',':'))+'\n')
 print('Built',len(countries),'map entities;',sum(len(c['facts']) for c in countries),'historical/context excerpts. Missing Factbook profiles:',missing)

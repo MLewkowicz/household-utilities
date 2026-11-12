@@ -1,0 +1,3223 @@
+{
+  "schema": 1,
+  "provider": "Wikidata",
+  "license": "CC0-1.0",
+  "fetchedAt": "2026-11-12T20:52:45.187Z",
+  "events": [
+    {
+      "id": "Q10257",
+      "revision": 2567452585,
+      "source": "https://www.wikidata.org/wiki/Q10257",
+      "property": "P1619",
+      "label": "Channel Tunnel is inaugurated",
+      "year": 1994,
+      "art": "tower"
+    },
+    {
+      "id": "Q1065",
+      "revision": 2568248852,
+      "source": "https://www.wikidata.org/wiki/Q1065",
+      "property": "P571",
+      "label": "United Nations is founded",
+      "year": 1945,
+      "art": "clock"
+    },
+    {
+      "id": "Q1159927",
+      "revision": 2564283649,
+      "source": "https://www.wikidata.org/wiki/Q1159927",
+      "property": "P619",
+      "label": "Luna 2 launches",
+      "year": 1959,
+      "art": "rocket"
+    },
+    {
+      "id": "Q1159933",
+      "revision": 2499459929,
+      "source": "https://www.wikidata.org/wiki/Q1159933",
+      "property": "P619",
+      "label": "Luna 9 launches",
+      "year": 1966,
+      "art": "rocket"
+    },
+    {
+      "id": "Q11678",
+      "revision": 2558795615,
+      "source": "https://www.wikidata.org/wiki/Q11678",
+      "property": "P577",
+      "label": "The Hunger Games is first published",
+      "year": 2008,
+      "art": "book"
+    },
+    {
+      "id": "Q1168267",
+      "revision": 2549928528,
+      "source": "https://www.wikidata.org/wiki/Q1168267",
+      "property": "P577",
+      "label": "The House of the Spirits is first published",
+      "year": 1982,
+      "art": "book"
+    },
+    {
+      "id": "Q1219561",
+      "revision": 2565325885,
+      "source": "https://www.wikidata.org/wiki/Q1219561",
+      "property": "P577",
+      "label": "Around the World in Eighty Days is first published",
+      "year": 1872,
+      "art": "book"
+    },
+    {
+      "id": "Q123885",
+      "revision": 2568181728,
+      "source": "https://www.wikidata.org/wiki/Q123885",
+      "property": "P571",
+      "label": "The Royal Society is founded",
+      "year": 1660,
+      "art": "clock"
+    },
+    {
+      "id": "Q124354",
+      "revision": 2567716982,
+      "source": "https://www.wikidata.org/wiki/Q124354",
+      "property": "P571",
+      "label": "Bauhaus is founded",
+      "year": 1919,
+      "art": "clock"
+    },
+    {
+      "id": "Q12495",
+      "revision": 2553195880,
+      "source": "https://www.wikidata.org/wiki/Q12495",
+      "property": "P1619",
+      "label": "Burj Khalifa is inaugurated",
+      "year": 2010,
+      "art": "tower"
+    },
+    {
+      "id": "Q125006",
+      "revision": 2558307344,
+      "source": "https://www.wikidata.org/wiki/Q125006",
+      "property": "P1619",
+      "label": "Brooklyn Bridge is inaugurated",
+      "year": 1883,
+      "art": "tower"
+    },
+    {
+      "id": "Q126065",
+      "revision": 2563762371,
+      "source": "https://www.wikidata.org/wiki/Q126065",
+      "property": "P580",
+      "label": "Iranian Revolution begins",
+      "year": 1978,
+      "art": "clock"
+    },
+    {
+      "id": "Q129864",
+      "revision": 2538506884,
+      "source": "https://www.wikidata.org/wiki/Q129864",
+      "property": "P580",
+      "label": "The Indian Rebellion begins",
+      "year": 1857,
+      "art": "clock"
+    },
+    {
+      "id": "Q130295",
+      "revision": 2551707840,
+      "source": "https://www.wikidata.org/wiki/Q130295",
+      "property": "P577",
+      "label": "The Wonderful Wizard of Oz is first published",
+      "year": 1900,
+      "art": "book"
+    },
+    {
+      "id": "Q131626",
+      "revision": 2568351435,
+      "source": "https://www.wikidata.org/wiki/Q131626",
+      "property": "P571",
+      "label": "Smithsonian Institution is founded",
+      "year": 1846,
+      "art": "clock"
+    },
+    {
+      "id": "Q134883",
+      "revision": 2542555379,
+      "source": "https://www.wikidata.org/wiki/Q134883",
+      "property": "P1619",
+      "label": "CN Tower is inaugurated",
+      "year": 1976,
+      "art": "tower"
+    },
+    {
+      "id": "Q1396889",
+      "revision": 2568209934,
+      "source": "https://www.wikidata.org/wiki/Q1396889",
+      "property": "P577",
+      "label": "Animal Farm is first published",
+      "year": 1945,
+      "art": "book"
+    },
+    {
+      "id": "Q140527",
+      "revision": 2551756567,
+      "source": "https://www.wikidata.org/wiki/Q140527",
+      "property": "P577",
+      "label": "The Three Musketeers is first published",
+      "year": 1844,
+      "art": "book"
+    },
+    {
+      "id": "Q1476619",
+      "revision": 2556779626,
+      "source": "https://www.wikidata.org/wiki/Q1476619",
+      "property": "P577",
+      "label": "Their Eyes Were Watching God is first published",
+      "year": 1937,
+      "art": "book"
+    },
+    {
+      "id": "Q147787",
+      "revision": 2563323567,
+      "source": "https://www.wikidata.org/wiki/Q147787",
+      "property": "P577",
+      "label": "Anna Karenina is first published",
+      "year": 1877,
+      "art": "book"
+    },
+    {
+      "id": "Q150827",
+      "revision": 2562176360,
+      "source": "https://www.wikidata.org/wiki/Q150827",
+      "property": "P577",
+      "label": "Frankenstein is first published",
+      "year": 1818,
+      "art": "book"
+    },
+    {
+      "id": "Q1526343",
+      "revision": 2471694184,
+      "source": "https://www.wikidata.org/wiki/Q1526343",
+      "property": "P619",
+      "label": "Perseverance’s Mars mission launches",
+      "year": 2020,
+      "art": "rocket"
+    },
+    {
+      "id": "Q152800",
+      "revision": 2561637010,
+      "source": "https://www.wikidata.org/wiki/Q152800",
+      "property": "P619",
+      "label": "Venera 7 launches",
+      "year": 1970,
+      "art": "rocket"
+    },
+    {
+      "id": "Q1541914",
+      "revision": 2555880501,
+      "source": "https://www.wikidata.org/wiki/Q1541914",
+      "property": "P577",
+      "label": "The Handmaid's Tale is first published",
+      "year": 1985,
+      "art": "book"
+    },
+    {
+      "id": "Q160659",
+      "revision": 2564276295,
+      "source": "https://www.wikidata.org/wiki/Q160659",
+      "property": "P1619",
+      "label": "London Eye is inaugurated",
+      "year": 1999,
+      "art": "tower"
+    },
+    {
+      "id": "Q161531",
+      "revision": 2565164190,
+      "source": "https://www.wikidata.org/wiki/Q161531",
+      "property": "P577",
+      "label": "War and Peace is first published",
+      "year": 1869,
+      "art": "book"
+    },
+    {
+      "id": "Q163297",
+      "revision": 2563965853,
+      "source": "https://www.wikidata.org/wiki/Q163297",
+      "property": "P577",
+      "label": "The Stranger is first published",
+      "year": 1942,
+      "art": "book"
+    },
+    {
+      "id": "Q165318",
+      "revision": 2555913981,
+      "source": "https://www.wikidata.org/wiki/Q165318",
+      "property": "P577",
+      "label": "Crime and Punishment is first published",
+      "year": 1866,
+      "art": "book"
+    },
+    {
+      "id": "Q165585",
+      "revision": 2562440006,
+      "source": "https://www.wikidata.org/wiki/Q165585",
+      "property": "P619",
+      "label": "Cassini–Huygens launches",
+      "year": 1997,
+      "art": "rocket"
+    },
+    {
+      "id": "Q167186",
+      "revision": 2548997285,
+      "source": "https://www.wikidata.org/wiki/Q167186",
+      "property": "P571",
+      "label": "National Geographic Society is founded",
+      "year": 1888,
+      "art": "clock"
+    },
+    {
+      "id": "Q170583",
+      "revision": 2556968373,
+      "source": "https://www.wikidata.org/wiki/Q170583",
+      "property": "P577",
+      "label": "Pride and Prejudice is first published",
+      "year": 1813,
+      "art": "book"
+    },
+    {
+      "id": "Q17111624",
+      "revision": 2553467334,
+      "source": "https://www.wikidata.org/wiki/Q17111624",
+      "property": "P577",
+      "label": "The Martian is first published",
+      "year": 2011,
+      "art": "book"
+    },
+    {
+      "id": "Q172850",
+      "revision": 2556981778,
+      "source": "https://www.wikidata.org/wiki/Q172850",
+      "property": "P577",
+      "label": "The Name of the Rose is first published",
+      "year": 1980,
+      "art": "book"
+    },
+    {
+      "id": "Q174596",
+      "revision": 2561463112,
+      "source": "https://www.wikidata.org/wiki/Q174596",
+      "property": "P577",
+      "label": "Moby-Dick is first published",
+      "year": 1851,
+      "art": "book"
+    },
+    {
+      "id": "Q1781959",
+      "revision": 2563669774,
+      "source": "https://www.wikidata.org/wiki/Q1781959",
+      "property": "P571",
+      "label": "Nobel Foundation is founded",
+      "year": 1900,
+      "art": "clock"
+    },
+    {
+      "id": "Q1784288",
+      "revision": 2561092486,
+      "source": "https://www.wikidata.org/wiki/Q1784288",
+      "property": "P577",
+      "label": "Invisible Man is first published",
+      "year": 1952,
+      "art": "book"
+    },
+    {
+      "id": "Q178869",
+      "revision": 2565176699,
+      "source": "https://www.wikidata.org/wiki/Q178869",
+      "property": "P577",
+      "label": "One Hundred Years of Solitude is first published",
+      "year": 1967,
+      "art": "book"
+    },
+    {
+      "id": "Q179021",
+      "revision": 2561014433,
+      "source": "https://www.wikidata.org/wiki/Q179021",
+      "property": "P577",
+      "label": "The Alchemist is first published",
+      "year": 1988,
+      "art": "book"
+    },
+    {
+      "id": "Q179199",
+      "revision": 2535624605,
+      "source": "https://www.wikidata.org/wiki/Q179199",
+      "property": "P1619",
+      "label": "Guggenheim Museum Bilbao is inaugurated",
+      "year": 1997,
+      "art": "tower"
+    },
+    {
+      "id": "Q180736",
+      "revision": 2567584968,
+      "source": "https://www.wikidata.org/wiki/Q180736",
+      "property": "P577",
+      "label": "Les Misérables is first published",
+      "year": 1862,
+      "art": "book"
+    },
+    {
+      "id": "Q180901",
+      "revision": 2558305297,
+      "source": "https://www.wikidata.org/wiki/Q180901",
+      "property": "P1619",
+      "label": "Atomium is inaugurated",
+      "year": 1958,
+      "art": "tower"
+    },
+    {
+      "id": "Q180971",
+      "revision": 2558346424,
+      "source": "https://www.wikidata.org/wiki/Q180971",
+      "property": "P619",
+      "label": "Apollo 17 launches",
+      "year": 1972,
+      "art": "rocket"
+    },
+    {
+      "id": "Q182252",
+      "revision": 2523409120,
+      "source": "https://www.wikidata.org/wiki/Q182252",
+      "property": "P619",
+      "label": "Apollo 13 launches",
+      "year": 1970,
+      "art": "rocket"
+    },
+    {
+      "id": "Q182524",
+      "revision": 2561711921,
+      "source": "https://www.wikidata.org/wiki/Q182524",
+      "property": "P619",
+      "label": "Vostok 1 launches",
+      "year": 1961,
+      "art": "rocket"
+    },
+    {
+      "id": "Q182817",
+      "revision": 2567571267,
+      "source": "https://www.wikidata.org/wiki/Q182817",
+      "property": "P580",
+      "label": "Velvet Revolution begins",
+      "year": 1989,
+      "art": "clock"
+    },
+    {
+      "id": "Q182961",
+      "revision": 2563742298,
+      "source": "https://www.wikidata.org/wiki/Q182961",
+      "property": "P577",
+      "label": "Jane Eyre is first published",
+      "year": 1847,
+      "art": "book"
+    },
+    {
+      "id": "Q183157",
+      "revision": 2565333002,
+      "source": "https://www.wikidata.org/wiki/Q183157",
+      "property": "P577",
+      "label": "The Brothers Karamazov is first published",
+      "year": 1880,
+      "art": "book"
+    },
+    {
+      "id": "Q184201",
+      "revision": 2488778568,
+      "source": "https://www.wikidata.org/wiki/Q184201",
+      "property": "P619",
+      "label": "Apollo 8 launches",
+      "year": 1968,
+      "art": "rocket"
+    },
+    {
+      "id": "Q184213",
+      "revision": 2519111200,
+      "source": "https://www.wikidata.org/wiki/Q184213",
+      "property": "P1619",
+      "label": "Akashi Kaikyo Bridge is inaugurated",
+      "year": 1998,
+      "art": "tower"
+    },
+    {
+      "id": "Q184222",
+      "revision": 2565336769,
+      "source": "https://www.wikidata.org/wiki/Q184222",
+      "property": "P577",
+      "label": "The Metamorphosis is first published",
+      "year": 1915,
+      "art": "book"
+    },
+    {
+      "id": "Q186447",
+      "revision": 2550170780,
+      "source": "https://www.wikidata.org/wiki/Q186447",
+      "property": "P619",
+      "label": "James Webb Space Telescope launches",
+      "year": 2021,
+      "art": "rocket"
+    },
+    {
+      "id": "Q1897870",
+      "revision": 2562682367,
+      "source": "https://www.wikidata.org/wiki/Q1897870",
+      "property": "P577",
+      "label": "The Color Purple is first published",
+      "year": 1982,
+      "art": "book"
+    },
+    {
+      "id": "Q19024",
+      "revision": 2564386171,
+      "source": "https://www.wikidata.org/wiki/Q19024",
+      "property": "P585",
+      "label": "Boston Tea Party takes place",
+      "year": 1773,
+      "art": "clock"
+    },
+    {
+      "id": "Q190555",
+      "revision": 2539031698,
+      "source": "https://www.wikidata.org/wiki/Q190555",
+      "property": "P619",
+      "label": "Sputnik 2 launches",
+      "year": 1957,
+      "art": "rocket"
+    },
+    {
+      "id": "Q190776",
+      "revision": 2548418930,
+      "source": "https://www.wikidata.org/wiki/Q190776",
+      "property": "P619",
+      "label": "Skylab launches",
+      "year": 1973,
+      "art": "rocket"
+    },
+    {
+      "id": "Q191838",
+      "revision": 2563750233,
+      "source": "https://www.wikidata.org/wiki/Q191838",
+      "property": "P577",
+      "label": "The Count of Monte Cristo is first published",
+      "year": 1844,
+      "art": "book"
+    },
+    {
+      "id": "Q191949",
+      "revision": 2538925311,
+      "source": "https://www.wikidata.org/wiki/Q191949",
+      "property": "P577",
+      "label": "Brave New World is first published",
+      "year": 1932,
+      "art": "book"
+    },
+    {
+      "id": "Q193375",
+      "revision": 2561432995,
+      "source": "https://www.wikidata.org/wiki/Q193375",
+      "property": "P1619",
+      "label": "Tate Modern is inaugurated",
+      "year": 2000,
+      "art": "tower"
+    },
+    {
+      "id": "Q193417",
+      "revision": 2564394185,
+      "source": "https://www.wikidata.org/wiki/Q193417",
+      "property": "P577",
+      "label": "Madame Bovary is first published",
+      "year": 1857,
+      "art": "book"
+    },
+    {
+      "id": "Q193740",
+      "revision": 2532294481,
+      "source": "https://www.wikidata.org/wiki/Q193740",
+      "property": "P585",
+      "label": "Live Aid takes place",
+      "year": 1985,
+      "art": "clock"
+    },
+    {
+      "id": "Q20075",
+      "revision": 2564585861,
+      "source": "https://www.wikidata.org/wiki/Q20075",
+      "property": "P1619",
+      "label": "London Underground is inaugurated",
+      "year": 1863,
+      "art": "tower"
+    },
+    {
+      "id": "Q201771",
+      "revision": 2551217441,
+      "source": "https://www.wikidata.org/wiki/Q201771",
+      "property": "P619",
+      "label": "Mars Pathfinder launches",
+      "year": 1996,
+      "art": "rocket"
+    },
+    {
+      "id": "Q202009",
+      "revision": 2562874004,
+      "source": "https://www.wikidata.org/wiki/Q202009",
+      "property": "P577",
+      "label": "Fahrenheit 451 is first published",
+      "year": 1953,
+      "art": "book"
+    },
+    {
+      "id": "Q202975",
+      "revision": 2567224697,
+      "source": "https://www.wikidata.org/wiki/Q202975",
+      "property": "P577",
+      "label": "Wuthering Heights is first published",
+      "year": 1847,
+      "art": "book"
+    },
+    {
+      "id": "Q203805",
+      "revision": 2560901434,
+      "source": "https://www.wikidata.org/wiki/Q203805",
+      "property": "P619",
+      "label": "Mariner 4 launches",
+      "year": 1964,
+      "art": "rocket"
+    },
+    {
+      "id": "Q208460",
+      "revision": 2555548448,
+      "source": "https://www.wikidata.org/wiki/Q208460",
+      "property": "P577",
+      "label": "Nineteen Eighty-Four is first published",
+      "year": 1949,
+      "art": "book"
+    },
+    {
+      "id": "Q208984",
+      "revision": 2560899867,
+      "source": "https://www.wikidata.org/wiki/Q208984",
+      "property": "P619",
+      "label": "Mariner 2 launches",
+      "year": 1962,
+      "art": "rocket"
+    },
+    {
+      "id": "Q210199",
+      "revision": 2517282133,
+      "source": "https://www.wikidata.org/wiki/Q210199",
+      "property": "P619",
+      "label": "Viking 1 launches",
+      "year": 1975,
+      "art": "rocket"
+    },
+    {
+      "id": "Q2113134",
+      "revision": 2544036111,
+      "source": "https://www.wikidata.org/wiki/Q2113134",
+      "property": "P619",
+      "label": "Hayabusa2 launches",
+      "year": 2014,
+      "art": "rocket"
+    },
+    {
+      "id": "Q211761",
+      "revision": 2560505451,
+      "source": "https://www.wikidata.org/wiki/Q211761",
+      "property": "P619",
+      "label": "Salyut 1 launches",
+      "year": 1971,
+      "art": "rocket"
+    },
+    {
+      "id": "Q212131",
+      "revision": 2543377676,
+      "source": "https://www.wikidata.org/wiki/Q212131",
+      "property": "P619",
+      "label": "Viking 2 launches",
+      "year": 1975,
+      "art": "rocket"
+    },
+    {
+      "id": "Q212340",
+      "revision": 2557663392,
+      "source": "https://www.wikidata.org/wiki/Q212340",
+      "property": "P577",
+      "label": "To Kill a Mockingbird is first published",
+      "year": 1960,
+      "art": "book"
+    },
+    {
+      "id": "Q213019",
+      "revision": 2567263172,
+      "source": "https://www.wikidata.org/wiki/Q213019",
+      "property": "P577",
+      "label": "The War of the Worlds is first published",
+      "year": 1897,
+      "art": "book"
+    },
+    {
+      "id": "Q214371",
+      "revision": 2565836911,
+      "source": "https://www.wikidata.org/wiki/Q214371",
+      "property": "P577",
+      "label": "The Great Gatsby is first published",
+      "year": 1925,
+      "art": "book"
+    },
+    {
+      "id": "Q214426",
+      "revision": 2567760432,
+      "source": "https://www.wikidata.org/wiki/Q214426",
+      "property": "P580",
+      "label": "Mexican Revolution begins",
+      "year": 1910,
+      "art": "clock"
+    },
+    {
+      "id": "Q215410",
+      "revision": 2559519610,
+      "source": "https://www.wikidata.org/wiki/Q215410",
+      "property": "P577",
+      "label": "Adventures of Huckleberry Finn is first published",
+      "year": 1884,
+      "art": "book"
+    },
+    {
+      "id": "Q219552",
+      "revision": 2558972033,
+      "source": "https://www.wikidata.org/wiki/Q219552",
+      "property": "P577",
+      "label": "Great Expectations is first published",
+      "year": 1861,
+      "art": "book"
+    },
+    {
+      "id": "Q23548",
+      "revision": 2562673423,
+      "source": "https://www.wikidata.org/wiki/Q23548",
+      "property": "P571",
+      "label": "NASA is founded",
+      "year": 1958,
+      "art": "clock"
+    },
+    {
+      "id": "Q239344",
+      "revision": 2546493686,
+      "source": "https://www.wikidata.org/wiki/Q239344",
+      "property": "P585",
+      "label": "Salt March takes place",
+      "year": 1930,
+      "art": "clock"
+    },
+    {
+      "id": "Q24082770",
+      "revision": 2563627461,
+      "source": "https://www.wikidata.org/wiki/Q24082770",
+      "property": "P577",
+      "label": "The Vegetarian is first published",
+      "year": 2007,
+      "art": "book"
+    },
+    {
+      "id": "Q243",
+      "revision": 2561797302,
+      "source": "https://www.wikidata.org/wiki/Q243",
+      "property": "P1619",
+      "label": "Eiffel Tower is inaugurated",
+      "year": 1889,
+      "art": "tower"
+    },
+    {
+      "id": "Q249367",
+      "revision": 2547707362,
+      "source": "https://www.wikidata.org/wiki/Q249367",
+      "property": "P580",
+      "label": "Montgomery bus boycott begins",
+      "year": 1955,
+      "art": "clock"
+    },
+    {
+      "id": "Q2513",
+      "revision": 2562622211,
+      "source": "https://www.wikidata.org/wiki/Q2513",
+      "property": "P619",
+      "label": "Hubble Space Telescope launches",
+      "year": 1990,
+      "art": "rocket"
+    },
+    {
+      "id": "Q252612",
+      "revision": 2531331645,
+      "source": "https://www.wikidata.org/wiki/Q252612",
+      "property": "P585",
+      "label": "First Continental Congress takes place",
+      "year": 1774,
+      "art": "clock"
+    },
+    {
+      "id": "Q25338",
+      "revision": 2555871854,
+      "source": "https://www.wikidata.org/wiki/Q25338",
+      "property": "P577",
+      "label": "The Little Prince is first published",
+      "year": 1943,
+      "art": "book"
+    },
+    {
+      "id": "Q2565",
+      "revision": 2523388310,
+      "source": "https://www.wikidata.org/wiki/Q2565",
+      "property": "P575",
+      "label": "Titan is discovered",
+      "year": 1655,
+      "art": "science"
+    },
+    {
+      "id": "Q261052",
+      "revision": 2517543238,
+      "source": "https://www.wikidata.org/wiki/Q261052",
+      "property": "P619",
+      "label": "Lunokhod 1 launches",
+      "year": 1970,
+      "art": "rocket"
+    },
+    {
+      "id": "Q26505",
+      "revision": 2555914589,
+      "source": "https://www.wikidata.org/wiki/Q26505",
+      "property": "P577",
+      "label": "The Old Man and the Sea is first published",
+      "year": 1952,
+      "art": "book"
+    },
+    {
+      "id": "Q269668",
+      "revision": 2517598298,
+      "source": "https://www.wikidata.org/wiki/Q269668",
+      "property": "P619",
+      "label": "Vostok 6 launches",
+      "year": 1963,
+      "art": "rocket"
+    },
+    {
+      "id": "Q275444",
+      "revision": 2515857651,
+      "source": "https://www.wikidata.org/wiki/Q275444",
+      "property": "P619",
+      "label": "Hayabusa launches",
+      "year": 2003,
+      "art": "rocket"
+    },
+    {
+      "id": "Q297871",
+      "revision": 2559171959,
+      "source": "https://www.wikidata.org/wiki/Q297871",
+      "property": "P1619",
+      "label": "Øresund Bridge is inaugurated",
+      "year": 2000,
+      "art": "tower"
+    },
+    {
+      "id": "Q308918",
+      "revision": 2563750823,
+      "source": "https://www.wikidata.org/wiki/Q308918",
+      "property": "P577",
+      "label": "A Tale of Two Cities is first published",
+      "year": 1859,
+      "art": "book"
+    },
+    {
+      "id": "Q3123",
+      "revision": 2563366388,
+      "source": "https://www.wikidata.org/wiki/Q3123",
+      "property": "P575",
+      "label": "Io is discovered",
+      "year": 1610,
+      "art": "science"
+    },
+    {
+      "id": "Q3134",
+      "revision": 2561297480,
+      "source": "https://www.wikidata.org/wiki/Q3134",
+      "property": "P575",
+      "label": "Callisto is discovered",
+      "year": 1610,
+      "art": "science"
+    },
+    {
+      "id": "Q3143",
+      "revision": 2564604868,
+      "source": "https://www.wikidata.org/wiki/Q3143",
+      "property": "P575",
+      "label": "Europa is discovered",
+      "year": 1610,
+      "art": "science"
+    },
+    {
+      "id": "Q3169",
+      "revision": 2563823780,
+      "source": "https://www.wikidata.org/wiki/Q3169",
+      "property": "P575",
+      "label": "Ganymede is discovered",
+      "year": 1610,
+      "art": "science"
+    },
+    {
+      "id": "Q3176133",
+      "revision": 2549990788,
+      "source": "https://www.wikidata.org/wiki/Q3176133",
+      "property": "P1619",
+      "label": "Louvre Abu Dhabi is inaugurated",
+      "year": 2017,
+      "art": "tower"
+    },
+    {
+      "id": "Q3235393",
+      "revision": 2555899497,
+      "source": "https://www.wikidata.org/wiki/Q3235393",
+      "property": "P577",
+      "label": "Half of a Yellow Sun is first published",
+      "year": 2006,
+      "art": "book"
+    },
+    {
+      "id": "Q324",
+      "revision": 2567560882,
+      "source": "https://www.wikidata.org/wiki/Q324",
+      "property": "P575",
+      "label": "Uranus is discovered",
+      "year": 1781,
+      "art": "science"
+    },
+    {
+      "id": "Q332",
+      "revision": 2567836878,
+      "source": "https://www.wikidata.org/wiki/Q332",
+      "property": "P575",
+      "label": "Neptune is discovered",
+      "year": 1846,
+      "art": "science"
+    },
+    {
+      "id": "Q3359",
+      "revision": 2560679290,
+      "source": "https://www.wikidata.org/wiki/Q3359",
+      "property": "P575",
+      "label": "Triton is discovered",
+      "year": 1846,
+      "art": "science"
+    },
+    {
+      "id": "Q339",
+      "revision": 2567839053,
+      "source": "https://www.wikidata.org/wiki/Q339",
+      "property": "P575",
+      "label": "Pluto is discovered",
+      "year": 1930,
+      "art": "science"
+    },
+    {
+      "id": "Q36097",
+      "revision": 2565337666,
+      "source": "https://www.wikidata.org/wiki/Q36097",
+      "property": "P577",
+      "label": "The Trial is first published",
+      "year": 1925,
+      "art": "book"
+    },
+    {
+      "id": "Q378786",
+      "revision": 2531451653,
+      "source": "https://www.wikidata.org/wiki/Q378786",
+      "property": "P577",
+      "label": "The God of Small Things is first published",
+      "year": 1997,
+      "art": "book"
+    },
+    {
+      "id": "Q3797766",
+      "revision": 2563459643,
+      "source": "https://www.wikidata.org/wiki/Q3797766",
+      "property": "P585",
+      "label": "Coronation of Elizabeth II takes place",
+      "year": 1953,
+      "art": "clock"
+    },
+    {
+      "id": "Q392147",
+      "revision": 2555873242,
+      "source": "https://www.wikidata.org/wiki/Q392147",
+      "property": "P577",
+      "label": "The Adventures of Sherlock Holmes is first published",
+      "year": 1892,
+      "art": "book"
+    },
+    {
+      "id": "Q40970",
+      "revision": 2564426939,
+      "source": "https://www.wikidata.org/wiki/Q40970",
+      "property": "P571",
+      "label": "International Olympic Committee is founded",
+      "year": 1894,
+      "art": "clock"
+    },
+    {
+      "id": "Q41542",
+      "revision": 2561637422,
+      "source": "https://www.wikidata.org/wiki/Q41542",
+      "property": "P577",
+      "label": "Dracula is first published",
+      "year": 1897,
+      "art": "book"
+    },
+    {
+      "id": "Q42262",
+      "revision": 2564963214,
+      "source": "https://www.wikidata.org/wiki/Q42262",
+      "property": "P571",
+      "label": "European Space Agency is founded",
+      "year": 1975,
+      "art": "clock"
+    },
+    {
+      "id": "Q42944",
+      "revision": 2564892115,
+      "source": "https://www.wikidata.org/wiki/Q42944",
+      "property": "P571",
+      "label": "CERN is founded",
+      "year": 1954,
+      "art": "clock"
+    },
+    {
+      "id": "Q42970",
+      "revision": 2564804947,
+      "source": "https://www.wikidata.org/wiki/Q42970",
+      "property": "P571",
+      "label": "Amnesty International is founded",
+      "year": 1961,
+      "art": "clock"
+    },
+    {
+      "id": "Q43280",
+      "revision": 2535661817,
+      "source": "https://www.wikidata.org/wiki/Q43280",
+      "property": "P1619",
+      "label": "Oslo Opera House is inaugurated",
+      "year": 2008,
+      "art": "tower"
+    },
+    {
+      "id": "Q43653",
+      "revision": 2563425559,
+      "source": "https://www.wikidata.org/wiki/Q43653",
+      "property": "P619",
+      "label": "Apollo 11 launches",
+      "year": 1969,
+      "art": "rocket"
+    },
+    {
+      "id": "Q44440",
+      "revision": 2564162296,
+      "source": "https://www.wikidata.org/wiki/Q44440",
+      "property": "P1619",
+      "label": "Golden Gate Bridge is inaugurated",
+      "year": 1937,
+      "art": "tower"
+    },
+    {
+      "id": "Q45178",
+      "revision": 2564427535,
+      "source": "https://www.wikidata.org/wiki/Q45178",
+      "property": "P1619",
+      "label": "Sydney Opera House is inaugurated",
+      "year": 1973,
+      "art": "tower"
+    },
+    {
+      "id": "Q45192",
+      "revision": 2555886734,
+      "source": "https://www.wikidata.org/wiki/Q45192",
+      "property": "P577",
+      "label": "The Hound of the Baskervilles is first published",
+      "year": 1902,
+      "art": "book"
+    },
+    {
+      "id": "Q457289",
+      "revision": 2555888061,
+      "source": "https://www.wikidata.org/wiki/Q457289",
+      "property": "P577",
+      "label": "Siddhartha is first published",
+      "year": 1922,
+      "art": "book"
+    },
+    {
+      "id": "Q47272",
+      "revision": 2560300613,
+      "source": "https://www.wikidata.org/wiki/Q47272",
+      "property": "P619",
+      "label": "Kepler space telescope launches",
+      "year": 2009,
+      "art": "rocket"
+    },
+    {
+      "id": "Q48314",
+      "revision": 2567631794,
+      "source": "https://www.wikidata.org/wiki/Q48314",
+      "property": "P585",
+      "label": "Battle of Waterloo takes place",
+      "year": 1815,
+      "art": "clock"
+    },
+    {
+      "id": "Q48461",
+      "revision": 2566187634,
+      "source": "https://www.wikidata.org/wiki/Q48461",
+      "property": "P619",
+      "label": "New Horizons launches",
+      "year": 2006,
+      "art": "rocket"
+    },
+    {
+      "id": "Q48469",
+      "revision": 2549748683,
+      "source": "https://www.wikidata.org/wiki/Q48469",
+      "property": "P619",
+      "label": "Voyager 1 launches",
+      "year": 1977,
+      "art": "rocket"
+    },
+    {
+      "id": "Q48475",
+      "revision": 2549748560,
+      "source": "https://www.wikidata.org/wiki/Q48475",
+      "property": "P619",
+      "label": "Voyager 2 launches",
+      "year": 1977,
+      "art": "rocket"
+    },
+    {
+      "id": "Q48496",
+      "revision": 2516827607,
+      "source": "https://www.wikidata.org/wiki/Q48496",
+      "property": "P619",
+      "label": "Mars Science Laboratory launches",
+      "year": 2011,
+      "art": "rocket"
+    },
+    {
+      "id": "Q48546",
+      "revision": 2516830087,
+      "source": "https://www.wikidata.org/wiki/Q48546",
+      "property": "P619",
+      "label": "Juno launches",
+      "year": 2011,
+      "art": "rocket"
+    },
+    {
+      "id": "Q48572",
+      "revision": 2541533087,
+      "source": "https://www.wikidata.org/wiki/Q48572",
+      "property": "P619",
+      "label": "Rosetta launches",
+      "year": 2004,
+      "art": "rocket"
+    },
+    {
+      "id": "Q48604",
+      "revision": 2560242252,
+      "source": "https://www.wikidata.org/wiki/Q48604",
+      "property": "P619",
+      "label": "Mir launches",
+      "year": 1986,
+      "art": "rocket"
+    },
+    {
+      "id": "Q49011",
+      "revision": 2489379605,
+      "source": "https://www.wikidata.org/wiki/Q49011",
+      "property": "P619",
+      "label": "Chandrayaan-1 launches",
+      "year": 2008,
+      "art": "rocket"
+    },
+    {
+      "id": "Q49330",
+      "revision": 2564993590,
+      "source": "https://www.wikidata.org/wiki/Q49330",
+      "property": "P571",
+      "label": "Médecins Sans Frontières is founded",
+      "year": 1971,
+      "art": "clock"
+    },
+    {
+      "id": "Q49901",
+      "revision": 2516833874,
+      "source": "https://www.wikidata.org/wiki/Q49901",
+      "property": "P619",
+      "label": "Explorer 1 launches",
+      "year": 1958,
+      "art": "rocket"
+    },
+    {
+      "id": "Q523076",
+      "revision": 2563750240,
+      "source": "https://www.wikidata.org/wiki/Q523076",
+      "property": "P577",
+      "label": "Little Women is first published",
+      "year": 1868,
+      "art": "book"
+    },
+    {
+      "id": "Q5317",
+      "revision": 2541609816,
+      "source": "https://www.wikidata.org/wiki/Q5317",
+      "property": "P1619",
+      "label": "Space Needle is inaugurated",
+      "year": 1962,
+      "art": "tower"
+    },
+    {
+      "id": "Q59113",
+      "revision": 2558080796,
+      "source": "https://www.wikidata.org/wiki/Q59113",
+      "property": "P619",
+      "label": "Pioneer 11 launches",
+      "year": 1973,
+      "art": "rocket"
+    },
+    {
+      "id": "Q596",
+      "revision": 2565045596,
+      "source": "https://www.wikidata.org/wiki/Q596",
+      "property": "P575",
+      "label": "Ceres is discovered",
+      "year": 1801,
+      "art": "science"
+    },
+    {
+      "id": "Q604",
+      "revision": 2565043993,
+      "source": "https://www.wikidata.org/wiki/Q604",
+      "property": "P575",
+      "label": "Makemake is discovered",
+      "year": 2005,
+      "art": "science"
+    },
+    {
+      "id": "Q622400",
+      "revision": 2555873663,
+      "source": "https://www.wikidata.org/wiki/Q622400",
+      "property": "P577",
+      "label": "Things Fall Apart is first published",
+      "year": 1958,
+      "art": "book"
+    },
+    {
+      "id": "Q625764",
+      "revision": 2555879730,
+      "source": "https://www.wikidata.org/wiki/Q625764",
+      "property": "P577",
+      "label": "Midnight's Children is first published",
+      "year": 1981,
+      "art": "book"
+    },
+    {
+      "id": "Q627333",
+      "revision": 2567292692,
+      "source": "https://www.wikidata.org/wiki/Q627333",
+      "property": "P577",
+      "label": "The Time Machine is first published",
+      "year": 1895,
+      "art": "book"
+    },
+    {
+      "id": "Q637839",
+      "revision": 2555880804,
+      "source": "https://www.wikidata.org/wiki/Q637839",
+      "property": "P577",
+      "label": "The Kite Runner is first published",
+      "year": 2003,
+      "art": "book"
+    },
+    {
+      "id": "Q6534",
+      "revision": 2565601141,
+      "source": "https://www.wikidata.org/wiki/Q6534",
+      "property": "P580",
+      "label": "French Revolution begins",
+      "year": 1789,
+      "art": "clock"
+    },
+    {
+      "id": "Q6539",
+      "revision": 2553984551,
+      "source": "https://www.wikidata.org/wiki/Q6539",
+      "property": "P585",
+      "label": "Storming of the Bastille takes place",
+      "year": 1789,
+      "art": "clock"
+    },
+    {
+      "id": "Q689128",
+      "revision": 2564501503,
+      "source": "https://www.wikidata.org/wiki/Q689128",
+      "property": "P580",
+      "label": "Haitian Revolution begins",
+      "year": 1791,
+      "art": "clock"
+    },
+    {
+      "id": "Q69163529",
+      "revision": 2545528111,
+      "source": "https://www.wikidata.org/wiki/Q69163529",
+      "property": "P585",
+      "label": "Fall of the Berlin Wall takes place",
+      "year": 1989,
+      "art": "clock"
+    },
+    {
+      "id": "Q7178",
+      "revision": 2568247526,
+      "source": "https://www.wikidata.org/wiki/Q7178",
+      "property": "P571",
+      "label": "International Red Cross and Red Crescent Movement is founded",
+      "year": 1863,
+      "art": "clock"
+    },
+    {
+      "id": "Q7350",
+      "revision": 2566625957,
+      "source": "https://www.wikidata.org/wiki/Q7350",
+      "property": "P1619",
+      "label": "Panama Canal is inaugurated",
+      "year": 1914,
+      "art": "tower"
+    },
+    {
+      "id": "Q74287",
+      "revision": 2549895075,
+      "source": "https://www.wikidata.org/wiki/Q74287",
+      "property": "P577",
+      "label": "The Hobbit is first published",
+      "year": 1937,
+      "art": "book"
+    },
+    {
+      "id": "Q751348",
+      "revision": 2563771838,
+      "source": "https://www.wikidata.org/wiki/Q751348",
+      "property": "P577",
+      "label": "Norwegian Wood is first published",
+      "year": 1987,
+      "art": "book"
+    },
+    {
+      "id": "Q7547",
+      "revision": 2564349664,
+      "source": "https://www.wikidata.org/wiki/Q7547",
+      "property": "P575",
+      "label": "Phobos is discovered",
+      "year": 1877,
+      "art": "science"
+    },
+    {
+      "id": "Q7548",
+      "revision": 2560260631,
+      "source": "https://www.wikidata.org/wiki/Q7548",
+      "property": "P575",
+      "label": "Deimos is discovered",
+      "year": 1877,
+      "art": "science"
+    },
+    {
+      "id": "Q7809",
+      "revision": 2566560622,
+      "source": "https://www.wikidata.org/wiki/Q7809",
+      "property": "P571",
+      "label": "UNESCO is founded",
+      "year": 1945,
+      "art": "clock"
+    },
+    {
+      "id": "Q7817",
+      "revision": 2555598525,
+      "source": "https://www.wikidata.org/wiki/Q7817",
+      "property": "P571",
+      "label": "World Health Organization is founded",
+      "year": 1948,
+      "art": "clock"
+    },
+    {
+      "id": "Q79961",
+      "revision": 2558124354,
+      "source": "https://www.wikidata.org/wiki/Q79961",
+      "property": "P1619",
+      "label": "Christ the Redeemer is inaugurated",
+      "year": 1931,
+      "art": "tower"
+    },
+    {
+      "id": "Q80811",
+      "revision": 2562489308,
+      "source": "https://www.wikidata.org/wiki/Q80811",
+      "property": "P619",
+      "label": "Sputnik 1 launches",
+      "year": 1957,
+      "art": "rocket"
+    },
+    {
+      "id": "Q81307",
+      "revision": 2565580123,
+      "source": "https://www.wikidata.org/wiki/Q81307",
+      "property": "P571",
+      "label": "Greenpeace is founded",
+      "year": 1971,
+      "art": "clock"
+    },
+    {
+      "id": "Q819101",
+      "revision": 2555871886,
+      "source": "https://www.wikidata.org/wiki/Q819101",
+      "property": "P577",
+      "label": "The Book Thief is first published",
+      "year": 2006,
+      "art": "book"
+    },
+    {
+      "id": "Q82464",
+      "revision": 2525017400,
+      "source": "https://www.wikidata.org/wiki/Q82464",
+      "property": "P577",
+      "label": "The Picture of Dorian Gray is first published",
+      "year": 1890,
+      "art": "book"
+    },
+    {
+      "id": "Q83063",
+      "revision": 2567531326,
+      "source": "https://www.wikidata.org/wiki/Q83063",
+      "property": "P1619",
+      "label": "Petronas Towers is inaugurated",
+      "year": 1999,
+      "art": "tower"
+    },
+    {
+      "id": "Q83125",
+      "revision": 2565099511,
+      "source": "https://www.wikidata.org/wiki/Q83125",
+      "property": "P1619",
+      "label": "Tower Bridge is inaugurated",
+      "year": 1894,
+      "art": "tower"
+    },
+    {
+      "id": "Q8707",
+      "revision": 2567528881,
+      "source": "https://www.wikidata.org/wiki/Q8707",
+      "property": "P580",
+      "label": "Meiji Restoration begins",
+      "year": 1868,
+      "art": "clock"
+    },
+    {
+      "id": "Q8736",
+      "revision": 2568006367,
+      "source": "https://www.wikidata.org/wiki/Q8736",
+      "property": "P585",
+      "label": "Treaty of Versailles takes place",
+      "year": 1919,
+      "art": "clock"
+    },
+    {
+      "id": "Q899",
+      "revision": 2562602003,
+      "source": "https://www.wikidata.org/wiki/Q899",
+      "property": "P1619",
+      "label": "Suez Canal is inaugurated",
+      "year": 1869,
+      "art": "tower"
+    },
+    {
+      "id": "Q9188",
+      "revision": 2559360832,
+      "source": "https://www.wikidata.org/wiki/Q9188",
+      "property": "P1619",
+      "label": "Empire State Building is inaugurated",
+      "year": 1931,
+      "art": "tower"
+    },
+    {
+      "id": "Q92640",
+      "revision": 2563961661,
+      "source": "https://www.wikidata.org/wiki/Q92640",
+      "property": "P577",
+      "label": "Alice's Adventures in Wonderland is first published",
+      "year": 1865,
+      "art": "book"
+    },
+    {
+      "id": "Q927194",
+      "revision": 2510430285,
+      "source": "https://www.wikidata.org/wiki/Q927194",
+      "property": "P580",
+      "label": "Polish Round Table talks begin",
+      "year": 1989,
+      "art": "clock"
+    },
+    {
+      "id": "Q936276",
+      "revision": 2528669676,
+      "source": "https://www.wikidata.org/wiki/Q936276",
+      "property": "P577",
+      "label": "The Wind in the Willows is first published",
+      "year": 1908,
+      "art": "book"
+    },
+    {
+      "id": "Q942814",
+      "revision": 2539957480,
+      "source": "https://www.wikidata.org/wiki/Q942814",
+      "property": "P619",
+      "label": "Luna 3 launches",
+      "year": 1959,
+      "art": "rocket"
+    },
+    {
+      "id": "Q971767",
+      "revision": 2552038308,
+      "source": "https://www.wikidata.org/wiki/Q971767",
+      "property": "P577",
+      "label": "Beloved is first published",
+      "year": 1987,
+      "art": "book"
+    },
+    {
+      "id": "Q99236",
+      "revision": 2556996783,
+      "source": "https://www.wikidata.org/wiki/Q99236",
+      "property": "P1619",
+      "label": "Millau Viaduct is inaugurated",
+      "year": 2004,
+      "art": "tower"
+    }
+  ],
+  "places": [
+    {
+      "id": "Q10285",
+      "revision": 2551136894,
+      "source": "https://www.wikidata.org/wiki/Q10285",
+      "countryRevision": 2568120921,
+      "country": "ITA",
+      "countryId": "Q38",
+      "label": "Colosseum"
+    },
+    {
+      "id": "Q10288",
+      "revision": 2564923773,
+      "source": "https://www.wikidata.org/wiki/Q10288",
+      "countryRevision": 2565433405,
+      "country": "GRC",
+      "countryId": "Q41",
+      "label": "Parthenon"
+    },
+    {
+      "id": "Q105893254",
+      "revision": 2514288247,
+      "source": "https://www.wikidata.org/wiki/Q105893254",
+      "countryRevision": 2566488380,
+      "country": "TUR",
+      "countryId": "Q43",
+      "label": "Pamukkale"
+    },
+    {
+      "id": "Q1059910",
+      "revision": 2562533411,
+      "source": "https://www.wikidata.org/wiki/Q1059910",
+      "countryRevision": 2563722703,
+      "country": "THA",
+      "countryId": "Q869",
+      "label": "Wat Pho"
+    },
+    {
+      "id": "Q106187",
+      "revision": 2517944811,
+      "source": "https://www.wikidata.org/wiki/Q106187",
+      "countryRevision": 2567992077,
+      "country": "GBR",
+      "countryId": "Q145",
+      "label": "Giant's Causeway"
+    },
+    {
+      "id": "Q10769129",
+      "revision": 2567458709,
+      "source": "https://www.wikidata.org/wiki/Q10769129",
+      "countryRevision": 2568121058,
+      "country": "VNM",
+      "countryId": "Q881",
+      "label": "Imperial City of Hue"
+    },
+    {
+      "id": "Q10796830",
+      "revision": 2567887957,
+      "source": "https://www.wikidata.org/wiki/Q10796830",
+      "countryRevision": 2568121058,
+      "country": "VNM",
+      "countryId": "Q881",
+      "label": "Mỹ Sơn, Khánh Hòa"
+    },
+    {
+      "id": "Q1094367",
+      "revision": 2491548690,
+      "source": "https://www.wikidata.org/wiki/Q1094367",
+      "countryRevision": 2568134418,
+      "country": "COL",
+      "countryId": "Q739",
+      "label": "Ciudad Perdida"
+    },
+    {
+      "id": "Q1130112",
+      "revision": 2550124865,
+      "source": "https://www.wikidata.org/wiki/Q1130112",
+      "countryRevision": 2568126124,
+      "country": "ZAF",
+      "countryId": "Q258",
+      "label": "Cradle of Humankind"
+    },
+    {
+      "id": "Q118841",
+      "revision": 2557951032,
+      "source": "https://www.wikidata.org/wiki/Q118841",
+      "countryRevision": 2568050134,
+      "country": "USA",
+      "countryId": "Q30",
+      "label": "Grand Canyon"
+    },
+    {
+      "id": "Q119498",
+      "revision": 2334552076,
+      "source": "https://www.wikidata.org/wiki/Q119498",
+      "countryRevision": 2565948626,
+      "country": "CHL",
+      "countryId": "Q298",
+      "label": "Valle de la Luna"
+    },
+    {
+      "id": "Q1217726",
+      "revision": 2553849441,
+      "source": "https://www.wikidata.org/wiki/Q1217726",
+      "countryRevision": 2565401233,
+      "country": "TZA",
+      "countryId": "Q924",
+      "label": "Ngorongoro Conservation Area"
+    },
+    {
+      "id": "Q12495",
+      "revision": 2553195880,
+      "source": "https://www.wikidata.org/wiki/Q12495",
+      "countryRevision": 2565763742,
+      "country": "ARE",
+      "countryId": "Q878",
+      "label": "Burj Khalifa"
+    },
+    {
+      "id": "Q12506",
+      "revision": 2562621660,
+      "source": "https://www.wikidata.org/wiki/Q12506",
+      "countryRevision": 2566488380,
+      "country": "TUR",
+      "countryId": "Q43",
+      "label": "Hagia Sophia"
+    },
+    {
+      "id": "Q125445",
+      "revision": 2566424549,
+      "source": "https://www.wikidata.org/wiki/Q125445",
+      "countryRevision": 2567854504,
+      "country": "CHN",
+      "countryId": "Q148",
+      "label": "Temple of Heaven"
+    },
+    {
+      "id": "Q1254826",
+      "revision": 2522392454,
+      "source": "https://www.wikidata.org/wiki/Q1254826",
+      "countryRevision": 2562960086,
+      "country": "GHA",
+      "countryId": "Q117",
+      "label": "Cape Coast Castle"
+    },
+    {
+      "id": "Q1255269",
+      "revision": 2546879322,
+      "source": "https://www.wikidata.org/wiki/Q1255269",
+      "countryRevision": 2567304629,
+      "country": "TUN",
+      "countryId": "Q948",
+      "label": "Great Mosque of Kairouan"
+    },
+    {
+      "id": "Q1255597",
+      "revision": 2567224283,
+      "source": "https://www.wikidata.org/wiki/Q1255597",
+      "countryRevision": 2567202608,
+      "country": "IRL",
+      "countryId": "Q27",
+      "label": "Rock of Cashel"
+    },
+    {
+      "id": "Q1256223",
+      "revision": 2550103191,
+      "source": "https://www.wikidata.org/wiki/Q1256223",
+      "countryRevision": 2562957266,
+      "country": "UZB",
+      "countryId": "Q265",
+      "label": "Gur-e Amir"
+    },
+    {
+      "id": "Q129072",
+      "revision": 2528746816,
+      "source": "https://www.wikidata.org/wiki/Q129072",
+      "countryRevision": 2568113615,
+      "country": "IRN",
+      "countryId": "Q794",
+      "label": "Persepolis"
+    },
+    {
+      "id": "Q12946982",
+      "revision": 2548784674,
+      "source": "https://www.wikidata.org/wiki/Q12946982",
+      "countryRevision": 2562601319,
+      "country": "NPL",
+      "countryId": "Q837",
+      "label": "Swayambhunath"
+    },
+    {
+      "id": "Q131330",
+      "revision": 2564765977,
+      "source": "https://www.wikidata.org/wiki/Q131330",
+      "countryRevision": 2566537010,
+      "country": "AUT",
+      "countryId": "Q40",
+      "label": "Schönbrunn Palace"
+    },
+    {
+      "id": "Q133423",
+      "revision": 2567716446,
+      "source": "https://www.wikidata.org/wiki/Q133423",
+      "countryRevision": 2566531433,
+      "country": "EGY",
+      "countryId": "Q79",
+      "label": "Valley of the Kings"
+    },
+    {
+      "id": "Q134140",
+      "revision": 2566065082,
+      "source": "https://www.wikidata.org/wiki/Q134140",
+      "countryRevision": 2566531433,
+      "country": "EGY",
+      "countryId": "Q79",
+      "label": "Abu Simbel"
+    },
+    {
+      "id": "Q134883",
+      "revision": 2542555379,
+      "source": "https://www.wikidata.org/wiki/Q134883",
+      "countryRevision": 2567425781,
+      "country": "CAN",
+      "countryId": "Q16",
+      "label": "CN Tower"
+    },
+    {
+      "id": "Q1373583",
+      "revision": 2553155306,
+      "source": "https://www.wikidata.org/wiki/Q1373583",
+      "countryRevision": 2562957266,
+      "country": "UZB",
+      "countryId": "Q265",
+      "label": "Registan"
+    },
+    {
+      "id": "Q1408909",
+      "revision": 2542076671,
+      "source": "https://www.wikidata.org/wiki/Q1408909",
+      "countryRevision": 2562953723,
+      "country": "OMN",
+      "countryId": "Q842",
+      "label": "Bahla Fort"
+    },
+    {
+      "id": "Q1522557",
+      "revision": 2516850886,
+      "source": "https://www.wikidata.org/wiki/Q1522557",
+      "countryRevision": 2558478403,
+      "country": "SEN",
+      "countryId": "Q1041",
+      "label": "Lake Retba"
+    },
+    {
+      "id": "Q153430",
+      "revision": 2520671666,
+      "source": "https://www.wikidata.org/wiki/Q153430",
+      "countryRevision": 2563797329,
+      "country": "NOR",
+      "countryId": "Q20",
+      "label": "Bryggen"
+    },
+    {
+      "id": "Q1548443",
+      "revision": 2514709101,
+      "source": "https://www.wikidata.org/wiki/Q1548443",
+      "countryRevision": 2562953723,
+      "country": "OMN",
+      "countryId": "Q842",
+      "label": "Sultan Qaboos Grand Mosque"
+    },
+    {
+      "id": "Q164150",
+      "revision": 2567669011,
+      "source": "https://www.wikidata.org/wiki/Q164150",
+      "countryRevision": 2564008844,
+      "country": "ROU",
+      "countryId": "Q218",
+      "label": "Palace of the Parliament"
+    },
+    {
+      "id": "Q172070",
+      "revision": 2561584772,
+      "source": "https://www.wikidata.org/wiki/Q172070",
+      "countryRevision": 2561607519,
+      "country": "KEN",
+      "countryId": "Q114",
+      "label": "Mount Kenya"
+    },
+    {
+      "id": "Q172125",
+      "revision": 2551292361,
+      "source": "https://www.wikidata.org/wiki/Q172125",
+      "countryRevision": 2568120791,
+      "country": "FRA",
+      "countryId": "Q142",
+      "label": "Lascaux"
+    },
+    {
+      "id": "Q172613",
+      "revision": 2568270991,
+      "source": "https://www.wikidata.org/wiki/Q172613",
+      "countryRevision": 2567841409,
+      "country": "MEX",
+      "countryId": "Q96",
+      "label": "Teotihuacan"
+    },
+    {
+      "id": "Q1763364",
+      "revision": 2560078520,
+      "source": "https://www.wikidata.org/wiki/Q1763364",
+      "countryRevision": 2565948626,
+      "country": "CHL",
+      "countryId": "Q298",
+      "label": "Rapa Nui National Park"
+    },
+    {
+      "id": "Q1801226",
+      "revision": 2566430603,
+      "source": "https://www.wikidata.org/wiki/Q1801226",
+      "countryRevision": 2567630410,
+      "country": "BGD",
+      "countryId": "Q902",
+      "label": "Lalbagh Fort"
+    },
+    {
+      "id": "Q181427",
+      "revision": 2546972338,
+      "source": "https://www.wikidata.org/wiki/Q181427",
+      "countryRevision": 2567841409,
+      "country": "MEX",
+      "countryId": "Q96",
+      "label": "Palenque"
+    },
+    {
+      "id": "Q184427",
+      "revision": 2564834550,
+      "source": "https://www.wikidata.org/wiki/Q184427",
+      "countryRevision": 2567936481,
+      "country": "IND",
+      "countryId": "Q668",
+      "label": "Ajanta Caves"
+    },
+    {
+      "id": "Q185382",
+      "revision": 2563036424,
+      "source": "https://www.wikidata.org/wiki/Q185382",
+      "countryRevision": 2568120921,
+      "country": "ITA",
+      "countryId": "Q38",
+      "label": "Trevi Fountain"
+    },
+    {
+      "id": "Q187197",
+      "revision": 2484618334,
+      "source": "https://www.wikidata.org/wiki/Q187197",
+      "countryRevision": 2568132058,
+      "country": "NZL",
+      "countryId": "Q664",
+      "label": "Milford Sound / Piopiotahi"
+    },
+    {
+      "id": "Q187635",
+      "revision": 2560612446,
+      "source": "https://www.wikidata.org/wiki/Q187635",
+      "countryRevision": 2567936481,
+      "country": "IND",
+      "countryId": "Q668",
+      "label": "Qutb Minar"
+    },
+    {
+      "id": "Q18820",
+      "revision": 2557995407,
+      "source": "https://www.wikidata.org/wiki/Q18820",
+      "countryRevision": 2564426432,
+      "country": "POL",
+      "countryId": "Q36",
+      "label": "Wawel Castle"
+    },
+    {
+      "id": "Q188754",
+      "revision": 2568222523,
+      "source": "https://www.wikidata.org/wiki/Q188754",
+      "countryRevision": 2567486844,
+      "country": "JPN",
+      "countryId": "Q17",
+      "label": "Himeji Castle"
+    },
+    {
+      "id": "Q189358",
+      "revision": 2561450284,
+      "source": "https://www.wikidata.org/wiki/Q189358",
+      "countryRevision": 2562953359,
+      "country": "DNK",
+      "countryId": "Q35",
+      "label": "Kronborg Castle"
+    },
+    {
+      "id": "Q189764",
+      "revision": 2521619763,
+      "source": "https://www.wikidata.org/wiki/Q189764",
+      "countryRevision": 2568120791,
+      "country": "FRA",
+      "countryId": "Q142",
+      "label": "Pont du Gard"
+    },
+    {
+      "id": "Q189849",
+      "revision": 2558319357,
+      "source": "https://www.wikidata.org/wiki/Q189849",
+      "countryRevision": 2564285180,
+      "country": "HRV",
+      "countryId": "Q224",
+      "label": "Plitvice Lakes National Park"
+    },
+    {
+      "id": "Q190128",
+      "revision": 2556436080,
+      "source": "https://www.wikidata.org/wiki/Q190128",
+      "countryRevision": 2568121058,
+      "country": "VNM",
+      "countryId": "Q881",
+      "label": "Ha Long Bay"
+    },
+    {
+      "id": "Q191763",
+      "revision": 2563891917,
+      "source": "https://www.wikidata.org/wiki/Q191763",
+      "countryRevision": 2567486844,
+      "country": "JPN",
+      "countryId": "Q17",
+      "label": "Itsukushima Shrine"
+    },
+    {
+      "id": "Q192493",
+      "revision": 2555307401,
+      "source": "https://www.wikidata.org/wiki/Q192493",
+      "countryRevision": 2568126124,
+      "country": "ZAF",
+      "countryId": "Q258",
+      "label": "Robben Island"
+    },
+    {
+      "id": "Q193369",
+      "revision": 2556630785,
+      "source": "https://www.wikidata.org/wiki/Q193369",
+      "countryRevision": 2565433432,
+      "country": "CZE",
+      "countryId": "Q213",
+      "label": "Prague Castle"
+    },
+    {
+      "id": "Q2027162",
+      "revision": 2547456311,
+      "source": "https://www.wikidata.org/wiki/Q2027162",
+      "countryRevision": 2568050134,
+      "country": "USA",
+      "countryId": "Q30",
+      "label": "Gateway Arch"
+    },
+    {
+      "id": "Q202845",
+      "revision": 2515851729,
+      "source": "https://www.wikidata.org/wiki/Q202845",
+      "countryRevision": 2568132058,
+      "country": "NZL",
+      "countryId": "Q664",
+      "label": "Tongariro National Park"
+    },
+    {
+      "id": "Q206101",
+      "revision": 2560618453,
+      "source": "https://www.wikidata.org/wiki/Q206101",
+      "countryRevision": 2562953359,
+      "country": "DNK",
+      "countryId": "Q35",
+      "label": "Rosenborg Castle"
+    },
+    {
+      "id": "Q207724",
+      "revision": 2535764896,
+      "source": "https://www.wikidata.org/wiki/Q207724",
+      "countryRevision": 2561607519,
+      "country": "KEN",
+      "countryId": "Q114",
+      "label": "Masai Mara"
+    },
+    {
+      "id": "Q208559",
+      "revision": 2513533375,
+      "source": "https://www.wikidata.org/wiki/Q208559",
+      "countryRevision": 2568059265,
+      "country": "SWE",
+      "countryId": "Q34",
+      "label": "Drottningholm Palace"
+    },
+    {
+      "id": "Q20892",
+      "revision": 2563581564,
+      "source": "https://www.wikidata.org/wiki/Q20892",
+      "countryRevision": 2568120791,
+      "country": "FRA",
+      "countryId": "Q142",
+      "label": "Le Mont Saint-Michel"
+    },
+    {
+      "id": "Q210610",
+      "revision": 2550149627,
+      "source": "https://www.wikidata.org/wiki/Q210610",
+      "countryRevision": 2568113615,
+      "country": "IRN",
+      "countryId": "Q794",
+      "label": "Golestan Palace"
+    },
+    {
+      "id": "Q210678",
+      "revision": 2491549748,
+      "source": "https://www.wikidata.org/wiki/Q210678",
+      "countryRevision": 2563797329,
+      "country": "NOR",
+      "countryId": "Q20",
+      "label": "Urnes Stave Church"
+    },
+    {
+      "id": "Q210722",
+      "revision": 2561031860,
+      "source": "https://www.wikidata.org/wiki/Q210722",
+      "countryRevision": 2567934123,
+      "country": "BRA",
+      "countryId": "Q155",
+      "label": "Sugarloaf Mountain"
+    },
+    {
+      "id": "Q212867",
+      "revision": 2567246254,
+      "source": "https://www.wikidata.org/wiki/Q212867",
+      "countryRevision": 2565415102,
+      "country": "ESP",
+      "countryId": "Q29",
+      "label": "Park Güell"
+    },
+    {
+      "id": "Q213232",
+      "revision": 2550587223,
+      "source": "https://www.wikidata.org/wiki/Q213232",
+      "countryRevision": 2567841409,
+      "country": "MEX",
+      "countryId": "Q96",
+      "label": "Uxmal"
+    },
+    {
+      "id": "Q213360",
+      "revision": 2561102998,
+      "source": "https://www.wikidata.org/wiki/Q213360",
+      "countryRevision": 2568126124,
+      "country": "ZAF",
+      "countryId": "Q258",
+      "label": "Table Mountain"
+    },
+    {
+      "id": "Q214619",
+      "revision": 2565076060,
+      "source": "https://www.wikidata.org/wiki/Q214619",
+      "countryRevision": 2562953359,
+      "country": "DNK",
+      "countryId": "Q35",
+      "label": "The Little Mermaid"
+    },
+    {
+      "id": "Q214944",
+      "revision": 2562274861,
+      "source": "https://www.wikidata.org/wiki/Q214944",
+      "countryRevision": 2566488380,
+      "country": "TUR",
+      "countryId": "Q43",
+      "label": "Göbekli Tepe"
+    },
+    {
+      "id": "Q215003",
+      "revision": 2555918917,
+      "source": "https://www.wikidata.org/wiki/Q215003",
+      "countryRevision": 2565314690,
+      "country": "PRT",
+      "countryId": "Q45",
+      "label": "Belém Tower"
+    },
+    {
+      "id": "Q215023",
+      "revision": 2565533768,
+      "source": "https://www.wikidata.org/wiki/Q215023",
+      "countryRevision": 2563797329,
+      "country": "NOR",
+      "countryId": "Q20",
+      "label": "Nidaros Cathedral"
+    },
+    {
+      "id": "Q239477",
+      "revision": 2517585233,
+      "source": "https://www.wikidata.org/wiki/Q239477",
+      "countryRevision": 2567202608,
+      "country": "IRL",
+      "countryId": "Q27",
+      "label": "Cliffs of Moher"
+    },
+    {
+      "id": "Q243",
+      "revision": 2561797302,
+      "source": "https://www.wikidata.org/wiki/Q243",
+      "countryRevision": 2568120791,
+      "country": "FRA",
+      "countryId": "Q142",
+      "label": "Eiffel Tower"
+    },
+    {
+      "id": "Q244347",
+      "revision": 2559138595,
+      "source": "https://www.wikidata.org/wiki/Q244347",
+      "countryRevision": 2558478403,
+      "country": "SEN",
+      "countryId": "Q1041",
+      "label": "Gorée"
+    },
+    {
+      "id": "Q2565876",
+      "revision": 2552146337,
+      "source": "https://www.wikidata.org/wiki/Q2565876",
+      "countryRevision": 2568134418,
+      "country": "COL",
+      "countryId": "Q739",
+      "label": "Salt Cathedral of Zipaquirá"
+    },
+    {
+      "id": "Q258348",
+      "revision": 2518504923,
+      "source": "https://www.wikidata.org/wiki/Q258348",
+      "countryRevision": 2566625093,
+      "country": "MAR",
+      "countryId": "Q1028",
+      "label": "Jemaa el-Fnaa"
+    },
+    {
+      "id": "Q270983",
+      "revision": 2560783949,
+      "source": "https://www.wikidata.org/wiki/Q270983",
+      "countryRevision": 2567486844,
+      "country": "JPN",
+      "countryId": "Q17",
+      "label": "Kinkaku-ji Temple"
+    },
+    {
+      "id": "Q272153",
+      "revision": 2565450272,
+      "source": "https://www.wikidata.org/wiki/Q272153",
+      "countryRevision": 2567699840,
+      "country": "LKA",
+      "countryId": "Q854",
+      "label": "Sigiriya"
+    },
+    {
+      "id": "Q272781",
+      "revision": 2553533630,
+      "source": "https://www.wikidata.org/wiki/Q272781",
+      "countryRevision": 2565314690,
+      "country": "PRT",
+      "countryId": "Q45",
+      "label": "Jerónimos Monastery"
+    },
+    {
+      "id": "Q275",
+      "revision": 2562593730,
+      "source": "https://www.wikidata.org/wiki/Q275",
+      "countryRevision": 2567992077,
+      "country": "GBR",
+      "countryId": "Q145",
+      "label": "Forth Bridge"
+    },
+    {
+      "id": "Q277540",
+      "revision": 2548042859,
+      "source": "https://www.wikidata.org/wiki/Q277540",
+      "countryRevision": 2568117526,
+      "country": "PER",
+      "countryId": "Q419",
+      "label": "Chan Chan"
+    },
+    {
+      "id": "Q2834259",
+      "revision": 2502966088,
+      "source": "https://www.wikidata.org/wiki/Q2834259",
+      "countryRevision": 2567630410,
+      "country": "BGD",
+      "countryId": "Q902",
+      "label": "Sixty Dome Mosque"
+    },
+    {
+      "id": "Q2887224",
+      "revision": 2558344410,
+      "source": "https://www.wikidata.org/wiki/Q2887224",
+      "countryRevision": 2568134418,
+      "country": "COL",
+      "countryId": "Q739",
+      "label": "San Agustin archeological park"
+    },
+    {
+      "id": "Q289175",
+      "revision": 2566971369,
+      "source": "https://www.wikidata.org/wiki/Q289175",
+      "countryRevision": 2567699840,
+      "country": "LKA",
+      "countryId": "Q854",
+      "label": "Temple of the Tooth"
+    },
+    {
+      "id": "Q2914326",
+      "revision": 2563326889,
+      "source": "https://www.wikidata.org/wiki/Q2914326",
+      "countryRevision": 2567304629,
+      "country": "TUN",
+      "countryId": "Q948",
+      "label": "Roman amphitheatre of El Jem"
+    },
+    {
+      "id": "Q2946",
+      "revision": 2568006361,
+      "source": "https://www.wikidata.org/wiki/Q2946",
+      "countryRevision": 2568120791,
+      "country": "FRA",
+      "countryId": "Q142",
+      "label": "Palace of Versailles"
+    },
+    {
+      "id": "Q305044",
+      "revision": 2549990064,
+      "source": "https://www.wikidata.org/wiki/Q305044",
+      "countryRevision": 2567630410,
+      "country": "BGD",
+      "countryId": "Q902",
+      "label": "Somapura Mahavihara"
+    },
+    {
+      "id": "Q309436",
+      "revision": 2566877674,
+      "source": "https://www.wikidata.org/wiki/Q309436",
+      "countryRevision": 2566625093,
+      "country": "MAR",
+      "countryId": "Q1028",
+      "label": "Aït Benhaddou"
+    },
+    {
+      "id": "Q3125051",
+      "revision": 2563811271,
+      "source": "https://www.wikidata.org/wiki/Q3125051",
+      "countryRevision": 2565433405,
+      "country": "GRC",
+      "countryId": "Q41",
+      "label": "Meteora"
+    },
+    {
+      "id": "Q3139943",
+      "revision": 2457373125,
+      "source": "https://www.wikidata.org/wiki/Q3139943",
+      "countryRevision": 2568059265,
+      "country": "SWE",
+      "countryId": "Q34",
+      "label": "Icehotel in Jukkasjärvi"
+    },
+    {
+      "id": "Q31565",
+      "revision": 2560329582,
+      "source": "https://www.wikidata.org/wiki/Q31565",
+      "countryRevision": 2563911272,
+      "country": "JOR",
+      "countryId": "Q810",
+      "label": "Jerash"
+    },
+    {
+      "id": "Q3176133",
+      "revision": 2549990788,
+      "source": "https://www.wikidata.org/wiki/Q3176133",
+      "countryRevision": 2565763742,
+      "country": "ARE",
+      "countryId": "Q878",
+      "label": "Louvre Abu Dhabi"
+    },
+    {
+      "id": "Q322287",
+      "revision": 2491546001,
+      "source": "https://www.wikidata.org/wiki/Q322287",
+      "countryRevision": 2564285180,
+      "country": "HRV",
+      "countryId": "Q224",
+      "label": "Diocletian's Palace"
+    },
+    {
+      "id": "Q32378",
+      "revision": 2533556309,
+      "source": "https://www.wikidata.org/wiki/Q32378",
+      "countryRevision": 2567304629,
+      "country": "TUN",
+      "countryId": "Q948",
+      "label": "Dougga"
+    },
+    {
+      "id": "Q330872",
+      "revision": 2565020026,
+      "source": "https://www.wikidata.org/wiki/Q330872",
+      "countryRevision": 2565433264,
+      "country": "PAK",
+      "countryId": "Q843",
+      "label": "Badshahi Mosque"
+    },
+    {
+      "id": "Q33910",
+      "revision": 2557142739,
+      "source": "https://www.wikidata.org/wiki/Q33910",
+      "countryRevision": 2567535006,
+      "country": "AUS",
+      "countryId": "Q408",
+      "label": "Uluru"
+    },
+    {
+      "id": "Q339503",
+      "revision": 2567221876,
+      "source": "https://www.wikidata.org/wiki/Q339503",
+      "countryRevision": 2567202608,
+      "country": "IRL",
+      "countryId": "Q27",
+      "label": "Newgrange"
+    },
+    {
+      "id": "Q37200",
+      "revision": 2563087850,
+      "source": "https://www.wikidata.org/wiki/Q37200",
+      "countryRevision": 2566531433,
+      "country": "EGY",
+      "countryId": "Q79",
+      "label": "Great Pyramid of Giza"
+    },
+    {
+      "id": "Q379080",
+      "revision": 2539065692,
+      "source": "https://www.wikidata.org/wiki/Q379080",
+      "countryRevision": 2561607519,
+      "country": "KEN",
+      "countryId": "Q114",
+      "label": "Fort Jesus Museum"
+    },
+    {
+      "id": "Q390275",
+      "revision": 2564926722,
+      "source": "https://www.wikidata.org/wiki/Q390275",
+      "countryRevision": 2564008844,
+      "country": "ROU",
+      "countryId": "Q218",
+      "label": "Bran Castle"
+    },
+    {
+      "id": "Q39054",
+      "revision": 2547401969,
+      "source": "https://www.wikidata.org/wiki/Q39054",
+      "countryRevision": 2568120921,
+      "country": "ITA",
+      "countryId": "Q38",
+      "label": "Leaning Tower of Pisa"
+    },
+    {
+      "id": "Q39671",
+      "revision": 2567642940,
+      "source": "https://www.wikidata.org/wiki/Q39671",
+      "countryRevision": 2567992077,
+      "country": "GBR",
+      "countryId": "Q145",
+      "label": "Stonehenge"
+    },
+    {
+      "id": "Q40729",
+      "revision": 2564204888,
+      "source": "https://www.wikidata.org/wiki/Q40729",
+      "countryRevision": 2563911272,
+      "country": "JOR",
+      "countryId": "Q810",
+      "label": "Wadi Rum"
+    },
+    {
+      "id": "Q408318",
+      "revision": 2550094434,
+      "source": "https://www.wikidata.org/wiki/Q408318",
+      "countryRevision": 2564777958,
+      "country": "KOR",
+      "countryId": "Q884",
+      "label": "Bulguksa"
+    },
+    {
+      "id": "Q41346",
+      "revision": 2540442843,
+      "source": "https://www.wikidata.org/wiki/Q41346",
+      "countryRevision": 2566625093,
+      "country": "MAR",
+      "countryId": "Q1028",
+      "label": "Hassan II Mosque"
+    },
+    {
+      "id": "Q4152",
+      "revision": 2551268188,
+      "source": "https://www.wikidata.org/wiki/Q4152",
+      "countryRevision": 2565378989,
+      "country": "DEU",
+      "countryId": "Q183",
+      "label": "Neuschwanstein Castle"
+    },
+    {
+      "id": "Q4176",
+      "revision": 2562629766,
+      "source": "https://www.wikidata.org/wiki/Q4176",
+      "countryRevision": 2565378989,
+      "country": "DEU",
+      "countryId": "Q183",
+      "label": "Cologne Cathedral"
+    },
+    {
+      "id": "Q41858",
+      "revision": 2537844900,
+      "source": "https://www.wikidata.org/wiki/Q41858",
+      "countryRevision": 2567425781,
+      "country": "CAN",
+      "countryId": "Q16",
+      "label": "Banff National Park"
+    },
+    {
+      "id": "Q423654",
+      "revision": 2462786936,
+      "source": "https://www.wikidata.org/wiki/Q423654",
+      "countryRevision": 2563722703,
+      "country": "THA",
+      "countryId": "Q869",
+      "label": "Sukhothai Historical Park"
+    },
+    {
+      "id": "Q42798",
+      "revision": 2567630633,
+      "source": "https://www.wikidata.org/wiki/Q42798",
+      "countryRevision": 2567846032,
+      "country": "IDN",
+      "countryId": "Q252",
+      "label": "Borobudur Temple"
+    },
+    {
+      "id": "Q43286",
+      "revision": 2559363079,
+      "source": "https://www.wikidata.org/wiki/Q43286",
+      "countryRevision": 2567854504,
+      "country": "CHN",
+      "countryId": "Q148",
+      "label": "Mogao Caves"
+    },
+    {
+      "id": "Q43332",
+      "revision": 2562918462,
+      "source": "https://www.wikidata.org/wiki/Q43332",
+      "countryRevision": 2568120921,
+      "country": "ITA",
+      "countryId": "Q38",
+      "label": "Pompeii"
+    },
+    {
+      "id": "Q44440",
+      "revision": 2564162296,
+      "source": "https://www.wikidata.org/wiki/Q44440",
+      "countryRevision": 2568050134,
+      "country": "USA",
+      "countryId": "Q30",
+      "label": "Golden Gate Bridge"
+    },
+    {
+      "id": "Q45178",
+      "revision": 2564427535,
+      "source": "https://www.wikidata.org/wiki/Q45178",
+      "countryRevision": 2567535006,
+      "country": "AUS",
+      "countryId": "Q408",
+      "label": "Sydney Opera House"
+    },
+    {
+      "id": "Q4519",
+      "revision": 2562628423,
+      "source": "https://www.wikidata.org/wiki/Q4519",
+      "countryRevision": 2568113615,
+      "country": "IRN",
+      "countryId": "Q794",
+      "label": "Naqsh-e Jahan Square"
+    },
+    {
+      "id": "Q454019",
+      "revision": 2515867825,
+      "source": "https://www.wikidata.org/wiki/Q454019",
+      "countryRevision": 2564426432,
+      "country": "POL",
+      "countryId": "Q36",
+      "label": "Wieliczka Salt Mine"
+    },
+    {
+      "id": "Q45690",
+      "revision": 2565912617,
+      "source": "https://www.wikidata.org/wiki/Q45690",
+      "countryRevision": 2567699840,
+      "country": "LKA",
+      "countryId": "Q854",
+      "label": "Dambulla cave temple"
+    },
+    {
+      "id": "Q46242",
+      "revision": 2534711820,
+      "source": "https://www.wikidata.org/wiki/Q46242",
+      "countryRevision": 2566537010,
+      "country": "AUT",
+      "countryId": "Q40",
+      "label": "Hofburg Palace"
+    },
+    {
+      "id": "Q46313",
+      "revision": 2561539725,
+      "source": "https://www.wikidata.org/wiki/Q46313",
+      "countryRevision": 2567886045,
+      "country": "HUN",
+      "countryId": "Q28",
+      "label": "Buda Castle"
+    },
+    {
+      "id": "Q465534",
+      "revision": 2541299398,
+      "source": "https://www.wikidata.org/wiki/Q465534",
+      "countryRevision": 2567886045,
+      "country": "HUN",
+      "countryId": "Q28",
+      "label": "Széchenyi Chain Bridge"
+    },
+    {
+      "id": "Q47476",
+      "revision": 2547292293,
+      "source": "https://www.wikidata.org/wiki/Q47476",
+      "countryRevision": 2565415102,
+      "country": "ESP",
+      "countryId": "Q29",
+      "label": "Alhambra"
+    },
+    {
+      "id": "Q474998",
+      "revision": 2550114260,
+      "source": "https://www.wikidata.org/wiki/Q474998",
+      "countryRevision": 2564285180,
+      "country": "HRV",
+      "countryId": "Q224",
+      "label": "Pula Arena"
+    },
+    {
+      "id": "Q47611",
+      "revision": 2555485600,
+      "source": "https://www.wikidata.org/wiki/Q47611",
+      "countryRevision": 2566488380,
+      "country": "TUR",
+      "countryId": "Q43",
+      "label": "Ephesus"
+    },
+    {
+      "id": "Q47672",
+      "revision": 2559758312,
+      "source": "https://www.wikidata.org/wiki/Q47672",
+      "countryRevision": 2567854504,
+      "country": "CHN",
+      "countryId": "Q148",
+      "label": "Terracotta Army"
+    },
+    {
+      "id": "Q477157",
+      "revision": 2566438808,
+      "source": "https://www.wikidata.org/wiki/Q477157",
+      "countryRevision": 2564777958,
+      "country": "KOR",
+      "countryId": "Q884",
+      "label": "Changdeokgung"
+    },
+    {
+      "id": "Q47721",
+      "revision": 2559883738,
+      "source": "https://www.wikidata.org/wiki/Q47721",
+      "countryRevision": 2567846032,
+      "country": "IDN",
+      "countryId": "Q252",
+      "label": "Prambanan Temple"
+    },
+    {
+      "id": "Q478926",
+      "revision": 2517944357,
+      "source": "https://www.wikidata.org/wiki/Q478926",
+      "countryRevision": 2567814018,
+      "country": "ARG",
+      "countryId": "Q414",
+      "label": "Casa Rosada"
+    },
+    {
+      "id": "Q482485",
+      "revision": 2564062961,
+      "source": "https://www.wikidata.org/wiki/Q482485",
+      "countryRevision": 2564777958,
+      "country": "KOR",
+      "countryId": "Q884",
+      "label": "Gyeongbokgung"
+    },
+    {
+      "id": "Q48435",
+      "revision": 2565242339,
+      "source": "https://www.wikidata.org/wiki/Q48435",
+      "countryRevision": 2565415102,
+      "country": "ESP",
+      "countryId": "Q29",
+      "label": "Basilica and Expiatory Church of the Holy Family"
+    },
+    {
+      "id": "Q493117",
+      "revision": 2513533625,
+      "source": "https://www.wikidata.org/wiki/Q493117",
+      "countryRevision": 2567886045,
+      "country": "HUN",
+      "countryId": "Q28",
+      "label": "Fisherman's Bastion"
+    },
+    {
+      "id": "Q504315",
+      "revision": 2555408055,
+      "source": "https://www.wikidata.org/wiki/Q504315",
+      "countryRevision": 2568136261,
+      "country": "ETH",
+      "countryId": "Q115",
+      "label": "Simien Mountains National Park"
+    },
+    {
+      "id": "Q513821",
+      "revision": 2560624955,
+      "source": "https://www.wikidata.org/wiki/Q513821",
+      "countryRevision": 2565433432,
+      "country": "CZE",
+      "countryId": "Q213",
+      "label": "Sedlec Ossuary"
+    },
+    {
+      "id": "Q515253",
+      "revision": 2564533974,
+      "source": "https://www.wikidata.org/wiki/Q515253",
+      "countryRevision": 2567846032,
+      "country": "IDN",
+      "countryId": "Q252",
+      "label": "Tanah Lot"
+    },
+    {
+      "id": "Q522862",
+      "revision": 2550114584,
+      "source": "https://www.wikidata.org/wiki/Q522862",
+      "countryRevision": 2566531433,
+      "country": "EGY",
+      "countryId": "Q79",
+      "label": "Karnak Temple Complex"
+    },
+    {
+      "id": "Q535577",
+      "revision": 2538692472,
+      "source": "https://www.wikidata.org/wiki/Q535577",
+      "countryRevision": 2562957266,
+      "country": "UZB",
+      "countryId": "Q265",
+      "label": "Itchan Kala"
+    },
+    {
+      "id": "Q55264655",
+      "revision": 2550114771,
+      "source": "https://www.wikidata.org/wiki/Q55264655",
+      "countryRevision": 2562960086,
+      "country": "GHA",
+      "countryId": "Q117",
+      "label": "Elmina Castle"
+    },
+    {
+      "id": "Q568693",
+      "revision": 2509534776,
+      "source": "https://www.wikidata.org/wiki/Q568693",
+      "countryRevision": 2562960086,
+      "country": "GHA",
+      "countryId": "Q117",
+      "label": "Kakum National Park"
+    },
+    {
+      "id": "Q5725",
+      "revision": 2562614986,
+      "source": "https://www.wikidata.org/wiki/Q5725",
+      "countryRevision": 2565433264,
+      "country": "PAK",
+      "countryId": "Q843",
+      "label": "Mohenjo-daro"
+    },
+    {
+      "id": "Q57357",
+      "revision": 2568060392,
+      "source": "https://www.wikidata.org/wiki/Q57357",
+      "countryRevision": 2567992077,
+      "country": "GBR",
+      "countryId": "Q145",
+      "label": "Hadrian's Wall"
+    },
+    {
+      "id": "Q5788",
+      "revision": 2560286472,
+      "source": "https://www.wikidata.org/wiki/Q5788",
+      "countryRevision": 2563911272,
+      "country": "JOR",
+      "countryId": "Q810",
+      "label": "Petra"
+    },
+    {
+      "id": "Q5859",
+      "revision": 2551136917,
+      "source": "https://www.wikidata.org/wiki/Q5859",
+      "countryRevision": 2567841409,
+      "country": "MEX",
+      "countryId": "Q96",
+      "label": "Chichen Itza"
+    },
+    {
+      "id": "Q592846",
+      "revision": 2549144145,
+      "source": "https://www.wikidata.org/wiki/Q592846",
+      "countryRevision": 2566702209,
+      "country": "KHM",
+      "countryId": "Q424",
+      "label": "Ta Prohm"
+    },
+    {
+      "id": "Q60967",
+      "revision": 2564386305,
+      "source": "https://www.wikidata.org/wiki/Q60967",
+      "countryRevision": 2568158311,
+      "country": "MYS",
+      "countryId": "Q833",
+      "label": "Mount Kinabalu"
+    },
+    {
+      "id": "Q613720",
+      "revision": 2566608496,
+      "source": "https://www.wikidata.org/wiki/Q613720",
+      "countryRevision": 2565433264,
+      "country": "PAK",
+      "countryId": "Q843",
+      "label": "Lahore Fort"
+    },
+    {
+      "id": "Q62378",
+      "revision": 2558887482,
+      "source": "https://www.wikidata.org/wiki/Q62378",
+      "countryRevision": 2567992077,
+      "country": "GBR",
+      "countryId": "Q145",
+      "label": "Tower of London"
+    },
+    {
+      "id": "Q642979",
+      "revision": 2562938635,
+      "source": "https://www.wikidata.org/wiki/Q642979",
+      "countryRevision": 2568136261,
+      "country": "ETH",
+      "countryId": "Q115",
+      "label": "Monolithic churches in Lalibela"
+    },
+    {
+      "id": "Q647777",
+      "revision": 2548986540,
+      "source": "https://www.wikidata.org/wiki/Q647777",
+      "countryRevision": 2567934123,
+      "country": "BRA",
+      "countryId": "Q155",
+      "label": "Lençóis Maranhenses National Park"
+    },
+    {
+      "id": "Q654024",
+      "revision": 2536982466,
+      "source": "https://www.wikidata.org/wiki/Q654024",
+      "countryRevision": 2566702209,
+      "country": "KHM",
+      "countryId": "Q424",
+      "label": "Bayon"
+    },
+    {
+      "id": "Q660082",
+      "revision": 2557764462,
+      "source": "https://www.wikidata.org/wiki/Q660082",
+      "countryRevision": 2566537010,
+      "country": "AUT",
+      "countryId": "Q40",
+      "label": "Melk Abbey"
+    },
+    {
+      "id": "Q676203",
+      "revision": 2567299294,
+      "source": "https://www.wikidata.org/wiki/Q676203",
+      "countryRevision": 2568117526,
+      "country": "PER",
+      "countryId": "Q419",
+      "label": "Machu Picchu"
+    },
+    {
+      "id": "Q687629",
+      "revision": 2539107477,
+      "source": "https://www.wikidata.org/wiki/Q687629",
+      "countryRevision": 2568158311,
+      "country": "MYS",
+      "countryId": "Q833",
+      "label": "Batu Caves"
+    },
+    {
+      "id": "Q69513",
+      "revision": 2558120401,
+      "source": "https://www.wikidata.org/wiki/Q69513",
+      "countryRevision": 2565314690,
+      "country": "PRT",
+      "countryId": "Q45",
+      "label": "Pena Palace"
+    },
+    {
+      "id": "Q695604",
+      "revision": 2547871977,
+      "source": "https://www.wikidata.org/wiki/Q695604",
+      "countryRevision": 2565763742,
+      "country": "ARE",
+      "countryId": "Q878",
+      "label": "Sheikh Zayed Mosque"
+    },
+    {
+      "id": "Q7042280",
+      "revision": 2568404192,
+      "source": "https://www.wikidata.org/wiki/Q7042280",
+      "countryRevision": 2562953723,
+      "country": "OMN",
+      "countryId": "Q842",
+      "label": "Nizwa Fort"
+    },
+    {
+      "id": "Q71279",
+      "revision": 2552330928,
+      "source": "https://www.wikidata.org/wiki/Q71279",
+      "countryRevision": 2564426432,
+      "country": "POL",
+      "countryId": "Q36",
+      "label": "Malbork Castle"
+    },
+    {
+      "id": "Q714828",
+      "revision": 2560189905,
+      "source": "https://www.wikidata.org/wiki/Q714828",
+      "countryRevision": 2567486844,
+      "country": "JPN",
+      "countryId": "Q17",
+      "label": "Fushimi Inari-taisha"
+    },
+    {
+      "id": "Q724970",
+      "revision": 2513533803,
+      "source": "https://www.wikidata.org/wiki/Q724970",
+      "countryRevision": 2563722703,
+      "country": "THA",
+      "countryId": "Q869",
+      "label": "Wat Arun"
+    },
+    {
+      "id": "Q7296",
+      "revision": 2567533932,
+      "source": "https://www.wikidata.org/wiki/Q7296",
+      "countryRevision": 2565401233,
+      "country": "TZA",
+      "countryId": "Q924",
+      "label": "Mount Kilimanjaro"
+    },
+    {
+      "id": "Q733676",
+      "revision": 2541690573,
+      "source": "https://www.wikidata.org/wiki/Q733676",
+      "countryRevision": 2558478403,
+      "country": "SEN",
+      "countryId": "Q1041",
+      "label": "Djoudj National Bird Sanctuary"
+    },
+    {
+      "id": "Q7343",
+      "revision": 2554363052,
+      "source": "https://www.wikidata.org/wiki/Q7343",
+      "countryRevision": 2567535006,
+      "country": "AUS",
+      "countryId": "Q408",
+      "label": "Great Barrier Reef"
+    },
+    {
+      "id": "Q745964",
+      "revision": 2542295467,
+      "source": "https://www.wikidata.org/wiki/Q745964",
+      "countryRevision": 2567425781,
+      "country": "CAN",
+      "countryId": "Q16",
+      "label": "Château Frontenac"
+    },
+    {
+      "id": "Q752091",
+      "revision": 2565828166,
+      "source": "https://www.wikidata.org/wiki/Q752091",
+      "countryRevision": 2567936481,
+      "country": "IND",
+      "countryId": "Q668",
+      "label": "Konark Sun Temple"
+    },
+    {
+      "id": "Q75459",
+      "revision": 2565894520,
+      "source": "https://www.wikidata.org/wiki/Q75459",
+      "countryRevision": 2565433405,
+      "country": "GRC",
+      "countryId": "Q41",
+      "label": "Delphi"
+    },
+    {
+      "id": "Q79961",
+      "revision": 2558124354,
+      "source": "https://www.wikidata.org/wiki/Q79961",
+      "countryRevision": 2567934123,
+      "country": "BRA",
+      "countryId": "Q155",
+      "label": "Christ the Redeemer"
+    },
+    {
+      "id": "Q80290",
+      "revision": 2562607683,
+      "source": "https://www.wikidata.org/wiki/Q80290",
+      "countryRevision": 2567854504,
+      "country": "CHN",
+      "countryId": "Q148",
+      "label": "Forbidden City"
+    },
+    {
+      "id": "Q827401",
+      "revision": 2561068024,
+      "source": "https://www.wikidata.org/wiki/Q827401",
+      "countryRevision": 2567814018,
+      "country": "ARG",
+      "countryId": "Q414",
+      "label": "Colón Theater"
+    },
+    {
+      "id": "Q83063",
+      "revision": 2567531326,
+      "source": "https://www.wikidata.org/wiki/Q83063",
+      "countryRevision": 2568158311,
+      "country": "MYS",
+      "countryId": "Q833",
+      "label": "Petronas Towers"
+    },
+    {
+      "id": "Q83497",
+      "revision": 2563074042,
+      "source": "https://www.wikidata.org/wiki/Q83497",
+      "countryRevision": 2568050134,
+      "country": "USA",
+      "countryId": "Q30",
+      "label": "Mount Rushmore"
+    },
+    {
+      "id": "Q836531",
+      "revision": 2563951140,
+      "source": "https://www.wikidata.org/wiki/Q836531",
+      "countryRevision": 2567936481,
+      "country": "IND",
+      "countryId": "Q668",
+      "label": "Hawa Mahal"
+    },
+    {
+      "id": "Q844417",
+      "revision": 2545411836,
+      "source": "https://www.wikidata.org/wiki/Q844417",
+      "countryRevision": 2565401233,
+      "country": "TZA",
+      "countryId": "Q924",
+      "label": "Stone Town"
+    },
+    {
+      "id": "Q901371",
+      "revision": 2516363881,
+      "source": "https://www.wikidata.org/wiki/Q901371",
+      "countryRevision": 2568059265,
+      "country": "SWE",
+      "countryId": "Q34",
+      "label": "Vasa Museum"
+    },
+    {
+      "id": "Q901646",
+      "revision": 2559413925,
+      "source": "https://www.wikidata.org/wiki/Q901646",
+      "countryRevision": 2565948626,
+      "country": "CHL",
+      "countryId": "Q298",
+      "label": "Torres del Paine National Park"
+    },
+    {
+      "id": "Q9141",
+      "revision": 2563722674,
+      "source": "https://www.wikidata.org/wiki/Q9141",
+      "countryRevision": 2567936481,
+      "country": "IND",
+      "countryId": "Q668",
+      "label": "Taj Mahal"
+    },
+    {
+      "id": "Q917702",
+      "revision": 2550117721,
+      "source": "https://www.wikidata.org/wiki/Q917702",
+      "countryRevision": 2564008844,
+      "country": "ROU",
+      "countryId": "Q218",
+      "label": "Peleș Castle"
+    },
+    {
+      "id": "Q9202",
+      "revision": 2563041205,
+      "source": "https://www.wikidata.org/wiki/Q9202",
+      "countryRevision": 2568050134,
+      "country": "USA",
+      "countryId": "Q30",
+      "label": "Statue of Liberty"
+    },
+    {
+      "id": "Q9213",
+      "revision": 2562618357,
+      "source": "https://www.wikidata.org/wiki/Q9213",
+      "countryRevision": 2562601319,
+      "country": "NPL",
+      "countryId": "Q837",
+      "label": "Lumbini"
+    },
+    {
+      "id": "Q99309",
+      "revision": 2561422890,
+      "source": "https://www.wikidata.org/wiki/Q99309",
+      "countryRevision": 2568120921,
+      "country": "ITA",
+      "countryId": "Q38",
+      "label": "Pantheon"
+    }
+  ],
+  "rejected": [
+    {
+      "title": "Pioneer 10",
+      "reason": "Disagrees with reviewed date"
+    },
+    {
+      "title": "The Tale of Peter Rabbit",
+      "reason": "Disagrees with reviewed date"
+    },
+    {
+      "title": "The Secret Garden",
+      "reason": "Disagrees with reviewed date"
+    },
+    {
+      "title": "Twenty Thousand Leagues Under the Seas",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Journey to the Center of the Earth",
+      "reason": "No exact linked item"
+    },
+    {
+      "title": "Persepolis (comics)",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Taipei 101",
+      "reason": "Disagrees with reviewed date"
+    },
+    {
+      "title": "Gateway Arch",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Palm Jumeirah",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Shinkansen",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Battle of Hastings",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Great Fire of London",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "March on Washington for Jobs and Freedom",
+      "reason": "No exact linked item"
+    },
+    {
+      "title": "Woodstock",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Dandi March",
+      "reason": "No exact linked item"
+    },
+    {
+      "title": "First inauguration of Nelson Mandela",
+      "reason": "No exact linked item"
+    },
+    {
+      "title": "Treaty of Waitangi",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Seneca Falls Convention",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Eris (dwarf planet)",
+      "reason": "Observation, discovery and announcement dates differ."
+    },
+    {
+      "title": "Haumea",
+      "reason": "Observation, discovery and announcement dates differ."
+    },
+    {
+      "title": "League of Nations",
+      "reason": "Covenant signing and formal establishment dates differ."
+    },
+    {
+      "title": "African Union",
+      "reason": "Founding declaration and formal establishment dates differ."
+    },
+    {
+      "title": "Association of Southeast Asian Nations",
+      "reason": "No exact linked item"
+    },
+    {
+      "title": "Indian Space Research Organisation",
+      "reason": "No exact linked item"
+    },
+    {
+      "title": "Russian Revolution",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Industrial Revolution",
+      "reason": "An approximate period cannot be given a single quiz year."
+    },
+    {
+      "title": "Xinhai Revolution",
+      "reason": "No exact linked item"
+    },
+    {
+      "title": "Prague Spring",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Carnation Revolution",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Salt March",
+      "reason": "Missing, ambiguous or imprecise date"
+    },
+    {
+      "title": "Aqueduct of Segovia",
+      "reason": "Country missing, ambiguous or differs from selected destination"
+    },
+    {
+      "title": "Brandenburg Gate",
+      "reason": "Country missing, ambiguous or differs from selected destination"
+    },
+    {
+      "title": "Charles Bridge",
+      "reason": "Country missing, ambiguous or differs from selected destination"
+    },
+    {
+      "title": "Boudhanath",
+      "reason": "Country missing, ambiguous or differs from selected destination"
+    },
+    {
+      "title": "Potala Palace",
+      "reason": "Country missing, ambiguous or differs from selected destination"
+    },
+    {
+      "title": "Angkor Wat",
+      "reason": "Country missing, ambiguous or differs from selected destination"
+    },
+    {
+      "title": "Waitomo Glowworm Caves",
+      "reason": "Country missing, ambiguous or differs from selected destination"
+    },
+    {
+      "title": "Nazca Lines",
+      "reason": "Country missing, ambiguous or differs from selected destination"
+    },
+    {
+      "title": "Perito Moreno Glacier",
+      "reason": "Country missing, ambiguous or differs from selected destination"
+    },
+    {
+      "title": "Fasil Ghebbi",
+      "reason": "Country missing, ambiguous or differs from selected destination"
+    }
+  ]
+}

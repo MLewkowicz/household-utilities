@@ -29,17 +29,20 @@ function borderMaterial(width:number,vertexColors=false){
 export async function createGlobeTerrain(renderer:T.WebGLRenderer,countries:Country[],requestDraw:()=>void,initialStyle:GlobeStyle){
  const memory=(navigator as Navigator&{deviceMemory?:number}).deviceMemory;
  const detailed=renderer.capabilities.maxTextureSize>=8192&&innerWidth>720&&(!memory||memory>4),anisotropy=renderer.capabilities.getMaxAnisotropy();
+ let cover:T.Texture|undefined;
  let color:T.Texture|undefined,normal:T.Texture|undefined,loading:Promise<void>|undefined,destroyed=false,style=initialStyle,version=0;
  async function loadTopography(){
   if(color)return;if(loading)return loading;
   loading=(async()=>{
    const loader=new T.TextureLoader(),loaded=await Promise.allSettled([
     loader.loadAsync(new URL(`./globe/${assets.textures[detailed?'color-8k':'color-4k']}`,document.baseURI).href),
-    loader.loadAsync(new URL(`./globe/${assets.textures[detailed?'normal-4k':'normal-2k']}`,document.baseURI).href)
+    loader.loadAsync(new URL(`./globe/${assets.textures[detailed?'normal-4k':'normal-2k']}`,document.baseURI).href),
+    loader.loadAsync(new URL(`./globe/${assets.textures[detailed?'cover-8k':'cover-4k']}`,document.baseURI).href)
    ]);
    if(destroyed||loaded.some(r=>r.status==='rejected')){for(const r of loaded)if(r.status==='fulfilled')r.value.dispose();throw new Error('Globe textures could not load.');}
    color=(loaded[0] as PromiseFulfilledResult<T.Texture>).value;normal=(loaded[1] as PromiseFulfilledResult<T.Texture>).value;color.colorSpace=T.SRGBColorSpace;
-   for(const texture of [color,normal]){texture.anisotropy=anisotropy;texture.wrapS=T.RepeatWrapping;}
+   cover=(loaded[2] as PromiseFulfilledResult<T.Texture>).value;cover.colorSpace=T.SRGBColorSpace;
+   for(const texture of [color,normal,cover]){texture.anisotropy=anisotropy;texture.wrapS=T.RepeatWrapping;}
   })();try{await loading;}finally{loading=undefined;}
  }
  if(style==='terrain')await loadTopography();
@@ -59,10 +62,10 @@ export async function createGlobeTerrain(renderer:T.WebGLRenderer,countries:Coun
  const detail=createGlobeDetail(anisotropy,requestDraw);
  const material=new T.MeshStandardMaterial({map:color,normalMap:normal,normalMapType:T.ObjectSpaceNormalMap,roughness:.92,metalness:0});
  material.onBeforeCompile=shader=>{
-  Object.assign(shader.uniforms,detail.uniforms);shader.uniforms.quizOverlay={value:overlay};
-  shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nuniform sampler2D quizOverlay;\n'+detail.declarations).replace('#include <map_fragment>','#include <map_fragment>\n'+detail.colorShader+'\nvec4 quizColor=texture2D(quizOverlay,vMapUv);\ndiffuseColor.rgb=mix(diffuseColor.rgb,quizColor.rgb,quizColor.a);').replace('#include <normal_fragment_maps>','#include <normal_fragment_maps>\n'+detail.normalShader);
+  Object.assign(shader.uniforms,detail.uniforms);shader.uniforms.quizOverlay={value:overlay};shader.uniforms.landCover={value:cover};
+  shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nuniform sampler2D quizOverlay;\nuniform sampler2D landCover;\n'+detail.declarations).replace('#include <map_fragment>','#include <map_fragment>\n'+detail.colorShader+'\nvec4 coverColor=texture2D(landCover,vMapUv);diffuseColor.rgb=mix(diffuseColor.rgb,coverColor.rgb,coverColor.a);\nvec4 quizColor=texture2D(quizOverlay,vMapUv);\ndiffuseColor.rgb=mix(diffuseColor.rgb,quizColor.rgb,quizColor.a);').replace('#include <normal_fragment_maps>','#include <normal_fragment_maps>\n'+detail.normalShader);
  };
- material.customProgramCacheKey=()=>'globe-terrain-detail-v2';
+ material.customProgramCacheKey=()=>'globe-terrain-cover-v3';
  const paperTexture=new T.DataTexture(new Uint8Array([231,222,199,255]),1,1);paperTexture.colorSpace=T.SRGBColorSpace;paperTexture.needsUpdate=true;
  const paperMaterial=new T.MeshStandardMaterial({map:paperTexture,roughness:1,metalness:0});
  paperMaterial.onBeforeCompile=shader=>{
@@ -125,6 +128,6 @@ export async function createGlobeTerrain(renderer:T.WebGLRenderer,countries:Coun
  applyStyle(initialStyle);
  return {earth,borders,selectedBorder,grid,paint,detail,get style(){return style;},textureWidth:detailed?8192:4096,normalWidth:detailed?4096:2048,get triangles(){return style==='paper'?paperGeometry.index!.count/3:indices.length/3;},borderEdges:edges.length,
   async setStyle(next:GlobeStyle){const token=++version;if(next==='terrain'){await loadTopography();if(destroyed||token!==version)return;material.map=color!;material.normalMap=normal!;material.needsUpdate=true;}applyStyle(next);requestDraw();},
-  destroy(){destroyed=true;version++;detail.destroy();geometry.dispose();paperGeometry.dispose();material.dispose();paperMaterial.dispose();paperTexture.dispose();color?.dispose();normal?.dispose();overlay.dispose();borderGeometry.dispose();outlines.dispose();selectedBorder.geometry.dispose();selectedMaterial.dispose();}
+  destroy(){destroyed=true;version++;detail.destroy();geometry.dispose();paperGeometry.dispose();material.dispose();paperMaterial.dispose();paperTexture.dispose();color?.dispose();normal?.dispose();cover?.dispose();overlay.dispose();borderGeometry.dispose();outlines.dispose();selectedBorder.geometry.dispose();selectedMaterial.dispose();}
  };
 }

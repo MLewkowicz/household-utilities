@@ -1,0 +1,35 @@
+name: Refresh game catalog
+on:
+  schedule:
+    - cron: '23 9 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: game-catalog-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Fetch and validate selected public facts
+        run: npm run games:sync
+      - name: Save catalog and validation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-catalog
+          path: .local/game-sync/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
+      - name: Install immutable daily packs
+        if: vars.GAMES_ONLINE_SYNC == 'true'
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+        run: npm run games:sync:install -- .local/game-sync/release.json

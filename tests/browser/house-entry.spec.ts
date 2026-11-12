@@ -278,6 +278,8 @@ test('Settings pauses the scene, restores focus and keeps explicit theme choices
 });
 
 test('the lawn notice board opens What’s new once per release, and Settings keeps the history',async({page})=>{
+ // This scenario reloads the full 3D house three times under software WebGL.
+ test.setTimeout(90000);
  await page.goto('/');await ready(page);
  const board=async()=>(await diag(page)).updatesBoard,dialog=page.locator('#updates-dialog');
  await expect.poll(async()=>(await board()).visible).toBe(true);

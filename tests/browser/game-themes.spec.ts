@@ -3,13 +3,13 @@ import {test,expect} from '@playwright/test';
 test('game theme changes preserve a puzzle, persist, and use the household preference',async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.emulateMedia({colorScheme:'light',reducedMotion:'reduce'});
  await page.clock.setFixedTime(new Date('2026-11-11T17:00:00Z'));
- await page.goto('/?webgl=0#games/clue-cascade');await page.getByRole('button',{name:'Practice',exact:true}).click();await page.getByRole('button',{name:'Start practice'}).click();
+ await page.goto('/?webgl=0#games/clue-cascade');await page.getByRole('button',{name:'Practice',exact:true}).click();
  const word=await page.locator('.word-tile').first().textContent();await page.locator('.word-tile').first().click();
  const toggle=page.locator('#trivia-page [data-theme-toggle]');await toggle.click();
  await expect(page.locator('html')).toHaveAttribute('data-theme','dark');await expect(toggle).toHaveAccessibleName('Color theme: Dark. Switch to Time of day');
  await expect(page.getByRole('button',{name:word!,exact:true})).toHaveAttribute('aria-pressed','true');
  expect(await page.evaluate(()=>localStorage.getItem('household-theme'))).toBe('dark');
- await page.reload();await page.getByRole('button',{name:'Practice',exact:true}).click();await page.getByRole('button',{name:'Start practice'}).click();
+ await page.reload();await page.getByRole('button',{name:'Practice',exact:true}).click();
  await expect(page.locator('html')).toHaveAttribute('data-theme','dark');await expect(page.getByRole('button',{name:word!,exact:true})).toHaveAttribute('aria-pressed','true');
  await page.getByRole('link',{name:/^Scores/}).click();await toggle.click();
  await expect(page.locator('html')).toHaveAttribute('data-theme','light');await expect(page.locator('html')).toHaveAttribute('data-theme-preference','daylight');

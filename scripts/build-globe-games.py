@@ -24,6 +24,7 @@ for c in atlas:
   if not m or not any(norm(n) in norm(old) for n in entry['aliases']):missing.append((c['id'],city));continue
   a,b,ns,d,e,ew=m.groups();coords=[(int(d)+int(e)/60)*(-1 if ew=='W' else 1),(int(a)+int(b)/60)*(-1 if ns=='S' else 1)];source='https://github.com/factbook/factbook.json/blob/'+FACT+'/'+c['source']
  cities[c['id']]={'id':c['id'],'name':city,'lon':round(coords[0],6),'lat':round(coords[1],6),'source':source}
+ if matches and f['properties']['pop_max']>0:cities[c['id']].update(population=f['properties']['pop_max'],populationBasis='archived metro/urban estimate; not city proper')
 # Distinct territories must not inherit the sovereign's capital position.
 for id,name,lon,lat in [('ALD','Mariehamn',19.9348,60.0973),('CYN','North Nicosia',33.3615,35.1856),('SOL','Hargeisa',44.065,9.5624)]:
  match=next((f for f in places if norm(f['properties']['name'])==norm(name.replace('North ',''))),None)
@@ -39,15 +40,18 @@ def distance(a,b):
  return 6371*2*math.asin(min(1,math.sqrt(math.sin((lat1-lat2)/2)**2+math.cos(lat1)*math.cos(lat2)*math.sin(dl/2)**2)))
 for country in atlas:
  id=country['id'];picked=[c for c in cities.values() if c['countryId']==id]
- candidates=sorted((f for f in places if f['properties']['adm0_a3']==id and (f['properties']['pop_max']>=500000 or any(norm(f['properties']['name'])==norm(n) for n in answers.get(id,{}).get('names',[])[1:]))),key=lambda f:(f['properties']['scalerank'],-f['properties']['pop_max']))
+ candidates=sorted((f for f in places if f['properties']['adm0_a3']==id and ((f['properties']['pop_max']>=1000000 or f['properties']['pop_max']>=500000 and f['properties']['scalerank']<=6 or f['properties']['worldcity']==1) or any(norm(f['properties']['name'])==norm(n) for n in answers.get(id,{}).get('names',[])[1:]))),key=lambda f:(f['properties']['scalerank'],-f['properties']['pop_max']))
  count=0
  for f in candidates:
   if count>=8:break
   p=f['properties'];name=p['name'];name={'Shenyeng':'Shenyang','Port Elizabeth':'Gqeberha','Odessa':'Odesa','St.  Petersburg':'Saint Petersburg','Bandjarmasin':'Banjarmasin'}.get(name,name);lon,lat=f['geometry']['coordinates']
   city={'id':id+'_'+norm(p.get('nameascii') or name).upper(),'countryId':id,'name':name,'lon':round(lon,6),'lat':round(lat,6),'capital':False,'capitalRole':'','source':NE}
-  # Delhi/New Delhi and same-metropolitan-area suburbs are not competing targets.
+  # Keep one representative per nearby urban cluster; retain distinct capital roles.
+  if p['pop_max']>0:city.update(population=p['pop_max'],populationBasis='archived metro/urban estimate; not city proper')
   additional_capital=any(norm(name)==norm(n) for n in answers.get(id,{}).get('names',[])[1:])
-  if any(norm(c['name'])==norm(name) or distance(c,city)<12 and not additional_capital for c in picked):continue
+  distinct_port=id=='NLD' and name=='Rotterdam'
+  if any(norm(c['name'])==norm(name) or distance(c,city)<65 and not additional_capital and not distinct_port for c in picked):continue
+  if distinct_port:city['note']='Included separately as a major port within the Randstad urban region.'
   city['capitalRole']={('ZAF','Cape Town'):'legislative',('ZAF','Bloemfontein'):'judicial',('BOL','La Paz'):'seat of government',('SWZ','Lobamba'):'royal and legislative',('LKA','Colombo'):'executive and judicial',('MSR','Brades'):'seat of government'}.get((id,name),'')
   if name=='Gqeberha':city.update(note='Formerly known as Port Elizabeth.',nameSource='https://www.gov.za/news/media-statements/sport-arts-and-culture-transformation-our-heritage-landscape-25-feb-2021')
   cities[city['id']]=city;picked.append(city);count+=1

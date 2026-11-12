@@ -5,15 +5,15 @@
       "actor": "michal",
       "owner": "michal",
       "title": "HRI pioneers reviews",
-      "action": "create",
-      "due_at": null,
-      "due_on": null,
+      "action": "edit",
+      "due_at": "2026-11-17T04:59:00+00:00",
+      "due_on": "2026-11-16",
       "pinned": false,
       "deleted": false,
-      "version": 1,
+      "version": 2,
       "added_at": "2026-11-09T17:33:05.697962+00:00",
-      "due_time": null,
-      "created_at": "2026-11-09T17:33:05.697962+00:00",
+      "due_time": "23:59",
+      "created_at": "2026-11-12T21:19:17.045767+00:00",
       "group_name": "MIT",
       "completed_at": null
     },
@@ -438,17 +438,35 @@
     },
     {
       "keys": [
+        "shared:3bc543a9-00ec-40ae-8cfe-8e3ef44b6843",
         "shared:f0138fa9-2b6b-451d-a9f9-86f52ad298ac:turn:1",
         "shared:605d27a3-9827-4e25-8fc3-d9b587a56f98",
         "shared:41526915-8c8f-41d9-8340-dc5980c8ce00:2026-10-26:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
         "shared:952286c6-8a12-4606-ac1b-f47ca92ff2b8"
       ],
       "member": "rohil",
-      "version": 4,
-      "created_at": "2026-11-07T23:36:36.729339+00:00"
+      "version": 5,
+      "created_at": "2026-11-12T21:30:06.170937+00:00"
     }
   ],
   "history": [
+    {
+      "id": "825793f6-fed8-4489-a933-82cc2648478e",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "HRI pioneers reviews",
+      "action": "edit",
+      "due_at": "2026-11-17T04:59:00+00:00",
+      "due_on": "2026-11-16",
+      "pinned": false,
+      "deleted": false,
+      "version": 2,
+      "added_at": "2026-11-09T17:33:05.697962+00:00",
+      "due_time": "23:59",
+      "created_at": "2026-11-12T21:19:17.045767+00:00",
+      "group_name": "MIT",
+      "completed_at": null
+    },
     {
       "id": "6f3ae4f7-cfcd-410d-9222-0e5cb7d00d7f",
       "actor": "michal",
@@ -1232,8 +1250,8 @@
       "completed_at": null
     }
   ],
-  "updated_at": "2026-11-12T03:06:13.114008+00:00",
-  "exported_at": "2026-11-12T03:06:13.114008+00:00",
+  "updated_at": "2026-11-12T21:42:55.446695+00:00",
+  "exported_at": "2026-11-12T21:42:55.446695+00:00",
   "format_version": 2,
   "group_rename_version": 1
 }

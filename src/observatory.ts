@@ -2,7 +2,6 @@ import * as T from 'three';
 import {actor,loadBitmojis,faceCamera,type CastMember} from './house/bitmoji-cast';
 import {box,ball,cylinder,group,dispose,ring,mesh,line} from './house/scene-geometry';
 import {GAMES} from './game-registry';
-import {buildGamePlanet} from './game-planets';
 import {buildObservatoryCosmos} from './observatory-cosmos';
 const TAU=Math.PI*2;
 /** A single physical azimuth selects both the telescope direction and game. */
@@ -49,33 +48,49 @@ export async function mountObservatory(host:HTMLElement,initialAngle=0){
  const astronomer=actor(building,faces,'michal',-2.8,1.5,{y:2.98,scale:.7});astronomer.rightArm.rotation.x=-1.1;people.push(astronomer);
  const reader=actor(building,faces,'rina',-3.55,2.35,{scale:.72});reader.leftArm.rotation.x=-1;reader.rightArm.rotation.x=-1;box(reader.root,'#ae7865',.42,.04,.32,0,.7,.35);people.push(reader);
  const visitor=actor(building,faces,'rohil',2.8,3.45,{scale:.72});visitor.rightArm.rotation.z=-1.2;people.push(visitor);
- // Each world has its own silhouette and material, not a repeated colored dot.
- const planets:GPlanet[]=[];type GPlanet={root:T.Group;position:T.Vector3;halo:T.Mesh;index:number;animate:(time:number)=>void};
- GAMES.forEach((g,i)=>{const a=i/GAMES.length*TAU,p=new T.Vector3(Math.sin(a)*11.2,10.8,Math.cos(a)*11.2),world=group(root,p.x,p.y,p.z,true);
-  const {animate}=buildGamePlanet(world,g.id);
-  const halo=mesh(world,new T.TorusGeometry(1.65,.025,8,64),'#f5ddaa');halo.material.transparent=true;halo.material.opacity=.75;halo.material.emissive.set('#b19a67');halo.visible=i===0;planets.push({root:world,position:p,halo,index:i,animate});
- });
+ // The cards and telescope share screen-space targets, so the lens always
+ // points at the highlighted card, at every viewport size.
+ const targets=GAMES.map(()=>new T.Vector3());
+ const aimingPlane=new T.Plane(),aimRay=new T.Raycaster(),cameraNormal=new T.Vector3();
+ let selectionAngle=initialAngle,pitch=-.28,targetPitch=pitch;
  const cosmos=buildObservatoryCosmos(scene);
  const beamGeometry=new T.BufferGeometry().setFromPoints([new T.Vector3(),new T.Vector3()]);const beam=new T.Line(beamGeometry,new T.LineBasicMaterial({color:'#f0dca9',transparent:true,opacity:.25}));scene.add(beam);
- host.append(canvas);let active=false,frame=0,lost=false,destroyed=false,angle=initialAngle,target=initialAngle,last:number|undefined;const reduce=matchMedia('(prefers-reduced-motion: reduce)');
- const screen=new T.Vector3();
+ host.append(canvas);let active=false,frame=0,lost=false,destroyed=false,angle=0,target=0,last:number|undefined;const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+ const cards=GAMES.map(g=>host.querySelector<HTMLElement>(`[data-orbit-game="${g.id}"]`)!);let focused=-1;
  function requestDraw(){if(!frame&&active&&!lost&&!destroyed)frame=requestAnimationFrame(draw);}
  // All paints use the same animation clock, including resize and resume.
  function draw(now:number){frame=0;if(!active||lost||destroyed)return;if(!host.clientWidth||!host.clientHeight){last=undefined;return;}
   const dt=last===undefined?0:T.MathUtils.clamp((now-last)/1000,0,.05);last=now;
   angle=reduce.matches?target:T.MathUtils.damp(angle,target,8,dt);if(Math.abs(angle-target)<.001)angle=target;
   const turns=Math.round(angle/TAU)*TAU;angle-=turns;target-=turns;building.rotation.y=angle;
-  const selected=((Math.round(target/(TAU/6))%6)+6)%6;planets.forEach(p=>{p.halo.visible=p.index===selected;if(active&&!reduce.matches&&p.index===selected)p.animate(now);p.halo.quaternion.copy(camera.quaternion);screen.copy(p.position).project(camera);const label=host.querySelector<HTMLElement>(`[data-orbit-game="${GAMES[p.index].id}"]`);if(label){const x=(screen.x*.5+.5)*host.clientWidth,pad=label.offsetWidth/2+6;label.style.left=`${Math.max(pad,Math.min(host.clientWidth-pad,x))}px`;label.style.top=`${(-screen.y*.5+.5)*100}%`;}});
-  telescope.updateWorldMatrix(true,false);const start=telescope.localToWorld(new T.Vector3(0,0,6.67));beam.geometry.setFromPoints([start,planets[selected].position]);beam.visible=Math.abs(angle-target)<.03;
+  const selected=((Math.round(selectionAngle/(TAU/6))%6)+6)%6;
+  pitch=reduce.matches?targetPitch:T.MathUtils.damp(pitch,targetPitch,8,dt);telescope.rotation.x=pitch;
+  const nextFocus=Math.abs(angle-target)<.05&&Math.abs(pitch-targetPitch)<.04?selected:-1;
+  if(nextFocus!==focused){focused=nextFocus;cards.forEach((card,i)=>card.dataset.focused=String(i===focused));}
+  telescope.updateWorldMatrix(true,false);const start=telescope.localToWorld(new T.Vector3(0,0,6.67));beam.geometry.setFromPoints([start,targets[selected]]);beam.visible=Math.abs(angle-target)<.03;
   if(active&&!reduce.matches){engineer.rightArm.rotation.x=-1+Math.sin(now/1100)*.12;visitor.rightArm.rotation.z=-1.2+Math.sin(now/1900)*.08;crank.rotation.x=now/3500;}
   cosmos.update(now,dt,!reduce.matches);faceCamera(people,camera);renderer.render(scene,camera);host.classList.add('has-scene');host.dataset.ready='true';host.dataset.sky='3d';if(!reduce.matches)requestDraw();
  }
- function resize(){if(lost||destroyed)return;const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h);const aspect=w/h,halfW=aspect<.85?8.2:17.5,halfH=halfW/aspect;planets.forEach(p=>{const a=p.index/6*TAU,r=aspect<.85?6.5:11.2;p.position.set(Math.sin(a)*r,aspect<.85?13.5:10.8,Math.cos(a)*r);p.root.position.copy(p.position);p.root.scale.setScalar(aspect<.85?.78:1);});telescope.rotation.x=-Math.atan2((aspect<.85?13.5:10.8)-6.65,aspect<.85?6.5:11.2);camera.left=-halfW;camera.right=halfW;camera.top=halfH;camera.bottom=-halfH;camera.lookAt(0,5.2,0);camera.updateProjectionMatrix();camera.updateMatrixWorld();cosmos.resize(camera);requestDraw();}
+ function aim(){
+  const index=((Math.round(selectionAngle/(TAU/6))%6)+6)%6,p=targets[index];
+  const heading=Math.atan2(p.x,p.z);
+  target=angle+T.MathUtils.euclideanModulo(heading-angle+Math.PI,TAU)-Math.PI;
+  targetPitch=-Math.atan2(p.y-6.65,Math.hypot(p.x,p.z));
+  if(!active){angle=target;pitch=targetPitch;}
+ }
+ function resize(){
+  if(lost||destroyed)return;const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;
+  renderer.setSize(w,h);const aspect=w/h,halfW=aspect<.85?13:18,halfH=halfW/aspect;
+  camera.left=-halfW;camera.right=halfW;camera.top=halfH;camera.bottom=-halfH;camera.lookAt(0,4.5,0);camera.updateProjectionMatrix();camera.updateMatrixWorld();
+  camera.getWorldDirection(cameraNormal);aimingPlane.setFromNormalAndCoplanarPoint(cameraNormal,new T.Vector3(0,8,0));
+  const bounds=host.getBoundingClientRect();GAMES.forEach((g,i)=>{const card=host.querySelector<HTMLElement>(`[data-orbit-game="${g.id}"]`)!.getBoundingClientRect();aimRay.setFromCamera(new T.Vector2((card.left+card.width/2-bounds.left)/w*2-1,1-(card.top+card.height/2-bounds.top)/h*2),camera);aimRay.ray.intersectPlane(aimingPlane,targets[i]);});
+  aim();cosmos.resize(camera);requestDraw();
+ }
  const pointerMove=(e:PointerEvent)=>{if(!active||e.pointerType!=='mouse')return;const r=host.getBoundingClientRect();if(!r.width||!r.height)return;cosmos.setPointer(T.MathUtils.clamp((e.clientX-r.left)/r.width*2-1,-1,1),T.MathUtils.clamp(1-(e.clientY-r.top)/r.height*2,-1,1));};
  const pointerLeave=()=>cosmos.setPointer(0,0);host.addEventListener('pointermove',pointerMove);host.addEventListener('pointerleave',pointerLeave);
  const observer=new ResizeObserver(resize);observer.observe(host);
  const motion=()=>{cancelAnimationFrame(frame);frame=0;last=undefined;requestDraw();};reduce.addEventListener('change',motion);
- function fallback(){host.classList.remove('has-scene');delete host.dataset.sky;delete host.dataset.ready;host.querySelectorAll<HTMLElement>('[data-orbit-game]').forEach(label=>{label.style.removeProperty('left');label.style.removeProperty('top');});}
+ function fallback(){focused=-1;cards.forEach(card=>card.dataset.focused='false');host.classList.remove('has-scene');delete host.dataset.sky;delete host.dataset.ready;host.querySelectorAll<HTMLElement>('[data-orbit-game]').forEach(label=>{label.style.removeProperty('left');label.style.removeProperty('top');});}
  const contextLost=(e:Event)=>{e.preventDefault();lost=true;cancelAnimationFrame(frame);frame=0;last=undefined;fallback();};
  const contextRestored=()=>{if(destroyed)return;lost=false;last=undefined;resize();};
  canvas.addEventListener('webglcontextlost',contextLost);canvas.addEventListener('webglcontextrestored',contextRestored);resize();
@@ -83,11 +98,11 @@ export async function mountObservatory(host:HTMLElement,initialAngle=0){
   setAngle(value:number){
    if(!Number.isFinite(value)||destroyed)return;
    // Equivalent headings never require replaying complete revolutions on return.
-   target=angle+T.MathUtils.euclideanModulo(value-angle+Math.PI,TAU)-Math.PI;
+   selectionAngle=value;aim();
    if(!active)angle=target;requestDraw();host.dataset.selected=GAMES[((Math.round(value/(TAU/6))%6)+6)%6].id;
   },
   setActive(value:boolean){if(active===value||destroyed)return;active=value;cancelAnimationFrame(frame);frame=0;last=undefined;if(active)resize();else pointerLeave();},
-  diagnostics:()=>({angle,target,active:active&&!lost,lost,cosmos:cosmos.diagnostics(),frames:renderer.info.render.frame,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,selected:GAMES[((Math.round(target/(TAU/6))%6)+6)%6].id}),
+  diagnostics:()=>({angle,target,active:active&&!lost,lost,cosmos:cosmos.diagnostics(),frames:renderer.info.render.frame,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,selected:GAMES[((Math.round(selectionAngle/(TAU/6))%6)+6)%6].id,aim:targets[((Math.round(selectionAngle/(TAU/6))%6)+6)%6].toArray(),pitch,targetPitch}),
   destroy(){destroyed=true;active=false;cancelAnimationFrame(frame);observer.disconnect();reduce.removeEventListener('change',motion);host.removeEventListener('pointermove',pointerMove);host.removeEventListener('pointerleave',pointerLeave);canvas.removeEventListener('webglcontextlost',contextLost);canvas.removeEventListener('webglcontextrestored',contextRestored);dispose(root);cosmos.destroy();beamGeometry.dispose();(beam.material as T.Material).dispose();sun.shadow.dispose();renderer.dispose();canvas.remove();fallback();}
  };
 }

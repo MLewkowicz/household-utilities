@@ -2,6 +2,7 @@ import {test,expect,type Page} from '@playwright/test';
 
 const diagnostics=(page:Page)=>page.evaluate(()=>(window as any).__observatoryDiagnostics());
 async function stableScene(page:Page){
+ await expect(page.locator('#orbit-lobby')).toBeVisible();
  await expect(page.locator('#observatory-scene')).toHaveAttribute('data-sky','3d');
  const d=await diagnostics(page);
  expect(Number.isFinite(d.angle)&&Number.isFinite(d.target)).toBe(true);
@@ -18,7 +19,7 @@ test('returning from every game and resizing keeps the observatory and backgroun
  await page.goto('/#games');await stableScene(page);await page.mouse.move(30,300);
  await expect.poll(async()=>(await diagnostics(page)).cosmos.parallax[0]).toBeLessThan(-.1);
  for(const [i,title] of ['How Much-ish?','Before or After?','Common Ground','Passport Puzzle','Odd One Out','Geography'].entries()){
-  await page.getByRole('button',{name:title,exact:true}).click();await page.locator('#geo-launch').click();
+  await page.getByRole('button',{name:'Play '+title,exact:true}).click();
   await expect.poll(async()=>(await diagnostics(page)).active).toBe(false);
   await page.getByRole('link',{name:'Games',exact:true}).click();await stableScene(page);
   await page.setViewportSize(i%2?{width:1280,height:900}:{width:390,height:844});await stableScene(page);
@@ -63,8 +64,8 @@ test('a failed scene load retries on the next hub visit and finishes safely whil
  await page.goto('/#games');await expect(page.locator('.observatory-fallback')).toBeVisible();
  // Wait for all initial portrait failures before retrying the same mounted hub.
  await page.waitForTimeout(500);fail=false;
- await page.getByRole('button',{name:'Odd One Out',exact:true}).click();await page.locator('#geo-launch').click();await page.getByRole('link',{name:'Games',exact:true}).click();
- await page.getByRole('button',{name:'Common Ground',exact:true}).click();await page.locator('#geo-launch').click();release();
+ await page.getByRole('button',{name:'Play Odd One Out',exact:true}).click();await page.getByRole('link',{name:'Games',exact:true}).click();
+ await page.getByRole('button',{name:'Play Common Ground',exact:true}).click();release();
  await expect.poll(async()=>Boolean(await diagnostics(page))).toBe(true);expect((await diagnostics(page)).active).toBe(false);
  await page.getByRole('link',{name:'Games',exact:true}).click();await stableScene(page);await expect(page.locator('#orbit-game-title')).toHaveText('Common Ground');
 });
@@ -73,7 +74,7 @@ test('a lost graphics context shows the backdrop and restoration recovers the hu
  await page.goto('/#games');await stableScene(page);
  await page.locator('#observatory-scene canvas').evaluate(canvas=>{const gl=(canvas as HTMLCanvasElement).getContext('webgl2')!;(window as any).__restoreObservatory=gl.getExtension('WEBGL_lose_context');(window as any).__restoreObservatory.loseContext();});
  await expect(page.locator('.observatory-sky')).toBeVisible();await expect(page.locator('.observatory-fallback')).toBeVisible();
- await page.getByRole('button',{name:'Before or After?',exact:true}).click();await page.locator('#geo-launch').click();
+ await page.getByRole('button',{name:'Play Before or After?',exact:true}).click();
  await page.evaluate(()=>(window as any).__restoreObservatory.restoreContext());await expect.poll(async()=>(await diagnostics(page)).lost).toBe(false);
  await page.getByRole('link',{name:'Games',exact:true}).click();await stableScene(page);await expect(page.locator('#orbit-game-title')).toHaveText('Before or After?');
 });

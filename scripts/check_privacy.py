@@ -14,12 +14,23 @@ globe_manifest = json.loads((ROOT / 'public/globe/manifest.json').read_text())
 approved_globe = {f'globe/{name}': info for name, info in globe_manifest['files'].items()}
 sky_manifest = json.loads((ROOT / 'src/observatory-sky-assets.json').read_text())
 approved_skies = set(sky_manifest.values())
+card_manifest = json.loads((ROOT / 'src/game-card-assets.json').read_text())
+approved_cards = set(card_manifest.values())
+for name in approved_cards:
+    match = re.fullmatch(r'game-card-[a-z-]+-([a-f0-9]{12})\.webp', name)
+    asset = ROOT / 'public' / name
+    if not match or not asset.is_file() or not hashlib.sha256(asset.read_bytes()).hexdigest().startswith(match[1]):
+        violations.append('Invalid generated game card manifest')
 for name in approved_skies:
     match = re.fullmatch(r'observatory-sky-(wide|phone)-([a-f0-9]{12})\.webp', name)
     asset = ROOT / 'public' / name
     if not match or not asset.is_file() or not hashlib.sha256(asset.read_bytes()).hexdigest().startswith(match[2]):
         violations.append('Invalid generated observatory sky manifest')
 for p in (ROOT / "dist").rglob("*"):
+    if p.is_file() and p.relative_to(ROOT / 'dist').as_posix() in approved_cards:
+        if p.read_bytes() != (ROOT / 'public' / p.name).read_bytes():
+            violations.append(f"Game card checksum mismatch: {p.relative_to(ROOT)}")
+        continue
     if p.is_file() and p.relative_to(ROOT / 'dist').as_posix() in approved_skies:
         if p.read_bytes() != (ROOT / 'public' / p.name).read_bytes():
             violations.append(f"Observatory sky checksum mismatch: {p.relative_to(ROOT)}")

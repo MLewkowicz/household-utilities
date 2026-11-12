@@ -11,7 +11,9 @@
     "color-8k": "color-8k-eef9a86739a5.webp",
     "color-4k": "color-4k-2c23fc236450.webp",
     "normal-4k": "normal-4k-ce66d830c147.webp",
-    "normal-2k": "normal-2k-8f5529a9e1fe.webp"
+    "normal-2k": "normal-2k-8f5529a9e1fe.webp",
+    "cover-8k": "cover-8k-836bbf05e615.webp",
+    "cover-4k": "cover-4k-1a0f2d840e4d.webp"
   },
   "files": {
     "color-8k-eef9a86739a5.webp": {
@@ -865,6 +867,18 @@
       "bytes": 1444616,
       "width": 1804,
       "height": 1804
+    },
+    "cover-8k-836bbf05e615.webp": {
+      "sha256": "836bbf05e61555314dd010306f64a46cc94269b03ac16ebfdd3f844349eecca6",
+      "bytes": 2571858,
+      "width": 8192,
+      "height": 4096
+    },
+    "cover-4k-1a0f2d840e4d.webp": {
+      "sha256": "1a0f2d840e4dc140c516d2862758f23639e0556d915557bbbbd1e8c0070efbcd",
+      "bytes": 1183840,
+      "width": 4096,
+      "height": 2048
     }
   },
   "detailSource": "https://coastwatch.pfeg.noaa.gov/erddap/griddap/etopo180.nc?altitude%5B(-90):1:(90)%5D%5B(-180):1:(180)%5D",
@@ -1494,5 +1508,14 @@
       "color": "detail-11-5-color-8eba16cabd8e.webp",
       "normal": "detail-11-5-normal-b172cf82edfd.webp"
     }
+  },
+  "landCover": {
+    "source": "https://naturalearth.s3.amazonaws.com/10m_raster/NE1_LR_LC.zip",
+    "sha256": "dae6ad77c963976f44afb3a3916febf36f44c42da1690854b9fa1dac74694e54",
+    "dataset": "Natural Earth I v3.2.0 land cover",
+    "rivers": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_50m_rivers_lake_centerlines.geojson",
+    "lakes": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_50m_lakes.geojson",
+    "riverFeatures": 359,
+    "license": "Public domain"
   }
 }

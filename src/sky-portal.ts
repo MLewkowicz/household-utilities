@@ -37,7 +37,7 @@ export function mountSkyPortal(state:()=>{section:Section;homeVisible:boolean;re
    await Promise.all([prepare(),journey]);
    if(token!==version)return;overlay.className='is-arriving';enter();
    await new Promise(resolve=>setTimeout(resolve,reduce?0:650));if(token!==version)return;
-   cancel();document.querySelector<HTMLElement>('#geo-launch')?.focus({preventScroll:true});
+   cancel();document.querySelector<HTMLElement>('[data-orbit-game][aria-pressed=true]')?.focus({preventScroll:true});
   }catch{if(token!==version)return;cancel();button.textContent='Retry Games';button.focus();}
  }
  button.addEventListener('click',()=>void launch());overlay.querySelector('button')!.addEventListener('click',()=>{cancel();button.focus();});

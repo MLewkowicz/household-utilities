@@ -26,7 +26,7 @@ def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
         print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
-        print("Existing projects need migrations 009 through 032 (and any earlier missing migrations); do not rerun installed migrations.")
+        print("Existing projects need migrations 009 through 041 (and any earlier missing migrations); do not rerun installed migrations.")
         print("Phone delivery also needs the normal ./configure.sh flow to deploy its worker, signing keys, and schedule.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
@@ -127,6 +127,10 @@ def main():
             ("035_geography_cities.sql", "ledger_private.geography_cities_version()"),
             ("036_geography_routes.sql", "public.utilities_geography_route_capabilities()"),
             ("037_geography_major_cities.sql", "ledger_private.geography_major_cities_version()"),
+            ("038_geography_urban_catalog.sql", "ledger_private.geography_urban_version()"),
+            ("039_size_comparisons_v4.sql", "ledger_private.trivia_content_v4()"),
+            ("040_trivia_online_catalog.sql", "ledger_private.trivia_online_catalog_version()"),
+            ("041_trivia_online_seed.sql", "ledger_private.trivia_online_seed_version()"),
         ]:
             installed = request(base + "/database/query", token, {"query": f"SELECT to_regprocedure('{signature}')::text AS fn"})
             if not installed or not installed[0].get("fn"):

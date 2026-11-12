@@ -1,0 +1,2060 @@
+[
+  {
+    "game": "how-much-ish",
+    "slot": 0,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-1",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the hubble telescope to match its real size.",
+        "target": {
+          "name": "Hubble telescope",
+          "dimension": "body length",
+          "shape": "sourced:hubble"
+        },
+        "reference": {
+          "name": "Male sperm whale",
+          "dimension": "mature adult length",
+          "shape": "sourced:sperm-whale",
+          "measure": "15.9 m · mature adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.83018868,
+        "explanation": "Hubble telescope: 13.2 m (body length). Male sperm whale: 15.9 m (mature adult length). Ratio: 0.83×.\nHubble is about 13.2 m long; solar panels extend to either side of its body.",
+        "sources": [
+          "https://science.nasa.gov/mission/hubble/observatory/design/",
+          "https://www.fisheries.noaa.gov/species/sperm-whale"
+        ],
+        "tag": "Space / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-2",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the fiba basketball court to match its real size.",
+        "target": {
+          "name": "FIBA basketball court",
+          "dimension": "endline-to-endline length",
+          "shape": "sourced:basketball-court"
+        },
+        "reference": {
+          "name": "Eiffel Tower",
+          "dimension": "height, antenna included",
+          "shape": "sourced:eiffel-tower",
+          "measure": "330 m · height, antenna included"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.08484848,
+        "explanation": "FIBA basketball court: 28 m (endline-to-endline length). Eiffel Tower: 330 m (height, antenna included). Ratio: 0.08×.\nFIBA’s playing court is 28 m long and 15 m wide. NBA courts use different dimensions.",
+        "sources": [
+          "https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2024-v10a.pdf",
+          "https://www.toureiffel.paris/en/the-monument/key-figures"
+        ],
+        "tag": "Sport / Architecture"
+      },
+      {
+        "id": "how-much-ish-v4-3",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the humpback whale to match its real size.",
+        "target": {
+          "name": "Humpback whale",
+          "dimension": "upper adult length",
+          "shape": "sourced:humpback-whale"
+        },
+        "reference": {
+          "name": "Person",
+          "dimension": "reference height",
+          "shape": "sourced:human",
+          "measure": "1.75 m · reference height"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 10.45714286,
+        "explanation": "Humpback whale: 18.3 m (upper adult length). Person: 1.75 m (reference height). Ratio: 10.46×.\nHumpbacks can reach about 60 ft (18.3 m).",
+        "sources": [
+          "https://www.fisheries.noaa.gov/species/humpback-whale",
+          "Reference chosen for comparison: a 1.75 m person."
+        ],
+        "tag": "Nature / Reference"
+      },
+      {
+        "id": "how-much-ish-v4-4",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the hippopotamus to match its real size.",
+        "target": {
+          "name": "Hippopotamus",
+          "dimension": "upper adult length",
+          "shape": "sourced:hippopotamus"
+        },
+        "reference": {
+          "name": "Airbus A380",
+          "dimension": "overall aircraft length",
+          "shape": "sourced:a380",
+          "measure": "72.7 m · overall aircraft length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.06877579,
+        "explanation": "Hippopotamus: 5 m (upper adult length). Airbus A380: 72.7 m (overall aircraft length). Ratio: 0.07×.\nHippos measure about 3.3–5 m long. This board uses the upper end.",
+        "sources": [
+          "https://animals.sandiegozoo.org/animals/hippo",
+          "https://www.airbus.com/sites/g/files/jlcbta136/files/2025-01/airbus-a380-facts-and-figures-february-2022.pdf"
+        ],
+        "tag": "Nature / Transport"
+      },
+      {
+        "id": "how-much-ish-v4-5",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the ingenuity helicopter to match its real size.",
+        "target": {
+          "name": "Ingenuity helicopter",
+          "dimension": "rotor tip-to-tip span",
+          "shape": "sourced:ingenuity"
+        },
+        "reference": {
+          "name": "Table tennis table",
+          "dimension": "playing-surface length",
+          "shape": "sourced:table-tennis",
+          "measure": "2.74 m · playing-surface length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.4379562,
+        "explanation": "Ingenuity helicopter: 1.2 m (rotor tip-to-tip span). Table tennis table: 2.74 m (playing-surface length). Ratio: 0.44×.\nThe Mars helicopter’s counter-rotating rotors span about 1.2 m from tip to tip.",
+        "sources": [
+          "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+          "https://documents.ittf.sport/sites/default/files/public/2026-04/ITTFCouncil_Working_Documents-2026-v1.pdf"
+        ],
+        "tag": "Space / Sport"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 1,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-6",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the perseverance rover to match its real size.",
+        "target": {
+          "name": "Perseverance rover",
+          "dimension": "chassis length",
+          "shape": "sourced:perseverance"
+        },
+        "reference": {
+          "name": "Male giraffe",
+          "dimension": "upper adult height",
+          "shape": "sourced:giraffe",
+          "measure": "5.5 m · upper adult height"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.54545455,
+        "explanation": "Perseverance rover: 3 m (chassis length). Male giraffe: 5.5 m (upper adult height). Ratio: 0.55×.\nThe chassis is about 3 m long. The robotic arm is stowed in this schematic.",
+        "sources": [
+          "https://www.jpl.nasa.gov/news/press_kits/mars_2020/launch/",
+          "https://animals.sandiegozoo.org/animals/giraffe"
+        ],
+        "tag": "Space / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-7",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the steinway model d to match its real size.",
+        "target": {
+          "name": "Steinway Model D",
+          "dimension": "piano length, plan view",
+          "shape": "sourced:concert-grand"
+        },
+        "reference": {
+          "name": "White rhinoceros",
+          "dimension": "upper adult length",
+          "shape": "sourced:rhinoceros",
+          "measure": "4 m · upper adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.685,
+        "explanation": "Steinway Model D: 2.74 m (piano length, plan view). White rhinoceros: 4 m (upper adult length). Ratio: 0.69×.\nThe Model D concert grand is 274 cm long. This profile shows its shape from above.",
+        "sources": [
+          "https://www.steinway.com/dam/jcr%3A9d156c27-487d-478c-8d2d-4dda7d47475b/918_Steinway_Brochure_11x8.5_S7.pdf",
+          "https://animals.sandiegozoo.org/animals/rhinoceros"
+        ],
+        "tag": "Music / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-8",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the tyrannosaurus rex to match its real size.",
+        "target": {
+          "name": "Tyrannosaurus rex",
+          "dimension": "adult length",
+          "shape": "sourced:t-rex"
+        },
+        "reference": {
+          "name": "Washington Monument",
+          "dimension": "rounded monument height",
+          "shape": "sourced:washington-monument",
+          "measure": "169 m · rounded monument height"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.07100592,
+        "explanation": "Tyrannosaurus rex: 12 m (adult length). Washington Monument: 169 m (rounded monument height). Ratio: 0.07×.\nAMNH gives an adult T. rex length of about 12 m.",
+        "sources": [
+          "https://www.amnh.org/exhibitions/dinosaurs-ancient-fossils/theropod-biomechanics/the-problem-of-size",
+          "https://www.nps.gov/articles/000/upload/Build-Your-Own-Washington-Monument-Activity.pdf"
+        ],
+        "tag": "Nature / Architecture"
+      },
+      {
+        "id": "how-much-ish-v4-9",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the webb sunshield to match its real size.",
+        "target": {
+          "name": "Webb sunshield",
+          "dimension": "deployed sunshield length",
+          "shape": "sourced:webb"
+        },
+        "reference": {
+          "name": "Gateway Arch",
+          "dimension": "height above ground",
+          "shape": "sourced:gateway-arch",
+          "measure": "192 m · height above ground"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.11041667,
+        "explanation": "Webb sunshield: 21.2 m (deployed sunshield length). Gateway Arch: 192 m (height above ground). Ratio: 0.11×.\nThe unfolded sunshield is approximately 21.2 by 14.2 m. This profile compares its long axis, not the mirror diameter.",
+        "sources": [
+          "https://science.nasa.gov/mission/webb/science-overview/science-explainers/telescope-overview/",
+          "https://www.nps.gov/jeff/faqs.htm"
+        ],
+        "tag": "Space / Architecture"
+      },
+      {
+        "id": "how-much-ish-v4-10",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the international space station to match its real size.",
+        "target": {
+          "name": "International Space Station",
+          "dimension": "end-to-end span",
+          "shape": "sourced:iss"
+        },
+        "reference": {
+          "name": "Male lion",
+          "dimension": "large adult length, tail included",
+          "shape": "sourced:lion",
+          "measure": "3.55 m · large adult length, tail included"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 30.70422535,
+        "explanation": "International Space Station: 109 m (end-to-end span). Male lion: 3.55 m (large adult length, tail included). Ratio: 30.70×.\nNASA gives the station an end-to-end span of about 109 m. The diagram is a simplified plan view.",
+        "sources": [
+          "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/",
+          "https://animals.sandiegozoo.org/animals/lion"
+        ],
+        "tag": "Space / Nature"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 2,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-11",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the polar bear to match its real size.",
+        "target": {
+          "name": "Polar bear",
+          "dimension": "upper usual body length",
+          "shape": "sourced:polar-bear"
+        },
+        "reference": {
+          "name": "US dollar note",
+          "dimension": "approximate note length",
+          "shape": "sourced:dollar-note",
+          "measure": "0.156 m · approximate note length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 17.30769231,
+        "explanation": "Polar bear: 2.7 m (upper usual body length). US dollar note: 0.156 m (approximate note length). Ratio: 17.31×.\nSan Diego Zoo gives a usual head-and-body length of 1.8–2.7 m. This board uses 2.7 m; the small tail is not part of that measurement.",
+        "sources": [
+          "https://animals.sandiegozoo.org/animals/polar-bear",
+          "https://www.federalreserve.gov/aboutthefed/chapter-1-balance-sheet.htm"
+        ],
+        "tag": "Nature / Everyday"
+      },
+      {
+        "id": "how-much-ish-v4-12",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the doubles tennis court to match its real size.",
+        "target": {
+          "name": "Doubles tennis court",
+          "dimension": "baseline-to-baseline length",
+          "shape": "sourced:tennis-court"
+        },
+        "reference": {
+          "name": "Bus",
+          "dimension": "reference length",
+          "shape": "sourced:school-bus",
+          "measure": "12 m · reference length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 1.98083333,
+        "explanation": "Doubles tennis court: 23.77 m (baseline-to-baseline length). Bus: 12 m (reference length). Ratio: 1.98×.\nThe playing court is 23.77 m long. Run-off space beyond the lines is excluded.",
+        "sources": [
+          "https://www.itftennis.com/media/7221/2024-rules-of-tennis-english.pdf",
+          "Reference chosen for comparison: a 12 m bus."
+        ],
+        "tag": "Sport / Reference"
+      },
+      {
+        "id": "how-much-ish-v4-13",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the saturn v to match its real size.",
+        "target": {
+          "name": "Saturn V",
+          "dimension": "height with Apollo spacecraft",
+          "shape": "sourced:saturn-v"
+        },
+        "reference": {
+          "name": "Statue of Liberty",
+          "dimension": "height, pedestal included",
+          "shape": "sourced:statue-of-liberty",
+          "measure": "92.99 m · height, pedestal included"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 1.1893752,
+        "explanation": "Saturn V: 110.6 m (height with Apollo spacecraft). Statue of Liberty: 92.99 m (height, pedestal included). Ratio: 1.19×.\nNASA lists the complete Apollo–Saturn V at 363 ft (110.6 m).",
+        "sources": [
+          "https://www.nasa.gov/wp-content/uploads/2015/03/167718main_early_years.pdf",
+          "https://www.nps.gov/stli/learn/historyculture/statue-statistics.htm"
+        ],
+        "tag": "Space / Architecture"
+      },
+      {
+        "id": "how-much-ish-v4-14",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the us quarter to match its real size.",
+        "target": {
+          "name": "US quarter",
+          "dimension": "coin diameter",
+          "shape": "sourced:quarter"
+        },
+        "reference": {
+          "name": "Golf ball",
+          "dimension": "minimum permitted diameter",
+          "shape": "sourced:golf-ball",
+          "measure": "0.04267 m · minimum permitted diameter"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.56854933,
+        "explanation": "US quarter: 0.02426 m (coin diameter). Golf ball: 0.04267 m (minimum permitted diameter). Ratio: 0.57×.\nA US quarter has a diameter of 24.26 mm. The profile represents the coin’s outline.",
+        "sources": [
+          "https://www.usmint.gov/learn/coins-and-medals/circulating-coins/coin-specifications",
+          "https://www.randa.org/roe/the-rules-of-equipment/part-4-conformance-of-balls"
+        ],
+        "tag": "Everyday / Sport"
+      },
+      {
+        "id": "how-much-ish-v4-15",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the iphone 16 to match its real size.",
+        "target": {
+          "name": "iPhone 16",
+          "dimension": "device height",
+          "shape": "sourced:iphone-16"
+        },
+        "reference": {
+          "name": "African elephant",
+          "dimension": "upper adult length",
+          "shape": "sourced:african-elephant",
+          "measure": "7.3 m · upper adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.02021918,
+        "explanation": "iPhone 16: 0.1476 m (device height). African elephant: 7.3 m (upper adult length). Ratio: 0.02×.\nThe standard iPhone 16 is 147.6 mm tall. Pro, Plus and other models differ.",
+        "sources": [
+          "https://support.apple.com/en-us/121029",
+          "https://www.worldwildlife.org/species/elephant/african-elephant/"
+        ],
+        "tag": "Everyday / Nature"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 3,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-16",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the antarctic blue whale to match its real size.",
+        "target": {
+          "name": "Antarctic blue whale",
+          "dimension": "upper adult length",
+          "shape": "sourced:blue-whale"
+        },
+        "reference": {
+          "name": "Whale shark",
+          "dimension": "record measured length",
+          "shape": "sourced:whale-shark",
+          "measure": "18.8 m · record measured length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 1.78191489,
+        "explanation": "Antarctic blue whale: 33.5 m (upper adult length). Whale shark: 18.8 m (record measured length). Ratio: 1.78×.\nAntarctic blue whales can reach about 110 ft (33.5 m); other populations are smaller.",
+        "sources": [
+          "https://www.fisheries.noaa.gov/species/blue-whale",
+          "https://www.georgiaaquarium.org/animal/whale-shark/"
+        ],
+        "tag": "Nature / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-17",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the hubble telescope to match its real size.",
+        "target": {
+          "name": "Hubble telescope",
+          "dimension": "body length",
+          "shape": "sourced:hubble"
+        },
+        "reference": {
+          "name": "FIBA basketball court",
+          "dimension": "endline-to-endline length",
+          "shape": "sourced:basketball-court",
+          "measure": "28 m · endline-to-endline length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.47142857,
+        "explanation": "Hubble telescope: 13.2 m (body length). FIBA basketball court: 28 m (endline-to-endline length). Ratio: 0.47×.\nHubble is about 13.2 m long; solar panels extend to either side of its body.",
+        "sources": [
+          "https://science.nasa.gov/mission/hubble/observatory/design/",
+          "https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2024-v10a.pdf"
+        ],
+        "tag": "Space / Sport"
+      },
+      {
+        "id": "how-much-ish-v4-18",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the webb sunshield to match its real size.",
+        "target": {
+          "name": "Webb sunshield",
+          "dimension": "deployed sunshield length",
+          "shape": "sourced:webb"
+        },
+        "reference": {
+          "name": "Male giraffe",
+          "dimension": "upper adult height",
+          "shape": "sourced:giraffe",
+          "measure": "5.5 m · upper adult height"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 3.85454545,
+        "explanation": "Webb sunshield: 21.2 m (deployed sunshield length). Male giraffe: 5.5 m (upper adult height). Ratio: 3.85×.\nThe unfolded sunshield is approximately 21.2 by 14.2 m. This profile compares its long axis, not the mirror diameter.",
+        "sources": [
+          "https://science.nasa.gov/mission/webb/science-overview/science-explainers/telescope-overview/",
+          "https://animals.sandiegozoo.org/animals/giraffe"
+        ],
+        "tag": "Space / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-19",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the perseverance rover to match its real size.",
+        "target": {
+          "name": "Perseverance rover",
+          "dimension": "chassis length",
+          "shape": "sourced:perseverance"
+        },
+        "reference": {
+          "name": "Statue of Liberty",
+          "dimension": "height, pedestal included",
+          "shape": "sourced:statue-of-liberty",
+          "measure": "92.99 m · height, pedestal included"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.03226153,
+        "explanation": "Perseverance rover: 3 m (chassis length). Statue of Liberty: 92.99 m (height, pedestal included). Ratio: 0.03×.\nThe chassis is about 3 m long. The robotic arm is stowed in this schematic.",
+        "sources": [
+          "https://www.jpl.nasa.gov/news/press_kits/mars_2020/launch/",
+          "https://www.nps.gov/stli/learn/historyculture/statue-statistics.htm"
+        ],
+        "tag": "Space / Architecture"
+      },
+      {
+        "id": "how-much-ish-v4-20",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the tyrannosaurus rex to match its real size.",
+        "target": {
+          "name": "Tyrannosaurus rex",
+          "dimension": "adult length",
+          "shape": "sourced:t-rex"
+        },
+        "reference": {
+          "name": "Saturn V",
+          "dimension": "height with Apollo spacecraft",
+          "shape": "sourced:saturn-v",
+          "measure": "110.6 m · height with Apollo spacecraft"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.1084991,
+        "explanation": "Tyrannosaurus rex: 12 m (adult length). Saturn V: 110.6 m (height with Apollo spacecraft). Ratio: 0.11×.\nAMNH gives an adult T. rex length of about 12 m.",
+        "sources": [
+          "https://www.amnh.org/exhibitions/dinosaurs-ancient-fossils/theropod-biomechanics/the-problem-of-size",
+          "https://www.nasa.gov/wp-content/uploads/2015/03/167718main_early_years.pdf"
+        ],
+        "tag": "Nature / Space"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 4,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-21",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the gateway arch to match its real size.",
+        "target": {
+          "name": "Gateway Arch",
+          "dimension": "height above ground",
+          "shape": "sourced:gateway-arch"
+        },
+        "reference": {
+          "name": "International Space Station",
+          "dimension": "end-to-end span",
+          "shape": "sourced:iss",
+          "measure": "109 m · end-to-end span"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 1.76146789,
+        "explanation": "Gateway Arch: 192 m (height above ground). International Space Station: 109 m (end-to-end span). Ratio: 1.76×.\nThe arch is about 192 m tall and approximately the same width from leg to leg.",
+        "sources": [
+          "https://www.nps.gov/jeff/faqs.htm",
+          "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/"
+        ],
+        "tag": "Architecture / Space"
+      },
+      {
+        "id": "how-much-ish-v4-22",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the airbus a380 to match its real size.",
+        "target": {
+          "name": "Airbus A380",
+          "dimension": "overall aircraft length",
+          "shape": "sourced:a380"
+        },
+        "reference": {
+          "name": "Male lion",
+          "dimension": "large adult length, tail included",
+          "shape": "sourced:lion",
+          "measure": "3.55 m · large adult length, tail included"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 20.47887324,
+        "explanation": "Airbus A380: 72.7 m (overall aircraft length). Male lion: 3.55 m (large adult length, tail included). Ratio: 20.48×.\nAirbus gives the A380 an overall length of 72.7 m. This is a side profile, not its wingspan.",
+        "sources": [
+          "https://www.airbus.com/sites/g/files/jlcbta136/files/2025-01/airbus-a380-facts-and-figures-february-2022.pdf",
+          "https://animals.sandiegozoo.org/animals/lion"
+        ],
+        "tag": "Transport / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-23",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the iphone 16 to match its real size.",
+        "target": {
+          "name": "iPhone 16",
+          "dimension": "device height",
+          "shape": "sourced:iphone-16"
+        },
+        "reference": {
+          "name": "Person",
+          "dimension": "reference height",
+          "shape": "sourced:human",
+          "measure": "1.75 m · reference height"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.08434286,
+        "explanation": "iPhone 16: 0.1476 m (device height). Person: 1.75 m (reference height). Ratio: 0.08×.\nThe standard iPhone 16 is 147.6 mm tall. Pro, Plus and other models differ.",
+        "sources": [
+          "https://support.apple.com/en-us/121029",
+          "Reference chosen for comparison: a 1.75 m person."
+        ],
+        "tag": "Everyday / Reference"
+      },
+      {
+        "id": "how-much-ish-v4-24",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the doubles tennis court to match its real size.",
+        "target": {
+          "name": "Doubles tennis court",
+          "dimension": "baseline-to-baseline length",
+          "shape": "sourced:tennis-court"
+        },
+        "reference": {
+          "name": "Steinway Model D",
+          "dimension": "piano length, plan view",
+          "shape": "sourced:concert-grand",
+          "measure": "2.74 m · piano length, plan view"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 8.67518248,
+        "explanation": "Doubles tennis court: 23.77 m (baseline-to-baseline length). Steinway Model D: 2.74 m (piano length, plan view). Ratio: 8.68×.\nThe playing court is 23.77 m long. Run-off space beyond the lines is excluded.",
+        "sources": [
+          "https://www.itftennis.com/media/7221/2024-rules-of-tennis-english.pdf",
+          "https://www.steinway.com/dam/jcr%3A9d156c27-487d-478c-8d2d-4dda7d47475b/918_Steinway_Brochure_11x8.5_S7.pdf"
+        ],
+        "tag": "Sport / Music"
+      },
+      {
+        "id": "how-much-ish-v4-25",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the washington monument to match its real size.",
+        "target": {
+          "name": "Washington Monument",
+          "dimension": "rounded monument height",
+          "shape": "sourced:washington-monument"
+        },
+        "reference": {
+          "name": "White rhinoceros",
+          "dimension": "upper adult length",
+          "shape": "sourced:rhinoceros",
+          "measure": "4 m · upper adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 42.25,
+        "explanation": "Washington Monument: 169 m (rounded monument height). White rhinoceros: 4 m (upper adult length). Ratio: 42.25×.\nThe National Park Service rounds the obelisk’s height to 169 m in this educational reference.",
+        "sources": [
+          "https://www.nps.gov/articles/000/upload/Build-Your-Own-Washington-Monument-Activity.pdf",
+          "https://animals.sandiegozoo.org/animals/rhinoceros"
+        ],
+        "tag": "Architecture / Nature"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 5,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-26",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the hippopotamus to match its real size.",
+        "target": {
+          "name": "Hippopotamus",
+          "dimension": "upper adult length",
+          "shape": "sourced:hippopotamus"
+        },
+        "reference": {
+          "name": "Table tennis table",
+          "dimension": "playing-surface length",
+          "shape": "sourced:table-tennis",
+          "measure": "2.74 m · playing-surface length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 1.82481752,
+        "explanation": "Hippopotamus: 5 m (upper adult length). Table tennis table: 2.74 m (playing-surface length). Ratio: 1.82×.\nHippos measure about 3.3–5 m long. This board uses the upper end.",
+        "sources": [
+          "https://animals.sandiegozoo.org/animals/hippo",
+          "https://documents.ittf.sport/sites/default/files/public/2026-04/ITTFCouncil_Working_Documents-2026-v1.pdf"
+        ],
+        "tag": "Nature / Sport"
+      },
+      {
+        "id": "how-much-ish-v4-27",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the eiffel tower to match its real size.",
+        "target": {
+          "name": "Eiffel Tower",
+          "dimension": "height, antenna included",
+          "shape": "sourced:eiffel-tower"
+        },
+        "reference": {
+          "name": "Male sperm whale",
+          "dimension": "mature adult length",
+          "shape": "sourced:sperm-whale",
+          "measure": "15.9 m · mature adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 20.75471698,
+        "explanation": "Eiffel Tower: 330 m (height, antenna included). Male sperm whale: 15.9 m (mature adult length). Ratio: 20.75×.\nThe Eiffel Tower is 330 m tall including its antenna.",
+        "sources": [
+          "https://www.toureiffel.paris/en/the-monument/key-figures",
+          "https://www.fisheries.noaa.gov/species/sperm-whale"
+        ],
+        "tag": "Architecture / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-28",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the us dollar note to match its real size.",
+        "target": {
+          "name": "US dollar note",
+          "dimension": "approximate note length",
+          "shape": "sourced:dollar-note"
+        },
+        "reference": {
+          "name": "Golf ball",
+          "dimension": "minimum permitted diameter",
+          "shape": "sourced:golf-ball",
+          "measure": "0.04267 m · minimum permitted diameter"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 3.65596438,
+        "explanation": "US dollar note: 0.156 m (approximate note length). Golf ball: 0.04267 m (minimum permitted diameter). Ratio: 3.66×.\nModern US currency notes are approximately 6.14 inches long, or 15.6 cm.",
+        "sources": [
+          "https://www.federalreserve.gov/aboutthefed/chapter-1-balance-sheet.htm",
+          "https://www.randa.org/roe/the-rules-of-equipment/part-4-conformance-of-balls"
+        ],
+        "tag": "Everyday / Sport"
+      },
+      {
+        "id": "how-much-ish-v4-29",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the whale shark to match its real size.",
+        "target": {
+          "name": "Whale shark",
+          "dimension": "record measured length",
+          "shape": "sourced:whale-shark"
+        },
+        "reference": {
+          "name": "Bus",
+          "dimension": "reference length",
+          "shape": "sourced:school-bus",
+          "measure": "12 m · reference length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 1.56666667,
+        "explanation": "Whale shark: 18.8 m (record measured length). Bus: 12 m (reference length). Ratio: 1.57×.\nGeorgia Aquarium reports a largest measured whale shark of 18.8 m. Common adults are much smaller: 5.5–10 m.",
+        "sources": [
+          "https://www.georgiaaquarium.org/animal/whale-shark/",
+          "Reference chosen for comparison: a 12 m bus."
+        ],
+        "tag": "Nature / Reference"
+      },
+      {
+        "id": "how-much-ish-v4-30",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the ingenuity helicopter to match its real size.",
+        "target": {
+          "name": "Ingenuity helicopter",
+          "dimension": "rotor tip-to-tip span",
+          "shape": "sourced:ingenuity"
+        },
+        "reference": {
+          "name": "US quarter",
+          "dimension": "coin diameter",
+          "shape": "sourced:quarter",
+          "measure": "0.02426 m · coin diameter"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 49.4641385,
+        "explanation": "Ingenuity helicopter: 1.2 m (rotor tip-to-tip span). US quarter: 0.02426 m (coin diameter). Ratio: 49.46×.\nThe Mars helicopter’s counter-rotating rotors span about 1.2 m from tip to tip.",
+        "sources": [
+          "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+          "https://www.usmint.gov/learn/coins-and-medals/circulating-coins/coin-specifications"
+        ],
+        "tag": "Space / Everyday"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 6,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-31",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the polar bear to match its real size.",
+        "target": {
+          "name": "Polar bear",
+          "dimension": "upper usual body length",
+          "shape": "sourced:polar-bear"
+        },
+        "reference": {
+          "name": "Antarctic blue whale",
+          "dimension": "upper adult length",
+          "shape": "sourced:blue-whale",
+          "measure": "33.5 m · upper adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.08059701,
+        "explanation": "Polar bear: 2.7 m (upper usual body length). Antarctic blue whale: 33.5 m (upper adult length). Ratio: 0.08×.\nSan Diego Zoo gives a usual head-and-body length of 1.8–2.7 m. This board uses 2.7 m; the small tail is not part of that measurement.",
+        "sources": [
+          "https://animals.sandiegozoo.org/animals/polar-bear",
+          "https://www.fisheries.noaa.gov/species/blue-whale"
+        ],
+        "tag": "Nature / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-32",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the african elephant to match its real size.",
+        "target": {
+          "name": "African elephant",
+          "dimension": "upper adult length",
+          "shape": "sourced:african-elephant"
+        },
+        "reference": {
+          "name": "Humpback whale",
+          "dimension": "upper adult length",
+          "shape": "sourced:humpback-whale",
+          "measure": "18.3 m · upper adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.3989071,
+        "explanation": "African elephant: 7.3 m (upper adult length). Humpback whale: 18.3 m (upper adult length). Ratio: 0.40×.\nWWF gives a length range of 19–24 ft (5.8–7.3 m). This board uses the upper end, with the trunk hanging down.",
+        "sources": [
+          "https://www.worldwildlife.org/species/elephant/african-elephant/",
+          "https://www.fisheries.noaa.gov/species/humpback-whale"
+        ],
+        "tag": "Nature / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-33",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the hubble telescope to match its real size.",
+        "target": {
+          "name": "Hubble telescope",
+          "dimension": "body length",
+          "shape": "sourced:hubble"
+        },
+        "reference": {
+          "name": "White rhinoceros",
+          "dimension": "upper adult length",
+          "shape": "sourced:rhinoceros",
+          "measure": "4 m · upper adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 3.3,
+        "explanation": "Hubble telescope: 13.2 m (body length). White rhinoceros: 4 m (upper adult length). Ratio: 3.30×.\nHubble is about 13.2 m long; solar panels extend to either side of its body.",
+        "sources": [
+          "https://science.nasa.gov/mission/hubble/observatory/design/",
+          "https://animals.sandiegozoo.org/animals/rhinoceros"
+        ],
+        "tag": "Space / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-34",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the fiba basketball court to match its real size.",
+        "target": {
+          "name": "FIBA basketball court",
+          "dimension": "endline-to-endline length",
+          "shape": "sourced:basketball-court"
+        },
+        "reference": {
+          "name": "Whale shark",
+          "dimension": "record measured length",
+          "shape": "sourced:whale-shark",
+          "measure": "18.8 m · record measured length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 1.4893617,
+        "explanation": "FIBA basketball court: 28 m (endline-to-endline length). Whale shark: 18.8 m (record measured length). Ratio: 1.49×.\nFIBA’s playing court is 28 m long and 15 m wide. NBA courts use different dimensions.",
+        "sources": [
+          "https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2024-v10a.pdf",
+          "https://www.georgiaaquarium.org/animal/whale-shark/"
+        ],
+        "tag": "Sport / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-35",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the webb sunshield to match its real size.",
+        "target": {
+          "name": "Webb sunshield",
+          "dimension": "deployed sunshield length",
+          "shape": "sourced:webb"
+        },
+        "reference": {
+          "name": "Eiffel Tower",
+          "dimension": "height, antenna included",
+          "shape": "sourced:eiffel-tower",
+          "measure": "330 m · height, antenna included"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.06424242,
+        "explanation": "Webb sunshield: 21.2 m (deployed sunshield length). Eiffel Tower: 330 m (height, antenna included). Ratio: 0.06×.\nThe unfolded sunshield is approximately 21.2 by 14.2 m. This profile compares its long axis, not the mirror diameter.",
+        "sources": [
+          "https://science.nasa.gov/mission/webb/science-overview/science-explainers/telescope-overview/",
+          "https://www.toureiffel.paris/en/the-monument/key-figures"
+        ],
+        "tag": "Space / Architecture"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 7,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-36",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the perseverance rover to match its real size.",
+        "target": {
+          "name": "Perseverance rover",
+          "dimension": "chassis length",
+          "shape": "sourced:perseverance"
+        },
+        "reference": {
+          "name": "Antarctic blue whale",
+          "dimension": "upper adult length",
+          "shape": "sourced:blue-whale",
+          "measure": "33.5 m · upper adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.08955224,
+        "explanation": "Perseverance rover: 3 m (chassis length). Antarctic blue whale: 33.5 m (upper adult length). Ratio: 0.09×.\nThe chassis is about 3 m long. The robotic arm is stowed in this schematic.",
+        "sources": [
+          "https://www.jpl.nasa.gov/news/press_kits/mars_2020/launch/",
+          "https://www.fisheries.noaa.gov/species/blue-whale"
+        ],
+        "tag": "Space / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-37",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the table tennis table to match its real size.",
+        "target": {
+          "name": "Table tennis table",
+          "dimension": "playing-surface length",
+          "shape": "sourced:table-tennis"
+        },
+        "reference": {
+          "name": "Male giraffe",
+          "dimension": "upper adult height",
+          "shape": "sourced:giraffe",
+          "measure": "5.5 m · upper adult height"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.49818182,
+        "explanation": "Table tennis table: 2.74 m (playing-surface length). Male giraffe: 5.5 m (upper adult height). Ratio: 0.50×.\nThe playing surface measures 2.74 m by 1.525 m. This schematic is a plan view.",
+        "sources": [
+          "https://documents.ittf.sport/sites/default/files/public/2026-04/ITTFCouncil_Working_Documents-2026-v1.pdf",
+          "https://animals.sandiegozoo.org/animals/giraffe"
+        ],
+        "tag": "Sport / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-38",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the us dollar note to match its real size.",
+        "target": {
+          "name": "US dollar note",
+          "dimension": "approximate note length",
+          "shape": "sourced:dollar-note"
+        },
+        "reference": {
+          "name": "Male lion",
+          "dimension": "large adult length, tail included",
+          "shape": "sourced:lion",
+          "measure": "3.55 m · large adult length, tail included"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.04394366,
+        "explanation": "US dollar note: 0.156 m (approximate note length). Male lion: 3.55 m (large adult length, tail included). Ratio: 0.04×.\nModern US currency notes are approximately 6.14 inches long, or 15.6 cm.",
+        "sources": [
+          "https://www.federalreserve.gov/aboutthefed/chapter-1-balance-sheet.htm",
+          "https://animals.sandiegozoo.org/animals/lion"
+        ],
+        "tag": "Everyday / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-39",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the washington monument to match its real size.",
+        "target": {
+          "name": "Washington Monument",
+          "dimension": "rounded monument height",
+          "shape": "sourced:washington-monument"
+        },
+        "reference": {
+          "name": "Airbus A380",
+          "dimension": "overall aircraft length",
+          "shape": "sourced:a380",
+          "measure": "72.7 m · overall aircraft length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 2.32462173,
+        "explanation": "Washington Monument: 169 m (rounded monument height). Airbus A380: 72.7 m (overall aircraft length). Ratio: 2.32×.\nThe National Park Service rounds the obelisk’s height to 169 m in this educational reference.",
+        "sources": [
+          "https://www.nps.gov/articles/000/upload/Build-Your-Own-Washington-Monument-Activity.pdf",
+          "https://www.airbus.com/sites/g/files/jlcbta136/files/2025-01/airbus-a380-facts-and-figures-february-2022.pdf"
+        ],
+        "tag": "Architecture / Transport"
+      },
+      {
+        "id": "how-much-ish-v4-40",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the male sperm whale to match its real size.",
+        "target": {
+          "name": "Male sperm whale",
+          "dimension": "mature adult length",
+          "shape": "sourced:sperm-whale"
+        },
+        "reference": {
+          "name": "Steinway Model D",
+          "dimension": "piano length, plan view",
+          "shape": "sourced:concert-grand",
+          "measure": "2.74 m · piano length, plan view"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 5.80291971,
+        "explanation": "Male sperm whale: 15.9 m (mature adult length). Steinway Model D: 2.74 m (piano length, plan view). Ratio: 5.80×.\nMature males reach about 52 ft (15.9 m); females are smaller.",
+        "sources": [
+          "https://www.fisheries.noaa.gov/species/sperm-whale",
+          "https://www.steinway.com/dam/jcr%3A9d156c27-487d-478c-8d2d-4dda7d47475b/918_Steinway_Brochure_11x8.5_S7.pdf"
+        ],
+        "tag": "Nature / Music"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 8,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-41",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the doubles tennis court to match its real size.",
+        "target": {
+          "name": "Doubles tennis court",
+          "dimension": "baseline-to-baseline length",
+          "shape": "sourced:tennis-court"
+        },
+        "reference": {
+          "name": "Polar bear",
+          "dimension": "upper usual body length",
+          "shape": "sourced:polar-bear",
+          "measure": "2.7 m · upper usual body length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 8.8037037,
+        "explanation": "Doubles tennis court: 23.77 m (baseline-to-baseline length). Polar bear: 2.7 m (upper usual body length). Ratio: 8.80×.\nThe playing court is 23.77 m long. Run-off space beyond the lines is excluded.",
+        "sources": [
+          "https://www.itftennis.com/media/7221/2024-rules-of-tennis-english.pdf",
+          "https://animals.sandiegozoo.org/animals/polar-bear"
+        ],
+        "tag": "Sport / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-42",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the ingenuity helicopter to match its real size.",
+        "target": {
+          "name": "Ingenuity helicopter",
+          "dimension": "rotor tip-to-tip span",
+          "shape": "sourced:ingenuity"
+        },
+        "reference": {
+          "name": "Person",
+          "dimension": "reference height",
+          "shape": "sourced:human",
+          "measure": "1.75 m · reference height"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.68571429,
+        "explanation": "Ingenuity helicopter: 1.2 m (rotor tip-to-tip span). Person: 1.75 m (reference height). Ratio: 0.69×.\nThe Mars helicopter’s counter-rotating rotors span about 1.2 m from tip to tip.",
+        "sources": [
+          "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+          "Reference chosen for comparison: a 1.75 m person."
+        ],
+        "tag": "Space / Reference"
+      },
+      {
+        "id": "how-much-ish-v4-43",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the gateway arch to match its real size.",
+        "target": {
+          "name": "Gateway Arch",
+          "dimension": "height above ground",
+          "shape": "sourced:gateway-arch"
+        },
+        "reference": {
+          "name": "Tyrannosaurus rex",
+          "dimension": "adult length",
+          "shape": "sourced:t-rex",
+          "measure": "12 m · adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 16.0,
+        "explanation": "Gateway Arch: 192 m (height above ground). Tyrannosaurus rex: 12 m (adult length). Ratio: 16.00×.\nThe arch is about 192 m tall and approximately the same width from leg to leg.",
+        "sources": [
+          "https://www.nps.gov/jeff/faqs.htm",
+          "https://www.amnh.org/exhibitions/dinosaurs-ancient-fossils/theropod-biomechanics/the-problem-of-size"
+        ],
+        "tag": "Architecture / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-44",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the international space station to match its real size.",
+        "target": {
+          "name": "International Space Station",
+          "dimension": "end-to-end span",
+          "shape": "sourced:iss"
+        },
+        "reference": {
+          "name": "Hippopotamus",
+          "dimension": "upper adult length",
+          "shape": "sourced:hippopotamus",
+          "measure": "5 m · upper adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 21.8,
+        "explanation": "International Space Station: 109 m (end-to-end span). Hippopotamus: 5 m (upper adult length). Ratio: 21.80×.\nNASA gives the station an end-to-end span of about 109 m. The diagram is a simplified plan view.",
+        "sources": [
+          "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/",
+          "https://animals.sandiegozoo.org/animals/hippo"
+        ],
+        "tag": "Space / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-45",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the statue of liberty to match its real size.",
+        "target": {
+          "name": "Statue of Liberty",
+          "dimension": "height, pedestal included",
+          "shape": "sourced:statue-of-liberty"
+        },
+        "reference": {
+          "name": "Humpback whale",
+          "dimension": "upper adult length",
+          "shape": "sourced:humpback-whale",
+          "measure": "18.3 m · upper adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 5.08142077,
+        "explanation": "Statue of Liberty: 92.99 m (height, pedestal included). Humpback whale: 18.3 m (upper adult length). Ratio: 5.08×.\nThe full monument measures 92.99 m from ground to torch, including the pedestal. The statue alone is 46.05 m.",
+        "sources": [
+          "https://www.nps.gov/stli/learn/historyculture/statue-statistics.htm",
+          "https://www.fisheries.noaa.gov/species/humpback-whale"
+        ],
+        "tag": "Architecture / Nature"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 9,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-46",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the african elephant to match its real size.",
+        "target": {
+          "name": "African elephant",
+          "dimension": "upper adult length",
+          "shape": "sourced:african-elephant"
+        },
+        "reference": {
+          "name": "Bus",
+          "dimension": "reference length",
+          "shape": "sourced:school-bus",
+          "measure": "12 m · reference length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.60833333,
+        "explanation": "African elephant: 7.3 m (upper adult length). Bus: 12 m (reference length). Ratio: 0.61×.\nWWF gives a length range of 19–24 ft (5.8–7.3 m). This board uses the upper end, with the trunk hanging down.",
+        "sources": [
+          "https://www.worldwildlife.org/species/elephant/african-elephant/",
+          "Reference chosen for comparison: a 12 m bus."
+        ],
+        "tag": "Nature / Reference"
+      },
+      {
+        "id": "how-much-ish-v4-47",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the golf ball to match its real size.",
+        "target": {
+          "name": "Golf ball",
+          "dimension": "minimum permitted diameter",
+          "shape": "sourced:golf-ball"
+        },
+        "reference": {
+          "name": "iPhone 16",
+          "dimension": "device height",
+          "shape": "sourced:iphone-16",
+          "measure": "0.1476 m · device height"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.28909214,
+        "explanation": "Golf ball: 0.04267 m (minimum permitted diameter). iPhone 16: 0.1476 m (device height). Ratio: 0.29×.\nThe equipment rules set a minimum diameter of 42.67 mm. This board uses that minimum.",
+        "sources": [
+          "https://www.randa.org/roe/the-rules-of-equipment/part-4-conformance-of-balls",
+          "https://support.apple.com/en-us/121029"
+        ],
+        "tag": "Sport / Everyday"
+      },
+      {
+        "id": "how-much-ish-v4-48",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the polar bear to match its real size.",
+        "target": {
+          "name": "Polar bear",
+          "dimension": "upper usual body length",
+          "shape": "sourced:polar-bear"
+        },
+        "reference": {
+          "name": "Saturn V",
+          "dimension": "height with Apollo spacecraft",
+          "shape": "sourced:saturn-v",
+          "measure": "110.6 m · height with Apollo spacecraft"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.0244123,
+        "explanation": "Polar bear: 2.7 m (upper usual body length). Saturn V: 110.6 m (height with Apollo spacecraft). Ratio: 0.02×.\nSan Diego Zoo gives a usual head-and-body length of 1.8–2.7 m. This board uses 2.7 m; the small tail is not part of that measurement.",
+        "sources": [
+          "https://animals.sandiegozoo.org/animals/polar-bear",
+          "https://www.nasa.gov/wp-content/uploads/2015/03/167718main_early_years.pdf"
+        ],
+        "tag": "Nature / Space"
+      },
+      {
+        "id": "how-much-ish-v4-49",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the us dollar note to match its real size.",
+        "target": {
+          "name": "US dollar note",
+          "dimension": "approximate note length",
+          "shape": "sourced:dollar-note"
+        },
+        "reference": {
+          "name": "US quarter",
+          "dimension": "coin diameter",
+          "shape": "sourced:quarter",
+          "measure": "0.02426 m · coin diameter"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 6.430338,
+        "explanation": "US dollar note: 0.156 m (approximate note length). US quarter: 0.02426 m (coin diameter). Ratio: 6.43×.\nModern US currency notes are approximately 6.14 inches long, or 15.6 cm.",
+        "sources": [
+          "https://www.federalreserve.gov/aboutthefed/chapter-1-balance-sheet.htm",
+          "https://www.usmint.gov/learn/coins-and-medals/circulating-coins/coin-specifications"
+        ],
+        "tag": "Everyday / Everyday"
+      },
+      {
+        "id": "how-much-ish-v4-50",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the hubble telescope to match its real size.",
+        "target": {
+          "name": "Hubble telescope",
+          "dimension": "body length",
+          "shape": "sourced:hubble"
+        },
+        "reference": {
+          "name": "Male giraffe",
+          "dimension": "upper adult height",
+          "shape": "sourced:giraffe",
+          "measure": "5.5 m · upper adult height"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 2.4,
+        "explanation": "Hubble telescope: 13.2 m (body length). Male giraffe: 5.5 m (upper adult height). Ratio: 2.40×.\nHubble is about 13.2 m long; solar panels extend to either side of its body.",
+        "sources": [
+          "https://science.nasa.gov/mission/hubble/observatory/design/",
+          "https://animals.sandiegozoo.org/animals/giraffe"
+        ],
+        "tag": "Space / Nature"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 10,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-51",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the airbus a380 to match its real size.",
+        "target": {
+          "name": "Airbus A380",
+          "dimension": "overall aircraft length",
+          "shape": "sourced:a380"
+        },
+        "reference": {
+          "name": "FIBA basketball court",
+          "dimension": "endline-to-endline length",
+          "shape": "sourced:basketball-court",
+          "measure": "28 m · endline-to-endline length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 2.59642857,
+        "explanation": "Airbus A380: 72.7 m (overall aircraft length). FIBA basketball court: 28 m (endline-to-endline length). Ratio: 2.60×.\nAirbus gives the A380 an overall length of 72.7 m. This is a side profile, not its wingspan.",
+        "sources": [
+          "https://www.airbus.com/sites/g/files/jlcbta136/files/2025-01/airbus-a380-facts-and-figures-february-2022.pdf",
+          "https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2024-v10a.pdf"
+        ],
+        "tag": "Transport / Sport"
+      },
+      {
+        "id": "how-much-ish-v4-52",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the humpback whale to match its real size.",
+        "target": {
+          "name": "Humpback whale",
+          "dimension": "upper adult length",
+          "shape": "sourced:humpback-whale"
+        },
+        "reference": {
+          "name": "Webb sunshield",
+          "dimension": "deployed sunshield length",
+          "shape": "sourced:webb",
+          "measure": "21.2 m · deployed sunshield length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.86320755,
+        "explanation": "Humpback whale: 18.3 m (upper adult length). Webb sunshield: 21.2 m (deployed sunshield length). Ratio: 0.86×.\nHumpbacks can reach about 60 ft (18.3 m).",
+        "sources": [
+          "https://www.fisheries.noaa.gov/species/humpback-whale",
+          "https://science.nasa.gov/mission/webb/science-overview/science-explainers/telescope-overview/"
+        ],
+        "tag": "Nature / Space"
+      },
+      {
+        "id": "how-much-ish-v4-53",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the tyrannosaurus rex to match its real size.",
+        "target": {
+          "name": "Tyrannosaurus rex",
+          "dimension": "adult length",
+          "shape": "sourced:t-rex"
+        },
+        "reference": {
+          "name": "Table tennis table",
+          "dimension": "playing-surface length",
+          "shape": "sourced:table-tennis",
+          "measure": "2.74 m · playing-surface length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 4.37956204,
+        "explanation": "Tyrannosaurus rex: 12 m (adult length). Table tennis table: 2.74 m (playing-surface length). Ratio: 4.38×.\nAMNH gives an adult T. rex length of about 12 m.",
+        "sources": [
+          "https://www.amnh.org/exhibitions/dinosaurs-ancient-fossils/theropod-biomechanics/the-problem-of-size",
+          "https://documents.ittf.sport/sites/default/files/public/2026-04/ITTFCouncil_Working_Documents-2026-v1.pdf"
+        ],
+        "tag": "Nature / Sport"
+      },
+      {
+        "id": "how-much-ish-v4-54",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the hippopotamus to match its real size.",
+        "target": {
+          "name": "Hippopotamus",
+          "dimension": "upper adult length",
+          "shape": "sourced:hippopotamus"
+        },
+        "reference": {
+          "name": "Steinway Model D",
+          "dimension": "piano length, plan view",
+          "shape": "sourced:concert-grand",
+          "measure": "2.74 m · piano length, plan view"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 1.82481752,
+        "explanation": "Hippopotamus: 5 m (upper adult length). Steinway Model D: 2.74 m (piano length, plan view). Ratio: 1.82×.\nHippos measure about 3.3–5 m long. This board uses the upper end.",
+        "sources": [
+          "https://animals.sandiegozoo.org/animals/hippo",
+          "https://www.steinway.com/dam/jcr%3A9d156c27-487d-478c-8d2d-4dda7d47475b/918_Steinway_Brochure_11x8.5_S7.pdf"
+        ],
+        "tag": "Nature / Music"
+      },
+      {
+        "id": "how-much-ish-v4-55",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the african elephant to match its real size.",
+        "target": {
+          "name": "African elephant",
+          "dimension": "upper adult length",
+          "shape": "sourced:african-elephant"
+        },
+        "reference": {
+          "name": "Perseverance rover",
+          "dimension": "chassis length",
+          "shape": "sourced:perseverance",
+          "measure": "3 m · chassis length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 2.43333333,
+        "explanation": "African elephant: 7.3 m (upper adult length). Perseverance rover: 3 m (chassis length). Ratio: 2.43×.\nWWF gives a length range of 19–24 ft (5.8–7.3 m). This board uses the upper end, with the trunk hanging down.",
+        "sources": [
+          "https://www.worldwildlife.org/species/elephant/african-elephant/",
+          "https://www.jpl.nasa.gov/news/press_kits/mars_2020/launch/"
+        ],
+        "tag": "Nature / Space"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 11,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-56",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the golf ball to match its real size.",
+        "target": {
+          "name": "Golf ball",
+          "dimension": "minimum permitted diameter",
+          "shape": "sourced:golf-ball"
+        },
+        "reference": {
+          "name": "Person",
+          "dimension": "reference height",
+          "shape": "sourced:human",
+          "measure": "1.75 m · reference height"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.02438286,
+        "explanation": "Golf ball: 0.04267 m (minimum permitted diameter). Person: 1.75 m (reference height). Ratio: 0.02×.\nThe equipment rules set a minimum diameter of 42.67 mm. This board uses that minimum.",
+        "sources": [
+          "https://www.randa.org/roe/the-rules-of-equipment/part-4-conformance-of-balls",
+          "Reference chosen for comparison: a 1.75 m person."
+        ],
+        "tag": "Sport / Reference"
+      },
+      {
+        "id": "how-much-ish-v4-57",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the male lion to match its real size.",
+        "target": {
+          "name": "Male lion",
+          "dimension": "large adult length, tail included",
+          "shape": "sourced:lion"
+        },
+        "reference": {
+          "name": "Doubles tennis court",
+          "dimension": "baseline-to-baseline length",
+          "shape": "sourced:tennis-court",
+          "measure": "23.77 m · baseline-to-baseline length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.14934792,
+        "explanation": "Male lion: 3.55 m (large adult length, tail included). Doubles tennis court: 23.77 m (baseline-to-baseline length). Ratio: 0.15×.\nA large male has up to 2.5 m of head and body, plus up to 1.05 m of tail; this illustrative upper-end total is 3.55 m.",
+        "sources": [
+          "https://animals.sandiegozoo.org/animals/lion",
+          "https://www.itftennis.com/media/7221/2024-rules-of-tennis-english.pdf"
+        ],
+        "tag": "Nature / Sport"
+      },
+      {
+        "id": "how-much-ish-v4-58",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the white rhinoceros to match its real size.",
+        "target": {
+          "name": "White rhinoceros",
+          "dimension": "upper adult length",
+          "shape": "sourced:rhinoceros"
+        },
+        "reference": {
+          "name": "Bus",
+          "dimension": "reference length",
+          "shape": "sourced:school-bus",
+          "measure": "12 m · reference length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.33333333,
+        "explanation": "White rhinoceros: 4 m (upper adult length). Bus: 12 m (reference length). Ratio: 0.33×.\nWhite rhinos are about 3.7–4 m long. This board uses the upper end.",
+        "sources": [
+          "https://animals.sandiegozoo.org/animals/rhinoceros",
+          "Reference chosen for comparison: a 12 m bus."
+        ],
+        "tag": "Nature / Reference"
+      },
+      {
+        "id": "how-much-ish-v4-59",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the gateway arch to match its real size.",
+        "target": {
+          "name": "Gateway Arch",
+          "dimension": "height above ground",
+          "shape": "sourced:gateway-arch"
+        },
+        "reference": {
+          "name": "Saturn V",
+          "dimension": "height with Apollo spacecraft",
+          "shape": "sourced:saturn-v",
+          "measure": "110.6 m · height with Apollo spacecraft"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 1.73598553,
+        "explanation": "Gateway Arch: 192 m (height above ground). Saturn V: 110.6 m (height with Apollo spacecraft). Ratio: 1.74×.\nThe arch is about 192 m tall and approximately the same width from leg to leg.",
+        "sources": [
+          "https://www.nps.gov/jeff/faqs.htm",
+          "https://www.nasa.gov/wp-content/uploads/2015/03/167718main_early_years.pdf"
+        ],
+        "tag": "Architecture / Space"
+      },
+      {
+        "id": "how-much-ish-v4-60",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the whale shark to match its real size.",
+        "target": {
+          "name": "Whale shark",
+          "dimension": "record measured length",
+          "shape": "sourced:whale-shark"
+        },
+        "reference": {
+          "name": "International Space Station",
+          "dimension": "end-to-end span",
+          "shape": "sourced:iss",
+          "measure": "109 m · end-to-end span"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.17247706,
+        "explanation": "Whale shark: 18.8 m (record measured length). International Space Station: 109 m (end-to-end span). Ratio: 0.17×.\nGeorgia Aquarium reports a largest measured whale shark of 18.8 m. Common adults are much smaller: 5.5–10 m.",
+        "sources": [
+          "https://www.georgiaaquarium.org/animal/whale-shark/",
+          "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/"
+        ],
+        "tag": "Nature / Space"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 12,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-61",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the antarctic blue whale to match its real size.",
+        "target": {
+          "name": "Antarctic blue whale",
+          "dimension": "upper adult length",
+          "shape": "sourced:blue-whale"
+        },
+        "reference": {
+          "name": "Washington Monument",
+          "dimension": "rounded monument height",
+          "shape": "sourced:washington-monument",
+          "measure": "169 m · rounded monument height"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.19822485,
+        "explanation": "Antarctic blue whale: 33.5 m (upper adult length). Washington Monument: 169 m (rounded monument height). Ratio: 0.20×.\nAntarctic blue whales can reach about 110 ft (33.5 m); other populations are smaller.",
+        "sources": [
+          "https://www.fisheries.noaa.gov/species/blue-whale",
+          "https://www.nps.gov/articles/000/upload/Build-Your-Own-Washington-Monument-Activity.pdf"
+        ],
+        "tag": "Nature / Architecture"
+      },
+      {
+        "id": "how-much-ish-v4-62",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the ingenuity helicopter to match its real size.",
+        "target": {
+          "name": "Ingenuity helicopter",
+          "dimension": "rotor tip-to-tip span",
+          "shape": "sourced:ingenuity"
+        },
+        "reference": {
+          "name": "iPhone 16",
+          "dimension": "device height",
+          "shape": "sourced:iphone-16",
+          "measure": "0.1476 m · device height"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 8.1300813,
+        "explanation": "Ingenuity helicopter: 1.2 m (rotor tip-to-tip span). iPhone 16: 0.1476 m (device height). Ratio: 8.13×.\nThe Mars helicopter’s counter-rotating rotors span about 1.2 m from tip to tip.",
+        "sources": [
+          "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+          "https://support.apple.com/en-us/121029"
+        ],
+        "tag": "Space / Everyday"
+      },
+      {
+        "id": "how-much-ish-v4-63",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the statue of liberty to match its real size.",
+        "target": {
+          "name": "Statue of Liberty",
+          "dimension": "height, pedestal included",
+          "shape": "sourced:statue-of-liberty"
+        },
+        "reference": {
+          "name": "Male sperm whale",
+          "dimension": "mature adult length",
+          "shape": "sourced:sperm-whale",
+          "measure": "15.9 m · mature adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 5.84842767,
+        "explanation": "Statue of Liberty: 92.99 m (height, pedestal included). Male sperm whale: 15.9 m (mature adult length). Ratio: 5.85×.\nThe full monument measures 92.99 m from ground to torch, including the pedestal. The statue alone is 46.05 m.",
+        "sources": [
+          "https://www.nps.gov/stli/learn/historyculture/statue-statistics.htm",
+          "https://www.fisheries.noaa.gov/species/sperm-whale"
+        ],
+        "tag": "Architecture / Nature"
+      },
+      {
+        "id": "how-much-ish-v4-64",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the airbus a380 to match its real size.",
+        "target": {
+          "name": "Airbus A380",
+          "dimension": "overall aircraft length",
+          "shape": "sourced:a380"
+        },
+        "reference": {
+          "name": "Eiffel Tower",
+          "dimension": "height, antenna included",
+          "shape": "sourced:eiffel-tower",
+          "measure": "330 m · height, antenna included"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.22030303,
+        "explanation": "Airbus A380: 72.7 m (overall aircraft length). Eiffel Tower: 330 m (height, antenna included). Ratio: 0.22×.\nAirbus gives the A380 an overall length of 72.7 m. This is a side profile, not its wingspan.",
+        "sources": [
+          "https://www.airbus.com/sites/g/files/jlcbta136/files/2025-01/airbus-a380-facts-and-figures-february-2022.pdf",
+          "https://www.toureiffel.paris/en/the-monument/key-figures"
+        ],
+        "tag": "Transport / Architecture"
+      },
+      {
+        "id": "how-much-ish-v4-65",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the fiba basketball court to match its real size.",
+        "target": {
+          "name": "FIBA basketball court",
+          "dimension": "endline-to-endline length",
+          "shape": "sourced:basketball-court"
+        },
+        "reference": {
+          "name": "Male lion",
+          "dimension": "large adult length, tail included",
+          "shape": "sourced:lion",
+          "measure": "3.55 m · large adult length, tail included"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 7.88732394,
+        "explanation": "FIBA basketball court: 28 m (endline-to-endline length). Male lion: 3.55 m (large adult length, tail included). Ratio: 7.89×.\nFIBA’s playing court is 28 m long and 15 m wide. NBA courts use different dimensions.",
+        "sources": [
+          "https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2024-v10a.pdf",
+          "https://animals.sandiegozoo.org/animals/lion"
+        ],
+        "tag": "Sport / Nature"
+      }
+    ]
+  },
+  {
+    "game": "how-much-ish",
+    "slot": 13,
+    "version": 4,
+    "questions": [
+      {
+        "id": "how-much-ish-v4-66",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the iphone 16 to match its real size.",
+        "target": {
+          "name": "iPhone 16",
+          "dimension": "device height",
+          "shape": "sourced:iphone-16"
+        },
+        "reference": {
+          "name": "US quarter",
+          "dimension": "coin diameter",
+          "shape": "sourced:quarter",
+          "measure": "0.02426 m · coin diameter"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 6.08408904,
+        "explanation": "iPhone 16: 0.1476 m (device height). US quarter: 0.02426 m (coin diameter). Ratio: 6.08×.\nThe standard iPhone 16 is 147.6 mm tall. Pro, Plus and other models differ.",
+        "sources": [
+          "https://support.apple.com/en-us/121029",
+          "https://www.usmint.gov/learn/coins-and-medals/circulating-coins/coin-specifications"
+        ],
+        "tag": "Everyday / Everyday"
+      },
+      {
+        "id": "how-much-ish-v4-67",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the hubble telescope to match its real size.",
+        "target": {
+          "name": "Hubble telescope",
+          "dimension": "body length",
+          "shape": "sourced:hubble"
+        },
+        "reference": {
+          "name": "Statue of Liberty",
+          "dimension": "height, pedestal included",
+          "shape": "sourced:statue-of-liberty",
+          "measure": "92.99 m · height, pedestal included"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.14195075,
+        "explanation": "Hubble telescope: 13.2 m (body length). Statue of Liberty: 92.99 m (height, pedestal included). Ratio: 0.14×.\nHubble is about 13.2 m long; solar panels extend to either side of its body.",
+        "sources": [
+          "https://science.nasa.gov/mission/hubble/observatory/design/",
+          "https://www.nps.gov/stli/learn/historyculture/statue-statistics.htm"
+        ],
+        "tag": "Space / Architecture"
+      },
+      {
+        "id": "how-much-ish-v4-68",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the male giraffe to match its real size.",
+        "target": {
+          "name": "Male giraffe",
+          "dimension": "upper adult height",
+          "shape": "sourced:giraffe"
+        },
+        "reference": {
+          "name": "US dollar note",
+          "dimension": "approximate note length",
+          "shape": "sourced:dollar-note",
+          "measure": "0.156 m · approximate note length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 35.25641026,
+        "explanation": "Male giraffe: 5.5 m (upper adult height). US dollar note: 0.156 m (approximate note length). Ratio: 35.26×.\nMale giraffes can reach about 5.5 m tall.",
+        "sources": [
+          "https://animals.sandiegozoo.org/animals/giraffe",
+          "https://www.federalreserve.gov/aboutthefed/chapter-1-balance-sheet.htm"
+        ],
+        "tag": "Nature / Everyday"
+      },
+      {
+        "id": "how-much-ish-v4-69",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the tyrannosaurus rex to match its real size.",
+        "target": {
+          "name": "Tyrannosaurus rex",
+          "dimension": "adult length",
+          "shape": "sourced:t-rex"
+        },
+        "reference": {
+          "name": "Doubles tennis court",
+          "dimension": "baseline-to-baseline length",
+          "shape": "sourced:tennis-court",
+          "measure": "23.77 m · baseline-to-baseline length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 0.50483803,
+        "explanation": "Tyrannosaurus rex: 12 m (adult length). Doubles tennis court: 23.77 m (baseline-to-baseline length). Ratio: 0.50×.\nAMNH gives an adult T. rex length of about 12 m.",
+        "sources": [
+          "https://www.amnh.org/exhibitions/dinosaurs-ancient-fossils/theropod-biomechanics/the-problem-of-size",
+          "https://www.itftennis.com/media/7221/2024-rules-of-tennis-english.pdf"
+        ],
+        "tag": "Nature / Sport"
+      },
+      {
+        "id": "how-much-ish-v4-70",
+        "version": 4,
+        "kind": "scale",
+        "prompt": "Resize the washington monument to match its real size.",
+        "target": {
+          "name": "Washington Monument",
+          "dimension": "rounded monument height",
+          "shape": "sourced:washington-monument"
+        },
+        "reference": {
+          "name": "Hippopotamus",
+          "dimension": "upper adult length",
+          "shape": "sourced:hippopotamus",
+          "measure": "5 m · upper adult length"
+        },
+        "bounds": [
+          0.01,
+          100
+        ],
+        "answer": 33.8,
+        "explanation": "Washington Monument: 169 m (rounded monument height). Hippopotamus: 5 m (upper adult length). Ratio: 33.80×.\nThe National Park Service rounds the obelisk’s height to 169 m in this educational reference.",
+        "sources": [
+          "https://www.nps.gov/articles/000/upload/Build-Your-Own-Washington-Monument-Activity.pdf",
+          "https://animals.sandiegozoo.org/animals/hippo"
+        ],
+        "tag": "Architecture / Nature"
+      }
+    ]
+  }
+]

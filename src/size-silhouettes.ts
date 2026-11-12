@@ -3,7 +3,7 @@ import library from './size-art.json';
 type Profile={art:string;axis:string;source:string;author:string;license:string;bounds:{width:number;height:number}};
 export const sizeProfiles:Record<string,Profile>=library;
 const escape=(s:string)=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]!));
-export function silhouetteCredit(shape:string){const p=shape.startsWith('sourced:')?sizeProfiles[shape.slice(8)]:undefined;return p?`<a href="${escape(p.source)}" target="_blank" rel="noopener noreferrer">${escape(p.author)} · ${escape(p.license)}</a>`:'';}
+export function silhouetteCredit(shape:string){const p=shape.startsWith('sourced:')?sizeProfiles[shape.slice(8)]:undefined;return p?.author==='Household'?'Original Household schematic · CC0':p?`<a href="${escape(p.source)}" target="_blank" rel="noopener noreferrer">${escape(p.author)} · ${escape(p.license)}</a>`:'';}
 const paths:Record<string,string>={
  finger:'M35 100V18Q35 0 50 0Q65 0 65 18V100Z',
  hand:'M25 100V66L8 43Q4 33 12 30L31 48V10Q31 0 39 0Q47 0 47 10V40H51V12Q51 4 58 4Q65 4 65 12V43H69V22Q69 15 76 15Q83 15 83 22V60L74 100Z',

@@ -4,8 +4,8 @@ test.use({viewport:{width:1280,height:900}});
 test('scrolling up leaves the house through the sky and approaches the game planet',async({page})=>{
  // This transition initializes both 3D scenes when WebGL runs in software.
  test.setTimeout(120000);const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/#home');await expect(page.locator('#house-stage')).toHaveAttribute('data-ready','true',{timeout:30000});await ready(page);
- await expect(page.locator('.house-navigation a')).toHaveCount(6);await expect(page.locator('[data-ledger=games]')).toHaveCount(0);await expect(page.locator('#sky-games-launch')).toBeVisible();await page.mouse.move(950,450);await page.mouse.wheel(0,-160);await expect(page.locator('#sky-flight')).toBeVisible();await expect(page).toHaveURL(/#games$/,{timeout:30000});await expect(page.locator('#sky-flight')).toBeHidden();await expect(page.locator('#observatory-scene')).toBeVisible();await expect(page.locator('#geo-globe')).toHaveCount(0);await expect(page.locator('#geo-launch')).toBeVisible();await expect(page.locator('.house-chrome')).toBeHidden();
- await expect(page.locator('#geo-launch')).toBeFocused();await page.locator('#geo-launch').click();await expect(page).toHaveURL(/#games\/geography$/);await expect(page.locator('#geo-random')).toBeVisible();await page.locator('.observatory-home:visible').click();await expect(page).toHaveURL(/#home$/);await expect(page.locator('.house-navigation a')).toHaveCount(6);await expect(page.locator('#sky-games-launch')).toBeVisible();expect(errors).toEqual([]);
+ await expect(page.locator('.house-navigation a')).toHaveCount(6);await expect(page.locator('[data-ledger=games]')).toHaveCount(0);await expect(page.locator('#sky-games-launch')).toBeVisible();await page.mouse.move(950,450);await page.mouse.wheel(0,-160);await expect(page.locator('#sky-flight')).toBeVisible();await expect(page).toHaveURL(/#games$/,{timeout:30000});await expect(page.locator('#sky-flight')).toBeHidden();await expect(page.locator('#observatory-scene')).toBeVisible();await expect(page.locator('#geo-globe')).toHaveCount(0);await expect(page.locator('[data-orbit-game=geography]')).toBeVisible();await expect(page.locator('.house-chrome')).toBeHidden();
+ await expect(page.locator('[data-orbit-game=geography]')).toBeFocused();await page.locator('[data-orbit-game=geography]').click();await expect(page).toHaveURL(/#games\/geography$/);await expect(page.locator('#geo-random')).toBeVisible();await page.locator('.game-floating-nav [data-game-return]').click();await expect(page).toHaveURL(/#home$/);await expect(page.locator('.house-navigation a')).toHaveCount(6);await expect(page.locator('#sky-games-launch')).toBeVisible();expect(errors).toEqual([]);
 });
 test('keyboard entry respects reduced motion, and cancelled loading cannot navigate later',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/?webgl=0#home');await ready(page);await page.locator('#sky-games-launch').focus();await page.keyboard.press('Enter');await expect(page).toHaveURL(/#games$/);await expect(page.locator('#orbit-lobby')).toBeVisible();await expect(page.locator('#sky-flight')).toBeHidden();await page.goBack();await expect(page).toHaveURL(/#home$/);
@@ -14,7 +14,7 @@ test('keyboard entry respects reduced motion, and cancelled loading cannot navig
 });
 test('upward touch enters the hub while downward scrolling still opens To-dos',async({browser})=>{
  const context=await browser.newContext({baseURL:test.info().project.use.baseURL,viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'reduce'}),page=await context.newPage();await page.goto('/?webgl=0#home');await ready(page);const cdp=await context.newCDPSession(page);
- await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:200,y:400}]});for(let i=1;i<=5;i++)await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:201,y:400+i*20}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await expect(page).toHaveURL(/#games$/);await expect(page.locator('#geo-launch')).toBeVisible();await page.locator('.observatory-home:visible').click();await ready(page);await page.evaluate(()=>scrollTo(0,document.querySelector<HTMLElement>('#house-hero')!.offsetHeight));await expect(page).toHaveURL(/#chores$/);await expect(page.locator('#house-hero')).toBeHidden();await context.close();
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:200,y:400}]});for(let i=1;i<=5;i++)await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:201,y:400+i*20}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await expect(page).toHaveURL(/#games$/);await expect(page.locator('[data-orbit-game=geography]')).toBeVisible();await page.locator('.game-floating-nav [data-game-return]').click();await ready(page);await page.evaluate(()=>scrollTo(0,document.querySelector<HTMLElement>('#house-hero')!.offsetHeight));await expect(page).toHaveURL(/#chores$/);await expect(page.locator('#house-hero')).toBeHidden();await context.close();
 });
 
 test('every house scene has an upward entrance and returns to that same scene',async({page})=>{
@@ -29,9 +29,9 @@ test('every house scene has an upward entrance and returns to that same scene',a
   await expect(page.locator('#sky-games-launch')).toBeVisible();
   await page.locator('#house-stage').dispatchEvent('wheel',{deltaY:-180,bubbles:true,cancelable:true});
   await expect(page).toHaveURL(/#games$/);await expect(page.locator('#sky-flight')).toBeHidden();
-  await expect(page.locator('.observatory-home:visible')).toHaveAttribute('href','#'+section);
-  await page.reload();await expect(page.locator('.observatory-home:visible')).toHaveAttribute('data-house-return','true');
-  await page.locator('.observatory-home:visible').click();
+  await expect(page.locator('.game-floating-nav [data-game-return]')).toHaveAttribute('href','#'+section);
+  await page.reload();await expect(page.locator('.game-floating-nav [data-game-return]')).toHaveAttribute('data-house-return','true');
+  await page.locator('.game-floating-nav [data-game-return]').click();
   await expect(page).toHaveURL(new RegExp('#'+section+'$'));
   await expect(page.locator('#house-hero')).toBeVisible();
   await expect(page.locator('#sky-games-launch')).toBeFocused();

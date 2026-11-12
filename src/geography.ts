@@ -1,12 +1,12 @@
 import {globeCities,cityLocation} from './globe-cities';
 import {restoreRoute,type RouteRound} from './geography-route';
 import {hasCapital,capitalHints} from './capital-answers';
-export type Country={id:string;name:string;aliases:string[];continent:string;region:string;type:string;sovereign:string;center:number[];rings:number[][][];capital:string;population:string;terrain:string;facts:string[];background:string};
+export type Country={id:string;name:string;aliases:string[];continent:string;region:string;type:string;sovereign:string;center:number[];rings:number[][][];capital:string;population:string;terrain:string;facts:string[];background:string;source?:string;stories?:{title:string;body:string;source:string}[]};
 export const REGIONS=['World','Africa','Asia','Europe','North America','South America','Oceania','Micronesia','Polynesia','Melanesia','Caribbean','Central America'] as const;
 export type Region=typeof REGIONS[number];
 export type CountryScope='countries'|'expanded';
 export type GameMode='practice'|'competitive'|'competitive-find'|'learn'|'capitals'|'learn-capitals'|'competitive-capitals'|'cities'|'competitive-cities'|'route'|'daily-route';
-export type ScoreChallenge='name'|'find'|'capitals'|'cities'|'places';
+export type ScoreChallenge='name'|'find'|'capitals'|'cities'|'places'|'urban';
 export const isCompetitive=(mode:GameMode)=>mode==='competitive'||mode==='competitive-find'||mode==='competitive-capitals'||mode==='competitive-cities';
 export const isCapitalMode=(mode:GameMode)=>['capitals','learn-capitals','competitive-capitals'].includes(mode);
 export const isCityMode=(mode:GameMode)=>mode==='cities'||mode==='competitive-cities';
@@ -37,7 +37,7 @@ export function answerSuggestions(countries:Country[],query:string,region:string
  return countries.filter(c=>inRegion(c,region)).map(c=>({country:c,score:Math.min(...c.aliases.map(alias=>{const a=normalizeAnswer(alias);return a===q?0:a.startsWith(q)?1:a.split(' ').some(w=>w.startsWith(q))?2:a.includes(q)?3:4+distance(a,q)/Math.max(a.length,q.length);} ))})).filter(c=>c.score<4||q.length>=3&&c.score<=4.48).sort((a,b)=>a.score-b.score||a.country.name.localeCompare(b.country.name)).slice(0,7).map(c=>c.country);
 }
 export type Round={cityVersion?:number;route?:RouteRound;id:string;mode:GameMode;scope:CountryScope;findOrder:string[];findTarget?:string;missed:string[];learningOrder:string[];learningTarget?:string;learningRemaining:number;region:Region;limit:number;maxLives:number;startedAt:number|null;correct:string[];revealed:string[];hints:Record<string,number>;mistakes:number;finishedAt?:number;ended:'won'|'complete'|'time'|'lives'|null};
-export const newRound=(region:Region='World',limit=0,maxLives=0,scope:CountryScope='countries',mode:GameMode='practice'):Round=>({id:crypto.randomUUID(),mode,cityVersion:isCityMode(mode)?2:undefined,scope,findOrder:[],missed:[],learningOrder:[],learningRemaining:12000,region,limit:isCompetitive(mode)?300:isLearningMode(mode)?0:limit,maxLives:isCompetitive(mode)?3:isLearningMode(mode)?0:maxLives,startedAt:null,correct:[],revealed:[],hints:{},mistakes:0,ended:null});
+export const newRound=(region:Region='World',limit=0,maxLives=0,scope:CountryScope='countries',mode:GameMode='practice'):Round=>({id:crypto.randomUUID(),mode,cityVersion:isCityMode(mode)?3:undefined,scope,findOrder:[],missed:[],learningOrder:[],learningRemaining:12000,region,limit:isCompetitive(mode)?300:isLearningMode(mode)?0:limit,maxLives:isCompetitive(mode)?3:isLearningMode(mode)?0:maxLives,startedAt:null,correct:[],revealed:[],hints:{},mistakes:0,ended:null});
 export function shuffledCountries(countries:Country[],random=Math.random){
  const ids=countries.map(c=>c.id);for(let i=ids.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[ids[i],ids[j]]=[ids[j],ids[i]];}return ids;
 }
@@ -72,7 +72,7 @@ export function restoreRound(value:unknown,countries:Country[]):Round|null{
 
  if(r.finishedAt!==undefined&&(!Number.isFinite(r.finishedAt)||r.finishedAt<0))return null;
  if(!REGIONS.includes(r.region)||![0,60,180,300,600,900].includes(r.limit)||![0,3,5,10].includes(r.maxLives)||!Number.isInteger(r.mistakes)||r.mistakes<0||!Array.isArray(r.correct)||!(r.startedAt===null||Number.isFinite(r.startedAt)&&r.startedAt>0)||![null,'won','complete','time','lives'].includes(r.ended))return null;
- if(isCityMode(r.mode)&&r.cityVersion!==2){if(isCompetitive(r.mode))return newRound(r.region,0,0,r.scope,r.mode);r.cityVersion=2;if(r.ended==='won'||r.ended==='complete'){r.ended=null;delete r.finishedAt;}}
+ if(isCityMode(r.mode)&&r.cityVersion!==3){if(isCompetitive(r.mode))return newRound(r.region,0,0,r.scope,r.mode);r.cityVersion=3;if(r.ended==='won'||r.ended==='complete'){r.ended=null;delete r.finishedAt;}}
  const locations=roundLocations(countries,r),valid=(id:unknown):id is string=>typeof id==='string'&&locations.some(c=>c.id===id);
  const correct=[...new Set(r.correct)].filter(valid);
  // Older saved rounds have no assistance fields. Keep their existing progress.

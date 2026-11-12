@@ -9,8 +9,17 @@ export function mountGlobeFallback(host:HTMLElement,countries:Country[],onSelect
  let state:GlobeState={region:'World',correct:[],revealed:[],playing:false},view:View=regionView('World'),paintedRegion='';
  host.innerHTML='<svg id="geo-map" role="group" aria-label="Unlabeled world map. Drag to pan, pinch to zoom. Use Tab and Enter to choose a country." xmlns="http://www.w3.org/2000/svg"><g id="geo-land"></g><g id="geo-islands"></g><g id="geo-route" aria-hidden="true"></g><g id="geo-cities"></g></svg><span class="globe-country-label" hidden></span><p class="globe-fallback-notice">3D graphics are unavailable. You can still play on this map.</p>';
  const svg=host.querySelector<SVGSVGElement>('svg')!,land=svg.querySelector('#geo-land')!,islands=svg.querySelector('#geo-islands')!,cityLayer=svg.querySelector('#geo-cities')!,routeLayer=svg.querySelector('#geo-route')!,label=host.querySelector<HTMLElement>('.globe-country-label')!;
+ const labels=document.createElement('div');labels.className='globe-review-labels';host.append(labels);
+ const names=countries.map(c=>{const button=document.createElement('button');button.type='button';button.textContent=c.name;button.dataset.studyLabel=c.id;button.addEventListener('click',()=>onSelect(c));labels.append(button);return {c,button};});
  const tiny=countries.filter(smallCountry),taps=countryTapSequence(),abort=new AbortController(),signal=abort.signal;
  function layout(){
+  labels.hidden=!state.labels;
+  if(state.labels){const m=svg.getScreenCTM(),r=host.getBoundingClientRect(),occupied:{x:number;y:number;w:number}[]=[];
+   for(const {c,button} of names){const [x,y]=projectCenter(c,pacificRegion(state.region)),p=m?new DOMPoint(x,y).matrixTransform(m):new DOMPoint(-1000,-1000),w=c.name.length*6.5+16;
+    button.hidden=p.x<r.left+w/2||p.x>r.right-w/2||p.y<r.top+15||p.y>r.bottom-15||occupied.some(a=>Math.abs(a.x-p.x)<(a.w+w)/2+4&&Math.abs(a.y-p.y)<25);
+    if(!button.hidden){occupied.push({x:p.x,y:p.y,w});button.style.left=`${p.x-r.left}px`;button.style.top=`${p.y-r.top}px`;}
+   }
+  }
   const scale=svg.getScreenCTM()?.a||1;islands.querySelectorAll('circle').forEach(c=>c.setAttribute('r',String(9/scale)));
   cityLayer.querySelectorAll('circle').forEach(c=>c.setAttribute('r',String((c.classList.contains('city-hit')?16:5)/scale)));
   const city=state.cities?.find(c=>c.id===state.label),country=countries.find(c=>c.id===(city?.countryId||state.label));label.hidden=!country;
@@ -48,5 +57,5 @@ export function mountGlobeFallback(host:HTMLElement,countries:Country[],onSelect
  function end(e:PointerEvent){pointers.delete(e.pointerId);if(svg.hasPointerCapture(e.pointerId))svg.releasePointerCapture(e.pointerId);if(pointers.size){const p=[...pointers.values()][0];drag={...p,view:[...view]};moved=true;}else drag=undefined;}
  svg.addEventListener('pointerup',end,{signal});svg.addEventListener('pointercancel',e=>{moved=true;taps.reset();end(e);},{signal});
  const resize=new ResizeObserver(layout);resize.observe(host);svg.dataset.style=initialStyle;setView(view);paint();
- return {async setStyle(style){svg.dataset.style=style;taps.reset();},setState(s){state=s;svg.setAttribute('aria-label',state.route?'Revealed country trail. Name a neighboring country in the answer field. Drag to pan; pinch to zoom.':state.cities?'Unlabeled city dots. Drag to pan; pinch to zoom. Use Tab and Enter to choose a city dot.':'Unlabeled world map. Drag to pan; pinch to zoom. Use Tab and Enter to choose a country.');paint();},reset(){taps.reset();setView(regionView(state.region));},focusCountry(c){setView(countryView(c,pacificRegion(state.region)));},focusCity(c){const [x,y]=projectCenter({center:[c.lon,c.lat]} as Country,pacificRegion(state.region));setView([x-18,y-15,36,30]);},zoom,entrance(){},setActive(){layout();},destroy(){resize.disconnect();abort.abort();host.replaceChildren();}};
+ return {async setStyle(style){svg.dataset.style=style;taps.reset();},setState(s){state=s;svg.setAttribute('aria-label',state.route?'Revealed country trail. Name a neighboring country in the answer field. Drag to pan; pinch to zoom.':state.cities?'Unlabeled city dots. Drag to pan; pinch to zoom. Use Tab and Enter to choose a city dot.':`${state.labels?'Labeled':'Unlabeled'} world map. Drag to pan; pinch to zoom. Use Tab and Enter to choose a country.`);paint();},reset(){taps.reset();setView(regionView(state.region));},focusCountry(c){setView(countryView(c,pacificRegion(state.region)));},focusCity(c){const [x,y]=projectCenter({center:[c.lon,c.lat]} as Country,pacificRegion(state.region));setView([x-18,y-15,36,30]);},zoom,entrance(){},setActive(){layout();},destroy(){resize.disconnect();abort.abort();host.replaceChildren();}};
 }

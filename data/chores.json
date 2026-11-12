@@ -3571,9 +3571,112 @@
       "point_policy": "dishwasher-v2",
       "queue_visibility": "immediately",
       "reminder_group_id": null
+    },
+    {
+      "id": "3bc543a9-00ec-40ae-8cfe-8e3ef44b6843",
+      "kind": "chore",
+      "note": "",
+      "actor": "rohil",
+      "state": "completed",
+      "title": "Collect bananas",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 1,
+      "status": "completed",
+      "icon_id": "bananas",
+      "version": 2,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": "bananas",
+      "projected": false,
+      "requester": "rohil",
+      "completion": {
+        "completed_at": "2026-11-12T21:30:00+00:00",
+        "contributors": [
+          "rohil"
+        ]
+      },
+      "created_at": "2026-11-12T21:30:05.028735+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "household-v1",
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
     }
   ],
   "history": [
+    {
+      "id": "3bc543a9-00ec-40ae-8cfe-8e3ef44b6843",
+      "kind": "chore",
+      "note": "",
+      "actor": "rohil",
+      "state": "completed",
+      "title": "Collect bananas",
+      "action": "complete",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 1,
+      "icon_id": "bananas",
+      "version": 2,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": "bananas",
+      "requester": "rohil",
+      "completion": {
+        "completed_at": "2026-11-12T21:30:00+00:00",
+        "contributors": [
+          "rohil"
+        ]
+      },
+      "created_at": "2026-11-12T21:30:16.183767+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "change_note": "",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "household-v1",
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
+    },
+    {
+      "id": "3bc543a9-00ec-40ae-8cfe-8e3ef44b6843",
+      "kind": "chore",
+      "note": "",
+      "actor": "rohil",
+      "state": "active",
+      "title": "Collect bananas",
+      "action": "create",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 1,
+      "icon_id": "bananas",
+      "version": 1,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": "bananas",
+      "requester": "rohil",
+      "completion": null,
+      "created_at": "2026-11-12T21:30:05.028735+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "change_note": "",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "household-v1",
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
+    },
     {
       "id": "a9abc492-bd6c-4af9-a130-9773166e1896:2026-11-11:d9d7650c-09c5-4437-a73c-972a83099ed7",
       "kind": "reminder",
@@ -7206,9 +7309,9 @@
       "interval_weeks": 1
     }
   ],
-  "local_day": "2026-11-11",
-  "updated_at": "2026-11-12T03:06:11.605769+00:00",
-  "exported_at": "2026-11-12T03:06:11.605769+00:00",
+  "local_day": "2026-11-12",
+  "updated_at": "2026-11-12T21:42:53.990718+00:00",
+  "exported_at": "2026-11-12T21:42:53.990718+00:00",
   "leaderboard": [
     {
       "rank": 1,
@@ -7317,7 +7420,113 @@
       ]
     },
     {
-      "rank": 2,
+      "rank": 1,
+      "units": 141.5,
+      "member": "rohil",
+      "period": "all",
+      "entries": [
+        {
+          "id": "3bc543a9-00ec-40ae-8cfe-8e3ef44b6843",
+          "title": "Collect bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-12T21:30:00+00:00"
+        },
+        {
+          "id": "d1191cbf-6e72-4bd9-8fef-112c1c0cf69f",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-09T19:50:00+00:00"
+        },
+        {
+          "id": "884ac189-123e-4604-a290-dad07e7fd87a",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-06T20:16:00+00:00"
+        },
+        {
+          "id": "a9d2b51e-9845-40d3-a450-0ac7a2847cf5",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-05T21:31:00+00:00"
+        },
+        {
+          "id": "046ac3bc-cfff-47a7-ace6-e20a83d7d084",
+          "title": "Empty dishwasher",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-05T02:27:00+00:00"
+        },
+        {
+          "id": "605d27a3-9827-4e25-8fc3-d9b587a56f98",
+          "title": "Pick up bananas",
+          "units": 6.0,
+          "member": "rohil",
+          "completed_at": "2026-11-03T00:30:00+00:00"
+        },
+        {
+          "id": "af58c7f2-743c-486d-960f-f2f7c88d6ab2",
+          "title": "Unloading Dishwasher",
+          "units": 6.0,
+          "member": "rohil",
+          "completed_at": "2026-11-02T16:00:00+00:00"
+        },
+        {
+          "id": "59b8543b-9f7b-422a-86f8-5e638f1ef08d",
+          "title": "Start dishwasher",
+          "units": 1.5,
+          "member": "rohil",
+          "completed_at": "2026-11-02T15:27:00+00:00"
+        },
+        {
+          "id": "f80563df-b704-4173-8d9c-601a7519b602",
+          "title": "Bring back baked ziti leftovers",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-10-30T21:34:00+00:00"
+        },
+        {
+          "id": "a57b6ddf-8652-41ea-8be6-3521f457f368",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-10-26T23:00:00+00:00"
+        },
+        {
+          "id": "78d695c6-3705-4420-8ba6-cd63c7fa390e",
+          "title": "Bring thai curry back",
+          "units": 24.0,
+          "member": "rohil",
+          "completed_at": "2026-10-24T17:36:00+00:00"
+        },
+        {
+          "id": "952286c6-8a12-4606-ac1b-f47ca92ff2b8",
+          "title": "Contact landlord about heating",
+          "units": 6.0,
+          "member": "rohil",
+          "completed_at": "2026-10-23T01:03:18.27562+00:00"
+        },
+        {
+          "id": "31aed63b-53a9-4435-8df5-83abd586818d",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-10-20T19:18:00+00:00"
+        },
+        {
+          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
+          "title": "Bring bins back",
+          "units": 2.0,
+          "member": "rohil",
+          "completed_at": "2026-10-20T15:36:00+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 3,
       "units": 137.0,
       "member": "rina",
       "period": "all",
@@ -7465,105 +7674,6 @@
       ]
     },
     {
-      "rank": 3,
-      "units": 129.5,
-      "member": "rohil",
-      "period": "all",
-      "entries": [
-        {
-          "id": "d1191cbf-6e72-4bd9-8fef-112c1c0cf69f",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-09T19:50:00+00:00"
-        },
-        {
-          "id": "884ac189-123e-4604-a290-dad07e7fd87a",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-06T20:16:00+00:00"
-        },
-        {
-          "id": "a9d2b51e-9845-40d3-a450-0ac7a2847cf5",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-05T21:31:00+00:00"
-        },
-        {
-          "id": "046ac3bc-cfff-47a7-ace6-e20a83d7d084",
-          "title": "Empty dishwasher",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-05T02:27:00+00:00"
-        },
-        {
-          "id": "605d27a3-9827-4e25-8fc3-d9b587a56f98",
-          "title": "Pick up bananas",
-          "units": 6.0,
-          "member": "rohil",
-          "completed_at": "2026-11-03T00:30:00+00:00"
-        },
-        {
-          "id": "af58c7f2-743c-486d-960f-f2f7c88d6ab2",
-          "title": "Unloading Dishwasher",
-          "units": 6.0,
-          "member": "rohil",
-          "completed_at": "2026-11-02T16:00:00+00:00"
-        },
-        {
-          "id": "59b8543b-9f7b-422a-86f8-5e638f1ef08d",
-          "title": "Start dishwasher",
-          "units": 1.5,
-          "member": "rohil",
-          "completed_at": "2026-11-02T15:27:00+00:00"
-        },
-        {
-          "id": "f80563df-b704-4173-8d9c-601a7519b602",
-          "title": "Bring back baked ziti leftovers",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-10-30T21:34:00+00:00"
-        },
-        {
-          "id": "a57b6ddf-8652-41ea-8be6-3521f457f368",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-10-26T23:00:00+00:00"
-        },
-        {
-          "id": "78d695c6-3705-4420-8ba6-cd63c7fa390e",
-          "title": "Bring thai curry back",
-          "units": 24.0,
-          "member": "rohil",
-          "completed_at": "2026-10-24T17:36:00+00:00"
-        },
-        {
-          "id": "952286c6-8a12-4606-ac1b-f47ca92ff2b8",
-          "title": "Contact landlord about heating",
-          "units": 6.0,
-          "member": "rohil",
-          "completed_at": "2026-10-23T01:03:18.27562+00:00"
-        },
-        {
-          "id": "31aed63b-53a9-4435-8df5-83abd586818d",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-10-20T19:18:00+00:00"
-        },
-        {
-          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
-          "title": "Bring bins back",
-          "units": 2.0,
-          "member": "rohil",
-          "completed_at": "2026-10-20T15:36:00+00:00"
-        }
-      ]
-    },
-    {
       "rank": 4,
       "units": 12.0,
       "member": "ohm",
@@ -7636,11 +7746,18 @@
       ]
     },
     {
-      "rank": 2,
-      "units": 61.5,
+      "rank": 1,
+      "units": 73.5,
       "member": "rohil",
       "period": "month",
       "entries": [
+        {
+          "id": "3bc543a9-00ec-40ae-8cfe-8e3ef44b6843",
+          "title": "Collect bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-12T21:30:00+00:00"
+        },
         {
           "id": "d1191cbf-6e72-4bd9-8fef-112c1c0cf69f",
           "title": "Pick up bananas",
@@ -7816,10 +7933,17 @@
     },
     {
       "rank": 2,
-      "units": 12.0,
+      "units": 24.0,
       "member": "rohil",
       "period": "week",
       "entries": [
+        {
+          "id": "3bc543a9-00ec-40ae-8cfe-8e3ef44b6843",
+          "title": "Collect bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-12T21:30:00+00:00"
+        },
         {
           "id": "d1191cbf-6e72-4bd9-8fef-112c1c0cf69f",
           "title": "Pick up bananas",
@@ -8416,7 +8540,7 @@
       "occurrence_root": "10986bd6-79a1-4a69-b799-e4938953c007"
     }
   ],
-  "projection_until": "2027-02-03",
+  "projection_until": "2027-02-04",
   "point_adjustments": [
     {
       "id": "2b8a273b382a2742ed12fe2a37fb5668",
