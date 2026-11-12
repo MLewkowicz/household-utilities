@@ -1,0 +1,167 @@
+{
+  "giraffe": {
+    "axis": "height",
+    "attribution": {
+      "author": "GDJ",
+      "license": "CC0 1.0",
+      "file": "https://openclipart.org/detail/254014/giraffe-silhouette"
+    },
+    "source": "https://openclipart.org/detail/254014/giraffe-silhouette",
+    "download": "https://openclipart.org/download/254014/Giraffe-Silhouette.svg",
+    "licenseVerified": true
+  },
+  "blue-whale": {
+    "axis": "length",
+    "attribution": {
+      "author": "T. Michael Keesey",
+      "license": "PDM 1.0",
+      "file": "https://www.phylopic.org/images/6ca9f0b7-cacb-45cc-9229-1b672d55b15b"
+    },
+    "source": "https://www.phylopic.org/images/6ca9f0b7-cacb-45cc-9229-1b672d55b15b",
+    "download": "https://images.phylopic.org/images/6ca9f0b7-cacb-45cc-9229-1b672d55b15b/vector.svg",
+    "licenseVerified": true
+  },
+  "t-rex": {
+    "axis": "length",
+    "attribution": {
+      "author": "Richard Rich",
+      "license": "CC0 1.0",
+      "file": "https://www.phylopic.org/images/ccb9b896-20b5-4e0b-8979-001742a884c5"
+    },
+    "source": "https://www.phylopic.org/images/ccb9b896-20b5-4e0b-8979-001742a884c5",
+    "download": "https://images.phylopic.org/images/ccb9b896-20b5-4e0b-8979-001742a884c5/vector.svg",
+    "licenseVerified": true
+  },
+  "rhinoceros": {
+    "axis": "length",
+    "attribution": {
+      "author": "Christophe Mallet",
+      "license": "CC0 1.0",
+      "file": "https://www.phylopic.org/images/55b24c01-3552-4c09-a485-087e4d2c4889"
+    },
+    "source": "https://www.phylopic.org/images/55b24c01-3552-4c09-a485-087e4d2c4889",
+    "download": "https://images.phylopic.org/images/55b24c01-3552-4c09-a485-087e4d2c4889/vector.svg",
+    "licenseVerified": true
+  },
+  "sperm-whale": {
+    "axis": "length",
+    "attribution": {
+      "author": "T. Michael Keesey",
+      "license": "PDM 1.0",
+      "file": "https://www.phylopic.org/images/2756dc6c-79a4-4507-a486-3cc613671a54"
+    },
+    "source": "https://www.phylopic.org/images/2756dc6c-79a4-4507-a486-3cc613671a54",
+    "download": "https://images.phylopic.org/images/2756dc6c-79a4-4507-a486-3cc613671a54/vector.svg",
+    "licenseVerified": true
+  },
+  "whale-shark": {
+    "axis": "length",
+    "attribution": {
+      "author": "Christoph Schomburg",
+      "license": "CC0 1.0",
+      "file": "https://www.phylopic.org/images/07a435aa-0db6-4054-8854-2db3010c8162"
+    },
+    "source": "https://www.phylopic.org/images/07a435aa-0db6-4054-8854-2db3010c8162",
+    "download": "https://images.phylopic.org/images/07a435aa-0db6-4054-8854-2db3010c8162/vector.svg",
+    "licenseVerified": true
+  },
+  "lion": {
+    "axis": "length",
+    "attribution": {
+      "author": "Margot Michaud",
+      "license": "CC0 1.0",
+      "file": "https://www.phylopic.org/images/76a5e7ce-53fa-46ae-af9e-fabd8b863dcf"
+    },
+    "source": "https://www.phylopic.org/images/76a5e7ce-53fa-46ae-af9e-fabd8b863dcf",
+    "download": "https://images.phylopic.org/images/76a5e7ce-53fa-46ae-af9e-fabd8b863dcf/vector.svg",
+    "licenseVerified": true
+  },
+  "polar-bear": {
+    "axis": "length",
+    "attribution": {
+      "author": "Margot Michaud",
+      "license": "CC0 1.0",
+      "file": "https://www.phylopic.org/images/35fbff4d-c0e6-4c53-9f27-f0a6ecbe7720"
+    },
+    "source": "https://www.phylopic.org/images/35fbff4d-c0e6-4c53-9f27-f0a6ecbe7720",
+    "download": "https://images.phylopic.org/images/35fbff4d-c0e6-4c53-9f27-f0a6ecbe7720/vector.svg",
+    "licenseVerified": true
+  },
+  "hippopotamus": {
+    "axis": "length",
+    "attribution": {
+      "author": "Steven Traver",
+      "license": "CC0 1.0",
+      "file": "https://www.phylopic.org/images/bab03f09-73ba-45ea-8534-ea176c82a1a0"
+    },
+    "source": "https://www.phylopic.org/images/bab03f09-73ba-45ea-8534-ea176c82a1a0",
+    "download": "https://images.phylopic.org/images/bab03f09-73ba-45ea-8534-ea176c82a1a0/vector.svg",
+    "licenseVerified": true
+  },
+  "african-elephant": {
+    "axis": "length",
+    "attribution": {
+      "author": "Chuanxin Yu",
+      "license": "CC0 1.0",
+      "file": "https://www.phylopic.org/images/910d853a-1a15-4953-a1d3-b81208994d35/loxodonta-africana"
+    },
+    "source": "https://www.phylopic.org/images/910d853a-1a15-4953-a1d3-b81208994d35/loxodonta-africana",
+    "download": "https://images.phylopic.org/images/910d853a-1a15-4953-a1d3-b81208994d35/vector.svg",
+    "licenseVerified": true
+  },
+  "humpback-whale": {
+    "axis": "length",
+    "attribution": {
+      "author": "T. Michael Keesey",
+      "license": "Public domain",
+      "file": "https://www.phylopic.org/images/fd8d3e5e-24a0-4aa2-9211-987ff86007dd"
+    },
+    "source": "https://www.phylopic.org/images/fd8d3e5e-24a0-4aa2-9211-987ff86007dd",
+    "download": "https://images.phylopic.org/images/fd8d3e5e-24a0-4aa2-9211-987ff86007dd/vector.svg",
+    "licenseVerified": true
+  },
+  "human": {
+    "axis": "height",
+    "attribution": {
+      "author": "OpenClipart-Vectors",
+      "license": "CC0",
+      "file": "https://commons.wikimedia.org/wiki/File:Girl_silhouette_black.svg"
+    },
+    "source": "https://commons.wikimedia.org/wiki/File:Girl_silhouette_black.svg",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Girl_silhouette_black.svg",
+    "licenseVerified": true
+  },
+  "school-bus": {
+    "axis": "length",
+    "attribution": {
+      "author": "German StVO pictogram",
+      "license": "Public domain",
+      "file": "https://commons.wikimedia.org/wiki/File:Sinnbild_Kraftomnibus.svg"
+    },
+    "source": "https://commons.wikimedia.org/wiki/File:Sinnbild_Kraftomnibus.svg",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/6/66/Sinnbild_Kraftomnibus.svg",
+    "licenseVerified": true
+  },
+  "statue-of-liberty": {
+    "axis": "height",
+    "attribution": {
+      "author": "shokunin",
+      "license": "CC0 1.0",
+      "file": "https://commons.wikimedia.org/wiki/File:World_landmarks_blue_icons_-_Statue_of_Liberty.svg"
+    },
+    "source": "https://commons.wikimedia.org/wiki/File:World_landmarks_blue_icons_-_Statue_of_Liberty.svg",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/c/c3/World_landmarks_blue_icons_-_Statue_of_Liberty.svg",
+    "licenseVerified": true
+  },
+  "eiffel-tower": {
+    "axis": "height",
+    "attribution": {
+      "author": "GDJ",
+      "license": "CC0 1.0",
+      "file": "https://commons.wikimedia.org/wiki/File:Eiffel_Tower_Silhouette.svg"
+    },
+    "source": "https://commons.wikimedia.org/wiki/File:Eiffel_Tower_Silhouette.svg",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Eiffel_Tower_Silhouette.svg",
+    "licenseVerified": true
+  }
+}

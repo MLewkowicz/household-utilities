@@ -11,10 +11,12 @@ function destination(hash:string|null){
  return hash;
 }
 
+let instance:{sync(hash:string):void}|undefined;
 export function mountGameNavigation(){
+ if(instance)return instance;
  let last='#chores',scene=false;
  try{last=destination(sessionStorage.getItem(STORAGE_KEY));scene=sessionStorage.getItem(VIEW_KEY)==='true';}catch{/* Navigation works without storage. */}
- return {sync(hash:string){
+ return instance={sync(hash:string){
   const section=sectionFromHash(hash);
   if(section!=='games'){
    last=destination(hash||'#home');scene=!document.querySelector<HTMLElement>('#house-hero')!.hidden;
@@ -23,7 +25,7 @@ export function mountGameNavigation(){
   const label=HOUSE_SECTIONS.find(s=>s.route===sectionFromHash(last))!.label;
   document.querySelectorAll<HTMLAnchorElement>('[data-game-return]').forEach(link=>{
    link.href=last;link.dataset.houseReturn=String(scene);link.setAttribute('aria-label',`Back to ${label}`);
-   link.innerHTML=`<span aria-hidden="true">←</span><span>${label}</span>`;
+   link.innerHTML=`<span aria-hidden="true">←</span><span>${label==='Home'?'Return home':'Return to '+label}</span>`;
   });
   const shortcut=document.querySelector<HTMLElement>('#games-shortcut')!;
   // House scenes have their sky entrance. Feature pages get a direct shortcut.

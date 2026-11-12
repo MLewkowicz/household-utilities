@@ -1,0 +1,362 @@
+[
+  {
+    "kind": "choice",
+    "tag": "In the fruit bowl",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Mango",
+      "Lime",
+      "Grapefruit",
+      "Lemon"
+    ],
+    "answer": "Mango",
+    "explanation": "Three are citrus fruits. Mango belongs to a different botanical family.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-50",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Seafood counter",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Shrimp",
+      "Crab",
+      "Oyster",
+      "Lobster"
+    ],
+    "answer": "Oyster",
+    "explanation": "Three are crustaceans. An oyster is a bivalve mollusc.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-87",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "On the page",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Limerick",
+      "Sonata",
+      "Haiku",
+      "Sonnet"
+    ],
+    "answer": "Sonata",
+    "explanation": "Three are poetic forms. A sonata is a musical composition.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-8",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Out in space",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Eris",
+      "Ceres",
+      "Pluto",
+      "Europa"
+    ],
+    "answer": "Europa",
+    "explanation": "Three are recognised dwarf planets. Europa is a moon of Jupiter.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-56",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Cold-blooded company",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Lizard",
+      "Snake",
+      "Turtle",
+      "Salamander"
+    ],
+    "answer": "Salamander",
+    "explanation": "Three are reptiles. A salamander is an amphibian.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-86",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Reading a map",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Contour",
+      "Bibliography",
+      "Legend",
+      "Scale"
+    ],
+    "answer": "Bibliography",
+    "explanation": "Three are common map components. A bibliography lists sources.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-69",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "At sea",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Squid",
+      "Octopus",
+      "Cuttlefish",
+      "Jellyfish"
+    ],
+    "answer": "Jellyfish",
+    "explanation": "Octopuses, squid and cuttlefish are cephalopod molluscs. Jellyfish are cnidarians.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-2",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "In flight",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Flying fox",
+      "Flying squirrel",
+      "Bat",
+      "Horseshoe bat"
+    ],
+    "answer": "Flying squirrel",
+    "explanation": "Bats fly using powered wingbeats. Flying squirrels glide.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-7",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Printed letters",
+    "prompt": "Find the outsider.",
+    "options": [
+      "H",
+      "M",
+      "R",
+      "A"
+    ],
+    "answer": "R",
+    "explanation": "In standard block capitals, A, H and M have vertical reflection symmetry. R does not.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-18",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Polar bears and friends",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Polar bear",
+      "Giant panda",
+      "Red panda",
+      "Brown bear"
+    ],
+    "answer": "Red panda",
+    "explanation": "Three belong to the bear family, Ursidae. The red panda belongs to Ailuridae.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-80",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Weather",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Stratus",
+      "Aurora",
+      "Cirrus",
+      "Cumulus"
+    ],
+    "answer": "Aurora",
+    "explanation": "Three are cloud types. An aurora is light produced through interactions involving charged particles.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-39",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "The orchestra",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Bassoon",
+      "Clarinet",
+      "Trumpet",
+      "Oboe"
+    ],
+    "answer": "Trumpet",
+    "explanation": "Three are woodwind instruments. A trumpet belongs to the brass section.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-3",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Measuring things",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Kilogram",
+      "Metre",
+      "Litre",
+      "Second"
+    ],
+    "answer": "Litre",
+    "explanation": "Three are SI base units. A litre is a unit of volume, not an SI base unit.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-21",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Air and water",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Whale",
+      "Tuna",
+      "Seal",
+      "Dolphin"
+    ],
+    "answer": "Tuna",
+    "explanation": "Three are mammals that breathe air with lungs. Tuna are fish with gills.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-26",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "In the pantry",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Pea",
+      "Walnut",
+      "Lentil",
+      "Chickpea"
+    ],
+    "answer": "Walnut",
+    "explanation": "Three are legumes. A walnut comes from a tree in the walnut family.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-5",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Roman numerals",
+    "prompt": "Find the outsider.",
+    "options": [
+      "V",
+      "Z",
+      "I",
+      "X"
+    ],
+    "answer": "Z",
+    "explanation": "I, V and X represent 1, 5 and 10. Z is not a Roman numeral.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-11",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Computer files",
+    "prompt": "Find the outsider.",
+    "options": [
+      "PNG",
+      "GIF",
+      "MP3",
+      "JPEG"
+    ],
+    "answer": "MP3",
+    "explanation": "Three are image formats. MP3 is an audio format.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-54",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "The periodic table",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Neon",
+      "Nitrogen",
+      "Argon",
+      "Helium"
+    ],
+    "answer": "Nitrogen",
+    "explanation": "Three are noble gases. Nitrogen is in group 15.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-74",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Textiles",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Hemp",
+      "Polyester",
+      "Cotton",
+      "Linen"
+    ],
+    "answer": "Polyester",
+    "explanation": "Three fibres come from plants. Polyester is synthetic.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-52",
+    "version": 2
+  },
+  {
+    "kind": "choice",
+    "tag": "Wordplay",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Level",
+      "Racecar",
+      "Radar",
+      "Rotorcraft"
+    ],
+    "answer": "Rotorcraft",
+    "explanation": "Three words read the same forwards and backwards. Rotorcraft does not.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ],
+    "id": "odd-one-out-v2-72",
+    "version": 2
+  }
+]

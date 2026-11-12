@@ -1,6 +1,6 @@
 # Household
 
-A household app for To-dos, Expenses, Events, Bulletin, Utilities and a geography game. Handwritten TypeScript + esbuild, Supabase RPCs, GitHub Pages. No framework or login; choosing a name is attribution, not authentication.
+A household app for To-dos, Expenses, Events, Bulletin, Utilities and an observatory with six games. Handwritten TypeScript + esbuild, Supabase RPCs, GitHub Pages. No framework or login; choosing a name is attribution, not authentication.
 
 ## Start here
 
@@ -37,11 +37,11 @@ npm run test:browser
 uv run --frozen python scripts/check_privacy.py
 ```
 
-Browser tests use a disposable database on port 4174. If needed, install Chromium with `npx playwright install chromium`. `npm run test:house` uses its separate house configuration. Run focused browser specs during iteration, then the required release checks before publishing.
+Browser tests use a disposable database on port 4174. In environments that cannot probe a closed local port, start `PORT=4174 UTILITIES_TEST_DB=1 node scripts/serve.mjs` first and run the checks with `UTILITIES_BROWSER_REUSE_SERVER=1`. If needed, install Chromium with `npx playwright install chromium`. `npm run test:house` uses its separate house configuration. Run focused browser specs during iteration, then the required release checks before publishing.
 
 ## Navigation and previews
 
-Home is the animated house; scrolling down opens To-dos. The six household shortcuts open features directly. Scroll upward at the top of any of the six house scenes to rise through modeled clouds into Games; the Games button and Page Up offer the same entrance. Escape or Cancel returns immediately. Reduced motion skips the journey, and the map fallback remains usable without WebGL. Feature pages also have a direct Games shortcut. The return link remembers the previous household route and whether you left its house scene or feature page, including after a reload in the same tab; fresh game links return to To-dos.
+Home is the animated house; scrolling down opens To-dos. The six household shortcuts open features directly. Scroll upward at the top of any of the six house scenes to rise through modeled clouds into the roommate observatory; the Games button and Page Up offer the same entrance. Escape or Cancel returns immediately. Reduced motion skips the journey, and the map fallback remains usable without WebGL. Feature pages also have a direct Games shortcut. The return link remembers the previous household route and whether you left its house scene or feature page, including after a reload in the same tab; fresh game links return to To-dos.
 
 | Command | Local preview |
 |---|---|
@@ -61,3 +61,6 @@ Concepts use disposable UI state and never connect to Supabase. They are exclude
 - Apply additive database upgrades before publishing dependent UI. Check the schema through `scripts/check-release-schema.mjs`; a migration file does not prove it is installed live.
 
 Publish through the existing `./publish.sh` workflow when requested. See [operations](docs/operations.md) before running it: it exports live snapshots, stages an allowlist, commits and pushes `main`.
+
+
+The observatory planets represent Geography, Odd One Out, Passport Puzzle, Common Ground, Before or After, and How Much-ish. Common Ground replaces Clue Cascade with a four-group word board. Geography has Countries, city dots covering capitals and major cities, and Border Trail on a progressively revealed Paper globe. Apply migrations through `037_geography_major_cities.sql` before releasing this client; local preview installs them automatically. Source and content generation details are in [architecture](docs/architecture.md).

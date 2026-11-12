@@ -1,0 +1,914 @@
+[
+  {
+    "id": "common-ground-v3-15",
+    "version": 3,
+    "kind": "groups",
+    "prompt": "Find four groups of four.",
+    "words": [
+      "Emu",
+      "Chrome",
+      "Lime",
+      "Shirt",
+      "Gem",
+      "Sand",
+      "Kiwi",
+      "Cassowary",
+      "Safari",
+      "Ostrich",
+      "Firefox",
+      "Guitar",
+      "Grave",
+      "Giraffe",
+      "Edge",
+      "Bottle"
+    ],
+    "groups": [
+      {
+        "id": "0",
+        "label": "Birds that cannot fly",
+        "words": [
+          "Kiwi",
+          "Emu",
+          "Ostrich",
+          "Cassowary"
+        ]
+      },
+      {
+        "id": "1",
+        "label": "Words before stone",
+        "words": [
+          "Lime",
+          "Sand",
+          "Gem",
+          "Grave"
+        ]
+      },
+      {
+        "id": "2",
+        "label": "Web browsers",
+        "words": [
+          "Firefox",
+          "Safari",
+          "Chrome",
+          "Edge"
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Things with a neck",
+        "words": [
+          "Bottle",
+          "Guitar",
+          "Shirt",
+          "Giraffe"
+        ]
+      }
+    ],
+    "answer": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "explanation": "Birds that cannot fly: Kiwi, Emu, Ostrich, Cassowary\nWords before stone: Lime, Sand, Gem, Grave\nWeb browsers: Firefox, Safari, Chrome, Edge\nThings with a neck: Bottle, Guitar, Shirt, Giraffe",
+    "sources": [
+      "Original household wordplay and category boards; not copied from another game."
+    ]
+  },
+  {
+    "id": "common-ground-v3-16",
+    "version": 3,
+    "kind": "groups",
+    "prompt": "Find four groups of four.",
+    "words": [
+      "Planet",
+      "Fish",
+      "Last",
+      "Asteroid",
+      "Comet",
+      "Macro",
+      "First",
+      "Telephoto",
+      "Wide-angle",
+      "Moon",
+      "Light",
+      "Third",
+      "Second",
+      "Dust",
+      "Gazer",
+      "Fisheye"
+    ],
+    "groups": [
+      {
+        "id": "0",
+        "label": "Types of lens",
+        "words": [
+          "Wide-angle",
+          "Telephoto",
+          "Macro",
+          "Fisheye"
+        ]
+      },
+      {
+        "id": "1",
+        "label": "Can follow star",
+        "words": [
+          "Fish",
+          "Dust",
+          "Light",
+          "Gazer"
+        ]
+      },
+      {
+        "id": "2",
+        "label": "Finishing a race",
+        "words": [
+          "First",
+          "Second",
+          "Third",
+          "Last"
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Celestial bodies",
+        "words": [
+          "Planet",
+          "Moon",
+          "Asteroid",
+          "Comet"
+        ]
+      }
+    ],
+    "answer": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "explanation": "Types of lens: Wide-angle, Telephoto, Macro, Fisheye\nCan follow star: Fish, Dust, Light, Gazer\nFinishing a race: First, Second, Third, Last\nCelestial bodies: Planet, Moon, Asteroid, Comet",
+    "sources": [
+      "Original household wordplay and category boards; not copied from another game."
+    ]
+  },
+  {
+    "id": "common-ground-v3-17",
+    "version": 3,
+    "kind": "groups",
+    "prompt": "Find four groups of four.",
+    "words": [
+      "Coat",
+      "Ciabatta",
+      "Control",
+      "Command",
+      "Fall",
+      "Nose",
+      "Guitar",
+      "Pita",
+      "Drop",
+      "Baguette",
+      "Shift",
+      "Bow",
+      "Focaccia",
+      "Ship",
+      "Alt",
+      "Violin"
+    ],
+    "groups": [
+      {
+        "id": "0",
+        "label": "Can follow rain",
+        "words": [
+          "Bow",
+          "Coat",
+          "Fall",
+          "Drop"
+        ]
+      },
+      {
+        "id": "1",
+        "label": "Kinds of bread",
+        "words": [
+          "Baguette",
+          "Focaccia",
+          "Ciabatta",
+          "Pita"
+        ]
+      },
+      {
+        "id": "2",
+        "label": "Keyboard modifier keys",
+        "words": [
+          "Shift",
+          "Control",
+          "Alt",
+          "Command"
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Things with a bridge",
+        "words": [
+          "Violin",
+          "Guitar",
+          "Nose",
+          "Ship"
+        ]
+      }
+    ],
+    "answer": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "explanation": "Can follow rain: Bow, Coat, Fall, Drop\nKinds of bread: Baguette, Focaccia, Ciabatta, Pita\nKeyboard modifier keys: Shift, Control, Alt, Command\nThings with a bridge: Violin, Guitar, Nose, Ship",
+    "sources": [
+      "Original household wordplay and category boards; not copied from another game."
+    ]
+  },
+  {
+    "id": "common-ground-v3-18",
+    "version": 3,
+    "kind": "groups",
+    "prompt": "Find four groups of four.",
+    "words": [
+      "Marble",
+      "Quartzite",
+      "Gneiss",
+      "Raglan",
+      "Puff",
+      "Gold",
+      "Cap",
+      "Star",
+      "Bell",
+      "Pickle",
+      "Can",
+      "Slate",
+      "Sword",
+      "Freeze",
+      "Dry",
+      "Jelly"
+    ],
+    "groups": [
+      {
+        "id": "0",
+        "label": "Words before fish",
+        "words": [
+          "Gold",
+          "Sword",
+          "Jelly",
+          "Star"
+        ]
+      },
+      {
+        "id": "1",
+        "label": "Metamorphic rocks",
+        "words": [
+          "Marble",
+          "Slate",
+          "Gneiss",
+          "Quartzite"
+        ]
+      },
+      {
+        "id": "2",
+        "label": "Kinds of sleeve",
+        "words": [
+          "Raglan",
+          "Cap",
+          "Bell",
+          "Puff"
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Ways to preserve food",
+        "words": [
+          "Pickle",
+          "Freeze",
+          "Dry",
+          "Can"
+        ]
+      }
+    ],
+    "answer": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "explanation": "Words before fish: Gold, Sword, Jelly, Star\nMetamorphic rocks: Marble, Slate, Gneiss, Quartzite\nKinds of sleeve: Raglan, Cap, Bell, Puff\nWays to preserve food: Pickle, Freeze, Dry, Can",
+    "sources": [
+      "Original household wordplay and category boards; not copied from another game."
+    ]
+  },
+  {
+    "id": "common-ground-v3-19",
+    "version": 3,
+    "kind": "groups",
+    "prompt": "Find four groups of four.",
+    "words": [
+      "Nigiri",
+      "Dragon",
+      "Fire",
+      "Piano",
+      "Maki",
+      "Breton",
+      "Fish",
+      "Cornish",
+      "Snake",
+      "Orchestra",
+      "Chirashi",
+      "Temaki",
+      "Irish",
+      "Peach",
+      "Map",
+      "Welsh"
+    ],
+    "groups": [
+      {
+        "id": "0",
+        "label": "Types of sushi",
+        "words": [
+          "Nigiri",
+          "Maki",
+          "Temaki",
+          "Chirashi"
+        ]
+      },
+      {
+        "id": "1",
+        "label": "Words before pit",
+        "words": [
+          "Fire",
+          "Orchestra",
+          "Peach",
+          "Snake"
+        ]
+      },
+      {
+        "id": "2",
+        "label": "Things with scales",
+        "words": [
+          "Fish",
+          "Map",
+          "Piano",
+          "Dragon"
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Celtic languages",
+        "words": [
+          "Irish",
+          "Welsh",
+          "Breton",
+          "Cornish"
+        ]
+      }
+    ],
+    "answer": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "explanation": "Types of sushi: Nigiri, Maki, Temaki, Chirashi\nWords before pit: Fire, Orchestra, Peach, Snake\nThings with scales: Fish, Map, Piano, Dragon\nCeltic languages: Irish, Welsh, Breton, Cornish",
+    "sources": [
+      "Original household wordplay and category boards; not copied from another game."
+    ]
+  },
+  {
+    "id": "common-ground-v3-20",
+    "version": 3,
+    "kind": "groups",
+    "prompt": "Find four groups of four.",
+    "words": [
+      "Flap",
+      "For",
+      "East",
+      "Neutron",
+      "Proton",
+      "Electron",
+      "Lumber",
+      "Union",
+      "West",
+      "Too",
+      "North",
+      "Ate",
+      "South",
+      "Won",
+      "Black",
+      "Nucleus"
+    ],
+    "groups": [
+      {
+        "id": "0",
+        "label": "Can precede jack",
+        "words": [
+          "Flap",
+          "Lumber",
+          "Union",
+          "Black"
+        ]
+      },
+      {
+        "id": "1",
+        "label": "Cardinal directions",
+        "words": [
+          "North",
+          "South",
+          "East",
+          "West"
+        ]
+      },
+      {
+        "id": "2",
+        "label": "Parts of an atom",
+        "words": [
+          "Proton",
+          "Neutron",
+          "Electron",
+          "Nucleus"
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Sound like numbers",
+        "words": [
+          "Won",
+          "Too",
+          "For",
+          "Ate"
+        ]
+      }
+    ],
+    "answer": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "explanation": "Can precede jack: Flap, Lumber, Union, Black\nCardinal directions: North, South, East, West\nParts of an atom: Proton, Neutron, Electron, Nucleus\nSound like numbers: Won, Too, For, Ate",
+    "sources": [
+      "Original household wordplay and category boards; not copied from another game."
+    ]
+  },
+  {
+    "id": "common-ground-v3-21",
+    "version": 3,
+    "kind": "groups",
+    "prompt": "Find four groups of four.",
+    "words": [
+      "Top",
+      "Gutter",
+      "Spider",
+      "Station",
+      "Socks",
+      "Worm",
+      "Ukulele",
+      "Violin",
+      "Proof",
+      "Cello",
+      "King",
+      "Bleed",
+      "Crop",
+      "Hermit",
+      "Fiddler",
+      "Viola"
+    ],
+    "groups": [
+      {
+        "id": "0",
+        "label": "Usually have four strings",
+        "words": [
+          "Violin",
+          "Viola",
+          "Cello",
+          "Ukulele"
+        ]
+      },
+      {
+        "id": "1",
+        "label": "Kinds of crab",
+        "words": [
+          "Hermit",
+          "Fiddler",
+          "King",
+          "Spider"
+        ]
+      },
+      {
+        "id": "2",
+        "label": "Printing terms",
+        "words": [
+          "Bleed",
+          "Crop",
+          "Proof",
+          "Gutter"
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Can follow tube",
+        "words": [
+          "Top",
+          "Socks",
+          "Station",
+          "Worm"
+        ]
+      }
+    ],
+    "answer": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "explanation": "Usually have four strings: Violin, Viola, Cello, Ukulele\nKinds of crab: Hermit, Fiddler, King, Spider\nPrinting terms: Bleed, Crop, Proof, Gutter\nCan follow tube: Top, Socks, Station, Worm",
+    "sources": [
+      "Original household wordplay and category boards; not copied from another game."
+    ]
+  },
+  {
+    "id": "common-ground-v3-22",
+    "version": 3,
+    "kind": "groups",
+    "prompt": "Find four groups of four.",
+    "words": [
+      "Emerald",
+      "Ruby",
+      "Spot",
+      "Sapphire",
+      "Whirl",
+      "Stop",
+      "Gene",
+      "Jelly",
+      "Car",
+      "Tops",
+      "Tide",
+      "Diamond",
+      "Coffee",
+      "Pots",
+      "Kidney",
+      "String"
+    ],
+    "groups": [
+      {
+        "id": "0",
+        "label": "Anagrams of post",
+        "words": [
+          "Stop",
+          "Pots",
+          "Tops",
+          "Spot"
+        ]
+      },
+      {
+        "id": "1",
+        "label": "Words before pool",
+        "words": [
+          "Car",
+          "Gene",
+          "Tide",
+          "Whirl"
+        ]
+      },
+      {
+        "id": "2",
+        "label": "Gemstones",
+        "words": [
+          "Ruby",
+          "Emerald",
+          "Sapphire",
+          "Diamond"
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Words before bean",
+        "words": [
+          "Kidney",
+          "Jelly",
+          "Coffee",
+          "String"
+        ]
+      }
+    ],
+    "answer": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "explanation": "Anagrams of post: Stop, Pots, Tops, Spot\nWords before pool: Car, Gene, Tide, Whirl\nGemstones: Ruby, Emerald, Sapphire, Diamond\nWords before bean: Kidney, Jelly, Coffee, String",
+    "sources": [
+      "Original household wordplay and category boards; not copied from another game."
+    ]
+  },
+  {
+    "id": "common-ground-v3-23",
+    "version": 3,
+    "kind": "groups",
+    "prompt": "Find four groups of four.",
+    "words": [
+      "Satin",
+      "Board",
+      "Twill",
+      "Moon",
+      "Bolt",
+      "Air",
+      "Pin",
+      "Key",
+      "Water",
+      "Cylinder",
+      "Cake",
+      "Cat",
+      "Basket",
+      "Peer",
+      "Plain",
+      "Blood"
+    ],
+    "groups": [
+      {
+        "id": "0",
+        "label": "Words before walk",
+        "words": [
+          "Board",
+          "Cat",
+          "Cake",
+          "Moon"
+        ]
+      },
+      {
+        "id": "1",
+        "label": "Kinds of pressure",
+        "words": [
+          "Peer",
+          "Air",
+          "Blood",
+          "Water"
+        ]
+      },
+      {
+        "id": "2",
+        "label": "Parts of a lock",
+        "words": [
+          "Bolt",
+          "Cylinder",
+          "Pin",
+          "Key"
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Fabric weaves",
+        "words": [
+          "Plain",
+          "Twill",
+          "Satin",
+          "Basket"
+        ]
+      }
+    ],
+    "answer": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "explanation": "Words before walk: Board, Cat, Cake, Moon\nKinds of pressure: Peer, Air, Blood, Water\nParts of a lock: Bolt, Cylinder, Pin, Key\nFabric weaves: Plain, Twill, Satin, Basket",
+    "sources": [
+      "Original household wordplay and category boards; not copied from another game."
+    ]
+  },
+  {
+    "id": "common-ground-v3-24",
+    "version": 3,
+    "kind": "groups",
+    "prompt": "Find four groups of four.",
+    "words": [
+      "Over",
+      "Sea",
+      "Clam",
+      "Cookies",
+      "Cache",
+      "Bomb",
+      "Bookmarks",
+      "Pod",
+      "History",
+      "Celsius",
+      "Rankine",
+      "Broad",
+      "Kelvin",
+      "Egg",
+      "Fahrenheit",
+      "Fore"
+    ],
+    "groups": [
+      {
+        "id": "0",
+        "label": "Words before cast",
+        "words": [
+          "Broad",
+          "Fore",
+          "Pod",
+          "Over"
+        ]
+      },
+      {
+        "id": "1",
+        "label": "Temperature scales",
+        "words": [
+          "Celsius",
+          "Fahrenheit",
+          "Kelvin",
+          "Rankine"
+        ]
+      },
+      {
+        "id": "2",
+        "label": "What a browser stores",
+        "words": [
+          "Cookies",
+          "History",
+          "Bookmarks",
+          "Cache"
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Words before shell",
+        "words": [
+          "Clam",
+          "Egg",
+          "Sea",
+          "Bomb"
+        ]
+      }
+    ],
+    "answer": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "explanation": "Words before cast: Broad, Fore, Pod, Over\nTemperature scales: Celsius, Fahrenheit, Kelvin, Rankine\nWhat a browser stores: Cookies, History, Bookmarks, Cache\nWords before shell: Clam, Egg, Sea, Bomb",
+    "sources": [
+      "Original household wordplay and category boards; not copied from another game."
+    ]
+  },
+  {
+    "id": "common-ground-v3-25",
+    "version": 3,
+    "kind": "groups",
+    "prompt": "Find four groups of four.",
+    "words": [
+      "U",
+      "Thyme",
+      "Basil",
+      "Dune",
+      "Fjord",
+      "Sage",
+      "Ice",
+      "Record",
+      "Oregano",
+      "Promise",
+      "Silence",
+      "Butte",
+      "Down",
+      "Up",
+      "Over",
+      "Mesa"
+    ],
+    "groups": [
+      {
+        "id": "0",
+        "label": "Landforms",
+        "words": [
+          "Butte",
+          "Mesa",
+          "Dune",
+          "Fjord"
+        ]
+      },
+      {
+        "id": "1",
+        "label": "Words or letters before turn",
+        "words": [
+          "U",
+          "Over",
+          "Up",
+          "Down"
+        ]
+      },
+      {
+        "id": "2",
+        "label": "Things you can break",
+        "words": [
+          "Record",
+          "Promise",
+          "Ice",
+          "Silence"
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Culinary herbs",
+        "words": [
+          "Basil",
+          "Thyme",
+          "Sage",
+          "Oregano"
+        ]
+      }
+    ],
+    "answer": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "explanation": "Landforms: Butte, Mesa, Dune, Fjord\nWords or letters before turn: U, Over, Up, Down\nThings you can break: Record, Promise, Ice, Silence\nCulinary herbs: Basil, Thyme, Sage, Oregano",
+    "sources": [
+      "Original household wordplay and category boards; not copied from another game."
+    ]
+  },
+  {
+    "id": "common-ground-v3-26",
+    "version": 3,
+    "kind": "groups",
+    "prompt": "Find four groups of four.",
+    "words": [
+      "Francium",
+      "Drum",
+      "Swift",
+      "Bread",
+      "Go",
+      "Idea",
+      "Rust",
+      "Germanium",
+      "Polonium",
+      "Americium",
+      "Barrel",
+      "Python",
+      "Spring",
+      "Fit",
+      "Tent",
+      "Ball"
+    ],
+    "groups": [
+      {
+        "id": "0",
+        "label": "Things you can pitch",
+        "words": [
+          "Tent",
+          "Idea",
+          "Ball",
+          "Fit"
+        ]
+      },
+      {
+        "id": "1",
+        "label": "Words before roll",
+        "words": [
+          "Drum",
+          "Bread",
+          "Spring",
+          "Barrel"
+        ]
+      },
+      {
+        "id": "2",
+        "label": "Programming languages",
+        "words": [
+          "Python",
+          "Rust",
+          "Swift",
+          "Go"
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Elements named for places",
+        "words": [
+          "Polonium",
+          "Germanium",
+          "Francium",
+          "Americium"
+        ]
+      }
+    ],
+    "answer": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "explanation": "Things you can pitch: Tent, Idea, Ball, Fit\nWords before roll: Drum, Bread, Spring, Barrel\nProgramming languages: Python, Rust, Swift, Go\nElements named for places: Polonium, Germanium, Francium, Americium",
+    "sources": [
+      "Original household wordplay and category boards; not copied from another game."
+    ]
+  }
+]

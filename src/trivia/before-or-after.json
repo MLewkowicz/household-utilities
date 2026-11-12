@@ -1,0 +1,220 @@
+[
+  {
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "event-55",
+        "label": "Sony releases the first Discman",
+        "art": "disc"
+      },
+      {
+        "id": "event-63",
+        "label": "Nintendo starts making playing cards",
+        "art": "cards"
+      },
+      {
+        "id": "event-67",
+        "label": "The transistor is demonstrated at Bell Labs",
+        "art": "science"
+      },
+      {
+        "id": "event-62",
+        "label": "The Famicom launches in Japan",
+        "art": "game"
+      },
+      {
+        "id": "event-51",
+        "label": "The Nintendo 64 launches in Japan",
+        "art": "game"
+      }
+    ],
+    "answer": [
+      "event-63",
+      "event-67",
+      "event-62",
+      "event-55",
+      "event-51"
+    ],
+    "reveal": {
+      "event-55": 1984,
+      "event-63": 1889,
+      "event-67": 1947,
+      "event-62": 1983,
+      "event-51": 1996
+    },
+    "explanation": "1889 · Nintendo starts making playing cards\n1947 · The transistor is demonstrated at Bell Labs\n1983 · The Famicom launches in Japan\n1984 · Sony releases the first Discman\n1996 · The Nintendo 64 launches in Japan",
+    "sources": [
+      "https://www.computerhistory.org/timeline/1947/",
+      "https://www.nintendo.com/en-gb/Hardware/Nintendo-History/Nintendo-History-625945.html",
+      "https://www.sony.com/en/SonyInfo/CorporateInfo/History/sonyhistory-d.html"
+    ],
+    "id": "before-or-after-v2-15",
+    "version": 2
+  },
+  {
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "event-66",
+        "label": "The first photograph of a black hole is released",
+        "art": "camera"
+      },
+      {
+        "id": "event-57",
+        "label": "The first commercial microwave ovens are marketed",
+        "art": "microwave"
+      },
+      {
+        "id": "event-52",
+        "label": "Rontgen discovers X-rays",
+        "art": "science"
+      },
+      {
+        "id": "event-58",
+        "label": "The first compact discs go on sale in Japan",
+        "art": "disc"
+      },
+      {
+        "id": "event-64",
+        "label": "The CD-ROM format is introduced",
+        "art": "disc"
+      }
+    ],
+    "answer": [
+      "event-52",
+      "event-57",
+      "event-58",
+      "event-64",
+      "event-66"
+    ],
+    "reveal": {
+      "event-64": 1985,
+      "event-57": 1947,
+      "event-58": 1982,
+      "event-66": 2019,
+      "event-52": 1895
+    },
+    "explanation": "1895 · Rontgen discovers X-rays\n1947 · The first commercial microwave ovens are marketed\n1982 · The first compact discs go on sale in Japan\n1985 · The CD-ROM format is introduced\n2019 · The first photograph of a black hole is released",
+    "sources": [
+      "https://invention.si.edu/invention-stories/recognize-unusual",
+      "https://www.computerhistory.org/timeline/1985/",
+      "https://www.nasa.gov/universe/black-holes/black-hole-image-makes-history-nasa-telescopes-coordinate-observations/",
+      "https://www.nobelprize.org/prizes/physics/1901/rontgen/biographical/",
+      "https://www.sony.com/en/SonyInfo/CorporateInfo/History/sonyhistory-d.html"
+    ],
+    "id": "before-or-after-v2-16",
+    "version": 2
+  },
+  {
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "event-61",
+        "label": "The first Intel 4004 microprocessor is announced",
+        "art": "chip"
+      },
+      {
+        "id": "event-68",
+        "label": "The first Raspberry Pi goes on sale",
+        "art": "computer"
+      },
+      {
+        "id": "event-50",
+        "label": "YouTube launches",
+        "art": "film"
+      },
+      {
+        "id": "event-60",
+        "label": "The Mosaic web browser is released",
+        "art": "computer"
+      },
+      {
+        "id": "event-54",
+        "label": "The first ISS module launches",
+        "art": "rocket"
+      }
+    ],
+    "answer": [
+      "event-61",
+      "event-60",
+      "event-54",
+      "event-50",
+      "event-68"
+    ],
+    "reveal": {
+      "event-60": 1993,
+      "event-50": 2005,
+      "event-54": 1998,
+      "event-68": 2012,
+      "event-61": 1971
+    },
+    "explanation": "1971 · The first Intel 4004 microprocessor is announced\n1993 · The Mosaic web browser is released\n1998 · The first ISS module launches\n2005 · YouTube launches\n2012 · The first Raspberry Pi goes on sale",
+    "sources": [
+      "https://www.computerhistory.org/timeline/1971/",
+      "https://www.computerhistory.org/timeline/1993/",
+      "https://www.computerhistory.org/timeline/2005/",
+      "https://www.computerhistory.org/timeline/2012/",
+      "https://www.nasa.gov/international-space-station/space-station-assembly/"
+    ],
+    "id": "before-or-after-v2-17",
+    "version": 2
+  },
+  {
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "event-59",
+        "label": "Fleming observes penicillin’s antibacterial effect",
+        "art": "science"
+      },
+      {
+        "id": "event-53",
+        "label": "The first Xbox launches",
+        "art": "game"
+      },
+      {
+        "id": "event-56",
+        "label": "Google is incorporated",
+        "art": "computer"
+      },
+      {
+        "id": "event-69",
+        "label": "Nintendo DS launches in North America",
+        "art": "game"
+      },
+      {
+        "id": "event-65",
+        "label": "The first modern Olympic Games open",
+        "art": "ball"
+      }
+    ],
+    "answer": [
+      "event-65",
+      "event-59",
+      "event-56",
+      "event-53",
+      "event-69"
+    ],
+    "reveal": {
+      "event-69": 2004,
+      "event-53": 2001,
+      "event-65": 1896,
+      "event-59": 1928,
+      "event-56": 1998
+    },
+    "explanation": "1896 · The first modern Olympic Games open\n1928 · Fleming observes penicillin’s antibacterial effect\n1998 · Google is incorporated\n2001 · The first Xbox launches\n2004 · Nintendo DS launches in North America",
+    "sources": [
+      "https://news.xbox.com/en-us/2021/11/15/celebrate-20-years-of-play-together/",
+      "https://www.computerhistory.org/timeline/1998/",
+      "https://www.nintendo.com/en-gb/Hardware/Nintendo-History/Nintendo-History-625945.html",
+      "https://www.nobelprize.org/prizes/medicine/1945/fleming/biographical/",
+      "https://www.olympics.com/en/olympic-games/athens-1896"
+    ],
+    "id": "before-or-after-v2-18",
+    "version": 2
+  }
+]

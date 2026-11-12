@@ -1,3 +1,5 @@
+import {hasCapital,isCapitalAnswer,capitalNames,capitalHints} from '../src/capital-answers';
+import {inRound,isCapitalMode,isLearningMode} from '../src/geography';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import atlas from '../src/geography-data.json';
@@ -82,4 +84,13 @@ test('find competition stops at three mistakes and rejects guesses at the time l
  for(let i=0;i<3;i++)answerLocation(r,undefined,countries,101000+i);
  assert.equal(roundEnd(r,r.findOrder.length,102000),'lives');assert.equal(r.missed.length,3);assert.equal(answerLocation(r,undefined,countries,103000),undefined);
  const timed=newRound('Europe',0,0,'countries','competitive-find');prepareFindTarget(timed,countries,100000);assert.equal(answerLocation(timed,find(timed.findTarget!),countries,400000),undefined);assert.equal(timed.correct.length,0);
+});
+
+test('capital rounds use explicit answers, flexible aliases and pools that can be completed',()=>{
+ for(const [id,answer] of [['POL','Warsaw'],['ATG','St Johns'],['MSR','Plymouth'],['MSR','Brades'],['USA','Washington DC'],['UKR','Kiev'],['ZAF','Cape Town'],['ZAF','Pretoria'],['BOL','La Paz'],['LKA','Kotte'],['MMR','Naypyidaw'],['GNQ','Ciudad de la Paz'],['BDI','Gitega']])assert.ok(isCapitalAnswer(find(id),answer),id+answer);
+ assert.equal(isCapitalAnswer(find('MMR'),'Rangoon'),false);assert.equal(isCapitalAnswer(find('BDI'),'Bujumbura'),false);assert.equal(isCapitalAnswer(find('POL'),'Poland'),false);
+ const r=newRound('Micronesia',0,0,'countries','capitals');assert.ok(isCapitalMode(r.mode));assert.equal(inRound(find('NRU'),r),false);assert.equal(inRound(find('PLW'),r),true);assert.ok(countries.filter(c=>inRound(c,r)).every(hasCapital));
+ assert.equal(restoreRound({...r,correct:['NRU','PLW']},countries)?.correct.join(','),'PLW');assert.equal(useHint(r,find('PLW')),true);assert.ok(capitalHints(find('PLW'))[0].includes(capitalNames(find('PLW'))[0][0]));
+ const ranked=newRound('World',0,0,'countries','competitive-capitals');assert.equal(ranked.limit,300);assert.equal(ranked.maxLives,3);assert.equal(useHint(ranked,find('POL')),false);
+ const learning=newRound('World',300,3,'countries','learn-capitals');assert.equal(learning.limit,0);assert.equal(learning.maxLives,0);assert.ok(isLearningMode(learning.mode));assert.equal(restoreRound(learning,countries)?.mode,'learn-capitals');
 });

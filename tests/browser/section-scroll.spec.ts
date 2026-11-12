@@ -59,6 +59,25 @@ test('the return scroll has intermediate positions and same-route history restor
  await page.goForward();await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
 });
 
+test('a delayed first return frame cannot dock the house again',async({page})=>{
+ await page.goto('/?webgl=0#chores');await ready(page);
+ await page.evaluate(()=>{
+  const scroll=window.scrollTo.bind(window);
+  window.scrollTo=((options:ScrollToOptions)=>{
+   if(options.behavior==='smooth'&&options.top===0)(window as any).resumeHouseReturn=()=>scroll(options);
+   else scroll(options);
+  }) as typeof window.scrollTo;
+ });
+ await wheel(page,-90);
+ // Hold the first smooth-scroll frame beyond the interrupted-scroll timer.
+ await page.waitForTimeout(300);
+ await expect(page.locator('#house-hero')).toBeVisible();
+ expect(await page.evaluate(()=>scrollY)).toBeGreaterThan(0);
+ await page.evaluate(()=>(window as any).resumeHouseReturn());
+ await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
+ await expect(page.locator('#house-hero')).toBeVisible();await expect(page).toHaveURL(/#chores$/);
+});
+
 test('arriving at the top mid-gesture does not leave the feature and PageUp returns to its scene',async({page})=>{
  await page.goto('/?webgl=0#events');await ready(page);await page.addStyleTag({content:'#feature-area{min-height:2400px}'});
  await page.evaluate(()=>scrollTo(0,80));await swipe(page,180);await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);await expect(page.locator('#house-hero')).toBeHidden();

@@ -8,7 +8,7 @@ await mkdir('dist', { recursive: true });
 for (const file of await readdir('public')) {
   if(file==='avatars'){await copyAvatarAssets();continue;}
   if(file==='globe'){await copyGlobeAssets();continue;}
-  if (!/\.(html|css|svg|txt)$/.test(file) && !['sw.js','manifest.webmanifest','icon-192.png','icon-512.png','_headers'].includes(file)) throw new Error(`Unexpected public file: ${file}`);
+  if (!/^observatory-sky-(wide|phone)-[a-f0-9]{12}\.webp$/.test(file) && !/\.(html|css|svg|txt)$/.test(file) && !['sw.js','manifest.webmanifest','icon-192.png','icon-512.png','_headers'].includes(file)) throw new Error(`Unexpected public file: ${file}`);
   await copyFile(`public/${file}`, `dist/${file}`);
 }
 const bundle = await build({ entryPoints: ['src/app.ts'], bundle: true, outdir: 'dist', format: 'esm', splitting: true, entryNames: '[name]-[hash]', chunkNames: 'chunk-[hash]', metafile: true, minify: true, target: 'es2022' });

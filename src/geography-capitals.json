@@ -1,0 +1,1891 @@
+{
+  "AFG": {
+    "names": [
+      "Kabul"
+    ],
+    "aliases": [
+      "Kabul"
+    ]
+  },
+  "ALB": {
+    "names": [
+      "Tirana"
+    ],
+    "aliases": [
+      "Tirana",
+      "Tirane"
+    ]
+  },
+  "DZA": {
+    "names": [
+      "Algiers"
+    ],
+    "aliases": [
+      "Algiers"
+    ]
+  },
+  "ASM": {
+    "names": [
+      "Pago Pago"
+    ],
+    "aliases": [
+      "Pago Pago"
+    ]
+  },
+  "AND": {
+    "names": [
+      "Andorra la Vella"
+    ],
+    "aliases": [
+      "Andorra la Vella"
+    ]
+  },
+  "AGO": {
+    "names": [
+      "Luanda"
+    ],
+    "aliases": [
+      "Luanda"
+    ]
+  },
+  "AIA": {
+    "names": [
+      "The Valley"
+    ],
+    "aliases": [
+      "The Valley"
+    ]
+  },
+  "ATG": {
+    "names": [
+      "Saint John's"
+    ],
+    "aliases": [
+      "Saint John's"
+    ]
+  },
+  "ARG": {
+    "names": [
+      "Buenos Aires"
+    ],
+    "aliases": [
+      "Buenos Aires"
+    ]
+  },
+  "ARM": {
+    "names": [
+      "Yerevan"
+    ],
+    "aliases": [
+      "Yerevan"
+    ]
+  },
+  "ABW": {
+    "names": [
+      "Oranjestad"
+    ],
+    "aliases": [
+      "Oranjestad"
+    ]
+  },
+  "AUS": {
+    "names": [
+      "Canberra"
+    ],
+    "aliases": [
+      "Canberra"
+    ]
+  },
+  "AUT": {
+    "names": [
+      "Vienna"
+    ],
+    "aliases": [
+      "Vienna"
+    ]
+  },
+  "AZE": {
+    "names": [
+      "Baku"
+    ],
+    "aliases": [
+      "Baku",
+      "Baki",
+      "Baky"
+    ]
+  },
+  "BHR": {
+    "names": [
+      "Manama"
+    ],
+    "aliases": [
+      "Manama"
+    ]
+  },
+  "BGD": {
+    "names": [
+      "Dhaka"
+    ],
+    "aliases": [
+      "Dhaka"
+    ]
+  },
+  "BRB": {
+    "names": [
+      "Bridgetown"
+    ],
+    "aliases": [
+      "Bridgetown"
+    ]
+  },
+  "BLR": {
+    "names": [
+      "Minsk"
+    ],
+    "aliases": [
+      "Minsk"
+    ]
+  },
+  "BEL": {
+    "names": [
+      "Brussels"
+    ],
+    "aliases": [
+      "Brussels"
+    ]
+  },
+  "BLZ": {
+    "names": [
+      "Belmopan"
+    ],
+    "aliases": [
+      "Belmopan"
+    ]
+  },
+  "BEN": {
+    "names": [
+      "Porto-Novo"
+    ],
+    "aliases": [
+      "Porto-Novo"
+    ]
+  },
+  "BMU": {
+    "names": [
+      "Hamilton"
+    ],
+    "aliases": [
+      "Hamilton"
+    ]
+  },
+  "BTN": {
+    "names": [
+      "Thimphu"
+    ],
+    "aliases": [
+      "Thimphu"
+    ]
+  },
+  "BOL": {
+    "names": [
+      "Sucre",
+      "La Paz"
+    ],
+    "aliases": [
+      "Sucre",
+      "La Paz"
+    ],
+    "note": "Sucre: constitutional capital; La Paz: seat of government."
+  },
+  "BIH": {
+    "names": [
+      "Sarajevo"
+    ],
+    "aliases": [
+      "Sarajevo"
+    ]
+  },
+  "BWA": {
+    "names": [
+      "Gaborone"
+    ],
+    "aliases": [
+      "Gaborone"
+    ]
+  },
+  "BRA": {
+    "names": [
+      "Brasília"
+    ],
+    "aliases": [
+      "Brasília"
+    ]
+  },
+  "VGB": {
+    "names": [
+      "Road Town"
+    ],
+    "aliases": [
+      "Road Town"
+    ]
+  },
+  "BRN": {
+    "names": [
+      "Bandar Seri Begawan"
+    ],
+    "aliases": [
+      "Bandar Seri Begawan"
+    ]
+  },
+  "BGR": {
+    "names": [
+      "Sofia"
+    ],
+    "aliases": [
+      "Sofia"
+    ]
+  },
+  "BFA": {
+    "names": [
+      "Ouagadougou"
+    ],
+    "aliases": [
+      "Ouagadougou"
+    ]
+  },
+  "BDI": {
+    "names": [
+      "Gitega"
+    ],
+    "aliases": [
+      "Gitega"
+    ],
+    "source": "https://www.mae.gov.bi/geographie/"
+  },
+  "KHM": {
+    "names": [
+      "Phnom Penh"
+    ],
+    "aliases": [
+      "Phnom Penh"
+    ]
+  },
+  "CMR": {
+    "names": [
+      "Yaounde"
+    ],
+    "aliases": [
+      "Yaounde"
+    ]
+  },
+  "CAN": {
+    "names": [
+      "Ottawa"
+    ],
+    "aliases": [
+      "Ottawa"
+    ]
+  },
+  "CPV": {
+    "names": [
+      "Praia"
+    ],
+    "aliases": [
+      "Praia"
+    ]
+  },
+  "CYM": {
+    "names": [
+      "George Town"
+    ],
+    "aliases": [
+      "George Town"
+    ]
+  },
+  "CAF": {
+    "names": [
+      "Bangui"
+    ],
+    "aliases": [
+      "Bangui"
+    ]
+  },
+  "TCD": {
+    "names": [
+      "N'Djamena"
+    ],
+    "aliases": [
+      "N'Djamena"
+    ]
+  },
+  "CHL": {
+    "names": [
+      "Santiago"
+    ],
+    "aliases": [
+      "Santiago"
+    ]
+  },
+  "COL": {
+    "names": [
+      "Bogotá"
+    ],
+    "aliases": [
+      "Bogotá"
+    ]
+  },
+  "COM": {
+    "names": [
+      "Moroni"
+    ],
+    "aliases": [
+      "Moroni"
+    ]
+  },
+  "COK": {
+    "names": [
+      "Avarua"
+    ],
+    "aliases": [
+      "Avarua"
+    ]
+  },
+  "CRI": {
+    "names": [
+      "San José"
+    ],
+    "aliases": [
+      "San José"
+    ]
+  },
+  "HRV": {
+    "names": [
+      "Zagreb"
+    ],
+    "aliases": [
+      "Zagreb"
+    ]
+  },
+  "CUB": {
+    "names": [
+      "Havana"
+    ],
+    "aliases": [
+      "Havana"
+    ]
+  },
+  "CUW": {
+    "names": [
+      "Willemstad"
+    ],
+    "aliases": [
+      "Willemstad"
+    ]
+  },
+  "CYP": {
+    "names": [
+      "Nicosia"
+    ],
+    "aliases": [
+      "Nicosia",
+      "Lefkosia",
+      "Lefkosa"
+    ]
+  },
+  "CZE": {
+    "names": [
+      "Prague"
+    ],
+    "aliases": [
+      "Prague"
+    ]
+  },
+  "COD": {
+    "names": [
+      "Kinshasa"
+    ],
+    "aliases": [
+      "Kinshasa"
+    ]
+  },
+  "DNK": {
+    "names": [
+      "Copenhagen"
+    ],
+    "aliases": [
+      "Copenhagen"
+    ]
+  },
+  "DJI": {
+    "names": [
+      "Djibouti"
+    ],
+    "aliases": [
+      "Djibouti"
+    ]
+  },
+  "DMA": {
+    "names": [
+      "Roseau"
+    ],
+    "aliases": [
+      "Roseau"
+    ]
+  },
+  "DOM": {
+    "names": [
+      "Santo Domingo"
+    ],
+    "aliases": [
+      "Santo Domingo"
+    ]
+  },
+  "TLS": {
+    "names": [
+      "Dili"
+    ],
+    "aliases": [
+      "Dili"
+    ]
+  },
+  "ECU": {
+    "names": [
+      "Quito"
+    ],
+    "aliases": [
+      "Quito"
+    ]
+  },
+  "EGY": {
+    "names": [
+      "Cairo"
+    ],
+    "aliases": [
+      "Cairo"
+    ]
+  },
+  "SLV": {
+    "names": [
+      "San Salvador"
+    ],
+    "aliases": [
+      "San Salvador"
+    ]
+  },
+  "GNQ": {
+    "names": [
+      "Ciudad de la Paz"
+    ],
+    "aliases": [
+      "Ciudad de la Paz",
+      "Djibloho",
+      "Oyala"
+    ],
+    "source": "https://www.guineaecuatorialpress.com/noticias/el_presidente_de_la_republica_proclama_la_ciudad_de_la_paz_como_capital_de_la_republica_de_guinea_ecuatorial_con_la_firma_de_un_decreto_ley"
+  },
+  "ERI": {
+    "names": [
+      "Asmara"
+    ],
+    "aliases": [
+      "Asmara"
+    ]
+  },
+  "EST": {
+    "names": [
+      "Tallinn"
+    ],
+    "aliases": [
+      "Tallinn"
+    ]
+  },
+  "SWZ": {
+    "names": [
+      "Mbabane",
+      "Lobamba"
+    ],
+    "aliases": [
+      "Mbabane",
+      "Lobamba"
+    ],
+    "note": "Mbabane: administrative; Lobamba: royal and legislative."
+  },
+  "ETH": {
+    "names": [
+      "Addis Ababa"
+    ],
+    "aliases": [
+      "Addis Ababa"
+    ]
+  },
+  "FLK": {
+    "names": [
+      "Stanley"
+    ],
+    "aliases": [
+      "Stanley"
+    ]
+  },
+  "FRO": {
+    "names": [
+      "Torshavn"
+    ],
+    "aliases": [
+      "Torshavn"
+    ]
+  },
+  "FSM": {
+    "names": [
+      "Palikir"
+    ],
+    "aliases": [
+      "Palikir"
+    ]
+  },
+  "FJI": {
+    "names": [
+      "Suva"
+    ],
+    "aliases": [
+      "Suva"
+    ]
+  },
+  "FIN": {
+    "names": [
+      "Helsinki"
+    ],
+    "aliases": [
+      "Helsinki"
+    ]
+  },
+  "FRA": {
+    "names": [
+      "Paris"
+    ],
+    "aliases": [
+      "Paris"
+    ]
+  },
+  "PYF": {
+    "names": [
+      "Papeete"
+    ],
+    "aliases": [
+      "Papeete"
+    ]
+  },
+  "GAB": {
+    "names": [
+      "Libreville"
+    ],
+    "aliases": [
+      "Libreville"
+    ]
+  },
+  "GEO": {
+    "names": [
+      "Tbilisi"
+    ],
+    "aliases": [
+      "Tbilisi"
+    ]
+  },
+  "DEU": {
+    "names": [
+      "Berlin"
+    ],
+    "aliases": [
+      "Berlin"
+    ]
+  },
+  "GHA": {
+    "names": [
+      "Accra"
+    ],
+    "aliases": [
+      "Accra"
+    ]
+  },
+  "GRC": {
+    "names": [
+      "Athens"
+    ],
+    "aliases": [
+      "Athens"
+    ]
+  },
+  "GRL": {
+    "names": [
+      "Nuuk"
+    ],
+    "aliases": [
+      "Nuuk"
+    ]
+  },
+  "GRD": {
+    "names": [
+      "Saint George's"
+    ],
+    "aliases": [
+      "Saint George's"
+    ]
+  },
+  "GUM": {
+    "names": [
+      "Hagåtña"
+    ],
+    "aliases": [
+      "Hagåtña",
+      "Hagatna",
+      "Agana"
+    ]
+  },
+  "GTM": {
+    "names": [
+      "Guatemala City"
+    ],
+    "aliases": [
+      "Guatemala City"
+    ]
+  },
+  "GGY": {
+    "names": [
+      "Saint Peter Port"
+    ],
+    "aliases": [
+      "Saint Peter Port"
+    ]
+  },
+  "GIN": {
+    "names": [
+      "Conakry"
+    ],
+    "aliases": [
+      "Conakry"
+    ]
+  },
+  "GNB": {
+    "names": [
+      "Bissau"
+    ],
+    "aliases": [
+      "Bissau"
+    ]
+  },
+  "GUY": {
+    "names": [
+      "Georgetown"
+    ],
+    "aliases": [
+      "Georgetown"
+    ]
+  },
+  "HTI": {
+    "names": [
+      "Port-au-Prince"
+    ],
+    "aliases": [
+      "Port-au-Prince"
+    ]
+  },
+  "HND": {
+    "names": [
+      "Tegucigalpa"
+    ],
+    "aliases": [
+      "Tegucigalpa"
+    ]
+  },
+  "HUN": {
+    "names": [
+      "Budapest"
+    ],
+    "aliases": [
+      "Budapest"
+    ]
+  },
+  "ISL": {
+    "names": [
+      "Reykjavik"
+    ],
+    "aliases": [
+      "Reykjavik"
+    ]
+  },
+  "IND": {
+    "names": [
+      "New Delhi"
+    ],
+    "aliases": [
+      "New Delhi"
+    ]
+  },
+  "IDN": {
+    "names": [
+      "Jakarta"
+    ],
+    "aliases": [
+      "Jakarta"
+    ]
+  },
+  "IRN": {
+    "names": [
+      "Tehran"
+    ],
+    "aliases": [
+      "Tehran"
+    ]
+  },
+  "IRQ": {
+    "names": [
+      "Baghdad"
+    ],
+    "aliases": [
+      "Baghdad"
+    ]
+  },
+  "IRL": {
+    "names": [
+      "Dublin"
+    ],
+    "aliases": [
+      "Dublin"
+    ]
+  },
+  "IMN": {
+    "names": [
+      "Douglas"
+    ],
+    "aliases": [
+      "Douglas"
+    ]
+  },
+  "ISR": {
+    "names": [
+      "Jerusalem"
+    ],
+    "aliases": [
+      "Jerusalem"
+    ]
+  },
+  "ITA": {
+    "names": [
+      "Rome"
+    ],
+    "aliases": [
+      "Rome"
+    ]
+  },
+  "CIV": {
+    "names": [
+      "Yamoussoukro"
+    ],
+    "aliases": [
+      "Yamoussoukro"
+    ]
+  },
+  "JAM": {
+    "names": [
+      "Kingston"
+    ],
+    "aliases": [
+      "Kingston"
+    ]
+  },
+  "JPN": {
+    "names": [
+      "Tokyo"
+    ],
+    "aliases": [
+      "Tokyo"
+    ]
+  },
+  "JEY": {
+    "names": [
+      "Saint Helier"
+    ],
+    "aliases": [
+      "Saint Helier"
+    ]
+  },
+  "JOR": {
+    "names": [
+      "Amman"
+    ],
+    "aliases": [
+      "Amman"
+    ]
+  },
+  "KAZ": {
+    "names": [
+      "Astana"
+    ],
+    "aliases": [
+      "Astana"
+    ]
+  },
+  "KEN": {
+    "names": [
+      "Nairobi"
+    ],
+    "aliases": [
+      "Nairobi"
+    ]
+  },
+  "KIR": {
+    "names": [
+      "South Tarawa"
+    ],
+    "aliases": [
+      "South Tarawa",
+      "Tarawa"
+    ]
+  },
+  "KOS": {
+    "names": [
+      "Pristina"
+    ],
+    "aliases": [
+      "Pristina",
+      "Prishtina",
+      "Prishtine"
+    ]
+  },
+  "KWT": {
+    "names": [
+      "Kuwait City"
+    ],
+    "aliases": [
+      "Kuwait City"
+    ]
+  },
+  "KGZ": {
+    "names": [
+      "Bishkek"
+    ],
+    "aliases": [
+      "Bishkek"
+    ]
+  },
+  "LAO": {
+    "names": [
+      "Vientiane"
+    ],
+    "aliases": [
+      "Vientiane",
+      "Viangchan"
+    ]
+  },
+  "LVA": {
+    "names": [
+      "Riga"
+    ],
+    "aliases": [
+      "Riga"
+    ]
+  },
+  "LBN": {
+    "names": [
+      "Beirut"
+    ],
+    "aliases": [
+      "Beirut"
+    ]
+  },
+  "LSO": {
+    "names": [
+      "Maseru"
+    ],
+    "aliases": [
+      "Maseru"
+    ]
+  },
+  "LBR": {
+    "names": [
+      "Monrovia"
+    ],
+    "aliases": [
+      "Monrovia"
+    ]
+  },
+  "LBY": {
+    "names": [
+      "Tripoli"
+    ],
+    "aliases": [
+      "Tripoli",
+      "Tarabulus"
+    ]
+  },
+  "LIE": {
+    "names": [
+      "Vaduz"
+    ],
+    "aliases": [
+      "Vaduz"
+    ]
+  },
+  "LTU": {
+    "names": [
+      "Vilnius"
+    ],
+    "aliases": [
+      "Vilnius"
+    ]
+  },
+  "LUX": {
+    "names": [
+      "Luxembourg"
+    ],
+    "aliases": [
+      "Luxembourg"
+    ]
+  },
+  "MDG": {
+    "names": [
+      "Antananarivo"
+    ],
+    "aliases": [
+      "Antananarivo"
+    ]
+  },
+  "MWI": {
+    "names": [
+      "Lilongwe"
+    ],
+    "aliases": [
+      "Lilongwe"
+    ]
+  },
+  "MYS": {
+    "names": [
+      "Kuala Lumpur"
+    ],
+    "aliases": [
+      "Kuala Lumpur"
+    ]
+  },
+  "MDV": {
+    "names": [
+      "Malé"
+    ],
+    "aliases": [
+      "Malé"
+    ]
+  },
+  "MLI": {
+    "names": [
+      "Bamako"
+    ],
+    "aliases": [
+      "Bamako"
+    ]
+  },
+  "MLT": {
+    "names": [
+      "Valletta"
+    ],
+    "aliases": [
+      "Valletta"
+    ]
+  },
+  "MHL": {
+    "names": [
+      "Majuro"
+    ],
+    "aliases": [
+      "Majuro"
+    ]
+  },
+  "MRT": {
+    "names": [
+      "Nouakchott"
+    ],
+    "aliases": [
+      "Nouakchott"
+    ]
+  },
+  "MUS": {
+    "names": [
+      "Port Louis"
+    ],
+    "aliases": [
+      "Port Louis"
+    ]
+  },
+  "MEX": {
+    "names": [
+      "Mexico City"
+    ],
+    "aliases": [
+      "Mexico City",
+      "Ciudad de Mexico"
+    ]
+  },
+  "MDA": {
+    "names": [
+      "Chișinău"
+    ],
+    "aliases": [
+      "Chișinău",
+      "Chisinau",
+      "Kishinev"
+    ]
+  },
+  "MCO": {
+    "names": [
+      "Monaco"
+    ],
+    "aliases": [
+      "Monaco"
+    ]
+  },
+  "MNG": {
+    "names": [
+      "Ulaanbaatar"
+    ],
+    "aliases": [
+      "Ulaanbaatar"
+    ]
+  },
+  "MNE": {
+    "names": [
+      "Podgorica"
+    ],
+    "aliases": [
+      "Podgorica"
+    ]
+  },
+  "MSR": {
+    "names": [
+      "Plymouth",
+      "Brades"
+    ],
+    "aliases": [
+      "Plymouth",
+      "Brades",
+      "Brades Estate"
+    ],
+    "note": "Plymouth: abandoned capital; Brades: current government seat.",
+    "source": "https://www.visitmontserrat.com/boat-tours/"
+  },
+  "MAR": {
+    "names": [
+      "Rabat"
+    ],
+    "aliases": [
+      "Rabat"
+    ]
+  },
+  "MOZ": {
+    "names": [
+      "Maputo"
+    ],
+    "aliases": [
+      "Maputo"
+    ]
+  },
+  "MMR": {
+    "names": [
+      "Nay Pyi Taw"
+    ],
+    "aliases": [
+      "Nay Pyi Taw",
+      "Naypyidaw",
+      "Nay Pyi Daw"
+    ],
+    "source": "https://myanmar.gov.mm/en/-/nay-pyi-daw"
+  },
+  "NAM": {
+    "names": [
+      "Windhoek"
+    ],
+    "aliases": [
+      "Windhoek"
+    ]
+  },
+  "NPL": {
+    "names": [
+      "Kathmandu"
+    ],
+    "aliases": [
+      "Kathmandu"
+    ]
+  },
+  "NLD": {
+    "names": [
+      "Amsterdam"
+    ],
+    "aliases": [
+      "Amsterdam"
+    ]
+  },
+  "NCL": {
+    "names": [
+      "Noumea"
+    ],
+    "aliases": [
+      "Noumea"
+    ]
+  },
+  "NZL": {
+    "names": [
+      "Wellington"
+    ],
+    "aliases": [
+      "Wellington"
+    ]
+  },
+  "NIC": {
+    "names": [
+      "Managua"
+    ],
+    "aliases": [
+      "Managua"
+    ]
+  },
+  "NER": {
+    "names": [
+      "Niamey"
+    ],
+    "aliases": [
+      "Niamey"
+    ]
+  },
+  "NGA": {
+    "names": [
+      "Abuja"
+    ],
+    "aliases": [
+      "Abuja"
+    ]
+  },
+  "NIU": {
+    "names": [
+      "Alofi"
+    ],
+    "aliases": [
+      "Alofi"
+    ]
+  },
+  "NFK": {
+    "names": [
+      "Kingston"
+    ],
+    "aliases": [
+      "Kingston"
+    ]
+  },
+  "PRK": {
+    "names": [
+      "Pyongyang"
+    ],
+    "aliases": [
+      "Pyongyang"
+    ]
+  },
+  "MKD": {
+    "names": [
+      "Skopje"
+    ],
+    "aliases": [
+      "Skopje"
+    ]
+  },
+  "MNP": {
+    "names": [
+      "Saipan"
+    ],
+    "aliases": [
+      "Saipan"
+    ]
+  },
+  "NOR": {
+    "names": [
+      "Oslo"
+    ],
+    "aliases": [
+      "Oslo"
+    ]
+  },
+  "OMN": {
+    "names": [
+      "Muscat"
+    ],
+    "aliases": [
+      "Muscat"
+    ]
+  },
+  "PAK": {
+    "names": [
+      "Islamabad"
+    ],
+    "aliases": [
+      "Islamabad"
+    ]
+  },
+  "PLW": {
+    "names": [
+      "Ngerulmud"
+    ],
+    "aliases": [
+      "Ngerulmud"
+    ]
+  },
+  "PAN": {
+    "names": [
+      "Panama City"
+    ],
+    "aliases": [
+      "Panama City"
+    ]
+  },
+  "PNG": {
+    "names": [
+      "Port Moresby"
+    ],
+    "aliases": [
+      "Port Moresby"
+    ]
+  },
+  "PRY": {
+    "names": [
+      "Asunción"
+    ],
+    "aliases": [
+      "Asunción"
+    ]
+  },
+  "CHN": {
+    "names": [
+      "Beijing"
+    ],
+    "aliases": [
+      "Beijing"
+    ]
+  },
+  "PER": {
+    "names": [
+      "Lima"
+    ],
+    "aliases": [
+      "Lima"
+    ]
+  },
+  "PHL": {
+    "names": [
+      "Manila"
+    ],
+    "aliases": [
+      "Manila"
+    ]
+  },
+  "PCN": {
+    "names": [
+      "Adamstown"
+    ],
+    "aliases": [
+      "Adamstown"
+    ]
+  },
+  "POL": {
+    "names": [
+      "Warsaw"
+    ],
+    "aliases": [
+      "Warsaw"
+    ]
+  },
+  "PRT": {
+    "names": [
+      "Lisbon"
+    ],
+    "aliases": [
+      "Lisbon"
+    ]
+  },
+  "PRI": {
+    "names": [
+      "San Juan"
+    ],
+    "aliases": [
+      "San Juan"
+    ]
+  },
+  "QAT": {
+    "names": [
+      "Doha"
+    ],
+    "aliases": [
+      "Doha"
+    ]
+  },
+  "COG": {
+    "names": [
+      "Brazzaville"
+    ],
+    "aliases": [
+      "Brazzaville"
+    ]
+  },
+  "ROU": {
+    "names": [
+      "Bucharest"
+    ],
+    "aliases": [
+      "Bucharest"
+    ]
+  },
+  "RUS": {
+    "names": [
+      "Moscow"
+    ],
+    "aliases": [
+      "Moscow"
+    ]
+  },
+  "RWA": {
+    "names": [
+      "Kigali"
+    ],
+    "aliases": [
+      "Kigali"
+    ]
+  },
+  "BLM": {
+    "names": [
+      "Gustavia"
+    ],
+    "aliases": [
+      "Gustavia"
+    ]
+  },
+  "SHN": {
+    "names": [
+      "Jamestown"
+    ],
+    "aliases": [
+      "Jamestown"
+    ]
+  },
+  "KNA": {
+    "names": [
+      "Basseterre"
+    ],
+    "aliases": [
+      "Basseterre"
+    ]
+  },
+  "LCA": {
+    "names": [
+      "Castries"
+    ],
+    "aliases": [
+      "Castries"
+    ]
+  },
+  "MAF": {
+    "names": [
+      "Marigot"
+    ],
+    "aliases": [
+      "Marigot"
+    ]
+  },
+  "SPM": {
+    "names": [
+      "Saint-Pierre"
+    ],
+    "aliases": [
+      "Saint-Pierre"
+    ]
+  },
+  "VCT": {
+    "names": [
+      "Kingstown"
+    ],
+    "aliases": [
+      "Kingstown"
+    ]
+  },
+  "WSM": {
+    "names": [
+      "Apia"
+    ],
+    "aliases": [
+      "Apia"
+    ]
+  },
+  "SMR": {
+    "names": [
+      "San Marino"
+    ],
+    "aliases": [
+      "San Marino",
+      "City of San Marino"
+    ]
+  },
+  "SAU": {
+    "names": [
+      "Riyadh"
+    ],
+    "aliases": [
+      "Riyadh"
+    ]
+  },
+  "SEN": {
+    "names": [
+      "Dakar"
+    ],
+    "aliases": [
+      "Dakar"
+    ]
+  },
+  "SRB": {
+    "names": [
+      "Belgrade"
+    ],
+    "aliases": [
+      "Belgrade",
+      "Beograd"
+    ]
+  },
+  "SYC": {
+    "names": [
+      "Victoria"
+    ],
+    "aliases": [
+      "Victoria"
+    ]
+  },
+  "SLE": {
+    "names": [
+      "Freetown"
+    ],
+    "aliases": [
+      "Freetown"
+    ]
+  },
+  "SGP": {
+    "names": [
+      "Singapore"
+    ],
+    "aliases": [
+      "Singapore"
+    ]
+  },
+  "SXM": {
+    "names": [
+      "Philipsburg"
+    ],
+    "aliases": [
+      "Philipsburg"
+    ]
+  },
+  "SVK": {
+    "names": [
+      "Bratislava"
+    ],
+    "aliases": [
+      "Bratislava"
+    ]
+  },
+  "SVN": {
+    "names": [
+      "Ljubljana"
+    ],
+    "aliases": [
+      "Ljubljana"
+    ]
+  },
+  "SLB": {
+    "names": [
+      "Honiara"
+    ],
+    "aliases": [
+      "Honiara"
+    ]
+  },
+  "SOM": {
+    "names": [
+      "Mogadishu"
+    ],
+    "aliases": [
+      "Mogadishu"
+    ]
+  },
+  "SOL": {
+    "names": [
+      "Hargeisa"
+    ],
+    "aliases": [
+      "Hargeisa"
+    ]
+  },
+  "ZAF": {
+    "names": [
+      "Pretoria",
+      "Cape Town",
+      "Bloemfontein"
+    ],
+    "aliases": [
+      "Pretoria",
+      "Cape Town",
+      "Bloemfontein"
+    ],
+    "note": "Administrative, legislative and judicial capitals, respectively.",
+    "source": "https://www.gov.za/about-sa/south-africas-provinces"
+  },
+  "KOR": {
+    "names": [
+      "Seoul"
+    ],
+    "aliases": [
+      "Seoul"
+    ]
+  },
+  "SDS": {
+    "names": [
+      "Juba"
+    ],
+    "aliases": [
+      "Juba"
+    ]
+  },
+  "ESP": {
+    "names": [
+      "Madrid"
+    ],
+    "aliases": [
+      "Madrid"
+    ]
+  },
+  "LKA": {
+    "names": [
+      "Sri Jayawardenepura Kotte",
+      "Colombo"
+    ],
+    "aliases": [
+      "Sri Jayawardenepura Kotte",
+      "Colombo",
+      "Sri Jayewardenepura Kotte",
+      "Sri Jayawardanapura Kotte",
+      "Kotte"
+    ],
+    "note": "Kotte: legislative; Colombo: executive and judicial.",
+    "source": "https://www.kotte.mc.gov.lk/index.php?Itemid=175&id=25&lang=en&option=com_content&view=article"
+  },
+  "SDN": {
+    "names": [
+      "Khartoum"
+    ],
+    "aliases": [
+      "Khartoum"
+    ]
+  },
+  "SUR": {
+    "names": [
+      "Paramaribo"
+    ],
+    "aliases": [
+      "Paramaribo"
+    ]
+  },
+  "SWE": {
+    "names": [
+      "Stockholm"
+    ],
+    "aliases": [
+      "Stockholm"
+    ]
+  },
+  "CHE": {
+    "names": [
+      "Bern"
+    ],
+    "aliases": [
+      "Bern"
+    ]
+  },
+  "SYR": {
+    "names": [
+      "Damascus"
+    ],
+    "aliases": [
+      "Damascus"
+    ]
+  },
+  "STP": {
+    "names": [
+      "Sao Tome"
+    ],
+    "aliases": [
+      "Sao Tome"
+    ]
+  },
+  "TWN": {
+    "names": [
+      "Taipei"
+    ],
+    "aliases": [
+      "Taipei"
+    ]
+  },
+  "TJK": {
+    "names": [
+      "Dushanbe"
+    ],
+    "aliases": [
+      "Dushanbe"
+    ]
+  },
+  "TZA": {
+    "names": [
+      "Dodoma"
+    ],
+    "aliases": [
+      "Dodoma"
+    ]
+  },
+  "THA": {
+    "names": [
+      "Bangkok"
+    ],
+    "aliases": [
+      "Bangkok"
+    ]
+  },
+  "BHS": {
+    "names": [
+      "Nassau"
+    ],
+    "aliases": [
+      "Nassau"
+    ]
+  },
+  "GMB": {
+    "names": [
+      "Banjul"
+    ],
+    "aliases": [
+      "Banjul"
+    ]
+  },
+  "TGO": {
+    "names": [
+      "Lome"
+    ],
+    "aliases": [
+      "Lome"
+    ]
+  },
+  "TON": {
+    "names": [
+      "Nuku'alofa"
+    ],
+    "aliases": [
+      "Nuku'alofa"
+    ]
+  },
+  "TTO": {
+    "names": [
+      "Port of Spain"
+    ],
+    "aliases": [
+      "Port of Spain"
+    ]
+  },
+  "TUN": {
+    "names": [
+      "Tunis"
+    ],
+    "aliases": [
+      "Tunis"
+    ]
+  },
+  "CYN": {
+    "names": [
+      "North Nicosia"
+    ],
+    "aliases": [
+      "North Nicosia"
+    ]
+  },
+  "TKM": {
+    "names": [
+      "Ashgabat"
+    ],
+    "aliases": [
+      "Ashgabat",
+      "Ashkhabad"
+    ]
+  },
+  "TCA": {
+    "names": [
+      "Cockburn Town"
+    ],
+    "aliases": [
+      "Cockburn Town",
+      "Grand Turk"
+    ]
+  },
+  "TUV": {
+    "names": [
+      "Funafuti"
+    ],
+    "aliases": [
+      "Funafuti"
+    ]
+  },
+  "TUR": {
+    "names": [
+      "Ankara"
+    ],
+    "aliases": [
+      "Ankara"
+    ]
+  },
+  "UGA": {
+    "names": [
+      "Kampala"
+    ],
+    "aliases": [
+      "Kampala"
+    ]
+  },
+  "UKR": {
+    "names": [
+      "Kyiv"
+    ],
+    "aliases": [
+      "Kyiv",
+      "Kiev"
+    ]
+  },
+  "ARE": {
+    "names": [
+      "Abu Dhabi"
+    ],
+    "aliases": [
+      "Abu Dhabi"
+    ]
+  },
+  "GBR": {
+    "names": [
+      "London"
+    ],
+    "aliases": [
+      "London"
+    ]
+  },
+  "VIR": {
+    "names": [
+      "Charlotte Amalie"
+    ],
+    "aliases": [
+      "Charlotte Amalie"
+    ]
+  },
+  "USA": {
+    "names": [
+      "Washington, D.C."
+    ],
+    "aliases": [
+      "Washington, D.C.",
+      "Washington DC",
+      "Washington D C",
+      "Washington"
+    ]
+  },
+  "URY": {
+    "names": [
+      "Montevideo"
+    ],
+    "aliases": [
+      "Montevideo"
+    ]
+  },
+  "UZB": {
+    "names": [
+      "Tashkent"
+    ],
+    "aliases": [
+      "Tashkent",
+      "Toshkent"
+    ]
+  },
+  "VUT": {
+    "names": [
+      "Port Vila"
+    ],
+    "aliases": [
+      "Port Vila",
+      "Port-Vila"
+    ]
+  },
+  "VAT": {
+    "names": [
+      "Vatican City"
+    ],
+    "aliases": [
+      "Vatican City"
+    ]
+  },
+  "VEN": {
+    "names": [
+      "Caracas"
+    ],
+    "aliases": [
+      "Caracas"
+    ]
+  },
+  "VNM": {
+    "names": [
+      "Hanoi"
+    ],
+    "aliases": [
+      "Hanoi",
+      "Ha Noi"
+    ]
+  },
+  "WLF": {
+    "names": [
+      "Mata-Utu"
+    ],
+    "aliases": [
+      "Mata-Utu"
+    ]
+  },
+  "YEM": {
+    "names": [
+      "Sanaa"
+    ],
+    "aliases": [
+      "Sanaa"
+    ]
+  },
+  "ZMB": {
+    "names": [
+      "Lusaka"
+    ],
+    "aliases": [
+      "Lusaka"
+    ]
+  },
+  "ZWE": {
+    "names": [
+      "Harare"
+    ],
+    "aliases": [
+      "Harare"
+    ]
+  },
+  "ALD": {
+    "names": [
+      "Mariehamn"
+    ],
+    "aliases": [
+      "Mariehamn"
+    ]
+  }
+}

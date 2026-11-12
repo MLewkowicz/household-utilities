@@ -1,5 +1,12 @@
 import {test,expect} from '@playwright/test';
 
+test('browser Back closes a game dialog before returning to the hub',async({page})=>{
+ await page.goto('/?webgl=0#games');await page.locator('#geo-launch').click();
+ await page.getByRole('button',{name:'Game settings',exact:true}).click();await page.goBack();
+ await expect(page).toHaveURL(/#games$/);await expect(page.locator('#geo-settings-dialog')).toBeHidden();
+ await page.getByRole('button',{name:'Common Ground',exact:true}).click();await page.locator('#geo-launch').click();await expect(page.locator('#trivia-page')).toBeVisible();
+});
+
 test('every household feature can open Games and return to its exact route after a reload',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.addInitScript(()=>localStorage.setItem('household-person','michal'));
@@ -14,7 +21,7 @@ test('every household feature can open Games and return to its exact route after
   if(route==='chores/week')expect(requests.some(url=>url.includes('/globe/'))).toBe(false);
   await page.locator('#games-shortcut').focus();await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/#games$/);
-  const back=page.locator('.observatory-home');
+  const back=page.locator('.observatory-home:visible');
   await expect(back).toHaveAttribute('href','#'+route);
   await expect(page.locator('#geo-launch')).toBeVisible();
   await page.locator('#geo-launch').click();await expect(page).toHaveURL(/#games\/geography$/);
@@ -29,10 +36,10 @@ test('every household feature can open Games and return to its exact route after
 test('phone return links stay labeled and reachable on the hub, game and leaderboard',async({page})=>{
  await page.setViewportSize({width:360,height:800});
  await page.goto('/?webgl=0#games');
- await expect(page.locator('.observatory-home')).toHaveAccessibleName('Back to To-dos');
- await expect(page.locator('.observatory-home span').last()).toBeVisible();
+ await expect(page.locator('.observatory-home:visible')).toHaveAccessibleName('Back to To-dos');
+ await expect(page.locator('.observatory-home:visible span').last()).toBeVisible();
  await page.locator('#geo-launch').click();
- await expect(page.locator('.observatory-home')).toBeInViewport();
+ await expect(page.locator('.observatory-home:visible')).toBeInViewport();
  expect(await page.locator('.observatory-topbar').evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
  await page.getByRole('link',{name:'Leaderboard',exact:true}).first().click();
  await expect(page.locator('.game-score-return')).toBeVisible();
@@ -43,9 +50,9 @@ test('phone return links stay labeled and reachable on the hub, game and leaderb
 
 test('return navigation tolerates blocked storage and rejects unknown stored destinations',async({page})=>{
  await page.addInitScript(()=>sessionStorage.setItem('household-game-return','https://example.com'));
- await page.goto('/?webgl=0#games');await expect(page.locator('.observatory-home')).toHaveAttribute('href','#chores');
+ await page.goto('/?webgl=0#games');await expect(page.locator('.observatory-home:visible')).toHaveAttribute('href','#chores');
  await page.addInitScript(()=>Object.defineProperty(window,'sessionStorage',{get(){throw new Error('Storage unavailable');}}));
  await page.goto('/?webgl=0#events');await page.locator('#games-shortcut').click();
- await expect(page.locator('.observatory-home')).toHaveAttribute('href','#events');
- await page.locator('.observatory-home').click();await expect(page).toHaveURL(/#events$/);
+ await expect(page.locator('.observatory-home:visible')).toHaveAttribute('href','#events');
+ await page.locator('.observatory-home:visible').click();await expect(page).toHaveURL(/#events$/);
 });

@@ -1206,7 +1206,7 @@
       "due_on": "2026-11-10",
       "pinned": false,
       "points": 0.5,
-      "status": "active",
+      "status": "overdue",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
       "version": 0,
@@ -2698,22 +2698,27 @@
       "kind": "reminder",
       "note": "Weekly CLEAR lab lunch order",
       "actor": "michal",
-      "state": "active",
+      "state": "completed",
       "title": "CLEAR Lab lunch order",
       "due_at": "2026-11-11T22:00:00+00:00",
       "due_on": "2026-11-11",
       "pinned": false,
       "points": 0,
-      "status": "active",
+      "status": "completed",
       "icon_id": "takeaway",
       "step_id": "d9d7650c-09c5-4437-a73c-972a83099ed7",
-      "version": 0,
+      "version": 1,
       "assignee": "michal",
       "due_time": "17:00",
       "cycle_end": "2026-11-18T05:00:00+00:00",
-      "projected": true,
+      "projected": false,
       "requester": "michal",
-      "completion": null,
+      "completion": {
+        "completed_at": "2026-11-11T21:23:47.229045+00:00",
+        "contributors": [
+          "michal"
+        ]
+      },
       "created_at": "2026-11-03T20:40:09.542677+00:00",
       "expires_at": null,
       "expires_on": null,
@@ -3060,6 +3065,37 @@
       "expires_on": null,
       "routine_id": "a9abc492-bd6c-4af9-a130-9773166e1896",
       "cycle_start": "2027-01-27",
+      "expires_time": null,
+      "routine_title": "CLEAR Lab lunch order",
+      "queue_visibility": "due_date",
+      "schedule_version": 1
+    },
+    {
+      "id": "a9abc492-bd6c-4af9-a130-9773166e1896:2027-02-03:d9d7650c-09c5-4437-a73c-972a83099ed7",
+      "kind": "reminder",
+      "note": "Weekly CLEAR lab lunch order",
+      "actor": "michal",
+      "state": "active",
+      "title": "CLEAR Lab lunch order",
+      "due_at": "2027-02-03T22:00:00+00:00",
+      "due_on": "2027-02-03",
+      "pinned": false,
+      "points": 0,
+      "status": "active",
+      "icon_id": "takeaway",
+      "step_id": "d9d7650c-09c5-4437-a73c-972a83099ed7",
+      "version": 0,
+      "assignee": "michal",
+      "due_time": "17:00",
+      "cycle_end": "2027-02-10T05:00:00+00:00",
+      "projected": true,
+      "requester": "michal",
+      "completion": null,
+      "created_at": "2026-11-03T20:40:09.542677+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": "a9abc492-bd6c-4af9-a130-9773166e1896",
+      "cycle_start": "2027-02-03",
       "expires_time": null,
       "routine_title": "CLEAR Lab lunch order",
       "queue_visibility": "due_date",
@@ -3463,9 +3499,189 @@
       "point_policy": "household-v1",
       "queue_visibility": "immediately",
       "reminder_group_id": null
+    },
+    {
+      "id": "fb2ff7cc-4841-48f3-9f91-3c00fa74e791",
+      "kind": "chore",
+      "note": "",
+      "actor": "rina",
+      "state": "completed",
+      "title": "Start dishwasher",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 0.25,
+      "status": "completed",
+      "icon_id": "dishes",
+      "version": 1,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": "dishwasher-start",
+      "projected": false,
+      "requester": "rina",
+      "completion": {
+        "completed_at": "2026-11-10T17:38:00+00:00",
+        "contributors": [
+          "rina"
+        ]
+      },
+      "created_at": "2026-11-11T17:38:14.953274+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "dishwasher-v2",
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
+    },
+    {
+      "id": "8a965858-ba79-4813-b695-927f654ce6e5",
+      "kind": "chore",
+      "note": "",
+      "actor": "rina",
+      "state": "completed",
+      "title": "Empty dishwasher",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 1,
+      "status": "completed",
+      "icon_id": "dishes",
+      "version": 1,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": "dishwasher-empty",
+      "projected": false,
+      "requester": "rina",
+      "completion": {
+        "completed_at": "2026-11-11T17:55:00+00:00",
+        "contributors": [
+          "rina"
+        ]
+      },
+      "created_at": "2026-11-11T17:55:58.320898+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "dishwasher-v2",
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
     }
   ],
   "history": [
+    {
+      "id": "a9abc492-bd6c-4af9-a130-9773166e1896:2026-11-11:d9d7650c-09c5-4437-a73c-972a83099ed7",
+      "kind": "reminder",
+      "note": "Weekly CLEAR lab lunch order",
+      "actor": "michal",
+      "state": "completed",
+      "title": "CLEAR Lab lunch order",
+      "action": "quick_complete",
+      "due_at": "2026-11-11T22:00:00+00:00",
+      "due_on": "2026-11-11",
+      "pinned": false,
+      "points": 0,
+      "icon_id": "takeaway",
+      "step_id": "d9d7650c-09c5-4437-a73c-972a83099ed7",
+      "version": 1,
+      "assignee": "michal",
+      "due_time": "17:00",
+      "cycle_end": "2026-11-18T05:00:00+00:00",
+      "requester": "michal",
+      "completion": {
+        "completed_at": "2026-11-11T21:23:47.229045+00:00",
+        "contributors": [
+          "michal"
+        ]
+      },
+      "created_at": "2026-11-11T21:23:47.229045+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": "a9abc492-bd6c-4af9-a130-9773166e1896",
+      "change_note": "",
+      "cycle_start": "2026-11-11",
+      "expires_time": null,
+      "routine_title": "CLEAR Lab lunch order",
+      "queue_visibility": "due_date",
+      "schedule_version": 1
+    },
+    {
+      "id": "8a965858-ba79-4813-b695-927f654ce6e5",
+      "kind": "chore",
+      "note": "",
+      "actor": "rina",
+      "state": "completed",
+      "title": "Empty dishwasher",
+      "action": "create",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 1,
+      "icon_id": "dishes",
+      "version": 1,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": "dishwasher-empty",
+      "requester": "rina",
+      "completion": {
+        "completed_at": "2026-11-11T17:55:00+00:00",
+        "contributors": [
+          "rina"
+        ]
+      },
+      "created_at": "2026-11-11T17:55:58.320898+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "change_note": "",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "dishwasher-v2",
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
+    },
+    {
+      "id": "fb2ff7cc-4841-48f3-9f91-3c00fa74e791",
+      "kind": "chore",
+      "note": "",
+      "actor": "rina",
+      "state": "completed",
+      "title": "Start dishwasher",
+      "action": "create",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 0.25,
+      "icon_id": "dishes",
+      "version": 1,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": "dishwasher-start",
+      "requester": "rina",
+      "completion": {
+        "completed_at": "2026-11-10T17:38:00+00:00",
+        "contributors": [
+          "rina"
+        ]
+      },
+      "created_at": "2026-11-11T17:38:14.953274+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "change_note": "",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "dishwasher-v2",
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
+    },
     {
       "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-09:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
       "kind": "chore",
@@ -6990,9 +7206,9 @@
       "interval_weeks": 1
     }
   ],
-  "local_day": "2026-11-10",
-  "updated_at": "2026-11-11T00:48:37.996005+00:00",
-  "exported_at": "2026-11-11T00:48:37.996005+00:00",
+  "local_day": "2026-11-11",
+  "updated_at": "2026-11-12T03:06:11.605769+00:00",
+  "exported_at": "2026-11-12T03:06:11.605769+00:00",
   "leaderboard": [
     {
       "rank": 1,
@@ -7102,109 +7318,24 @@
     },
     {
       "rank": 2,
-      "units": 129.5,
-      "member": "rohil",
-      "period": "all",
-      "entries": [
-        {
-          "id": "d1191cbf-6e72-4bd9-8fef-112c1c0cf69f",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-09T19:50:00+00:00"
-        },
-        {
-          "id": "884ac189-123e-4604-a290-dad07e7fd87a",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-06T20:16:00+00:00"
-        },
-        {
-          "id": "a9d2b51e-9845-40d3-a450-0ac7a2847cf5",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-05T21:31:00+00:00"
-        },
-        {
-          "id": "046ac3bc-cfff-47a7-ace6-e20a83d7d084",
-          "title": "Empty dishwasher",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-05T02:27:00+00:00"
-        },
-        {
-          "id": "605d27a3-9827-4e25-8fc3-d9b587a56f98",
-          "title": "Pick up bananas",
-          "units": 6.0,
-          "member": "rohil",
-          "completed_at": "2026-11-03T00:30:00+00:00"
-        },
-        {
-          "id": "af58c7f2-743c-486d-960f-f2f7c88d6ab2",
-          "title": "Unloading Dishwasher",
-          "units": 6.0,
-          "member": "rohil",
-          "completed_at": "2026-11-02T16:00:00+00:00"
-        },
-        {
-          "id": "59b8543b-9f7b-422a-86f8-5e638f1ef08d",
-          "title": "Start dishwasher",
-          "units": 1.5,
-          "member": "rohil",
-          "completed_at": "2026-11-02T15:27:00+00:00"
-        },
-        {
-          "id": "f80563df-b704-4173-8d9c-601a7519b602",
-          "title": "Bring back baked ziti leftovers",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-10-30T21:34:00+00:00"
-        },
-        {
-          "id": "a57b6ddf-8652-41ea-8be6-3521f457f368",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-10-26T23:00:00+00:00"
-        },
-        {
-          "id": "78d695c6-3705-4420-8ba6-cd63c7fa390e",
-          "title": "Bring thai curry back",
-          "units": 24.0,
-          "member": "rohil",
-          "completed_at": "2026-10-24T17:36:00+00:00"
-        },
-        {
-          "id": "952286c6-8a12-4606-ac1b-f47ca92ff2b8",
-          "title": "Contact landlord about heating",
-          "units": 6.0,
-          "member": "rohil",
-          "completed_at": "2026-10-23T01:03:18.27562+00:00"
-        },
-        {
-          "id": "31aed63b-53a9-4435-8df5-83abd586818d",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-10-20T19:18:00+00:00"
-        },
-        {
-          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
-          "title": "Bring bins back",
-          "units": 2.0,
-          "member": "rohil",
-          "completed_at": "2026-10-20T15:36:00+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 3,
-      "units": 122.0,
+      "units": 137.0,
       "member": "rina",
       "period": "all",
       "entries": [
+        {
+          "id": "8a965858-ba79-4813-b695-927f654ce6e5",
+          "title": "Empty dishwasher",
+          "units": 12.0,
+          "member": "rina",
+          "completed_at": "2026-11-11T17:55:00+00:00"
+        },
+        {
+          "id": "fb2ff7cc-4841-48f3-9f91-3c00fa74e791",
+          "title": "Start dishwasher",
+          "units": 3.0,
+          "member": "rina",
+          "completed_at": "2026-11-10T17:38:00+00:00"
+        },
         {
           "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-09:1a7bbd79-0488-4b94-825d-6843207f75dc",
           "title": "Take out the trash",
@@ -7329,6 +7460,105 @@
           "title": "Bring bins back",
           "units": 2.0,
           "member": "rina",
+          "completed_at": "2026-10-20T15:36:00+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "units": 129.5,
+      "member": "rohil",
+      "period": "all",
+      "entries": [
+        {
+          "id": "d1191cbf-6e72-4bd9-8fef-112c1c0cf69f",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-09T19:50:00+00:00"
+        },
+        {
+          "id": "884ac189-123e-4604-a290-dad07e7fd87a",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-06T20:16:00+00:00"
+        },
+        {
+          "id": "a9d2b51e-9845-40d3-a450-0ac7a2847cf5",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-05T21:31:00+00:00"
+        },
+        {
+          "id": "046ac3bc-cfff-47a7-ace6-e20a83d7d084",
+          "title": "Empty dishwasher",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-05T02:27:00+00:00"
+        },
+        {
+          "id": "605d27a3-9827-4e25-8fc3-d9b587a56f98",
+          "title": "Pick up bananas",
+          "units": 6.0,
+          "member": "rohil",
+          "completed_at": "2026-11-03T00:30:00+00:00"
+        },
+        {
+          "id": "af58c7f2-743c-486d-960f-f2f7c88d6ab2",
+          "title": "Unloading Dishwasher",
+          "units": 6.0,
+          "member": "rohil",
+          "completed_at": "2026-11-02T16:00:00+00:00"
+        },
+        {
+          "id": "59b8543b-9f7b-422a-86f8-5e638f1ef08d",
+          "title": "Start dishwasher",
+          "units": 1.5,
+          "member": "rohil",
+          "completed_at": "2026-11-02T15:27:00+00:00"
+        },
+        {
+          "id": "f80563df-b704-4173-8d9c-601a7519b602",
+          "title": "Bring back baked ziti leftovers",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-10-30T21:34:00+00:00"
+        },
+        {
+          "id": "a57b6ddf-8652-41ea-8be6-3521f457f368",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-10-26T23:00:00+00:00"
+        },
+        {
+          "id": "78d695c6-3705-4420-8ba6-cd63c7fa390e",
+          "title": "Bring thai curry back",
+          "units": 24.0,
+          "member": "rohil",
+          "completed_at": "2026-10-24T17:36:00+00:00"
+        },
+        {
+          "id": "952286c6-8a12-4606-ac1b-f47ca92ff2b8",
+          "title": "Contact landlord about heating",
+          "units": 6.0,
+          "member": "rohil",
+          "completed_at": "2026-10-23T01:03:18.27562+00:00"
+        },
+        {
+          "id": "31aed63b-53a9-4435-8df5-83abd586818d",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-10-20T19:18:00+00:00"
+        },
+        {
+          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
+          "title": "Bring bins back",
+          "units": 2.0,
+          "member": "rohil",
           "completed_at": "2026-10-20T15:36:00+00:00"
         }
       ]
@@ -7464,10 +7694,24 @@
     },
     {
       "rank": 3,
-      "units": 36.0,
+      "units": 51.0,
       "member": "rina",
       "period": "month",
       "entries": [
+        {
+          "id": "8a965858-ba79-4813-b695-927f654ce6e5",
+          "title": "Empty dishwasher",
+          "units": 12.0,
+          "member": "rina",
+          "completed_at": "2026-11-11T17:55:00+00:00"
+        },
+        {
+          "id": "fb2ff7cc-4841-48f3-9f91-3c00fa74e791",
+          "title": "Start dishwasher",
+          "units": 3.0,
+          "member": "rina",
+          "completed_at": "2026-11-10T17:38:00+00:00"
+        },
         {
           "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-09:1a7bbd79-0488-4b94-825d-6843207f75dc",
           "title": "Take out the trash",
@@ -7536,10 +7780,24 @@
     },
     {
       "rank": 1,
-      "units": 12.0,
+      "units": 27.0,
       "member": "rina",
       "period": "week",
       "entries": [
+        {
+          "id": "8a965858-ba79-4813-b695-927f654ce6e5",
+          "title": "Empty dishwasher",
+          "units": 12.0,
+          "member": "rina",
+          "completed_at": "2026-11-11T17:55:00+00:00"
+        },
+        {
+          "id": "fb2ff7cc-4841-48f3-9f91-3c00fa74e791",
+          "title": "Start dishwasher",
+          "units": 3.0,
+          "member": "rina",
+          "completed_at": "2026-11-10T17:38:00+00:00"
+        },
         {
           "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-09:1a7bbd79-0488-4b94-825d-6843207f75dc",
           "title": "Take out the trash",
@@ -7557,7 +7815,7 @@
       ]
     },
     {
-      "rank": 1,
+      "rank": 2,
       "units": 12.0,
       "member": "rohil",
       "period": "week",
@@ -8158,7 +8416,7 @@
       "occurrence_root": "10986bd6-79a1-4a69-b799-e4938953c007"
     }
   ],
-  "projection_until": "2027-02-02",
+  "projection_until": "2027-02-03",
   "point_adjustments": [
     {
       "id": "2b8a273b382a2742ed12fe2a37fb5668",

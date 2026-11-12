@@ -12,7 +12,18 @@ avatar_manifest = json.loads((ROOT / 'public/avatars/v1/manifest.json').read_tex
 approved_avatars = {f'avatars/v1/{name}': info for name, info in avatar_manifest['files'].items()}
 globe_manifest = json.loads((ROOT / 'public/globe/manifest.json').read_text())
 approved_globe = {f'globe/{name}': info for name, info in globe_manifest['files'].items()}
+sky_manifest = json.loads((ROOT / 'src/observatory-sky-assets.json').read_text())
+approved_skies = set(sky_manifest.values())
+for name in approved_skies:
+    match = re.fullmatch(r'observatory-sky-(wide|phone)-([a-f0-9]{12})\.webp', name)
+    asset = ROOT / 'public' / name
+    if not match or not asset.is_file() or not hashlib.sha256(asset.read_bytes()).hexdigest().startswith(match[2]):
+        violations.append('Invalid generated observatory sky manifest')
 for p in (ROOT / "dist").rglob("*"):
+    if p.is_file() and p.relative_to(ROOT / 'dist').as_posix() in approved_skies:
+        if p.read_bytes() != (ROOT / 'public' / p.name).read_bytes():
+            violations.append(f"Observatory sky checksum mismatch: {p.relative_to(ROOT)}")
+        continue
     if p.is_file() and p.relative_to(ROOT / 'dist').as_posix() in approved_globe:
         info = approved_globe[p.relative_to(ROOT / 'dist').as_posix()]
         if hashlib.sha256(p.read_bytes()).hexdigest() != info['sha256']:
@@ -53,7 +64,7 @@ except ImportError:
 if (ROOT/".git").exists():
     tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT).decode().split("\0")
     for file in filter(None,tracked):
-        if file.lower().endswith(".pdf") or file.startswith(("bitmoji_photos/", "bills/", ".local/", ".venv/", ".tools/", "node_modules/", ".env", ".dev.vars")):
+        if file.lower().endswith(".pdf") or file.startswith(("bitmoji_photos/", "scripts/size-art/sources/", "bills/", ".local/", ".venv/", ".tools/", "node_modules/", ".env", ".dev.vars")):
             violations.append(f"Private file tracked by Git: {file}")
 if violations:
     print("\n".join(sorted(set(violations))), file=sys.stderr)

@@ -22,3 +22,5 @@ test-results/
 playwright-report/
 config.local.json
 bitmoji_photos/
+scripts/size-art/sources/
+scripts/size-art/sanitized.json

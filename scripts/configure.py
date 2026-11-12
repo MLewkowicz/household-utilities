@@ -26,7 +26,7 @@ def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
         print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
-        print("Existing projects need migrations 009 through 030 (and any earlier missing migrations); do not rerun installed migrations.")
+        print("Existing projects need migrations 009 through 032 (and any earlier missing migrations); do not rerun installed migrations.")
         print("Phone delivery also needs the normal ./configure.sh flow to deploy its worker, signing keys, and schedule.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
@@ -120,6 +120,13 @@ def main():
             ("028_personal_deadlines.sql", "ledger_private.personal_deadlines_version()"),
             ("029_geography_scores.sql", "public.utilities_geography_scores()"),
             ("030_geography_find_scores.sql", "public.utilities_geography_score_modes()"),
+            ("031_observatory_trivia.sql", "public.utilities_trivia_capabilities()"),
+            ("032_observatory_puzzles_v2.sql", "ledger_private.trivia_content_v2()"),
+            ("033_observatory_games_v3.sql", "ledger_private.trivia_content_v3()"),
+            ("034_geography_capitals.sql", "ledger_private.geography_capitals_version()"),
+            ("035_geography_cities.sql", "ledger_private.geography_cities_version()"),
+            ("036_geography_routes.sql", "public.utilities_geography_route_capabilities()"),
+            ("037_geography_major_cities.sql", "ledger_private.geography_major_cities_version()"),
         ]:
             installed = request(base + "/database/query", token, {"query": f"SELECT to_regprocedure('{signature}')::text AS fn"})
             if not installed or not installed[0].get("fn"):

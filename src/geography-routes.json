@@ -1,0 +1,1567 @@
+{
+  "version": 1,
+  "source": "https://github.com/nvkelso/natural-earth-vector/blob/v5.1.2/geojson/ne_50m_admin_0_countries.geojson",
+  "neighbors": {
+    "AFG": [
+      "CHN",
+      "IRN",
+      "PAK",
+      "TJK",
+      "TKM",
+      "UZB"
+    ],
+    "AGO": [
+      "COD",
+      "COG",
+      "NAM",
+      "ZMB"
+    ],
+    "ALB": [
+      "GRC",
+      "MKD",
+      "MNE"
+    ],
+    "AND": [
+      "ESP",
+      "FRA"
+    ],
+    "ARE": [
+      "OMN",
+      "SAU"
+    ],
+    "ARG": [
+      "BOL",
+      "BRA",
+      "CHL",
+      "PRY",
+      "URY"
+    ],
+    "ARM": [
+      "AZE",
+      "GEO",
+      "IRN",
+      "TUR"
+    ],
+    "AUT": [
+      "CHE",
+      "CZE",
+      "DEU",
+      "HUN",
+      "ITA",
+      "LIE",
+      "SVK",
+      "SVN"
+    ],
+    "AZE": [
+      "ARM",
+      "GEO",
+      "IRN",
+      "RUS",
+      "TUR"
+    ],
+    "BDI": [
+      "COD",
+      "RWA",
+      "TZA"
+    ],
+    "BEL": [
+      "DEU",
+      "FRA",
+      "LUX",
+      "NLD"
+    ],
+    "BEN": [
+      "BFA",
+      "NER",
+      "NGA",
+      "TGO"
+    ],
+    "BFA": [
+      "BEN",
+      "CIV",
+      "GHA",
+      "MLI",
+      "NER",
+      "TGO"
+    ],
+    "BGD": [
+      "IND",
+      "MMR"
+    ],
+    "BGR": [
+      "GRC",
+      "MKD",
+      "ROU",
+      "SRB",
+      "TUR"
+    ],
+    "BIH": [
+      "HRV",
+      "MNE",
+      "SRB"
+    ],
+    "BLR": [
+      "LTU",
+      "LVA",
+      "POL",
+      "RUS",
+      "UKR"
+    ],
+    "BLZ": [
+      "GTM",
+      "MEX"
+    ],
+    "BOL": [
+      "ARG",
+      "BRA",
+      "CHL",
+      "PER",
+      "PRY"
+    ],
+    "BRA": [
+      "ARG",
+      "BOL",
+      "COL",
+      "GUY",
+      "PER",
+      "PRY",
+      "SUR",
+      "URY",
+      "VEN"
+    ],
+    "BRN": [
+      "MYS"
+    ],
+    "BTN": [
+      "CHN",
+      "IND"
+    ],
+    "BWA": [
+      "NAM",
+      "ZAF",
+      "ZMB",
+      "ZWE"
+    ],
+    "CAF": [
+      "CMR",
+      "COD",
+      "COG",
+      "SDN",
+      "SDS",
+      "TCD"
+    ],
+    "CAN": [
+      "USA"
+    ],
+    "CHE": [
+      "AUT",
+      "DEU",
+      "FRA",
+      "ITA",
+      "LIE"
+    ],
+    "CHL": [
+      "ARG",
+      "BOL",
+      "PER"
+    ],
+    "CHN": [
+      "AFG",
+      "BTN",
+      "IND",
+      "KAZ",
+      "KGZ",
+      "LAO",
+      "MMR",
+      "MNG",
+      "NPL",
+      "PAK",
+      "PRK",
+      "RUS",
+      "TJK",
+      "VNM"
+    ],
+    "CIV": [
+      "BFA",
+      "GHA",
+      "GIN",
+      "LBR",
+      "MLI"
+    ],
+    "CMR": [
+      "CAF",
+      "COG",
+      "GAB",
+      "GNQ",
+      "NGA",
+      "TCD"
+    ],
+    "COD": [
+      "AGO",
+      "BDI",
+      "CAF",
+      "COG",
+      "RWA",
+      "SDS",
+      "TZA",
+      "UGA",
+      "ZMB"
+    ],
+    "COG": [
+      "AGO",
+      "CAF",
+      "CMR",
+      "COD",
+      "GAB"
+    ],
+    "COL": [
+      "BRA",
+      "ECU",
+      "PAN",
+      "PER",
+      "VEN"
+    ],
+    "CRI": [
+      "NIC",
+      "PAN"
+    ],
+    "CZE": [
+      "AUT",
+      "DEU",
+      "POL",
+      "SVK"
+    ],
+    "DEU": [
+      "AUT",
+      "BEL",
+      "CHE",
+      "CZE",
+      "DNK",
+      "FRA",
+      "LUX",
+      "NLD",
+      "POL"
+    ],
+    "DJI": [
+      "ERI",
+      "ETH"
+    ],
+    "DNK": [
+      "DEU"
+    ],
+    "DOM": [
+      "HTI"
+    ],
+    "DZA": [
+      "LBY",
+      "MAR",
+      "MLI",
+      "MRT",
+      "NER",
+      "TUN"
+    ],
+    "ECU": [
+      "COL",
+      "PER"
+    ],
+    "EGY": [
+      "ISR",
+      "LBY",
+      "PSX",
+      "SDN"
+    ],
+    "ERI": [
+      "DJI",
+      "ETH",
+      "SDN"
+    ],
+    "ESP": [
+      "AND",
+      "FRA",
+      "PRT"
+    ],
+    "EST": [
+      "LVA",
+      "RUS"
+    ],
+    "ETH": [
+      "DJI",
+      "ERI",
+      "KEN",
+      "SDN",
+      "SDS",
+      "SOM"
+    ],
+    "FIN": [
+      "NOR",
+      "RUS",
+      "SWE"
+    ],
+    "FRA": [
+      "AND",
+      "BEL",
+      "CHE",
+      "DEU",
+      "ESP",
+      "ITA",
+      "LUX",
+      "MCO"
+    ],
+    "GAB": [
+      "CMR",
+      "COG",
+      "GNQ"
+    ],
+    "GBR": [
+      "IRL"
+    ],
+    "GEO": [
+      "ARM",
+      "AZE",
+      "RUS",
+      "TUR"
+    ],
+    "GHA": [
+      "BFA",
+      "CIV",
+      "TGO"
+    ],
+    "GIN": [
+      "CIV",
+      "GNB",
+      "LBR",
+      "MLI",
+      "SEN",
+      "SLE"
+    ],
+    "GMB": [
+      "SEN"
+    ],
+    "GNB": [
+      "GIN",
+      "SEN"
+    ],
+    "GNQ": [
+      "CMR",
+      "GAB"
+    ],
+    "GRC": [
+      "ALB",
+      "BGR",
+      "MKD",
+      "TUR"
+    ],
+    "GTM": [
+      "BLZ",
+      "HND",
+      "MEX",
+      "SLV"
+    ],
+    "GUY": [
+      "BRA",
+      "SUR",
+      "VEN"
+    ],
+    "HND": [
+      "GTM",
+      "NIC",
+      "SLV"
+    ],
+    "HRV": [
+      "BIH",
+      "HUN",
+      "MNE",
+      "SRB",
+      "SVN"
+    ],
+    "HTI": [
+      "DOM"
+    ],
+    "HUN": [
+      "AUT",
+      "HRV",
+      "ROU",
+      "SRB",
+      "SVK",
+      "SVN",
+      "UKR"
+    ],
+    "IDN": [
+      "MYS",
+      "PNG",
+      "TLS"
+    ],
+    "IND": [
+      "BGD",
+      "BTN",
+      "CHN",
+      "MMR",
+      "NPL",
+      "PAK"
+    ],
+    "IRL": [
+      "GBR"
+    ],
+    "IRN": [
+      "AFG",
+      "ARM",
+      "AZE",
+      "IRQ",
+      "PAK",
+      "TKM",
+      "TUR"
+    ],
+    "IRQ": [
+      "IRN",
+      "JOR",
+      "KWT",
+      "SAU",
+      "SYR",
+      "TUR"
+    ],
+    "ISR": [
+      "EGY",
+      "JOR",
+      "LBN",
+      "PSX",
+      "SYR"
+    ],
+    "ITA": [
+      "AUT",
+      "CHE",
+      "FRA",
+      "SMR",
+      "SVN",
+      "VAT"
+    ],
+    "JOR": [
+      "IRQ",
+      "ISR",
+      "PSX",
+      "SAU",
+      "SYR"
+    ],
+    "KAZ": [
+      "CHN",
+      "KGZ",
+      "RUS",
+      "TKM",
+      "UZB"
+    ],
+    "KEN": [
+      "ETH",
+      "SDS",
+      "SOM",
+      "TZA",
+      "UGA"
+    ],
+    "KGZ": [
+      "CHN",
+      "KAZ",
+      "TJK",
+      "UZB"
+    ],
+    "KHM": [
+      "LAO",
+      "THA",
+      "VNM"
+    ],
+    "KOR": [
+      "PRK"
+    ],
+    "KWT": [
+      "IRQ",
+      "SAU"
+    ],
+    "LAO": [
+      "CHN",
+      "KHM",
+      "MMR",
+      "THA",
+      "VNM"
+    ],
+    "LBN": [
+      "ISR",
+      "SYR"
+    ],
+    "LBR": [
+      "CIV",
+      "GIN",
+      "SLE"
+    ],
+    "LBY": [
+      "DZA",
+      "EGY",
+      "NER",
+      "SDN",
+      "TCD",
+      "TUN"
+    ],
+    "LIE": [
+      "AUT",
+      "CHE"
+    ],
+    "LSO": [
+      "ZAF"
+    ],
+    "LTU": [
+      "BLR",
+      "LVA",
+      "POL"
+    ],
+    "LUX": [
+      "BEL",
+      "DEU",
+      "FRA"
+    ],
+    "LVA": [
+      "BLR",
+      "EST",
+      "LTU",
+      "RUS"
+    ],
+    "MAR": [
+      "DZA"
+    ],
+    "MCO": [
+      "FRA"
+    ],
+    "MDA": [
+      "ROU",
+      "UKR"
+    ],
+    "MEX": [
+      "BLZ",
+      "GTM",
+      "USA"
+    ],
+    "MKD": [
+      "ALB",
+      "BGR",
+      "GRC",
+      "SRB"
+    ],
+    "MLI": [
+      "BFA",
+      "CIV",
+      "DZA",
+      "GIN",
+      "MRT",
+      "NER",
+      "SEN"
+    ],
+    "MMR": [
+      "BGD",
+      "CHN",
+      "IND",
+      "LAO",
+      "THA"
+    ],
+    "MNE": [
+      "ALB",
+      "BIH",
+      "HRV",
+      "SRB"
+    ],
+    "MNG": [
+      "CHN",
+      "RUS"
+    ],
+    "MOZ": [
+      "MWI",
+      "SWZ",
+      "TZA",
+      "ZAF",
+      "ZMB",
+      "ZWE"
+    ],
+    "MRT": [
+      "DZA",
+      "MLI",
+      "SEN"
+    ],
+    "MWI": [
+      "MOZ",
+      "TZA",
+      "ZMB"
+    ],
+    "MYS": [
+      "BRN",
+      "IDN",
+      "THA"
+    ],
+    "NAM": [
+      "AGO",
+      "BWA",
+      "ZAF",
+      "ZMB"
+    ],
+    "NER": [
+      "BEN",
+      "BFA",
+      "DZA",
+      "LBY",
+      "MLI",
+      "NGA",
+      "TCD"
+    ],
+    "NGA": [
+      "BEN",
+      "CMR",
+      "NER",
+      "TCD"
+    ],
+    "NIC": [
+      "CRI",
+      "HND"
+    ],
+    "NLD": [
+      "BEL",
+      "DEU"
+    ],
+    "NOR": [
+      "FIN",
+      "RUS",
+      "SWE"
+    ],
+    "NPL": [
+      "CHN",
+      "IND"
+    ],
+    "OMN": [
+      "ARE",
+      "SAU",
+      "YEM"
+    ],
+    "PAK": [
+      "AFG",
+      "CHN",
+      "IND",
+      "IRN"
+    ],
+    "PAN": [
+      "COL",
+      "CRI"
+    ],
+    "PER": [
+      "BOL",
+      "BRA",
+      "CHL",
+      "COL",
+      "ECU"
+    ],
+    "PNG": [
+      "IDN"
+    ],
+    "POL": [
+      "BLR",
+      "CZE",
+      "DEU",
+      "LTU",
+      "SVK",
+      "UKR"
+    ],
+    "PRK": [
+      "CHN",
+      "KOR",
+      "RUS"
+    ],
+    "PRT": [
+      "ESP"
+    ],
+    "PRY": [
+      "ARG",
+      "BOL",
+      "BRA"
+    ],
+    "PSX": [
+      "EGY",
+      "ISR",
+      "JOR"
+    ],
+    "QAT": [
+      "SAU"
+    ],
+    "ROU": [
+      "BGR",
+      "HUN",
+      "MDA",
+      "SRB",
+      "UKR"
+    ],
+    "RUS": [
+      "AZE",
+      "BLR",
+      "CHN",
+      "EST",
+      "FIN",
+      "GEO",
+      "KAZ",
+      "LVA",
+      "MNG",
+      "NOR",
+      "PRK",
+      "UKR"
+    ],
+    "RWA": [
+      "BDI",
+      "COD",
+      "TZA",
+      "UGA"
+    ],
+    "SAU": [
+      "ARE",
+      "IRQ",
+      "JOR",
+      "KWT",
+      "OMN",
+      "QAT",
+      "YEM"
+    ],
+    "SDN": [
+      "CAF",
+      "EGY",
+      "ERI",
+      "ETH",
+      "LBY",
+      "SDS",
+      "TCD"
+    ],
+    "SDS": [
+      "CAF",
+      "COD",
+      "ETH",
+      "KEN",
+      "SDN",
+      "UGA"
+    ],
+    "SEN": [
+      "GIN",
+      "GMB",
+      "GNB",
+      "MLI",
+      "MRT"
+    ],
+    "SLE": [
+      "GIN",
+      "LBR"
+    ],
+    "SLV": [
+      "GTM",
+      "HND"
+    ],
+    "SMR": [
+      "ITA"
+    ],
+    "SOM": [
+      "ETH",
+      "KEN"
+    ],
+    "SRB": [
+      "BGR",
+      "BIH",
+      "HRV",
+      "HUN",
+      "MKD",
+      "MNE",
+      "ROU"
+    ],
+    "SUR": [
+      "BRA",
+      "GUY"
+    ],
+    "SVK": [
+      "AUT",
+      "CZE",
+      "HUN",
+      "POL",
+      "UKR"
+    ],
+    "SVN": [
+      "AUT",
+      "HRV",
+      "HUN",
+      "ITA"
+    ],
+    "SWE": [
+      "FIN",
+      "NOR"
+    ],
+    "SWZ": [
+      "MOZ",
+      "ZAF"
+    ],
+    "SYR": [
+      "IRQ",
+      "ISR",
+      "JOR",
+      "LBN",
+      "TUR"
+    ],
+    "TCD": [
+      "CAF",
+      "CMR",
+      "LBY",
+      "NER",
+      "NGA",
+      "SDN"
+    ],
+    "TGO": [
+      "BEN",
+      "BFA",
+      "GHA"
+    ],
+    "THA": [
+      "KHM",
+      "LAO",
+      "MMR",
+      "MYS"
+    ],
+    "TJK": [
+      "AFG",
+      "CHN",
+      "KGZ",
+      "UZB"
+    ],
+    "TKM": [
+      "AFG",
+      "IRN",
+      "KAZ",
+      "UZB"
+    ],
+    "TLS": [
+      "IDN"
+    ],
+    "TUN": [
+      "DZA",
+      "LBY"
+    ],
+    "TUR": [
+      "ARM",
+      "AZE",
+      "BGR",
+      "GEO",
+      "GRC",
+      "IRN",
+      "IRQ",
+      "SYR"
+    ],
+    "TZA": [
+      "BDI",
+      "COD",
+      "KEN",
+      "MOZ",
+      "MWI",
+      "RWA",
+      "UGA",
+      "ZMB"
+    ],
+    "UGA": [
+      "COD",
+      "KEN",
+      "RWA",
+      "SDS",
+      "TZA"
+    ],
+    "UKR": [
+      "BLR",
+      "HUN",
+      "MDA",
+      "POL",
+      "ROU",
+      "RUS",
+      "SVK"
+    ],
+    "URY": [
+      "ARG",
+      "BRA"
+    ],
+    "USA": [
+      "CAN",
+      "MEX"
+    ],
+    "UZB": [
+      "AFG",
+      "KAZ",
+      "KGZ",
+      "TJK",
+      "TKM"
+    ],
+    "VAT": [
+      "ITA"
+    ],
+    "VEN": [
+      "BRA",
+      "COL",
+      "GUY"
+    ],
+    "VNM": [
+      "CHN",
+      "KHM",
+      "LAO"
+    ],
+    "YEM": [
+      "OMN",
+      "SAU"
+    ],
+    "ZAF": [
+      "BWA",
+      "LSO",
+      "MOZ",
+      "NAM",
+      "SWZ",
+      "ZWE"
+    ],
+    "ZMB": [
+      "AGO",
+      "BWA",
+      "COD",
+      "MOZ",
+      "MWI",
+      "NAM",
+      "TZA",
+      "ZWE"
+    ],
+    "ZWE": [
+      "BWA",
+      "MOZ",
+      "ZAF",
+      "ZMB"
+    ]
+  },
+  "puzzles": [
+    {
+      "id": 0,
+      "start": "PRT",
+      "end": "POL",
+      "region": "Europe",
+      "minimum": 4,
+      "solution": [
+        "PRT",
+        "ESP",
+        "FRA",
+        "DEU",
+        "POL"
+      ]
+    },
+    {
+      "id": 1,
+      "start": "ESP",
+      "end": "AUT",
+      "region": "Europe",
+      "minimum": 3,
+      "solution": [
+        "ESP",
+        "FRA",
+        "CHE",
+        "AUT"
+      ]
+    },
+    {
+      "id": 2,
+      "start": "FRA",
+      "end": "ROU",
+      "region": "Europe",
+      "minimum": 4,
+      "solution": [
+        "FRA",
+        "CHE",
+        "AUT",
+        "HUN",
+        "ROU"
+      ]
+    },
+    {
+      "id": 3,
+      "start": "BEL",
+      "end": "HRV",
+      "region": "Europe",
+      "minimum": 4,
+      "solution": [
+        "BEL",
+        "DEU",
+        "AUT",
+        "HUN",
+        "HRV"
+      ]
+    },
+    {
+      "id": 4,
+      "start": "NLD",
+      "end": "ITA",
+      "region": "Europe",
+      "minimum": 3,
+      "solution": [
+        "NLD",
+        "BEL",
+        "FRA",
+        "ITA"
+      ]
+    },
+    {
+      "id": 5,
+      "start": "DNK",
+      "end": "SVK",
+      "region": "Europe",
+      "minimum": 3,
+      "solution": [
+        "DNK",
+        "DEU",
+        "AUT",
+        "SVK"
+      ]
+    },
+    {
+      "id": 6,
+      "start": "NOR",
+      "end": "UKR",
+      "region": "Europe",
+      "minimum": 2,
+      "solution": [
+        "NOR",
+        "RUS",
+        "UKR"
+      ]
+    },
+    {
+      "id": 7,
+      "start": "SWE",
+      "end": "DEU",
+      "region": "Europe",
+      "minimum": 5,
+      "solution": [
+        "SWE",
+        "FIN",
+        "RUS",
+        "BLR",
+        "POL",
+        "DEU"
+      ]
+    },
+    {
+      "id": 8,
+      "start": "ITA",
+      "end": "CZE",
+      "region": "Europe",
+      "minimum": 2,
+      "solution": [
+        "ITA",
+        "AUT",
+        "CZE"
+      ]
+    },
+    {
+      "id": 9,
+      "start": "CHE",
+      "end": "BGR",
+      "region": "Europe",
+      "minimum": 4,
+      "solution": [
+        "CHE",
+        "AUT",
+        "HUN",
+        "ROU",
+        "BGR"
+      ]
+    },
+    {
+      "id": 10,
+      "start": "POL",
+      "end": "GRC",
+      "region": "Europe",
+      "minimum": 4,
+      "solution": [
+        "POL",
+        "UKR",
+        "ROU",
+        "BGR",
+        "GRC"
+      ]
+    },
+    {
+      "id": 11,
+      "start": "FIN",
+      "end": "HUN",
+      "region": "Europe",
+      "minimum": 3,
+      "solution": [
+        "FIN",
+        "RUS",
+        "UKR",
+        "HUN"
+      ]
+    },
+    {
+      "id": 12,
+      "start": "AUT",
+      "end": "ALB",
+      "region": "Europe",
+      "minimum": 4,
+      "solution": [
+        "AUT",
+        "HUN",
+        "HRV",
+        "MNE",
+        "ALB"
+      ]
+    },
+    {
+      "id": 13,
+      "start": "SEN",
+      "end": "GHA",
+      "region": "Africa",
+      "minimum": 3,
+      "solution": [
+        "SEN",
+        "GIN",
+        "CIV",
+        "GHA"
+      ]
+    },
+    {
+      "id": 14,
+      "start": "MAR",
+      "end": "EGY",
+      "region": "Africa",
+      "minimum": 3,
+      "solution": [
+        "MAR",
+        "DZA",
+        "LBY",
+        "EGY"
+      ]
+    },
+    {
+      "id": 15,
+      "start": "GHA",
+      "end": "CMR",
+      "region": "Africa",
+      "minimum": 4,
+      "solution": [
+        "GHA",
+        "BFA",
+        "BEN",
+        "NGA",
+        "CMR"
+      ]
+    },
+    {
+      "id": 16,
+      "start": "NAM",
+      "end": "KEN",
+      "region": "Africa",
+      "minimum": 3,
+      "solution": [
+        "NAM",
+        "ZMB",
+        "TZA",
+        "KEN"
+      ]
+    },
+    {
+      "id": 17,
+      "start": "ZAF",
+      "end": "AGO",
+      "region": "Africa",
+      "minimum": 2,
+      "solution": [
+        "ZAF",
+        "NAM",
+        "AGO"
+      ]
+    },
+    {
+      "id": 18,
+      "start": "ZMB",
+      "end": "SOM",
+      "region": "Africa",
+      "minimum": 3,
+      "solution": [
+        "ZMB",
+        "TZA",
+        "KEN",
+        "SOM"
+      ]
+    },
+    {
+      "id": 19,
+      "start": "ETH",
+      "end": "COG",
+      "region": "Africa",
+      "minimum": 3,
+      "solution": [
+        "ETH",
+        "SDN",
+        "CAF",
+        "COG"
+      ]
+    },
+    {
+      "id": 20,
+      "start": "TUN",
+      "end": "TCD",
+      "region": "Africa",
+      "minimum": 2,
+      "solution": [
+        "TUN",
+        "LBY",
+        "TCD"
+      ]
+    },
+    {
+      "id": 21,
+      "start": "BEN",
+      "end": "TZA",
+      "region": "Africa",
+      "minimum": 5,
+      "solution": [
+        "BEN",
+        "NER",
+        "TCD",
+        "CAF",
+        "COD",
+        "TZA"
+      ]
+    },
+    {
+      "id": 22,
+      "start": "BFA",
+      "end": "UGA",
+      "region": "Africa",
+      "minimum": 5,
+      "solution": [
+        "BFA",
+        "NER",
+        "LBY",
+        "SDN",
+        "SDS",
+        "UGA"
+      ]
+    },
+    {
+      "id": 23,
+      "start": "GIN",
+      "end": "NER",
+      "region": "Africa",
+      "minimum": 2,
+      "solution": [
+        "GIN",
+        "MLI",
+        "NER"
+      ]
+    },
+    {
+      "id": 24,
+      "start": "MWI",
+      "end": "GAB",
+      "region": "Africa",
+      "minimum": 4,
+      "solution": [
+        "MWI",
+        "TZA",
+        "COD",
+        "COG",
+        "GAB"
+      ]
+    },
+    {
+      "id": 25,
+      "start": "EGY",
+      "end": "ZAF",
+      "region": "Africa",
+      "minimum": 6,
+      "solution": [
+        "EGY",
+        "SDN",
+        "CAF",
+        "COD",
+        "AGO",
+        "NAM",
+        "ZAF"
+      ]
+    },
+    {
+      "id": 26,
+      "start": "CAN",
+      "end": "HND",
+      "region": "North America",
+      "minimum": 4,
+      "solution": [
+        "CAN",
+        "USA",
+        "MEX",
+        "GTM",
+        "HND"
+      ]
+    },
+    {
+      "id": 27,
+      "start": "USA",
+      "end": "PAN",
+      "region": "North America",
+      "minimum": 6,
+      "solution": [
+        "USA",
+        "MEX",
+        "GTM",
+        "HND",
+        "NIC",
+        "CRI",
+        "PAN"
+      ]
+    },
+    {
+      "id": 28,
+      "start": "MEX",
+      "end": "CRI",
+      "region": "North America",
+      "minimum": 4,
+      "solution": [
+        "MEX",
+        "GTM",
+        "HND",
+        "NIC",
+        "CRI"
+      ]
+    },
+    {
+      "id": 29,
+      "start": "GTM",
+      "end": "PAN",
+      "region": "North America",
+      "minimum": 4,
+      "solution": [
+        "GTM",
+        "HND",
+        "NIC",
+        "CRI",
+        "PAN"
+      ]
+    },
+    {
+      "id": 30,
+      "start": "SLV",
+      "end": "NIC",
+      "region": "North America",
+      "minimum": 2,
+      "solution": [
+        "SLV",
+        "HND",
+        "NIC"
+      ]
+    },
+    {
+      "id": 31,
+      "start": "CHL",
+      "end": "COL",
+      "region": "South America",
+      "minimum": 2,
+      "solution": [
+        "CHL",
+        "PER",
+        "COL"
+      ]
+    },
+    {
+      "id": 32,
+      "start": "PER",
+      "end": "URY",
+      "region": "South America",
+      "minimum": 2,
+      "solution": [
+        "PER",
+        "BRA",
+        "URY"
+      ]
+    },
+    {
+      "id": 33,
+      "start": "ECU",
+      "end": "ARG",
+      "region": "South America",
+      "minimum": 3,
+      "solution": [
+        "ECU",
+        "COL",
+        "BRA",
+        "ARG"
+      ]
+    },
+    {
+      "id": 34,
+      "start": "BOL",
+      "end": "GUY",
+      "region": "South America",
+      "minimum": 2,
+      "solution": [
+        "BOL",
+        "BRA",
+        "GUY"
+      ]
+    },
+    {
+      "id": 35,
+      "start": "VEN",
+      "end": "PRY",
+      "region": "South America",
+      "minimum": 2,
+      "solution": [
+        "VEN",
+        "BRA",
+        "PRY"
+      ]
+    },
+    {
+      "id": 36,
+      "start": "SUR",
+      "end": "PER",
+      "region": "South America",
+      "minimum": 2,
+      "solution": [
+        "SUR",
+        "BRA",
+        "PER"
+      ]
+    },
+    {
+      "id": 37,
+      "start": "COL",
+      "end": "URY",
+      "region": "South America",
+      "minimum": 2,
+      "solution": [
+        "COL",
+        "BRA",
+        "URY"
+      ]
+    },
+    {
+      "id": 38,
+      "start": "NPL",
+      "end": "THA",
+      "region": "Asia",
+      "minimum": 3,
+      "solution": [
+        "NPL",
+        "CHN",
+        "LAO",
+        "THA"
+      ]
+    },
+    {
+      "id": 39,
+      "start": "IND",
+      "end": "VNM",
+      "region": "Asia",
+      "minimum": 2,
+      "solution": [
+        "IND",
+        "CHN",
+        "VNM"
+      ]
+    },
+    {
+      "id": 40,
+      "start": "PAK",
+      "end": "KHM",
+      "region": "Asia",
+      "minimum": 3,
+      "solution": [
+        "PAK",
+        "CHN",
+        "LAO",
+        "KHM"
+      ]
+    },
+    {
+      "id": 41,
+      "start": "IRN",
+      "end": "CHN",
+      "region": "Asia",
+      "minimum": 2,
+      "solution": [
+        "IRN",
+        "AFG",
+        "CHN"
+      ]
+    },
+    {
+      "id": 42,
+      "start": "TUR",
+      "end": "NPL",
+      "region": "World",
+      "minimum": 4,
+      "solution": [
+        "TUR",
+        "AZE",
+        "RUS",
+        "CHN",
+        "NPL"
+      ]
+    },
+    {
+      "id": 43,
+      "start": "KAZ",
+      "end": "IRQ",
+      "region": "Asia",
+      "minimum": 3,
+      "solution": [
+        "KAZ",
+        "TKM",
+        "IRN",
+        "IRQ"
+      ]
+    },
+    {
+      "id": 44,
+      "start": "LAO",
+      "end": "BGD",
+      "region": "Asia",
+      "minimum": 2,
+      "solution": [
+        "LAO",
+        "MMR",
+        "BGD"
+      ]
+    },
+    {
+      "id": 45,
+      "start": "MNG",
+      "end": "AFG",
+      "region": "Asia",
+      "minimum": 2,
+      "solution": [
+        "MNG",
+        "CHN",
+        "AFG"
+      ]
+    },
+    {
+      "id": 46,
+      "start": "JOR",
+      "end": "GEO",
+      "region": "Asia",
+      "minimum": 3,
+      "solution": [
+        "JOR",
+        "IRQ",
+        "TUR",
+        "GEO"
+      ]
+    },
+    {
+      "id": 47,
+      "start": "OMN",
+      "end": "ARM",
+      "region": "Asia",
+      "minimum": 4,
+      "solution": [
+        "OMN",
+        "SAU",
+        "IRQ",
+        "IRN",
+        "ARM"
+      ]
+    }
+  ]
+}

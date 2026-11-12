@@ -2,6 +2,13 @@ import {$,saved,remember} from './ui';
 import {householdDaylight,daylightPalette} from './daylight';
 import {initUpdates,openUpdates} from './updates';
 
+/** Reuse the shared theme control in screens that hide the house navigation. */
+export function themeToggleMarkup(className:string){
+ const button=$<HTMLButtonElement>('#theme-toggle').cloneNode(true) as HTMLButtonElement;
+ button.removeAttribute('id');button.className=className;button.setAttribute('data-theme-toggle','');
+ return button.outerHTML;
+}
+
 export function initSettings() {
  const dialog=$<HTMLDialogElement>('#settings-dialog'),toggle=$<HTMLButtonElement>('#theme-toggle');
  const systemTheme=matchMedia('(prefers-color-scheme: dark)'),selector=$<HTMLSelectElement>('#theme-select');
@@ -34,11 +41,12 @@ export function initSettings() {
   }
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content',selector.value==='daylight'&&palette.colors?palette.colors.bg:theme==='dark'?'#182437':'#f5f2e9');
   const action=`Color theme: ${labels[selector.value]}. Switch to ${labels[nextTheme()]}`;
-  toggle.setAttribute('aria-label',action);toggle.title=action;
+  document.querySelectorAll<HTMLElement>('#theme-toggle,[data-theme-toggle]').forEach(button=>{button.setAttribute('aria-label',action);button.title=action;});
  }
  function saveTheme(){remember('household-theme',selector.value);applyTheme(true);}
  selector.addEventListener('change',saveTheme);
  toggle.addEventListener('click',()=>{selector.value=nextTheme();saveTheme();});
+ document.addEventListener('click',event=>{if((event.target as Element).closest('[data-theme-toggle]')){selector.value=nextTheme();saveTheme();}});
  systemTheme.addEventListener('change',()=>applyTheme(true));
  setInterval(()=>{if(!document.hidden)applyTheme();},60000);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)applyTheme();});applyTheme();

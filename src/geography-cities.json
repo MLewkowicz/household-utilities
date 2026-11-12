@@ -1,0 +1,5744 @@
+{
+  "AFG": {
+    "id": "AFG",
+    "name": "Kabul",
+    "lon": 69.181314,
+    "lat": 34.518636,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "AFG",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ALB": {
+    "id": "ALB",
+    "name": "Tirana",
+    "lon": 19.818883,
+    "lat": 41.327541,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ALB",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "DZA": {
+    "id": "DZA",
+    "name": "Algiers",
+    "lon": 3.048607,
+    "lat": 36.765011,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "DZA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ASM": {
+    "id": "ASM",
+    "name": "Pago Pago",
+    "lon": -170.706645,
+    "lat": -14.276611,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ASM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "AND": {
+    "id": "AND",
+    "name": "Andorra la Vella",
+    "lon": 1.516667,
+    "lat": 42.5,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/europe/an.json",
+    "countryId": "AND",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "AGO": {
+    "id": "AGO",
+    "name": "Luanda",
+    "lon": 13.232481,
+    "lat": -8.83634,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "AGO",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "AIA": {
+    "id": "AIA",
+    "name": "The Valley",
+    "lon": -63.05,
+    "lat": 18.216667,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/central-america-n-caribbean/av.json",
+    "countryId": "AIA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ATG": {
+    "id": "ATG",
+    "name": "Saint John's",
+    "lon": -61.850034,
+    "lat": 17.118036,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ATG",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ARG": {
+    "id": "ARG",
+    "name": "Buenos Aires",
+    "lon": -58.432513,
+    "lat": -34.610715,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ARG",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ARM": {
+    "id": "ARM",
+    "name": "Yerevan",
+    "lon": 44.511606,
+    "lat": 40.183097,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ARM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ABW": {
+    "id": "ABW",
+    "name": "Oranjestad",
+    "lon": -70.025526,
+    "lat": 12.521503,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ABW",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "AUS": {
+    "id": "AUS",
+    "name": "Canberra",
+    "lon": 149.129026,
+    "lat": -35.283029,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "AUS",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "AUT": {
+    "id": "AUT",
+    "name": "Vienna",
+    "lon": 16.364693,
+    "lat": 48.201961,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "AUT",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "AZE": {
+    "id": "AZE",
+    "name": "Baku",
+    "lon": 49.860271,
+    "lat": 40.397218,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "AZE",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BHR": {
+    "id": "BHR",
+    "name": "Manama",
+    "lon": 50.583052,
+    "lat": 26.236136,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BHR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BGD": {
+    "id": "BGD",
+    "name": "Dhaka",
+    "lon": 90.406634,
+    "lat": 23.725006,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BGD",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BRB": {
+    "id": "BRB",
+    "name": "Bridgetown",
+    "lon": -59.616527,
+    "lat": 13.102003,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BRB",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BLR": {
+    "id": "BLR",
+    "name": "Minsk",
+    "lon": 27.564681,
+    "lat": 53.901923,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BLR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BEL": {
+    "id": "BEL",
+    "name": "Brussels",
+    "lon": 4.331371,
+    "lat": 50.835263,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BEL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BLZ": {
+    "id": "BLZ",
+    "name": "Belmopan",
+    "lon": -88.767073,
+    "lat": 17.252033,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BLZ",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BEN": {
+    "id": "BEN",
+    "name": "Porto-Novo",
+    "lon": 2.616626,
+    "lat": 6.483311,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BEN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BMU": {
+    "id": "BMU",
+    "name": "Hamilton",
+    "lon": -64.783937,
+    "lat": 32.29419,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BMU",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BTN": {
+    "id": "BTN",
+    "name": "Thimphu",
+    "lon": 89.639014,
+    "lat": 27.472986,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BTN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BOL": {
+    "id": "BOL",
+    "name": "Sucre",
+    "lon": -65.259516,
+    "lat": -19.040971,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BOL",
+    "capital": true,
+    "capitalRole": "constitutional"
+  },
+  "BIH": {
+    "id": "BIH",
+    "name": "Sarajevo",
+    "lon": 18.383002,
+    "lat": 43.850022,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BIH",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BWA": {
+    "id": "BWA",
+    "name": "Gaborone",
+    "lon": 25.911948,
+    "lat": -24.646314,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BWA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BRA": {
+    "id": "BRA",
+    "name": "Brasília",
+    "lon": -47.917998,
+    "lat": -15.781394,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BRA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "VGB": {
+    "id": "VGB",
+    "name": "Road Town",
+    "lon": -64.616667,
+    "lat": 18.416667,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/central-america-n-caribbean/vi.json",
+    "countryId": "VGB",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BRN": {
+    "id": "BRN",
+    "name": "Bandar Seri Begawan",
+    "lon": 114.933284,
+    "lat": 4.883331,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BRN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BGR": {
+    "id": "BGR",
+    "name": "Sofia",
+    "lon": 23.314708,
+    "lat": 42.685295,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BGR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BFA": {
+    "id": "BFA",
+    "name": "Ouagadougou",
+    "lon": -1.52667,
+    "lat": 12.372262,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BFA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BDI": {
+    "id": "BDI",
+    "name": "Gitega",
+    "lon": 29.843594,
+    "lat": -3.426007,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BDI",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "KHM": {
+    "id": "KHM",
+    "name": "Phnom Penh",
+    "lon": 104.914689,
+    "lat": 11.551976,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "KHM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CMR": {
+    "id": "CMR",
+    "name": "Yaounde",
+    "lon": 11.514705,
+    "lat": 3.868647,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CMR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CAN": {
+    "id": "CAN",
+    "name": "Ottawa",
+    "lon": -75.701961,
+    "lat": 45.418643,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CAN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CPV": {
+    "id": "CPV",
+    "name": "Praia",
+    "lon": -23.516689,
+    "lat": 14.916698,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CPV",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CYM": {
+    "id": "CYM",
+    "name": "George Town",
+    "lon": -81.37157,
+    "lat": 19.294748,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CYM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CAF": {
+    "id": "CAF",
+    "name": "Bangui",
+    "lon": 18.558288,
+    "lat": 4.366644,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CAF",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TCD": {
+    "id": "TCD",
+    "name": "N'Djamena",
+    "lon": 15.047202,
+    "lat": 12.115042,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TCD",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CHL": {
+    "id": "CHL",
+    "name": "Santiago",
+    "lon": -70.650504,
+    "lat": -33.440205,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CHL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "COL": {
+    "id": "COL",
+    "name": "Bogotá",
+    "lon": -74.08529,
+    "lat": 4.598369,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "COL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "COM": {
+    "id": "COM",
+    "name": "Moroni",
+    "lon": 43.240244,
+    "lat": -11.704158,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "COM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "COK": {
+    "id": "COK",
+    "name": "Avarua",
+    "lon": -159.785437,
+    "lat": -21.196226,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "COK",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CRI": {
+    "id": "CRI",
+    "name": "San José",
+    "lon": -84.078814,
+    "lat": 9.930371,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CRI",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "HRV": {
+    "id": "HRV",
+    "name": "Zagreb",
+    "lon": 15.999995,
+    "lat": 45.800007,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "HRV",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CUB": {
+    "id": "CUB",
+    "name": "Havana",
+    "lon": -82.366128,
+    "lat": 23.133905,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CUB",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CUW": {
+    "id": "CUW",
+    "name": "Willemstad",
+    "lon": -68.872356,
+    "lat": 12.11229,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CUW",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CYP": {
+    "id": "CYP",
+    "name": "Nicosia",
+    "lon": 33.366635,
+    "lat": 35.166677,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CYP",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CZE": {
+    "id": "CZE",
+    "name": "Prague",
+    "lon": 14.422939,
+    "lat": 50.086967,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CZE",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "COD": {
+    "id": "COD",
+    "name": "Kinshasa",
+    "lon": 15.313026,
+    "lat": -4.327778,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "COD",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "DNK": {
+    "id": "DNK",
+    "name": "Copenhagen",
+    "lon": 12.583333,
+    "lat": 55.666667,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/europe/da.json",
+    "countryId": "DNK",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "DJI": {
+    "id": "DJI",
+    "name": "Djibouti",
+    "lon": 43.148002,
+    "lat": 11.595014,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "DJI",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "DMA": {
+    "id": "DMA",
+    "name": "Roseau",
+    "lon": -61.387013,
+    "lat": 15.301016,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "DMA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "DOM": {
+    "id": "DOM",
+    "name": "Santo Domingo",
+    "lon": -69.929742,
+    "lat": 18.470745,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "DOM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TLS": {
+    "id": "TLS",
+    "name": "Dili",
+    "lon": 125.579456,
+    "lat": -8.559388,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TLS",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ECU": {
+    "id": "ECU",
+    "name": "Quito",
+    "lon": -78.501997,
+    "lat": -0.213042,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ECU",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "EGY": {
+    "id": "EGY",
+    "name": "Cairo",
+    "lon": 31.248022,
+    "lat": 30.051906,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "EGY",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SLV": {
+    "id": "SLV",
+    "name": "San Salvador",
+    "lon": -89.215576,
+    "lat": 13.70328,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SLV",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ERI": {
+    "id": "ERI",
+    "name": "Asmara",
+    "lon": 38.933324,
+    "lat": 15.333339,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ERI",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "EST": {
+    "id": "EST",
+    "name": "Tallinn",
+    "lon": 24.728041,
+    "lat": 59.433877,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "EST",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SWZ": {
+    "id": "SWZ",
+    "name": "Mbabane",
+    "lon": 31.133335,
+    "lat": -26.316651,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SWZ",
+    "capital": true,
+    "capitalRole": "administrative"
+  },
+  "ETH": {
+    "id": "ETH",
+    "name": "Addis Ababa",
+    "lon": 38.698059,
+    "lat": 9.035256,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ETH",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "FLK": {
+    "id": "FLK",
+    "name": "Stanley",
+    "lon": -57.849968,
+    "lat": -51.700011,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "FLK",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "FRO": {
+    "id": "FRO",
+    "name": "Torshavn",
+    "lon": -6.820034,
+    "lat": 62.030024,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "FRO",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "FSM": {
+    "id": "FSM",
+    "name": "Palikir",
+    "lon": 158.149974,
+    "lat": 6.916644,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "FSM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "FJI": {
+    "id": "FJI",
+    "name": "Suva",
+    "lon": 178.441707,
+    "lat": -18.133016,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "FJI",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "FIN": {
+    "id": "FIN",
+    "name": "Helsinki",
+    "lon": 24.932457,
+    "lat": 60.163804,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "FIN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "FRA": {
+    "id": "FRA",
+    "name": "Paris",
+    "lon": 2.352992,
+    "lat": 48.858092,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "FRA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "PYF": {
+    "id": "PYF",
+    "name": "Papeete",
+    "lon": -149.566669,
+    "lat": -17.533363,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "PYF",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GAB": {
+    "id": "GAB",
+    "name": "Libreville",
+    "lon": 9.457965,
+    "lat": 0.385389,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GAB",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GEO": {
+    "id": "GEO",
+    "name": "Tbilisi",
+    "lon": 44.78885,
+    "lat": 41.726956,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GEO",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "DEU": {
+    "id": "DEU",
+    "name": "Berlin",
+    "lon": 13.399603,
+    "lat": 52.523764,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "DEU",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GHA": {
+    "id": "GHA",
+    "name": "Accra",
+    "lon": -0.218662,
+    "lat": 5.55198,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GHA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GRC": {
+    "id": "GRC",
+    "name": "Athens",
+    "lon": 23.731375,
+    "lat": 37.985272,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GRC",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GRL": {
+    "id": "GRL",
+    "name": "Nuuk",
+    "lon": -51.732659,
+    "lat": 64.198281,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GRL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GRD": {
+    "id": "GRD",
+    "name": "Saint George's",
+    "lon": -61.741643,
+    "lat": 12.052633,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GRD",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GUM": {
+    "id": "GUM",
+    "name": "Hagåtña",
+    "lon": 144.750017,
+    "lat": 13.470016,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GUM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GTM": {
+    "id": "GTM",
+    "name": "Guatemala City",
+    "lon": -90.528911,
+    "lat": 14.623081,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GTM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GGY": {
+    "id": "GGY",
+    "name": "Saint Peter Port",
+    "lon": -2.533333,
+    "lat": 49.45,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/europe/gk.json",
+    "countryId": "GGY",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GIN": {
+    "id": "GIN",
+    "name": "Conakry",
+    "lon": -13.682181,
+    "lat": 9.533469,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GIN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GNB": {
+    "id": "GNB",
+    "name": "Bissau",
+    "lon": -15.598361,
+    "lat": 11.865024,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GNB",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GUY": {
+    "id": "GUY",
+    "name": "Georgetown",
+    "lon": -58.167029,
+    "lat": 6.801974,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GUY",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "HTI": {
+    "id": "HTI",
+    "name": "Port-au-Prince",
+    "lon": -72.33798,
+    "lat": 18.54297,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "HTI",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "HND": {
+    "id": "HND",
+    "name": "Tegucigalpa",
+    "lon": -87.219475,
+    "lat": 14.103991,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "HND",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "HUN": {
+    "id": "HUN",
+    "name": "Budapest",
+    "lon": 19.081375,
+    "lat": 47.501952,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "HUN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ISL": {
+    "id": "ISL",
+    "name": "Reykjavik",
+    "lon": -21.936546,
+    "lat": 64.143459,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ISL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "IND": {
+    "id": "IND",
+    "name": "New Delhi",
+    "lon": 77.19998,
+    "lat": 28.600023,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "IND",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "IDN": {
+    "id": "IDN",
+    "name": "Jakarta",
+    "lon": 106.827492,
+    "lat": -6.172472,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "IDN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "IRN": {
+    "id": "IRN",
+    "name": "Tehran",
+    "lon": 51.422398,
+    "lat": 35.673889,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "IRN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "IRQ": {
+    "id": "IRQ",
+    "name": "Baghdad",
+    "lon": 44.391923,
+    "lat": 33.340594,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "IRQ",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "IRL": {
+    "id": "IRL",
+    "name": "Dublin",
+    "lon": -6.25698,
+    "lat": 53.346731,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "IRL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "IMN": {
+    "id": "IMN",
+    "name": "Douglas",
+    "lon": -4.480269,
+    "lat": 54.149122,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "IMN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ISR": {
+    "id": "ISR",
+    "name": "Jerusalem",
+    "lon": 35.206626,
+    "lat": 31.778408,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ISR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ITA": {
+    "id": "ITA",
+    "name": "Rome",
+    "lon": 12.481313,
+    "lat": 41.897902,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ITA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CIV": {
+    "id": "CIV",
+    "name": "Yamoussoukro",
+    "lon": -5.275503,
+    "lat": 6.818381,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CIV",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "JAM": {
+    "id": "JAM",
+    "name": "Kingston",
+    "lon": -76.767434,
+    "lat": 17.977077,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "JAM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "JPN": {
+    "id": "JPN",
+    "name": "Tokyo",
+    "lon": 139.749462,
+    "lat": 35.686963,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "JPN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "JEY": {
+    "id": "JEY",
+    "name": "Saint Helier",
+    "lon": -2.1,
+    "lat": 49.183333,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/europe/je.json",
+    "countryId": "JEY",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "JOR": {
+    "id": "JOR",
+    "name": "Amman",
+    "lon": 35.931354,
+    "lat": 31.951971,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "JOR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "KAZ": {
+    "id": "KAZ",
+    "name": "Astana",
+    "lon": 71.427774,
+    "lat": 51.181125,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "KAZ",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "KEN": {
+    "id": "KEN",
+    "name": "Nairobi",
+    "lon": 36.814711,
+    "lat": -1.281401,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "KEN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "KIR": {
+    "id": "KIR",
+    "name": "South Tarawa",
+    "lon": 173.017571,
+    "lat": 1.338188,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "KIR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "KOS": {
+    "id": "KOS",
+    "name": "Pristina",
+    "lon": 21.165984,
+    "lat": 42.66671,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "KOS",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "KWT": {
+    "id": "KWT",
+    "name": "Kuwait City",
+    "lon": 47.976355,
+    "lat": 29.371664,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "KWT",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "KGZ": {
+    "id": "KGZ",
+    "name": "Bishkek",
+    "lon": 74.583258,
+    "lat": 42.875025,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "KGZ",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "LAO": {
+    "id": "LAO",
+    "name": "Vientiane",
+    "lon": 102.59998,
+    "lat": 17.966693,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "LAO",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "LVA": {
+    "id": "LVA",
+    "name": "Riga",
+    "lon": 24.099965,
+    "lat": 56.950024,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "LVA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "LBN": {
+    "id": "LBN",
+    "name": "Beirut",
+    "lon": 35.507762,
+    "lat": 33.873921,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "LBN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "LSO": {
+    "id": "LSO",
+    "name": "Maseru",
+    "lon": 27.483273,
+    "lat": -29.316674,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "LSO",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "LBR": {
+    "id": "LBR",
+    "name": "Monrovia",
+    "lon": -10.79966,
+    "lat": 6.314582,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "LBR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "LBY": {
+    "id": "LBY",
+    "name": "Tripoli",
+    "lon": 13.180012,
+    "lat": 32.8925,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "LBY",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "LIE": {
+    "id": "LIE",
+    "name": "Vaduz",
+    "lon": 9.51667,
+    "lat": 47.133724,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "LIE",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "LTU": {
+    "id": "LTU",
+    "name": "Vilnius",
+    "lon": 25.316635,
+    "lat": 54.683366,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "LTU",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "LUX": {
+    "id": "LUX",
+    "name": "Luxembourg",
+    "lon": 6.130003,
+    "lat": 49.61166,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "LUX",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MDG": {
+    "id": "MDG",
+    "name": "Antananarivo",
+    "lon": 47.514678,
+    "lat": -18.914691,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MDG",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MWI": {
+    "id": "MWI",
+    "name": "Lilongwe",
+    "lon": 33.783302,
+    "lat": -13.983295,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MWI",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MYS": {
+    "id": "MYS",
+    "name": "Kuala Lumpur",
+    "lon": 101.688699,
+    "lat": 3.139797,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MYS",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MDV": {
+    "id": "MDV",
+    "name": "Malé",
+    "lon": 73.508901,
+    "lat": 4.172037,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MDV",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MLI": {
+    "id": "MLI",
+    "name": "Bamako",
+    "lon": -8.001985,
+    "lat": 12.65196,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MLI",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MLT": {
+    "id": "MLT",
+    "name": "Valletta",
+    "lon": 14.514711,
+    "lat": 35.899732,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MLT",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MHL": {
+    "id": "MHL",
+    "name": "Majuro",
+    "lon": 171.38,
+    "lat": 7.103004,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MHL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MRT": {
+    "id": "MRT",
+    "name": "Nouakchott",
+    "lon": -15.97534,
+    "lat": 18.086427,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MRT",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MUS": {
+    "id": "MUS",
+    "name": "Port Louis",
+    "lon": 57.499994,
+    "lat": -20.166639,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MUS",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MEX": {
+    "id": "MEX",
+    "name": "Mexico City",
+    "lon": -99.132934,
+    "lat": 19.444388,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MEX",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MDA": {
+    "id": "MDA",
+    "name": "Chișinău",
+    "lon": 28.857711,
+    "lat": 47.005024,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MDA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MCO": {
+    "id": "MCO",
+    "name": "Monaco",
+    "lon": 7.406913,
+    "lat": 43.739646,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MCO",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MNG": {
+    "id": "MNG",
+    "name": "Ulaanbaatar",
+    "lon": 106.91467,
+    "lat": 47.918619,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MNG",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MNE": {
+    "id": "MNE",
+    "name": "Podgorica",
+    "lon": 19.266307,
+    "lat": 42.465972,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MNE",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MSR": {
+    "id": "MSR",
+    "name": "Plymouth",
+    "lon": -62.216667,
+    "lat": 16.7,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/central-america-n-caribbean/mh.json",
+    "countryId": "MSR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MAR": {
+    "id": "MAR",
+    "name": "Rabat",
+    "lon": -6.836408,
+    "lat": 34.025307,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MAR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MOZ": {
+    "id": "MOZ",
+    "name": "Maputo",
+    "lon": 32.587217,
+    "lat": -25.953332,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MOZ",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MMR": {
+    "id": "MMR",
+    "name": "Nay Pyi Taw",
+    "lon": 96.116673,
+    "lat": 19.768503,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MMR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "NAM": {
+    "id": "NAM",
+    "name": "Windhoek",
+    "lon": 17.083546,
+    "lat": -22.570006,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "NAM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "NPL": {
+    "id": "NPL",
+    "name": "Kathmandu",
+    "lon": 85.314696,
+    "lat": 27.718638,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "NPL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "NLD": {
+    "id": "NLD",
+    "name": "Amsterdam",
+    "lon": 4.914694,
+    "lat": 52.351914,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "NLD",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "NCL": {
+    "id": "NCL",
+    "name": "Noumea",
+    "lon": 166.444285,
+    "lat": -22.262528,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "NCL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "NZL": {
+    "id": "NZL",
+    "name": "Wellington",
+    "lon": 174.777201,
+    "lat": -41.292068,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "NZL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "NIC": {
+    "id": "NIC",
+    "name": "Managua",
+    "lon": -86.270437,
+    "lat": 12.154962,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "NIC",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "NER": {
+    "id": "NER",
+    "name": "Niamey",
+    "lon": 2.11471,
+    "lat": 13.518652,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "NER",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "NGA": {
+    "id": "NGA",
+    "name": "Abuja",
+    "lon": 7.489505,
+    "lat": 9.05462,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "NGA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "NIU": {
+    "id": "NIU",
+    "name": "Alofi",
+    "lon": -169.913625,
+    "lat": -19.065988,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "NIU",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "NFK": {
+    "id": "NFK",
+    "name": "Kingston",
+    "lon": 167.966667,
+    "lat": -29.05,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/australia-oceania/nf.json",
+    "countryId": "NFK",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "PRK": {
+    "id": "PRK",
+    "name": "Pyongyang",
+    "lon": 125.752745,
+    "lat": 39.021385,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "PRK",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MKD": {
+    "id": "MKD",
+    "name": "Skopje",
+    "lon": 21.433461,
+    "lat": 42.000006,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "MKD",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MNP": {
+    "id": "MNP",
+    "name": "Saipan",
+    "lon": 145.75,
+    "lat": 15.2,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/australia-oceania/cq.json",
+    "countryId": "MNP",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "NOR": {
+    "id": "NOR",
+    "name": "Oslo",
+    "lon": 10.748033,
+    "lat": 59.918636,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "NOR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "OMN": {
+    "id": "OMN",
+    "name": "Muscat",
+    "lon": 58.378311,
+    "lat": 23.585179,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "OMN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "PAK": {
+    "id": "PAK",
+    "name": "Islamabad",
+    "lon": 73.08063,
+    "lat": 33.689368,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "PAK",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "PLW": {
+    "id": "PLW",
+    "name": "Ngerulmud",
+    "lon": 134.616667,
+    "lat": 7.5,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/australia-oceania/ps.json",
+    "countryId": "PLW",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "PAN": {
+    "id": "PAN",
+    "name": "Panama City",
+    "lon": -79.534983,
+    "lat": 8.969963,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "PAN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "PNG": {
+    "id": "PNG",
+    "name": "Port Moresby",
+    "lon": 147.192504,
+    "lat": -9.464708,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "PNG",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "PRY": {
+    "id": "PRY",
+    "name": "Asunción",
+    "lon": -57.625834,
+    "lat": -25.290671,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "PRY",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CHN": {
+    "id": "CHN",
+    "name": "Beijing",
+    "lon": 116.394201,
+    "lat": 39.90172,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CHN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "PER": {
+    "id": "PER",
+    "name": "Lima",
+    "lon": -77.052008,
+    "lat": -12.046067,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "PER",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "PHL": {
+    "id": "PHL",
+    "name": "Manila",
+    "lon": 120.980271,
+    "lat": 14.606105,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "PHL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "PCN": {
+    "id": "PCN",
+    "name": "Adamstown",
+    "lon": -130.083333,
+    "lat": -25.066667,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/australia-oceania/pc.json",
+    "countryId": "PCN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "POL": {
+    "id": "POL",
+    "name": "Warsaw",
+    "lon": 21.005347,
+    "lat": 52.230872,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "POL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "PRT": {
+    "id": "PRT",
+    "name": "Lisbon",
+    "lon": -9.146812,
+    "lat": 38.724669,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "PRT",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "PRI": {
+    "id": "PRI",
+    "name": "San Juan",
+    "lon": -66.129979,
+    "lat": 18.440023,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "PRI",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "QAT": {
+    "id": "QAT",
+    "name": "Doha",
+    "lon": 51.532968,
+    "lat": 25.286556,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "QAT",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "COG": {
+    "id": "COG",
+    "name": "Brazzaville",
+    "lon": 15.282744,
+    "lat": -4.25724,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "COG",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ROU": {
+    "id": "ROU",
+    "name": "Bucharest",
+    "lon": 26.098001,
+    "lat": 44.435318,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ROU",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "RUS": {
+    "id": "RUS",
+    "name": "Moscow",
+    "lon": 37.613577,
+    "lat": 55.75411,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "RUS",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "RWA": {
+    "id": "RWA",
+    "name": "Kigali",
+    "lon": 30.058586,
+    "lat": -1.951644,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "RWA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BLM": {
+    "id": "BLM",
+    "name": "Gustavia",
+    "lon": -62.85,
+    "lat": 17.883333,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/central-america-n-caribbean/tb.json",
+    "countryId": "BLM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SHN": {
+    "id": "SHN",
+    "name": "Jamestown",
+    "lon": -5.716667,
+    "lat": -15.933333,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/africa/sh.json",
+    "countryId": "SHN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "KNA": {
+    "id": "KNA",
+    "name": "Basseterre",
+    "lon": -62.717009,
+    "lat": 17.302031,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "KNA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "LCA": {
+    "id": "LCA",
+    "name": "Castries",
+    "lon": -60.992875,
+    "lat": 14.007875,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "LCA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "MAF": {
+    "id": "MAF",
+    "name": "Marigot",
+    "lon": -63.083333,
+    "lat": 18.066667,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/central-america-n-caribbean/rn.json",
+    "countryId": "MAF",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SPM": {
+    "id": "SPM",
+    "name": "Saint-Pierre",
+    "lon": -56.183333,
+    "lat": 46.766667,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/north-america/sb.json",
+    "countryId": "SPM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "VCT": {
+    "id": "VCT",
+    "name": "Kingstown",
+    "lon": -61.220236,
+    "lat": 13.155756,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "VCT",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "WSM": {
+    "id": "WSM",
+    "name": "Apia",
+    "lon": -171.768599,
+    "lat": -13.835715,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "WSM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SMR": {
+    "id": "SMR",
+    "name": "San Marino",
+    "lon": 12.44177,
+    "lat": 43.936096,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SMR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SAU": {
+    "id": "SAU",
+    "name": "Riyadh",
+    "lon": 46.720487,
+    "lat": 24.634497,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SAU",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SEN": {
+    "id": "SEN",
+    "name": "Dakar",
+    "lon": -17.475076,
+    "lat": 14.717778,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SEN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SRB": {
+    "id": "SRB",
+    "name": "Belgrade",
+    "lon": 20.466045,
+    "lat": 44.820591,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SRB",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SYC": {
+    "id": "SYC",
+    "name": "Victoria",
+    "lon": 55.44999,
+    "lat": -4.616632,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SYC",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SLE": {
+    "id": "SLE",
+    "name": "Freetown",
+    "lon": -13.236162,
+    "lat": 8.471957,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SLE",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SGP": {
+    "id": "SGP",
+    "name": "Singapore",
+    "lon": 103.853875,
+    "lat": 1.294979,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SGP",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SXM": {
+    "id": "SXM",
+    "name": "Philipsburg",
+    "lon": -63.033333,
+    "lat": 18.016667,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/central-america-n-caribbean/nn.json",
+    "countryId": "SXM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SVK": {
+    "id": "SVK",
+    "name": "Bratislava",
+    "lon": 17.116981,
+    "lat": 48.150018,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SVK",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SVN": {
+    "id": "SVN",
+    "name": "Ljubljana",
+    "lon": 14.514969,
+    "lat": 46.055288,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SVN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SLB": {
+    "id": "SLB",
+    "name": "Honiara",
+    "lon": 159.949766,
+    "lat": -9.437994,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SLB",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SOM": {
+    "id": "SOM",
+    "name": "Mogadishu",
+    "lon": 45.364732,
+    "lat": 2.068627,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SOM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SOL": {
+    "id": "SOL",
+    "name": "Hargeisa",
+    "lon": 44.06531,
+    "lat": 9.560022,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SOL",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ZAF": {
+    "id": "ZAF",
+    "name": "Pretoria",
+    "lon": 28.227483,
+    "lat": -25.704975,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ZAF",
+    "capital": true,
+    "capitalRole": "administrative"
+  },
+  "KOR": {
+    "id": "KOR",
+    "name": "Seoul",
+    "lon": 126.997785,
+    "lat": 37.568295,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "KOR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SDS": {
+    "id": "SDS",
+    "name": "Juba",
+    "lon": 31.616667,
+    "lat": 4.85,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/africa/od.json",
+    "countryId": "SDS",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ESP": {
+    "id": "ESP",
+    "name": "Madrid",
+    "lon": -3.685297,
+    "lat": 40.401972,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ESP",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "LKA": {
+    "id": "LKA",
+    "name": "Sri Jayawardenepura Kotte",
+    "lon": 79.949993,
+    "lat": 6.900004,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "LKA",
+    "capital": true,
+    "capitalRole": "legislative"
+  },
+  "SDN": {
+    "id": "SDN",
+    "name": "Khartoum",
+    "lon": 32.532233,
+    "lat": 15.590024,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SDN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SUR": {
+    "id": "SUR",
+    "name": "Paramaribo",
+    "lon": -55.167031,
+    "lat": 5.83503,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SUR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SWE": {
+    "id": "SWE",
+    "name": "Stockholm",
+    "lon": 18.0663,
+    "lat": 59.324127,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SWE",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CHE": {
+    "id": "CHE",
+    "name": "Bern",
+    "lon": 7.466976,
+    "lat": 46.916683,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "CHE",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "SYR": {
+    "id": "SYR",
+    "name": "Damascus",
+    "lon": 36.29805,
+    "lat": 33.50198,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "SYR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "STP": {
+    "id": "STP",
+    "name": "Sao Tome",
+    "lon": 6.72965,
+    "lat": 0.337466,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "STP",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TWN": {
+    "id": "TWN",
+    "name": "Taipei",
+    "lon": 121.568333,
+    "lat": 25.035833,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TWN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TJK": {
+    "id": "TJK",
+    "name": "Dushanbe",
+    "lon": 68.773879,
+    "lat": 38.560035,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TJK",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TZA": {
+    "id": "TZA",
+    "name": "Dodoma",
+    "lon": 35.750004,
+    "lat": -6.183306,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TZA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "THA": {
+    "id": "THA",
+    "name": "Bangkok",
+    "lon": 100.514699,
+    "lat": 13.751945,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "THA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "BHS": {
+    "id": "BHS",
+    "name": "Nassau",
+    "lon": -77.350044,
+    "lat": 25.08339,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "BHS",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GMB": {
+    "id": "GMB",
+    "name": "Banjul",
+    "lon": -16.591701,
+    "lat": 13.453876,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GMB",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TGO": {
+    "id": "TGO",
+    "name": "Lome",
+    "lon": 1.220811,
+    "lat": 6.133883,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TGO",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TON": {
+    "id": "TON",
+    "name": "Nuku'alofa",
+    "lon": -175.220564,
+    "lat": -21.138512,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TON",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TTO": {
+    "id": "TTO",
+    "name": "Port of Spain",
+    "lon": -61.517031,
+    "lat": 10.651997,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TTO",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TUN": {
+    "id": "TUN",
+    "name": "Tunis",
+    "lon": 10.179678,
+    "lat": 36.802778,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TUN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TKM": {
+    "id": "TKM",
+    "name": "Ashgabat",
+    "lon": 58.383299,
+    "lat": 37.949995,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TKM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TCA": {
+    "id": "TCA",
+    "name": "Cockburn Town",
+    "lon": -71.135979,
+    "lat": 21.466427,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TCA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TUV": {
+    "id": "TUV",
+    "name": "Funafuti",
+    "lon": 179.216647,
+    "lat": -8.516652,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TUV",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "TUR": {
+    "id": "TUR",
+    "name": "Ankara",
+    "lon": 32.862446,
+    "lat": 39.929184,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "TUR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "UGA": {
+    "id": "UGA",
+    "name": "Kampala",
+    "lon": 32.581378,
+    "lat": 0.318605,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "UGA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "UKR": {
+    "id": "UKR",
+    "name": "Kyiv",
+    "lon": 30.514682,
+    "lat": 50.435313,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "UKR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ARE": {
+    "id": "ARE",
+    "name": "Abu Dhabi",
+    "lon": 54.366593,
+    "lat": 24.466684,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ARE",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GBR": {
+    "id": "GBR",
+    "name": "London",
+    "lon": -0.118668,
+    "lat": 51.501941,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "GBR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "VIR": {
+    "id": "VIR",
+    "name": "Charlotte Amalie",
+    "lon": -64.933333,
+    "lat": 18.35,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/central-america-n-caribbean/vq.json",
+    "countryId": "VIR",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "USA": {
+    "id": "USA",
+    "name": "Washington, D.C.",
+    "lon": -77.011364,
+    "lat": 38.901495,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "USA",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "URY": {
+    "id": "URY",
+    "name": "Montevideo",
+    "lon": -56.186823,
+    "lat": -34.905376,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "URY",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "UZB": {
+    "id": "UZB",
+    "name": "Tashkent",
+    "lon": 69.268823,
+    "lat": 41.303828,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "UZB",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "VUT": {
+    "id": "VUT",
+    "name": "Port Vila",
+    "lon": 168.316641,
+    "lat": -17.73335,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "VUT",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "VAT": {
+    "id": "VAT",
+    "name": "Vatican City",
+    "lon": 12.453387,
+    "lat": 41.903282,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "VAT",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "VEN": {
+    "id": "VEN",
+    "name": "Caracas",
+    "lon": -66.918983,
+    "lat": 10.502944,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "VEN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "VNM": {
+    "id": "VNM",
+    "name": "Hanoi",
+    "lon": 105.848068,
+    "lat": 21.035273,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "VNM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "WLF": {
+    "id": "WLF",
+    "name": "Mata-Utu",
+    "lon": -171.933333,
+    "lat": -13.95,
+    "source": "https://github.com/factbook/factbook.json/blob/144d6977b2b01ac1cbd220de754c0a005616760b/australia-oceania/wf.json",
+    "countryId": "WLF",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "YEM": {
+    "id": "YEM",
+    "name": "Sanaa",
+    "lon": 44.204648,
+    "lat": 15.356679,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "YEM",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ZMB": {
+    "id": "ZMB",
+    "name": "Lusaka",
+    "lon": 28.281382,
+    "lat": -15.414698,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ZMB",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ZWE": {
+    "id": "ZWE",
+    "name": "Harare",
+    "lon": 31.042764,
+    "lat": -17.815844,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ZWE",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "ALD": {
+    "id": "ALD",
+    "name": "Mariehamn",
+    "lon": 19.949005,
+    "lat": 60.096996,
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "countryId": "ALD",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "CYN": {
+    "id": "CYN",
+    "name": "North Nicosia",
+    "lon": 33.3615,
+    "lat": 35.1856,
+    "source": "https://en.wikipedia.org/wiki/North_Nicosia",
+    "countryId": "CYN",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "GNQ": {
+    "id": "GNQ",
+    "name": "Ciudad de la Paz",
+    "lon": 10.8225,
+    "lat": 1.588889,
+    "source": "https://en.wikipedia.org/wiki/Ciudad_de_la_Paz",
+    "countryId": "GNQ",
+    "capital": true,
+    "capitalRole": ""
+  },
+  "AFG_KANDAHAR": {
+    "id": "AFG_KANDAHAR",
+    "countryId": "AFG",
+    "name": "Kandahar",
+    "lon": 65.694946,
+    "lat": 31.61002,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "AFG_JALALABAD": {
+    "id": "AFG_JALALABAD",
+    "countryId": "AFG",
+    "name": "Jalalabad",
+    "lon": 70.436104,
+    "lat": 34.441527,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DZA_ORAN": {
+    "id": "DZA_ORAN",
+    "countryId": "DZA",
+    "name": "Oran",
+    "lon": -0.621919,
+    "lat": 35.711948,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DZA_CONSTANTINE": {
+    "id": "DZA_CONSTANTINE",
+    "countryId": "DZA",
+    "name": "Constantine",
+    "lon": 6.599948,
+    "lat": 36.359989,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DZA_ANNABA": {
+    "id": "DZA_ANNABA",
+    "countryId": "DZA",
+    "name": "Annaba",
+    "lon": 7.759981,
+    "lat": 36.920006,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DZA_BLIDA": {
+    "id": "DZA_BLIDA",
+    "countryId": "DZA",
+    "name": "Blida",
+    "lon": 2.829998,
+    "lat": 36.420347,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "AGO_HUAMBO": {
+    "id": "AGO_HUAMBO",
+    "countryId": "AGO",
+    "name": "Huambo",
+    "lon": 15.758064,
+    "lat": -12.74804,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ARG_CORDOBA": {
+    "id": "ARG_CORDOBA",
+    "countryId": "ARG",
+    "name": "Córdoba",
+    "lon": -64.18424,
+    "lat": -31.398012,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ARG_MENDOZA": {
+    "id": "ARG_MENDOZA",
+    "countryId": "ARG",
+    "name": "Mendoza",
+    "lon": -68.818557,
+    "lat": -32.881384,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ARG_MARDELPLATA": {
+    "id": "ARG_MARDELPLATA",
+    "countryId": "ARG",
+    "name": "Mar del Plata",
+    "lon": -57.579984,
+    "lat": -38.00002,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ARG_ROSARIO": {
+    "id": "ARG_ROSARIO",
+    "countryId": "ARG",
+    "name": "Rosario",
+    "lon": -60.668253,
+    "lat": -32.949184,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ARG_TUCUMAN": {
+    "id": "ARG_TUCUMAN",
+    "countryId": "ARG",
+    "name": "Tucumán",
+    "lon": -65.21857,
+    "lat": -26.814054,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ARG_SALTA": {
+    "id": "ARG_SALTA",
+    "countryId": "ARG",
+    "name": "Salta",
+    "lon": -65.416638,
+    "lat": -24.783359,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ARG_LAPLATA": {
+    "id": "ARG_LAPLATA",
+    "countryId": "ARG",
+    "name": "La Plata",
+    "lon": -57.954436,
+    "lat": -34.923321,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "AUS_SYDNEY": {
+    "id": "AUS_SYDNEY",
+    "countryId": "AUS",
+    "name": "Sydney",
+    "lon": 151.212548,
+    "lat": -33.871373,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "AUS_MELBOURNE": {
+    "id": "AUS_MELBOURNE",
+    "countryId": "AUS",
+    "name": "Melbourne",
+    "lon": 144.97307,
+    "lat": -37.818086,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "AUS_PERTH": {
+    "id": "AUS_PERTH",
+    "countryId": "AUS",
+    "name": "Perth",
+    "lon": 115.838053,
+    "lat": -31.953069,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "AUS_BRISBANE": {
+    "id": "AUS_BRISBANE",
+    "countryId": "AUS",
+    "name": "Brisbane",
+    "lon": 153.033147,
+    "lat": -27.453085,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "AUS_ADELAIDE": {
+    "id": "AUS_ADELAIDE",
+    "countryId": "AUS",
+    "name": "Adelaide",
+    "lon": 138.598059,
+    "lat": -34.933042,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "AUS_NEWCASTLE": {
+    "id": "AUS_NEWCASTLE",
+    "countryId": "AUS",
+    "name": "Newcastle",
+    "lon": 151.770249,
+    "lat": -32.929508,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "AUS_GOLDCOAST": {
+    "id": "AUS_GOLDCOAST",
+    "countryId": "AUS",
+    "name": "Gold Coast",
+    "lon": 153.448246,
+    "lat": -28.081504,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BGD_CHATTOGRAM": {
+    "id": "BGD_CHATTOGRAM",
+    "countryId": "BGD",
+    "name": "Chattogram",
+    "lon": 91.798022,
+    "lat": 22.331938,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BGD_KHULNA": {
+    "id": "BGD_KHULNA",
+    "countryId": "BGD",
+    "name": "Khulna",
+    "lon": 89.558055,
+    "lat": 22.841933,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BGD_RAJSHAHI": {
+    "id": "BGD_RAJSHAHI",
+    "countryId": "BGD",
+    "name": "Rajshahi",
+    "lon": 88.603074,
+    "lat": 24.37693,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BEL_ANTWERPEN": {
+    "id": "BEL_ANTWERPEN",
+    "countryId": "BEL",
+    "name": "Antwerpen",
+    "lon": 4.413071,
+    "lat": 51.222319,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BEL_LIEGE": {
+    "id": "BEL_LIEGE",
+    "countryId": "BEL",
+    "name": "Liège",
+    "lon": 5.580011,
+    "lat": 50.629996,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BEN_COTONOU": {
+    "id": "BEN_COTONOU",
+    "countryId": "BEN",
+    "name": "Cotonou",
+    "lon": 2.404355,
+    "lat": 6.36298,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BOL_SANTACRUZ": {
+    "id": "BOL_SANTACRUZ",
+    "countryId": "BOL",
+    "name": "Santa Cruz",
+    "lon": -63.227942,
+    "lat": -17.751972,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BOL_LAPAZ": {
+    "id": "BOL_LAPAZ",
+    "countryId": "BOL",
+    "name": "La Paz",
+    "lon": -68.151931,
+    "lat": -16.496028,
+    "capital": false,
+    "capitalRole": "seat of government",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BOL_COCHABAMBA": {
+    "id": "BOL_COCHABAMBA",
+    "countryId": "BOL",
+    "name": "Cochabamba",
+    "lon": -66.169977,
+    "lat": -17.410011,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BRA_SAOPAULO": {
+    "id": "BRA_SAOPAULO",
+    "countryId": "BRA",
+    "name": "São Paulo",
+    "lon": -46.626966,
+    "lat": -23.556734,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BRA_RIODEJANEIRO": {
+    "id": "BRA_RIODEJANEIRO",
+    "countryId": "BRA",
+    "name": "Rio de Janeiro",
+    "lon": -43.212117,
+    "lat": -22.907308,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BRA_PORTOALEGRE": {
+    "id": "BRA_PORTOALEGRE",
+    "countryId": "BRA",
+    "name": "Porto Alegre",
+    "lon": -51.201958,
+    "lat": -30.048069,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BRA_RECIFE": {
+    "id": "BRA_RECIFE",
+    "countryId": "BRA",
+    "name": "Recife",
+    "lon": -34.908766,
+    "lat": -8.060532,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BRA_FORTALEZA": {
+    "id": "BRA_FORTALEZA",
+    "countryId": "BRA",
+    "name": "Fortaleza",
+    "lon": -38.581927,
+    "lat": -3.748072,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BRA_SALVADOR": {
+    "id": "BRA_SALVADOR",
+    "countryId": "BRA",
+    "name": "Salvador",
+    "lon": -38.481933,
+    "lat": -12.968026,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BRA_CURITIBA": {
+    "id": "BRA_CURITIBA",
+    "countryId": "BRA",
+    "name": "Curitiba",
+    "lon": -49.321944,
+    "lat": -25.418067,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "BRA_BELEM": {
+    "id": "BRA_BELEM",
+    "countryId": "BRA",
+    "name": "Belém",
+    "lon": -48.481969,
+    "lat": -1.448057,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CMR_DOUALA": {
+    "id": "CMR_DOUALA",
+    "countryId": "CMR",
+    "name": "Douala",
+    "lon": 9.708045,
+    "lat": 4.062356,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CAN_TORONTO": {
+    "id": "CAN_TORONTO",
+    "countryId": "CAN",
+    "name": "Toronto",
+    "lon": -79.389459,
+    "lat": 43.664645,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CAN_VANCOUVER": {
+    "id": "CAN_VANCOUVER",
+    "countryId": "CAN",
+    "name": "Vancouver",
+    "lon": -123.12359,
+    "lat": 49.275362,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CAN_MONTREAL": {
+    "id": "CAN_MONTREAL",
+    "countryId": "CAN",
+    "name": "Montréal",
+    "lon": -73.585243,
+    "lat": 45.501945,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CAN_EDMONTON": {
+    "id": "CAN_EDMONTON",
+    "countryId": "CAN",
+    "name": "Edmonton",
+    "lon": -113.501928,
+    "lat": 53.551971,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CAN_CALGARY": {
+    "id": "CAN_CALGARY",
+    "countryId": "CAN",
+    "name": "Calgary",
+    "lon": -114.081944,
+    "lat": 51.084938,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CAN_WINNIPEG": {
+    "id": "CAN_WINNIPEG",
+    "countryId": "CAN",
+    "name": "Winnipeg",
+    "lon": -97.165992,
+    "lat": 49.882987,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CAN_QUEBEC": {
+    "id": "CAN_QUEBEC",
+    "countryId": "CAN",
+    "name": "Québec",
+    "lon": -71.24561,
+    "lat": 46.839969,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CAN_HAMILTON": {
+    "id": "CAN_HAMILTON",
+    "countryId": "CAN",
+    "name": "Hamilton",
+    "lon": -79.829996,
+    "lat": 43.249981,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHL_CONCEPCION": {
+    "id": "CHL_CONCEPCION",
+    "countryId": "CHL",
+    "name": "Concepción",
+    "lon": -73.050022,
+    "lat": -36.830014,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHL_VALPARAISO": {
+    "id": "CHL_VALPARAISO",
+    "countryId": "CHL",
+    "name": "Valparaíso",
+    "lon": -71.617026,
+    "lat": -33.047739,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COL_MEDELLIN": {
+    "id": "COL_MEDELLIN",
+    "countryId": "COL",
+    "name": "Medellín",
+    "lon": -75.576956,
+    "lat": 6.276949,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COL_CALI": {
+    "id": "COL_CALI",
+    "countryId": "COL",
+    "name": "Cali",
+    "lon": -76.501912,
+    "lat": 3.401905,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COL_CARTAGENA": {
+    "id": "COL_CARTAGENA",
+    "countryId": "COL",
+    "name": "Cartagena",
+    "lon": -75.516339,
+    "lat": 10.401684,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COL_BARRANQUILLA": {
+    "id": "COL_BARRANQUILLA",
+    "countryId": "COL",
+    "name": "Barranquilla",
+    "lon": -74.801913,
+    "lat": 10.961934,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COL_BUCARAMANGA": {
+    "id": "COL_BUCARAMANGA",
+    "countryId": "COL",
+    "name": "Bucaramanga",
+    "lon": -73.127829,
+    "lat": 7.132039,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COL_CUCUTA": {
+    "id": "COL_CUCUTA",
+    "countryId": "COL",
+    "name": "Cúcuta",
+    "lon": -72.519977,
+    "lat": 7.920019,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COL_PEREIRA": {
+    "id": "COL_PEREIRA",
+    "countryId": "COL",
+    "name": "Pereira",
+    "lon": -75.679991,
+    "lat": 4.81039,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CUB_SANTIAGODECUBA": {
+    "id": "CUB_SANTIAGODECUBA",
+    "countryId": "CUB",
+    "name": "Santiago de Cuba",
+    "lon": -75.821326,
+    "lat": 20.025017,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COD_LUBUMBASHI": {
+    "id": "COD_LUBUMBASHI",
+    "countryId": "COD",
+    "name": "Lubumbashi",
+    "lon": 27.478072,
+    "lat": -11.678079,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COD_KIKWIT": {
+    "id": "COD_KIKWIT",
+    "countryId": "COD",
+    "name": "Kikwit",
+    "lon": 18.850002,
+    "lat": -5.030043,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COD_MBUJIMAYI": {
+    "id": "COD_MBUJIMAYI",
+    "countryId": "COD",
+    "name": "Mbuji-Mayi",
+    "lon": 23.59805,
+    "lat": -6.148081,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COD_KANANGA": {
+    "id": "COD_KANANGA",
+    "countryId": "COD",
+    "name": "Kananga",
+    "lon": 22.398072,
+    "lat": -5.888096,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COD_KISANGANI": {
+    "id": "COD_KISANGANI",
+    "countryId": "COD",
+    "name": "Kisangani",
+    "lon": 25.22,
+    "lat": 0.520006,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DOM_SANTIAGO": {
+    "id": "DOM_SANTIAGO",
+    "countryId": "DOM",
+    "name": "Santiago",
+    "lon": -70.670012,
+    "lat": 19.50001,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ECU_GUAYAQUIL": {
+    "id": "ECU_GUAYAQUIL",
+    "countryId": "ECU",
+    "name": "Guayaquil",
+    "lon": -79.921988,
+    "lat": -2.218088,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "EGY_ALEXANDRIA": {
+    "id": "EGY_ALEXANDRIA",
+    "countryId": "EGY",
+    "name": "Alexandria",
+    "lon": 29.94805,
+    "lat": 31.201965,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "EGY_LUXOR": {
+    "id": "EGY_LUXOR",
+    "countryId": "EGY",
+    "name": "Luxor",
+    "lon": 32.650038,
+    "lat": 25.700019,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "EGY_BURSAID": {
+    "id": "EGY_BURSAID",
+    "countryId": "EGY",
+    "name": "Bur Said",
+    "lon": 32.290008,
+    "lat": 31.25999,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "EGY_SUEZ": {
+    "id": "EGY_SUEZ",
+    "countryId": "EGY",
+    "name": "Suez",
+    "lon": 32.549941,
+    "lat": 30.004976,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "EGY_ELMINYA": {
+    "id": "EGY_ELMINYA",
+    "countryId": "EGY",
+    "name": "El Minya",
+    "lon": 30.749999,
+    "lat": 28.090003,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "EGY_ISMAILIA": {
+    "id": "EGY_ISMAILIA",
+    "countryId": "EGY",
+    "name": "Ismaïlia",
+    "lon": 32.259984,
+    "lat": 30.590341,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "EGY_ELMANSURA": {
+    "id": "EGY_ELMANSURA",
+    "countryId": "EGY",
+    "name": "El Mansura",
+    "lon": 31.380038,
+    "lat": 31.050442,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "EGY_SOHAG": {
+    "id": "EGY_SOHAG",
+    "countryId": "EGY",
+    "name": "Sohag",
+    "lon": 31.700018,
+    "lat": 26.550407,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SWZ_LOBAMBA": {
+    "id": "SWZ_LOBAMBA",
+    "countryId": "SWZ",
+    "name": "Lobamba",
+    "lon": 31.199997,
+    "lat": -26.466667,
+    "capital": false,
+    "capitalRole": "royal and legislative",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "FRA_LYON": {
+    "id": "FRA_LYON",
+    "countryId": "FRA",
+    "name": "Lyon",
+    "lon": 4.828085,
+    "lat": 45.771954,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "FRA_MARSEILLE": {
+    "id": "FRA_MARSEILLE",
+    "countryId": "FRA",
+    "name": "Marseille",
+    "lon": 5.373064,
+    "lat": 43.291925,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "FRA_BORDEAUX": {
+    "id": "FRA_BORDEAUX",
+    "countryId": "FRA",
+    "name": "Bordeaux",
+    "lon": -0.596959,
+    "lat": 44.851959,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "FRA_LILLE": {
+    "id": "FRA_LILLE",
+    "countryId": "FRA",
+    "name": "Lille",
+    "lon": 3.078062,
+    "lat": 50.651915,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "FRA_NICE": {
+    "id": "FRA_NICE",
+    "countryId": "FRA",
+    "name": "Nice",
+    "lon": 7.263078,
+    "lat": 43.716964,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "FRA_TOULOUSE": {
+    "id": "FRA_TOULOUSE",
+    "countryId": "FRA",
+    "name": "Toulouse",
+    "lon": 1.447981,
+    "lat": 43.621905,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "FRA_ROUEN": {
+    "id": "FRA_ROUEN",
+    "countryId": "FRA",
+    "name": "Rouen",
+    "lon": 1.079975,
+    "lat": 49.430405,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DEU_FRANKFURT": {
+    "id": "DEU_FRANKFURT",
+    "countryId": "DEU",
+    "name": "Frankfurt",
+    "lon": 8.675015,
+    "lat": 50.099977,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DEU_HAMBURG": {
+    "id": "DEU_HAMBURG",
+    "countryId": "DEU",
+    "name": "Hamburg",
+    "lon": 9.998053,
+    "lat": 53.551971,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DEU_MUNICH": {
+    "id": "DEU_MUNICH",
+    "countryId": "DEU",
+    "name": "Munich",
+    "lon": 11.573048,
+    "lat": 48.131888,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DEU_DRESDEN": {
+    "id": "DEU_DRESDEN",
+    "countryId": "DEU",
+    "name": "Dresden",
+    "lon": 13.750003,
+    "lat": 51.049971,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DEU_STUTTGART": {
+    "id": "DEU_STUTTGART",
+    "countryId": "DEU",
+    "name": "Stuttgart",
+    "lon": 9.199996,
+    "lat": 48.77998,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DEU_COLOGNE": {
+    "id": "DEU_COLOGNE",
+    "countryId": "DEU",
+    "name": "Cologne",
+    "lon": 6.948059,
+    "lat": 50.93195,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DEU_NURNBERG": {
+    "id": "DEU_NURNBERG",
+    "countryId": "DEU",
+    "name": "Nürnberg",
+    "lon": 11.079985,
+    "lat": 49.449991,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "DEU_BREMEN": {
+    "id": "DEU_BREMEN",
+    "countryId": "DEU",
+    "name": "Bremen",
+    "lon": 8.800021,
+    "lat": 53.080002,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "GHA_KUMASI": {
+    "id": "GHA_KUMASI",
+    "countryId": "GHA",
+    "name": "Kumasi",
+    "lon": -1.63196,
+    "lat": 6.691937,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "GRC_THESSALONIKI": {
+    "id": "GRC_THESSALONIKI",
+    "countryId": "GRC",
+    "name": "Thessaloniki",
+    "lon": 22.883055,
+    "lat": 40.698052,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "GTM_QUETZALTENANGO": {
+    "id": "GTM_QUETZALTENANGO",
+    "countryId": "GTM",
+    "name": "Quetzaltenango",
+    "lon": -91.520006,
+    "lat": 14.829959,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "HND_SANPEDROSULA": {
+    "id": "HND_SANPEDROSULA",
+    "countryId": "HND",
+    "name": "San Pedro Sula",
+    "lon": -88.029986,
+    "lat": 15.500022,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "HKG_HONGKONG": {
+    "id": "HKG_HONGKONG",
+    "countryId": "HKG",
+    "name": "Hong Kong",
+    "lon": 114.183064,
+    "lat": 22.306927,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IND_MUMBAI": {
+    "id": "IND_MUMBAI",
+    "countryId": "IND",
+    "name": "Mumbai",
+    "lon": 72.875839,
+    "lat": 19.068408,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IND_KOLKATA": {
+    "id": "IND_KOLKATA",
+    "countryId": "IND",
+    "name": "Kolkata",
+    "lon": 88.369126,
+    "lat": 22.569579,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IND_BENGALURU": {
+    "id": "IND_BENGALURU",
+    "countryId": "IND",
+    "name": "Bengaluru",
+    "lon": 77.558064,
+    "lat": 12.971941,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IND_CHENNAI": {
+    "id": "IND_CHENNAI",
+    "countryId": "IND",
+    "name": "Chennai",
+    "lon": 80.278053,
+    "lat": 13.091934,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IND_HYDERABAD": {
+    "id": "IND_HYDERABAD",
+    "countryId": "IND",
+    "name": "Hyderabad",
+    "lon": 78.478008,
+    "lat": 17.401929,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IND_AHMEDABAD": {
+    "id": "IND_AHMEDABAD",
+    "countryId": "IND",
+    "name": "Ahmedabad",
+    "lon": 72.578058,
+    "lat": 23.031999,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IND_PUNE": {
+    "id": "IND_PUNE",
+    "countryId": "IND",
+    "name": "Pune",
+    "lon": 73.851892,
+    "lat": 18.516394,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IND_SURAT": {
+    "id": "IND_SURAT",
+    "countryId": "IND",
+    "name": "Surat",
+    "lon": 72.838094,
+    "lat": 21.20193,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IDN_SURABAYA": {
+    "id": "IDN_SURABAYA",
+    "countryId": "IDN",
+    "name": "Surabaya",
+    "lon": 112.748887,
+    "lat": -7.24729,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IDN_BANDUNG": {
+    "id": "IDN_BANDUNG",
+    "countryId": "IDN",
+    "name": "Bandung",
+    "lon": 107.568067,
+    "lat": -6.948083,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IDN_MEDAN": {
+    "id": "IDN_MEDAN",
+    "countryId": "IDN",
+    "name": "Medan",
+    "lon": 98.648094,
+    "lat": 3.58192,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IDN_PALEMBANG": {
+    "id": "IDN_PALEMBANG",
+    "countryId": "IDN",
+    "name": "Palembang",
+    "lon": 104.748084,
+    "lat": -2.978093,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IDN_SEMARANG": {
+    "id": "IDN_SEMARANG",
+    "countryId": "IDN",
+    "name": "Semarang",
+    "lon": 110.418074,
+    "lat": -6.964672,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IDN_MAKASSAR": {
+    "id": "IDN_MAKASSAR",
+    "countryId": "IDN",
+    "name": "Makassar",
+    "lon": 119.430082,
+    "lat": -5.138013,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IDN_PADANG": {
+    "id": "IDN_PADANG",
+    "countryId": "IDN",
+    "name": "Padang",
+    "lon": 100.358068,
+    "lat": -0.958061,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IDN_BANDJARMASIN": {
+    "id": "IDN_BANDJARMASIN",
+    "countryId": "IDN",
+    "name": "Banjarmasin",
+    "lon": 114.580076,
+    "lat": -3.329992,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRN_MASHHAD": {
+    "id": "IRN_MASHHAD",
+    "countryId": "IRN",
+    "name": "Mashhad",
+    "lon": 59.568051,
+    "lat": 36.271966,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRN_ISFAHAN": {
+    "id": "IRN_ISFAHAN",
+    "countryId": "IRN",
+    "name": "Isfahan",
+    "lon": 51.698092,
+    "lat": 32.701951,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRN_SHIRAZ": {
+    "id": "IRN_SHIRAZ",
+    "countryId": "IRN",
+    "name": "Shiraz",
+    "lon": 52.568065,
+    "lat": 29.631906,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRN_TABRIZ": {
+    "id": "IRN_TABRIZ",
+    "countryId": "IRN",
+    "name": "Tabriz",
+    "lon": 46.2993,
+    "lat": 38.088237,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRN_AHVAZ": {
+    "id": "IRN_AHVAZ",
+    "countryId": "IRN",
+    "name": "Ahvaz",
+    "lon": 48.718067,
+    "lat": 31.281934,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRN_HAMADAN": {
+    "id": "IRN_HAMADAN",
+    "countryId": "IRN",
+    "name": "Hamadan",
+    "lon": 48.515013,
+    "lat": 34.796027,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRN_QOM": {
+    "id": "IRN_QOM",
+    "countryId": "IRN",
+    "name": "Qom",
+    "lon": 50.94806,
+    "lat": 34.651961,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRN_KERMANSHAH": {
+    "id": "IRN_KERMANSHAH",
+    "countryId": "IRN",
+    "name": "Kermanshah",
+    "lon": 47.058065,
+    "lat": 34.381952,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRQ_MOSUL": {
+    "id": "IRQ_MOSUL",
+    "countryId": "IRQ",
+    "name": "Mosul",
+    "lon": 43.143059,
+    "lat": 36.346948,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRQ_BASRA": {
+    "id": "IRQ_BASRA",
+    "countryId": "IRQ",
+    "name": "Basra",
+    "lon": 47.811611,
+    "lat": 30.51547,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRQ_ANNAJAF": {
+    "id": "IRQ_ANNAJAF",
+    "countryId": "IRQ",
+    "name": "Najaf",
+    "lon": 44.335371,
+    "lat": 32.000332,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRQ_KIRKUK": {
+    "id": "IRQ_KIRKUK",
+    "countryId": "IRQ",
+    "name": "Kirkuk",
+    "lon": 44.392267,
+    "lat": 35.472239,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRQ_IRBIL": {
+    "id": "IRQ_IRBIL",
+    "countryId": "IRQ",
+    "name": "Irbil",
+    "lon": 44.006675,
+    "lat": 36.18099,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRQ_ASSULAYMANIYAH": {
+    "id": "IRQ_ASSULAYMANIYAH",
+    "countryId": "IRQ",
+    "name": "As Sulaymaniyah",
+    "lon": 45.43086,
+    "lat": 35.561278,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRQ_ALHILLAH": {
+    "id": "IRQ_ALHILLAH",
+    "countryId": "IRQ",
+    "name": "Al Hillah",
+    "lon": 44.421722,
+    "lat": 32.472138,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "IRQ_KARBALA": {
+    "id": "IRQ_KARBALA",
+    "countryId": "IRQ",
+    "name": "Karbala",
+    "lon": 44.024486,
+    "lat": 32.61492,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ISR_TELAVIVYAFO": {
+    "id": "ISR_TELAVIVYAFO",
+    "countryId": "ISR",
+    "name": "Tel Aviv",
+    "lon": 34.768066,
+    "lat": 32.081937,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ISR_HAIFA": {
+    "id": "ISR_HAIFA",
+    "countryId": "ISR",
+    "name": "Haifa",
+    "lon": 34.978079,
+    "lat": 32.822357,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ITA_MILAN": {
+    "id": "ITA_MILAN",
+    "countryId": "ITA",
+    "name": "Milan",
+    "lon": 9.203063,
+    "lat": 45.471921,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ITA_NAPLES": {
+    "id": "ITA_NAPLES",
+    "countryId": "ITA",
+    "name": "Naples",
+    "lon": 14.243066,
+    "lat": 40.841971,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ITA_PALERMO": {
+    "id": "ITA_PALERMO",
+    "countryId": "ITA",
+    "name": "Palermo",
+    "lon": 13.348081,
+    "lat": 38.126969,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ITA_FLORENCE": {
+    "id": "ITA_FLORENCE",
+    "countryId": "ITA",
+    "name": "Florence",
+    "lon": 11.25,
+    "lat": 43.780001,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ITA_CATANIA": {
+    "id": "ITA_CATANIA",
+    "countryId": "ITA",
+    "name": "Catania",
+    "lon": 15.079999,
+    "lat": 37.499971,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ITA_TURIN": {
+    "id": "ITA_TURIN",
+    "countryId": "ITA",
+    "name": "Turin",
+    "lon": 7.668015,
+    "lat": 45.072333,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ITA_GENOA": {
+    "id": "ITA_GENOA",
+    "countryId": "ITA",
+    "name": "Genoa",
+    "lon": 8.930039,
+    "lat": 44.409988,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ITA_SALERNO": {
+    "id": "ITA_SALERNO",
+    "countryId": "ITA",
+    "name": "Salerno",
+    "lon": 14.769941,
+    "lat": 40.680397,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CIV_ABIDJAN": {
+    "id": "CIV_ABIDJAN",
+    "countryId": "CIV",
+    "name": "Abidjan",
+    "lon": -4.020207,
+    "lat": 5.323126,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CIV_BOUAKE": {
+    "id": "CIV_BOUAKE",
+    "countryId": "CIV",
+    "name": "Bouaké",
+    "lon": -5.030014,
+    "lat": 7.689982,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "JPN_OSAKA": {
+    "id": "JPN_OSAKA",
+    "countryId": "JPN",
+    "name": "Ōsaka",
+    "lon": 135.503754,
+    "lat": 34.691095,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "JPN_SAPPORO": {
+    "id": "JPN_SAPPORO",
+    "countryId": "JPN",
+    "name": "Sapporo",
+    "lon": 141.338099,
+    "lat": 43.076925,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "JPN_HIROSHIMA": {
+    "id": "JPN_HIROSHIMA",
+    "countryId": "JPN",
+    "name": "Hiroshima",
+    "lon": 132.440967,
+    "lat": 34.389781,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "JPN_NAGOYA": {
+    "id": "JPN_NAGOYA",
+    "countryId": "JPN",
+    "name": "Nagoya",
+    "lon": 136.913046,
+    "lat": 35.156943,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "JPN_FUKUOKA": {
+    "id": "JPN_FUKUOKA",
+    "countryId": "JPN",
+    "name": "Fukuoka",
+    "lon": 130.408068,
+    "lat": 33.596961,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "JPN_SENDAI": {
+    "id": "JPN_SENDAI",
+    "countryId": "JPN",
+    "name": "Sendai",
+    "lon": 140.869667,
+    "lat": 38.268441,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "JPN_KYOTO": {
+    "id": "JPN_KYOTO",
+    "countryId": "JPN",
+    "name": "Kyoto",
+    "lon": 135.748052,
+    "lat": 35.031938,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "JPN_NAHA": {
+    "id": "JPN_NAHA",
+    "countryId": "JPN",
+    "name": "Naha",
+    "lon": 127.672972,
+    "lat": 26.207172,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "JOR_AZZARQA": {
+    "id": "JOR_AZZARQA",
+    "countryId": "JOR",
+    "name": "Az Zarqa",
+    "lon": 36.100008,
+    "lat": 32.069992,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "JOR_IRBID": {
+    "id": "JOR_IRBID",
+    "countryId": "JOR",
+    "name": "Irbid",
+    "lon": 35.849998,
+    "lat": 32.549989,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "KAZ_ALMATY": {
+    "id": "KAZ_ALMATY",
+    "countryId": "KAZ",
+    "name": "Almaty",
+    "lon": 76.91309,
+    "lat": 43.326936,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "KEN_MOMBASA": {
+    "id": "KEN_MOMBASA",
+    "countryId": "KEN",
+    "name": "Mombasa",
+    "lon": 39.687972,
+    "lat": -4.03808,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "LBN_TARABULUS": {
+    "id": "LBN_TARABULUS",
+    "countryId": "LBN",
+    "name": "Ṭarābulus",
+    "lon": 35.831661,
+    "lat": 34.438267,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "LBY_BANGHAZI": {
+    "id": "LBY_BANGHAZI",
+    "countryId": "LBY",
+    "name": "Banghazi",
+    "lon": 20.064777,
+    "lat": 32.118679,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MAC_MACAU": {
+    "id": "MAC_MACAU",
+    "countryId": "MAC",
+    "name": "Macau",
+    "lon": 113.544375,
+    "lat": 22.189135,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MWI_BLANTYRE": {
+    "id": "MWI_BLANTYRE",
+    "countryId": "MWI",
+    "name": "Blantyre",
+    "lon": 34.989947,
+    "lat": -15.790007,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MYS_GEORGETOWN": {
+    "id": "MYS_GEORGETOWN",
+    "countryId": "MYS",
+    "name": "George Town",
+    "lon": 100.329368,
+    "lat": 5.413613,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MYS_KUCHING": {
+    "id": "MYS_KUCHING",
+    "countryId": "MYS",
+    "name": "Kuching",
+    "lon": 110.329999,
+    "lat": 1.52997,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MYS_KELANG": {
+    "id": "MYS_KELANG",
+    "countryId": "MYS",
+    "name": "Kelang",
+    "lon": 101.447059,
+    "lat": 3.043281,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MYS_JOHORBAHRU": {
+    "id": "MYS_JOHORBAHRU",
+    "countryId": "MYS",
+    "name": "Johor Bahru",
+    "lon": 103.728094,
+    "lat": 1.481971,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MYS_MALACCA": {
+    "id": "MYS_MALACCA",
+    "countryId": "MYS",
+    "name": "Malacca",
+    "lon": 102.246461,
+    "lat": 2.206414,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MYS_IPOH": {
+    "id": "MYS_IPOH",
+    "countryId": "MYS",
+    "name": "Ipoh",
+    "lon": 101.064983,
+    "lat": 4.599989,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MYS_KOTAKINABALU": {
+    "id": "MYS_KOTAKINABALU",
+    "countryId": "MYS",
+    "name": "Kota Kinabalu",
+    "lon": 116.110008,
+    "lat": 5.979983,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MYS_KOTABAHARU": {
+    "id": "MYS_KOTABAHARU",
+    "countryId": "MYS",
+    "name": "Kota Baharu",
+    "lon": 102.229977,
+    "lat": 6.119974,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MEX_MONTERREY": {
+    "id": "MEX_MONTERREY",
+    "countryId": "MEX",
+    "name": "Monterrey",
+    "lon": -100.331931,
+    "lat": 25.671941,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MEX_GUADALAJARA": {
+    "id": "MEX_GUADALAJARA",
+    "countryId": "MEX",
+    "name": "Guadalajara",
+    "lon": -103.33198,
+    "lat": 20.671962,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MEX_PUEBLA": {
+    "id": "MEX_PUEBLA",
+    "countryId": "MEX",
+    "name": "Puebla",
+    "lon": -98.203737,
+    "lat": 19.032594,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MEX_TIJUANA": {
+    "id": "MEX_TIJUANA",
+    "countryId": "MEX",
+    "name": "Tijuana",
+    "lon": -117.081942,
+    "lat": 32.501963,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MEX_MERIDA": {
+    "id": "MEX_MERIDA",
+    "countryId": "MEX",
+    "name": "Mérida",
+    "lon": -89.618579,
+    "lat": 20.968585,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MEX_TAMPICO": {
+    "id": "MEX_TAMPICO",
+    "countryId": "MEX",
+    "name": "Tampico",
+    "lon": -97.870006,
+    "lat": 22.30002,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MEX_CHIHUAHUA": {
+    "id": "MEX_CHIHUAHUA",
+    "countryId": "MEX",
+    "name": "Chihuahua",
+    "lon": -106.086928,
+    "lat": 28.646927,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MEX_ACAPULCO": {
+    "id": "MEX_ACAPULCO",
+    "countryId": "MEX",
+    "name": "Acapulco",
+    "lon": -99.915979,
+    "lat": 16.849991,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MAR_CASABLANCA": {
+    "id": "MAR_CASABLANCA",
+    "countryId": "MAR",
+    "name": "Casablanca",
+    "lon": -7.618313,
+    "lat": 33.601922,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MAR_FEZ": {
+    "id": "MAR_FEZ",
+    "countryId": "MAR",
+    "name": "Fez",
+    "lon": -5.002323,
+    "lat": 34.056545,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MAR_MARRAKESH": {
+    "id": "MAR_MARRAKESH",
+    "countryId": "MAR",
+    "name": "Marrakesh",
+    "lon": -8.001933,
+    "lat": 31.631939,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MAR_AGADIR": {
+    "id": "MAR_AGADIR",
+    "countryId": "MAR",
+    "name": "Agadir",
+    "lon": -9.620044,
+    "lat": 30.439988,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MAR_TANGIER": {
+    "id": "MAR_TANGIER",
+    "countryId": "MAR",
+    "name": "Tangier",
+    "lon": -5.806198,
+    "lat": 35.775925,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MAR_MEKNES": {
+    "id": "MAR_MEKNES",
+    "countryId": "MAR",
+    "name": "Meknes",
+    "lon": -5.559981,
+    "lat": 33.900423,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MAR_KENITRA": {
+    "id": "MAR_KENITRA",
+    "countryId": "MAR",
+    "name": "Kenitra",
+    "lon": -6.579997,
+    "lat": 34.2704,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MOZ_BEIRA": {
+    "id": "MOZ_BEIRA",
+    "countryId": "MOZ",
+    "name": "Beira",
+    "lon": 34.870006,
+    "lat": -19.820045,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MOZ_MATOLA": {
+    "id": "MOZ_MATOLA",
+    "countryId": "MOZ",
+    "name": "Matola",
+    "lon": 32.460024,
+    "lat": -25.969592,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MMR_RANGOON": {
+    "id": "MMR_RANGOON",
+    "countryId": "MMR",
+    "name": "Yangon",
+    "lon": 96.164732,
+    "lat": 16.7853,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "MMR_MANDALAY": {
+    "id": "MMR_MANDALAY",
+    "countryId": "MMR",
+    "name": "Mandalay",
+    "lon": 96.083083,
+    "lat": 21.971934,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "NLD_THEHAGUE": {
+    "id": "NLD_THEHAGUE",
+    "countryId": "NLD",
+    "name": "The Hague",
+    "lon": 4.269961,
+    "lat": 52.080037,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "NLD_ROTTERDAM": {
+    "id": "NLD_ROTTERDAM",
+    "countryId": "NLD",
+    "name": "Rotterdam",
+    "lon": 4.478028,
+    "lat": 51.921915,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "NLD_UTRECHT": {
+    "id": "NLD_UTRECHT",
+    "countryId": "NLD",
+    "name": "Utrecht",
+    "lon": 5.120039,
+    "lat": 52.100346,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "NZL_AUCKLAND": {
+    "id": "NZL_AUCKLAND",
+    "countryId": "NZL",
+    "name": "Auckland",
+    "lon": 174.763027,
+    "lat": -36.848055,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "NGA_LAGOS": {
+    "id": "NGA_LAGOS",
+    "countryId": "NGA",
+    "name": "Lagos",
+    "lon": 3.389585,
+    "lat": 6.445208,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "NGA_KANO": {
+    "id": "NGA_KANO",
+    "countryId": "NGA",
+    "name": "Kano",
+    "lon": 8.518092,
+    "lat": 12.001923,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "NGA_SOKOTO": {
+    "id": "NGA_SOKOTO",
+    "countryId": "NGA",
+    "name": "Sokoto",
+    "lon": 5.240031,
+    "lat": 13.060016,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "NGA_ENUGU": {
+    "id": "NGA_ENUGU",
+    "countryId": "NGA",
+    "name": "Enugu",
+    "lon": 7.499997,
+    "lat": 6.450031,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "NGA_IBADAN": {
+    "id": "NGA_IBADAN",
+    "countryId": "NGA",
+    "name": "Ibadan",
+    "lon": 3.928036,
+    "lat": 7.381972,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "NGA_KADUNA": {
+    "id": "NGA_KADUNA",
+    "countryId": "NGA",
+    "name": "Kaduna",
+    "lon": 7.438054,
+    "lat": 10.521961,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "NGA_BENINCITY": {
+    "id": "NGA_BENINCITY",
+    "countryId": "NGA",
+    "name": "Benin City",
+    "lon": 5.618062,
+    "lat": 6.342423,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "NGA_PORTHARCOURT": {
+    "id": "NGA_PORTHARCOURT",
+    "countryId": "NGA",
+    "name": "Port Harcourt",
+    "lon": 7.008055,
+    "lat": 4.811948,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PRK_NAMPO": {
+    "id": "PRK_NAMPO",
+    "countryId": "PRK",
+    "name": "Nampo",
+    "lon": 125.450488,
+    "lat": 38.768867,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PRK_HAMHUNG": {
+    "id": "PRK_HAMHUNG",
+    "countryId": "PRK",
+    "name": "Hamhung",
+    "lon": 127.543488,
+    "lat": 39.912002,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PRK_CHONGJIN": {
+    "id": "PRK_CHONGJIN",
+    "countryId": "PRK",
+    "name": "Chongjin",
+    "lon": 129.79,
+    "lat": 41.784619,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PAK_KARACHI": {
+    "id": "PAK_KARACHI",
+    "countryId": "PAK",
+    "name": "Karachi",
+    "lon": 66.988063,
+    "lat": 24.871938,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PAK_LAHORE": {
+    "id": "PAK_LAHORE",
+    "countryId": "PAK",
+    "name": "Lahore",
+    "lon": 74.348079,
+    "lat": 31.561917,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PAK_MULTAN": {
+    "id": "PAK_MULTAN",
+    "countryId": "PAK",
+    "name": "Multan",
+    "lon": 71.453062,
+    "lat": 30.201923,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PAK_HYDERABAD": {
+    "id": "PAK_HYDERABAD",
+    "countryId": "PAK",
+    "name": "Hyderabad",
+    "lon": 68.373043,
+    "lat": 25.381933,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PAK_PESHAWAR": {
+    "id": "PAK_PESHAWAR",
+    "countryId": "PAK",
+    "name": "Peshawar",
+    "lon": 71.533057,
+    "lat": 34.006962,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PAK_GUJRANWALA": {
+    "id": "PAK_GUJRANWALA",
+    "countryId": "PAK",
+    "name": "Gujranwala",
+    "lon": 74.183076,
+    "lat": 32.162372,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PAK_QUETTA": {
+    "id": "PAK_QUETTA",
+    "countryId": "PAK",
+    "name": "Quetta",
+    "lon": 67.023048,
+    "lat": 30.221947,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PAK_FAISALABAD": {
+    "id": "PAK_FAISALABAD",
+    "countryId": "PAK",
+    "name": "Faisalabad",
+    "lon": 73.108051,
+    "lat": 31.411927,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PSX_GAZA": {
+    "id": "PSX_GAZA",
+    "countryId": "PSX",
+    "name": "Gaza City",
+    "lon": 34.445019,
+    "lat": 31.529999,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHN_SHANGHAI": {
+    "id": "CHN_SHANGHAI",
+    "countryId": "CHN",
+    "name": "Shanghai",
+    "lon": 121.434559,
+    "lat": 31.218398,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHN_CHENGDU": {
+    "id": "CHN_CHENGDU",
+    "countryId": "CHN",
+    "name": "Chengdu",
+    "lon": 104.068074,
+    "lat": 30.671946,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHN_URUMQI": {
+    "id": "CHN_URUMQI",
+    "countryId": "CHN",
+    "name": "Ürümqi",
+    "lon": 87.57306,
+    "lat": 43.806958,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHN_GUANGZHOU": {
+    "id": "CHN_GUANGZHOU",
+    "countryId": "CHN",
+    "name": "Guangzhou",
+    "lon": 113.261785,
+    "lat": 23.124723,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHN_SHENZHEN": {
+    "id": "CHN_SHENZHEN",
+    "countryId": "CHN",
+    "name": "Shenzhen",
+    "lon": 114.061154,
+    "lat": 22.548097,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHN_WUHAN": {
+    "id": "CHN_WUHAN",
+    "countryId": "CHN",
+    "name": "Wuhan",
+    "lon": 114.268071,
+    "lat": 30.581977,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHN_TIANJIN": {
+    "id": "CHN_TIANJIN",
+    "countryId": "CHN",
+    "name": "Tianjin",
+    "lon": 117.196607,
+    "lat": 39.082772,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHN_CHONGQING": {
+    "id": "CHN_CHONGQING",
+    "countryId": "CHN",
+    "name": "Chongqing",
+    "lon": 106.593036,
+    "lat": 29.566923,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PER_TRUJILLO": {
+    "id": "PER_TRUJILLO",
+    "countryId": "PER",
+    "name": "Trujillo",
+    "lon": -79.019968,
+    "lat": -8.120035,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PER_AREQUIPA": {
+    "id": "PER_AREQUIPA",
+    "countryId": "PER",
+    "name": "Arequipa",
+    "lon": -71.531957,
+    "lat": -16.418048,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PER_CHICLAYO": {
+    "id": "PER_CHICLAYO",
+    "countryId": "PER",
+    "name": "Chiclayo",
+    "lon": -79.836585,
+    "lat": -6.762909,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PHL_DAVAO": {
+    "id": "PHL_DAVAO",
+    "countryId": "PHL",
+    "name": "Davao",
+    "lon": 125.62805,
+    "lat": 7.111963,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PHL_CEBU": {
+    "id": "PHL_CEBU",
+    "countryId": "PHL",
+    "name": "Cebu",
+    "lon": 123.898129,
+    "lat": 10.321922,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PHL_GENERALSANTOS": {
+    "id": "PHL_GENERALSANTOS",
+    "countryId": "PHL",
+    "name": "General Santos",
+    "lon": 125.174726,
+    "lat": 6.110827,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PHL_ZAMBOANGA": {
+    "id": "PHL_ZAMBOANGA",
+    "countryId": "PHL",
+    "name": "Zamboanga",
+    "lon": 122.078085,
+    "lat": 6.921923,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PHL_CAGAYANDEORO": {
+    "id": "PHL_CAGAYANDEORO",
+    "countryId": "PHL",
+    "name": "Cagayan de Oro",
+    "lon": 124.685299,
+    "lat": 8.45084,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PHL_BACOLOD": {
+    "id": "PHL_BACOLOD",
+    "countryId": "PHL",
+    "name": "Bacolod",
+    "lon": 122.981682,
+    "lat": 10.631688,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PHL_NAGA": {
+    "id": "PHL_NAGA",
+    "countryId": "PHL",
+    "name": "Naga",
+    "lon": 123.181359,
+    "lat": 13.619155,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "POL_KRAKOW": {
+    "id": "POL_KRAKOW",
+    "countryId": "POL",
+    "name": "Kraków",
+    "lon": 19.958066,
+    "lat": 50.061925,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "POL_GDANSK": {
+    "id": "POL_GDANSK",
+    "countryId": "POL",
+    "name": "Gdańsk",
+    "lon": 18.64004,
+    "lat": 54.359975,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "POL_LODZ": {
+    "id": "POL_LODZ",
+    "countryId": "POL",
+    "name": "Łódź",
+    "lon": 19.458229,
+    "lat": 51.767797,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "POL_KATOWICE": {
+    "id": "POL_KATOWICE",
+    "countryId": "POL",
+    "name": "Katowice",
+    "lon": 19.020017,
+    "lat": 50.26038,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "POL_WROCLAW": {
+    "id": "POL_WROCLAW",
+    "countryId": "POL",
+    "name": "Wrocław",
+    "lon": 17.030009,
+    "lat": 51.110432,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "POL_POZNAN": {
+    "id": "POL_POZNAN",
+    "countryId": "POL",
+    "name": "Poznań",
+    "lon": 16.89994,
+    "lat": 52.405753,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "POL_GLIWICE": {
+    "id": "POL_GLIWICE",
+    "countryId": "POL",
+    "name": "Gliwice",
+    "lon": 18.670013,
+    "lat": 50.330376,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "POL_BYTOM": {
+    "id": "POL_BYTOM",
+    "countryId": "POL",
+    "name": "Bytom",
+    "lon": 18.909998,
+    "lat": 50.350039,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PRT_PORTO": {
+    "id": "PRT_PORTO",
+    "countryId": "PRT",
+    "name": "Porto",
+    "lon": -8.621947,
+    "lat": 41.151952,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "PRT_BRAGA": {
+    "id": "PRT_BRAGA",
+    "countryId": "PRT",
+    "name": "Braga",
+    "lon": -8.421331,
+    "lat": 41.554994,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "COG_POINTENOIRE": {
+    "id": "COG_POINTENOIRE",
+    "countryId": "COG",
+    "name": "Pointe-Noire",
+    "lon": 11.880039,
+    "lat": -4.770007,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "RUS_STPETERSBURG": {
+    "id": "RUS_STPETERSBURG",
+    "countryId": "RUS",
+    "name": "Saint Petersburg",
+    "lon": 30.314074,
+    "lat": 59.94096,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "RUS_NOVOSIBIRSK": {
+    "id": "RUS_NOVOSIBIRSK",
+    "countryId": "RUS",
+    "name": "Novosibirsk",
+    "lon": 82.958096,
+    "lat": 55.031906,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "RUS_YEKATERINBURG": {
+    "id": "RUS_YEKATERINBURG",
+    "countryId": "RUS",
+    "name": "Yekaterinburg",
+    "lon": 60.598014,
+    "lat": 56.851976,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "RUS_NIZHNYNOVGOROD": {
+    "id": "RUS_NIZHNYNOVGOROD",
+    "countryId": "RUS",
+    "name": "Nizhny Novgorod",
+    "lon": 43.998148,
+    "lat": 56.334953,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "RUS_SAMARA": {
+    "id": "RUS_SAMARA",
+    "countryId": "RUS",
+    "name": "Samara",
+    "lon": 50.149349,
+    "lat": 53.196953,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "RUS_KAZAN": {
+    "id": "RUS_KAZAN",
+    "countryId": "RUS",
+    "name": "Kazan",
+    "lon": 49.124399,
+    "lat": 55.751888,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "RUS_UFA": {
+    "id": "RUS_UFA",
+    "countryId": "RUS",
+    "name": "Ufa",
+    "lon": 56.038085,
+    "lat": 54.791921,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "RUS_PERM": {
+    "id": "RUS_PERM",
+    "countryId": "RUS",
+    "name": "Perm",
+    "lon": 56.248047,
+    "lat": 58.001906,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SAU_JEDDAH": {
+    "id": "SAU_JEDDAH",
+    "countryId": "SAU",
+    "name": "Jeddah",
+    "lon": 39.217252,
+    "lat": 21.518835,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SAU_MAKKAH": {
+    "id": "SAU_MAKKAH",
+    "countryId": "SAU",
+    "name": "Makkah",
+    "lon": 39.818094,
+    "lat": 21.431967,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SAU_MEDINA": {
+    "id": "SAU_MEDINA",
+    "countryId": "SAU",
+    "name": "Medina",
+    "lon": 39.578057,
+    "lat": 24.501935,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SAU_TABUK": {
+    "id": "SAU_TABUK",
+    "countryId": "SAU",
+    "name": "Tabuk",
+    "lon": 36.554967,
+    "lat": 28.383835,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SAU_ALHUFUF": {
+    "id": "SAU_ALHUFUF",
+    "countryId": "SAU",
+    "name": "Hofuf",
+    "lon": 49.585593,
+    "lat": 25.348749,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SAU_ADDAMMAN": {
+    "id": "SAU_ADDAMMAN",
+    "countryId": "SAU",
+    "name": "Dammam",
+    "lon": 50.097724,
+    "lat": 26.430138,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SAU_ATTAIF": {
+    "id": "SAU_ATTAIF",
+    "countryId": "SAU",
+    "name": "At Taif",
+    "lon": 40.382279,
+    "lat": 21.262228,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SAU_ALHILLAH": {
+    "id": "SAU_ALHILLAH",
+    "countryId": "SAU",
+    "name": "Al Hillah",
+    "lon": 46.75636,
+    "lat": 23.489456,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ZAF_CAPETOWN": {
+    "id": "ZAF_CAPETOWN",
+    "countryId": "ZAF",
+    "name": "Cape Town",
+    "lon": 18.433042,
+    "lat": -33.918065,
+    "capital": false,
+    "capitalRole": "legislative",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ZAF_JOHANNESBURG": {
+    "id": "ZAF_JOHANNESBURG",
+    "countryId": "ZAF",
+    "name": "Johannesburg",
+    "lon": 28.028064,
+    "lat": -26.168099,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ZAF_DURBAN": {
+    "id": "ZAF_DURBAN",
+    "countryId": "ZAF",
+    "name": "Durban",
+    "lon": 31.010944,
+    "lat": -29.860662,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ZAF_PORTELIZABETH": {
+    "id": "ZAF_PORTELIZABETH",
+    "countryId": "ZAF",
+    "name": "Gqeberha",
+    "lon": 25.598083,
+    "lat": -33.968088,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson",
+    "note": "Formerly known as Port Elizabeth.",
+    "nameSource": "https://www.gov.za/news/media-statements/sport-arts-and-culture-transformation-our-heritage-landscape-25-feb-2021"
+  },
+  "ZAF_BLOEMFONTEIN": {
+    "id": "ZAF_BLOEMFONTEIN",
+    "countryId": "ZAF",
+    "name": "Bloemfontein",
+    "lon": 26.229913,
+    "lat": -29.119994,
+    "capital": false,
+    "capitalRole": "judicial",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ZAF_BENONI": {
+    "id": "ZAF_BENONI",
+    "countryId": "ZAF",
+    "name": "Benoni",
+    "lon": 28.327994,
+    "lat": -26.147635,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ZAF_VEREENIGING": {
+    "id": "ZAF_VEREENIGING",
+    "countryId": "ZAF",
+    "name": "Vereeniging",
+    "lon": 27.958042,
+    "lat": -26.647656,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ZAF_PIETERMARITZBURG": {
+    "id": "ZAF_PIETERMARITZBURG",
+    "countryId": "ZAF",
+    "name": "Pietermaritzburg",
+    "lon": 30.390021,
+    "lat": -29.610042,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "KOR_BUSAN": {
+    "id": "KOR_BUSAN",
+    "countryId": "KOR",
+    "name": "Busan",
+    "lon": 129.008102,
+    "lat": 35.096999,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "KOR_INCHEON": {
+    "id": "KOR_INCHEON",
+    "countryId": "KOR",
+    "name": "Incheon",
+    "lon": 126.640288,
+    "lat": 37.478094,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "KOR_DAEJEON": {
+    "id": "KOR_DAEJEON",
+    "countryId": "KOR",
+    "name": "Daejeon",
+    "lon": 127.423082,
+    "lat": 36.337491,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "KOR_GWANGJU": {
+    "id": "KOR_GWANGJU",
+    "countryId": "KOR",
+    "name": "Gwangju",
+    "lon": 126.908488,
+    "lat": 35.172911,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "KOR_DAEGU": {
+    "id": "KOR_DAEGU",
+    "countryId": "KOR",
+    "name": "Daegu",
+    "lon": 128.605026,
+    "lat": 35.868735,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "KOR_SUWON": {
+    "id": "KOR_SUWON",
+    "countryId": "KOR",
+    "name": "Suwon",
+    "lon": 127.008947,
+    "lat": 37.259735,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "KOR_ULSAN": {
+    "id": "KOR_ULSAN",
+    "countryId": "KOR",
+    "name": "Ulsan",
+    "lon": 129.315008,
+    "lat": 35.548677,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "KOR_SONGNAM": {
+    "id": "KOR_SONGNAM",
+    "countryId": "KOR",
+    "name": "Songnam",
+    "lon": 127.135832,
+    "lat": 37.440557,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ESP_BARCELONA": {
+    "id": "ESP_BARCELONA",
+    "countryId": "ESP",
+    "name": "Barcelona",
+    "lon": 2.181424,
+    "lat": 41.385245,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ESP_SEVILLE": {
+    "id": "ESP_SEVILLE",
+    "countryId": "ESP",
+    "name": "Seville",
+    "lon": -5.980007,
+    "lat": 37.405015,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ESP_VALENCIA": {
+    "id": "ESP_VALENCIA",
+    "countryId": "ESP",
+    "name": "Valencia",
+    "lon": -0.401958,
+    "lat": 39.486963,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ESP_BILBAO": {
+    "id": "ESP_BILBAO",
+    "countryId": "ESP",
+    "name": "Bilbao",
+    "lon": -2.929987,
+    "lat": 43.249981,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ESP_ZARAGOZA": {
+    "id": "ESP_ZARAGOZA",
+    "countryId": "ESP",
+    "name": "Zaragoza",
+    "lon": -0.889982,
+    "lat": 41.650002,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ESP_MALAGA": {
+    "id": "ESP_MALAGA",
+    "countryId": "ESP",
+    "name": "Málaga",
+    "lon": -4.419999,
+    "lat": 36.720406,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "LKA_COLOMBO": {
+    "id": "LKA_COLOMBO",
+    "countryId": "LKA",
+    "name": "Colombo",
+    "lon": 79.857751,
+    "lat": 6.931966,
+    "capital": false,
+    "capitalRole": "executive and judicial",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SWE_GOTEBORG": {
+    "id": "SWE_GOTEBORG",
+    "countryId": "SWE",
+    "name": "Göteborg",
+    "lon": 11.97863,
+    "lat": 57.709147,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHE_GENEVA": {
+    "id": "CHE_GENEVA",
+    "countryId": "CHE",
+    "name": "Geneva",
+    "lon": 6.140028,
+    "lat": 46.210008,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHE_ZURICH": {
+    "id": "CHE_ZURICH",
+    "countryId": "CHE",
+    "name": "Zürich",
+    "lon": 8.548064,
+    "lat": 47.381934,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "CHE_BASEL": {
+    "id": "CHE_BASEL",
+    "countryId": "CHE",
+    "name": "Basel",
+    "lon": 7.590017,
+    "lat": 47.580389,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SYR_ALEPPO": {
+    "id": "SYR_ALEPPO",
+    "countryId": "SYR",
+    "name": "Aleppo",
+    "lon": 37.168074,
+    "lat": 36.231917,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SYR_HIMS": {
+    "id": "SYR_HIMS",
+    "countryId": "SYR",
+    "name": "Homs",
+    "lon": 36.718076,
+    "lat": 34.731905,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "SYR_ALLADHIQIYAH": {
+    "id": "SYR_ALLADHIQIYAH",
+    "countryId": "SYR",
+    "name": "Latakia",
+    "lon": 35.779976,
+    "lat": 35.539987,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TWN_KAOHSIUNG": {
+    "id": "TWN_KAOHSIUNG",
+    "countryId": "TWN",
+    "name": "Kaohsiung",
+    "lon": 120.266602,
+    "lat": 22.633307,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TWN_TAICHUNG": {
+    "id": "TWN_TAICHUNG",
+    "countryId": "TWN",
+    "name": "Taichung",
+    "lon": 120.681667,
+    "lat": 24.152078,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TWN_TAINAN": {
+    "id": "TWN_TAINAN",
+    "countryId": "TWN",
+    "name": "Tainan",
+    "lon": 120.200043,
+    "lat": 23.000003,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TWN_HSINCHU": {
+    "id": "TWN_HSINCHU",
+    "countryId": "TWN",
+    "name": "Hsinchu",
+    "lon": 120.976739,
+    "lat": 24.816791,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TWN_ZHONGLI": {
+    "id": "TWN_ZHONGLI",
+    "countryId": "TWN",
+    "name": "Zhongli",
+    "lon": 121.216776,
+    "lat": 24.965025,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TWN_CHANGHUA": {
+    "id": "TWN_CHANGHUA",
+    "countryId": "TWN",
+    "name": "Changhua",
+    "lon": 120.513409,
+    "lat": 24.0734,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TWN_PINGTUNG": {
+    "id": "TWN_PINGTUNG",
+    "countryId": "TWN",
+    "name": "Pingtung",
+    "lon": 120.481679,
+    "lat": 22.681702,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TWN_KEELUNG": {
+    "id": "TWN_KEELUNG",
+    "countryId": "TWN",
+    "name": "Keelung",
+    "lon": 121.733282,
+    "lat": 25.133258,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TZA_DARESSALAAM": {
+    "id": "TZA_DARESSALAAM",
+    "countryId": "TZA",
+    "name": "Dar es Salaam",
+    "lon": 39.266396,
+    "lat": -6.798067,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TZA_MOSHI": {
+    "id": "TZA_MOSHI",
+    "countryId": "TZA",
+    "name": "Moshi",
+    "lon": 37.339984,
+    "lat": -3.339604,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TUR_ISTANBUL": {
+    "id": "TUR_ISTANBUL",
+    "countryId": "TUR",
+    "name": "Istanbul",
+    "lon": 28.974277,
+    "lat": 41.017602,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TUR_IZMIR": {
+    "id": "TUR_IZMIR",
+    "countryId": "TUR",
+    "name": "İzmir",
+    "lon": 27.149848,
+    "lat": 38.438096,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TUR_BURSA": {
+    "id": "TUR_BURSA",
+    "countryId": "TUR",
+    "name": "Bursa",
+    "lon": 29.068052,
+    "lat": 40.201933,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TUR_ADANA": {
+    "id": "TUR_ADANA",
+    "countryId": "TUR",
+    "name": "Adana",
+    "lon": 35.318058,
+    "lat": 36.996935,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TUR_KONYA": {
+    "id": "TUR_KONYA",
+    "countryId": "TUR",
+    "name": "Konya",
+    "lon": 32.473064,
+    "lat": 37.876958,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TUR_SAMSUN": {
+    "id": "TUR_SAMSUN",
+    "countryId": "TUR",
+    "name": "Samsun",
+    "lon": 36.343663,
+    "lat": 41.279998,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TUR_GAZIANTEP": {
+    "id": "TUR_GAZIANTEP",
+    "countryId": "TUR",
+    "name": "Gaziantep",
+    "lon": 37.383048,
+    "lat": 37.07693,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "TUR_ANTALYA": {
+    "id": "TUR_ANTALYA",
+    "countryId": "TUR",
+    "name": "Antalya",
+    "lon": 30.69803,
+    "lat": 36.891928,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "UKR_KHARKIV": {
+    "id": "UKR_KHARKIV",
+    "countryId": "UKR",
+    "name": "Kharkiv",
+    "lon": 36.248079,
+    "lat": 50.001929,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "UKR_DNIPRO": {
+    "id": "UKR_DNIPRO",
+    "countryId": "UKR",
+    "name": "Dnipro",
+    "lon": 34.998078,
+    "lat": 48.481918,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "UKR_ODESSA": {
+    "id": "UKR_ODESSA",
+    "countryId": "UKR",
+    "name": "Odesa",
+    "lon": 30.708055,
+    "lat": 46.491962,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "UKR_DONETSK": {
+    "id": "UKR_DONETSK",
+    "countryId": "UKR",
+    "name": "Donetsk",
+    "lon": 37.828034,
+    "lat": 48.001947,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "UKR_LVOV": {
+    "id": "UKR_LVOV",
+    "countryId": "UKR",
+    "name": "Lviv",
+    "lon": 24.029995,
+    "lat": 49.83498,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "UKR_ZAPORIZHZHYA": {
+    "id": "UKR_ZAPORIZHZHYA",
+    "countryId": "UKR",
+    "name": "Zaporizhzhya",
+    "lon": 35.174863,
+    "lat": 47.859243,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "UKR_KRYVYYRIH": {
+    "id": "UKR_KRYVYYRIH",
+    "countryId": "UKR",
+    "name": "Kryvyy Rih",
+    "lon": 33.344983,
+    "lat": 47.928326,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "UKR_MYKOLAYIV": {
+    "id": "UKR_MYKOLAYIV",
+    "countryId": "UKR",
+    "name": "Mykolayiv",
+    "lon": 31.984342,
+    "lat": 46.967739,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ARE_DUBAI": {
+    "id": "ARE_DUBAI",
+    "countryId": "ARE",
+    "name": "Dubai",
+    "lon": 55.286946,
+    "lat": 25.214912,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ARE_SHARJAH": {
+    "id": "ARE_SHARJAH",
+    "countryId": "ARE",
+    "name": "Sharjah",
+    "lon": 55.406478,
+    "lat": 25.371383,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "GBR_GLASGOW": {
+    "id": "GBR_GLASGOW",
+    "countryId": "GBR",
+    "name": "Glasgow",
+    "lon": -4.239101,
+    "lat": 55.86227,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "GBR_BIRMINGHAM": {
+    "id": "GBR_BIRMINGHAM",
+    "countryId": "GBR",
+    "name": "Birmingham",
+    "lon": -1.921943,
+    "lat": 52.47692,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "GBR_MANCHESTER": {
+    "id": "GBR_MANCHESTER",
+    "countryId": "GBR",
+    "name": "Manchester",
+    "lon": -2.248685,
+    "lat": 53.47532,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "GBR_LEEDS": {
+    "id": "GBR_LEEDS",
+    "countryId": "GBR",
+    "name": "Leeds",
+    "lon": -1.551348,
+    "lat": 53.790017,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "GBR_NEWCASTLE": {
+    "id": "GBR_NEWCASTLE",
+    "countryId": "GBR",
+    "name": "Newcastle",
+    "lon": -1.611625,
+    "lat": 54.989742,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "GBR_CARDIFF": {
+    "id": "GBR_CARDIFF",
+    "countryId": "GBR",
+    "name": "Cardiff",
+    "lon": -3.167598,
+    "lat": 51.482619,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "GBR_LIVERPOOL": {
+    "id": "GBR_LIVERPOOL",
+    "countryId": "GBR",
+    "name": "Liverpool",
+    "lon": -2.961934,
+    "lat": 53.405068,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "GBR_EDINBURGH": {
+    "id": "GBR_EDINBURGH",
+    "countryId": "GBR",
+    "name": "Edinburgh",
+    "lon": -3.219091,
+    "lat": 55.948328,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "USA_NEWYORK": {
+    "id": "USA_NEWYORK",
+    "countryId": "USA",
+    "name": "New York",
+    "lon": -73.995718,
+    "lat": 40.721562,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "USA_LOSANGELES": {
+    "id": "USA_LOSANGELES",
+    "countryId": "USA",
+    "name": "Los Angeles",
+    "lon": -118.231986,
+    "lat": 34.049219,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "USA_CHICAGO": {
+    "id": "USA_CHICAGO",
+    "countryId": "USA",
+    "name": "Chicago",
+    "lon": -87.635237,
+    "lat": 41.847961,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "USA_MIAMI": {
+    "id": "USA_MIAMI",
+    "countryId": "USA",
+    "name": "Miami",
+    "lon": -80.226052,
+    "lat": 25.789557,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "USA_ATLANTA": {
+    "id": "USA_ATLANTA",
+    "countryId": "USA",
+    "name": "Atlanta",
+    "lon": -84.367642,
+    "lat": 33.739457,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "USA_HOUSTON": {
+    "id": "USA_HOUSTON",
+    "countryId": "USA",
+    "name": "Houston",
+    "lon": -95.348436,
+    "lat": 29.741273,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "USA_SANFRANCISCO": {
+    "id": "USA_SANFRANCISCO",
+    "countryId": "USA",
+    "name": "San Francisco",
+    "lon": -122.3996,
+    "lat": 37.784263,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "USA_DENVER": {
+    "id": "USA_DENVER",
+    "countryId": "USA",
+    "name": "Denver",
+    "lon": -104.985962,
+    "lat": 39.741134,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "UZB_SAMARQAND": {
+    "id": "UZB_SAMARQAND",
+    "countryId": "UZB",
+    "name": "Samarkand",
+    "lon": 66.944999,
+    "lat": 39.670019,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "UZB_ANDIJON": {
+    "id": "UZB_ANDIJON",
+    "countryId": "UZB",
+    "name": "Andijan",
+    "lon": 72.339967,
+    "lat": 40.790002,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "UZB_FARGONA": {
+    "id": "UZB_FARGONA",
+    "countryId": "UZB",
+    "name": "Fargona",
+    "lon": 71.780001,
+    "lat": 40.389975,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "UZB_NAMANGAN": {
+    "id": "UZB_NAMANGAN",
+    "countryId": "UZB",
+    "name": "Namangan",
+    "lon": 71.669982,
+    "lat": 41.000016,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VEN_MARACAIBO": {
+    "id": "VEN_MARACAIBO",
+    "countryId": "VEN",
+    "name": "Maracaibo",
+    "lon": -71.661924,
+    "lat": 10.731923,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VEN_VALENCIA": {
+    "id": "VEN_VALENCIA",
+    "countryId": "VEN",
+    "name": "Valencia",
+    "lon": -67.981967,
+    "lat": 10.231927,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VEN_CIUDADGUAYANA": {
+    "id": "VEN_CIUDADGUAYANA",
+    "countryId": "VEN",
+    "name": "Ciudad Guayana",
+    "lon": -62.619987,
+    "lat": 8.370017,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VEN_BARQUISIMETO": {
+    "id": "VEN_BARQUISIMETO",
+    "countryId": "VEN",
+    "name": "Barquisimeto",
+    "lon": -69.301913,
+    "lat": 10.051938,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VEN_MARACAY": {
+    "id": "VEN_MARACAY",
+    "countryId": "VEN",
+    "name": "Maracay",
+    "lon": -67.597753,
+    "lat": 10.248826,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VEN_BARCELONA": {
+    "id": "VEN_BARCELONA",
+    "countryId": "VEN",
+    "name": "Barcelona",
+    "lon": -64.720014,
+    "lat": 10.130375,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VNM_HOCHIMINHCITY": {
+    "id": "VNM_HOCHIMINHCITY",
+    "countryId": "VNM",
+    "name": "Ho Chi Minh City",
+    "lon": 106.702985,
+    "lat": 10.762125,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VNM_HAIPHONG": {
+    "id": "VNM_HAIPHONG",
+    "countryId": "VNM",
+    "name": "Haiphong",
+    "lon": 106.678147,
+    "lat": 20.831952,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VNM_DANANG": {
+    "id": "VNM_DANANG",
+    "countryId": "VNM",
+    "name": "Da Nang",
+    "lon": 108.249971,
+    "lat": 16.060039,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VNM_CANTHO": {
+    "id": "VNM_CANTHO",
+    "countryId": "VNM",
+    "name": "Can Tho",
+    "lon": 105.770019,
+    "lat": 10.049993,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VNM_HUE": {
+    "id": "VNM_HUE",
+    "countryId": "VNM",
+    "name": "Hue",
+    "lon": 107.580038,
+    "lat": 16.469988,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VNM_QUINHON": {
+    "id": "VNM_QUINHON",
+    "countryId": "VNM",
+    "name": "Qui Nhon",
+    "lon": 109.180043,
+    "lat": 13.779972,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VNM_BIENHOA": {
+    "id": "VNM_BIENHOA",
+    "countryId": "VNM",
+    "name": "Biên Hòa",
+    "lon": 106.830058,
+    "lat": 10.970014,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "VNM_VINH": {
+    "id": "VNM_VINH",
+    "countryId": "VNM",
+    "name": "Vinh",
+    "lon": 105.679999,
+    "lat": 18.699981,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "YEM_ADEN": {
+    "id": "YEM_ADEN",
+    "countryId": "YEM",
+    "name": "Aden",
+    "lon": 45.00949,
+    "lat": 12.779723,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "YEM_TAIZZ": {
+    "id": "YEM_TAIZZ",
+    "countryId": "YEM",
+    "name": "Taizz",
+    "lon": 44.037474,
+    "lat": 13.606398,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "YEM_ALHUDAYDAH": {
+    "id": "YEM_ALHUDAYDAH",
+    "countryId": "YEM",
+    "name": "Al Hudaydah",
+    "lon": 42.951029,
+    "lat": 14.799891,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  },
+  "ZWE_BULAWAYO": {
+    "id": "ZWE_BULAWAYO",
+    "countryId": "ZWE",
+    "name": "Bulawayo",
+    "lon": 28.580002,
+    "lat": -20.169998,
+    "capital": false,
+    "capitalRole": "",
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places_simple.geojson"
+  }
+}

@@ -161,6 +161,8 @@ test('scrolling beyond the house docks the feature and an edge gesture returns t
  await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(120);
  await expect.poll(async()=>(await diag(page)).active).toBe(false);const frozen=(await diag(page)).frames;
  await page.waitForTimeout(200);expect((await diag(page)).frames).toBe(frozen);
+ // Docking can refresh the feature; edge gestures are disabled until it is ready.
+ await expect(page.locator('#main')).toHaveAttribute('aria-busy','false');
  await page.evaluate(()=>scrollTo(0,0));await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);await page.mouse.move(20,500);await page.mouse.wheel(0,-600);await page.waitForFunction(()=>scrollY===0);await expect(page).toHaveURL(/#utilities$/);await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);await expect.poll(async()=>(await diag(page)).displayed).toBe('utilities');
  await page.locator('[data-ledger=events]').click();await expect(page.locator('#event-new')).toBeEnabled();await expect(page.locator('#house-hero')).toBeHidden();
  await page.locator('[data-ledger=home]').click();await expect(page.locator('#house-hero')).toBeVisible();await expect.poll(async()=>(await diag(page)).displayed).toBe('home');await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);

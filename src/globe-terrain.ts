@@ -1,4 +1,5 @@
 import * as T from 'three';
+import {routeTileColor} from './globe-route-colors';
 import {createGlobeDetail} from './globe-detail';
 import {countryBorderEdges} from './globe-borders';
 import {LineSegments2} from 'three/addons/lines/LineSegments2.js';
@@ -95,8 +96,9 @@ export async function createGlobeTerrain(renderer:T.WebGLRenderer,countries:Coun
  const selectedMaterial=borderMaterial(2),selectedBorder=new LineSegments2(new LineSegmentsGeometry(),selectedMaterial);selectedBorder.visible=false;selectedBorder.renderOrder=21;
  let state:GlobeState={region:'World',correct:[],revealed:[],playing:false};
  function paint(next:GlobeState){
-  state=next;ctx.clearRect(0,0,W,H);const paper=style==='paper';
+  state=next;ctx.clearRect(0,0,W,H);const paper=style==='paper';borders.visible=!state.route;
   countries.forEach((c,i)=>{
+   if(state.route){if(state.route.discovered.includes(c.id)){ctx.fillStyle=routeTileColor(c.id,state.route.destination);ctx.fill(paths[i],'evenodd');}return;}
    const correct=state.correct.includes(c.id),revealed=state.revealed.includes(c.id),selected=state.selected===c.id;
    if(!inPool(c,state.region,state.scope)){ctx.fillStyle=paper?'#a49b8960':'#152a40a6';ctx.fill(paths[i],'evenodd');}
    if(correct){ctx.fillStyle=paper?'#66ad828c':'#38bb7c80';ctx.fill(paths[i],'evenodd');}
@@ -109,9 +111,9 @@ export async function createGlobeTerrain(renderer:T.WebGLRenderer,countries:Coun
    for(let n=start;n<start+count;n+=3){borderColors[n]=tint.r;borderColors[n+1]=tint.g;borderColors[n+2]=tint.b;}
   });
   overlay.needsUpdate=true;(borderGeometry.attributes.instanceColorStart as T.InterleavedBufferAttribute).data.needsUpdate=true;
-  const index=countries.findIndex(c=>c.id===state.selected);selectedBorder.visible=index>=0;
-  if(index>=0){const positions=style==='paper'?paperPositions:terrainPositions,selection:number[]=[];
-   edges.forEach((edge,i)=>{if(edge.owners.includes(index)){const {start,count}=ranges[i];for(let n=start;n<start+count;n++)selection.push(positions[n]);}});
+  const index=countries.findIndex(c=>c.id===state.selected);selectedBorder.visible=!!state.route||index>=0;
+  if(state.route||index>=0){const positions=style==='paper'?paperPositions:terrainPositions,selection:number[]=[];
+   edges.forEach((edge,i)=>{if(state.route?edge.owners.some(n=>state.route!.discovered.includes(countries[n].id)):edge.owners.includes(index)){const {start,count}=ranges[i];for(let n=start;n<start+count;n++)selection.push(positions[n]);}});
    selectedBorder.geometry.dispose();selectedBorder.geometry=new LineSegmentsGeometry().setPositions(selection);selectedMaterial.color.set(state.correct.includes(state.selected!)?(paper?'#276b48':'#a0f4ae'):paper?'#976025':'#ffe4a2');
   }
  }
