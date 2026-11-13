@@ -48,14 +48,14 @@ export function initChores(){
  $('#chores-page').innerHTML=`<section class="intro"><div><h1>To-dos</h1></div><div class="intro-side"><span class="status"><span class="status-dot"></span><span id="chores-status">Loading to-dos</span></span><div class="misc-primary-actions"><button id="chore-new" class="button primary" disabled>＋ Add task</button><button id="chore-log" class="button secondary" disabled>✓ Log completed</button></div></div></section>
  <div id="chores-notice" class="ledger-notice" role="status" hidden></div>
  <section id="chore-identity" class="identity-panel"><div><p id="chore-identity-error" class="form-error" role="alert" hidden></p><h2>Choose your name</h2></div><div class="identity-choices">${MEMBERS.map(m=>`<button class="person-tile member-${m}" data-chore-person="${m}">${avatar(m)}<span>I’m ${name(m)}</span></button>`).join('')}</div></section>
- <div id="chore-identity-bar" class="identity-bar" hidden><span id="chore-identity-name"></span><button id="chore-switch" class="text-button">Switch person</button></div>
+ <div id="chore-identity-bar" class="identity-bar" hidden><span id="chore-identity-name"></span></div>
  <nav class="chore-views" aria-label="To-do views">${[['mine','My tasks'],['household','Household'],['week','Week'],['leaderboard','Leaderboard']].map(([v,label])=>`<button data-chore-view="${v}" aria-pressed="${v==='mine'}">${label}</button>`).join('')}</nav>
  <div id="my-tasks"></div><div id="chore-content" aria-live="polite" hidden></div>`;
  $('#chores-page .intro>div').append($('#chore-identity-bar'));
  initMyTasks(renderChrome);initChoreDialogs();bindBoard();
- onIdentityChange(()=>{resetMyTasks();render();if(!$('#chores-page').hidden)void refreshChores();});
+ onIdentityChange(()=>{identityRefreshPending=true;resetMyTasks();render();if(!$('#chores-page').hidden)void refreshChores();});
  onChoresChange(()=>{ledger=choreSource.ledger;live=choreSource.live;render();});render();
- document.addEventListener('close',()=>{if(!document.querySelector('dialog[open]'))render();},true);
+ document.addEventListener('close',()=>{if(!document.querySelector('dialog[open]')){if(identityRefreshPending&&!$('#chores-page').hidden)void refreshChores();else render();}},true);
 }
 function renderChrome(){
  $('#chore-identity').hidden=!!identity;$('#chore-identity-bar').hidden=!identity;
@@ -157,10 +157,11 @@ function leaderboardView(){
  const scores=ledger?.leaderboard.filter(s=>s.period===period)||[];
  return `<div class="chore-section-top"><div><h2>Leaderboard</h2></div><label>Time frame<select id="chore-period"><option value="week" ${period==='week'?'selected':''}>This week</option><option value="month" ${period==='month'?'selected':''}>This month</option><option value="all" ${period==='all'?'selected':''}>All time</option></select></label></div><div class="chore-scores">${scores.map(s=>`<details class="chore-score member-${s.member}" data-score-member="${s.member}" style="--race-width:${Math.round(s.units/Math.max(1,...scores.map(x=>x.units))*100)}%"><summary><span class="chore-rank">${s.units?'#'+s.rank:'—'}</span>${avatar(s.member)}<span>${name(s.member)}<small>${s.entries.length} contribution${s.entries.length===1?'':'s'}</small></span><strong>${points(s.units)}<small>points</small></strong><span class="quiet">⌄</span><span class="race-track" aria-hidden="true"><span class="race-bar"></span></span></summary><div class="chore-score-entries">${s.entries.length?s.entries.map(e=>`<div><span>${esc(e.title)}<small>${localStamp(e.completed_at)}</small></span><strong>+${points(e.units)}</strong></div>`).join(''):'<p>No contributions in this period yet.</p>'}</div></details>`).join('')}</div>`;
 }
+let identityRefreshPending=false;
 export async function refreshChores(){
  selectRoute();render();
  if(busy||dragging||myTasksInUse())return;
- await Promise.allSettled([loadChores(),refreshMyTasks()]);ledger=choreSource.ledger;live=choreSource.live;
+ identityRefreshPending=false;await Promise.allSettled([loadChores(),refreshMyTasks()]);ledger=choreSource.ledger;live=choreSource.live;
  selectRoute();await reconcileMyTaskOrder();render();
 }
 export function openSharedTask(task?:Chore,command='edit'){
@@ -338,7 +339,6 @@ function bindBoard(){
  $('#chores-page').addEventListener('click',event=>{
   const b=(event.target as HTMLElement).closest<HTMLElement>('button');if(!b||b.hasAttribute('disabled')||busy)return;
   if(b.dataset.chorePerson){setIdentity(b.dataset.chorePerson as Member);const next=pendingTask;pendingTask=null;if(next)openTask(next);return;}
-  if(b.id==='chore-switch'){setIdentity(null);$('#chore-identity button').focus();return;}
   if(b.dataset.choreView){location.hash=b.dataset.choreView==='mine'?'#chores':'#chores/'+b.dataset.choreView;return;}
   if(b.id==='chore-new')openTask('request');if(b.id==='chore-log')openTask('log');
   if(b.dataset.weekShift){week=b.dataset.weekShift==='0'?weekStart(day()):addDays(week,Number(b.dataset.weekShift));render();restoreFilters();}

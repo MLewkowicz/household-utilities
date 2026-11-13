@@ -1,4 +1,4 @@
-import {setTheme,refreshSection,openSettings} from './settings';
+import {setTheme,refreshSection,openSettings,setPerson} from './settings';
 import {test,expect,type Page} from '@playwright/test';
 import {mkdir} from 'node:fs/promises';
 const rpc=async(page:Page,name:string,p?:unknown)=>{const response=await page.request.post('/rest/v1/rpc/utilities_'+name,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(response.ok(),await response.text()).toBeTruthy();return response.json();};
@@ -48,7 +48,7 @@ test('personal saves retry once, stale edits keep drafts, filters and identity d
  const d=await rpc(page,'personal_tasks',{member:'michal'}),t=d.tasks.find((t:any)=>t.title===title);expect(d.history.filter((h:any)=>h.id===t.id)).toHaveLength(1);
  const card=page.locator(`[data-personal-id="${t.id}"]`);await card.locator('summary.chore-corner-tab').click();await card.getByRole('button',{name:'Edit',exact:true}).click();await page.locator('#personal-edit-title').fill('Retain my edit');
  await rpc(page,'save_personal_task',{id:t.id,actor:'michal',expected_version:t.version,action:'pin',pinned:true,request_id:crypto.randomUUID()});await page.locator('#personal-save').click();await expect(page.locator('#personal-error')).toContainText('changed');await expect(page.locator('#personal-edit-title')).toHaveValue('Retain my edit');await page.keyboard.press('Escape');
- await page.locator('#chore-switch').click();await page.locator('[data-chore-person=rina]').click();await expect(page.locator('#personal-add')).toBeEnabled();await expect(card).toHaveCount(0);
+ await setPerson(page,'rina');await expect(page.locator('#personal-add')).toBeEnabled();await expect(card).toHaveCount(0);
  await page.goto('/#nonsense');await expect(page.locator('#feature-area')).not.toBeInViewport();await expect(page).toHaveTitle(/Home/);
 });
 test('dragging persists only within a priority group and refresh preserves typing on small screens',async({page})=>{

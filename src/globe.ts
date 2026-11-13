@@ -17,6 +17,7 @@ export async function mountGlobe(host:HTMLElement,countries:Country[],onSelect:(
  const label=document.createElement('span');label.className='globe-country-label';label.hidden=true;host.append(label);
  const labelLayer=document.createElement('div');labelLayer.className='globe-review-labels';host.append(labelLayer);
  const countryLabels=new Map(countries.map(c=>{const button=document.createElement('button');button.type='button';button.textContent=c.name;button.hidden=true;button.addEventListener('click',()=>onSelect(c));labelLayer.append(button);return [c.id,button];}));
+ const cityLabels=new Map<string,HTMLButtonElement>();
  const recovery=document.createElement('div');recovery.className='globe-recovery';recovery.hidden=true;recovery.setAttribute('role','status');recovery.innerHTML='<p>Restoring the globe…</p><button type="button">Retry graphics</button>';recovery.querySelector('button')!.addEventListener('click',()=>renderer.forceContextRestore());host.append(recovery);
  const centers=new Map(countries.map(c=>[c.id,new T.Vector3(...spherePoint(c.center[0],c.center[1],1.005))]));
  const geographicBounds=new Map(countries.map(c=>{const points=c.rings.flat();return [c.id,{west:Math.min(...points.map(p=>p[0])),east:Math.max(...points.map(p=>p[0])),south:Math.min(...points.map(p=>p[1])),north:Math.max(...points.map(p=>p[1]))}];}));
@@ -54,9 +55,11 @@ export async function mountGlobe(host:HTMLElement,countries:Country[],onSelect:(
   labelLayer.hidden=!state.labels;
   if(state.labels){
    const occupied:{x:number;y:number;w:number}[]=[],width=el.clientWidth,height=el.clientHeight;
-   const ordered=[...countries].sort((a,b)=>Number(b.id===state.selected)-Number(a.id===state.selected)||(geographicBounds.get(b.id)!.east-geographicBounds.get(b.id)!.west)*(geographicBounds.get(b.id)!.north-geographicBounds.get(b.id)!.south)-(geographicBounds.get(a.id)!.east-geographicBounds.get(a.id)!.west)*(geographicBounds.get(a.id)!.north-geographicBounds.get(a.id)!.south));
+   const ordered=state.cities?state.cities.slice().sort((a,b)=>Number(b.id===state.selected)-Number(a.id===state.selected)||(b.population||0)-(a.population||0)).map(c=>({...cityLocation(c,countries.find(country=>country.id===c.countryId)!),name:c.name})):[...countries].sort((a,b)=>Number(b.id===state.selected)-Number(a.id===state.selected)||(geographicBounds.get(b.id)!.east-geographicBounds.get(b.id)!.west)*(geographicBounds.get(b.id)!.north-geographicBounds.get(b.id)!.south)-(geographicBounds.get(a.id)!.east-geographicBounds.get(a.id)!.west)*(geographicBounds.get(a.id)!.north-geographicBounds.get(a.id)!.south));
+   for(const button of [...countryLabels.values(),...cityLabels.values()])button.hidden=true;
    for(const c of ordered){
-    const button=countryLabels.get(c.id)!,center=centers.get(c.id)!,point=center.clone().project(camera),x=(point.x+1)/2*width,y=(1-point.y)/2*height,w=c.name.length*6.5+16;
+    if(state.cities&&!cityLabels.has(c.id)){const button=document.createElement('button');button.type='button';button.textContent=c.name;button.dataset.cityLabel=c.id;button.addEventListener('click',()=>onSelect(cityLocation(state.cities!.find(city=>city.id===c.id)!,countries.find(country=>country.id===state.cities!.find(city=>city.id===c.id)!.countryId)!)));cityLabels.set(c.id,button);labelLayer.append(button);}
+    const button=(state.cities?cityLabels:countryLabels).get(c.id)!,center=(state.cities?markerCenters:centers).get(c.id)!,point=center.clone().project(camera),x=(point.x+1)/2*width,y=(1-point.y)/2*height,w=c.name.length*6.5+16;
     button.hidden=center.dot(camera.position.clone().sub(center))<=.08||x<w/2||x>width-w/2||y<20||y>height-20||occupied.some(p=>Math.abs(p.x-x)<(p.w+w)/2+4&&Math.abs(p.y-y)<25);
     if(!button.hidden){occupied.push({x,y,w});button.style.left=`${x}px`;button.style.top=`${y}px`;button.dataset.selected=String(c.id===state.selected);}
    }

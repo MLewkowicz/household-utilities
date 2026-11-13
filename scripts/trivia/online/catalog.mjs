@@ -2,6 +2,7 @@ import {createHash} from 'node:crypto';
 import {readFile, mkdir, writeFile, rename} from 'node:fs/promises';
 import {setTimeout as delay} from 'node:timers/promises';
 
+export const passportFacts=(await readFile(new URL('passport-facts.tsv',import.meta.url),'utf8')).trim().split('\n').map(line=>{const [country,title,text]=line.split('|');if(!/^[A-Z]{3}$/.test(country)||!title||!text||text.length>220)throw new Error('Invalid reviewed passport fact');return {country,title,text};});
 const API='https://www.wikidata.org/w/api.php';
 const UA='HouseholdUtilities/1.0 (educational game catalog; https://github.com/MLewkowicz/household-utilities)';
 const normalize=s=>s.replaceAll('_',' ').toLowerCase();
@@ -45,7 +46,7 @@ export async function wikidata(params,{fetcher=fetch,sleep=delay}={}){
 }
 
 export async function fetchCatalog(seeds,options={}){
- const titles=[...new Set([...seeds.timeline.flatMap(g=>g.titles),...Object.values(seeds.landmarks).flat()])];
+ const titles=[...new Set([...seeds.timeline.flatMap(g=>g.titles),...Object.values(seeds.landmarks).flat(),...passportFacts.map(f=>f.title)])];
  const entities=new Map(),all=new Map();
  for(let i=0;i<titles.length;i+=40){
   const batch=await wikidata({sites:'enwiki',titles:titles.slice(i,i+40).join('|'),props:'info|labels|claims|sitelinks',sitefilter:'enwiki'},options);
@@ -59,7 +60,7 @@ export async function fetchCatalog(seeds,options={}){
   const batch=await wikidata({ids:countryIds.slice(i,i+40).join('|'),props:'info|labels|claims'},options);
   for(const e of Object.values(batch))countries.set(e.id,e);
  }
- const catalog={schema:1,provider:'Wikidata',license:'CC0-1.0',fetchedAt:new Date().toISOString(),events:[],places:[],rejected:[]};
+ const catalog={schema:1,provider:'Wikidata',license:'CC0-1.0',fetchedAt:new Date().toISOString(),events:[],places:[],passportFacts:[],rejected:[]};
  const provenance=e=>({id:e.id,revision:e.lastrevid,source:`https://www.wikidata.org/wiki/${e.id}`});
  const seen=new Set();
  for(const group of seeds.timeline)for(const title of group.titles){
@@ -82,6 +83,7 @@ export async function fetchCatalog(seeds,options={}){
   if(!e||!codes?.includes(iso)){catalog.rejected.push({title,reason:'Country missing, ambiguous or differs from selected destination'});continue;}
   catalog.places.push({...provenance(e),countryRevision:country.lastrevid,country:iso,countryId:country.id,label:e.labels?.en?.value||title});
  }
+ for(const fact of passportFacts){const e=entities.get(normalize(fact.title));if(!e){catalog.rejected.push({title:fact.title,reason:'Reviewed clue subject could not be resolved'});continue;}catalog.passportFacts.push({...fact,...provenance(e)});}
  catalog.events.sort((a,b)=>a.id.localeCompare(b.id));catalog.places.sort((a,b)=>a.id.localeCompare(b.id));
  if(catalog.events.length<80||new Set(catalog.places.map(p=>p.country)).size<40)throw new Error('Source coverage dropped below the minimum; existing catalog retained.');
  return catalog;
@@ -134,19 +136,20 @@ export function buildRelease(catalog,atlas){
  const timelines=timelineBoards(dailyEvents,180,`timeline-online-${digest.slice(0,10)}`);
  const practiceTimeline=timelineBoards(practiceEvents,40,`timeline-practice-${digest.slice(0,10)}`);
  const countries=new Map(atlas.map(c=>[c.id,c])),byCountry=new Map();
- for(const place of catalog.places){if(!byCountry.has(place.country))byCountry.set(place.country,[]);byCountry.get(place.country).push(place);}
+ if(!Array.isArray(catalog.passportFacts))throw new Error('Missing reviewed passport facts');
+ for(const fact of catalog.passportFacts){if(!byCountry.has(fact.country))byCountry.set(fact.country,[]);byCountry.get(fact.country).push(fact);}
  const passport=[],practicePassport=[];
- for(const [iso,places] of byCountry){
-  const country=countries.get(iso);if(!country?.capital||places.length<2)continue;
+ for(const [iso,facts] of byCountry){
+  const country=countries.get(iso);if(!country?.capital||facts.length<2)continue;
   const isPractice=parseInt(hash(iso).slice(0,8),16)%7===0;
-  for(let i=0;i<places.length;i++)for(let j=i+1;j<places.length;j++){
-   const a=places[i],b=places[j];
-   (isPractice?practicePassport:passport).push({id:`passport-online-${a.id}-${b.id}`,version:5,kind:'clues',prompt:'Where is this?',outline:outline(country),
-    clues:[`Home to ${a.label}.`,`You can also find ${b.label} here.`,`Region: ${country.region}`,`Capital: ${country.capital}`],
-    answer:country.name,aliases:country.aliases,explanation:`${a.label} and ${b.label} are in ${country.name}. Capital: ${country.capital}.`,sources:[a.source,b.source,`https://www.wikidata.org/wiki/${a.countryId}`]});
+  for(let i=0;i<facts.length;i++)for(let j=i+1;j<facts.length;j++){
+   const a=facts[i],b=facts[j];
+   (isPractice?practicePassport:passport).push({id:`passport-culture-${iso}-${hash([a.text,b.text]).slice(0,12)}`,version:5,kind:'clues',prompt:'Where is this?',outline:outline(country),
+    clues:[a.text,b.text,`Region: ${country.region}`,`Capital: ${country.capital}`],
+    answer:country.name,aliases:country.aliases,explanation:`${country.name}. ${a.text} ${b.text} Capital: ${country.capital}.`,sources:[...new Set([a.source,b.source])]});
   }
  }
- if(passport.length<100||practicePassport.length<10)throw new Error('Insufficient country-clue coverage');
+ if(passport.length<100||practicePassport.length<20||byCountry.size<55)throw new Error('Insufficient reviewed country-clue coverage');
  const rng=random('passport-online-v1'),use=new Map(passport.map(q=>[q.id,0])),packs=[],seen=new Set();
  for(let slot=0;slot<90;slot++){
   const chosen=[];
@@ -155,10 +158,10 @@ export function buildRelease(catalog,atlas){
   const signature=chosen.map(q=>q.id).sort().join('|');if(seen.has(signature))throw new Error('Duplicate country pack');seen.add(signature);
   for(const q of chosen)use.set(q.id,use.get(q.id)+1);packs.push(chosen);
  }
- const release={schema:1,provider:'wikidata',catalog:{fetchedAt:catalog.fetchedAt,license:catalog.license,events:catalog.events.length,landmarks:catalog.places.length,
-  revisions:[...new Map([...catalog.events,...catalog.places,...catalog.places.map(e=>({id:e.countryId,revision:e.countryRevision}))].map(e=>[e.id,{id:e.id,revision:e.revision}])).values()]},games:[{game:'before-or-after',packs:timelines.map(q=>[q])},{game:'passport-puzzle',packs}]};
+ const release={schema:1,provider:'wikidata',catalog:{fetchedAt:catalog.fetchedAt,license:catalog.license,events:catalog.events.length,landmarks:catalog.places.length,passportEditorial:2,passportFacts:catalog.passportFacts.length,
+  revisions:[...new Map([...catalog.events,...catalog.places,...catalog.passportFacts,...catalog.places.map(e=>({id:e.countryId,revision:e.countryRevision}))].map(e=>[e.id,{id:e.id,revision:e.revision}])).values()]},games:[{game:'before-or-after',packs:timelines.map(q=>[q])},{game:'passport-puzzle',packs}]};
  validateRelease(release);
- return {release,practice:{'before-or-after':practiceTimeline,'passport-puzzle':practicePassport},summary:{events:catalog.events.length,dailyEvents:dailyEvents.length,practiceEvents:practiceEvents.length,landmarks:catalog.places.length,countries:byCountry.size,countryClues:passport.length,practiceCountryClues:practicePassport.length,timelineDays:180,passportDays:90,rejected:catalog.rejected.length,contentHash:hash(release.games)}};
+ return {release,practice:{'before-or-after':practiceTimeline,'passport-puzzle':practicePassport},summary:{events:catalog.events.length,dailyEvents:dailyEvents.length,practiceEvents:practiceEvents.length,landmarks:catalog.places.length,passportFacts:catalog.passportFacts.length,countries:byCountry.size,countryClues:passport.length,practiceCountryClues:practicePassport.length,timelineDays:180,passportDays:90,rejected:catalog.rejected.length,contentHash:hash(release.games)}};
 }
 export function validateRelease(p){
  if(p.schema!==1||p.provider!=='wikidata'||p.games?.length!==2)throw new Error('Invalid release envelope');

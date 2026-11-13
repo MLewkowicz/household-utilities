@@ -16,6 +16,15 @@ sky_manifest = json.loads((ROOT / 'src/observatory-sky-assets.json').read_text()
 approved_skies = set(sky_manifest.values())
 card_manifest = json.loads((ROOT / 'src/game-card-assets.json').read_text())
 approved_cards = set(card_manifest.values())
+photo_manifest = json.loads((ROOT / 'src/size-photo-assets.json').read_text())
+approved_photos = {info['file']: info for info in photo_manifest.values()}
+for name, info in approved_photos.items():
+    asset = ROOT / 'public' / name
+    if (not re.fullmatch(r'size-photos/[a-z0-9-]+-[a-f0-9]{12}\.png', name)
+            or not asset.is_file() or hashlib.sha256(asset.read_bytes()).hexdigest() != info['sha256']
+            or not info['source'].startswith('https://commons.wikimedia.org/')
+            or not info['license'] or not info['author']):
+        violations.append('Invalid photographic silhouette manifest')
 for name in approved_cards:
     match = re.fullmatch(r'game-card-[a-z-]+-([a-f0-9]{12})\.webp', name)
     asset = ROOT / 'public' / name
@@ -27,6 +36,11 @@ for name in approved_skies:
     if not match or not asset.is_file() or not hashlib.sha256(asset.read_bytes()).hexdigest().startswith(match[2]):
         violations.append('Invalid generated observatory sky manifest')
 for p in (ROOT / "dist").rglob("*"):
+    if p.is_file() and p.relative_to(ROOT / 'dist').as_posix() in approved_photos:
+        info = approved_photos[p.relative_to(ROOT / 'dist').as_posix()]
+        if hashlib.sha256(p.read_bytes()).hexdigest() != info['sha256']:
+            violations.append(f"Photograph checksum mismatch: {p.relative_to(ROOT)}")
+        continue
     if p.is_file() and p.relative_to(ROOT / 'dist').as_posix() in approved_cards:
         if p.read_bytes() != (ROOT / 'public' / p.name).read_bytes():
             violations.append(f"Game card checksum mismatch: {p.relative_to(ROOT)}")

@@ -1,4 +1,6 @@
-import {$,saved,remember} from './ui';
+import {$,saved,remember,name} from './ui';
+import {identity,setIdentity,onIdentityChange} from './identity';
+import {MEMBERS,type Member} from './ledger';
 import {householdDaylight,daylightPalette} from './daylight';
 import {initUpdates,openUpdates} from './updates';
 
@@ -9,9 +11,20 @@ export function themeToggleMarkup(className:string){
  return button.outerHTML;
 }
 
+export function settingsButtonMarkup(){return '<button type="button" class="game-settings-button" data-open-settings aria-label="Settings" title="Settings">⚙</button>';}
+export function openSettings(){
+ document.querySelectorAll<HTMLDialogElement>('dialog[open]').forEach(d=>d.close());
+ $<HTMLDialogElement>('#settings-dialog').showModal();
+}
 export function initSettings() {
  const dialog=$<HTMLDialogElement>('#settings-dialog'),toggle=$<HTMLButtonElement>('#theme-toggle');
  const systemTheme=matchMedia('(prefers-color-scheme: dark)'),selector=$<HTMLSelectElement>('#theme-select');
+ const person=document.createElement('label');person.className='settings-person';person.innerHTML=`Playing as<select id="settings-person"><option value="">Guest</option>${MEMBERS.map(m=>`<option value="${m}">${name(m)}</option>`).join('')}</select>`;
+ dialog.querySelector('.settings-options')!.before(person);
+ const personSelect=person.querySelector('select')!;personSelect.value=identity||'';
+ personSelect.addEventListener('change',()=>setIdentity(personSelect.value as Member||null));
+ onIdentityChange(()=>{personSelect.value=identity||'';});
+ document.addEventListener('click',e=>{if((e.target as Element).closest('[data-open-settings]'))openSettings();});
  const preference=saved('household-theme');selector.value=['light','dark','daylight'].includes(preference||'')?preference!:'system';
  let fading:ReturnType<typeof setTimeout>|undefined;
  const labels:Record<string,string>={system:'System',light:'Light',dark:'Dark',daylight:'Time of day'};
@@ -50,7 +63,7 @@ export function initSettings() {
  systemTheme.addEventListener('change',()=>applyTheme(true));
  setInterval(()=>{if(!document.hidden)applyTheme();},60000);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)applyTheme();});applyTheme();
- $('#settings-open').addEventListener('click',()=>dialog.showModal());
+ $('#settings-open').addEventListener('click',openSettings);
  $('#settings-close').addEventListener('click',()=>dialog.close());
  // Close this modal before opening Notifications or refreshing the section.
  for(const id of ['#notifications','#refresh','#whats-new','#export'])$(id).addEventListener('click',()=>dialog.close());

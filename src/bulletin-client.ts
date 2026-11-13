@@ -36,7 +36,7 @@ export function initBulletin(){
  $('#bulletin-page').innerHTML=`<section class="intro"><div><h1>Bulletin</h1></div><div class="intro-side"><span class="status"><span class="status-dot"></span><span id="bulletin-status">Loading notes</span></span><button id="bulletin-new" class="button primary" disabled>＋ Pin a note</button></div></section>
  <div id="bulletin-notice" class="ledger-notice" role="status" hidden></div>
  <section id="bulletin-identity" class="identity-panel"><div><h2>Choose your name</h2><p id="bulletin-identity-error" class="form-error" role="alert" hidden></p></div><div class="identity-choices">${MEMBERS.map(m=>`<button class="person-tile member-${m}" data-bulletin-person="${m}">${avatar(m)}<span>I’m ${name(m)}</span></button>`).join('')}</div></section>
- <div id="bulletin-identity-bar" class="identity-bar" hidden><span id="bulletin-identity-name"></span><button id="bulletin-switch" class="text-button">Switch person</button></div>
+ <div id="bulletin-identity-bar" class="identity-bar" hidden><span id="bulletin-identity-name"></span></div>
  <nav class="chore-views bulletin-views" aria-label="Bulletin views">${[['board','Notes'],['activity','Activity']].map(([v,label])=>`<button data-bulletin-view="${v}" aria-pressed="${v==='board'}">${label}</button>`).join('')}</nav><div id="bulletin-content"></div>`;
  document.body.insertAdjacentHTML('beforeend',dialog('bulletin-note','Pin a note',`
  <div class="temperature-control"><div id="bulletin-reaction" class="bulletin-reaction"></div><div class="temperature-caption"><strong id="bulletin-expression"></strong><output id="bulletin-temperature-output" for="bulletin-temperature"></output></div>
@@ -55,7 +55,6 @@ export function initBulletin(){
  $('#bulletin-page').addEventListener('click',event=>{
   const b=(event.target as HTMLElement).closest<HTMLElement>('button');if(!b||b.hasAttribute('disabled'))return;
   if(b.dataset.bulletinPerson){setIdentity(b.dataset.bulletinPerson as Member);if(pendingNew){pendingNew=false;openNote();}return;}
-  if(b.id==='bulletin-switch'){setIdentity(null);$('#bulletin-identity button').focus();return;}
   if(b.id==='bulletin-new'){openNote();return;}
   if(b.id==='bulletin-motion'){animateCharacters=!animateCharacters;remember('household-note-motion',animateCharacters?'on':'off');updateAvatarActivity();return;}
   if(b.dataset.bulletinView){view=b.dataset.bulletinView;render();return;}

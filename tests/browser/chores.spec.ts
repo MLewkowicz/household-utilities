@@ -1,4 +1,4 @@
-import {setTheme,refreshSection,openSettings} from './settings';
+import {setTheme,refreshSection,openSettings,setPerson} from './settings';
 import {test,expect,type Page,type Locator} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 import {addDays,weekStart} from '../../src/chores';
@@ -10,7 +10,7 @@ async function open(page:Page,who='michal'){
 const card=(page:Page,title:string)=>page.locator('.chore-grid .chore-card').filter({has:page.locator('h3',{hasText:title})});
 async function expand(card:Locator){const details=card.locator(':scope > .tile-details');if(!await details.evaluate(el=>el.hasAttribute('open')))await details.locator(':scope > summary').click();}
 const view=async(page:Page,v:string)=>{await page.locator(`[data-chore-view=${v==='mine'?'household':v}]`).click();if(v==='mine'){const who=(await page.locator('#chore-identity-name').innerText()).match(/You’re (\w+)/)![1].toLowerCase();await page.locator('#chore-household-filter').selectOption(who);}};
-async function choosePerson(page:Page,who:string){await page.locator('#chore-switch').click();await page.locator(`[data-chore-person=${who}]`).click();}
+async function choosePerson(page:Page,who:string){await setPerson(page,who);}
 
 test('requests, urgency, hand-back and shared identity work across tabs on a phone',async({page})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.setViewportSize({width:390,height:844});
@@ -31,7 +31,7 @@ test('requests, urgency, hand-back and shared identity work across tabs on a pho
  await view(page,'mine');await expect(request).toBeVisible();await expand(request);await expect(request.locator('.chore-history')).toHaveCount(0);await expect(request.locator('.entry-updated')).toContainText('Updated by Michal');expect((await rpc(page,'chores_dashboard')).history.some((h:any)=>h.change_note==='Could someone cover today?')).toBeTruthy();
  await refreshSection(page);await expect(request.locator(':scope > .tile-details')).toHaveAttribute('open','');
  await page.getByRole('link',{name:'Expenses',exact:true}).click();await expect(page.locator('#identity-name')).toContainText('You’re Michal');
- await page.locator('#switch-person').click();await page.locator('[data-identity=rina]').click();await page.getByRole('link',{name:/^To-dos/}).click();await expect(page.locator('#chore-identity-name')).toContainText('You’re Rina');
+ await page.locator('#settings-open').click();await page.locator('#settings-person').selectOption('rina');await page.getByRole('button',{name:'Close settings',exact:true}).click();await page.getByRole('link',{name:/^To-dos/}).click();await expect(page.locator('#chore-identity-name')).toContainText('You’re Rina');
  await setTheme(page,'dark');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');await setTheme(page,'light');await expect(page.locator('html')).toHaveAttribute('data-theme','light');
  await page.reload();await expect(page.locator('#chore-identity-name')).toContainText('You’re Rina');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();expect(errors).toEqual([]);
@@ -140,7 +140,7 @@ test('requesting without an identity explains how to continue, and unassigned wo
  await choosePerson(page,'rina');await view(page,'mine');await expect(task).toHaveCount(0);await view(page,'household');await page.locator('#chore-household-filter').selectOption('all');await expect(task).toBeVisible();
  await page.reload();await expect(page.locator('#chores-status')).toHaveText('Up to date');await view(page,'household');await expect(page.locator('#chore-household-filter')).toHaveValue('all');await expect(task).toBeVisible();
  await page.setViewportSize({width:390,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
- await page.locator('#chore-switch').click();await page.locator('#chore-log').click();await expect(page.locator('#chore-identity-error')).toContainText('logging a completion');
+ await setPerson(page,'');await page.locator('#chore-log').click();await expect(page.locator('#chore-identity-error')).toContainText('logging a completion');
 });
 
 

@@ -19,7 +19,7 @@ const cache=process.env.HOME+'/.cache/ms-playwright',executablePath=(await readd
 const browser=await chromium.launch({executablePath,args:['--enable-unsafe-swiftshader']});
 try{
  const page=await browser.newPage();await page.addScriptTag({content:code.outputFiles[0].text});const manifest={};
- for(const id of ['geography','odd-one-out','passport-puzzle','clue-cascade','before-or-after','how-much-ish']){
+ for(const id of ['geography','odd-one-out','passport-puzzle','clue-cascade','before-or-after','how-much-ish','sudoku','crossword']){
   const encoded=await page.evaluate(id=>window.renderCard(id),id),bytes=Buffer.from(encoded.split(',')[1],'base64'),hash=createHash('sha256').update(bytes).digest('hex').slice(0,12),file=`game-card-${id}-${hash}.webp`;
   await writeFile('public/'+file,bytes);manifest[id]=file;console.log(`${id}: ${Math.ceil(bytes.length/1024)} KB`);
  }

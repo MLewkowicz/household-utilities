@@ -8,10 +8,10 @@ test('background refresh preserves an active game input and its draft',async({pa
 });
 test('planet selection uses rotation, keyboard and links without loading the globe',async({page})=>{
  const requests:string[]=[];page.on('request',r=>requests.push(r.url()));await page.goto('/?webgl=0#games');
- await expect(page.locator('[data-orbit-game]')).toHaveCount(6);expect(requests.some(r=>r.includes('/globe/'))).toBe(false);await expect(page.locator('#geo-map')).toHaveCount(0);
+ await expect(page.locator('[data-orbit-game]')).toHaveCount(8);expect(requests.some(r=>r.includes('/globe/'))).toBe(false);await expect(page.locator('#geo-map')).toHaveCount(0);
  const scene=page.locator('#observatory-scene');await scene.focus();await page.keyboard.press('ArrowRight');await expect(page.locator('#orbit-game-title')).toHaveText('Odd One Out');
  await page.getByRole('button',{name:'Previous game'}).click();await expect(scene).toHaveAttribute('data-selected','geography');
- const box=(await scene.boundingBox())!;await page.mouse.move(box.x+box.width*.6,box.y+box.height*.7);await page.mouse.down();await page.mouse.move(box.x+box.width*.6+150,box.y+box.height*.7,{steps:8});await page.mouse.up();await expect(scene).toHaveAttribute('data-selected','odd-one-out');
+ const box=(await scene.boundingBox())!;await page.mouse.move(box.x+box.width*.6,box.y+box.height*.7);await page.mouse.down();await page.mouse.move(box.x+box.width*.6+90,box.y+box.height*.7,{steps:8});await page.mouse.up();await expect(scene).toHaveAttribute('data-selected','odd-one-out');
  await page.getByRole('button',{name:'How Much-ish?'}).click();await expect(page).toHaveURL(/#games\/how-much-ish$/);
  await page.getByRole('button',{name:'Practice',exact:true}).click();await expect(page.locator('.scale-stage')).toBeVisible();await page.locator('.scale-precision summary').evaluate(el=>{(el.parentElement as HTMLDetailsElement).open=true;});await page.locator('#scale-number').fill('2');await expect(page.locator('#ratio-value')).toHaveText('2.00×');await page.getByRole('button',{name:'Submit'}).click();await expect(page.locator('.scale-correct')).toBeVisible();
  await page.getByRole('link',{name:'Games',exact:true}).click();await page.getByRole('button',{name:'Play Geography',exact:true}).click();await expect(page.locator('#geo-map')).toBeVisible();
@@ -40,7 +40,7 @@ test('daily answers resume after reload and silhouettes fit a phone',async({page
 test('practice draws unseen puzzles after a completed round',async({page})=>{
  await page.goto('/?webgl=0#games/odd-one-out');await page.getByRole('button',{name:'Practice',exact:true}).click();const questions:string[]=[];
  for(let i=0;i<5;i++){questions.push(await page.locator('.trivia-choices').innerText());await page.locator('.trivia-choice').first().click();await page.getByRole('button',{name:'Submit'}).click();await page.getByRole('button',{name:i===4?'See result':'Next question'}).click();}
- await page.getByRole('button',{name:'Practice again'}).click();expect(questions).not.toContain(await page.locator('.trivia-choices').innerText());
+ await page.getByRole('button',{name:'Open practice archive'}).click();await expect(page.locator('[data-archive-entry="starter-2"]')).toHaveAttribute('aria-pressed','true');await expect(page.locator('[data-archive-entry="starter-1"]')).toHaveClass(/is-complete/);
 });
 test('leaving a slow leaderboard cannot overwrite or break the game board',async({page})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));

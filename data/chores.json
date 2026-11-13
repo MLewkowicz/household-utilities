@@ -1199,24 +1199,29 @@
       "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-09:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
       "kind": "chore",
       "note": "",
-      "actor": "rina",
-      "state": "active",
+      "actor": "ohm",
+      "state": "completed",
       "title": "Bring bins back",
       "due_at": "2026-11-11T05:00:00+00:00",
       "due_on": "2026-11-10",
       "pinned": false,
       "points": 0.5,
-      "status": "overdue",
+      "status": "completed",
       "icon_id": "bins",
       "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
-      "version": 0,
+      "version": 1,
       "assignee": "ohm",
       "due_time": null,
       "cycle_end": "2026-11-16T05:00:00+00:00",
       "preset_id": "bins-return",
       "projected": false,
       "requester": "rina",
-      "completion": null,
+      "completion": {
+        "completed_at": "2026-11-10T22:56:00+00:00",
+        "contributors": [
+          "ohm"
+        ]
+      },
       "created_at": "2026-10-20T17:20:09.5773+00:00",
       "expires_at": null,
       "expires_on": null,
@@ -3607,9 +3612,108 @@
       "point_policy": "household-v1",
       "queue_visibility": "immediately",
       "reminder_group_id": null
+    },
+    {
+      "id": "fd2c8f60-949d-49f3-a376-6f59e8544825",
+      "kind": "chore",
+      "note": "",
+      "actor": "ohm",
+      "state": "active",
+      "title": "Collect bananas",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 1,
+      "status": "active",
+      "icon_id": "bananas",
+      "version": 1,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": "bananas",
+      "projected": false,
+      "requester": "ohm",
+      "completion": null,
+      "created_at": "2026-11-12T23:21:49.825158+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "household-v1",
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
     }
   ],
   "history": [
+    {
+      "id": "fd2c8f60-949d-49f3-a376-6f59e8544825",
+      "kind": "chore",
+      "note": "",
+      "actor": "ohm",
+      "state": "active",
+      "title": "Collect bananas",
+      "action": "create",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 1,
+      "icon_id": "bananas",
+      "version": 1,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": "bananas",
+      "requester": "ohm",
+      "completion": null,
+      "created_at": "2026-11-12T23:21:49.825158+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "change_note": "",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "household-v1",
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
+    },
+    {
+      "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-09:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
+      "kind": "chore",
+      "note": "",
+      "actor": "ohm",
+      "state": "completed",
+      "title": "Bring bins back",
+      "action": "complete",
+      "due_at": "2026-11-11T05:00:00+00:00",
+      "due_on": "2026-11-10",
+      "pinned": false,
+      "points": 0.5,
+      "icon_id": "bins",
+      "step_id": "94996806-a96a-47d7-a54a-c5e67e1a0bdf",
+      "version": 1,
+      "assignee": "ohm",
+      "due_time": null,
+      "cycle_end": "2026-11-16T05:00:00+00:00",
+      "preset_id": "bins-return",
+      "requester": "rina",
+      "completion": {
+        "completed_at": "2026-11-10T22:56:00+00:00",
+        "contributors": [
+          "ohm"
+        ]
+      },
+      "created_at": "2026-11-12T22:56:35.616424+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": "41526915-8c8f-41d9-8340-dc5980c8ce00",
+      "change_note": "",
+      "cycle_start": "2026-11-09",
+      "expires_time": null,
+      "point_policy": "household-v1",
+      "routine_title": "Bin return",
+      "schedule_version": 3
+    },
     {
       "id": "3bc543a9-00ec-40ae-8cfe-8e3ef44b6843",
       "kind": "chore",
@@ -7310,8 +7414,8 @@
     }
   ],
   "local_day": "2026-11-12",
-  "updated_at": "2026-11-12T21:42:53.990718+00:00",
-  "exported_at": "2026-11-12T21:42:53.990718+00:00",
+  "updated_at": "2026-11-13T00:11:25.55484+00:00",
+  "exported_at": "2026-11-13T00:11:25.55484+00:00",
   "leaderboard": [
     {
       "rank": 1,
@@ -7675,10 +7779,17 @@
     },
     {
       "rank": 4,
-      "units": 12.0,
+      "units": 18.0,
       "member": "ohm",
       "period": "all",
       "entries": [
+        {
+          "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-09:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
+          "title": "Bring bins back",
+          "units": 6.0,
+          "member": "ohm",
+          "completed_at": "2026-11-10T22:56:00+00:00"
+        },
         {
           "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-02:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
           "title": "Put in new trash bag",
@@ -7875,10 +7986,17 @@
     },
     {
       "rank": 4,
-      "units": 12.0,
+      "units": 18.0,
       "member": "ohm",
       "period": "month",
       "entries": [
+        {
+          "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-09:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
+          "title": "Bring bins back",
+          "units": 6.0,
+          "member": "ohm",
+          "completed_at": "2026-11-10T22:56:00+00:00"
+        },
         {
           "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-02:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
           "title": "Put in new trash bag",
@@ -7955,15 +8073,23 @@
     },
     {
       "rank": 3,
-      "units": 0,
-      "member": "michal",
+      "units": 6.0,
+      "member": "ohm",
       "period": "week",
-      "entries": []
+      "entries": [
+        {
+          "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-09:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
+          "title": "Bring bins back",
+          "units": 6.0,
+          "member": "ohm",
+          "completed_at": "2026-11-10T22:56:00+00:00"
+        }
+      ]
     },
     {
-      "rank": 3,
+      "rank": 4,
       "units": 0,
-      "member": "ohm",
+      "member": "michal",
       "period": "week",
       "entries": []
     }

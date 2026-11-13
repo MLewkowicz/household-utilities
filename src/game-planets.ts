@@ -7,6 +7,12 @@ export function buildGamePlanet(parent:T.Group,id:GameId){
  const globe=(color:string)=>ball(world,color,1.03,1.03,1.03);
  const tree=(p:T.Group,x:number,z:number,color:string)=>{cylinder(p,'#947559',.035,.24,x,.12,z);ball(p,color,.16,.23,.16,x,.37,z);};
  const flag=(p:T.Group,x:number,y:number,z:number,color:string)=>{cylinder(p,cream,.022,.46,x,y+.23,z);box(p,color,.24,.15,.025,x+.12,y+.37,z);};
+ if(id==='sudoku'||id==='crossword'){
+  globe(id==='sudoku'?'#8d7c9e':'#a17e63');const desk=group(world,0,.83,0);box(desk,cream,1.65,.15,1.65);
+  const size=id==='sudoku'?3:5,step=1.5/size;
+  for(let row=0;row<size;row++)for(let col=0;col<size;col++){const blocked=id==='crossword'&&[[0,0],[0,1],[1,0],[4,4],[4,3],[3,4]].some(([r,c])=>r===row&&c===col);box(desk,blocked?ink:'#f8efda',step-.025,.06,step-.025,(col-(size-1)/2)*step,.12,(row-(size-1)/2)*step);if(!blocked&&(row+col)%2===0){const dot=ball(desk,gold,.04,.03,.04,(col-(size-1)/2)*step,.18,(row-(size-1)/2)*step);}}
+  const pencil=group(world,1.05,.95,.3);pencil.rotation.z=-.3;cylinder(pencil,gold,.07,1.3);mesh(pencil,new T.ConeGeometry(.07,.23,6),ink,0,-.76,0).rotation.z=Math.PI;
+ }
  if(id==='geography'){
   globe('#568fa4');
   for(const [x,y,z,s] of [[-.45,.45,.85,.48],[.35,-.25,.9,.4],[.6,.55,.55,.25],[-.6,-.45,.5,.3]])ball(world,'#a1b57a',s,s*.65,.1,x,y,z);

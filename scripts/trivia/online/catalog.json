@@ -2,7 +2,7 @@
   "schema": 1,
   "provider": "Wikidata",
   "license": "CC0-1.0",
-  "fetchedAt": "2026-11-12T20:52:45.187Z",
+  "fetchedAt": "2026-11-12T23:44:09.733Z",
   "events": [
     {
       "id": "Q10257",
@@ -2149,6 +2149,15 @@
       "label": "Jemaa el-Fnaa"
     },
     {
+      "id": "Q2620036",
+      "revision": 2561575267,
+      "source": "https://www.wikidata.org/wiki/Q2620036",
+      "countryRevision": 2568117526,
+      "country": "PER",
+      "countryId": "Q419",
+      "label": "Nazca Lines"
+    },
+    {
       "id": "Q270983",
       "revision": 2560783949,
       "source": "https://www.wikidata.org/wiki/Q270983",
@@ -3058,6 +3067,1640 @@
       "label": "Pantheon"
     }
   ],
+  "passportFacts": [
+    {
+      "country": "ARE",
+      "title": "Burj Khalifa",
+      "text": "Dubai's Burj Khalifa became the world's tallest building in 2010.",
+      "id": "Q12495",
+      "revision": 2553195880,
+      "source": "https://www.wikidata.org/wiki/Q12495"
+    },
+    {
+      "country": "ARE",
+      "title": "United Arab Emirates",
+      "text": "Seven emirates make up this country, formed as a federation in 1971.",
+      "id": "Q878",
+      "revision": 2565763742,
+      "source": "https://www.wikidata.org/wiki/Q878"
+    },
+    {
+      "country": "ARE",
+      "title": "Emirates Mars Mission",
+      "text": "Its Hope probe entered orbit around Mars in 2021.",
+      "id": "Q21027958",
+      "revision": 2484110361,
+      "source": "https://www.wikidata.org/wiki/Q21027958"
+    },
+    {
+      "country": "ARG",
+      "title": "Lionel Messi",
+      "text": "Lionel Messi grew up in Rosario and captained this country to the 2022 men's World Cup title.",
+      "id": "Q615",
+      "revision": 2568260945,
+      "source": "https://www.wikidata.org/wiki/Q615"
+    },
+    {
+      "country": "ARG",
+      "title": "Eva Perón",
+      "text": "Eva Perón, the political figure behind the musical Evita, was its first lady.",
+      "id": "Q40933",
+      "revision": 2565542280,
+      "source": "https://www.wikidata.org/wiki/Q40933"
+    },
+    {
+      "country": "ARG",
+      "title": "Tango",
+      "text": "Along with Uruguay, this country helped give the world tango.",
+      "id": "Q338450",
+      "revision": 2559736371,
+      "source": "https://www.wikidata.org/wiki/Q338450"
+    },
+    {
+      "country": "AUS",
+      "title": "Sydney Opera House",
+      "text": "Its best-known opera house has a roof often compared to sails.",
+      "id": "Q45178",
+      "revision": 2564427535,
+      "source": "https://www.wikidata.org/wiki/Q45178"
+    },
+    {
+      "country": "AUS",
+      "title": "Steve Irwin",
+      "text": "Wildlife presenter Steve Irwin became famous as the Crocodile Hunter here.",
+      "id": "Q126513",
+      "revision": 2567816036,
+      "source": "https://www.wikidata.org/wiki/Q126513"
+    },
+    {
+      "country": "AUS",
+      "title": "AC/DC",
+      "text": "The rock band AC/DC formed in Sydney in this country.",
+      "id": "Q27593",
+      "revision": 2568049458,
+      "source": "https://www.wikidata.org/wiki/Q27593"
+    },
+    {
+      "country": "AUT",
+      "title": "Wolfgang Amadeus Mozart",
+      "text": "Mozart was born in Salzburg, in what is now this country.",
+      "id": "Q254",
+      "revision": 2565325607,
+      "source": "https://www.wikidata.org/wiki/Q254"
+    },
+    {
+      "country": "AUT",
+      "title": "The Sound of Music (film)",
+      "text": "The Sound of Music follows the von Trapp family in this country.",
+      "id": "Q60072",
+      "revision": 2565436521,
+      "source": "https://www.wikidata.org/wiki/Q60072"
+    },
+    {
+      "country": "AUT",
+      "title": "Archduke Franz Ferdinand of Austria",
+      "text": "Vienna was the seat of the Habsburg rulers; the assassination of heir Franz Ferdinand helped spark World War I.",
+      "id": "Q43063",
+      "revision": 2565357665,
+      "source": "https://www.wikidata.org/wiki/Q43063"
+    },
+    {
+      "country": "BGD",
+      "title": "Bangladesh Liberation War",
+      "text": "This country became independent from Pakistan after a war in 1971.",
+      "id": "Q371394",
+      "revision": 2550165751,
+      "source": "https://www.wikidata.org/wiki/Q371394"
+    },
+    {
+      "country": "BGD",
+      "title": "Muhammad Yunus",
+      "text": "Muhammad Yunus and Grameen Bank won the Nobel Peace Prize for work on microcredit here.",
+      "id": "Q43969",
+      "revision": 2563050908,
+      "source": "https://www.wikidata.org/wiki/Q43969"
+    },
+    {
+      "country": "BGD",
+      "title": "Bengali language movement",
+      "text": "A movement defending Bengali helped inspire International Mother Language Day.",
+      "id": "Q1975418",
+      "revision": 2559534241,
+      "source": "https://www.wikidata.org/wiki/Q1975418"
+    },
+    {
+      "country": "BRA",
+      "title": "Pelé",
+      "text": "Pelé won three men's World Cups playing for this country.",
+      "id": "Q12897",
+      "revision": 2568022319,
+      "source": "https://www.wikidata.org/wiki/Q12897"
+    },
+    {
+      "country": "BRA",
+      "title": "Rio Carnival",
+      "text": "Rio de Janeiro hosts its famous carnival of samba schools and parades.",
+      "id": "Q35232",
+      "revision": 2559529660,
+      "source": "https://www.wikidata.org/wiki/Q35232"
+    },
+    {
+      "country": "BRA",
+      "title": "Bossa nova",
+      "text": "The musical style bossa nova developed here; The Girl from Ipanema became a worldwide hit.",
+      "id": "Q486263",
+      "revision": 2561328152,
+      "source": "https://www.wikidata.org/wiki/Q486263"
+    },
+    {
+      "country": "CAN",
+      "title": "Celine Dion",
+      "text": "Céline Dion was born in Quebec in this country.",
+      "id": "Q5105",
+      "revision": 2568198491,
+      "source": "https://www.wikidata.org/wiki/Q5105"
+    },
+    {
+      "country": "CAN",
+      "title": "Toronto Raptors",
+      "text": "The Toronto Raptors became the first NBA champions based outside the United States.",
+      "id": "Q132880",
+      "revision": 2555352768,
+      "source": "https://www.wikidata.org/wiki/Q132880"
+    },
+    {
+      "country": "CAN",
+      "title": "Terry Fox",
+      "text": "Terry Fox attempted to run across this country to raise money for cancer research.",
+      "id": "Q295053",
+      "revision": 2555020150,
+      "source": "https://www.wikidata.org/wiki/Q295053"
+    },
+    {
+      "country": "CHL",
+      "title": "Pablo Neruda",
+      "text": "Nobel Prize-winning poet Pablo Neruda came from this country.",
+      "id": "Q34189",
+      "revision": 2567305674,
+      "source": "https://www.wikidata.org/wiki/Q34189"
+    },
+    {
+      "country": "CHL",
+      "title": "2010 Copiapó mining accident",
+      "text": "The world watched as 33 trapped miners were rescued here in 2010.",
+      "id": "Q214790",
+      "revision": 2556557703,
+      "source": "https://www.wikidata.org/wiki/Q214790"
+    },
+    {
+      "country": "CHL",
+      "title": "Easter Island",
+      "text": "Rapa Nui, famous for its giant moai statues, is part of this country.",
+      "id": "Q14452",
+      "revision": 2564978393,
+      "source": "https://www.wikidata.org/wiki/Q14452"
+    },
+    {
+      "country": "CHN",
+      "title": "Terracotta Army",
+      "text": "Thousands of terracotta soldiers guarded the tomb of its first emperor.",
+      "id": "Q47672",
+      "revision": 2559758312,
+      "source": "https://www.wikidata.org/wiki/Q47672"
+    },
+    {
+      "country": "CHN",
+      "title": "Great Wall of China",
+      "text": "A vast network of defensive walls stretches across its northern landscape.",
+      "id": "Q12501",
+      "revision": 2567948024,
+      "source": "https://www.wikidata.org/wiki/Q12501"
+    },
+    {
+      "country": "CHN",
+      "title": "Mao Zedong",
+      "text": "Mao Zedong proclaimed its People's Republic in 1949.",
+      "id": "Q5816",
+      "revision": 2568297854,
+      "source": "https://www.wikidata.org/wiki/Q5816"
+    },
+    {
+      "country": "COL",
+      "title": "Shakira",
+      "text": "Shakira was born in Barranquilla in this country.",
+      "id": "Q34424",
+      "revision": 2567881637,
+      "source": "https://www.wikidata.org/wiki/Q34424"
+    },
+    {
+      "country": "COL",
+      "title": "Gabriel García Márquez",
+      "text": "Gabriel García Márquez, author of One Hundred Years of Solitude, was born here.",
+      "id": "Q5878",
+      "revision": 2565594608,
+      "source": "https://www.wikidata.org/wiki/Q5878"
+    },
+    {
+      "country": "COL",
+      "title": "Encanto",
+      "text": "Disney's Encanto is set in this country.",
+      "id": "Q103372692",
+      "revision": 2566732013,
+      "source": "https://www.wikidata.org/wiki/Q103372692"
+    },
+    {
+      "country": "CZE",
+      "title": "Velvet Revolution",
+      "text": "The peaceful Velvet Revolution ended communist rule in its predecessor state in 1989.",
+      "id": "Q182817",
+      "revision": 2567571267,
+      "source": "https://www.wikidata.org/wiki/Q182817"
+    },
+    {
+      "country": "CZE",
+      "title": "Franz Kafka",
+      "text": "Franz Kafka was born in Prague, now this country's capital.",
+      "id": "Q905",
+      "revision": 2563977943,
+      "source": "https://www.wikidata.org/wiki/Q905"
+    },
+    {
+      "country": "CZE",
+      "title": "Pilsner Urquell",
+      "text": "The golden lager style called pilsner began in the city of Plzeň here.",
+      "id": "Q331630",
+      "revision": 2543390101,
+      "source": "https://www.wikidata.org/wiki/Q331630"
+    },
+    {
+      "country": "DEU",
+      "title": "Fall of the Berlin Wall",
+      "text": "A wall dividing its best-known city opened in November 1989.",
+      "id": "Q69163529",
+      "revision": 2545528111,
+      "source": "https://www.wikidata.org/wiki/Q69163529"
+    },
+    {
+      "country": "DEU",
+      "title": "Ludwig van Beethoven",
+      "text": "Beethoven was born in Bonn, in what is now this country.",
+      "id": "Q255",
+      "revision": 2567720737,
+      "source": "https://www.wikidata.org/wiki/Q255"
+    },
+    {
+      "country": "DEU",
+      "title": "Johannes Gutenberg",
+      "text": "Gutenberg developed his influential movable-type printing system in Mainz here.",
+      "id": "Q8958",
+      "revision": 2567631305,
+      "source": "https://www.wikidata.org/wiki/Q8958"
+    },
+    {
+      "country": "DNK",
+      "title": "The Lego Group",
+      "text": "LEGO began as a small workshop in Billund in this country.",
+      "id": "Q1063455",
+      "revision": 2555916262,
+      "source": "https://www.wikidata.org/wiki/Q1063455"
+    },
+    {
+      "country": "DNK",
+      "title": "Hans Christian Andersen",
+      "text": "Hans Christian Andersen wrote The Little Mermaid and The Ugly Duckling here.",
+      "id": "Q5673",
+      "revision": 2565593446,
+      "source": "https://www.wikidata.org/wiki/Q5673"
+    },
+    {
+      "country": "DNK",
+      "title": "Niels Bohr",
+      "text": "Physicist Niels Bohr, known for his model of the atom, was born in its capital.",
+      "id": "Q7085",
+      "revision": 2568285261,
+      "source": "https://www.wikidata.org/wiki/Q7085"
+    },
+    {
+      "country": "EGY",
+      "title": "Tutankhamun",
+      "text": "The discovery of Tutankhamun's tomb made headlines around the world.",
+      "id": "Q12154",
+      "revision": 2564631094,
+      "source": "https://www.wikidata.org/wiki/Q12154"
+    },
+    {
+      "country": "EGY",
+      "title": "Suez Canal",
+      "text": "The Suez Canal links the Mediterranean and Red Sea through this country.",
+      "id": "Q899",
+      "revision": 2562602003,
+      "source": "https://www.wikidata.org/wiki/Q899"
+    },
+    {
+      "country": "EGY",
+      "title": "Cleopatra",
+      "text": "Cleopatra VII was its last active Ptolemaic ruler.",
+      "id": "Q635",
+      "revision": 2563775419,
+      "source": "https://www.wikidata.org/wiki/Q635"
+    },
+    {
+      "country": "ESP",
+      "title": "Pablo Picasso",
+      "text": "Picasso was born in Málaga in this country.",
+      "id": "Q5593",
+      "revision": 2565534231,
+      "source": "https://www.wikidata.org/wiki/Q5593"
+    },
+    {
+      "country": "ESP",
+      "title": "Don Quixote",
+      "text": "Cervantes set Don Quixote's windmill-tilting adventures here.",
+      "id": "Q480",
+      "revision": 2558010319,
+      "source": "https://www.wikidata.org/wiki/Q480"
+    },
+    {
+      "country": "ESP",
+      "title": "2010 FIFA World Cup final",
+      "text": "An Andrés Iniesta goal won this country its first men's World Cup in 2010.",
+      "id": "Q208401",
+      "revision": 2529265489,
+      "source": "https://www.wikidata.org/wiki/Q208401"
+    },
+    {
+      "country": "ETH",
+      "title": "Lucy (hominid)",
+      "text": "The ancient human relative nicknamed Lucy was discovered here.",
+      "id": "Q245388",
+      "revision": 2553609215,
+      "source": "https://www.wikidata.org/wiki/Q245388"
+    },
+    {
+      "country": "ETH",
+      "title": "Abebe Bikila",
+      "text": "Abebe Bikila won the 1960 Olympic marathon barefoot while representing this country.",
+      "id": "Q52596",
+      "revision": 2567439593,
+      "source": "https://www.wikidata.org/wiki/Q52596"
+    },
+    {
+      "country": "ETH",
+      "title": "Battle of Adwa",
+      "text": "Its victory at Adwa in 1896 defeated an invading Italian army.",
+      "id": "Q302519",
+      "revision": 2517690374,
+      "source": "https://www.wikidata.org/wiki/Q302519"
+    },
+    {
+      "country": "FRA",
+      "title": "French Revolution",
+      "text": "The storming of the Bastille became a symbol of its 1789 revolution.",
+      "id": "Q6534",
+      "revision": 2565601141,
+      "source": "https://www.wikidata.org/wiki/Q6534"
+    },
+    {
+      "country": "FRA",
+      "title": "Napoleon",
+      "text": "Napoleon rose from army officer to emperor of this country.",
+      "id": "Q517",
+      "revision": 2567767072,
+      "source": "https://www.wikidata.org/wiki/Q517"
+    },
+    {
+      "country": "FRA",
+      "title": "Tour de France",
+      "text": "The world's most famous multi-stage bicycle race is chiefly held here.",
+      "id": "Q33881",
+      "revision": 2564068950,
+      "source": "https://www.wikidata.org/wiki/Q33881"
+    },
+    {
+      "country": "GBR",
+      "title": "The Beatles",
+      "text": "The Beatles formed in Liverpool in this country.",
+      "id": "Q1299",
+      "revision": 2567933047,
+      "source": "https://www.wikidata.org/wiki/Q1299"
+    },
+    {
+      "country": "GBR",
+      "title": "William Shakespeare",
+      "text": "William Shakespeare was born in Stratford-upon-Avon here.",
+      "id": "Q692",
+      "revision": 2564792846,
+      "source": "https://www.wikidata.org/wiki/Q692"
+    },
+    {
+      "country": "GBR",
+      "title": "Winston Churchill",
+      "text": "Winston Churchill led its government through much of World War II.",
+      "id": "Q8016",
+      "revision": 2566776222,
+      "source": "https://www.wikidata.org/wiki/Q8016"
+    },
+    {
+      "country": "GHA",
+      "title": "Kwame Nkrumah",
+      "text": "Kwame Nkrumah led this country to independence from Britain in 1957.",
+      "id": "Q8620",
+      "revision": 2566510432,
+      "source": "https://www.wikidata.org/wiki/Q8620"
+    },
+    {
+      "country": "GHA",
+      "title": "Kofi Annan",
+      "text": "Former UN secretary-general Kofi Annan was born in Kumasi here.",
+      "id": "Q1254",
+      "revision": 2563196004,
+      "source": "https://www.wikidata.org/wiki/Q1254"
+    },
+    {
+      "country": "GHA",
+      "title": "Kente cloth",
+      "text": "Its brightly patterned kente cloth is woven in strips and often worn for celebrations.",
+      "id": "Q1428368",
+      "revision": 2568035374,
+      "source": "https://www.wikidata.org/wiki/Q1428368"
+    },
+    {
+      "country": "GRC",
+      "title": "Ancient Olympic Games",
+      "text": "The ancient Olympic Games began at Olympia here.",
+      "id": "Q188468",
+      "revision": 2522224905,
+      "source": "https://www.wikidata.org/wiki/Q188468"
+    },
+    {
+      "country": "GRC",
+      "title": "Socrates",
+      "text": "Socrates taught and questioned fellow citizens in ancient Athens here.",
+      "id": "Q913",
+      "revision": 2565972049,
+      "source": "https://www.wikidata.org/wiki/Q913"
+    },
+    {
+      "country": "GRC",
+      "title": "Mamma Mia! (film)",
+      "text": "The film Mamma Mia! used islands such as Skopelos for its seaside setting.",
+      "id": "Q188850",
+      "revision": 2566898685,
+      "source": "https://www.wikidata.org/wiki/Q188850"
+    },
+    {
+      "country": "HRV",
+      "title": "2018 FIFA World Cup final",
+      "text": "Luka Modrić captained this country to the 2018 men's World Cup final.",
+      "id": "Q31043671",
+      "revision": 2511747921,
+      "source": "https://www.wikidata.org/wiki/Q31043671"
+    },
+    {
+      "country": "HRV",
+      "title": "Game of Thrones",
+      "text": "Dubrovnik's walls stood in for King's Landing in Game of Thrones.",
+      "id": "Q23572",
+      "revision": 2542105894,
+      "source": "https://www.wikidata.org/wiki/Q23572"
+    },
+    {
+      "country": "HRV",
+      "title": "Nikola Tesla",
+      "text": "Nikola Tesla was born in Smiljan, a village in what is now this country.",
+      "id": "Q9036",
+      "revision": 2567566127,
+      "source": "https://www.wikidata.org/wiki/Q9036"
+    },
+    {
+      "country": "HUN",
+      "title": "Ernő Rubik",
+      "text": "The inventor of the Rubik's Cube, Ernő Rubik, came from this country.",
+      "id": "Q186089",
+      "revision": 2568354905,
+      "source": "https://www.wikidata.org/wiki/Q186089"
+    },
+    {
+      "country": "HUN",
+      "title": "Hungarian Revolution of 1956",
+      "text": "Soviet forces crushed an uprising in its capital in 1956.",
+      "id": "Q164348",
+      "revision": 2564290109,
+      "source": "https://www.wikidata.org/wiki/Q164348"
+    },
+    {
+      "country": "HUN",
+      "title": "Harry Houdini",
+      "text": "Escape artist Harry Houdini was born in Budapest here.",
+      "id": "Q131545",
+      "revision": 2567326047,
+      "source": "https://www.wikidata.org/wiki/Q131545"
+    },
+    {
+      "country": "IDN",
+      "title": "Komodo dragon",
+      "text": "Wild Komodo dragons live on a handful of islands in this country.",
+      "id": "Q4504",
+      "revision": 2563016567,
+      "source": "https://www.wikidata.org/wiki/Q4504"
+    },
+    {
+      "country": "IDN",
+      "title": "Proclamation of Indonesian Independence",
+      "text": "Sukarno and Mohammad Hatta proclaimed its independence in 1945.",
+      "id": "Q1661772",
+      "revision": 2559685096,
+      "source": "https://www.wikidata.org/wiki/Q1661772"
+    },
+    {
+      "country": "IDN",
+      "title": "Bali",
+      "text": "The island of Bali is one of its best-known destinations.",
+      "id": "Q3125978",
+      "revision": 2566166595,
+      "source": "https://www.wikidata.org/wiki/Q3125978"
+    },
+    {
+      "country": "IND",
+      "title": "Mahatma Gandhi",
+      "text": "Gandhi's campaigns of nonviolent resistance helped it win independence from Britain.",
+      "id": "Q1001",
+      "revision": 2567490707,
+      "source": "https://www.wikidata.org/wiki/Q1001"
+    },
+    {
+      "country": "IND",
+      "title": "Hindi cinema",
+      "text": "Mumbai is the center of the Hindi film industry nicknamed Bollywood.",
+      "id": "Q93196",
+      "revision": 2550162340,
+      "source": "https://www.wikidata.org/wiki/Q93196"
+    },
+    {
+      "country": "IND",
+      "title": "Taj Mahal",
+      "text": "An emperor built the Taj Mahal here as a tomb for his wife Mumtaz Mahal.",
+      "id": "Q9141",
+      "revision": 2563722674,
+      "source": "https://www.wikidata.org/wiki/Q9141"
+    },
+    {
+      "country": "IRL",
+      "title": "U2",
+      "text": "The rock band U2 formed in Dublin here.",
+      "id": "Q396",
+      "revision": 2561921143,
+      "source": "https://www.wikidata.org/wiki/Q396"
+    },
+    {
+      "country": "IRL",
+      "title": "James Joyce",
+      "text": "James Joyce set Ulysses in its capital.",
+      "id": "Q6882",
+      "revision": 2562944284,
+      "source": "https://www.wikidata.org/wiki/Q6882"
+    },
+    {
+      "country": "IRL",
+      "title": "Guinness",
+      "text": "The Guinness brewery began at St James's Gate in its capital.",
+      "id": "Q194297",
+      "revision": 2566565144,
+      "source": "https://www.wikidata.org/wiki/Q194297"
+    },
+    {
+      "country": "IRN",
+      "title": "Iranian Revolution",
+      "text": "A revolution overthrew the shah here in 1979.",
+      "id": "Q126065",
+      "revision": 2563762371,
+      "source": "https://www.wikidata.org/wiki/Q126065"
+    },
+    {
+      "country": "IRN",
+      "title": "Persepolis",
+      "text": "The ruins of Persepolis recall the Achaemenid Persian Empire here.",
+      "id": "Q129072",
+      "revision": 2528746816,
+      "source": "https://www.wikidata.org/wiki/Q129072"
+    },
+    {
+      "country": "IRN",
+      "title": "A Separation",
+      "text": "Asghar Farhadi's A Separation won this country its first Oscar for a foreign-language film.",
+      "id": "Q640561",
+      "revision": 2559031347,
+      "source": "https://www.wikidata.org/wiki/Q640561"
+    },
+    {
+      "country": "ITA",
+      "title": "Leonardo da Vinci",
+      "text": "Leonardo da Vinci was born near Vinci, in what is now this country.",
+      "id": "Q762",
+      "revision": 2568278414,
+      "source": "https://www.wikidata.org/wiki/Q762"
+    },
+    {
+      "country": "ITA",
+      "title": "Colosseum",
+      "text": "Gladiators once fought in the Colosseum in its capital.",
+      "id": "Q10285",
+      "revision": 2551136894,
+      "source": "https://www.wikidata.org/wiki/Q10285"
+    },
+    {
+      "country": "ITA",
+      "title": "Ferrari",
+      "text": "Enzo Ferrari founded his famous sports-car company here.",
+      "id": "Q27586",
+      "revision": 2566439387,
+      "source": "https://www.wikidata.org/wiki/Q27586"
+    },
+    {
+      "country": "JOR",
+      "title": "Petra",
+      "text": "Its rock-cut city of Petra appeared in Indiana Jones and the Last Crusade.",
+      "id": "Q5788",
+      "revision": 2560286472,
+      "source": "https://www.wikidata.org/wiki/Q5788"
+    },
+    {
+      "country": "JOR",
+      "title": "The Martian (film)",
+      "text": "Wadi Rum's desert stood in for Mars in The Martian.",
+      "id": "Q18547944",
+      "revision": 2568295830,
+      "source": "https://www.wikidata.org/wiki/Q18547944"
+    },
+    {
+      "country": "JOR",
+      "title": "Dead Sea",
+      "text": "This country has an eastern shore on the Dead Sea.",
+      "id": "Q23883",
+      "revision": 2564284556,
+      "source": "https://www.wikidata.org/wiki/Q23883"
+    },
+    {
+      "country": "JPN",
+      "title": "Nintendo",
+      "text": "Nintendo began in Kyoto as a maker of playing cards.",
+      "id": "Q8093",
+      "revision": 2561680110,
+      "source": "https://www.wikidata.org/wiki/Q8093"
+    },
+    {
+      "country": "JPN",
+      "title": "Studio Ghibli",
+      "text": "Studio Ghibli made Spirited Away and My Neighbor Totoro here.",
+      "id": "Q182950",
+      "revision": 2563323639,
+      "source": "https://www.wikidata.org/wiki/Q182950"
+    },
+    {
+      "country": "JPN",
+      "title": "Hiroshima",
+      "text": "Hiroshima and Nagasaki were struck by atomic bombs in 1945.",
+      "id": "Q34664",
+      "revision": 2564642765,
+      "source": "https://www.wikidata.org/wiki/Q34664"
+    },
+    {
+      "country": "KEN",
+      "title": "Eliud Kipchoge",
+      "text": "Marathon runner Eliud Kipchoge represents this country.",
+      "id": "Q9124",
+      "revision": 2557866845,
+      "source": "https://www.wikidata.org/wiki/Q9124"
+    },
+    {
+      "country": "KEN",
+      "title": "Wangarĩ Maathai",
+      "text": "Wangari Maathai founded the Green Belt Movement here and won the Nobel Peace Prize.",
+      "id": "Q46795",
+      "revision": 2563063481,
+      "source": "https://www.wikidata.org/wiki/Q46795"
+    },
+    {
+      "country": "KEN",
+      "title": "Maasai Mara",
+      "text": "Its Maasai Mara reserve is famous for lions and migrating wildebeest.",
+      "id": "Q207724",
+      "revision": 2535764896,
+      "source": "https://www.wikidata.org/wiki/Q207724"
+    },
+    {
+      "country": "KHM",
+      "title": "Angkor Wat",
+      "text": "Angkor Wat, a vast temple complex, appears on its national flag.",
+      "id": "Q43473",
+      "revision": 2564609166,
+      "source": "https://www.wikidata.org/wiki/Q43473"
+    },
+    {
+      "country": "KHM",
+      "title": "Khmer Rouge",
+      "text": "Pol Pot's Khmer Rouge regime ruled this country in the 1970s.",
+      "id": "Q191764",
+      "revision": 2528747133,
+      "source": "https://www.wikidata.org/wiki/Q191764"
+    },
+    {
+      "country": "KHM",
+      "title": "Lara Croft: Tomb Raider",
+      "text": "The temple of Ta Prohm here was a filming location for Lara Croft: Tomb Raider.",
+      "id": "Q464014",
+      "revision": 2566807342,
+      "source": "https://www.wikidata.org/wiki/Q464014"
+    },
+    {
+      "country": "KOR",
+      "title": "BTS",
+      "text": "BTS and BLACKPINK helped bring this country's pop music to a worldwide audience.",
+      "id": "Q13580495",
+      "revision": 2565233483,
+      "source": "https://www.wikidata.org/wiki/Q13580495"
+    },
+    {
+      "country": "KOR",
+      "title": "Parasite (2019 film)",
+      "text": "Parasite became the first non-English-language film to win the Best Picture Oscar.",
+      "id": "Q61448040",
+      "revision": 2565018566,
+      "source": "https://www.wikidata.org/wiki/Q61448040"
+    },
+    {
+      "country": "KOR",
+      "title": "Squid Game",
+      "text": "The television series Squid Game was made in this country.",
+      "id": "Q106582931",
+      "revision": 2548138876,
+      "source": "https://www.wikidata.org/wiki/Q106582931"
+    },
+    {
+      "country": "LKA",
+      "title": "Ceylon tea",
+      "text": "Tea from this island is still widely sold under its former name, Ceylon.",
+      "id": "Q105616623",
+      "revision": 2463951211,
+      "source": "https://www.wikidata.org/wiki/Q105616623"
+    },
+    {
+      "country": "LKA",
+      "title": "1996 Cricket World Cup final",
+      "text": "Its men's cricket team won the 1996 World Cup, beating Australia in the final.",
+      "id": "Q14422139",
+      "revision": 2447524212,
+      "source": "https://www.wikidata.org/wiki/Q14422139"
+    },
+    {
+      "country": "LKA",
+      "title": "Sirimavo Bandaranaike",
+      "text": "Sirimavo Bandaranaike became the world's first woman prime minister here.",
+      "id": "Q194291",
+      "revision": 2567892727,
+      "source": "https://www.wikidata.org/wiki/Q194291"
+    },
+    {
+      "country": "MAR",
+      "title": "2022 FIFA World Cup",
+      "text": "Its men's football team became Africa's first World Cup semifinalist in 2022.",
+      "id": "Q284163",
+      "revision": 2547887431,
+      "source": "https://www.wikidata.org/wiki/Q284163"
+    },
+    {
+      "country": "MAR",
+      "title": "Casablanca (film)",
+      "text": "The classic film Casablanca is named after a city in this country.",
+      "id": "Q132689",
+      "revision": 2564732872,
+      "source": "https://www.wikidata.org/wiki/Q132689"
+    },
+    {
+      "country": "MAR",
+      "title": "Ibn Battuta",
+      "text": "The great medieval traveler Ibn Battuta was born in Tangier here.",
+      "id": "Q7331",
+      "revision": 2559621005,
+      "source": "https://www.wikidata.org/wiki/Q7331"
+    },
+    {
+      "country": "MEX",
+      "title": "Frida Kahlo",
+      "text": "Frida Kahlo painted self-portraits at her Blue House here.",
+      "id": "Q5588",
+      "revision": 2557886527,
+      "source": "https://www.wikidata.org/wiki/Q5588"
+    },
+    {
+      "country": "MEX",
+      "title": "Day of the Dead",
+      "text": "Families remember loved ones with colorful Day of the Dead offerings here.",
+      "id": "Q309256",
+      "revision": 2563844379,
+      "source": "https://www.wikidata.org/wiki/Q309256"
+    },
+    {
+      "country": "MEX",
+      "title": "Chichen Itza",
+      "text": "The Maya built the great stepped pyramid at Chichén Itzá here.",
+      "id": "Q5859",
+      "revision": 2551136917,
+      "source": "https://www.wikidata.org/wiki/Q5859"
+    },
+    {
+      "country": "MYS",
+      "title": "Petronas Towers",
+      "text": "Kuala Lumpur's twin Petronas Towers became a symbol of this country.",
+      "id": "Q83063",
+      "revision": 2567531326,
+      "source": "https://www.wikidata.org/wiki/Q83063"
+    },
+    {
+      "country": "MYS",
+      "title": "Michelle Yeoh",
+      "text": "Oscar-winning actor Michelle Yeoh was born in Ipoh here.",
+      "id": "Q214289",
+      "revision": 2564511040,
+      "source": "https://www.wikidata.org/wiki/Q214289"
+    },
+    {
+      "country": "MYS",
+      "title": "Malayan Declaration of Independence",
+      "text": "Tunku Abdul Rahman proclaimed Malaya's independence in 1957; it later became part of this country.",
+      "id": "Q1475298",
+      "revision": 2550332186,
+      "source": "https://www.wikidata.org/wiki/Q1475298"
+    },
+    {
+      "country": "NOR",
+      "title": "Edvard Munch",
+      "text": "Edvard Munch, the artist behind The Scream, came from this country.",
+      "id": "Q41406",
+      "revision": 2567483464,
+      "source": "https://www.wikidata.org/wiki/Q41406"
+    },
+    {
+      "country": "NOR",
+      "title": "Roald Amundsen",
+      "text": "Explorer Roald Amundsen led the first expedition to reach the South Pole for this country.",
+      "id": "Q926",
+      "revision": 2564773900,
+      "source": "https://www.wikidata.org/wiki/Q926"
+    },
+    {
+      "country": "NOR",
+      "title": "A-ha",
+      "text": "The band a-ha, known for Take On Me, formed here.",
+      "id": "Q156305",
+      "revision": 2564482460,
+      "source": "https://www.wikidata.org/wiki/Q156305"
+    },
+    {
+      "country": "NPL",
+      "title": "Mount Everest",
+      "text": "Mount Everest rises on its border with China.",
+      "id": "Q513",
+      "revision": 2568335844,
+      "source": "https://www.wikidata.org/wiki/Q513"
+    },
+    {
+      "country": "NPL",
+      "title": "The Buddha",
+      "text": "Lumbini, traditionally recognized as the Buddha's birthplace, is here.",
+      "id": "Q9441",
+      "revision": 2568129342,
+      "source": "https://www.wikidata.org/wiki/Q9441"
+    },
+    {
+      "country": "NPL",
+      "title": "Gurkha",
+      "text": "Gurkha soldiers take their name from the town of Gorkha in this country.",
+      "id": "Q207962",
+      "revision": 2551034095,
+      "source": "https://www.wikidata.org/wiki/Q207962"
+    },
+    {
+      "country": "NZL",
+      "title": "The Lord of the Rings (film series)",
+      "text": "Peter Jackson filmed his Lord of the Rings trilogy here.",
+      "id": "Q190214",
+      "revision": 2565163827,
+      "source": "https://www.wikidata.org/wiki/Q190214"
+    },
+    {
+      "country": "NZL",
+      "title": "New Zealand national rugby union team",
+      "text": "Its All Blacks rugby team performs a haka before matches.",
+      "id": "Q55801",
+      "revision": 2511932857,
+      "source": "https://www.wikidata.org/wiki/Q55801"
+    },
+    {
+      "country": "NZL",
+      "title": "Women's suffrage in New Zealand",
+      "text": "In 1893 it became the first self-governing country to give women the vote in parliamentary elections.",
+      "id": "Q3447247",
+      "revision": 2548848637,
+      "source": "https://www.wikidata.org/wiki/Q3447247"
+    },
+    {
+      "country": "OMN",
+      "title": "Frankincense",
+      "text": "Its Dhofar region is famous for the ancient frankincense trade.",
+      "id": "Q173486",
+      "revision": 2520188338,
+      "source": "https://www.wikidata.org/wiki/Q173486"
+    },
+    {
+      "country": "OMN",
+      "title": "Qaboos bin Said",
+      "text": "Sultan Qaboos ruled this country from 1970 until 2020.",
+      "id": "Q57331",
+      "revision": 2562898162,
+      "source": "https://www.wikidata.org/wiki/Q57331"
+    },
+    {
+      "country": "OMN",
+      "title": "Strait of Hormuz",
+      "text": "Its Musandam peninsula helps form the southern side of the Strait of Hormuz.",
+      "id": "Q79883",
+      "revision": 2566532875,
+      "source": "https://www.wikidata.org/wiki/Q79883"
+    },
+    {
+      "country": "PAK",
+      "title": "Malala Yousafzai",
+      "text": "Education campaigner Malala Yousafzai was born in Mingora here.",
+      "id": "Q32732",
+      "revision": 2567795892,
+      "source": "https://www.wikidata.org/wiki/Q32732"
+    },
+    {
+      "country": "PAK",
+      "title": "1992 Cricket World Cup final",
+      "text": "Imran Khan captained this country to the 1992 men's Cricket World Cup title.",
+      "id": "Q5262151",
+      "revision": 2447523033,
+      "source": "https://www.wikidata.org/wiki/Q5262151"
+    },
+    {
+      "country": "PAK",
+      "title": "Mohenjo-daro",
+      "text": "The ancient Indus Valley city of Mohenjo-daro is here.",
+      "id": "Q5725",
+      "revision": 2562614986,
+      "source": "https://www.wikidata.org/wiki/Q5725"
+    },
+    {
+      "country": "PER",
+      "title": "Machu Picchu",
+      "text": "The Inca built Machu Picchu high in its Andes mountains.",
+      "id": "Q676203",
+      "revision": 2567299294,
+      "source": "https://www.wikidata.org/wiki/Q676203"
+    },
+    {
+      "country": "PER",
+      "title": "Nazca lines",
+      "text": "Huge ancient figures called the Nazca Lines are etched into its desert.",
+      "id": "Q2620036",
+      "revision": 2561575267,
+      "source": "https://www.wikidata.org/wiki/Q2620036"
+    },
+    {
+      "country": "PER",
+      "title": "Paddington Bear",
+      "text": "Paddington Bear is said to come from this country.",
+      "id": "Q632908",
+      "revision": 2550306321,
+      "source": "https://www.wikidata.org/wiki/Q632908"
+    },
+    {
+      "country": "POL",
+      "title": "Marie Curie",
+      "text": "Marie Curie was born in Warsaw, now this country's capital.",
+      "id": "Q7186",
+      "revision": 2568279485,
+      "source": "https://www.wikidata.org/wiki/Q7186"
+    },
+    {
+      "country": "POL",
+      "title": "Solidarity (Polish trade union)",
+      "text": "Lech Wałęsa and the Solidarity movement challenged communist rule here.",
+      "id": "Q1003",
+      "revision": 2558239527,
+      "source": "https://www.wikidata.org/wiki/Q1003"
+    },
+    {
+      "country": "POL",
+      "title": "Frédéric Chopin",
+      "text": "Composer Frédéric Chopin was born near Warsaw here.",
+      "id": "Q1268",
+      "revision": 2564779483,
+      "source": "https://www.wikidata.org/wiki/Q1268"
+    },
+    {
+      "country": "PRT",
+      "title": "Cristiano Ronaldo",
+      "text": "Cristiano Ronaldo was born on Madeira, an island belonging to this country.",
+      "id": "Q11571",
+      "revision": 2568207942,
+      "source": "https://www.wikidata.org/wiki/Q11571"
+    },
+    {
+      "country": "PRT",
+      "title": "Vasco da Gama",
+      "text": "Vasco da Gama sailed from here to India around the Cape of Good Hope.",
+      "id": "Q7328",
+      "revision": 2568005248,
+      "source": "https://www.wikidata.org/wiki/Q7328"
+    },
+    {
+      "country": "PRT",
+      "title": "Carnation Revolution",
+      "text": "The Carnation Revolution ended its dictatorship in 1974.",
+      "id": "Q193245",
+      "revision": 2567839599,
+      "source": "https://www.wikidata.org/wiki/Q193245"
+    },
+    {
+      "country": "ROU",
+      "title": "Dracula",
+      "text": "Bram Stoker's Dracula made its region of Transylvania famous around the world.",
+      "id": "Q41542",
+      "revision": 2561637422,
+      "source": "https://www.wikidata.org/wiki/Q41542"
+    },
+    {
+      "country": "ROU",
+      "title": "Nadia Comăneci",
+      "text": "Nadia Comăneci earned the first perfect 10 in Olympic gymnastics for this country.",
+      "id": "Q33228",
+      "revision": 2568453838,
+      "source": "https://www.wikidata.org/wiki/Q33228"
+    },
+    {
+      "country": "ROU",
+      "title": "Romanian revolution",
+      "text": "A revolution overthrew Nicolae Ceaușescu here in 1989.",
+      "id": "Q204213",
+      "revision": 2552177048,
+      "source": "https://www.wikidata.org/wiki/Q204213"
+    },
+    {
+      "country": "SEN",
+      "title": "Sadio Mané",
+      "text": "Footballer Sadio Mané helped this country win its first Africa Cup of Nations title.",
+      "id": "Q209942",
+      "revision": 2562669598,
+      "source": "https://www.wikidata.org/wiki/Q209942"
+    },
+    {
+      "country": "SEN",
+      "title": "Léopold Sédar Senghor",
+      "text": "Poet Léopold Sédar Senghor became its first president after independence.",
+      "id": "Q154545",
+      "revision": 2562803468,
+      "source": "https://www.wikidata.org/wiki/Q154545"
+    },
+    {
+      "country": "SEN",
+      "title": "Dakar Rally",
+      "text": "The original Paris-Dakar Rally ended in this country's capital.",
+      "id": "Q181336",
+      "revision": 2567826499,
+      "source": "https://www.wikidata.org/wiki/Q181336"
+    },
+    {
+      "country": "SWE",
+      "title": "ABBA",
+      "text": "ABBA won Eurovision with Waterloo while representing this country.",
+      "id": "Q18233",
+      "revision": 2564724193,
+      "source": "https://www.wikidata.org/wiki/Q18233"
+    },
+    {
+      "country": "SWE",
+      "title": "Alfred Nobel",
+      "text": "Alfred Nobel, whose fortune funded the Nobel Prizes, was born here.",
+      "id": "Q23810",
+      "revision": 2562762596,
+      "source": "https://www.wikidata.org/wiki/Q23810"
+    },
+    {
+      "country": "SWE",
+      "title": "Minecraft",
+      "text": "The video game Minecraft was created by Markus Persson in this country.",
+      "id": "Q49740",
+      "revision": 2568355950,
+      "source": "https://www.wikidata.org/wiki/Q49740"
+    },
+    {
+      "country": "THA",
+      "title": "Siam",
+      "text": "This country was formerly known internationally as Siam.",
+      "id": "Q1081620",
+      "revision": 2550610241,
+      "source": "https://www.wikidata.org/wiki/Q1081620"
+    },
+    {
+      "country": "THA",
+      "title": "Songkran (Thailand)",
+      "text": "Its Songkran New Year celebrations are famous for water splashing.",
+      "id": "Q215014",
+      "revision": 2549055774,
+      "source": "https://www.wikidata.org/wiki/Q215014"
+    },
+    {
+      "country": "THA",
+      "title": "The Beach (film)",
+      "text": "The film The Beach used Maya Bay on Ko Phi Phi Le here.",
+      "id": "Q470692",
+      "revision": 2566807961,
+      "source": "https://www.wikidata.org/wiki/Q470692"
+    },
+    {
+      "country": "TUN",
+      "title": "Tunisian revolution",
+      "text": "Protests here helped set off the Arab Spring in 2010–11.",
+      "id": "Q46959",
+      "revision": 2539142869,
+      "source": "https://www.wikidata.org/wiki/Q46959"
+    },
+    {
+      "country": "TUN",
+      "title": "Carthage",
+      "text": "Ancient Carthage, Rome's great rival, stood near its modern capital.",
+      "id": "Q6343",
+      "revision": 2544642967,
+      "source": "https://www.wikidata.org/wiki/Q6343"
+    },
+    {
+      "country": "TUN",
+      "title": "Tataouine",
+      "text": "Its desert locations helped portray Tatooine in the Star Wars films.",
+      "id": "Q817149",
+      "revision": 2518123836,
+      "source": "https://www.wikidata.org/wiki/Q817149"
+    },
+    {
+      "country": "TUR",
+      "title": "Mustafa Kemal Atatürk",
+      "text": "Mustafa Kemal Atatürk founded its modern republic in 1923.",
+      "id": "Q5152",
+      "revision": 2566536281,
+      "source": "https://www.wikidata.org/wiki/Q5152"
+    },
+    {
+      "country": "TUR",
+      "title": "Hagia Sophia",
+      "text": "Istanbul's Hagia Sophia began as a great Byzantine cathedral here.",
+      "id": "Q12506",
+      "revision": 2562621660,
+      "source": "https://www.wikidata.org/wiki/Q12506"
+    },
+    {
+      "country": "TUR",
+      "title": "Troy",
+      "text": "The archaeological site associated with ancient Troy is here.",
+      "id": "Q22647",
+      "revision": 2567294001,
+      "source": "https://www.wikidata.org/wiki/Q22647"
+    },
+    {
+      "country": "TZA",
+      "title": "Freddie Mercury",
+      "text": "Queen singer Freddie Mercury was born in Zanzibar, now part of this country.",
+      "id": "Q15869",
+      "revision": 2567547354,
+      "source": "https://www.wikidata.org/wiki/Q15869"
+    },
+    {
+      "country": "TZA",
+      "title": "Mount Kilimanjaro",
+      "text": "Mount Kilimanjaro, Africa's highest mountain, rises here.",
+      "id": "Q7296",
+      "revision": 2567533932,
+      "source": "https://www.wikidata.org/wiki/Q7296"
+    },
+    {
+      "country": "TZA",
+      "title": "Julius Nyerere",
+      "text": "Julius Nyerere helped unite Tanganyika and Zanzibar into this country.",
+      "id": "Q186525",
+      "revision": 2565420895,
+      "source": "https://www.wikidata.org/wiki/Q186525"
+    },
+    {
+      "country": "USA",
+      "title": "Apollo 11",
+      "text": "Its Apollo 11 mission landed the first people on the Moon.",
+      "id": "Q43653",
+      "revision": 2563425559,
+      "source": "https://www.wikidata.org/wiki/Q43653"
+    },
+    {
+      "country": "USA",
+      "title": "Martin Luther King Jr.",
+      "text": "Martin Luther King Jr. delivered his I Have a Dream speech in its capital.",
+      "id": "Q8027",
+      "revision": 2568184537,
+      "source": "https://www.wikidata.org/wiki/Q8027"
+    },
+    {
+      "country": "USA",
+      "title": "Hollywood",
+      "text": "Hollywood became the center of its internationally influential film industry.",
+      "id": "Q227856",
+      "revision": 2538295368,
+      "source": "https://www.wikidata.org/wiki/Q227856"
+    },
+    {
+      "country": "UZB",
+      "title": "Samarkand",
+      "text": "Silk Road merchants passed through its city of Samarkand, famed for its tiled monuments.",
+      "id": "Q5753",
+      "revision": 2564442125,
+      "source": "https://www.wikidata.org/wiki/Q5753"
+    },
+    {
+      "country": "UZB",
+      "title": "Timur",
+      "text": "The conqueror Timur made Samarkand his capital and was buried there.",
+      "id": "Q8462",
+      "revision": 2568066692,
+      "source": "https://www.wikidata.org/wiki/Q8462"
+    },
+    {
+      "country": "UZB",
+      "title": "1966 Tashkent earthquake",
+      "text": "A devastating earthquake struck its capital Tashkent in 1966.",
+      "id": "Q4120993",
+      "revision": 2484792624,
+      "source": "https://www.wikidata.org/wiki/Q4120993"
+    },
+    {
+      "country": "VNM",
+      "title": "Fall of Saigon",
+      "text": "The fall of Saigon in 1975 marked the end of a long war here.",
+      "id": "Q482456",
+      "revision": 2541687419,
+      "source": "https://www.wikidata.org/wiki/Q482456"
+    },
+    {
+      "country": "VNM",
+      "title": "Ho Chi Minh",
+      "text": "Ho Chi Minh led its independence movement; its largest city now bears his name.",
+      "id": "Q36014",
+      "revision": 2563052379,
+      "source": "https://www.wikidata.org/wiki/Q36014"
+    },
+    {
+      "country": "VNM",
+      "title": "Pho",
+      "text": "Phở, a soup of broth, rice noodles and herbs, originated here.",
+      "id": "Q420646",
+      "revision": 2567215612,
+      "source": "https://www.wikidata.org/wiki/Q420646"
+    },
+    {
+      "country": "ZAF",
+      "title": "Nelson Mandela",
+      "text": "Nelson Mandela became its president after the first fully democratic national election in 1994.",
+      "id": "Q8023",
+      "revision": 2567254517,
+      "source": "https://www.wikidata.org/wiki/Q8023"
+    },
+    {
+      "country": "ZAF",
+      "title": "1995 Rugby World Cup final",
+      "text": "Its Springboks won the 1995 Rugby World Cup, a moment later dramatized in Invictus.",
+      "id": "Q4590610",
+      "revision": 2520112357,
+      "source": "https://www.wikidata.org/wiki/Q4590610"
+    },
+    {
+      "country": "ZAF",
+      "title": "Desmond Tutu",
+      "text": "Archbishop Desmond Tutu was a leading opponent of apartheid here.",
+      "id": "Q43033",
+      "revision": 2565537528,
+      "source": "https://www.wikidata.org/wiki/Q43033"
+    },
+    {
+      "country": "KAZ",
+      "title": "Baikonur Cosmodrome",
+      "text": "The Baikonur spaceport, which launched the first human into space, is in this country.",
+      "id": "Q177477",
+      "revision": 2567629607,
+      "source": "https://www.wikidata.org/wiki/Q177477"
+    },
+    {
+      "country": "KAZ",
+      "title": "Kazakhstan",
+      "text": "It is the world's largest landlocked country.",
+      "id": "Q232",
+      "revision": 2567816055,
+      "source": "https://www.wikidata.org/wiki/Q232"
+    },
+    {
+      "country": "KAZ",
+      "title": "Astana",
+      "text": "Its capital was renamed Nur-Sultan in 2019 and returned to the name Astana in 2022.",
+      "id": "Q1520",
+      "revision": 2568008907,
+      "source": "https://www.wikidata.org/wiki/Q1520"
+    },
+    {
+      "country": "AZE",
+      "title": "Eurovision Song Contest 2012",
+      "text": "Baku hosted the Eurovision Song Contest in 2012 in this country.",
+      "id": "Q10161",
+      "revision": 2493160573,
+      "source": "https://www.wikidata.org/wiki/Q10161"
+    },
+    {
+      "country": "AZE",
+      "title": "Baku City Circuit",
+      "text": "Formula One races through the streets of its capital Baku.",
+      "id": "Q17004958",
+      "revision": 2458996373,
+      "source": "https://www.wikidata.org/wiki/Q17004958"
+    },
+    {
+      "country": "AZE",
+      "title": "Gobustan State Historical and Cultural Reserve",
+      "text": "Gobustan's ancient rock carvings record people, boats and animals near the Caspian Sea here.",
+      "id": "Q318181",
+      "revision": 2565344586,
+      "source": "https://www.wikidata.org/wiki/Q318181"
+    },
+    {
+      "country": "MNG",
+      "title": "Genghis Khan",
+      "text": "Genghis Khan united nomadic tribes here before building an enormous empire.",
+      "id": "Q720",
+      "revision": 2568445901,
+      "source": "https://www.wikidata.org/wiki/Q720"
+    },
+    {
+      "country": "MNG",
+      "title": "Naadam",
+      "text": "Its Naadam festival features wrestling, horse racing and archery.",
+      "id": "Q721133",
+      "revision": 2552722770,
+      "source": "https://www.wikidata.org/wiki/Q721133"
+    },
+    {
+      "country": "MNG",
+      "title": "Gobi Desert",
+      "text": "Much of the Gobi Desert lies in this country, north of China.",
+      "id": "Q42070",
+      "revision": 2562084203,
+      "source": "https://www.wikidata.org/wiki/Q42070"
+    },
+    {
+      "country": "MNE",
+      "title": "2006 Montenegrin independence referendum",
+      "text": "It voted for independence from its union with Serbia in 2006.",
+      "id": "Q1131784",
+      "revision": 2564439585,
+      "source": "https://www.wikidata.org/wiki/Q1131784"
+    },
+    {
+      "country": "MNE",
+      "title": "Casino Royale (2006 film)",
+      "text": "The high-stakes poker tournament in Casino Royale is set in this country.",
+      "id": "Q151904",
+      "revision": 2567880284,
+      "source": "https://www.wikidata.org/wiki/Q151904"
+    },
+    {
+      "country": "MNE",
+      "title": "Bay of Kotor",
+      "text": "Mountains surround the Bay of Kotor on its Adriatic coast.",
+      "id": "Q207468",
+      "revision": 2548941179,
+      "source": "https://www.wikidata.org/wiki/Q207468"
+    },
+    {
+      "country": "BWA",
+      "title": "The No. 1 Ladies' Detective Agency",
+      "text": "The No. 1 Ladies' Detective Agency novels are set here.",
+      "id": "Q3272407",
+      "revision": 2547369003,
+      "source": "https://www.wikidata.org/wiki/Q3272407"
+    },
+    {
+      "country": "BWA",
+      "title": "Okavango Delta",
+      "text": "The Okavango River spreads into a huge inland delta here instead of reaching the sea.",
+      "id": "Q650872",
+      "revision": 2516866179,
+      "source": "https://www.wikidata.org/wiki/Q650872"
+    },
+    {
+      "country": "BWA",
+      "title": "Seretse Khama",
+      "text": "Seretse Khama became its first president when it gained independence in 1966.",
+      "id": "Q219962",
+      "revision": 2563065939,
+      "source": "https://www.wikidata.org/wiki/Q219962"
+    },
+    {
+      "country": "NAM",
+      "title": "Namib",
+      "text": "Its Namib Desert has some of the world's tallest sand dunes.",
+      "id": "Q131377",
+      "revision": 2568115943,
+      "source": "https://www.wikidata.org/wiki/Q131377"
+    },
+    {
+      "country": "NAM",
+      "title": "South African Border War",
+      "text": "It gained independence from South African administration in 1990.",
+      "id": "Q1993848",
+      "revision": 2550157559,
+      "source": "https://www.wikidata.org/wiki/Q1993848"
+    },
+    {
+      "country": "NAM",
+      "title": "Mad Max: Fury Road",
+      "text": "Much of Mad Max: Fury Road was filmed in its desert landscapes.",
+      "id": "Q1757288",
+      "revision": 2568175453,
+      "source": "https://www.wikidata.org/wiki/Q1757288"
+    },
+    {
+      "country": "CRI",
+      "title": "Public Force of Costa Rica",
+      "text": "It abolished its standing army after a civil war in 1948.",
+      "id": "Q2333698",
+      "revision": 2564621635,
+      "source": "https://www.wikidata.org/wiki/Q2333698"
+    },
+    {
+      "country": "CRI",
+      "title": "Óscar Arias",
+      "text": "Óscar Arias won the Nobel Peace Prize for a Central American peace plan while its president.",
+      "id": "Q49344",
+      "revision": 2563065509,
+      "source": "https://www.wikidata.org/wiki/Q49344"
+    },
+    {
+      "country": "CRI",
+      "title": "Geography of Costa Rica",
+      "text": "This small Central American country is known for rainforests, sloths and exceptional biodiversity.",
+      "id": "Q738314",
+      "revision": 2462749350,
+      "source": "https://www.wikidata.org/wiki/Q738314"
+    },
+    {
+      "country": "EST",
+      "title": "Singing Revolution",
+      "text": "Mass singing gatherings helped its independence movement in the late 1980s.",
+      "id": "Q595321",
+      "revision": 2550317724,
+      "source": "https://www.wikidata.org/wiki/Q595321"
+    },
+    {
+      "country": "EST",
+      "title": "Skype",
+      "text": "The original Skype software was developed by a team based in this country.",
+      "id": "Q40984",
+      "revision": 2549164936,
+      "source": "https://www.wikidata.org/wiki/Q40984"
+    },
+    {
+      "country": "EST",
+      "title": "E-Residency of Estonia",
+      "text": "It pioneered an e-residency program for people running businesses online.",
+      "id": "Q19017724",
+      "revision": 2514758734,
+      "source": "https://www.wikidata.org/wiki/Q19017724"
+    },
+    {
+      "country": "BOL",
+      "title": "Salar de Uyuni",
+      "text": "The vast salt flat Salar de Uyuni is here.",
+      "id": "Q76122",
+      "revision": 2547346738,
+      "source": "https://www.wikidata.org/wiki/Q76122"
+    },
+    {
+      "country": "BOL",
+      "title": "Simón Bolívar",
+      "text": "This country is named after independence leader Simón Bolívar.",
+      "id": "Q8605",
+      "revision": 2568444329,
+      "source": "https://www.wikidata.org/wiki/Q8605"
+    },
+    {
+      "country": "BOL",
+      "title": "Lake Titicaca",
+      "text": "It shares Lake Titicaca with Peru.",
+      "id": "Q35342",
+      "revision": 2564283723,
+      "source": "https://www.wikidata.org/wiki/Q35342"
+    },
+    {
+      "country": "ECU",
+      "title": "Galápagos Islands",
+      "text": "Darwin visited its Galápagos Islands during the voyage of HMS Beagle.",
+      "id": "Q38095",
+      "revision": 2563469086,
+      "source": "https://www.wikidata.org/wiki/Q38095"
+    },
+    {
+      "country": "ECU",
+      "title": "Ecuador",
+      "text": "Its name is the Spanish word for equator.",
+      "id": "Q736",
+      "revision": 2562960551,
+      "source": "https://www.wikidata.org/wiki/Q736"
+    },
+    {
+      "country": "ECU",
+      "title": "Panama hat",
+      "text": "Despite their name, Panama hats are traditionally woven in this country.",
+      "id": "Q741814",
+      "revision": 2562036897,
+      "source": "https://www.wikidata.org/wiki/Q741814"
+    },
+    {
+      "country": "GTM",
+      "title": "Tikal",
+      "text": "The Maya built the monumental city of Tikal in its rainforest.",
+      "id": "Q181172",
+      "revision": 2567607088,
+      "source": "https://www.wikidata.org/wiki/Q181172"
+    },
+    {
+      "country": "GTM",
+      "title": "Rigoberta Menchú",
+      "text": "Indigenous rights campaigner Rigoberta Menchú won the Nobel Peace Prize for work rooted here.",
+      "id": "Q188620",
+      "revision": 2567435895,
+      "source": "https://www.wikidata.org/wiki/Q188620"
+    },
+    {
+      "country": "GTM",
+      "title": "Miguel Ángel Asturias",
+      "text": "Nobel Prize-winning novelist Miguel Ángel Asturias came from this country.",
+      "id": "Q75603",
+      "revision": 2568392096,
+      "source": "https://www.wikidata.org/wiki/Q75603"
+    },
+    {
+      "country": "URY",
+      "title": "1930 FIFA World Cup",
+      "text": "It hosted and won the first men's football World Cup in 1930.",
+      "id": "Q48432",
+      "revision": 2555055860,
+      "source": "https://www.wikidata.org/wiki/Q48432"
+    },
+    {
+      "country": "URY",
+      "title": "José Mujica",
+      "text": "Former president José Mujica became famous for his modest lifestyle.",
+      "id": "Q9094",
+      "revision": 2565411233,
+      "source": "https://www.wikidata.org/wiki/Q9094"
+    },
+    {
+      "country": "URY",
+      "title": "La cumparsita",
+      "text": "The famous tango La Cumparsita was composed in its capital Montevideo.",
+      "id": "Q765883",
+      "revision": 2550186255,
+      "source": "https://www.wikidata.org/wiki/Q765883"
+    },
+    {
+      "country": "JAM",
+      "title": "Bob Marley",
+      "text": "Bob Marley helped carry reggae from this island to the world.",
+      "id": "Q409",
+      "revision": 2566927803,
+      "source": "https://www.wikidata.org/wiki/Q409"
+    },
+    {
+      "country": "JAM",
+      "title": "Usain Bolt",
+      "text": "Sprinter Usain Bolt won eight Olympic gold medals representing this country.",
+      "id": "Q1189",
+      "revision": 2564712887,
+      "source": "https://www.wikidata.org/wiki/Q1189"
+    },
+    {
+      "country": "JAM",
+      "title": "Cool Runnings",
+      "text": "Cool Runnings was inspired by its team's debut in Olympic bobsleigh.",
+      "id": "Q282748",
+      "revision": 2567139618,
+      "source": "https://www.wikidata.org/wiki/Q282748"
+    }
+  ],
   "rejected": [
     {
       "title": "Pioneer 10",
@@ -3069,7 +4712,7 @@
     },
     {
       "title": "The Secret Garden",
-      "reason": "Disagrees with reviewed date"
+      "reason": "Serial and book publication dates differ; the available edition claims do not identify the earliest publication."
     },
     {
       "title": "Twenty Thousand Leagues Under the Seas",
@@ -3205,10 +4848,6 @@
     },
     {
       "title": "Waitomo Glowworm Caves",
-      "reason": "Country missing, ambiguous or differs from selected destination"
-    },
-    {
-      "title": "Nazca Lines",
       "reason": "Country missing, ambiguous or differs from selected destination"
     },
     {

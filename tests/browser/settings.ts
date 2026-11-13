@@ -18,3 +18,8 @@ export async function refreshSection(page:Page){
  await openSettings(page);await page.getByRole('button',{name:'Refresh',exact:true}).click();
  await expect(page.locator('#settings-dialog')).toBeHidden();
 }
+
+export async function setPerson(page:Page,person:string){
+ await openSettings(page);await page.locator('#settings-person').selectOption(person);
+ await page.getByRole('button',{name:'Close settings',exact:true}).click();
+}

@@ -40,7 +40,7 @@ function render(){
  renderedDay=today();
  const focused=document.activeElement as HTMLElement|null,focusedEvent=focused?.closest<HTMLElement>('[data-event-id]')?.dataset.eventId;
  const focusSelector=focusedEvent&&focused?.dataset.availDay?`[data-event-id="${CSS.escape(focusedEvent)}"] [data-avail-day="${focused.dataset.availDay}"]:not(:disabled)`:focusedEvent&&focused?.dataset.availBrush?`[data-event-id="${CSS.escape(focusedEvent)}"] [data-avail-brush="${focused.dataset.availBrush}"]`:null;
- $('#events-identity').innerHTML=identity?`<span>${avatar(identity)} You’re ${name(identity)}</span><button class="text-button" data-event-person="">Switch person</button>`:`<span>Choose your name</span>${MEMBERS.map(m=>`<button class="text-button" data-event-person="${m}">${avatar(m)}${name(m)}</button>`).join('')}`;
+ $('#events-identity').innerHTML=identity?`<span>${avatar(identity)} You’re ${name(identity)}</span>`:`<span>Choose your name</span>${MEMBERS.map(m=>`<button class="text-button" data-event-person="${m}">${avatar(m)}${name(m)}</button>`).join('')}`;
  $('#event-new').toggleAttribute('disabled',!live||!identity||busy);
  if(!ledger)return;
  let events=ledger.events.filter(e=>view==='calendar'?e.state!=='cancelled'&&!polling(e)&&onEventDay(e,selectedDay):past?!eventOpen(e):eventOpen(e));

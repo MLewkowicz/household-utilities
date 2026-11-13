@@ -31,15 +31,15 @@ test('returning from every game and resizing keeps the observatory and backgroun
 test('rapid turns stay bounded and interrupted drags cannot move the observatory later',async({page})=>{
  await page.goto('/#games');await stableScene(page);
  await page.locator('[data-turn="1"]').evaluate(button=>{for(let i=0;i<35;i++)(button as HTMLButtonElement).click();});
- await expect(page.locator('#orbit-game-title')).toHaveText('How Much-ish?');await stableScene(page);
+ await expect(page.locator('#orbit-game-title')).toHaveText('Common Ground');await stableScene(page);
  const scene=page.locator('#observatory-scene'),box=(await scene.boundingBox())!;
  await page.mouse.move(box.x+box.width*.4,box.y+box.height*.8);await page.mouse.down();await page.mouse.move(box.x+box.width*.4-100,box.y+box.height*.8,{steps:3});
  await scene.evaluate(el=>{if(el.hasPointerCapture(1))el.releasePointerCapture(1);});
  await page.mouse.move(box.x+30,box.y+box.height*.8);await page.mouse.up();
- await expect(scene).toHaveAttribute('data-selected','how-much-ish');await stableScene(page);
+ await expect(scene).toHaveAttribute('data-selected','clue-cascade');await stableScene(page);
  await page.mouse.move(box.x+box.width*.4,box.y+box.height*.8);await page.mouse.down();await page.mouse.move(box.x+box.width*.4-100,box.y+box.height*.8,{steps:3});
  await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await page.mouse.move(box.x+10,box.y+box.height*.8);await page.mouse.up();
- await expect(scene).toHaveAttribute('data-selected','how-much-ish');await stableScene(page);
+ await expect(scene).toHaveAttribute('data-selected','clue-cascade');await stableScene(page);
  await scene.focus();await page.keyboard.press('Home');await expect(scene).toHaveAttribute('data-selected','geography');await stableScene(page);
 });
 

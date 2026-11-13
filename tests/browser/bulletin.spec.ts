@@ -1,4 +1,4 @@
-import {setTheme,refreshSection,openSettings} from './settings';
+import {setTheme,refreshSection,openSettings,setPerson} from './settings';
 import {test,expect,type Page,type Locator} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 const rpc=async(page:Page,fn:string,p?:unknown)=>{const r=await page.request.post(`/rest/v1/rpc/utilities_${fn}`,{headers:{apikey:'local-public'},data:p?{p}:{}});expect(r.ok()).toBeTruthy();return r.json();};
@@ -23,7 +23,7 @@ test('pinned notes, temperature, attribution, revisions, deletion and counts wor
  let d=await rpc(page,'bulletin_dashboard'),saved=d.notes[0];expect(saved.recipients).toEqual(['rina','ohm']);expect(saved.kind).toBe('complaint');
  expect(d.stats.find((s:any)=>s.period==='all'&&s.direction==='written'&&s.member==='michal').complaints).toBe(1);
  await selectView(page,'compliment');await expect(card).toHaveCount(0);await selectView(page,'complaint');await expect(card).toBeVisible();
- await page.locator('#bulletin-switch').click();await page.locator('[data-bulletin-person=rohil]').click();await lift(card);await card.getByRole('button',{name:'Edit note',exact:true}).click();
+ await setPerson(page,'rohil');await lift(card);await card.getByRole('button',{name:'Edit note',exact:true}).click();
  await expect(page.locator('#bulletin-actor')).toContainText('Originally pinned by Michal');await page.locator('#bulletin-body').fill('Thanks for washing everything!');await page.locator('#bulletin-temperature').fill('100');await page.locator('#bulletin-note-save').click();await expect(page.locator('#bulletin-note-dialog')).not.toBeVisible();
  await selectView(page,'compliment');const changed=note(page,'Thanks for washing everything!');await expect(changed).toHaveClass(/note-member-michal/);await lift(changed);await expect(changed.locator('.entry-updated')).toContainText('Edited by Rohil');await expect(changed).not.toContainText('Please wash the dishes <b>tonight</b>.');
  await refreshSection(page);await expect(changed.locator('.note-tools')).toHaveAttribute('open','');await expect(changed.locator('.entry-updated')).toBeVisible();

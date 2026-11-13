@@ -1,7 +1,7 @@
 import {readFile} from 'node:fs/promises';
 const config=JSON.parse(await readFile('config.public.json','utf8'));
 const checks=[
- ['trivia_capabilities',{},d=>d.version===5&&d.games===5&&d.groups===true&&d.online_sync===true&&d.online_seed===1,'041_trivia_online_seed.sql'],
+ ['trivia_capabilities',{},d=>d.version===6&&d.games===7&&d.archive===true&&d.grid_puzzles===true&&d.photo_silhouettes===true&&d.passport_editorial===2&&d.groups===true&&d.online_sync===true&&d.online_seed===1,'045_passport_culture_catalog.sql'],
  ['geography_score_modes',{},d=>Array.isArray(d)&&d.includes('name')&&d.includes('find')&&d.includes('urban'),'038_geography_urban_catalog.sql'],
  ['geography_route_capabilities',{},d=>d.version===1&&d.puzzles===48,'036_geography_routes.sql'],
  ['geography_scores',{},Array.isArray,'029_geography_scores.sql'],
@@ -17,4 +17,4 @@ const results=await Promise.all(checks.map(async([operation,body,valid,migration
 }));
 const missing=[...new Set(results.filter(Boolean))];
 if(missing.length){console.error('Publication stopped: live database capabilities unavailable for '+missing.join(', ')+'. Apply missing migrations with ./configure.sh and retry.');process.exitCode=1;}
-else console.log('Live database supports personal group renaming, task ordering, event edits, quarter-point tasks, as-needed rotations, sweeping spaces, personal deadlines, expanded reactions, all five trivia games, major-city scores and daily Border Trails.');
+else console.log('Live database supports personal group renaming, task ordering, event edits, quarter-point tasks, as-needed rotations, sweeping spaces, personal deadlines, expanded reactions, all seven trivia games, personal archives, photographic silhouettes, contextual Passport clues, major-city scores and daily Border Trails.');

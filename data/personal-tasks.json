@@ -1,6 +1,23 @@
 {
   "tasks": [
     {
+      "id": "4a3e2b77-db90-4b5a-af90-a1878bd69e66",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Cancel Fellow Dues",
+      "action": "create",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "deleted": false,
+      "version": 1,
+      "added_at": "2026-11-12T23:46:02.655101+00:00",
+      "due_time": null,
+      "created_at": "2026-11-12T23:46:02.655101+00:00",
+      "group_name": "MIT",
+      "completed_at": null
+    },
+    {
       "id": "825793f6-fed8-4489-a933-82cc2648478e",
       "actor": "michal",
       "owner": "michal",
@@ -373,34 +390,53 @@
       "created_at": "2026-10-21T21:40:07.866708+00:00",
       "group_name": "RUBY",
       "completed_at": null
+    },
+    {
+      "id": "3eb4ebc1-d1cc-4c88-9f3a-4dbb2e741491",
+      "actor": "ohm",
+      "owner": "ohm",
+      "title": "Bananas",
+      "action": "complete",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "deleted": false,
+      "version": 2,
+      "added_at": "2026-11-12T22:56:47.48615+00:00",
+      "due_time": null,
+      "created_at": "2026-11-12T22:57:31.20815+00:00",
+      "group_name": null,
+      "completed_at": "2026-11-12T22:57:31.20815+00:00"
     }
   ],
   "orders": [
     {
       "keys": [
-        "shared:a9abc492-bd6c-4af9-a130-9773166e1896:2026-11-11:d9d7650c-09c5-4437-a73c-972a83099ed7",
+        "personal:6f3ae4f7-cfcd-410d-9222-0e5cb7d00d7f",
         "personal:825793f6-fed8-4489-a933-82cc2648478e",
+        "personal:baabc1de-0e44-424b-b4fe-e764f99d6f34",
+        "personal:7413329d-32ca-48d1-bbe7-b8d8829f613f",
+        "personal:4a3e2b77-db90-4b5a-af90-a1878bd69e66",
+        "personal:ef117f9a-5640-43e9-840c-8c481a752c5c",
+        "personal:ce8887c9-47e1-41d8-8fa3-ac189b4bf5a6",
+        "personal:e6913871-48f2-4d5f-a4a8-81446132526e",
+        "personal:64b0df69-f90f-4e10-92cd-abd9dcb56bb7",
+        "personal:9ed88924-5eb6-4cc9-b4ca-94de00ec943d",
+        "shared:fd2c8f60-949d-49f3-a376-6f59e8544825",
+        "shared:a9abc492-bd6c-4af9-a130-9773166e1896:2026-11-11:d9d7650c-09c5-4437-a73c-972a83099ed7",
         "personal:65df4a05-cb3c-47b2-b27b-d208f659ffc0",
         "shared:4a47d8de-a89f-4b34-a3f0-a39f59845d3f_michal",
         "shared:330d3eae-a220-449e-8a62-c253c430a43a_michal",
         "shared:a9abc492-bd6c-4af9-a130-9773166e1896:2026-11-04:d9d7650c-09c5-4437-a73c-972a83099ed7",
-        "personal:baabc1de-0e44-424b-b4fe-e764f99d6f34",
         "shared:605d27a3-9827-4e25-8fc3-d9b587a56f98",
         "shared:2c7a7534-ca39-4bd4-8257-f02e75f20583",
-        "personal:6f3ae4f7-cfcd-410d-9222-0e5cb7d00d7f",
-        "personal:7413329d-32ca-48d1-bbe7-b8d8829f613f",
         "personal:597e49ac-8d59-4277-bfd1-de07b45493a3",
         "personal:145f8cdd-a2c5-4d23-b954-9503dcb67de2",
         "personal:052d5075-477a-4d07-9eeb-319d5aea3cc7",
         "personal:eb390d6b-c8d9-493e-ae9e-cb484392ebe6",
         "personal:4b19e637-553b-42f9-8922-7e4c84ff0c03",
-        "personal:ef117f9a-5640-43e9-840c-8c481a752c5c",
         "personal:7b8697bb-1ff9-4849-9a79-9528f7b87a5c",
-        "personal:ce8887c9-47e1-41d8-8fa3-ac189b4bf5a6",
-        "personal:e6913871-48f2-4d5f-a4a8-81446132526e",
-        "personal:64b0df69-f90f-4e10-92cd-abd9dcb56bb7",
         "personal:dc01f5b9-9d08-4c2b-b958-0db18d5610bd",
-        "personal:9ed88924-5eb6-4cc9-b4ca-94de00ec943d",
         "personal:75a9471c-7701-4cde-8599-fe50bcd585e4",
         "personal:e26a2c61-0eba-4333-9b9f-061349f7bdac",
         "personal:7b8227e6-8bd2-4a1a-9fd3-01da672c35d9",
@@ -411,18 +447,20 @@
         "shared:e1175002-64d7-457f-a935-9ee02a5a5bf9"
       ],
       "member": "michal",
-      "version": 41,
-      "created_at": "2026-11-11T17:37:14.053594+00:00"
+      "version": 43,
+      "created_at": "2026-11-12T23:46:08.648523+00:00"
     },
     {
       "keys": [
+        "shared:fd2c8f60-949d-49f3-a376-6f59e8544825",
+        "personal:3eb4ebc1-d1cc-4c88-9f3a-4dbb2e741491",
         "shared:41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-09:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
         "shared:10986bd6-79a1-4a69-b799-e4938953c007:2026-11-02:1a7bbd79-0488-4b94-825d-6843207f75dc",
         "shared:10986bd6-79a1-4a69-b799-e4938953c007:2026-11-02:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff"
       ],
       "member": "ohm",
-      "version": 2,
-      "created_at": "2026-11-10T16:15:10.151912+00:00"
+      "version": 4,
+      "created_at": "2026-11-12T23:21:50.389459+00:00"
     },
     {
       "keys": [
@@ -450,6 +488,57 @@
     }
   ],
   "history": [
+    {
+      "id": "4a3e2b77-db90-4b5a-af90-a1878bd69e66",
+      "actor": "michal",
+      "owner": "michal",
+      "title": "Cancel Fellow Dues",
+      "action": "create",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "deleted": false,
+      "version": 1,
+      "added_at": "2026-11-12T23:46:02.655101+00:00",
+      "due_time": null,
+      "created_at": "2026-11-12T23:46:02.655101+00:00",
+      "group_name": "MIT",
+      "completed_at": null
+    },
+    {
+      "id": "3eb4ebc1-d1cc-4c88-9f3a-4dbb2e741491",
+      "actor": "ohm",
+      "owner": "ohm",
+      "title": "Bananas",
+      "action": "complete",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "deleted": false,
+      "version": 2,
+      "added_at": "2026-11-12T22:56:47.48615+00:00",
+      "due_time": null,
+      "created_at": "2026-11-12T22:57:31.20815+00:00",
+      "group_name": null,
+      "completed_at": "2026-11-12T22:57:31.20815+00:00"
+    },
+    {
+      "id": "3eb4ebc1-d1cc-4c88-9f3a-4dbb2e741491",
+      "actor": "ohm",
+      "owner": "ohm",
+      "title": "Bananas",
+      "action": "create",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "deleted": false,
+      "version": 1,
+      "added_at": "2026-11-12T22:56:47.48615+00:00",
+      "due_time": null,
+      "created_at": "2026-11-12T22:56:47.48615+00:00",
+      "group_name": null,
+      "completed_at": null
+    },
     {
       "id": "825793f6-fed8-4489-a933-82cc2648478e",
       "actor": "michal",
@@ -1250,8 +1339,8 @@
       "completed_at": null
     }
   ],
-  "updated_at": "2026-11-12T21:42:55.446695+00:00",
-  "exported_at": "2026-11-12T21:42:55.446695+00:00",
+  "updated_at": "2026-11-13T00:11:26.889909+00:00",
+  "exported_at": "2026-11-13T00:11:26.889909+00:00",
   "format_version": 2,
   "group_rename_version": 1
 }

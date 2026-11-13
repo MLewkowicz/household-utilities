@@ -1,6 +1,6 @@
 # Household
 
-A household app for To-dos, Expenses, Events, Bulletin, Utilities and an observatory with six games. Handwritten TypeScript + esbuild, Supabase RPCs, GitHub Pages. No framework or login; choosing a name is attribution, not authentication.
+A household app for To-dos, Expenses, Events, Bulletin, Utilities and an observatory with eight games. Handwritten TypeScript + esbuild, Supabase RPCs, GitHub Pages. No framework or login; choosing a name is attribution, not authentication.
 
 ## Start here
 
@@ -63,4 +63,6 @@ Concepts use disposable UI state and never connect to Supabase. They are exclude
 Publish through the existing `./publish.sh` workflow when requested. See [operations](docs/operations.md) before running it: it exports live snapshots, stages an allowlist, commits and pushes `main`.
 
 
-Compact cards with household-style model artwork around the observatory open Geography, Odd One Out, Passport Puzzle, Common Ground, Before or After, and How Much-ish. Common Ground replaces Clue Cascade with a four-group word board. Geography has Countries, city dots covering capitals and major cities, and Border Trail on a progressively revealed Paper globe. The review button opens a labeled version of the same rotating globe. Trivia opens directly into its board; How Much-ish uses direct silhouette resizing and 32 objects. Apply migrations through `041_trivia_online_seed.sql` before releasing this client; local preview installs them automatically. Source and content generation details are in [architecture](docs/architecture.md). Before or After and Passport Puzzle now have source-backed catalogs with 180 and 90 daily boards; [online syncing](docs/game-sync.md) explains fetching, validation, and weekly refresh setup.
+Compact cards with household-style model artwork open Geography, Odd One Out, Passport Puzzle, Common Ground, Before or After, How Much-ish, Sudoku and Crossword. The telescope follows a clockwise card ring at a fixed elevation that clears its dome. Games open directly into a board, with person selection in Settings, a floating shortcut for unfinished dailies, and crown/Bitmoji standings.
+
+Practice has ten starter boards per game and a personal calendar of past dailies. Finished boards are crossed out; unfinished boards resume. Geography's trail archive uses the same calendar, and its rotating review planet supports both countries and cities, including population figures. How Much-ish uses 59 solid silhouettes derived from openly licensed photographic cutouts, with direct resizing. Sudoku has 180 daily boards and Crossword has 90 original mini boards. Passport has 204 contextual clues across 68 countries, covering culture, sport and major history. Apply migrations through `045_passport_culture_catalog.sql` before releasing this client; local preview installs them automatically. [Architecture](docs/architecture.md) documents the controls and storage. [Online syncing](docs/game-sync.md) describes the existing Wikidata refresh and the new puzzle/photograph catalogs.

@@ -70,7 +70,7 @@ test('themes, identity, hash navigation and icon browsing work on phones and per
  expect(await page.locator('#expense-dialog').evaluate(el=>el.scrollWidth<=el.clientWidth)).toBeTruthy();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
  await page.keyboard.press('Escape');await expect(page.locator('#expense-dialog')).not.toBeVisible();
- await page.locator('#switch-person').click();await page.locator('[data-identity=ohm]').click();await expect(page.locator('#identity-name')).toContainText('You’re Ohm');
+ await page.locator('#settings-open').click();await page.locator('#settings-person').selectOption('ohm');await page.getByRole('button',{name:'Close settings',exact:true}).click();await expect(page.locator('#identity-name')).toContainText('You’re Ohm');
 });
 
 test('lost save responses can be retried without duplicate entries or extra rounding turns',async({page})=>{

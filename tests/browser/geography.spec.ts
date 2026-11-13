@@ -29,7 +29,7 @@ test('compact screen keeps configuration in a menu, saves answers and separates 
  expect((await page.locator('#geo-surface').boundingBox())!.y).toBeLessThan(120);
  await pick(page,'POL');await page.locator('#geo-answer').fill('Polnad');await page.locator('#geo-suggestions li').first().click();await expect(page.locator('#geo-correct')).toHaveText('1');await expect(page.locator('#geo-country-card')).toContainText('Warsaw');
  await expect(page.locator('#geo-country-card .atlas-history').first()).not.toBeEmpty();await page.locator('#geo-country-card .atlas-stories summary').click();await expect(page.locator('#geo-country-card .atlas-stories')).toHaveAttribute('open','');
- await page.reload();await ready(page);await expect(page.locator('#geo-correct')).toHaveText('1');await page.locator('#geo-study').click();await page.locator('#geo-study-country').selectOption('POL');await expect(page.locator('#geo-country-card')).toContainText('Poland');await page.locator('#geo-study').click();
+ await page.reload();await ready(page);await expect(page.locator('#geo-correct')).toHaveText('1');await page.locator('#geo-study').click();await page.getByRole('searchbox',{name:'Find a place'}).fill('Poland');await page.locator('#geo-review-results button').first().click();await expect(page.locator('#geo-country-card')).toContainText('Poland');await page.locator('#geo-study').click();
  await page.locator('#geo-settings').click();await page.locator('#geo-player').selectOption('rina');await expect(page.locator('#geo-correct')).toHaveText('0');await page.locator('#geo-player').selectOption('michal');await expect(page.locator('#geo-correct')).toHaveText('1');
 });
 
@@ -103,7 +103,7 @@ test('find competition ignores map drags and counts an empty-map click as one mi
 
 test('review planet labels countries and preserves the learning round',async({page})=>{
  await page.clock.install();await open(page);await start(page,'Caribbean','learn');const before=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-v1:michal')!));
- await page.locator('#geo-study').click();await expect(page.locator('#geography-page')).toHaveAttribute('data-mode','review');await page.locator('#geo-study-country').selectOption('POL');await expect(page.locator('#geo-country-card')).toContainText('Chapels carved from salt');await expect(page.locator('#geo-country-card')).toContainText('more stories');
+ await page.locator('#geo-study').click();await expect(page.locator('#geography-page')).toHaveAttribute('data-mode','review');await page.getByRole('searchbox',{name:'Find a place'}).fill('Poland');await page.locator('#geo-review-results button').first().click();await expect(page.locator('#geo-country-card')).toContainText('Chapels carved from salt');await expect(page.locator('#geo-country-card')).toContainText('more stories');
  await page.clock.fastForward(20000);await page.locator('#geo-study').click();await expect(page.locator('#geography-page')).toHaveAttribute('data-mode','quiz');await expect(page.locator('#geo-revealed')).toHaveText('0');
  const after=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-v1:michal')!));expect(after.id).toBe(before.id);expect(after.learningTarget).toBe(before.learningTarget);expect(after.region).toBe('Caribbean');expect(after.correct).toEqual(before.correct);
 });

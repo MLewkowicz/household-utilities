@@ -2,6 +2,7 @@ import * as T from 'three';
 import {actor,loadBitmojis,faceCamera,type CastMember} from './house/bitmoji-cast';
 import {box,ball,cylinder,group,dispose,ring,mesh,line} from './house/scene-geometry';
 import {GAMES} from './game-registry';
+import {headingForCard,headingAlongCards,telescopeElevation,wrapAngle} from './observatory-aim';
 import {buildObservatoryCosmos} from './observatory-cosmos';
 const TAU=Math.PI*2;
 /** A single physical azimuth selects both the telescope direction and game. */
@@ -28,12 +29,12 @@ export async function mountObservatory(host:HTMLElement,initialAngle=0){
  cylinder(building,ivory,3.38,.26,0,2.9);for(let i=0;i<10;i++){const a=i/10*TAU;const x=Math.sin(a)*3.02,z=Math.cos(a)*3.02;cylinder(building,trim,.20,2.3,x,4.05,z);cylinder(building,ivory,.31,.16,x,3,z);cylinder(building,ivory,.34,.2,x,5.17,z);}
  cylinder(building,trim,3.65,.22,0,5.38);cylinder(building,brass,3.6,.10,0,5.53);
  // The dome has a broad open slit for the enormous refractor.
- const dome=mesh(building,new T.SphereGeometry(3.56,48,20,.32,TAU-.64,0,Math.PI/2),copper,0,5.55,0);dome.rotation.y=Math.PI/2;
- for(let i=0;i<11;i++){const phi=.4+i*(TAU-.8)/10;const pts=[];for(let j=0;j<=18;j++){const t=j/18*Math.PI/2;pts.push([Math.sin(phi)*Math.sin(t)*3.59,5.55+Math.cos(t)*3.59,Math.cos(phi)*Math.sin(t)*3.59]);}line(building,'#a8ba9e',pts,.025);}
+ const dome=mesh(building,new T.SphereGeometry(3.56,48,20,.65,TAU-1.3,0,Math.PI/2),copper,0,5.55,0);dome.rotation.y=Math.PI/2;
+ for(let i=0;i<11;i++){const phi=.7+i*(TAU-1.4)/10;const pts=[];for(let j=0;j<=18;j++){const t=j/18*Math.PI/2;pts.push([Math.sin(phi)*Math.sin(t)*3.59,5.55+Math.cos(t)*3.59,Math.cos(phi)*Math.sin(t)*3.59]);}line(building,'#a8ba9e',pts,.025);}
  cylinder(building,brass,.22,.55,0,9.25);ball(building,'#e5c48b',.22,.22,.22,0,9.6);
  // Massive telescope, raised through the dome's slot. Local +Z is its aim.
- const mount=group(building,0,5.6,0);cylinder(mount,'#415767',.65,1.1,0,.25);const yoke=ring(mount,brass,1.05,.18,0,1.05,0);yoke.rotation.y=Math.PI/2;
- const telescope=group(mount,0,1.05,0,true);telescope.rotation.x=-.28;
+ const mount=group(building,0,6.65,0);cylinder(mount,'#415767',.65,1.1,0,.25);const yoke=ring(mount,brass,1.05,.18,0,1.05,0);yoke.rotation.y=Math.PI/2;
+ const telescope=group(mount,0,1.05,0,true);telescope.rotation.x=-telescopeElevation;
  const barrel=(color:string,r:number,length:number,z:number)=>{const p=cylinder(telescope,color,r,length,0,0,z);p.rotation.x=Math.PI/2;return p;};
  barrel('#416c70',.82,8.5,2.25);barrel(brass,.9,.25,-1.9);barrel(brass,1,.35,6.45);barrel('#d1b27d',.88,.18,4.4);barrel('#142e47',.84,.04,6.64);barrel('#6fbbc9',.68,.045,6.67);barrel('#e1b978',.22,.75,-2.1);
  const glint=ball(telescope,'#c4f0e8',.16,.12,.025,.3,.3,6.7);glint.material.emissive.set('#8fd9ce');
@@ -50,9 +51,9 @@ export async function mountObservatory(host:HTMLElement,initialAngle=0){
  const visitor=actor(building,faces,'rohil',2.8,3.45,{scale:.72});visitor.rightArm.rotation.z=-1.2;people.push(visitor);
  // The cards and telescope share screen-space targets, so the lens always
  // points at the highlighted card, at every viewport size.
- const targets=GAMES.map(()=>new T.Vector3());
- const aimingPlane=new T.Plane(),aimRay=new T.Raycaster(),cameraNormal=new T.Vector3();
- let selectionAngle=initialAngle,pitch=-.28,targetPitch=pitch;
+ const targets=GAMES.map(()=>new T.Vector3()),headings=GAMES.map(()=>0),step=TAU/GAMES.length;
+
+ let selectionAngle=initialAngle,pitch=-telescopeElevation,targetPitch=pitch,dragging=false;
  const cosmos=buildObservatoryCosmos(scene);
  const beamGeometry=new T.BufferGeometry().setFromPoints([new T.Vector3(),new T.Vector3()]);const beam=new T.Line(beamGeometry,new T.LineBasicMaterial({color:'#f0dca9',transparent:true,opacity:.25}));scene.add(beam);
  host.append(canvas);let active=false,frame=0,lost=false,destroyed=false,angle=0,target=0,last:number|undefined;const reduce=matchMedia('(prefers-reduced-motion: reduce)');
@@ -61,29 +62,33 @@ export async function mountObservatory(host:HTMLElement,initialAngle=0){
  // All paints use the same animation clock, including resize and resume.
  function draw(now:number){frame=0;if(!active||lost||destroyed)return;if(!host.clientWidth||!host.clientHeight){last=undefined;return;}
   const dt=last===undefined?0:T.MathUtils.clamp((now-last)/1000,0,.05);last=now;
-  angle=reduce.matches?target:T.MathUtils.damp(angle,target,8,dt);if(Math.abs(angle-target)<.001)angle=target;
+  angle=reduce.matches||dragging?target:T.MathUtils.damp(angle,target,18,dt);if(Math.abs(angle-target)<.001)angle=target;
   const turns=Math.round(angle/TAU)*TAU;angle-=turns;target-=turns;building.rotation.y=angle;
-  const selected=((Math.round(selectionAngle/(TAU/6))%6)+6)%6;
-  pitch=reduce.matches?targetPitch:T.MathUtils.damp(pitch,targetPitch,8,dt);telescope.rotation.x=pitch;
-  const nextFocus=Math.abs(angle-target)<.05&&Math.abs(pitch-targetPitch)<.04?selected:-1;
+  const selected=((Math.round(selectionAngle/step)%GAMES.length)+GAMES.length)%GAMES.length;
+  telescope.rotation.x=pitch;
+  const nextFocus=Math.abs(angle-target)<.05&&Math.abs(selectionAngle/step-Math.round(selectionAngle/step))<.08?selected:-1;
   if(nextFocus!==focused){focused=nextFocus;cards.forEach((card,i)=>card.dataset.focused=String(i===focused));}
-  telescope.updateWorldMatrix(true,false);const start=telescope.localToWorld(new T.Vector3(0,0,6.67));beam.geometry.setFromPoints([start,targets[selected]]);beam.visible=Math.abs(angle-target)<.03;
+  telescope.updateWorldMatrix(true,false);const start=telescope.localToWorld(new T.Vector3(0,0,6.67));beam.geometry.setFromPoints([start,targets[selected]]);beam.visible=false;
   if(active&&!reduce.matches){engineer.rightArm.rotation.x=-1+Math.sin(now/1100)*.12;visitor.rightArm.rotation.z=-1.2+Math.sin(now/1900)*.08;crank.rotation.x=now/3500;}
   cosmos.update(now,dt,!reduce.matches);faceCamera(people,camera);renderer.render(scene,camera);host.classList.add('has-scene');host.dataset.ready='true';host.dataset.sky='3d';if(!reduce.matches)requestDraw();
  }
  function aim(){
-  const index=((Math.round(selectionAngle/(TAU/6))%6)+6)%6,p=targets[index];
-  const heading=Math.atan2(p.x,p.z);
-  target=angle+T.MathUtils.euclideanModulo(heading-angle+Math.PI,TAU)-Math.PI;
-  targetPitch=-Math.atan2(p.y-6.65,Math.hypot(p.x,p.z));
-  if(!active){angle=target;pitch=targetPitch;}
+  const heading=headingAlongCards(headings,selectionAngle/step);
+  target=angle+wrapAngle(heading-angle);
+  if(!active)angle=target;
  }
  function resize(){
   if(lost||destroyed)return;const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;
   renderer.setSize(w,h);const aspect=w/h,halfW=aspect<.85?13:18,halfH=halfW/aspect;
   camera.left=-halfW;camera.right=halfW;camera.top=halfH;camera.bottom=-halfH;camera.lookAt(0,4.5,0);camera.updateProjectionMatrix();camera.updateMatrixWorld();
-  camera.getWorldDirection(cameraNormal);aimingPlane.setFromNormalAndCoplanarPoint(cameraNormal,new T.Vector3(0,8,0));
-  const bounds=host.getBoundingClientRect();GAMES.forEach((g,i)=>{const card=host.querySelector<HTMLElement>(`[data-orbit-game="${g.id}"]`)!.getBoundingClientRect();aimRay.setFromCamera(new T.Vector2((card.left+card.width/2-bounds.left)/w*2-1,1-(card.top+card.height/2-bounds.top)/h*2),camera);aimRay.ray.intersectPlane(aimingPlane,targets[i]);});
+  const pivot=new T.Vector3(0,7.7,0).project(camera);
+  const azimuth=Math.atan2(camera.position.x,camera.position.z),elevation=Math.atan2(camera.position.y-4.5,Math.hypot(camera.position.x,camera.position.z));
+  cards.forEach((card,i)=>{
+   // Layout anchors do not move when a card lifts or brightens.
+   const x=card.offsetLeft/w*2-1,y=1-card.offsetTop/h*2;
+   headings[i]=headingForCard((x-pivot.x)*aspect,y-pivot.y,azimuth,elevation);
+   targets[i].set(x,y,0).unproject(camera);
+  });
   aim();cosmos.resize(camera);requestDraw();
  }
  const pointerMove=(e:PointerEvent)=>{if(!active||e.pointerType!=='mouse')return;const r=host.getBoundingClientRect();if(!r.width||!r.height)return;cosmos.setPointer(T.MathUtils.clamp((e.clientX-r.left)/r.width*2-1,-1,1),T.MathUtils.clamp(1-(e.clientY-r.top)/r.height*2,-1,1));};
@@ -94,15 +99,16 @@ export async function mountObservatory(host:HTMLElement,initialAngle=0){
  const contextLost=(e:Event)=>{e.preventDefault();lost=true;cancelAnimationFrame(frame);frame=0;last=undefined;fallback();};
  const contextRestored=()=>{if(destroyed)return;lost=false;last=undefined;resize();};
  canvas.addEventListener('webglcontextlost',contextLost);canvas.addEventListener('webglcontextrestored',contextRestored);resize();
+ function screenAim(){const selected=((Math.round(selectionAngle/step)%GAMES.length)+GAMES.length)%GAMES.length;return [telescope.localToWorld(new T.Vector3()),telescope.localToWorld(new T.Vector3(0,0,6.67)),targets[selected].clone()].map(point=>{point.project(camera);return [point.x*host.clientWidth,-point.y*host.clientHeight];});}
  return {
-  setAngle(value:number){
+  setAngle(value:number,immediate=false){
    if(!Number.isFinite(value)||destroyed)return;
    // Equivalent headings never require replaying complete revolutions on return.
-   selectionAngle=value;aim();
-   if(!active)angle=target;requestDraw();host.dataset.selected=GAMES[((Math.round(value/(TAU/6))%6)+6)%6].id;
+   selectionAngle=value;dragging=immediate;aim();
+   if(!active)angle=target;requestDraw();host.dataset.selected=GAMES[((Math.round(value/step)%GAMES.length)+GAMES.length)%GAMES.length].id;
   },
   setActive(value:boolean){if(active===value||destroyed)return;active=value;cancelAnimationFrame(frame);frame=0;last=undefined;if(active)resize();else pointerLeave();},
-  diagnostics:()=>({angle,target,active:active&&!lost,lost,cosmos:cosmos.diagnostics(),frames:renderer.info.render.frame,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,selected:GAMES[((Math.round(selectionAngle/(TAU/6))%6)+6)%6].id,aim:targets[((Math.round(selectionAngle/(TAU/6))%6)+6)%6].toArray(),pitch,targetPitch}),
+  diagnostics:()=>({angle,target,active:active&&!lost,lost,cosmos:cosmos.diagnostics(),frames:renderer.info.render.frame,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,selected:GAMES[((Math.round(selectionAngle/step)%GAMES.length)+GAMES.length)%GAMES.length].id,aim:targets[((Math.round(selectionAngle/step)%GAMES.length)+GAMES.length)%GAMES.length].toArray(),screenAim:screenAim(),pitch,targetPitch,headings:[...headings],dragging}),
   destroy(){destroyed=true;active=false;cancelAnimationFrame(frame);observer.disconnect();reduce.removeEventListener('change',motion);host.removeEventListener('pointermove',pointerMove);host.removeEventListener('pointerleave',pointerLeave);canvas.removeEventListener('webglcontextlost',contextLost);canvas.removeEventListener('webglcontextrestored',contextRestored);dispose(root);cosmos.destroy();beamGeometry.dispose();(beam.material as T.Material).dispose();sun.shadow.dispose();renderer.dispose();canvas.remove();fallback();}
  };
 }
