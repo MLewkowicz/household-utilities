@@ -20,7 +20,7 @@ test('dark dashboard, monthly proration, and shared payment lifecycle',async({pa
  await expect(page.locator('#payment-dialog')).not.toBeVisible();
  await expect(page.locator('.payment-row')).toContainText('$13.37');
  await expect(rinaCard.locator('.balance-amount')).toHaveText('$113.40');
- const other=await browser.newPage();await other.goto('http://127.0.0.1:4174/#utilities');
+ const other=await browser.newPage();await other.goto(new URL('/#utilities',page.url()).href);
  await expect(other.locator('.payment-row')).toContainText('$13.37');
  const row=page.locator('.payment-row').first();await expect(row.locator('.payment-actions')).toBeHidden();await expect(row.locator('.payment-method')).toBeHidden();
  await row.locator('summary.chore-corner-tab').click();await expect(row).toContainText('Paid by cash');

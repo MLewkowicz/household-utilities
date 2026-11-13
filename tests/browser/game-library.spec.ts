@@ -26,9 +26,9 @@ test('Sudoku notes, undo, correction and completion work on a phone',async({page
  for(let i=0;i<81;i++)if(q.grid.givens[i]===' '){await page.locator(`[data-cell="${i}"]`).click();await page.keyboard.press(q.answer[i]);}
  await page.getByRole('button',{name:'Submit',exact:false}).click();await expect(page.locator('[data-archive-entry="starter-1"]')).toHaveClass(/is-complete/);
 });
-test('curated comparisons have familiar profiles, no written dimensions and stable reference size',async({page})=>{
- await page.goto('/?webgl=0#games/how-much-ish');await expect(page.locator('.scale-labels')).toContainText('Death Star I');await expect(page.locator('.scale-labels')).toContainText('Earth');
- await expect(page.locator('.scale-labels')).not.toContainText(/diameter|height|width|×|km|metres/);await expect(page.locator('.scale-precision')).toHaveCount(0);
+test('new comparisons show the reference measurement and keep its scale fixed while guessing',async({page})=>{
+ await page.goto('/?webgl=0#games/how-much-ish');await expect(page.locator('.size-caption')).toContainText('Golden Retriever');await expect(page.locator('.size-caption')).toContainText('Volkswagen campervan');
+ await expect(page.locator('.size-caption')).toContainText('2.04 m');await expect(page.locator('.size-caption')).not.toContainText('1.31 m');await expect(page.locator('.scale-precision')).toHaveCount(0);
  const reference=page.locator('.reference > svg'),target=page.getByRole('slider'),before=await reference.boundingBox();await target.focus();await page.keyboard.press('End');expect((await reference.boundingBox())!.width).toBe(before!.width);await page.keyboard.press('Home');expect((await reference.boundingBox())!.width).toBe(before!.width);
  const links=page.locator('.game-floating-nav>a');await expect(links.nth(0)).toHaveAttribute('href','#games');await expect(links.nth(1)).toHaveAttribute('data-game-return','');
 });

@@ -1,0 +1,4557 @@
+{
+  "classic": [
+    {
+      "id": "size-v10-classic-practice-1",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Golden Retriever.",
+      "target": {
+        "name": "Golden Retriever",
+        "dimension": "full silhouette length",
+        "shape": "catalog:golden-retriever",
+        "qualifier": "Average Adult Male"
+      },
+      "reference": {
+        "name": "Volkswagen campervan",
+        "dimension": "full silhouette height",
+        "shape": "catalog:volkswagen-t2-camper",
+        "qualifier": "Pop-Top",
+        "measure": "2.04 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.6425460641496951,
+      "explanation": "Golden Retriever: 1.31 m (full silhouette length). Volkswagen campervan: 2.04 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 59.7 cm shoulder height.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://grca.org/wp-content/uploads/2017/10/At-A-Glance071215.pdf",
+        "https://www.vw-t2-bulli.de/data/books/manuals/1977-08-vw-t2-westfalia-en-manual.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-2",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Milk-chocolate M&M.",
+      "target": {
+        "name": "Milk-chocolate M&M",
+        "dimension": "full silhouette length",
+        "shape": "catalog:milk-chocolate-mm"
+      },
+      "reference": {
+        "name": "Almond kernel",
+        "dimension": "full silhouette length",
+        "shape": "catalog:almond",
+        "qualifier": "Tuono, Kernel",
+        "measure": "2.23 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.6025962399283795,
+      "explanation": "Milk-chocolate M&M: 1.35 cm (full silhouette length). Almond kernel: 2.23 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.startribune.com/tidbits-mega-m-ms-honey-bunches-of-oats/259261311",
+        "https://om.ciheam.org/ressources/om/pdf/a119/00007411.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-3",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Nintendo Game Boy.",
+      "target": {
+        "name": "Nintendo Game Boy",
+        "dimension": "full silhouette height",
+        "shape": "catalog:game-boy-original",
+        "qualifier": "Handheld Games Console"
+      },
+      "reference": {
+        "name": "Ukulele",
+        "dimension": "full silhouette height",
+        "shape": "catalog:ukulele",
+        "qualifier": "Kala KA-15S, Soprano",
+        "measure": "53.5 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.2766355140186916,
+      "explanation": "Nintendo Game Boy: 14.8 cm (full silhouette height). Ukulele: 53.5 cm (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.nintendo.com/de-de/Support/Fruhere-Konsolen/Technische-Daten-619585.html",
+        "https://kalabrand.com/products/ka-15s-blk?variant=5405726212129"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-4",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Alaskan Moose.",
+      "target": {
+        "name": "Alaskan Moose",
+        "dimension": "full silhouette length",
+        "shape": "catalog:moose",
+        "qualifier": "Alaska–Yukon, Average Adult Male"
+      },
+      "reference": {
+        "name": "Paraceratherium",
+        "dimension": "full silhouette height",
+        "shape": "catalog:paraceratherium",
+        "qualifier": "Extinct Giant Rhinoceros Relative",
+        "measure": "6.05 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.5330427944956904,
+      "explanation": "Alaskan Moose: 3.23 m (full silhouette length). Paraceratherium: 6.05 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 1.98 m shoulder height.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 4.8 m shoulder height.",
+      "sources": [
+        "https://www.nps.gov/kefj/learn/nature/moose.htm",
+        "https://www.app.pan.pl/archive/published/app61/app001362014.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-5",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Meerkat.",
+      "target": {
+        "name": "Meerkat",
+        "dimension": "full silhouette height",
+        "shape": "catalog:meerkat",
+        "qualifier": "Average Adult, Standing"
+      },
+      "reference": {
+        "name": "Bare-nosed Wombat",
+        "dimension": "full silhouette length",
+        "shape": "catalog:wombat",
+        "qualifier": "Bare-nosed, Average Adult",
+        "measure": "93.5 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.35672631517030934,
+      "explanation": "Meerkat: 33.3 cm (full silhouette height). Bare-nosed Wombat: 93.5 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 26.7 cm head-to-rump length.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 90 cm head-and-body length.",
+      "sources": [
+        "https://animaldiversity.org/accounts/Suricata_suricatta/",
+        "https://animaldiversity.org/accounts/Vombatus_ursinus/"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-6",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Human sperm cell.",
+      "target": {
+        "name": "Human sperm cell",
+        "dimension": "full silhouette length",
+        "shape": "catalog:human-sperm-cell",
+        "qualifier": "Whole Cell"
+      },
+      "reference": {
+        "name": "Human egg cell",
+        "dimension": "full silhouette length",
+        "shape": "catalog:human-egg-cell",
+        "qualifier": "Cell Body",
+        "measure": "120 µm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.4986487901047399,
+      "explanation": "Human sperm cell: 59.8 µm (full silhouette length). Human egg cell: 120 µm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC293421/",
+        "https://www.cambridge.org/core/books/abs/biology-and-pathology-of-the-oocyte/morphology-and-pathology-of-the-human-oocyte/C07649F7230CF107F4C4323C7335ACA5"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-7",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Statue of Unity.",
+      "target": {
+        "name": "Statue of Unity",
+        "dimension": "full silhouette height",
+        "shape": "catalog:statue-of-unity",
+        "qualifier": "Gujarat - Tallest Statue in the World, With Base"
+      },
+      "reference": {
+        "name": "Airbus A380",
+        "dimension": "full silhouette length",
+        "shape": "catalog:airbus-a380",
+        "qualifier": "A380-800",
+        "measure": "72.7 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 3.3003300330033003,
+      "explanation": "Statue of Unity: 240 m (full silhouette height). Airbus A380: 72.7 m (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.incredibleindia.gov.in/en/gujarat/vadodara/statue-of-unity",
+        "https://www.airbus.com/sites/g/files/jlcbta136/files/2025-01/airbus-a380-facts-and-figures-february-2022.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-8",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Human Eyeball.",
+      "target": {
+        "name": "Human Eyeball",
+        "dimension": "full silhouette height",
+        "shape": "catalog:human-eyeball",
+        "qualifier": "Adult"
+      },
+      "reference": {
+        "name": "Walnut in shell",
+        "dimension": "full silhouette length",
+        "shape": "catalog:walnut",
+        "qualifier": "Chandler, In Shell",
+        "measure": "3.9 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.6153846153846154,
+      "explanation": "Human Eyeball: 2.4 cm (full silhouette height). Walnut in shell: 3.9 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.webvision.pitt.edu/book/part-i-foundations/gross-anatomy-of-the-ey/",
+        "https://www.nogalba.it/chandler-walnuts/"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-9",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up African Bush Elephant.",
+      "target": {
+        "name": "African Bush Elephant",
+        "dimension": "full silhouette height",
+        "shape": "catalog:elephant",
+        "qualifier": "Average Adult Male"
+      },
+      "reference": {
+        "name": "Lion",
+        "dimension": "full silhouette length",
+        "shape": "catalog:lion",
+        "qualifier": "Average Male",
+        "measure": "2.56 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.2488670091342275,
+      "explanation": "African Bush Elephant: 3.2 m (full silhouette height). Lion: 2.56 m (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 2.1 m head-and-body length.",
+      "sources": [
+        "https://app.pan.pl/archive/published/app61/app001362014.pdf",
+        "https://animals.sandiegozoo.org/animals/lion"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-10",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Heinz glass ketchup bottle.",
+      "target": {
+        "name": "Heinz glass ketchup bottle",
+        "dimension": "full silhouette height",
+        "shape": "catalog:heinz-glass-342g"
+      },
+      "reference": {
+        "name": "USB-A flash drive",
+        "dimension": "full silhouette length",
+        "shape": "catalog:usb-a-sandisk-ultra-flair",
+        "measure": "4.3 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 4.651744186046513,
+      "explanation": "Heinz glass ketchup bottle: 20 cm (full silhouette height). USB-A flash drive: 4.3 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://heinzhistorycenter.emuseum.com/objects/50706/bottle-condiment",
+        "https://documents.sandisk.com/content/dam/asset-library/en_us/assets/public/sandisk/product/usb-flash/ultra-flair-usb-3-0/data-sheet-ultra-flair-usb-3-0.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-11",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Mallard.",
+      "target": {
+        "name": "Mallard",
+        "dimension": "full silhouette length",
+        "shape": "catalog:mallard-duck",
+        "qualifier": "Average Adult Male"
+      },
+      "reference": {
+        "name": "American mastodon",
+        "dimension": "full silhouette height",
+        "shape": "catalog:american-mastodon",
+        "qualifier": "Extinct Mammal",
+        "measure": "2.81 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.17718741338981375,
+      "explanation": "Mallard: 49.8 cm (full silhouette length). American mastodon: 2.81 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 62.7 cm total length, bill to tail.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 2.75 m shoulder height.",
+      "sources": [
+        "https://www.ducks.org/hunting/waterfowl-id/mallard",
+        "https://museum.state.il.us/exhibits/larson/mammut.html"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-12",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Reese's Peanut Butter Cup.",
+      "target": {
+        "name": "Reese's Peanut Butter Cup",
+        "dimension": "full silhouette length",
+        "shape": "catalog:reeses-peanut-butter-cup"
+      },
+      "reference": {
+        "name": "Chihuahua",
+        "dimension": "full silhouette height",
+        "shape": "catalog:chihuahua",
+        "qualifier": "Average Adult",
+        "measure": "28.3 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.1794626271561256,
+      "explanation": "Reese's Peanut Butter Cup: 5.08 cm (full silhouette length). Chihuahua: 28.3 cm (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 19 cm shoulder height.",
+      "sources": [
+        "https://www.waynesthisandthat.com/candybars.html",
+        "https://www.dimensions.com/element/chihuahua"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-13",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Peregrine falcon.",
+      "target": {
+        "name": "Peregrine falcon",
+        "dimension": "full silhouette length",
+        "shape": "catalog:peregrine-falcon",
+        "qualifier": "North American, Average Female"
+      },
+      "reference": {
+        "name": "Big Ben Clock Face",
+        "dimension": "full silhouette length",
+        "shape": "catalog:big-ben-clock-face",
+        "qualifier": "Elizabeth Tower Dial",
+        "measure": "7 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.056830169889110334,
+      "explanation": "Peregrine falcon: 39.8 cm (full silhouette length). Big Ben Clock Face: 7 m (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 51.5 cm total length, bill to tail.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://animaldiversity.org/accounts/Falco_peregrinus/",
+        "https://www.parliament.uk/about/living-heritage/building/palace/big-ben/facts-figures/"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-14",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Lacrosse Stick Long.",
+      "target": {
+        "name": "Lacrosse Stick Long",
+        "dimension": "full silhouette height",
+        "shape": "catalog:lacrosse-stick-long"
+      },
+      "reference": {
+        "name": "Sabre-toothed Cat",
+        "dimension": "full silhouette length",
+        "shape": "catalog:sabre-tooth-tiger",
+        "qualifier": "Smilodon populator",
+        "measure": "2.25 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.8130962099125364,
+      "explanation": "Lacrosse Stick Long: 1.83 m (full silhouette height). Sabre-toothed Cat: 2.25 m (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 1.2 m shoulder height.",
+      "sources": [
+        "https://worldlacrosse.sport/wp-content/uploads/2025/01/WL_Mens-Rules_25-27.pdf",
+        "https://www.guinnessworldrecords.com/world-records/93329-largest-sabre-toothed-cat"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-15",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Die.",
+      "target": {
+        "name": "Die",
+        "dimension": "full silhouette height",
+        "shape": "catalog:die"
+      },
+      "reference": {
+        "name": "Original Skittle",
+        "dimension": "full silhouette length",
+        "shape": "catalog:original-skittle",
+        "measure": "1 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.6,
+      "explanation": "Die: 1.6 cm (full silhouette height). Original Skittle: 1 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.chessex.com/images/uploaded/Dice%20Set%20Sampler%20Sell%20Sheet%20-%20Opaque%20-%20Final.pdf",
+        "https://www.snackhistory.com/skittles/"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-16",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Basketball Hoop.",
+      "target": {
+        "name": "Basketball Hoop",
+        "dimension": "full silhouette length",
+        "shape": "catalog:basketball-hoop"
+      },
+      "reference": {
+        "name": "Curling Sheet",
+        "dimension": "full silhouette length",
+        "shape": "catalog:curling-sheet",
+        "qualifier": "World Curling",
+        "measure": "45.7 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.03937007874015748,
+      "explanation": "Basketball Hoop: 1.8 m (full silhouette length). Curling Sheet: 45.7 m (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2024-official-basketball-rules-and-basketball-equipment.pdf",
+        "https://worldcurling.org/wp-content/uploads/2026/10/Rules-2026_Clean.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-17",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up USB-A flash drive.",
+      "target": {
+        "name": "USB-A flash drive",
+        "dimension": "full silhouette length",
+        "shape": "catalog:usb-a-sandisk-ultra-flair"
+      },
+      "reference": {
+        "name": "Milk-chocolate M&M",
+        "dimension": "full silhouette length",
+        "shape": "catalog:milk-chocolate-mm",
+        "measure": "1.35 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 3.1941761996731537,
+      "explanation": "USB-A flash drive: 4.3 cm (full silhouette length). Milk-chocolate M&M: 1.35 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://documents.sandisk.com/content/dam/asset-library/en_us/assets/public/sandisk/product/usb-flash/ultra-flair-usb-3-0/data-sheet-ultra-flair-usb-3-0.pdf",
+        "https://www.startribune.com/tidbits-mega-m-ms-honey-bunches-of-oats/259261311"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-18",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Lion.",
+      "target": {
+        "name": "Lion",
+        "dimension": "full silhouette length",
+        "shape": "catalog:lion",
+        "qualifier": "Average Male"
+      },
+      "reference": {
+        "name": "Paraceratherium",
+        "dimension": "full silhouette height",
+        "shape": "catalog:paraceratherium",
+        "qualifier": "Extinct Giant Rhinoceros Relative",
+        "measure": "6.05 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.42339409292702407,
+      "explanation": "Lion: 2.56 m (full silhouette length). Paraceratherium: 6.05 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 2.1 m head-and-body length.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 4.8 m shoulder height.",
+      "sources": [
+        "https://animals.sandiegozoo.org/animals/lion",
+        "https://www.app.pan.pl/archive/published/app61/app001362014.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-19",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Walnut in shell.",
+      "target": {
+        "name": "Walnut in shell",
+        "dimension": "full silhouette length",
+        "shape": "catalog:walnut",
+        "qualifier": "Chandler, In Shell"
+      },
+      "reference": {
+        "name": "Bare-nosed Wombat",
+        "dimension": "full silhouette length",
+        "shape": "catalog:wombat",
+        "qualifier": "Bare-nosed, Average Adult",
+        "measure": "93.5 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.041724958363073994,
+      "explanation": "Walnut in shell: 3.9 cm (full silhouette length). Bare-nosed Wombat: 93.5 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 90 cm head-and-body length.",
+      "sources": [
+        "https://www.nogalba.it/chandler-walnuts/",
+        "https://animaldiversity.org/accounts/Vombatus_ursinus/"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-20",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Nintendo Game Boy.",
+      "target": {
+        "name": "Nintendo Game Boy",
+        "dimension": "full silhouette height",
+        "shape": "catalog:game-boy-original",
+        "qualifier": "Handheld Games Console"
+      },
+      "reference": {
+        "name": "Chihuahua",
+        "dimension": "full silhouette height",
+        "shape": "catalog:chihuahua",
+        "qualifier": "Average Adult",
+        "measure": "28.3 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.522843874391862,
+      "explanation": "Nintendo Game Boy: 14.8 cm (full silhouette height). Chihuahua: 28.3 cm (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 19 cm shoulder height.",
+      "sources": [
+        "https://www.nintendo.com/de-de/Support/Fruhere-Konsolen/Technische-Daten-619585.html",
+        "https://www.dimensions.com/element/chihuahua"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-21",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Human Eyeball.",
+      "target": {
+        "name": "Human Eyeball",
+        "dimension": "full silhouette height",
+        "shape": "catalog:human-eyeball",
+        "qualifier": "Adult"
+      },
+      "reference": {
+        "name": "Ukulele",
+        "dimension": "full silhouette height",
+        "shape": "catalog:ukulele",
+        "qualifier": "Kala KA-15S, Soprano",
+        "measure": "53.5 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.044859813084112146,
+      "explanation": "Human Eyeball: 2.4 cm (full silhouette height). Ukulele: 53.5 cm (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.webvision.pitt.edu/book/part-i-foundations/gross-anatomy-of-the-ey/",
+        "https://kalabrand.com/products/ka-15s-blk?variant=5405726212129"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-22",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Golden Retriever.",
+      "target": {
+        "name": "Golden Retriever",
+        "dimension": "full silhouette length",
+        "shape": "catalog:golden-retriever",
+        "qualifier": "Average Adult Male"
+      },
+      "reference": {
+        "name": "Mallard",
+        "dimension": "full silhouette length",
+        "shape": "catalog:mallard-duck",
+        "qualifier": "Average Adult Male",
+        "measure": "49.8 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.623226332756606,
+      "explanation": "Golden Retriever: 1.31 m (full silhouette length). Mallard: 49.8 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 59.7 cm shoulder height.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 62.7 cm total length, bill to tail.",
+      "sources": [
+        "https://grca.org/wp-content/uploads/2017/10/At-A-Glance071215.pdf",
+        "https://www.ducks.org/hunting/waterfowl-id/mallard"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-23",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Sabre-toothed Cat.",
+      "target": {
+        "name": "Sabre-toothed Cat",
+        "dimension": "full silhouette length",
+        "shape": "catalog:sabre-tooth-tiger",
+        "qualifier": "Smilodon populator"
+      },
+      "reference": {
+        "name": "Airbus A380",
+        "dimension": "full silhouette length",
+        "shape": "catalog:airbus-a380",
+        "qualifier": "A380-800",
+        "measure": "72.7 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.030929322440440766,
+      "explanation": "Sabre-toothed Cat: 2.25 m (full silhouette length). Airbus A380: 72.7 m (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 1.2 m shoulder height.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.guinnessworldrecords.com/world-records/93329-largest-sabre-toothed-cat",
+        "https://www.airbus.com/sites/g/files/jlcbta136/files/2025-01/airbus-a380-facts-and-figures-february-2022.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-24",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Basketball Hoop.",
+      "target": {
+        "name": "Basketball Hoop",
+        "dimension": "full silhouette length",
+        "shape": "catalog:basketball-hoop"
+      },
+      "reference": {
+        "name": "Volkswagen campervan",
+        "dimension": "full silhouette height",
+        "shape": "catalog:volkswagen-t2-camper",
+        "qualifier": "Pop-Top",
+        "measure": "2.04 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.8845208845208845,
+      "explanation": "Basketball Hoop: 1.8 m (full silhouette length). Volkswagen campervan: 2.04 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2024-official-basketball-rules-and-basketball-equipment.pdf",
+        "https://www.vw-t2-bulli.de/data/books/manuals/1977-08-vw-t2-westfalia-en-manual.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-25",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Meerkat.",
+      "target": {
+        "name": "Meerkat",
+        "dimension": "full silhouette height",
+        "shape": "catalog:meerkat",
+        "qualifier": "Average Adult, Standing"
+      },
+      "reference": {
+        "name": "Big Ben Clock Face",
+        "dimension": "full silhouette length",
+        "shape": "catalog:big-ben-clock-face",
+        "qualifier": "Elizabeth Tower Dial",
+        "measure": "7 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.04763276615463762,
+      "explanation": "Meerkat: 33.3 cm (full silhouette height). Big Ben Clock Face: 7 m (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 26.7 cm head-to-rump length.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://animaldiversity.org/accounts/Suricata_suricatta/",
+        "https://www.parliament.uk/about/living-heritage/building/palace/big-ben/facts-figures/"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-26",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Original Skittle.",
+      "target": {
+        "name": "Original Skittle",
+        "dimension": "full silhouette length",
+        "shape": "catalog:original-skittle"
+      },
+      "reference": {
+        "name": "Peregrine falcon",
+        "dimension": "full silhouette length",
+        "shape": "catalog:peregrine-falcon",
+        "qualifier": "North American, Average Female",
+        "measure": "39.8 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.025137553369256566,
+      "explanation": "Original Skittle: 1 cm (full silhouette length). Peregrine falcon: 39.8 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 51.5 cm total length, bill to tail.",
+      "sources": [
+        "https://www.snackhistory.com/skittles/",
+        "https://animaldiversity.org/accounts/Falco_peregrinus/"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-27",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up African Bush Elephant.",
+      "target": {
+        "name": "African Bush Elephant",
+        "dimension": "full silhouette height",
+        "shape": "catalog:elephant",
+        "qualifier": "Average Adult Male"
+      },
+      "reference": {
+        "name": "Heinz glass ketchup bottle",
+        "dimension": "full silhouette height",
+        "shape": "catalog:heinz-glass-342g",
+        "measure": "20 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 16.004907849385837,
+      "explanation": "African Bush Elephant: 3.2 m (full silhouette height). Heinz glass ketchup bottle: 20 cm (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://app.pan.pl/archive/published/app61/app001362014.pdf",
+        "https://heinzhistorycenter.emuseum.com/objects/50706/bottle-condiment"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-28",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Almond kernel.",
+      "target": {
+        "name": "Almond kernel",
+        "dimension": "full silhouette length",
+        "shape": "catalog:almond",
+        "qualifier": "Tuono, Kernel"
+      },
+      "reference": {
+        "name": "Die",
+        "dimension": "full silhouette height",
+        "shape": "catalog:die",
+        "measure": "1.6 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.39625,
+      "explanation": "Almond kernel: 2.23 cm (full silhouette length). Die: 1.6 cm (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://om.ciheam.org/ressources/om/pdf/a119/00007411.pdf",
+        "https://www.chessex.com/images/uploaded/Dice%20Set%20Sampler%20Sell%20Sheet%20-%20Opaque%20-%20Final.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-29",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Lacrosse Stick Long.",
+      "target": {
+        "name": "Lacrosse Stick Long",
+        "dimension": "full silhouette height",
+        "shape": "catalog:lacrosse-stick-long"
+      },
+      "reference": {
+        "name": "American mastodon",
+        "dimension": "full silhouette height",
+        "shape": "catalog:american-mastodon",
+        "qualifier": "Extinct Mammal",
+        "measure": "2.81 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.6500790395445262,
+      "explanation": "Lacrosse Stick Long: 1.83 m (full silhouette height). American mastodon: 2.81 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 2.75 m shoulder height.",
+      "sources": [
+        "https://worldlacrosse.sport/wp-content/uploads/2025/01/WL_Mens-Rules_25-27.pdf",
+        "https://museum.state.il.us/exhibits/larson/mammut.html"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-30",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Curling Sheet.",
+      "target": {
+        "name": "Curling Sheet",
+        "dimension": "full silhouette length",
+        "shape": "catalog:curling-sheet",
+        "qualifier": "World Curling"
+      },
+      "reference": {
+        "name": "Statue of Unity",
+        "dimension": "full silhouette height",
+        "shape": "catalog:statue-of-unity",
+        "qualifier": "Gujarat - Tallest Statue in the World, With Base",
+        "measure": "240 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.1905,
+      "explanation": "Curling Sheet: 45.7 m (full silhouette length). Statue of Unity: 240 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://worldcurling.org/wp-content/uploads/2026/10/Rules-2026_Clean.pdf",
+        "https://www.incredibleindia.gov.in/en/gujarat/vadodara/statue-of-unity"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-31",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Reese's Peanut Butter Cup.",
+      "target": {
+        "name": "Reese's Peanut Butter Cup",
+        "dimension": "full silhouette length",
+        "shape": "catalog:reeses-peanut-butter-cup"
+      },
+      "reference": {
+        "name": "Golden Retriever",
+        "dimension": "full silhouette length",
+        "shape": "catalog:golden-retriever",
+        "qualifier": "Average Adult Male",
+        "measure": "1.31 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.03885035852827083,
+      "explanation": "Reese's Peanut Butter Cup: 5.08 cm (full silhouette length). Golden Retriever: 1.31 m (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 59.7 cm shoulder height.",
+      "sources": [
+        "https://www.waynesthisandthat.com/candybars.html",
+        "https://grca.org/wp-content/uploads/2017/10/At-A-Glance071215.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-32",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Ukulele.",
+      "target": {
+        "name": "Ukulele",
+        "dimension": "full silhouette height",
+        "shape": "catalog:ukulele",
+        "qualifier": "Kala KA-15S, Soprano"
+      },
+      "reference": {
+        "name": "Alaskan Moose",
+        "dimension": "full silhouette length",
+        "shape": "catalog:moose",
+        "qualifier": "Alaska–Yukon, Average Adult Male",
+        "measure": "3.23 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.1657735491396909,
+      "explanation": "Ukulele: 53.5 cm (full silhouette height). Alaskan Moose: 3.23 m (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 1.98 m shoulder height.",
+      "sources": [
+        "https://kalabrand.com/products/ka-15s-blk?variant=5405726212129",
+        "https://www.nps.gov/kefj/learn/nature/moose.htm"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-33",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Human Eyeball.",
+      "target": {
+        "name": "Human Eyeball",
+        "dimension": "full silhouette height",
+        "shape": "catalog:human-eyeball",
+        "qualifier": "Adult"
+      },
+      "reference": {
+        "name": "Milk-chocolate M&M",
+        "dimension": "full silhouette length",
+        "shape": "catalog:milk-chocolate-mm",
+        "measure": "1.35 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.7827960184222258,
+      "explanation": "Human Eyeball: 2.4 cm (full silhouette height). Milk-chocolate M&M: 1.35 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.webvision.pitt.edu/book/part-i-foundations/gross-anatomy-of-the-ey/",
+        "https://www.startribune.com/tidbits-mega-m-ms-honey-bunches-of-oats/259261311"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-34",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Mallard.",
+      "target": {
+        "name": "Mallard",
+        "dimension": "full silhouette length",
+        "shape": "catalog:mallard-duck",
+        "qualifier": "Average Adult Male"
+      },
+      "reference": {
+        "name": "Heinz glass ketchup bottle",
+        "dimension": "full silhouette height",
+        "shape": "catalog:heinz-glass-342g",
+        "measure": "20 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.492003448181443,
+      "explanation": "Mallard: 49.8 cm (full silhouette length). Heinz glass ketchup bottle: 20 cm (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 62.7 cm total length, bill to tail.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.ducks.org/hunting/waterfowl-id/mallard",
+        "https://heinzhistorycenter.emuseum.com/objects/50706/bottle-condiment"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-35",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Sabre-toothed Cat.",
+      "target": {
+        "name": "Sabre-toothed Cat",
+        "dimension": "full silhouette length",
+        "shape": "catalog:sabre-tooth-tiger",
+        "qualifier": "Smilodon populator"
+      },
+      "reference": {
+        "name": "Big Ben Clock Face",
+        "dimension": "full silhouette length",
+        "shape": "catalog:big-ben-clock-face",
+        "qualifier": "Elizabeth Tower Dial",
+        "measure": "7 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.32131147540983607,
+      "explanation": "Sabre-toothed Cat: 2.25 m (full silhouette length). Big Ben Clock Face: 7 m (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 1.2 m shoulder height.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.guinnessworldrecords.com/world-records/93329-largest-sabre-toothed-cat",
+        "https://www.parliament.uk/about/living-heritage/building/palace/big-ben/facts-figures/"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-36",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Bare-nosed Wombat.",
+      "target": {
+        "name": "Bare-nosed Wombat",
+        "dimension": "full silhouette length",
+        "shape": "catalog:wombat",
+        "qualifier": "Bare-nosed, Average Adult"
+      },
+      "reference": {
+        "name": "Lacrosse Stick Long",
+        "dimension": "full silhouette height",
+        "shape": "catalog:lacrosse-stick-long",
+        "measure": "1.83 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.5110959999533046,
+      "explanation": "Bare-nosed Wombat: 93.5 cm (full silhouette length). Lacrosse Stick Long: 1.83 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 90 cm head-and-body length.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://animaldiversity.org/accounts/Vombatus_ursinus/",
+        "https://worldlacrosse.sport/wp-content/uploads/2025/01/WL_Mens-Rules_25-27.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-37",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Lion.",
+      "target": {
+        "name": "Lion",
+        "dimension": "full silhouette length",
+        "shape": "catalog:lion",
+        "qualifier": "Average Male"
+      },
+      "reference": {
+        "name": "Nintendo Game Boy",
+        "dimension": "full silhouette height",
+        "shape": "catalog:game-boy-original",
+        "qualifier": "Handheld Games Console",
+        "measure": "14.8 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 17.32046504875511,
+      "explanation": "Lion: 2.56 m (full silhouette length). Nintendo Game Boy: 14.8 cm (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 2.1 m head-and-body length.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://animals.sandiegozoo.org/animals/lion",
+        "https://www.nintendo.com/de-de/Support/Fruhere-Konsolen/Technische-Daten-619585.html"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-38",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Meerkat.",
+      "target": {
+        "name": "Meerkat",
+        "dimension": "full silhouette height",
+        "shape": "catalog:meerkat",
+        "qualifier": "Average Adult, Standing"
+      },
+      "reference": {
+        "name": "Volkswagen campervan",
+        "dimension": "full silhouette height",
+        "shape": "catalog:volkswagen-t2-camper",
+        "qualifier": "Pop-Top",
+        "measure": "2.04 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.16384735286607535,
+      "explanation": "Meerkat: 33.3 cm (full silhouette height). Volkswagen campervan: 2.04 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 26.7 cm head-to-rump length.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://animaldiversity.org/accounts/Suricata_suricatta/",
+        "https://www.vw-t2-bulli.de/data/books/manuals/1977-08-vw-t2-westfalia-en-manual.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-39",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Peregrine falcon.",
+      "target": {
+        "name": "Peregrine falcon",
+        "dimension": "full silhouette length",
+        "shape": "catalog:peregrine-falcon",
+        "qualifier": "North American, Average Female"
+      },
+      "reference": {
+        "name": "African Bush Elephant",
+        "dimension": "full silhouette height",
+        "shape": "catalog:elephant",
+        "qualifier": "Average Adult Male",
+        "measure": "3.2 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.12426234277112873,
+      "explanation": "Peregrine falcon: 39.8 cm (full silhouette length). African Bush Elephant: 3.2 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 51.5 cm total length, bill to tail.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://animaldiversity.org/accounts/Falco_peregrinus/",
+        "https://app.pan.pl/archive/published/app61/app001362014.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-40",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Alaskan Moose.",
+      "target": {
+        "name": "Alaskan Moose",
+        "dimension": "full silhouette length",
+        "shape": "catalog:moose",
+        "qualifier": "Alaska–Yukon, Average Adult Male"
+      },
+      "reference": {
+        "name": "Basketball Hoop",
+        "dimension": "full silhouette length",
+        "shape": "catalog:basketball-hoop",
+        "measure": "1.8 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.7929411764705883,
+      "explanation": "Alaskan Moose: 3.23 m (full silhouette length). Basketball Hoop: 1.8 m (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 1.98 m shoulder height.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.nps.gov/kefj/learn/nature/moose.htm",
+        "https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2024-official-basketball-rules-and-basketball-equipment.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-41",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Chihuahua.",
+      "target": {
+        "name": "Chihuahua",
+        "dimension": "full silhouette height",
+        "shape": "catalog:chihuahua",
+        "qualifier": "Average Adult"
+      },
+      "reference": {
+        "name": "American mastodon",
+        "dimension": "full silhouette height",
+        "shape": "catalog:american-mastodon",
+        "qualifier": "Extinct Mammal",
+        "measure": "2.81 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.10062123454121459,
+      "explanation": "Chihuahua: 28.3 cm (full silhouette height). American mastodon: 2.81 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 19 cm shoulder height.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 2.75 m shoulder height.",
+      "sources": [
+        "https://www.dimensions.com/element/chihuahua",
+        "https://museum.state.il.us/exhibits/larson/mammut.html"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-42",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up USB-A flash drive.",
+      "target": {
+        "name": "USB-A flash drive",
+        "dimension": "full silhouette length",
+        "shape": "catalog:usb-a-sandisk-ultra-flair"
+      },
+      "reference": {
+        "name": "Walnut in shell",
+        "dimension": "full silhouette length",
+        "shape": "catalog:walnut",
+        "qualifier": "Chandler, In Shell",
+        "measure": "3.9 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.1025641025641022,
+      "explanation": "USB-A flash drive: 4.3 cm (full silhouette length). Walnut in shell: 3.9 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://documents.sandisk.com/content/dam/asset-library/en_us/assets/public/sandisk/product/usb-flash/ultra-flair-usb-3-0/data-sheet-ultra-flair-usb-3-0.pdf",
+        "https://www.nogalba.it/chandler-walnuts/"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-43",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Curling Sheet.",
+      "target": {
+        "name": "Curling Sheet",
+        "dimension": "full silhouette length",
+        "shape": "catalog:curling-sheet",
+        "qualifier": "World Curling"
+      },
+      "reference": {
+        "name": "Paraceratherium",
+        "dimension": "full silhouette height",
+        "shape": "catalog:paraceratherium",
+        "qualifier": "Extinct Giant Rhinoceros Relative",
+        "measure": "6.05 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 7.551439588688946,
+      "explanation": "Curling Sheet: 45.7 m (full silhouette length). Paraceratherium: 6.05 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 4.8 m shoulder height.",
+      "sources": [
+        "https://worldcurling.org/wp-content/uploads/2026/10/Rules-2026_Clean.pdf",
+        "https://www.app.pan.pl/archive/published/app61/app001362014.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-44",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Almond kernel.",
+      "target": {
+        "name": "Almond kernel",
+        "dimension": "full silhouette length",
+        "shape": "catalog:almond",
+        "qualifier": "Tuono, Kernel"
+      },
+      "reference": {
+        "name": "Reese's Peanut Butter Cup",
+        "dimension": "full silhouette length",
+        "shape": "catalog:reeses-peanut-butter-cup",
+        "measure": "5.08 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.4397637795275591,
+      "explanation": "Almond kernel: 2.23 cm (full silhouette length). Reese's Peanut Butter Cup: 5.08 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://om.ciheam.org/ressources/om/pdf/a119/00007411.pdf",
+        "https://www.waynesthisandthat.com/candybars.html"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-45",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Die.",
+      "target": {
+        "name": "Die",
+        "dimension": "full silhouette height",
+        "shape": "catalog:die"
+      },
+      "reference": {
+        "name": "Milk-chocolate M&M",
+        "dimension": "full silhouette length",
+        "shape": "catalog:milk-chocolate-mm",
+        "measure": "1.35 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.1885306789481505,
+      "explanation": "Die: 1.6 cm (full silhouette height). Milk-chocolate M&M: 1.35 cm (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.chessex.com/images/uploaded/Dice%20Set%20Sampler%20Sell%20Sheet%20-%20Opaque%20-%20Final.pdf",
+        "https://www.startribune.com/tidbits-mega-m-ms-honey-bunches-of-oats/259261311"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-46",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Lion.",
+      "target": {
+        "name": "Lion",
+        "dimension": "full silhouette length",
+        "shape": "catalog:lion",
+        "qualifier": "Average Male"
+      },
+      "reference": {
+        "name": "Airbus A380",
+        "dimension": "full silhouette length",
+        "shape": "catalog:airbus-a380",
+        "qualifier": "A380-800",
+        "measure": "72.7 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.035250671441360786,
+      "explanation": "Lion: 2.56 m (full silhouette length). Airbus A380: 72.7 m (full silhouette length).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 2.1 m head-and-body length.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://animals.sandiegozoo.org/animals/lion",
+        "https://www.airbus.com/sites/g/files/jlcbta136/files/2025-01/airbus-a380-facts-and-figures-february-2022.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-47",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Original Skittle.",
+      "target": {
+        "name": "Original Skittle",
+        "dimension": "full silhouette length",
+        "shape": "catalog:original-skittle"
+      },
+      "reference": {
+        "name": "Nintendo Game Boy",
+        "dimension": "full silhouette height",
+        "shape": "catalog:game-boy-original",
+        "qualifier": "Handheld Games Console",
+        "measure": "14.8 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.06756756756756757,
+      "explanation": "Original Skittle: 1 cm (full silhouette length). Nintendo Game Boy: 14.8 cm (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.snackhistory.com/skittles/",
+        "https://www.nintendo.com/de-de/Support/Fruhere-Konsolen/Technische-Daten-619585.html"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-48",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Big Ben Clock Face.",
+      "target": {
+        "name": "Big Ben Clock Face",
+        "dimension": "full silhouette length",
+        "shape": "catalog:big-ben-clock-face",
+        "qualifier": "Elizabeth Tower Dial"
+      },
+      "reference": {
+        "name": "Statue of Unity",
+        "dimension": "full silhouette height",
+        "shape": "catalog:statue-of-unity",
+        "qualifier": "Gujarat - Tallest Statue in the World, With Base",
+        "measure": "240 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.029166666666666667,
+      "explanation": "Big Ben Clock Face: 7 m (full silhouette length). Statue of Unity: 240 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.parliament.uk/about/living-heritage/building/palace/big-ben/facts-figures/",
+        "https://www.incredibleindia.gov.in/en/gujarat/vadodara/statue-of-unity"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-49",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Sabre-toothed Cat.",
+      "target": {
+        "name": "Sabre-toothed Cat",
+        "dimension": "full silhouette length",
+        "shape": "catalog:sabre-tooth-tiger",
+        "qualifier": "Smilodon populator"
+      },
+      "reference": {
+        "name": "Volkswagen campervan",
+        "dimension": "full silhouette height",
+        "shape": "catalog:volkswagen-t2-camper",
+        "qualifier": "Pop-Top",
+        "measure": "2.04 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.1052483183630724,
+      "explanation": "Sabre-toothed Cat: 2.25 m (full silhouette length). Volkswagen campervan: 2.04 m (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary. The full outline is calibrated from a 1.2 m shoulder height.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://www.guinnessworldrecords.com/world-records/93329-largest-sabre-toothed-cat",
+        "https://www.vw-t2-bulli.de/data/books/manuals/1977-08-vw-t2-westfalia-en-manual.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-classic-practice-50",
+      "version": 10,
+      "kind": "scale",
+      "category": "classic",
+      "tag": "Classic",
+      "prompt": "Size up Heinz glass ketchup bottle.",
+      "target": {
+        "name": "Heinz glass ketchup bottle",
+        "dimension": "full silhouette height",
+        "shape": "catalog:heinz-glass-342g"
+      },
+      "reference": {
+        "name": "Ukulele",
+        "dimension": "full silhouette height",
+        "shape": "catalog:ukulele",
+        "qualifier": "Kala KA-15S, Soprano",
+        "measure": "53.5 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.3738785046728972,
+      "explanation": "Heinz glass ketchup bottle: 20 cm (full silhouette height). Ukulele: 53.5 cm (full silhouette height).\nA reference size for this illustrated object; models, specimens and poses can vary.\nA reference size for this illustrated object; models, specimens and poses can vary.",
+      "sources": [
+        "https://heinzhistorycenter.emuseum.com/objects/50706/bottle-condiment",
+        "https://kalabrand.com/products/ka-15s-blk?variant=5405726212129"
+      ]
+    }
+  ],
+  "pop-culture": [
+    {
+      "id": "size-v10-pop-culture-practice-1",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Aang.",
+      "target": {
+        "name": "Aang",
+        "dimension": "full silhouette height",
+        "shape": "catalog:aang",
+        "qualifier": "Avatar: The Last Airbender"
+      },
+      "reference": {
+        "name": "Finn The Human",
+        "dimension": "full silhouette height",
+        "shape": "catalog:finn-the-human",
+        "qualifier": "Adventure Time",
+        "measure": "1.52 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.8999999999999999,
+      "explanation": "Aang: 1.37 m (full silhouette height). Finn The Human: 1.52 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.reddit.com/r/TheLastAirbender/comments/1phzoeq/aangs_height_was_46_1372_cm_in_the_episode_the/",
+        "https://en.wikipedia-on-ipfs.org/wiki/Finn_the_Human"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-2",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Wreck-It Ralph.",
+      "target": {
+        "name": "Wreck-It Ralph",
+        "dimension": "full silhouette height",
+        "shape": "catalog:wreck-it-ralph",
+        "qualifier": "Wreck-It Ralph"
+      },
+      "reference": {
+        "name": "Bob",
+        "dimension": "full silhouette height",
+        "shape": "catalog:bob-despicable-me",
+        "qualifier": "Despicable Me",
+        "measure": "76 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 3.609473684210526,
+      "explanation": "Wreck-It Ralph: 2.74 m (full silhouette height). Bob: 76 cm (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://news.disney.com/wreck-it-ralph-quotes",
+        "https://blokees.com/en-us/blogs/news/how-tall-is-bob-from-minions"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-3",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up AT-AT Walker.",
+      "target": {
+        "name": "AT-AT Walker",
+        "dimension": "full silhouette height",
+        "shape": "catalog:at-at-walker",
+        "qualifier": "Star Wars"
+      },
+      "reference": {
+        "name": "Ginormica",
+        "dimension": "full silhouette height",
+        "shape": "catalog:susan-murphy-giant",
+        "qualifier": "Susan Murphy, Monsters vs. Aliens",
+        "measure": "15.2 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.478842690573528,
+      "explanation": "AT-AT Walker: 22.5 m (full silhouette height). Ginormica: 15.2 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.starwars.com/databank/at-at-walker",
+        "https://ko.com.ua/files/Monsters%20vs.%20Aliens%20Production%20Notes.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-4",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Darth Vader's Helmet.",
+      "target": {
+        "name": "Darth Vader's Helmet",
+        "dimension": "full silhouette length",
+        "shape": "catalog:darth-vader-helmet",
+        "qualifier": "Star Wars"
+      },
+      "reference": {
+        "name": "Golden Ticket",
+        "dimension": "full silhouette length",
+        "shape": "catalog:golden-ticket",
+        "qualifier": "Willy Wonka & the Chocolate Factory",
+        "measure": "17.2 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.0028488372093025,
+      "explanation": "Darth Vader's Helmet: 34.4 cm (full silhouette length). Golden Ticket: 17.2 cm (full silhouette length).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://mopop.emuseum.com/objects/130449/darth-vader-stunt-helmet-from-the-film-the-empire-strikes-b",
+        "https://www.christies.com/en/lot/lot-6572887"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-5",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Steelix.",
+      "target": {
+        "name": "Steelix",
+        "dimension": "full silhouette height",
+        "shape": "catalog:steelix",
+        "qualifier": "Pokémon"
+      },
+      "reference": {
+        "name": "Arbok",
+        "dimension": "full silhouette height",
+        "shape": "catalog:arbok",
+        "qualifier": "Pokémon",
+        "measure": "3.5 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.6285714285714286,
+      "explanation": "Steelix: 9.2 m (full silhouette height). Arbok: 3.5 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://zukan.pokemon.co.jp/detail/0208",
+        "https://zukan.pokemon.co.jp/detail/0024"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-6",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Frodo Baggins.",
+      "target": {
+        "name": "Frodo Baggins",
+        "dimension": "full silhouette height",
+        "shape": "catalog:frodo-baggins",
+        "qualifier": "The Lord of the Rings"
+      },
+      "reference": {
+        "name": "Sauron",
+        "dimension": "full silhouette height",
+        "shape": "catalog:sauron",
+        "qualifier": "The Lord of the Rings",
+        "measure": "2.79 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.4444444444444444,
+      "explanation": "Frodo Baggins: 1.24 m (full silhouette height). Sauron: 2.79 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.dimensions.com/element/frodo-baggins",
+        "https://www.dimensions.com/element/sauron"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-7",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Maggie Simpson.",
+      "target": {
+        "name": "Maggie Simpson",
+        "dimension": "full silhouette height",
+        "shape": "catalog:maggie-simpson",
+        "qualifier": "The Simpsons"
+      },
+      "reference": {
+        "name": "Lisa Simpson",
+        "dimension": "full silhouette height",
+        "shape": "catalog:lisa-simpson",
+        "qualifier": "The Simpsons",
+        "measure": "100 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.7500000000000001,
+      "explanation": "Maggie Simpson: 75 cm (full silhouette height). Lisa Simpson: 100 cm (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://ilustrablog.wordpress.com/wp-content/uploads/2012/04/the-simpsons-handbook.pdf#page=112",
+        "https://ilustrablog.wordpress.com/wp-content/uploads/2012/04/the-simpsons-handbook.pdf#page=112"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-8",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Gollum.",
+      "target": {
+        "name": "Gollum",
+        "dimension": "full silhouette height",
+        "shape": "catalog:gollum",
+        "qualifier": "The Lord of the Rings"
+      },
+      "reference": {
+        "name": "Birdperson",
+        "dimension": "full silhouette height",
+        "shape": "catalog:birdperson",
+        "qualifier": "Rick and Morty",
+        "measure": "2.1 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.557142857142857,
+      "explanation": "Gollum: 1.17 m (full silhouette height). Birdperson: 2.1 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.remingtonscott.com/lord-of-the-rings-two-towers",
+        "https://bleedingcool.com/comics/hero-collector-publishes-dc-collections-in-november-2020-solicits/"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-9",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Brian Griffin.",
+      "target": {
+        "name": "Brian Griffin",
+        "dimension": "full silhouette height",
+        "shape": "catalog:brian-griffin",
+        "qualifier": "Family Guy"
+      },
+      "reference": {
+        "name": "Megamind",
+        "dimension": "full silhouette height",
+        "shape": "catalog:megamind",
+        "qualifier": "Megamind",
+        "measure": "1.65 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.6,
+      "explanation": "Brian Griffin: 99.1 cm (full silhouette height). Megamind: 1.65 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.reddit.com/r/familyguy/comments/62jaw0/how_tall_are_the_griffins/",
+        "https://megamindfans.wordpress.com/fun-facts/"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-10",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Kid Buu.",
+      "target": {
+        "name": "Kid Buu",
+        "dimension": "full silhouette height",
+        "shape": "catalog:majin-buu-kid",
+        "qualifier": "Dragon Ball Z"
+      },
+      "reference": {
+        "name": "Super Buu",
+        "dimension": "full silhouette height",
+        "shape": "catalog:majin-buu-super",
+        "qualifier": "Dragon Ball Z",
+        "measure": "2.4 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.6041666666666666,
+      "explanation": "Kid Buu: 1.45 m (full silhouette height). Super Buu: 2.4 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://vsbattles.fandom.com/wiki/User_blog:Mr._Bambu/Google%2B_Blogs:_Z_Fighter_Heights",
+        "https://vsbattles.fandom.com/wiki/User_blog:Mr._Bambu/Google%2B_Blogs:_Z_Fighter_Heights"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-11",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Perfect Cell.",
+      "target": {
+        "name": "Perfect Cell",
+        "dimension": "full silhouette height",
+        "shape": "catalog:perfect-cell",
+        "qualifier": "Dragon Ball Z"
+      },
+      "reference": {
+        "name": "Saitama",
+        "dimension": "full silhouette height",
+        "shape": "catalog:saitama",
+        "qualifier": "One-Punch Man",
+        "measure": "1.75 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.217142857142857,
+      "explanation": "Perfect Cell: 2.13 m (full silhouette height). Saitama: 1.75 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.esportstales.com/dragon-ball/characters-official-heights-and-weights",
+        "https://onepunchman.fandom.com/wiki/Saitama"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-12",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Stewie Griffin.",
+      "target": {
+        "name": "Stewie Griffin",
+        "dimension": "full silhouette height",
+        "shape": "catalog:stewie-griffin",
+        "qualifier": "Family Guy"
+      },
+      "reference": {
+        "name": "Sideshow Bob",
+        "dimension": "full silhouette height",
+        "shape": "catalog:sideshow-bob",
+        "qualifier": "The Simpsons",
+        "measure": "2.1 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.2902857142857143,
+      "explanation": "Stewie Griffin: 61 cm (full silhouette height). Sideshow Bob: 2.1 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.reddit.com/r/familyguy/comments/62jaw0/how_tall_are_the_griffins/",
+        "https://ilustrablog.wordpress.com/wp-content/uploads/2012/04/the-simpsons-handbook.pdf#page=112"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-13",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Dorothy's Ruby Slipper.",
+      "target": {
+        "name": "Dorothy's Ruby Slipper",
+        "dimension": "full silhouette length",
+        "shape": "catalog:dorothy-ruby-slipper",
+        "qualifier": "The Wizard of Oz"
+      },
+      "reference": {
+        "name": "Eric Cartman",
+        "dimension": "full silhouette height",
+        "shape": "catalog:eric-cartman",
+        "qualifier": "South Park",
+        "measure": "1.35 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.1792452830188679,
+      "explanation": "Dorothy's Ruby Slipper: 24.1 cm (full silhouette length). Eric Cartman: 1.35 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://americanhistory.si.edu/collections/object/nmah_670130",
+        "https://charactersdb.com/eric-cartman/"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-14",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Jerry Smith.",
+      "target": {
+        "name": "Jerry Smith",
+        "dimension": "full silhouette height",
+        "shape": "catalog:jerry-smith",
+        "qualifier": "Rick and Morty"
+      },
+      "reference": {
+        "name": "Mr Meeseeks",
+        "dimension": "full silhouette height",
+        "shape": "catalog:mr-meeseeks",
+        "qualifier": "Rick and Morty",
+        "measure": "1.75 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.016,
+      "explanation": "Jerry Smith: 1.78 m (full silhouette height). Mr Meeseeks: 1.75 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://rickandmorty.fandom.com/wiki/Jerry_Smith",
+        "https://www.sideshow.com/collectibles/rick-and-morty-rick-and-morty-series-2-mondo-911168"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-15",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Frozone.",
+      "target": {
+        "name": "Frozone",
+        "dimension": "full silhouette height",
+        "shape": "catalog:frozone",
+        "qualifier": "The Incredibles"
+      },
+      "reference": {
+        "name": "Darth Vader's Helmet",
+        "dimension": "full silhouette length",
+        "shape": "catalog:darth-vader-helmet",
+        "qualifier": "Star Wars",
+        "measure": "34.4 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 5.45618160178815,
+      "explanation": "Frozone: 1.88 m (full silhouette height). Darth Vader's Helmet: 34.4 cm (full silhouette length).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://legionworld.net/forums/ubbthreads.php?Number=556382&ubb=showflat",
+        "https://mopop.emuseum.com/objects/130449/darth-vader-stunt-helmet-from-the-film-the-empire-strikes-b"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-16",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up The One Ring.",
+      "target": {
+        "name": "The One Ring",
+        "dimension": "full silhouette length",
+        "shape": "catalog:one-ring",
+        "qualifier": "The Lord of the Rings"
+      },
+      "reference": {
+        "name": "Maggie Simpson",
+        "dimension": "full silhouette height",
+        "shape": "catalog:maggie-simpson",
+        "qualifier": "The Simpsons",
+        "measure": "75 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.030867187500000004,
+      "explanation": "The One Ring: 2.32 cm (full silhouette length). Maggie Simpson: 75 cm (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary. The full outline is calibrated from a 2.7 mm ring band thickness.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.jenshansen.com/products/white-gold-movie-ring",
+        "https://ilustrablog.wordpress.com/wp-content/uploads/2012/04/the-simpsons-handbook.pdf#page=112"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-17",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Wreck-It Ralph.",
+      "target": {
+        "name": "Wreck-It Ralph",
+        "dimension": "full silhouette height",
+        "shape": "catalog:wreck-it-ralph",
+        "qualifier": "Wreck-It Ralph"
+      },
+      "reference": {
+        "name": "Sideshow Bob",
+        "dimension": "full silhouette height",
+        "shape": "catalog:sideshow-bob",
+        "qualifier": "The Simpsons",
+        "measure": "2.1 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.3062857142857143,
+      "explanation": "Wreck-It Ralph: 2.74 m (full silhouette height). Sideshow Bob: 2.1 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://news.disney.com/wreck-it-ralph-quotes",
+        "https://ilustrablog.wordpress.com/wp-content/uploads/2012/04/the-simpsons-handbook.pdf#page=112"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-18",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Steelix.",
+      "target": {
+        "name": "Steelix",
+        "dimension": "full silhouette height",
+        "shape": "catalog:steelix",
+        "qualifier": "Pokémon"
+      },
+      "reference": {
+        "name": "Eric Cartman",
+        "dimension": "full silhouette height",
+        "shape": "catalog:eric-cartman",
+        "qualifier": "South Park",
+        "measure": "1.35 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 6.834051403951864,
+      "explanation": "Steelix: 9.2 m (full silhouette height). Eric Cartman: 1.35 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://zukan.pokemon.co.jp/detail/0208",
+        "https://charactersdb.com/eric-cartman/"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-19",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Dorothy's Ruby Slipper.",
+      "target": {
+        "name": "Dorothy's Ruby Slipper",
+        "dimension": "full silhouette length",
+        "shape": "catalog:dorothy-ruby-slipper",
+        "qualifier": "The Wizard of Oz"
+      },
+      "reference": {
+        "name": "Finn The Human",
+        "dimension": "full silhouette height",
+        "shape": "catalog:finn-the-human",
+        "qualifier": "Adventure Time",
+        "measure": "1.52 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.15833333333333333,
+      "explanation": "Dorothy's Ruby Slipper: 24.1 cm (full silhouette length). Finn The Human: 1.52 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://americanhistory.si.edu/collections/object/nmah_670130",
+        "https://en.wikipedia-on-ipfs.org/wiki/Finn_the_Human"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-20",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Brian Griffin.",
+      "target": {
+        "name": "Brian Griffin",
+        "dimension": "full silhouette height",
+        "shape": "catalog:brian-griffin",
+        "qualifier": "Family Guy"
+      },
+      "reference": {
+        "name": "Aang",
+        "dimension": "full silhouette height",
+        "shape": "catalog:aang",
+        "qualifier": "Avatar: The Last Airbender",
+        "measure": "1.37 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.7222222222222222,
+      "explanation": "Brian Griffin: 99.1 cm (full silhouette height). Aang: 1.37 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.reddit.com/r/familyguy/comments/62jaw0/how_tall_are_the_griffins/",
+        "https://www.reddit.com/r/TheLastAirbender/comments/1phzoeq/aangs_height_was_46_1372_cm_in_the_episode_the/"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-21",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Jerry Smith.",
+      "target": {
+        "name": "Jerry Smith",
+        "dimension": "full silhouette height",
+        "shape": "catalog:jerry-smith",
+        "qualifier": "Rick and Morty"
+      },
+      "reference": {
+        "name": "Megamind",
+        "dimension": "full silhouette height",
+        "shape": "catalog:megamind",
+        "qualifier": "Megamind",
+        "measure": "1.65 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.0769230769230769,
+      "explanation": "Jerry Smith: 1.78 m (full silhouette height). Megamind: 1.65 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://rickandmorty.fandom.com/wiki/Jerry_Smith",
+        "https://megamindfans.wordpress.com/fun-facts/"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-22",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Perfect Cell.",
+      "target": {
+        "name": "Perfect Cell",
+        "dimension": "full silhouette height",
+        "shape": "catalog:perfect-cell",
+        "qualifier": "Dragon Ball Z"
+      },
+      "reference": {
+        "name": "Ginormica",
+        "dimension": "full silhouette height",
+        "shape": "catalog:susan-murphy-giant",
+        "qualifier": "Susan Murphy, Monsters vs. Aliens",
+        "measure": "15.2 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.13999710804096063,
+      "explanation": "Perfect Cell: 2.13 m (full silhouette height). Ginormica: 15.2 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.esportstales.com/dragon-ball/characters-official-heights-and-weights",
+        "https://ko.com.ua/files/Monsters%20vs.%20Aliens%20Production%20Notes.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-23",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Golden Ticket.",
+      "target": {
+        "name": "Golden Ticket",
+        "dimension": "full silhouette length",
+        "shape": "catalog:golden-ticket",
+        "qualifier": "Willy Wonka & the Chocolate Factory"
+      },
+      "reference": {
+        "name": "Mr Meeseeks",
+        "dimension": "full silhouette height",
+        "shape": "catalog:mr-meeseeks",
+        "qualifier": "Rick and Morty",
+        "measure": "1.75 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.09828571428571428,
+      "explanation": "Golden Ticket: 17.2 cm (full silhouette length). Mr Meeseeks: 1.75 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.christies.com/en/lot/lot-6572887",
+        "https://www.sideshow.com/collectibles/rick-and-morty-rick-and-morty-series-2-mondo-911168"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-24",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Stewie Griffin.",
+      "target": {
+        "name": "Stewie Griffin",
+        "dimension": "full silhouette height",
+        "shape": "catalog:stewie-griffin",
+        "qualifier": "Family Guy"
+      },
+      "reference": {
+        "name": "Sauron",
+        "dimension": "full silhouette height",
+        "shape": "catalog:sauron",
+        "qualifier": "The Lord of the Rings",
+        "measure": "2.79 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.218494623655914,
+      "explanation": "Stewie Griffin: 61 cm (full silhouette height). Sauron: 2.79 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.reddit.com/r/familyguy/comments/62jaw0/how_tall_are_the_griffins/",
+        "https://www.dimensions.com/element/sauron"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-25",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Super Buu.",
+      "target": {
+        "name": "Super Buu",
+        "dimension": "full silhouette height",
+        "shape": "catalog:majin-buu-super",
+        "qualifier": "Dragon Ball Z"
+      },
+      "reference": {
+        "name": "Gollum",
+        "dimension": "full silhouette height",
+        "shape": "catalog:gollum",
+        "qualifier": "The Lord of the Rings",
+        "measure": "1.17 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.0512820512820515,
+      "explanation": "Super Buu: 2.4 m (full silhouette height). Gollum: 1.17 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://vsbattles.fandom.com/wiki/User_blog:Mr._Bambu/Google%2B_Blogs:_Z_Fighter_Heights",
+        "https://www.remingtonscott.com/lord-of-the-rings-two-towers"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-26",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Frozone.",
+      "target": {
+        "name": "Frozone",
+        "dimension": "full silhouette height",
+        "shape": "catalog:frozone",
+        "qualifier": "The Incredibles"
+      },
+      "reference": {
+        "name": "AT-AT Walker",
+        "dimension": "full silhouette height",
+        "shape": "catalog:at-at-walker",
+        "qualifier": "Star Wars",
+        "measure": "22.5 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.08353777777777778,
+      "explanation": "Frozone: 1.88 m (full silhouette height). AT-AT Walker: 22.5 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://legionworld.net/forums/ubbthreads.php?Number=556382&ubb=showflat",
+        "https://www.starwars.com/databank/at-at-walker"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-27",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Frodo Baggins.",
+      "target": {
+        "name": "Frodo Baggins",
+        "dimension": "full silhouette height",
+        "shape": "catalog:frodo-baggins",
+        "qualifier": "The Lord of the Rings"
+      },
+      "reference": {
+        "name": "Lisa Simpson",
+        "dimension": "full silhouette height",
+        "shape": "catalog:lisa-simpson",
+        "qualifier": "The Simpsons",
+        "measure": "100 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.2400000000000002,
+      "explanation": "Frodo Baggins: 1.24 m (full silhouette height). Lisa Simpson: 100 cm (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.dimensions.com/element/frodo-baggins",
+        "https://ilustrablog.wordpress.com/wp-content/uploads/2012/04/the-simpsons-handbook.pdf#page=112"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-28",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Birdperson.",
+      "target": {
+        "name": "Birdperson",
+        "dimension": "full silhouette height",
+        "shape": "catalog:birdperson",
+        "qualifier": "Rick and Morty"
+      },
+      "reference": {
+        "name": "Bob",
+        "dimension": "full silhouette height",
+        "shape": "catalog:bob-despicable-me",
+        "qualifier": "Despicable Me",
+        "measure": "76 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.763157894736842,
+      "explanation": "Birdperson: 2.1 m (full silhouette height). Bob: 76 cm (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://bleedingcool.com/comics/hero-collector-publishes-dc-collections-in-november-2020-solicits/",
+        "https://blokees.com/en-us/blogs/news/how-tall-is-bob-from-minions"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-29",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Kid Buu.",
+      "target": {
+        "name": "Kid Buu",
+        "dimension": "full silhouette height",
+        "shape": "catalog:majin-buu-kid",
+        "qualifier": "Dragon Ball Z"
+      },
+      "reference": {
+        "name": "Arbok",
+        "dimension": "full silhouette height",
+        "shape": "catalog:arbok",
+        "qualifier": "Pokémon",
+        "measure": "3.5 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.41428571428571426,
+      "explanation": "Kid Buu: 1.45 m (full silhouette height). Arbok: 3.5 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://vsbattles.fandom.com/wiki/User_blog:Mr._Bambu/Google%2B_Blogs:_Z_Fighter_Heights",
+        "https://zukan.pokemon.co.jp/detail/0024"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-30",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Saitama.",
+      "target": {
+        "name": "Saitama",
+        "dimension": "full silhouette height",
+        "shape": "catalog:saitama",
+        "qualifier": "One-Punch Man"
+      },
+      "reference": {
+        "name": "Sauron",
+        "dimension": "full silhouette height",
+        "shape": "catalog:sauron",
+        "qualifier": "The Lord of the Rings",
+        "measure": "2.79 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.6272401433691757,
+      "explanation": "Saitama: 1.75 m (full silhouette height). Sauron: 2.79 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://onepunchman.fandom.com/wiki/Saitama",
+        "https://www.dimensions.com/element/sauron"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-31",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up The One Ring.",
+      "target": {
+        "name": "The One Ring",
+        "dimension": "full silhouette length",
+        "shape": "catalog:one-ring",
+        "qualifier": "The Lord of the Rings"
+      },
+      "reference": {
+        "name": "Darth Vader's Helmet",
+        "dimension": "full silhouette length",
+        "shape": "catalog:darth-vader-helmet",
+        "qualifier": "Star Wars",
+        "measure": "34.4 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.0672019234956022,
+      "explanation": "The One Ring: 2.32 cm (full silhouette length). Darth Vader's Helmet: 34.4 cm (full silhouette length).\nFictional reference size for this version and pose; depictions and source estimates vary. The full outline is calibrated from a 2.7 mm ring band thickness.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.jenshansen.com/products/white-gold-movie-ring",
+        "https://mopop.emuseum.com/objects/130449/darth-vader-stunt-helmet-from-the-film-the-empire-strikes-b"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-32",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Frodo Baggins.",
+      "target": {
+        "name": "Frodo Baggins",
+        "dimension": "full silhouette height",
+        "shape": "catalog:frodo-baggins",
+        "qualifier": "The Lord of the Rings"
+      },
+      "reference": {
+        "name": "Sideshow Bob",
+        "dimension": "full silhouette height",
+        "shape": "catalog:sideshow-bob",
+        "qualifier": "The Simpsons",
+        "measure": "2.1 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.5904761904761905,
+      "explanation": "Frodo Baggins: 1.24 m (full silhouette height). Sideshow Bob: 2.1 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.dimensions.com/element/frodo-baggins",
+        "https://ilustrablog.wordpress.com/wp-content/uploads/2012/04/the-simpsons-handbook.pdf#page=112"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-33",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Finn The Human.",
+      "target": {
+        "name": "Finn The Human",
+        "dimension": "full silhouette height",
+        "shape": "catalog:finn-the-human",
+        "qualifier": "Adventure Time"
+      },
+      "reference": {
+        "name": "Ginormica",
+        "dimension": "full silhouette height",
+        "shape": "catalog:susan-murphy-giant",
+        "qualifier": "Susan Murphy, Monsters vs. Aliens",
+        "measure": "15.2 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.10016694490818029,
+      "explanation": "Finn The Human: 1.52 m (full silhouette height). Ginormica: 15.2 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://en.wikipedia-on-ipfs.org/wiki/Finn_the_Human",
+        "https://ko.com.ua/files/Monsters%20vs.%20Aliens%20Production%20Notes.pdf"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-34",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Arbok.",
+      "target": {
+        "name": "Arbok",
+        "dimension": "full silhouette height",
+        "shape": "catalog:arbok",
+        "qualifier": "Pokémon"
+      },
+      "reference": {
+        "name": "Eric Cartman",
+        "dimension": "full silhouette height",
+        "shape": "catalog:eric-cartman",
+        "qualifier": "South Park",
+        "measure": "1.35 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.5999108601990786,
+      "explanation": "Arbok: 3.5 m (full silhouette height). Eric Cartman: 1.35 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://zukan.pokemon.co.jp/detail/0024",
+        "https://charactersdb.com/eric-cartman/"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-35",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Dorothy's Ruby Slipper.",
+      "target": {
+        "name": "Dorothy's Ruby Slipper",
+        "dimension": "full silhouette length",
+        "shape": "catalog:dorothy-ruby-slipper",
+        "qualifier": "The Wizard of Oz"
+      },
+      "reference": {
+        "name": "Brian Griffin",
+        "dimension": "full silhouette height",
+        "shape": "catalog:brian-griffin",
+        "qualifier": "Family Guy",
+        "measure": "99.1 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.24358974358974358,
+      "explanation": "Dorothy's Ruby Slipper: 24.1 cm (full silhouette length). Brian Griffin: 99.1 cm (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://americanhistory.si.edu/collections/object/nmah_670130",
+        "https://www.reddit.com/r/familyguy/comments/62jaw0/how_tall_are_the_griffins/"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-36",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Aang.",
+      "target": {
+        "name": "Aang",
+        "dimension": "full silhouette height",
+        "shape": "catalog:aang",
+        "qualifier": "Avatar: The Last Airbender"
+      },
+      "reference": {
+        "name": "Kid Buu",
+        "dimension": "full silhouette height",
+        "shape": "catalog:majin-buu-kid",
+        "qualifier": "Dragon Ball Z",
+        "measure": "1.45 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.9459310344827586,
+      "explanation": "Aang: 1.37 m (full silhouette height). Kid Buu: 1.45 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.reddit.com/r/TheLastAirbender/comments/1phzoeq/aangs_height_was_46_1372_cm_in_the_episode_the/",
+        "https://vsbattles.fandom.com/wiki/User_blog:Mr._Bambu/Google%2B_Blogs:_Z_Fighter_Heights"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-37",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Maggie Simpson.",
+      "target": {
+        "name": "Maggie Simpson",
+        "dimension": "full silhouette height",
+        "shape": "catalog:maggie-simpson",
+        "qualifier": "The Simpsons"
+      },
+      "reference": {
+        "name": "AT-AT Walker",
+        "dimension": "full silhouette height",
+        "shape": "catalog:at-at-walker",
+        "qualifier": "Star Wars",
+        "measure": "22.5 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.03333333333333333,
+      "explanation": "Maggie Simpson: 75 cm (full silhouette height). AT-AT Walker: 22.5 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://ilustrablog.wordpress.com/wp-content/uploads/2012/04/the-simpsons-handbook.pdf#page=112",
+        "https://www.starwars.com/databank/at-at-walker"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-38",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Steelix.",
+      "target": {
+        "name": "Steelix",
+        "dimension": "full silhouette height",
+        "shape": "catalog:steelix",
+        "qualifier": "Pokémon"
+      },
+      "reference": {
+        "name": "Lisa Simpson",
+        "dimension": "full silhouette height",
+        "shape": "catalog:lisa-simpson",
+        "qualifier": "The Simpsons",
+        "measure": "100 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 9.200000000000001,
+      "explanation": "Steelix: 9.2 m (full silhouette height). Lisa Simpson: 100 cm (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://zukan.pokemon.co.jp/detail/0208",
+        "https://ilustrablog.wordpress.com/wp-content/uploads/2012/04/the-simpsons-handbook.pdf#page=112"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-39",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Wreck-It Ralph.",
+      "target": {
+        "name": "Wreck-It Ralph",
+        "dimension": "full silhouette height",
+        "shape": "catalog:wreck-it-ralph",
+        "qualifier": "Wreck-It Ralph"
+      },
+      "reference": {
+        "name": "Super Buu",
+        "dimension": "full silhouette height",
+        "shape": "catalog:majin-buu-super",
+        "qualifier": "Dragon Ball Z",
+        "measure": "2.4 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.143,
+      "explanation": "Wreck-It Ralph: 2.74 m (full silhouette height). Super Buu: 2.4 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://news.disney.com/wreck-it-ralph-quotes",
+        "https://vsbattles.fandom.com/wiki/User_blog:Mr._Bambu/Google%2B_Blogs:_Z_Fighter_Heights"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-40",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up The One Ring.",
+      "target": {
+        "name": "The One Ring",
+        "dimension": "full silhouette length",
+        "shape": "catalog:one-ring",
+        "qualifier": "The Lord of the Rings"
+      },
+      "reference": {
+        "name": "Stewie Griffin",
+        "dimension": "full silhouette height",
+        "shape": "catalog:stewie-griffin",
+        "qualifier": "Family Guy",
+        "measure": "61 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.0379763625738189,
+      "explanation": "The One Ring: 2.32 cm (full silhouette length). Stewie Griffin: 61 cm (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary. The full outline is calibrated from a 2.7 mm ring band thickness.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.jenshansen.com/products/white-gold-movie-ring",
+        "https://www.reddit.com/r/familyguy/comments/62jaw0/how_tall_are_the_griffins/"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-41",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Birdperson.",
+      "target": {
+        "name": "Birdperson",
+        "dimension": "full silhouette height",
+        "shape": "catalog:birdperson",
+        "qualifier": "Rick and Morty"
+      },
+      "reference": {
+        "name": "Perfect Cell",
+        "dimension": "full silhouette height",
+        "shape": "catalog:perfect-cell",
+        "qualifier": "Dragon Ball Z",
+        "measure": "2.13 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.9859154929577466,
+      "explanation": "Birdperson: 2.1 m (full silhouette height). Perfect Cell: 2.13 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://bleedingcool.com/comics/hero-collector-publishes-dc-collections-in-november-2020-solicits/",
+        "https://www.esportstales.com/dragon-ball/characters-official-heights-and-weights"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-42",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Golden Ticket.",
+      "target": {
+        "name": "Golden Ticket",
+        "dimension": "full silhouette length",
+        "shape": "catalog:golden-ticket",
+        "qualifier": "Willy Wonka & the Chocolate Factory"
+      },
+      "reference": {
+        "name": "Saitama",
+        "dimension": "full silhouette height",
+        "shape": "catalog:saitama",
+        "qualifier": "One-Punch Man",
+        "measure": "1.75 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.09828571428571428,
+      "explanation": "Golden Ticket: 17.2 cm (full silhouette length). Saitama: 1.75 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.christies.com/en/lot/lot-6572887",
+        "https://onepunchman.fandom.com/wiki/Saitama"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-43",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Mr Meeseeks.",
+      "target": {
+        "name": "Mr Meeseeks",
+        "dimension": "full silhouette height",
+        "shape": "catalog:mr-meeseeks",
+        "qualifier": "Rick and Morty"
+      },
+      "reference": {
+        "name": "Gollum",
+        "dimension": "full silhouette height",
+        "shape": "catalog:gollum",
+        "qualifier": "The Lord of the Rings",
+        "measure": "1.17 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.4957264957264957,
+      "explanation": "Mr Meeseeks: 1.75 m (full silhouette height). Gollum: 1.17 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.sideshow.com/collectibles/rick-and-morty-rick-and-morty-series-2-mondo-911168",
+        "https://www.remingtonscott.com/lord-of-the-rings-two-towers"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-44",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Frozone.",
+      "target": {
+        "name": "Frozone",
+        "dimension": "full silhouette height",
+        "shape": "catalog:frozone",
+        "qualifier": "The Incredibles"
+      },
+      "reference": {
+        "name": "Bob",
+        "dimension": "full silhouette height",
+        "shape": "catalog:bob-despicable-me",
+        "qualifier": "Despicable Me",
+        "measure": "76 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.473157894736842,
+      "explanation": "Frozone: 1.88 m (full silhouette height). Bob: 76 cm (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://legionworld.net/forums/ubbthreads.php?Number=556382&ubb=showflat",
+        "https://blokees.com/en-us/blogs/news/how-tall-is-bob-from-minions"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-45",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Sauron.",
+      "target": {
+        "name": "Sauron",
+        "dimension": "full silhouette height",
+        "shape": "catalog:sauron",
+        "qualifier": "The Lord of the Rings"
+      },
+      "reference": {
+        "name": "Jerry Smith",
+        "dimension": "full silhouette height",
+        "shape": "catalog:jerry-smith",
+        "qualifier": "Rick and Morty",
+        "measure": "1.78 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.5691788526434196,
+      "explanation": "Sauron: 2.79 m (full silhouette height). Jerry Smith: 1.78 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.dimensions.com/element/sauron",
+        "https://rickandmorty.fandom.com/wiki/Jerry_Smith"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-46",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Megamind.",
+      "target": {
+        "name": "Megamind",
+        "dimension": "full silhouette height",
+        "shape": "catalog:megamind",
+        "qualifier": "Megamind"
+      },
+      "reference": {
+        "name": "Eric Cartman",
+        "dimension": "full silhouette height",
+        "shape": "catalog:eric-cartman",
+        "qualifier": "South Park",
+        "measure": "1.35 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.2264150943396226,
+      "explanation": "Megamind: 1.65 m (full silhouette height). Eric Cartman: 1.35 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://megamindfans.wordpress.com/fun-facts/",
+        "https://charactersdb.com/eric-cartman/"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-47",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Sideshow Bob.",
+      "target": {
+        "name": "Sideshow Bob",
+        "dimension": "full silhouette height",
+        "shape": "catalog:sideshow-bob",
+        "qualifier": "The Simpsons"
+      },
+      "reference": {
+        "name": "Arbok",
+        "dimension": "full silhouette height",
+        "shape": "catalog:arbok",
+        "qualifier": "Pokémon",
+        "measure": "3.5 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.6,
+      "explanation": "Sideshow Bob: 2.1 m (full silhouette height). Arbok: 3.5 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://ilustrablog.wordpress.com/wp-content/uploads/2012/04/the-simpsons-handbook.pdf#page=112",
+        "https://zukan.pokemon.co.jp/detail/0024"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-48",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Darth Vader's Helmet.",
+      "target": {
+        "name": "Darth Vader's Helmet",
+        "dimension": "full silhouette length",
+        "shape": "catalog:darth-vader-helmet",
+        "qualifier": "Star Wars"
+      },
+      "reference": {
+        "name": "Dorothy's Ruby Slipper",
+        "dimension": "full silhouette length",
+        "shape": "catalog:dorothy-ruby-slipper",
+        "qualifier": "The Wizard of Oz",
+        "measure": "24.1 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.4276419394944055,
+      "explanation": "Darth Vader's Helmet: 34.4 cm (full silhouette length). Dorothy's Ruby Slipper: 24.1 cm (full silhouette length).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://mopop.emuseum.com/objects/130449/darth-vader-stunt-helmet-from-the-film-the-empire-strikes-b",
+        "https://americanhistory.si.edu/collections/object/nmah_670130"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-49",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Ginormica.",
+      "target": {
+        "name": "Ginormica",
+        "dimension": "full silhouette height",
+        "shape": "catalog:susan-murphy-giant",
+        "qualifier": "Susan Murphy, Monsters vs. Aliens"
+      },
+      "reference": {
+        "name": "Frodo Baggins",
+        "dimension": "full silhouette height",
+        "shape": "catalog:frodo-baggins",
+        "qualifier": "The Lord of the Rings",
+        "measure": "1.24 m"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 12.26983870967742,
+      "explanation": "Ginormica: 15.2 m (full silhouette height). Frodo Baggins: 1.24 m (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://ko.com.ua/files/Monsters%20vs.%20Aliens%20Production%20Notes.pdf",
+        "https://www.dimensions.com/element/frodo-baggins"
+      ]
+    },
+    {
+      "id": "size-v10-pop-culture-practice-50",
+      "version": 10,
+      "kind": "scale",
+      "category": "pop-culture",
+      "tag": "Pop culture",
+      "prompt": "Size up Golden Ticket.",
+      "target": {
+        "name": "Golden Ticket",
+        "dimension": "full silhouette length",
+        "shape": "catalog:golden-ticket",
+        "qualifier": "Willy Wonka & the Chocolate Factory"
+      },
+      "reference": {
+        "name": "Brian Griffin",
+        "dimension": "full silhouette height",
+        "shape": "catalog:brian-griffin",
+        "qualifier": "Family Guy",
+        "measure": "99.1 cm"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.17363214213607914,
+      "explanation": "Golden Ticket: 17.2 cm (full silhouette length). Brian Griffin: 99.1 cm (full silhouette height).\nFictional reference size for this version and pose; depictions and source estimates vary.\nFictional reference size for this version and pose; depictions and source estimates vary.",
+      "sources": [
+        "https://www.christies.com/en/lot/lot-6572887",
+        "https://www.reddit.com/r/familyguy/comments/62jaw0/how_tall_are_the_griffins/"
+      ]
+    }
+  ],
+  "geography": [
+    {
+      "id": "size-v10-geography-practice-1",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Germany.",
+      "target": {
+        "name": "Germany",
+        "dimension": "projected north–south span",
+        "shape": "catalog:germany"
+      },
+      "reference": {
+        "name": "Texas",
+        "dimension": "projected east–west span",
+        "shape": "catalog:texas",
+        "measure": "1240 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.6975319918796178,
+      "explanation": "Germany: 868 km (projected north–south span). Texas: 1240 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.geoboundaries.org/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-2",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Great Britain.",
+      "target": {
+        "name": "Great Britain",
+        "dimension": "projected north–south span",
+        "shape": "catalog:great-britain"
+      },
+      "reference": {
+        "name": "Italy",
+        "dimension": "projected north–south span",
+        "shape": "catalog:italy",
+        "measure": "1290 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.7510107234832787,
+      "explanation": "Great Britain: 968 km (projected north–south span). Italy: 1290 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-3",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Lake Geneva.",
+      "target": {
+        "name": "Lake Geneva",
+        "dimension": "projected east–west span",
+        "shape": "catalog:lake-geneva"
+      },
+      "reference": {
+        "name": "Lake Ladoga",
+        "dimension": "projected north–south span",
+        "shape": "catalog:lake-ladoga",
+        "qualifier": "largest lake in Europe",
+        "measure": "209 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.29468609436309695,
+      "explanation": "Lake Geneva: 61.6 km (projected east–west span). Lake Ladoga: 209 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-4",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Nile.",
+      "target": {
+        "name": "Nile",
+        "dimension": "projected north–south span",
+        "shape": "catalog:nile",
+        "qualifier": "River, North–South Span"
+      },
+      "reference": {
+        "name": "Ganges",
+        "dimension": "projected east–west span",
+        "shape": "catalog:ganges",
+        "qualifier": "River, East–West Span",
+        "measure": "1220 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 3.206219327308253,
+      "explanation": "Nile: 3930 km (projected north–south span). Ganges: 1220 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-5",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Hawaii.",
+      "target": {
+        "name": "Hawaii",
+        "dimension": "projected east–west span",
+        "shape": "catalog:hawaii"
+      },
+      "reference": {
+        "name": "Cyprus",
+        "dimension": "projected east–west span",
+        "shape": "catalog:cyprus",
+        "measure": "210 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.7491901947857813,
+      "explanation": "Hawaii: 578 km (projected east–west span). Cyprus: 210 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.geoboundaries.org/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-6",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Greenland.",
+      "target": {
+        "name": "Greenland",
+        "dimension": "projected north–south span",
+        "shape": "catalog:greenland"
+      },
+      "reference": {
+        "name": "Australia",
+        "dimension": "projected east–west span",
+        "shape": "catalog:australia",
+        "qualifier": "Country",
+        "measure": "4040 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.6570217058637463,
+      "explanation": "Greenland: 2650 km (projected north–south span). Australia: 4040 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-7",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up New Zealand.",
+      "target": {
+        "name": "New Zealand",
+        "dimension": "projected north–south span",
+        "shape": "catalog:new-zealand"
+      },
+      "reference": {
+        "name": "United Kingdom",
+        "dimension": "projected north–south span",
+        "shape": "catalog:united-kingdom",
+        "measure": "1220 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.1292608485112665,
+      "explanation": "New Zealand: 2600 km (projected north–south span). United Kingdom: 1220 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-8",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Netherlands.",
+      "target": {
+        "name": "Netherlands",
+        "dimension": "projected north–south span",
+        "shape": "catalog:netherlands"
+      },
+      "reference": {
+        "name": "New Mexico",
+        "dimension": "projected north–south span",
+        "shape": "catalog:new-mexico",
+        "measure": "632 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.500364522894364,
+      "explanation": "Netherlands: 316 km (projected north–south span). New Mexico: 632 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.geoboundaries.org/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-9",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Alaska.",
+      "target": {
+        "name": "Alaska",
+        "dimension": "projected east–west span",
+        "shape": "catalog:alaska"
+      },
+      "reference": {
+        "name": "India",
+        "dimension": "projected north–south span",
+        "shape": "catalog:india",
+        "measure": "3160 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.1503204584258298,
+      "explanation": "Alaska: 3640 km (projected east–west span). India: 3160 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.geoboundaries.org/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-10",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up France.",
+      "target": {
+        "name": "France",
+        "dimension": "projected east–west span",
+        "shape": "catalog:france"
+      },
+      "reference": {
+        "name": "Mongolia",
+        "dimension": "projected east–west span",
+        "shape": "catalog:mongolia",
+        "measure": "2380 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.5146297930922036,
+      "explanation": "France: 1230 km (projected east–west span). Mongolia: 2380 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-11",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Canada.",
+      "target": {
+        "name": "Canada",
+        "dimension": "projected east–west span",
+        "shape": "catalog:canada"
+      },
+      "reference": {
+        "name": "Atlantic Ocean",
+        "dimension": "projected north–south span",
+        "shape": "catalog:atlantic-ocean",
+        "qualifier": "Ocean, North-South Span",
+        "measure": "14200 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.37949902933108254,
+      "explanation": "Canada: 5400 km (projected east–west span). Atlantic Ocean: 14200 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-12",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Lebanon.",
+      "target": {
+        "name": "Lebanon",
+        "dimension": "projected north–south span",
+        "shape": "catalog:lebanon"
+      },
+      "reference": {
+        "name": "Argentina",
+        "dimension": "projected north–south span",
+        "shape": "catalog:argentina",
+        "measure": "3690 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.049230177573103905,
+      "explanation": "Lebanon: 181 km (projected north–south span). Argentina: 3690 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-13",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Pacific Ocean.",
+      "target": {
+        "name": "Pacific Ocean",
+        "dimension": "projected east–west span",
+        "shape": "catalog:pacific-ocean",
+        "qualifier": "Ocean, East-West Span"
+      },
+      "reference": {
+        "name": "Indonesia",
+        "dimension": "projected east–west span",
+        "shape": "catalog:indonesia",
+        "measure": "5050 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 3.6039946165293273,
+      "explanation": "Pacific Ocean: 18200 km (projected east–west span). Indonesia: 5050 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-14",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Ontario.",
+      "target": {
+        "name": "Ontario",
+        "dimension": "projected north–south span",
+        "shape": "catalog:ontario",
+        "qualifier": "Canadian Province"
+      },
+      "reference": {
+        "name": "Chile",
+        "dimension": "projected north–south span",
+        "shape": "catalog:chile",
+        "measure": "4240 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.4014904225960573,
+      "explanation": "Ontario: 1700 km (projected north–south span). Chile: 4240 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-15",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Lake Ladoga.",
+      "target": {
+        "name": "Lake Ladoga",
+        "dimension": "projected north–south span",
+        "shape": "catalog:lake-ladoga",
+        "qualifier": "largest lake in Europe"
+      },
+      "reference": {
+        "name": "Great Britain",
+        "dimension": "projected north–south span",
+        "shape": "catalog:great-britain",
+        "measure": "968 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.21588867508010598,
+      "explanation": "Lake Ladoga: 209 km (projected north–south span). Great Britain: 968 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-16",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Atlantic Ocean.",
+      "target": {
+        "name": "Atlantic Ocean",
+        "dimension": "projected north–south span",
+        "shape": "catalog:atlantic-ocean",
+        "qualifier": "Ocean, North-South Span"
+      },
+      "reference": {
+        "name": "France",
+        "dimension": "projected east–west span",
+        "shape": "catalog:france",
+        "measure": "1230 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 11.597057673847376,
+      "explanation": "Atlantic Ocean: 14200 km (projected north–south span). France: 1230 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-17",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Argentina.",
+      "target": {
+        "name": "Argentina",
+        "dimension": "projected north–south span",
+        "shape": "catalog:argentina"
+      },
+      "reference": {
+        "name": "Nile",
+        "dimension": "projected north–south span",
+        "shape": "catalog:nile",
+        "qualifier": "River, North–South Span",
+        "measure": "3930 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.9389820654479307,
+      "explanation": "Argentina: 3690 km (projected north–south span). Nile: 3930 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-18",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Lake Geneva.",
+      "target": {
+        "name": "Lake Geneva",
+        "dimension": "projected east–west span",
+        "shape": "catalog:lake-geneva"
+      },
+      "reference": {
+        "name": "Italy",
+        "dimension": "projected north–south span",
+        "shape": "catalog:italy",
+        "measure": "1290 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.04777884446938162,
+      "explanation": "Lake Geneva: 61.6 km (projected east–west span). Italy: 1290 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-19",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Ontario.",
+      "target": {
+        "name": "Ontario",
+        "dimension": "projected north–south span",
+        "shape": "catalog:ontario",
+        "qualifier": "Canadian Province"
+      },
+      "reference": {
+        "name": "Cyprus",
+        "dimension": "projected east–west span",
+        "shape": "catalog:cyprus",
+        "measure": "210 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 8.085475504788485,
+      "explanation": "Ontario: 1700 km (projected north–south span). Cyprus: 210 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-20",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Lebanon.",
+      "target": {
+        "name": "Lebanon",
+        "dimension": "projected north–south span",
+        "shape": "catalog:lebanon"
+      },
+      "reference": {
+        "name": "New Zealand",
+        "dimension": "projected north–south span",
+        "shape": "catalog:new-zealand",
+        "measure": "2600 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.06982083991003783,
+      "explanation": "Lebanon: 181 km (projected north–south span). New Zealand: 2600 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-21",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up New Mexico.",
+      "target": {
+        "name": "New Mexico",
+        "dimension": "projected north–south span",
+        "shape": "catalog:new-mexico"
+      },
+      "reference": {
+        "name": "Australia",
+        "dimension": "projected east–west span",
+        "shape": "catalog:australia",
+        "qualifier": "Country",
+        "measure": "4040 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.15658807427008117,
+      "explanation": "New Mexico: 632 km (projected north–south span). Australia: 4040 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.geoboundaries.org/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-22",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up India.",
+      "target": {
+        "name": "India",
+        "dimension": "projected north–south span",
+        "shape": "catalog:india"
+      },
+      "reference": {
+        "name": "Texas",
+        "dimension": "projected east–west span",
+        "shape": "catalog:texas",
+        "measure": "1240 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.5391535296910512,
+      "explanation": "India: 3160 km (projected north–south span). Texas: 1240 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.geoboundaries.org/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-23",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Indonesia.",
+      "target": {
+        "name": "Indonesia",
+        "dimension": "projected east–west span",
+        "shape": "catalog:indonesia"
+      },
+      "reference": {
+        "name": "United Kingdom",
+        "dimension": "projected north–south span",
+        "shape": "catalog:united-kingdom",
+        "measure": "1220 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 4.13658435664381,
+      "explanation": "Indonesia: 5050 km (projected east–west span). United Kingdom: 1220 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-24",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Germany.",
+      "target": {
+        "name": "Germany",
+        "dimension": "projected north–south span",
+        "shape": "catalog:germany"
+      },
+      "reference": {
+        "name": "Mongolia",
+        "dimension": "projected east–west span",
+        "shape": "catalog:mongolia",
+        "measure": "2380 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.36449172540509667,
+      "explanation": "Germany: 868 km (projected north–south span). Mongolia: 2380 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-25",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Canada.",
+      "target": {
+        "name": "Canada",
+        "dimension": "projected east–west span",
+        "shape": "catalog:canada"
+      },
+      "reference": {
+        "name": "Alaska",
+        "dimension": "projected east–west span",
+        "shape": "catalog:alaska",
+        "measure": "3640 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.4839595525725298,
+      "explanation": "Canada: 5400 km (projected east–west span). Alaska: 3640 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.geoboundaries.org/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-26",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Netherlands.",
+      "target": {
+        "name": "Netherlands",
+        "dimension": "projected north–south span",
+        "shape": "catalog:netherlands"
+      },
+      "reference": {
+        "name": "Greenland",
+        "dimension": "projected north–south span",
+        "shape": "catalog:greenland",
+        "measure": "2650 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.11925194612877052,
+      "explanation": "Netherlands: 316 km (projected north–south span). Greenland: 2650 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-27",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Pacific Ocean.",
+      "target": {
+        "name": "Pacific Ocean",
+        "dimension": "projected east–west span",
+        "shape": "catalog:pacific-ocean",
+        "qualifier": "Ocean, East-West Span"
+      },
+      "reference": {
+        "name": "Ganges",
+        "dimension": "projected east–west span",
+        "shape": "catalog:ganges",
+        "qualifier": "River, East–West Span",
+        "measure": "1220 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 14.862573271383482,
+      "explanation": "Pacific Ocean: 18200 km (projected east–west span). Ganges: 1220 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-28",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Hawaii.",
+      "target": {
+        "name": "Hawaii",
+        "dimension": "projected east–west span",
+        "shape": "catalog:hawaii"
+      },
+      "reference": {
+        "name": "Chile",
+        "dimension": "projected north–south span",
+        "shape": "catalog:chile",
+        "measure": "4240 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.13651312559759649,
+      "explanation": "Hawaii: 578 km (projected east–west span). Chile: 4240 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.geoboundaries.org/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-29",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Mongolia.",
+      "target": {
+        "name": "Mongolia",
+        "dimension": "projected east–west span",
+        "shape": "catalog:mongolia"
+      },
+      "reference": {
+        "name": "Argentina",
+        "dimension": "projected north–south span",
+        "shape": "catalog:argentina",
+        "measure": "3690 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.6463334685622153,
+      "explanation": "Mongolia: 2380 km (projected east–west span). Argentina: 3690 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-30",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Texas.",
+      "target": {
+        "name": "Texas",
+        "dimension": "projected east–west span",
+        "shape": "catalog:texas"
+      },
+      "reference": {
+        "name": "Atlantic Ocean",
+        "dimension": "projected north–south span",
+        "shape": "catalog:atlantic-ocean",
+        "qualifier": "Ocean, North-South Span",
+        "measure": "14200 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.0875549694028276,
+      "explanation": "Texas: 1240 km (projected east–west span). Atlantic Ocean: 14200 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.geoboundaries.org/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-31",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up New Zealand.",
+      "target": {
+        "name": "New Zealand",
+        "dimension": "projected north–south span",
+        "shape": "catalog:new-zealand"
+      },
+      "reference": {
+        "name": "Cyprus",
+        "dimension": "projected east–west span",
+        "shape": "catalog:cyprus",
+        "measure": "210 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 12.351781761594296,
+      "explanation": "New Zealand: 2600 km (projected north–south span). Cyprus: 210 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-32",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up India.",
+      "target": {
+        "name": "India",
+        "dimension": "projected north–south span",
+        "shape": "catalog:india"
+      },
+      "reference": {
+        "name": "Lebanon",
+        "dimension": "projected north–south span",
+        "shape": "catalog:lebanon",
+        "measure": "181 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 17.419582689650575,
+      "explanation": "India: 3160 km (projected north–south span). Lebanon: 181 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-33",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Hawaii.",
+      "target": {
+        "name": "Hawaii",
+        "dimension": "projected east–west span",
+        "shape": "catalog:hawaii"
+      },
+      "reference": {
+        "name": "Great Britain",
+        "dimension": "projected north–south span",
+        "shape": "catalog:great-britain",
+        "measure": "968 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.5975238195002082,
+      "explanation": "Hawaii: 578 km (projected east–west span). Great Britain: 968 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.geoboundaries.org/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-34",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Italy.",
+      "target": {
+        "name": "Italy",
+        "dimension": "projected north–south span",
+        "shape": "catalog:italy"
+      },
+      "reference": {
+        "name": "Nile",
+        "dimension": "projected north–south span",
+        "shape": "catalog:nile",
+        "qualifier": "River, North–South Span",
+        "measure": "3930 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.3283805656154421,
+      "explanation": "Italy: 1290 km (projected north–south span). Nile: 3930 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-35",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Netherlands.",
+      "target": {
+        "name": "Netherlands",
+        "dimension": "projected north–south span",
+        "shape": "catalog:netherlands"
+      },
+      "reference": {
+        "name": "Australia",
+        "dimension": "projected east–west span",
+        "shape": "catalog:australia",
+        "qualifier": "Country",
+        "measure": "4040 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.07835111707309639,
+      "explanation": "Netherlands: 316 km (projected north–south span). Australia: 4040 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-36",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Germany.",
+      "target": {
+        "name": "Germany",
+        "dimension": "projected north–south span",
+        "shape": "catalog:germany"
+      },
+      "reference": {
+        "name": "France",
+        "dimension": "projected east–west span",
+        "shape": "catalog:france",
+        "measure": "1230 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.708260054698762,
+      "explanation": "Germany: 868 km (projected north–south span). France: 1230 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-37",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Alaska.",
+      "target": {
+        "name": "Alaska",
+        "dimension": "projected east–west span",
+        "shape": "catalog:alaska"
+      },
+      "reference": {
+        "name": "Ontario",
+        "dimension": "projected north–south span",
+        "shape": "catalog:ontario",
+        "qualifier": "Canadian Province",
+        "measure": "1700 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.1373010703637165,
+      "explanation": "Alaska: 3640 km (projected east–west span). Ontario: 1700 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.geoboundaries.org/",
+        "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-38",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Canada.",
+      "target": {
+        "name": "Canada",
+        "dimension": "projected east–west span",
+        "shape": "catalog:canada"
+      },
+      "reference": {
+        "name": "Indonesia",
+        "dimension": "projected east–west span",
+        "shape": "catalog:indonesia",
+        "measure": "5050 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.0686874429875088,
+      "explanation": "Canada: 5400 km (projected east–west span). Indonesia: 5050 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-39",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Lake Ladoga.",
+      "target": {
+        "name": "Lake Ladoga",
+        "dimension": "projected north–south span",
+        "shape": "catalog:lake-ladoga",
+        "qualifier": "largest lake in Europe"
+      },
+      "reference": {
+        "name": "Chile",
+        "dimension": "projected north–south span",
+        "shape": "catalog:chile",
+        "measure": "4240 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.0493229505745234,
+      "explanation": "Lake Ladoga: 209 km (projected north–south span). Chile: 4240 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-40",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Lake Geneva.",
+      "target": {
+        "name": "Lake Geneva",
+        "dimension": "projected east–west span",
+        "shape": "catalog:lake-geneva"
+      },
+      "reference": {
+        "name": "Ganges",
+        "dimension": "projected east–west span",
+        "shape": "catalog:ganges",
+        "qualifier": "River, East–West Span",
+        "measure": "1220 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.050304439739392394,
+      "explanation": "Lake Geneva: 61.6 km (projected east–west span). Ganges: 1220 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-41",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up New Mexico.",
+      "target": {
+        "name": "New Mexico",
+        "dimension": "projected north–south span",
+        "shape": "catalog:new-mexico"
+      },
+      "reference": {
+        "name": "Greenland",
+        "dimension": "projected north–south span",
+        "shape": "catalog:greenland",
+        "measure": "2650 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.2383301386736141,
+      "explanation": "New Mexico: 632 km (projected north–south span). Greenland: 2650 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.geoboundaries.org/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-42",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Pacific Ocean.",
+      "target": {
+        "name": "Pacific Ocean",
+        "dimension": "projected east–west span",
+        "shape": "catalog:pacific-ocean",
+        "qualifier": "Ocean, East-West Span"
+      },
+      "reference": {
+        "name": "United Kingdom",
+        "dimension": "projected north–south span",
+        "shape": "catalog:united-kingdom",
+        "measure": "1220 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 14.908227752163722,
+      "explanation": "Pacific Ocean: 18200 km (projected east–west span). United Kingdom: 1220 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-43",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Texas.",
+      "target": {
+        "name": "Texas",
+        "dimension": "projected east–west span",
+        "shape": "catalog:texas"
+      },
+      "reference": {
+        "name": "Hawaii",
+        "dimension": "projected east–west span",
+        "shape": "catalog:hawaii",
+        "measure": "578 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.1520813191646506,
+      "explanation": "Texas: 1240 km (projected east–west span). Hawaii: 578 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.geoboundaries.org/",
+        "https://www.geoboundaries.org/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-44",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Germany.",
+      "target": {
+        "name": "Germany",
+        "dimension": "projected north–south span",
+        "shape": "catalog:germany"
+      },
+      "reference": {
+        "name": "Great Britain",
+        "dimension": "projected north–south span",
+        "shape": "catalog:great-britain",
+        "measure": "968 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.89697023416039,
+      "explanation": "Germany: 868 km (projected north–south span). Great Britain: 968 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-45",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Mongolia.",
+      "target": {
+        "name": "Mongolia",
+        "dimension": "projected east–west span",
+        "shape": "catalog:mongolia"
+      },
+      "reference": {
+        "name": "Ganges",
+        "dimension": "projected east–west span",
+        "shape": "catalog:ganges",
+        "qualifier": "River, East–West Span",
+        "measure": "1220 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 1.9458401948675725,
+      "explanation": "Mongolia: 2380 km (projected east–west span). Ganges: 1220 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-46",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up New Mexico.",
+      "target": {
+        "name": "New Mexico",
+        "dimension": "projected north–south span",
+        "shape": "catalog:new-mexico"
+      },
+      "reference": {
+        "name": "Nile",
+        "dimension": "projected north–south span",
+        "shape": "catalog:nile",
+        "qualifier": "River, North–South Span",
+        "measure": "3930 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.16099490332105765,
+      "explanation": "New Mexico: 632 km (projected north–south span). Nile: 3930 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.geoboundaries.org/",
+        "https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-47",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Ontario.",
+      "target": {
+        "name": "Ontario",
+        "dimension": "projected north–south span",
+        "shape": "catalog:ontario",
+        "qualifier": "Canadian Province"
+      },
+      "reference": {
+        "name": "Australia",
+        "dimension": "projected east–west span",
+        "shape": "catalog:australia",
+        "qualifier": "Country",
+        "measure": "4040 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.42152772279791556,
+      "explanation": "Ontario: 1700 km (projected north–south span). Australia: 4040 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-48",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Netherlands.",
+      "target": {
+        "name": "Netherlands",
+        "dimension": "projected north–south span",
+        "shape": "catalog:netherlands"
+      },
+      "reference": {
+        "name": "France",
+        "dimension": "projected east–west span",
+        "shape": "catalog:france",
+        "measure": "1230 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 0.25792282071244127,
+      "explanation": "Netherlands: 316 km (projected north–south span). France: 1230 km (projected east–west span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-49",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up Alaska.",
+      "target": {
+        "name": "Alaska",
+        "dimension": "projected east–west span",
+        "shape": "catalog:alaska"
+      },
+      "reference": {
+        "name": "Italy",
+        "dimension": "projected north–south span",
+        "shape": "catalog:italy",
+        "measure": "1290 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.8207710871714964,
+      "explanation": "Alaska: 3640 km (projected east–west span). Italy: 1290 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.geoboundaries.org/",
+        "https://www.naturalearthdata.com/"
+      ]
+    },
+    {
+      "id": "size-v10-geography-practice-50",
+      "version": 10,
+      "kind": "scale",
+      "category": "geography",
+      "tag": "Geography",
+      "prompt": "Size up India.",
+      "target": {
+        "name": "India",
+        "dimension": "projected north–south span",
+        "shape": "catalog:india"
+      },
+      "reference": {
+        "name": "United Kingdom",
+        "dimension": "projected north–south span",
+        "shape": "catalog:united-kingdom",
+        "measure": "1220 km"
+      },
+      "bounds": [
+        0.001,
+        20
+      ],
+      "answer": 2.5897132818830824,
+      "explanation": "India: 3160 km (projected north–south span). United Kingdom: 1220 km (projected north–south span).\nThis compares the span of the projected outline, not land area or distance along a river.\nThis compares the span of the projected outline, not land area or distance along a river.",
+      "sources": [
+        "https://www.naturalearthdata.com/",
+        "https://www.naturalearthdata.com/"
+      ]
+    }
+  ]
+}
