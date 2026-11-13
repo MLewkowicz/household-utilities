@@ -1,10 +1,13 @@
 import {photoSilhouette,photoCredit} from './size-photo-silhouettes';
 import library from './size-art.json';
 // Legacy profiles are retained only for attempts pinned to old question packs.
-type Profile={art:string;axis:string;source:string;author:string;license:string;bounds:{width:number;height:number}};
+type Profile={art:string;axis:string;source:string;author:string;license:string;licenseUrl?:string;creditUrl?:string;bounds:{width:number;height:number}};
 export const sizeProfiles:Record<string,Profile>=library;
+let catalog:Record<string,Profile>|undefined;
+let loading:Promise<void>|undefined;
+export function loadSizeCatalog(){return loading??=import('./size-catalog.json').then(module=>{catalog=module.default;}).catch(error=>{loading=undefined;throw error;});}
 const escape=(s:string)=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]!));
-export function silhouetteCredit(shape:string){if(shape.startsWith('photo:'))return photoCredit(shape);const p=shape.startsWith('sourced:')?sizeProfiles[shape.slice(8)]:undefined;return p?.author==='Household'?'Original Household schematic · CC0':p?`<a href="${escape(p.source)}" target="_blank" rel="noopener noreferrer">${escape(p.author)} · ${escape(p.license)}</a>`:'';}
+export function silhouetteCredit(shape:string){if(shape.startsWith('photo:'))return photoCredit(shape);const p=shape.startsWith('catalog:')?catalog?.[shape.slice(8)]:shape.startsWith('sourced:')?sizeProfiles[shape.slice(8)]:undefined;return p?.author==='Household'?'Original Household schematic · CC0':p?`<a href="${escape(p.source)}" target="_blank" rel="noopener noreferrer">${escape(p.author)}</a> · ${p.licenseUrl?`<a href="${escape(p.licenseUrl)}" target="_blank" rel="noopener noreferrer">${escape(p.license)}</a>`:escape(p.license)}${p.creditUrl?` · <a href="${escape(p.creditUrl)}" target="_blank" rel="noopener noreferrer">Artwork credits</a>`:''}`:'';}
 const paths:Record<string,string>={
  finger:'M35 100V18Q35 0 50 0Q65 0 65 18V100Z',
  hand:'M25 100V66L8 43Q4 33 12 30L31 48V10Q31 0 39 0Q47 0 47 10V40H51V12Q51 4 58 4Q65 4 65 12V43H69V22Q69 15 76 15Q83 15 83 22V60L74 100Z',
@@ -38,6 +41,6 @@ const paths:Record<string,string>={
  };
 export function sizeSilhouette(shape:string){
  if(shape.startsWith('photo:'))return photoSilhouette(shape);
- const p=shape.startsWith('sourced:')?sizeProfiles[shape.slice(8)]:undefined;
+ const p=shape.startsWith('catalog:')?catalog?.[shape.slice(8)]:shape.startsWith('sourced:')?sizeProfiles[shape.slice(8)]:undefined;
  if(p){const left=50-p.bounds.width/2-6;return `<svg viewBox="0 0 100 100" data-profile="${escape(shape.slice(8))}" data-axis="${p.axis}" aria-hidden="true" preserveAspectRatio="xMidYMax meet"><g class="profile-shape" fill="currentColor">${p.art}</g><path class="size-dimension" d="${p.axis==='height'?`M${left} 0V100M${left-3} 0h6M${left-3} 100h6`:'M0 108H100M0 105v6M100 105v6'}" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>`;}
  return `<svg viewBox="0 0 100 100" aria-hidden="true" preserveAspectRatio="xMidYMax meet">${shape==='sphere'||shape==='ball'?'<circle cx="50" cy="50" r="50" fill="currentColor"/>':`<path d="${paths[shape]||paths.tower}" fill="currentColor"/>`}</svg>`;}

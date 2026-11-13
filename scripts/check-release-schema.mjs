@@ -2,7 +2,7 @@ import {readFile} from 'node:fs/promises';
 const config=JSON.parse(await readFile('config.public.json','utf8'));
 const checks=[
  ['puzzle_clock_capabilities',{},d=>d.version===1&&d.pause_resume===true,'051_active_puzzle_clocks.sql'],
- ['trivia_capabilities',{},d=>d.version===7&&d.timed_grids===true&&d.size_editorial===9&&d.games===7&&d.archive===true&&d.grid_puzzles===true&&d.photo_silhouettes===true&&d.passport_editorial===2&&d.groups===true&&d.online_sync===true&&d.online_seed===1,'047_size_editorial.sql'],
+ ['trivia_capabilities',{},d=>d.version===7&&d.timed_grids===true&&[9,10].includes(d.size_editorial)&&d.games===7&&d.archive===true&&d.grid_puzzles===true&&d.photo_silhouettes===true&&d.passport_editorial===2&&d.groups===true&&d.online_sync===true&&d.online_seed===1,'047_size_editorial.sql'],
  ['geography_score_modes',{},d=>Array.isArray(d)&&d.includes('name')&&d.includes('find')&&d.includes('urban'),'038_geography_urban_catalog.sql'],
  ['geography_route_capabilities',{},d=>d.version===2&&d.puzzles===108&&d.global_routes===true&&d.bidirectional===true,'049_bidirectional_routes.sql'],
  ['geography_scores',{},Array.isArray,'029_geography_scores.sql'],
