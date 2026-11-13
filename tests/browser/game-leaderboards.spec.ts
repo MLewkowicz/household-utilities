@@ -25,7 +25,7 @@ test('failed and late score requests cannot replace another game or newer period
 test('legacy links focus shared standings and four-player podiums fit a phone',async({page})=>{
  await page.setViewportSize({width:360,height:800});await mockScores(page);await page.goto('/?webgl=0#games/crossword/scores');await expect(page.locator('#leaderboards-title')).toHaveText('Leaderboards');await expect(page.locator('#leaderboard-crossword')).toBeFocused();
  await expect(page.locator('[data-standings=crossword] .podium-person')).toHaveCount(4);expect(await page.locator('#leaderboards-page').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
- await expect(page.locator('#leaderboard-crossword h2')).toBeInViewport();await page.screenshot({path:'.local/leaderboards-phone.png',fullPage:true});
+ await expect(page.locator('#leaderboard-crossword h2')).toBeInViewport();await page.screenshot({path:'.local/leaderboards-phone.png',fullPage:true});await page.locator('.leaderboards-theme').click();await expect(page.locator('html')).toHaveAttribute('data-theme','dark');expect(await page.locator('.leaderboards-theme svg:visible').evaluate(e=>e.getBoundingClientRect().width)).toBe(20);
  await page.evaluate(()=>location.hash='#games/scores');await expect(page.locator('#leaderboard-geography')).toBeFocused();await expect(page.locator('#geo-surface')).toHaveCount(0);
  await page.evaluate(()=>location.hash='#games/geography');await expect(page.locator('#geo-settings')).toBeVisible();await expect(page.locator('#geography-page a[href*="scores"],#geography-page a[href*="leaderboards"]')).toHaveCount(0);
 });
