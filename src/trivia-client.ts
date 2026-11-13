@@ -1,4 +1,5 @@
-import {timedGame,elapsedPuzzleTime,formatPuzzleTime} from './puzzle-clock';
+import {timedGame,elapsedPuzzleTime,formatPuzzleTime,pausedPuzzleClock,resumePracticeClock} from './puzzle-clock';
+import {DailyPuzzleClock,type PuzzleClockState} from './daily-puzzle-clock';
 import {gridMarkup,mountGrid} from './grid-puzzle';
 import {centerArchive,calendarMarkup,loadLibrary,newYorkDay,nextArchiveEntry,selectedArchive,rememberArchive,openArchive,storeArchive,updateCalendar,type CalendarEntry,type ArchiveBoard} from './game-library';
 import {mountTimelineSort} from './timeline-sort';
@@ -9,13 +10,14 @@ import {silhouetteCredit} from './size-silhouettes';
 import {emptyGroups,guessGroup,type WordGroup} from './group-puzzle';
 import {gameArt} from './game-art';
 import {mountGameNavigation} from './game-navigation';
-import {$,esc,name,rpc,download} from './ui';
+import {$,esc,name,rpc,keepaliveRpc,download} from './ui';
 import {identity,onIdentityChange} from './identity';
 import {GAMES,type TriviaId} from './game-registry';
 import {scoreAnswer,silhouette,type Question,type Attempt,type Answer} from './trivia-model';
 let game:TriviaId='odd-one-out',attempt:Attempt|undefined,mode:'daily'|'practice'='daily',period='day',review:number|null=null,request=0,busy=false,draft:Answer='',error='',bound=false;
 let entries:CalendarEntry[]=[],archiveEntry='',archiveBoard:ArchiveBoard|undefined,libraryOwner='',modeOwner='';
 let clockOffset=0;
+let puzzleClock:{attempt:Attempt;daily?:DailyPuzzleClock;running:boolean;checkpoint:number;persist:()=>void}|undefined;
 let scaleObserver:ResizeObserver|undefined;
 let clearTimeline:(()=>void)|undefined;
 const host=()=>$('#trivia-page');
@@ -23,22 +25,46 @@ const current=()=>!host().hidden&&!$('#games-page').hidden&&location.hash.split(
 const key=(suffix:string)=>`household-trivia-${game==='how-much-ish'?'v4':game==='clue-cascade'?'v3':'v2'}:${identity||'guest'}:${game}:${suffix}`;
 function read<T>(k:string):T|undefined{try{return JSON.parse(localStorage.getItem(k)||'null')??undefined;}catch{return;}}
 function save(k:string,value:unknown){try{localStorage.setItem(k,JSON.stringify(value));}catch{/* Play continues if storage is blocked. */}}
+function pausePuzzleClock(){
+ const clock=puzzleClock;if(!clock)return;
+ if(clock.daily)clock.daily.setActive(false);
+ else if(clock.running){Object.assign(clock.attempt,pausedPuzzleClock(clock.attempt));clock.running=false;clock.persist();}
+}
+function stopPuzzleClock(complete=false){if(complete)puzzleClock?.daily?.finish();else pausePuzzleClock();puzzleClock=undefined;}
+function syncPuzzleClock(){
+ const clock=puzzleClock;if(!clock)return;
+ const active=!document.hidden&&current()&&!location.hash.endsWith('/scores')&&!clock.attempt.complete;
+ if(clock.daily)clock.daily.setActive(active);
+ else if(active&&!clock.running){resumePracticeClock(clock.attempt);clock.running=true;clock.checkpoint=Date.now();clock.persist();}
+ else if(!active)pausePuzzleClock();
+}
+function beginPuzzleClock(){
+ stopPuzzleClock();if(!attempt||!timedGame(game)||attempt.complete)return;
+ const a=attempt,board=archiveBoard,entry=archiveEntry,id=game,practiceKey=key('practice');
+ const clock:NonNullable<typeof puzzleClock>={attempt:a,running:false,checkpoint:Date.now(),persist:()=>{
+  if(!board)return;const saved=pausedPuzzleClock(a);board.state.attempt=saved;storeArchive(id,entry,board);save(practiceKey,saved);
+ }};
+ puzzleClock=clock;
+ if(mode==='daily')clock.daily=new DailyPuzzleClock(a,p=>keepaliveRpc<PuzzleClockState>('puzzle_clock',{p}),()=>{if(puzzleClock===clock){clockOffset=clock.daily!.offset;paintClock();}});
+ else Object.assign(a,pausedPuzzleClock(a));
+ syncPuzzleClock();
+}
 async function practiceQuestions():Promise<Question[]>{
  switch(game){case 'sudoku':return (await import('./trivia/sudoku.json')).default as Question[];case 'crossword':return (await import('./trivia/crossword.json')).default as Question[];case 'odd-one-out':return (await import('./trivia/odd-one-out.json')).default as Question[];case 'passport-puzzle':return (await import('./trivia/passport-puzzle.json')).default as Question[];case 'clue-cascade':return (await import('./trivia/clue-cascade.json')).default as Question[];case 'before-or-after':return [...(await import('./trivia/before-or-after.json')).default,...(await import('./trivia/before-or-after-online.json')).default] as Question[];case 'how-much-ish':return (await import('./trivia/how-much-ish.json')).default as Question[];}
 }
 function shuffled<T>(values:T[]){const a=[...values];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function header(){const title=GAMES.find(g=>g.id===game)!.title;return `<header class="trivia-header"><h1 class="trivia-header-title">${title}</h1></header>`;}
 export async function renderTrivia(){
- request++;if(busy){attempt=undefined;review=null;}busy=false;
+ request++;if(busy){stopPuzzleClock();attempt=undefined;review=null;}busy=false;
  const next=location.hash.split('/')[1] as TriviaId;
- if(next!==game){request++;game=next;attempt=undefined;review=null;error='';busy=false;}
- if(!bound){bound=true;window.setInterval(()=>{if(current()&&!location.hash.endsWith('/scores'))paintClock();},1000);host().addEventListener('click',click);host().addEventListener('input',input);host().addEventListener('submit',e=>{e.preventDefault();void submit();});onIdentityChange(()=>{request++;attempt=undefined;review=null;busy=false;error='';if(current())void renderTrivia();});window.addEventListener('online',()=>{if(current()&&error){error='Connection restored. Retry your last action.';const s=host().querySelector('.trivia-status');if(s)s.textContent=error;}});}
+ if(next!==game){stopPuzzleClock();request++;game=next;attempt=undefined;review=null;error='';busy=false;}
+ if(!bound){bound=true;window.addEventListener('hashchange',syncPuzzleClock);document.addEventListener('visibilitychange',syncPuzzleClock);window.addEventListener('pagehide',pausePuzzleClock);window.addEventListener('pageshow',syncPuzzleClock);window.setInterval(()=>{if(current()&&!location.hash.endsWith('/scores'))paintClock();},1000);host().addEventListener('click',click);host().addEventListener('input',input);host().addEventListener('submit',e=>{e.preventDefault();void submit();});onIdentityChange(()=>{stopPuzzleClock();request++;attempt=undefined;review=null;busy=false;error='';if(current())void renderTrivia();});window.addEventListener('online',()=>{if(current()&&error){error='Connection restored. Retry your last action.';const s=host().querySelector('.trivia-status');if(s)s.textContent=error;}});}
  if(location.hash.endsWith('/scores')){void showScores();return;}
  const owner=`${identity||'guest'}:${game}`;if(modeOwner!==owner){modeOwner=owner;mode=read<'daily'|'practice'>(key('mode'))||mode;}
- if(location.hash.endsWith('/daily')){mode='daily';attempt=undefined;}
+ if(location.hash.endsWith('/daily')){stopPuzzleClock();mode='daily';attempt=undefined;}
  if(!identity)mode='practice';
  if(!attempt){await start();return;}
- render();
+ syncPuzzleClock();render();
 }
 function render(){
  scaleObserver?.disconnect();clearTimeline?.();clearTimeline=undefined;
@@ -91,30 +117,30 @@ function updateScale(q:Question,revealed:boolean){
  size('.reference > svg',base);size('.target > svg',base*ratio);size('.scale-correct > svg',base*actual);const target=host().querySelector<HTMLElement>('.scale-object.target')!;target.setAttribute('aria-valuenow',String(ratio));target.setAttribute('aria-valuetext',`${ratio.toFixed(2)} times the reference`);const bounds=target.querySelector<SVGGElement>('.profile-shape')?.getBBox();target.style.setProperty('--target-size',`${base*ratio}px`);target.style.setProperty('--target-height',`${base*ratio*(bounds?.height||100)/100}px`);target.style.setProperty('--target-width',`${base*ratio*(bounds?.width||100)/100}px`);
 }
 function clockMarkup(){return attempt&&timedGame(game)?`<p class="puzzle-timer" aria-label="Elapsed time"><span aria-hidden="true">◷</span> <time data-puzzle-clock>${attempt.complete&&!attempt.started_at&&attempt.elapsed_ms==null?'—':formatPuzzleTime(elapsedPuzzleTime(attempt,Date.now()+clockOffset))}</time></p>`:'';}
-function paintClock(){const timer=host().querySelector('[data-puzzle-clock]');if(timer&&attempt&&!attempt.complete)timer.textContent=formatPuzzleTime(elapsedPuzzleTime(attempt,Date.now()+clockOffset));}
-function saveDraft(){if(!attempt)return;save(key(`${attempt.id}:${attempt.answers.length}:draft`),draft);if(mode==='practice'&&archiveBoard){archiveBoard.state.drafts[String(attempt.answers.length)]=draft;storeArchive(game,archiveEntry,archiveBoard);}}
-function persistPractice(){if(mode!=='practice'||!attempt||!archiveBoard)return;archiveBoard.state.attempt=attempt;storeArchive(game,archiveEntry,archiveBoard);save(key('practice'),attempt);updateCalendar(entries,archiveEntry,attempt);}
+function paintClock(){const clock=puzzleClock;if(clock?.running&&Date.now()-clock.checkpoint>=10000){clock.checkpoint=Date.now();clock.persist();}const timer=host().querySelector('[data-puzzle-clock]');if(timer&&attempt&&!attempt.complete)timer.textContent=formatPuzzleTime(elapsedPuzzleTime(attempt,Date.now()+clockOffset));}
+function saveDraft(){if(!attempt)return;save(key(`${attempt.id}:${attempt.answers.length}:draft`),draft);if(mode==='practice'&&archiveBoard){archiveBoard.state.drafts[String(attempt.answers.length)]=draft;persistPractice();}}
+function persistPractice(){if(mode!=='practice'||!attempt||!archiveBoard)return;archiveBoard.state.attempt=timedGame(game)?pausedPuzzleClock(attempt):attempt;storeArchive(game,archiveEntry,archiveBoard);save(key('practice'),archiveBoard.state.attempt);updateCalendar(entries,archiveEntry,attempt);}
 function input(event:Event){const el=event.target as HTMLInputElement;if(el.id==='trivia-guess'){draft=el.value;saveDraft();}}
 
-function click(event:MouseEvent){const el=(event.target as Element).closest<HTMLElement>('button');if(!el||busy)return;if(el.dataset.archiveEntry){archiveEntry=el.dataset.archiveEntry;attempt=undefined;review=null;void start();}else if(el.hasAttribute('data-word')){const selected=Array.isArray(draft)?draft:[],word=el.dataset.word!;draft=selected.includes(word)?selected.filter(w=>w!==word):selected.length<4?[...selected,word]:selected;saveDraft();renderGroupBoard(attempt!.questions[0],false);Array.from(host().querySelectorAll<HTMLElement>('[data-word]')).find(b=>b.dataset.word===word)?.focus({preventScroll:true});}else if(el.hasAttribute('data-group-clear')){draft=[];saveDraft();renderGroupBoard(attempt!.questions[0],false);}else if(el.hasAttribute('data-group-shuffle')){const q=attempt!.questions[0];save(key(`${attempt!.id}:word-order`),shuffled(q.words!));renderGroupBoard(q,false);}else if(el.dataset.mode){request++;if(el.dataset.mode==='practice'&&attempt?.complete)archiveEntry=nextArchiveEntry(entries);mode=el.dataset.mode as typeof mode;save(key('mode'),mode);attempt=undefined;review=null;error='';if(mode==='daily'&&!identity)render();else void start();}else if(el.hasAttribute('data-start'))void start();else if(el.dataset.choice!==undefined){draft=el.dataset.choice;saveDraft();host().querySelectorAll<HTMLElement>('[data-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.choice===draft)));}else if(el.hasAttribute('data-clue'))void clue();else if(el.hasAttribute('data-next')){review=null;render();host().querySelector('h2')?.scrollIntoView({block:'nearest'});}else if(el.dataset.period){period=el.dataset.period;void showScores();}}
+function click(event:MouseEvent){const el=(event.target as Element).closest<HTMLElement>('button');if(!el||busy)return;if(el.dataset.archiveEntry){stopPuzzleClock();archiveEntry=el.dataset.archiveEntry;attempt=undefined;review=null;void start();}else if(el.hasAttribute('data-word')){const selected=Array.isArray(draft)?draft:[],word=el.dataset.word!;draft=selected.includes(word)?selected.filter(w=>w!==word):selected.length<4?[...selected,word]:selected;saveDraft();renderGroupBoard(attempt!.questions[0],false);Array.from(host().querySelectorAll<HTMLElement>('[data-word]')).find(b=>b.dataset.word===word)?.focus({preventScroll:true});}else if(el.hasAttribute('data-group-clear')){draft=[];saveDraft();renderGroupBoard(attempt!.questions[0],false);}else if(el.hasAttribute('data-group-shuffle')){const q=attempt!.questions[0];save(key(`${attempt!.id}:word-order`),shuffled(q.words!));renderGroupBoard(q,false);}else if(el.dataset.mode){stopPuzzleClock();request++;if(el.dataset.mode==='practice'&&attempt?.complete)archiveEntry=nextArchiveEntry(entries);mode=el.dataset.mode as typeof mode;save(key('mode'),mode);attempt=undefined;review=null;error='';if(mode==='daily'&&!identity)render();else void start();}else if(el.hasAttribute('data-start'))void start();else if(el.dataset.choice!==undefined){draft=el.dataset.choice;saveDraft();host().querySelectorAll<HTMLElement>('[data-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.choice===draft)));}else if(el.hasAttribute('data-clue'))void clue();else if(el.hasAttribute('data-next')){review=null;render();host().querySelector('h2')?.scrollIntoView({block:'nearest'});}else if(el.dataset.period){period=el.dataset.period;void showScores();}}
 async function operation(action:()=>Promise<void>){const token=++request;busy=true;error='';render();try{await action();}catch(e){if(token===request)error=(e as Error).message||'Could not connect. Try again.';}finally{if(token===request){busy=false;if(current()&&!location.hash.endsWith('/scores'))render();}}}
 async function start(){await operation(async()=>{
  const token=request,owner=`${identity||'guest'}:${game}:${newYorkDay()}`;let next:Attempt;
- if(mode==='daily')next=await rpc<Attempt>('trivia_start',{p:{game,player:identity}});
+ if(mode==='daily')next=await rpc<Attempt>('trivia_start',{p:{game,player:identity,...(timedGame(game)?{clock_version:1}:{})}});
  else{
   if(libraryOwner!==owner){const loaded=await loadLibrary(game);if(token!==request)return;entries=loaded;libraryOwner=owner;archiveEntry='';archiveBoard=undefined;}
   if(!archiveEntry)archiveEntry=selectedArchive(game,entries);
   const board=await openArchive(game,archiveEntry,practiceQuestions);if(token!==request)return;archiveBoard=board;rememberArchive(game,archiveEntry);next=board.state.attempt;
   for(const [index,value] of Object.entries(board.state.drafts))save(key(`${next.id}:${index}:draft`),value);
  }
- if(token!==request)return;attempt=next;clockOffset=next.server_now?Date.parse(next.server_now)-Date.now():0;if(timedGame(game)&&mode==='practice'&&!attempt.complete&&!attempt.started_at)attempt.started_at=new Date().toISOString();review=next.complete?null:next.answers.length?next.answers.length-1:null;if(mode==='practice')persistPractice();
+ if(token!==request)return;attempt=next;clockOffset=next.server_now?Date.parse(next.server_now)-Date.now():0;review=next.complete?null:next.answers.length?next.answers.length-1:null;beginPuzzleClock();if(mode==='practice')persistPractice();
 });}
-async function submit(){if(busy||!attempt||review!==null||attempt.complete)return;if(attempt.questions[attempt.answers.length].kind==='groups'){await submitGroup();return;}if(draft===''){error='Choose or enter an answer first.';host().querySelector('.trivia-status')!.textContent=error;return;}const q=attempt.questions[attempt.answers.length];if(q.grid&&mode==='practice'&&draft!==q.answer){error='The board is not quite right yet. Keep going.';host().querySelector('.trivia-status')!.textContent=error;return;}const value=draft;await operation(async()=>{const token=request,a=attempt!,index=a.answers.length;let next:Attempt;if(mode==='daily')next=await rpc<Attempt>('trivia_action',{p:{id:a.id,player:a.player,index,action:'answer',answer:value}});else{const points=scoreAnswer(a.questions[index],value,a.hints[index]||0);next={...a,answers:[...a.answers,{value,points}],score:a.score+points,complete:index+1===a.questions.length,...(timedGame(game)?{finished_at:new Date().toISOString(),elapsed_ms:elapsedPuzzleTime(a)}:{})};}if(token!==request)return;attempt=next;review=index;persistPractice();});}
+async function submit(){if(busy||!attempt||review!==null||attempt.complete)return;if(attempt.questions[attempt.answers.length].kind==='groups'){await submitGroup();return;}if(draft===''){error='Choose or enter an answer first.';host().querySelector('.trivia-status')!.textContent=error;return;}const q=attempt.questions[attempt.answers.length];if(q.grid&&mode==='practice'&&draft!==q.answer){error='The board is not quite right yet. Keep going.';host().querySelector('.trivia-status')!.textContent=error;return;}const value=draft;await operation(async()=>{const token=request,a=attempt!,index=a.answers.length;let next:Attempt;if(mode==='daily')next=await rpc<Attempt>('trivia_action',{p:{id:a.id,player:a.player,index,action:'answer',answer:value}});else{const points=scoreAnswer(a.questions[index],value,a.hints[index]||0);next={...a,answers:[...a.answers,{value,points}],score:a.score+points,complete:index+1===a.questions.length,...(timedGame(game)?{finished_at:new Date().toISOString(),elapsed_ms:elapsedPuzzleTime(a)}:{})};}if(token!==request)return;if(next.complete)stopPuzzleClock(true);attempt=next;review=index;persistPractice();});}
 async function clue(){await operation(async()=>{const token=request,a=attempt!,index=a.answers.length,level=(a.hints[index]||0)+1;const next=mode==='daily'?await rpc<Attempt>('trivia_action',{p:{id:a.id,player:a.player,index,action:'clue',level}}):{...a,hints:{...a.hints,[index]:level}};if(token!==request)return;attempt=next;persistPractice();});}
 async function showScores(){
  scaleObserver?.disconnect();clearTimeline?.();clearTimeline=undefined;
  const token=++request;busy=false;const title=GAMES.find(g=>g.id===game)!.title;host().dataset.game=game;
- host().innerHTML=header()+`<a class="orbit-sign" href="#games/${game}">← Back to ${title}</a><h2 class="scores-title">Scores</h2><p>${period==='week'?'Your five best days, Monday–Sunday.':'Today’s shared challenge.'} ${timedGame(game)?'Equal points are ranked by fastest total time. The timer keeps running when you leave.':'Equal scores share rank.'}</p><div class="trivia-modes"><button data-period="day" aria-pressed="${period==='day'}">Today</button><button data-period="week" aria-pressed="${period==='week'}">This week</button>${themeToggleMarkup('game-theme-toggle')}</div><div id="trivia-standings" role="status">Loading scores…</div>`;
+ host().innerHTML=header()+`<a class="orbit-sign" href="#games/${game}">← Back to ${title}</a><h2 class="scores-title">Scores</h2><p>${period==='week'?'Your five best days, Monday–Sunday.':'Today’s shared challenge.'} ${timedGame(game)?'Equal points are ranked by fastest total time. Timers pause when you leave the board and resume when you return.':'Equal scores share rank.'}</p><div class="trivia-modes"><button data-period="day" aria-pressed="${period==='day'}">Today</button><button data-period="week" aria-pressed="${period==='week'}">This week</button>${themeToggleMarkup('game-theme-toggle')}</div><div id="trivia-standings" role="status">Loading scores…</div>`;
  mountGameNavigation().sync(location.hash);
  try{const rows=await rpc<{player:string;score:number;rank:number;days:number;elapsed_ms?:number|null}[]>('trivia_scores',{p:{game,period}});if(token!==request||!current())return;$('#trivia-standings').innerHTML=rows.length?`${renderPodium(rows,timedGame(game))}<details class="score-disclosure"><summary>Score details</summary><ol class="trivia-ranks">${rows.map(r=>`<li><span>${r.rank}</span><strong>${esc(name(r.player))}${r.player===identity?' · you':''}</strong><span>${r.score.toLocaleString()} pts${timedGame(game)&&r.elapsed_ms!=null?` · ${formatPuzzleTime(r.elapsed_ms)}`:''}${period==='week'?` · ${r.days} days`:''}</span></li>`).join('')}</ol></details>`:'<p>No completed daily rounds yet.</p>';}catch{if(token===request&&current()&&location.hash.endsWith('/scores'))$('#trivia-standings').textContent='Shared scores are unavailable. Choose Today or This week to retry.';}
 }

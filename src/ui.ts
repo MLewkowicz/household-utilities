@@ -16,16 +16,17 @@ export function download(data: unknown,prefix: string) {
  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
  a.href=url;a.download=`${prefix}-${today()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);
 }
-async function fetchRpc<T>(functionName: string,params: Record<string,unknown>={}): Promise<T> {
+async function fetchRpc<T>(functionName: string,params: Record<string,unknown>={},keepalive=false): Promise<T> {
  const config=window.UTILITIES_CONFIG;
  if(!config?.url||!config.key)throw new Error('The shared database is not connected.');
  const headers: Record<string,string>={'Content-Type':'application/json',apikey:config.key};
  if(config.key.startsWith('eyJ'))headers.Authorization=`Bearer ${config.key}`;
- const res=await fetch(`${config.url.replace(/\/$/,'')}/rest/v1/rpc/utilities_${functionName}`,{method:'POST',headers,body:JSON.stringify(params),signal:AbortSignal.timeout(15000)});
+ const res=await fetch(`${config.url.replace(/\/$/,'')}/rest/v1/rpc/utilities_${functionName}`,{method:'POST',headers,body:JSON.stringify(params),keepalive,signal:AbortSignal.timeout(15000)});
  const body=await res.json().catch(()=>({message:'Could not read the server response.'}));
  if(!res.ok)throw new Error(body.message||`Could not save (${res.status}). Please try again.`);
  return body as T;
 }
+export const keepaliveRpc=<T>(functionName:string,params:Record<string,unknown>)=>fetchRpc<T>(functionName,params,true);
 
 // Deduplicate reads only. Mutation idempotency remains the server's request-ID contract.
 const reads=new Map<string,Promise<unknown>>();

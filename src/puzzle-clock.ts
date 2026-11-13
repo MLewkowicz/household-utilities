@@ -2,8 +2,17 @@ import type {Attempt} from './trivia-model';
 export const timedGame=(game:string)=>game==='sudoku'||game==='crossword';
 export function elapsedPuzzleTime(attempt:Attempt,now=Date.now()){
  if(attempt.elapsed_ms!=null)return Math.max(0,attempt.elapsed_ms);
+ if(attempt.clock_version===1)return Math.max(0,attempt.active_ms||0)+(attempt.active_since?Math.max(0,Math.min(now,attempt.active_until?Date.parse(attempt.active_until):now)-Date.parse(attempt.active_since)):0);
  if(!attempt.started_at)return 0;
  return Math.max(0,(attempt.finished_at?Date.parse(attempt.finished_at):now)-Date.parse(attempt.started_at));
+}
+/** Store a checkpoint, never a wall clock that keeps running in an archive. */
+export function pausedPuzzleClock(attempt:Attempt,now=Date.now()):Attempt{
+ if(attempt.complete)return {...attempt};
+ return {...attempt,clock_version:1,active_ms:elapsedPuzzleTime(attempt,now),active_since:null,active_until:null};
+}
+export function resumePracticeClock(attempt:Attempt,now=Date.now()){
+ Object.assign(attempt,pausedPuzzleClock(attempt,now),{started_at:attempt.started_at||new Date(now).toISOString(),active_since:new Date(now).toISOString()});
 }
 export function formatPuzzleTime(ms:number){
  const seconds=Math.floor(Math.max(0,ms)/1000),minutes=Math.floor(seconds/60);
