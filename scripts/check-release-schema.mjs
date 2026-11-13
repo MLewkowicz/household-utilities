@@ -2,7 +2,7 @@ import {readFile} from 'node:fs/promises';
 const config=JSON.parse(await readFile('config.public.json','utf8'));
 const checks=[
  ['puzzle_clock_capabilities',{},d=>d.version===1&&d.pause_resume===true,'051_active_puzzle_clocks.sql'],
- ['trivia_capabilities',{},d=>d.version===7&&d.timed_grids===true&&d.size_editorial===10&&d.size_categories===true&&d.games===7&&d.archive===true&&d.grid_puzzles===true&&d.photo_silhouettes===true&&d.passport_editorial===2&&d.groups===true&&d.online_sync===true&&d.online_seed===1,'050_size_categories.sql'],
+ ['trivia_capabilities',{},d=>d.version===7&&d.timed_grids===true&&d.size_editorial===11&&d.size_history_version===11&&d.size_categories===true&&d.games===7&&d.archive===true&&d.grid_puzzles===true&&d.photo_silhouettes===false&&d.passport_editorial===2&&d.groups===true&&d.online_sync===true&&d.online_seed===1,'052_size_catalog_reset.sql'],
  ['geography_score_modes',{},d=>Array.isArray(d)&&d.includes('name')&&d.includes('find')&&d.includes('urban'),'038_geography_urban_catalog.sql'],
  ['geography_route_capabilities',{},d=>d.version===2&&d.puzzles===108&&d.global_routes===true&&d.bidirectional===true,'049_bidirectional_routes.sql'],
  ['geography_scores',{},Array.isArray,'029_geography_scores.sql'],
@@ -18,4 +18,4 @@ const results=await Promise.all(checks.map(async([operation,body,valid,migration
 }));
 const missing=[...new Set(results.filter(Boolean))];
 if(missing.length){console.error('Publication stopped: live database capabilities unavailable for '+missing.join(', ')+'. Apply missing migrations with ./configure.sh and retry.');process.exitCode=1;}
-else console.log('Live database supports personal group renaming, task ordering, event edits, quarter-point tasks, as-needed rotations, sweeping spaces, personal deadlines, expanded reactions, all seven trivia games, personal archives, photographic silhouettes, contextual Passport clues, major-city scores and daily Border Trails.');
+else console.log('Live database supports personal group renaming, task ordering, event edits, quarter-point tasks, as-needed rotations, sweeping spaces, personal deadlines, expanded reactions, all seven trivia games, personal archives, the reset size catalog, contextual Passport clues, major-city scores and daily Border Trails.');

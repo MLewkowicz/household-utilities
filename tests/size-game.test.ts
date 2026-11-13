@@ -2,7 +2,6 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {zoomAt,fitSizeBoxes,sizeVerdict,referenceMeters,formatSize} from '../src/size-game-math';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
-import {readFile} from 'node:fs/promises';
 
 test('zoom keeps the world point beneath the pointer fixed, including clamped zooms',()=>{
  const camera={x:120,y:300,zoom:.7},pointer={x:380,y:140};
@@ -24,12 +23,12 @@ test('size feedback states direction, uses the actual size as denominator, and f
  assert.equal(referenceMeters('12,756 km'),12756000);assert.equal(referenceMeters('8.5 cm · width'),.085);assert.equal(referenceMeters('unknown'),undefined);
  assert.equal(formatSize(.00004),'40 µm');assert.equal(formatSize(250000),'250 km');assert.equal(formatSize(2.04),'2.04 m');
 });
-test('size categories sync independently, preserve pinned boards, and keep daily answers hidden',async()=>{
+test('size categories sync independently, reject retired boards, and keep mixed daily answers hidden',async()=>{
  const db=await openDatabase();try{
-  const p={game:'how-much-ish',player:'rina'},library=await callRpc(db,'game_library',{p});
-  assert.equal(library.entries.filter((e:any)=>e.entry.startsWith('size-')).length,30);
+  const p={game:'how-much-ish',player:'rina',size_version:11},library=await callRpc(db,'game_library',{p});
+  assert.equal(library.entries.filter((e:any)=>e.entry.startsWith('size-')).length,90);
   assert.ok((await callRpc(db,'trivia_capabilities')).size_categories);
-  const pop={...p,entry:'size-pop-culture-1'},geo={...p,entry:'size-geography-1'};
+  const pop={...p,entry:'size-v11-pop-culture-1'},geo={...p,entry:'size-v11-geography-1'};
   const board=await callRpc(db,'game_archive',{p:pop});assert.ok(board.state.attempt.questions.every((q:any)=>q.category==='pop-culture'));
   board.state.drafts['0']=.72;
   const saved=await callRpc(db,'game_archive_save',{p:{...pop,revision:0,state:board.state}});
@@ -38,12 +37,9 @@ test('size categories sync independently, preserve pinned boards, and keep daily
   assert.equal((await callRpc(db,'game_archive',{p:{...pop,player:'ohm'}})).revision,0);
   assert.equal((await callRpc(db,'game_archive_save',{p:{...pop,revision:0,state:board.state}})).revision,1);
   await assert.rejects(callRpc(db,'game_archive_save',{p:{...pop,revision:0,state:{...board.state,drafts:{'0':.8}}}}),/another device/);
-  await assert.rejects(callRpc(db,'game_archive',{p:{...pop,entry:'size-pop-culture-11'}}),/Invalid archive date/);
-  const classic=await callRpc(db,'game_archive',{p:{...p,entry:'starter-1'}});
-  classic.state.attempt.questions=JSON.parse(await readFile('src/trivia/how-much-ish.json','utf8')).slice(0,5);
-  await callRpc(db,'game_archive_save',{p:{...p,entry:'starter-1',revision:0,state:classic.state}});
-  assert.equal((await callRpc(db,'game_archive',{p:{...p,entry:'starter-1'}})).state.attempt.questions[0].version,9);
-  const daily=await callRpc(db,'trivia_start',{p});assert.equal(daily.version,10);assert.equal(new Set(daily.questions.map((q:any)=>q.category)).size,3);
+  await assert.rejects(callRpc(db,'game_archive',{p:{...pop,entry:'size-v11-pop-culture-31'}}),/retired/);
+  await assert.rejects(callRpc(db,'game_archive',{p:{...p,entry:'starter-1'}}),/retired/);
+  const daily=await callRpc(db,'trivia_start',{p});assert.equal(daily.version,11);assert.equal(new Set(daily.questions.map((q:any)=>q.category)).size,3);
   assert.ok(daily.questions.every((q:any)=>q.answer===undefined&&q.explanation===undefined&&!q.target.measure));
  }finally{await db.close();}
 });

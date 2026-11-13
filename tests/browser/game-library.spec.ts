@@ -56,8 +56,8 @@ test('the earlier local practice board survives the archive upgrade',async({page
 });
 test('standings show four proportional bars, Bitmoji and tied crowns',async({page})=>{
  await page.route('**/rest/v1/rpc/utilities_trivia_scores',route=>route.fulfill({json:[{player:'michal',score:900,rank:1},{player:'rina',score:900,rank:1},{player:'ohm',score:500,rank:3},{player:'rohil',score:200,rank:4}]}));
- await page.setViewportSize({width:390,height:844});await page.goto('/?webgl=0#games/crossword/scores');await expect(page.locator('.podium-person .avatar')).toHaveCount(4);await expect(page.locator('.podium-crown')).toHaveCount(2);
- const heights=await page.locator('.podium-plinth').evaluateAll(bars=>bars.map(b=>b.getBoundingClientRect().height));expect(heights[0]).toBe(heights[1]);expect(heights[1]).toBeGreaterThan(heights[2]);expect(heights[2]).toBeGreaterThan(heights[3]);await expect(page.locator('.trivia-ranks')).toBeHidden();
+ await page.setViewportSize({width:390,height:844});await page.goto('/?webgl=0#games/crossword/scores');await expect(page.locator('[data-standings=crossword] .podium-person .avatar')).toHaveCount(4);await expect(page.locator('[data-standings=crossword] .podium-crown')).toHaveCount(2);
+ const heights=await page.locator('[data-standings=crossword] .podium-plinth').evaluateAll(bars=>bars.map(b=>b.getBoundingClientRect().height));expect(heights[0]).toBe(heights[1]);expect(heights[1]).toBeGreaterThan(heights[2]);expect(heights[2]).toBeGreaterThan(heights[3]);await expect(page.locator('[data-standings=crossword] .trivia-ranks')).toBeHidden();
 });
 test('starting another practice trail advances beyond the completed calendar entry',async({page})=>{
  await page.goto('/?webgl=0#games/geography');await page.getByRole('button',{name:'Trail archive'}).click();await page.locator('.geo-route-rules summary').click();await page.locator('#geo-route-give-up').click();

@@ -12,4 +12,3 @@ export function scoreAnswer(q:Question,answer:Answer,clues=0){
  if(q.kind==='clues')return [String(q.answer),...(q.aliases||[])].some(a=>normalize(a)===normalize(String(answer)))?200-50*clues:0;
  return answer===q.answer?200:0;
 }
-export {sizeSilhouette as silhouette} from './size-silhouettes';

@@ -41,7 +41,8 @@ test('phone return links stay labeled and reachable on the hub, game and leaderb
  await page.locator('[data-orbit-game=geography]').click();
  await expect(page.locator('.game-floating-nav [data-game-return]')).toBeInViewport();
  expect(await page.locator('.observatory-topbar').evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
- await page.getByRole('link',{name:'Leaderboard',exact:true}).first().click();
+ await page.getByRole('link',{name:'Games',exact:true}).click();
+ await page.locator('#orbit-scores').click();
  await expect(page.locator('.game-floating-nav [data-game-return]')).toBeVisible();
  await expect(page.locator('.game-floating-nav [data-game-return]')).toHaveAccessibleName('Back to To-dos');
  await page.locator('.game-floating-nav [data-game-return]').click();await expect(page).toHaveURL(/#chores$/);

@@ -2,7 +2,6 @@ import { build, transform } from 'esbuild';
 import { createHash } from 'node:crypto';
 import { mkdir, copyFile, readdir, rm, readFile, writeFile, rename } from 'node:fs/promises';
 import {copyAvatarAssets} from './avatar-assets.mjs';
-import {copySizePhotos} from './size-photo-assets.mjs';
 import {copyGlobeAssets} from './globe-assets.mjs';
 import {createReleaseManifest} from './release-assets.mjs';
 const gameCardAssets=Object.values(JSON.parse(await readFile('src/game-card-assets.json','utf8')));
@@ -15,7 +14,6 @@ await mkdir('dist', { recursive: true });
 for (const file of await readdir('public')) {
   if(file==='avatars'){await copyAvatarAssets();continue;}
   if(file==='globe'){await copyGlobeAssets();continue;}
-  if(file==='size-photos'){await copySizePhotos();continue;}
   if (!gameCardAssets.includes(file) && !/^observatory-sky-(wide|phone)-[a-f0-9]{12}\.webp$/.test(file) && !/\.(html|css|svg|txt)$/.test(file) && !['sw.js','manifest.webmanifest','icon-192.png','icon-512.png','_headers'].includes(file)) throw new Error(`Unexpected public file: ${file}`);
   await copyFile(`public/${file}`, `dist/${file}`);
 }

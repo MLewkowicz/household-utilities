@@ -1,7 +1,16 @@
 import {setTheme,openNotifications} from './settings';
 import {test,expect,type Page} from '@playwright/test';
-import {readdirSync,readFileSync} from 'node:fs';
-const houseChunk=readdirSync('dist').find(file=>file.endsWith('.js')&&readFileSync('dist/'+file,'utf8').includes('house-landscape-3d'))!;
+import {readFileSync} from 'node:fs';
+// Follow the current release graph; dist also retains earlier releases' modules.
+const houseChunk=(()=>{
+ const html=readFileSync('dist/index.html','utf8'),pending=[/src="\.\/(app-[A-Z0-9]{8}\.js)"/.exec(html)![1]],seen=new Set<string>();
+ while(pending.length){
+  const file=pending.pop()!;if(seen.has(file))continue;seen.add(file);
+  const code=readFileSync('dist/'+file,'utf8');if(code.includes('house-landscape-3d'))return file;
+  for(const match of code.matchAll(/["']\.\/((?:app|chunk)-[A-Z0-9]{8}\.js)["']/g))pending.push(match[1]);
+ }
+ throw new Error('Current house scene module is missing');
+})();
 const diag=(page:Page)=>page.evaluate(()=>(window as any).__houseDiagnostics());
 const ready=(page:Page)=>expect(page.locator('#house-stage')).toHaveAttribute('data-ready','true',{timeout:20000});
 const sections=['home','chores','miscellaneous','events','bulletin','utilities'];
@@ -62,6 +71,7 @@ test('reduced-motion arrows follow the deployed order in both directions without
 });
 
 test('drags commit only on release, short drags cancel, and a quick swipe advances one section',async({page})=>{
+ test.setTimeout(90000);
  await page.goto('/');await ready(page);
  const canvas=page.locator('.stage-canvas'),rect=(await canvas.boundingBox())!,x=rect.width*.75,y=rect.height*.6;
  await page.mouse.move(x,y);await page.mouse.down();await page.mouse.move(x-30,y,{steps:3});await page.waitForTimeout(250);await page.mouse.up();

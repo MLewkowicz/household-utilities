@@ -64,7 +64,7 @@ test('Common Ground keeps daily progress after reload and locks after four misse
  await page.getByRole('button',{name:'See result'}).click();await expect(page.locator('.game-result h2')).toHaveText('250 / 1,000');
 });
 test('measured profiles preserve equal pixels per metre on both axes',async({page})=>{
- await page.goto('/?webgl=0#games/how-much-ish');await page.getByRole('button',{name:'Practice',exact:true}).click();await page.locator('[data-archive-entry=size-classic-5]').click();await page.getByRole('slider').focus();await page.keyboard.press('End');
+ await page.goto('/?webgl=0#games/how-much-ish');await page.getByRole('button',{name:'Practice',exact:true}).click();await page.locator('[data-archive-entry=size-v11-classic-5]').click();await page.getByRole('slider').focus();await page.keyboard.press('End');
  const spans=await page.locator('.scale-object > svg').evaluateAll(svgs=>svgs.map(svg=>{const g=svg.querySelector<SVGGraphicsElement>('.profile-shape')!,b=g.getBBox(),m=g.getScreenCTM()!;return (svg.getAttribute('data-axis')==='height'?b.height:b.width)*m.a;}));expect(spans[1]/spans[0]).toBeCloseTo(20,2);
  await page.getByRole('button',{name:'Check size',exact:false}).click();await page.getByText('Measurements & artwork',{exact:true}).click();await expect(page.locator('.size-credits a')).not.toHaveCount(0);
 });

@@ -11,9 +11,10 @@ test('game theme changes preserve a puzzle, persist, and use the household prefe
  expect(await page.evaluate(()=>localStorage.getItem('household-theme'))).toBe('dark');
  await page.reload();await page.getByRole('button',{name:'Practice',exact:true}).click();
  await expect(page.locator('html')).toHaveAttribute('data-theme','dark');await expect(page.getByRole('button',{name:word!,exact:true})).toHaveAttribute('aria-pressed','true');
- await page.getByRole('link',{name:/^Scores/}).click();await toggle.click();
+ await page.getByRole('link',{name:'Games',exact:true}).click();await page.locator('#orbit-scores').click();
+ const scoresToggle=page.locator('.leaderboards-theme');await scoresToggle.click();
  await expect(page.locator('html')).toHaveAttribute('data-theme','light');await expect(page.locator('html')).toHaveAttribute('data-theme-preference','daylight');
- await expect(toggle).toHaveAccessibleName('Color theme: Time of day. Switch to Light');await expect(toggle.locator('.theme-clock')).toBeVisible();
+ await expect(scoresToggle).toHaveAccessibleName('Color theme: Time of day. Switch to Light');await expect(scoresToggle.locator('.theme-clock')).toBeVisible();
  await page.getByRole('link',{name:'Back to To-dos',exact:true}).click();
  await expect(page.locator('#theme-toggle')).toHaveAccessibleName('Color theme: Time of day. Switch to Light');
  await page.getByRole('button',{name:'Settings',exact:true}).click();await page.locator('#theme-select').selectOption('system');await page.getByRole('button',{name:'Close settings',exact:true}).click();

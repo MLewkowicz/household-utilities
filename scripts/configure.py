@@ -26,7 +26,7 @@ def main():
     config = json.loads((ROOT / "config.public.json").read_text())
     if "--manual" in sys.argv:
         print("First install any missing migrations from supabase/migrations/ in order in the SQL Editor.")
-        print("Existing projects need migrations 009 through 051 (and any earlier missing migrations); do not rerun installed migrations.")
+        print("Existing projects need migrations 009 through 052 (and any earlier missing migrations); do not rerun installed migrations.")
         print("Phone delivery also needs the normal ./configure.sh flow to deploy its worker, signing keys, and schedule.")
         key = getpass.getpass("Supabase secret key or legacy service_role key (hidden): ").strip()
     else:
@@ -99,7 +99,10 @@ def main():
             installed = request(base + "/database/query", token, {"query": f"SELECT to_regprocedure('public.{function}()')::text AS fn"})
             if not installed or not installed[0].get("fn"):
                 request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations" / filename).read_text()})
-                print(f"Installed {filename}; existing history preserved.")
+                if filename == "052_size_catalog_reset.sql":
+                    print("Installed size catalog v11; How Much-ish history and today’s board reset. Other games preserved.")
+                else:
+                    print(f"Installed {filename}; existing history preserved.")
         queue_timing = request(base + "/database/query", token, {"query": "SELECT to_regprocedure('ledger_private.chore_queue_ready(jsonb,date)')::text AS fn"})
         if not queue_timing or not queue_timing[0].get("fn"):
             request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations/016_chore_queue_timing.sql").read_text()})
@@ -141,11 +144,15 @@ def main():
             ("049_bidirectional_routes.sql", "ledger_private.route_bidirectional_version()"),
             ("050_size_categories.sql", "ledger_private.size_categories_version()"),
             ("051_active_puzzle_clocks.sql", "ledger_private.active_puzzle_clocks_version()"),
+            ("052_size_catalog_reset.sql", "ledger_private.size_catalog_reset_version()"),
         ]:
             installed = request(base + "/database/query", token, {"query": f"SELECT to_regprocedure('{signature}')::text AS fn"})
             if not installed or not installed[0].get("fn"):
                 request(base + "/database/query", token, {"query": (ROOT / "supabase/migrations" / filename).read_text()})
-                print(f"Installed {filename}; existing history preserved.")
+                if filename == "052_size_catalog_reset.sql":
+                    print("Installed size catalog v11; How Much-ish history and today’s board reset. Other games preserved.")
+                else:
+                    print(f"Installed {filename}; existing history preserved.")
     if not key.startswith(("sb_secret_", "eyJ")):
         raise RuntimeError("Use a secret/service_role key, not the publishable key.")
     target = ROOT / ".env.local"

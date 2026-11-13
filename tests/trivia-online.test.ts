@@ -91,7 +91,7 @@ test('catalog import is private, atomic and idempotent; refreshes preserve today
   await db.query("INSERT INTO ledger_private.trivia_attempts(player,game,day,slot,version) VALUES('michal','before-or-after',(now() AT TIME ZONE 'America/New_York')::date,$1,2)",[legacySlot]);
   const oldRoommate=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'rina'}});assert.equal(oldRoommate.version,2);assert.equal(oldRoommate.slot,legacySlot);
   // Freeze a later day inside this disposable database to exercise slots beyond fourteen.
-  const definition=(await db.query("SELECT pg_get_functiondef('public.utilities_trivia_start(jsonb)'::regprocedure) AS sql")).rows[0].sql;
+  const definition=(await db.query("SELECT pg_get_functiondef('ledger_private.trivia_start_before_size_reset(jsonb)'::regprocedure) AS sql")).rows[0].sql;
   await db.exec(definition.replace("(now() AT TIME ZONE 'America/New_York')::date","DATE '2027-03-01'"));
   const later=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'ohm'}});assert.equal(later.slot,112);assert.equal(later.version,importedVersion);
  }finally{await db.close();}

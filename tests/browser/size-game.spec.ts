@@ -22,7 +22,7 @@ test('moving, panning and zooming preserve the guess; only resizing changes it',
 test('all three categories have distinct boards and resume their own draft',async({page})=>{
  await open(page);await page.getByRole('slider').focus();await page.keyboard.press('ArrowDown');const classic=await ratio(page);
  await page.getByRole('button',{name:'Pop culture',exact:true}).click();await expect(page.locator('.size-card h2')).toContainText('Aang');
- await page.locator('[data-archive-entry=size-pop-culture-3]').click();const prompt=await page.locator('.size-card h2').textContent();await page.getByRole('slider').focus();await page.keyboard.press('ArrowUp');const pop=await ratio(page);
+ await page.locator('[data-archive-entry=size-v11-pop-culture-3]').click();const prompt=await page.locator('.size-card h2').textContent();await page.getByRole('slider').focus();await page.keyboard.press('ArrowUp');const pop=await ratio(page);
  await page.getByRole('button',{name:'Geography',exact:true}).click();await expect(page.locator('.size-caption')).toContainText('Germany');await expect(page.locator('.size-caption')).toContainText('Texas');
  await page.getByRole('button',{name:'Pop culture',exact:true}).click();await expect(page.locator('.size-card h2')).toHaveText(prompt!);expect(await ratio(page)).toBe(pop);
  await page.reload();await expect(page.getByRole('button',{name:'Pop culture',exact:true})).toHaveAttribute('aria-pressed','true');expect(await ratio(page)).toBe(pop);
@@ -41,7 +41,7 @@ test('check counts the score, reveals comparable actual geometry, and never repl
   const target=world.querySelector<HTMLElement>('.target')!,correct=world.querySelector<HTMLElement>('.scale-correct')!;
   return {guess:Number(target.dataset.ratio),actual:Number.parseFloat(correct.style.width)/Number.parseFloat(target.style.width)};
  });
- const attempt=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-trivia-v4:guest:how-much-ish:practice')!));
+ const attempt=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-trivia-v11:guest:how-much-ish:practice')!));
  expect(dimensions.actual*dimensions.guess).toBeCloseTo(attempt.questions[0].answer,5);
  await expect(page.locator('[data-size-score]')).toHaveText(String(attempt.answers[0].points));await expect(page.locator('[data-size-total]')).toHaveText(String(attempt.score));
  await page.reload();await expect(page.locator('.size-result')).toBeVisible();expect(await page.evaluate(()=>(window as any).__sizeSounds)).toBe(0);
@@ -67,13 +67,41 @@ test('a named player gets a mixed daily and synced category progress',async({pag
  const external:string[]=[];page.on('request',request=>{if(!request.url().startsWith(baseURL+'/'))external.push(request.url());});
  await page.goto('/?webgl=0#games/how-much-ish');await expect(page.getByRole('slider')).toBeVisible();await expect(page.locator('.size-categories')).toHaveCount(0);await expect(page.locator('.size-card .game-board-label')).toBeVisible();
  await page.getByRole('button',{name:'Practice',exact:true}).click();await page.getByRole('button',{name:'Geography',exact:true}).click();await page.getByRole('slider').focus();await page.keyboard.press('ArrowDown');
- const value=await ratio(page);await expect.poll(()=>page.evaluate(async()=>{const c=(window as any).UTILITIES_CONFIG;const r=await fetch(c.url+'/rest/v1/rpc/utilities_game_archive',{method:'POST',headers:{'Content-Type':'application/json',apikey:c.key},body:JSON.stringify({p:{game:'how-much-ish',player:'michal',entry:'size-geography-1'}})});return (await r.json()).state.drafts['0'];})).toBe(value);
+ const value=await ratio(page);await expect.poll(()=>page.evaluate(async()=>{const c=(window as any).UTILITIES_CONFIG;const r=await fetch(c.url+'/rest/v1/rpc/utilities_game_archive',{method:'POST',headers:{'Content-Type':'application/json',apikey:c.key},body:JSON.stringify({p:{game:'how-much-ish',player:'michal',size_version:11,entry:'size-v11-geography-1'}})});return (await r.json()).state.drafts['0'];})).toBe(value);
  expect(external).toEqual([]);
 });
 
-test('new catalogs open fresh while earlier saved boards remain playable',async({page})=>{
- const {readFileSync}=await import('node:fs');const old=JSON.parse(readFileSync('src/trivia/how-much-ish.json','utf8'));
- await page.addInitScript(questions=>localStorage.setItem('household-trivia-v4:guest:how-much-ish:practice',JSON.stringify({id:'old-local-board',player:'guest',game:'how-much-ish',day:'practice',questions:questions.slice(0,5),answers:[],hints:{},score:0,complete:false})),old);
+test('retired history is removed for every identity while other games retain their progress',async({page})=>{
+ await page.addInitScript(()=>{
+  for(const player of ['guest','michal','rina','ohm','rohil']){
+   localStorage.setItem(`household-trivia-v4:${player}:how-much-ish:practice`,JSON.stringify({id:'retired',score:1000}));
+   localStorage.setItem(`household-game-library-v1:${player}:how-much-ish:size-classic-1`,JSON.stringify({revision:4}));
+  }
+  localStorage.setItem('household-trivia-v2:guest:before-or-after:mode','"practice"');
+ });
  await open(page);await expect(page.locator('.size-caption')).toContainText('Golden Retriever');
- await page.getByText('Earlier boards & daily archive',{exact:true}).click();await page.locator('[data-archive-entry=legacy]').click();await expect(page.locator('.size-caption')).toContainText('Death Star I');await page.getByRole('button',{name:'Check size'}).click();await expect(page.locator('.size-result')).toBeVisible();
+ await expect(page.locator('[data-archive-entry=legacy]')).toHaveCount(0);await expect(page.getByText('Earlier boards & daily archive',{exact:true})).toHaveCount(0);
+ await expect(page.locator('.size-calendar [data-archive-entry]')).toHaveCount(30);
+ const stored=await page.evaluate(()=>Object.fromEntries(Object.entries(localStorage)));
+ expect(Object.keys(stored).filter(key=>/household-(trivia-v4|game-library-v1):[^:]+:how-much-ish:/.test(key))).toEqual([]);
+ expect(stored['household-trivia-v2:guest:before-or-after:mode']).toBe('"practice"');
+ await page.getByRole('button',{name:'Check size'}).click();await expect(page.locator('.size-result')).toBeVisible();
 });
+
+ test('a failed category chunk can retry and a delayed category cannot overwrite a newer board',async({page})=>{
+  await open(page);
+  let fail=true;
+  await page.route('**/chunk-*.js',async route=>{if(fail){fail=false;await route.abort();}else await route.continue();});
+  await page.getByRole('button',{name:'Pop culture',exact:true}).click();
+  await expect(page.getByRole('button',{name:'Reload',exact:true})).toBeVisible();
+  // Dynamic imports may cache a network rejection until a reload. Recovery must remain visible.
+  await page.unroute('**/chunk-*.js');await page.getByRole('button',{name:'Reload',exact:true}).click();
+  await expect(page.locator('.size-card h2')).toContainText('Aang');
+  await page.locator('[data-archive-entry=size-v11-pop-culture-2]').click();await expect(page.getByRole('slider')).toBeVisible();
+  await page.locator('[data-archive-entry=size-v11-pop-culture-1]').click();await expect(page.locator('.size-card h2')).toContainText('Aang');
+  let release:()=>void=()=>{};const gate=new Promise<void>(resolve=>release=resolve);
+  await page.route('**/chunk-*.js',async route=>{await gate;await route.continue();});
+  await page.getByRole('button',{name:'Geography',exact:true}).click();await expect(page.getByText('Loading silhouettes…',{exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'Pop culture',exact:true}).click();await expect(page.locator('.size-card h2')).toContainText('Aang');
+  release();await page.unrouteAll({behavior:'wait'});await expect(page.locator('.size-card h2')).toContainText('Aang');
+ });

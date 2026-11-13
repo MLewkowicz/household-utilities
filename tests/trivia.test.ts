@@ -6,13 +6,13 @@ import {scoreAnswer,normalize,type Question} from '../src/trivia-model';
 const games=['odd-one-out','passport-puzzle','clue-cascade','before-or-after','how-much-ish'];
 test('practice and daily content are disjoint, complete, sourced and scoreable',async()=>{
  const packs=[...JSON.parse(await readFile('scripts/trivia/daily-packs.json','utf8')).filter(p=>!['clue-cascade','how-much-ish'].includes(p.game)),...JSON.parse(await readFile('scripts/trivia/daily-packs-v3.json','utf8')).filter(p=>p.game!=='how-much-ish'),...JSON.parse(await readFile('scripts/trivia/daily-packs-v4.json','utf8'))];
- for(const game of games){const daily=packs.filter(p=>p.game===game);assert.equal(daily.length,14);const bank:Question[]=JSON.parse(await readFile(`src/trivia/${game}.json`,'utf8'));assert.equal(bank.length,game==='passport-puzzle'?27:game==='how-much-ish'?50:game==='clue-cascade'?12:game==='before-or-after'?4:20);const ids=new Set(daily.flatMap(p=>p.questions.map(q=>q.id)));assert.ok(bank.every(q=>!ids.has(q.id)));
+ for(const game of games.filter(g=>g!=='how-much-ish')){const daily=packs.filter(p=>p.game===game);assert.equal(daily.length,14);const bank:Question[]=JSON.parse(await readFile(`src/trivia/${game}.json`,'utf8'));assert.equal(bank.length,game==='passport-puzzle'?27:game==='how-much-ish'?50:game==='clue-cascade'?12:game==='before-or-after'?4:20);const ids=new Set(daily.flatMap(p=>p.questions.map(q=>q.id)));assert.ok(bank.every(q=>!ids.has(q.id)));
  for(const q of [...bank,...daily.flatMap(p=>p.questions)] as Question[]){assert.ok(q.sources?.length);assert.ok(q.explanation);assert.equal(scoreAnswer(q,q.answer!),q.kind==='timeline'||q.kind==='groups'?1000:200);if(q.kind==='scale'){assert.ok(Number(q.answer)>=q.bounds![0]&&Number(q.answer)<=q.bounds![1]);assert.equal(scoreAnswer(q,Number(q.answer)*2),100);assert.equal(scoreAnswer(q,Number(q.answer)/2),100);}if(q.kind==='clues')assert.equal(scoreAnswer(q,q.answer!,3),50);}}
  assert.equal(normalize('Côte d’Ivoire'),'cotedivoire');
 });
 test('daily attempts hide answers, resume, lock clues and answers, and use server scoring',async()=>{
  const db=await openDatabase();try{
- for(const game of games.filter(g=>g!=='clue-cascade')){let a=await callRpc(db,'trivia_start',{p:{game,player:'michal'}});assert.equal(a.score,0);const concurrent=await Promise.all([callRpc(db,'trivia_start',{p:{game,player:'michal'}}),callRpc(db,'trivia_start',{p:{game,player:'michal'}})]);assert.equal(concurrent[0].id,concurrent[1].id);assert.ok(a.questions.every(q=>!('answer' in q)&&!('explanation' in q)&&!('aliases' in q)&&!('reveal' in q)));assert.equal((await callRpc(db,'trivia_start',{p:{game,player:'michal'}})).id,a.id);
+ for(const game of games.filter(g=>g!=='clue-cascade')){let a=await callRpc(db,'trivia_start',{p:{game,player:'michal',...(game==='how-much-ish'?{size_version:11}:{})}});assert.equal(a.score,0);const concurrent=await Promise.all([callRpc(db,'trivia_start',{p:{game,player:'michal',...(game==='how-much-ish'?{size_version:11}:{})}}),callRpc(db,'trivia_start',{p:{game,player:'michal',...(game==='how-much-ish'?{size_version:11}:{})}})]);assert.equal(concurrent[0].id,concurrent[1].id);assert.ok(a.questions.every(q=>!('answer' in q)&&!('explanation' in q)&&!('aliases' in q)&&!('reveal' in q)));assert.equal((await callRpc(db,'trivia_start',{p:{game,player:'michal',...(game==='how-much-ish'?{size_version:11}:{})}})).id,a.id);
  const pack=(await db.query('SELECT questions FROM ledger_private.trivia_packs WHERE game=$1 AND slot=$2 AND version=$3',[game,a.slot,a.version])).rows[0].questions;
  if(game==='passport-puzzle'){const p={id:a.id,player:'michal',index:0,action:'clue',level:1};a=await callRpc(db,'trivia_action',{p});assert.equal(a.questions[0].clues.length,2);a=await callRpc(db,'trivia_action',{p});assert.equal(a.hints['0'],1);await assert.rejects(callRpc(db,'trivia_action',{p:{...p,level:3}}),/Invalid clue/);}
  for(let i=0;i<pack.length;i++){const p={id:a.id,player:'michal',index:i,action:'answer',answer:pack[i].answer};const retries=await Promise.all([callRpc(db,'trivia_action',{p}),callRpc(db,'trivia_action',{p})]);a=retries[0];assert.deepEqual(retries[1],a);assert.equal(a.answers[i].points,scoreAnswer(pack[i],pack[i].answer,a.hints[i]||0));assert.ok(a.questions[i].explanation);await assert.rejects(callRpc(db,'trivia_action',{p:{...p,answer:'different'}}),/already locked/);}
@@ -65,18 +65,6 @@ test('v2 preserves pinned attempts and keeps roommates on the same pack during r
  }finally{await db.close();}
 });
 
-test('curated size v10 preserves the shared v3 rollout-day attempt and advances on a fresh day',async()=>{
- const db=await openDatabase();try{
-  const p={game:'how-much-ish',player:'michal'},first=await callRpc(db,'trivia_start',{p});assert.equal(first.version,10);
-  await db.query('UPDATE ledger_private.trivia_attempts SET version=3,slot=0 WHERE id=$1',[first.id]);
-  const old=await callRpc(db,'trivia_start',{p});assert.equal(old.id,first.id);assert.equal(old.version,3);
-  const roommate=await callRpc(db,'trivia_start',{p:{...p,player:'rina'}});assert.equal(roommate.version,3);assert.equal(roommate.questions[0].id,old.questions[0].id);
-  const q=(await db.query('SELECT questions->0 AS q FROM ledger_private.trivia_packs WHERE game=$1 AND slot=$2 AND version=3',[p.game,old.slot])).rows[0].q;
-  const answered=await callRpc(db,'trivia_action',{p:{id:old.id,player:p.player,index:0,action:'answer',answer:q.answer}});assert.equal(answered.score,200);
-  await db.exec('UPDATE ledger_private.trivia_attempts SET day=day-1');
-  const fresh=await callRpc(db,'trivia_start',{p});assert.equal(fresh.version,10);assert.notEqual(fresh.id,old.id);assert.equal(fresh.questions[0].answer,undefined);
- }finally{await db.close();}
-});
 test('word boards score groups, persist progress and make retries idempotent',async()=>{
  const {emptyGroups,guessGroup}=await import('../src/group-puzzle');
  const db=await openDatabase();try{
@@ -102,12 +90,4 @@ test('four distinct wrong word groups end a round and reveal the remaining group
   for(let i=0;i<4;i++)a=await callRpc(db,'trivia_action',{p:{id:a.id,player:a.player,index:0,action:'group',answer:q.groups.map(g=>g.words[i])}});
   assert.equal(a.complete,true);assert.equal(a.progress.mistakes,4);assert.equal(a.score,0);assert.equal(a.answers.length,1);assert.equal(a.questions[0].groups.length,4);
  }finally{await db.close();}
-});
-test('legacy source profiles remain calibrated for saved historical comparisons',async()=>{
- const {sizeProfiles,sizeSilhouette}=await import('../src/size-silhouettes');
- const packs=JSON.parse(await readFile('scripts/trivia/daily-packs-v4.json','utf8'));
- const qs=packs.filter(p=>p.game==='how-much-ish').flatMap(p=>p.questions);
- const pairs=new Set<string>();
- for(const q of qs){pairs.add([q.target.shape,q.reference.shape].sort().join('|'));for(const object of [q.target,q.reference]){const p=sizeProfiles[object.shape.slice(8)];assert.ok(p);assert.ok(p.source.startsWith('https://'));assert.ok(Math.abs(p.bounds[p.axis==='height'?'height':'width']-100)<.0001);assert.ok(p.bounds.width<=100.01&&p.bounds.height<=100.01);assert.match(sizeSilhouette(object.shape),/class="profile-shape"/);assert.doesNotMatch(p.art,/<(?:script|image|foreignObject|use)\b|\bonload=/);}}
- assert.equal(pairs.size,70);
 });

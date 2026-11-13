@@ -1,18 +1,23 @@
+import {SIZE_VERSION,SIZE_ENTRY_PREFIX,SIZE_PRACTICE_BOARDS,isSizeEntry} from './size-categories';
+import {retireSizeHistory,currentSizeBoard} from './size-history';
 import {identity} from './identity';
 import {rpc,esc} from './ui';
 import type {Attempt,Answer,Question} from './trivia-model';
 export type CalendarEntry={entry:string;day:string|null;starter:number|null;complete:boolean;started:boolean;score:number};
 export type SavedBoard={attempt:Attempt;drafts:Record<string,Answer>};
 export type ArchiveBoard={state:SavedBoard;revision:number;dirty?:boolean};
-const prefix=(game:string,player=identity||'guest')=>`household-game-library-v1:${player}:${game}:`;
+const prefix=(game:string,player=identity||'guest')=>`household-game-library-v${game==='how-much-ish'?SIZE_VERSION:1}:${player}:${game}:`;
+const sizeParams=(game:string)=>game==='how-much-ish'?{size_version:SIZE_VERSION}:{};
+retireSizeHistory();
 export function readLocal<T>(key:string):T|undefined{try{return JSON.parse(localStorage.getItem(key)||'null')??undefined;}catch{return;}}
 export function writeLocal(key:string,value:unknown){try{localStorage.setItem(key,JSON.stringify(value));}catch{/* The board remains playable in memory. */}}
 export const newYorkDay=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-export function nextArchiveEntry(entries:CalendarEntry[]){return entries.find(e=>e.starter&&!e.complete)?.entry||entries.find(e=>!e.complete)?.entry||'starter-1';}
+export function nextArchiveEntry(entries:CalendarEntry[]){return entries.find(e=>e.starter&&!e.complete)?.entry||entries.find(e=>!e.complete)?.entry||entries.find(e=>e.starter)?.entry||entries[0]?.entry||'starter-1';}
 export function selectedArchive(game:string,entries:CalendarEntry[]){const last=readLocal<string>(prefix(game)+'selected');return entries.find(e=>e.entry===last)?.entry||entries.find(e=>e.entry!=='legacy'&&e.started&&!e.complete)?.entry||nextArchiveEntry(entries);}
 export function rememberArchive(game:string,entry:string){writeLocal(prefix(game)+'selected',entry);}
 function withEarlierPractice(game:string,entries:CalendarEntry[]){
- const key=prefix(game)+'legacy',version=game==='how-much-ish'?'v4':game==='clue-cascade'?'v3':'v2';
+ if(game==='how-much-ish')return entries;
+ const key=prefix(game)+'legacy',version=game==='clue-cascade'?'v3':'v2';
  let previous=readLocal<ArchiveBoard>(key);
  if(!previous&&game==='geography'){
   const old=readLocal<{mode:string;route?:Record<string,unknown>}>(`household-geography-v1:${identity||'guest'}`);
@@ -24,14 +29,14 @@ function withEarlierPractice(game:string,entries:CalendarEntry[]){
  }
  return previous?[{entry:'legacy',day:null,starter:null,complete:previous.state.attempt.complete,started:true,score:previous.state.attempt.score},...entries]:entries;
 }
-export function starterEntries(game:string):CalendarEntry[]{const ids=Array.from({length:10},(_,i)=>`starter-${i+1}`);if(game==='how-much-ish')for(const category of ['classic','pop-culture','geography'])for(let i=1;i<=10;i++)ids.push(`size-${category}-${i}`);return ids.map(entry=>{const i=Number(entry.split('-').at(-1))-1,saved=readLocal<ArchiveBoard>(prefix(game)+entry);return {entry,day:null,starter:i+1,complete:!!saved?.state.attempt.complete,started:!!saved,score:saved?.state.attempt.score||0};});}
+export function starterEntries(game:string):CalendarEntry[]{const ids=game==='how-much-ish'?['classic','pop-culture','geography'].flatMap(category=>Array.from({length:SIZE_PRACTICE_BOARDS},(_,i)=>`${SIZE_ENTRY_PREFIX}${category}-${i+1}`)):Array.from({length:10},(_,i)=>`starter-${i+1}`);return ids.map(entry=>{const i=Number(entry.split('-').at(-1))-1,saved=readLocal<ArchiveBoard>(prefix(game)+entry);return {entry,day:null,starter:i+1,complete:!!saved?.state.attempt.complete,started:!!saved,score:saved?.state.attempt.score||0};});}
 export async function loadLibrary(game:string){
  const player=identity||'guest';
  if(player==='guest')return withEarlierPractice(game,starterEntries(game));
- try{const result=await rpc<{entries:CalendarEntry[];day:string}>('game_library',{p:{game,player}});writeLocal(prefix(game,player)+'entries',result.entries);return withEarlierPractice(game,result.entries.map(e=>{const pending=readLocal<ArchiveBoard>(prefix(game,player)+e.entry);return pending?.dirty?{...e,complete:pending.state.attempt.complete,started:true,score:pending.state.attempt.score}:e;}));}
+ try{const result=await rpc<{entries:CalendarEntry[];day:string}>('game_library',{p:{game,player,...sizeParams(game)}});writeLocal(prefix(game,player)+'entries',result.entries);return withEarlierPractice(game,result.entries.map(e=>{const pending=readLocal<ArchiveBoard>(prefix(game,player)+e.entry);return pending?.dirty?{...e,complete:pending.state.attempt.complete,started:true,score:pending.state.attempt.score}:e;}));}
  catch{const cached=readLocal<CalendarEntry[]>(prefix(game,player)+'entries');return withEarlierPractice(game,cached?[...cached,...starterEntries(game).filter(e=>!cached.some(c=>c.entry===e.entry))]:starterEntries(game));}
 }
-/** Ten deterministic starter boards. No random redraw when an entry is revisited. */
+/** Deterministic practice boards. No random redraw when an entry is revisited. */
 export function starterDeck(game:string,entry:string,bank:Question[]){
  if(!bank.length)return [];
  if(game==='passport-puzzle'){
@@ -44,12 +49,14 @@ export function starterDeck(game:string,entry:string,bank:Question[]){
 }
 export async function openArchive(game:string,entry:string,bank:()=>Promise<Question[]>):Promise<ArchiveBoard>{
  const player=identity||'guest',key=prefix(game,player)+entry,local=readLocal<ArchiveBoard>(key);
+ if(game==='how-much-ish'&&!isSizeEntry(entry)&&!/^\d{4}-\d{2}-\d{2}$/.test(entry))throw new Error('This size board has been retired. Choose a new board.');
  if(entry==='legacy'&&local)return local;
  if(player!=='guest'){
-  try{const remote=await rpc<ArchiveBoard>('game_archive',{p:{game,player,entry}});
+  try{const remote=await rpc<ArchiveBoard>('game_archive',{p:{game,player,entry,...sizeParams(game)}});
+   if(game==='how-much-ish'&&!currentSizeBoard(remote.state.attempt))throw new Error('The size catalog has changed. Reload the site.');
    if(local?.dirty){if(local.revision===remote.revision)return local;if(JSON.stringify(local.state)===JSON.stringify(remote.state)){writeLocal(key,remote);return remote;}writeLocal(key+':unsynced',local);}
    writeLocal(key,remote);return remote;
-  }catch(error){if(local)return local;if(!entry.startsWith('starter-')&&!(game==='how-much-ish'&&/^size-(classic|pop-culture|geography)-(10|[1-9])$/.test(entry)))throw error;}
+  }catch(error){if(local)return local;if(!(game==='how-much-ish'?isSizeEntry(entry):entry.startsWith('starter-')))throw error;}
  }
  if(local)return local;
  const state:SavedBoard={attempt:{id:`archive:${game}:${entry}`,game,player,day:entry,questions:starterDeck(game,entry,await bank()),answers:[],hints:{},score:0,complete:false},drafts:{}};
@@ -58,6 +65,7 @@ export async function openArchive(game:string,entry:string,bank:()=>Promise<Ques
 }
 const saving=new Map<string,Promise<void>>();
 export function storeArchive(game:string,entry:string,board:ArchiveBoard){
+ if(game==='how-much-ish'&&!currentSizeBoard(board.state.attempt))return;
  const player=board.state.attempt.player,key=prefix(game,player)+entry;
  board.dirty=true;writeLocal(key,board);
  if(player==='guest'||entry==='legacy')return;
@@ -66,7 +74,7 @@ export function storeArchive(game:string,entry:string,board:ArchiveBoard){
  if(saving.has(key))return;
  const task=(async()=>{
   for(;;){const latest=readLocal<ArchiveBoard>(key);if(!latest?.dirty)return;const state=latest.state;
-   try{const response=await rpc<ArchiveBoard>('game_archive_save',{p:{game,player,entry,state,revision:latest.revision}});const current=readLocal<ArchiveBoard>(key)!;const same=JSON.stringify(current.state)===JSON.stringify(state);writeLocal(key,{state:current.state,revision:response.revision,dirty:!same});board.revision=response.revision;if(same){board.dirty=false;return;}}
+   try{const response=await rpc<ArchiveBoard>('game_archive_save',{p:{game,player,entry,state,revision:latest.revision,...sizeParams(game)}});const current=readLocal<ArchiveBoard>(key)!;const same=JSON.stringify(current.state)===JSON.stringify(state);writeLocal(key,{state:current.state,revision:response.revision,dirty:!same});board.revision=response.revision;if(same){board.dirty=false;return;}}
    catch{return;}
   }
  })().finally(()=>saving.delete(key));saving.set(key,task);

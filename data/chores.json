@@ -3643,9 +3643,153 @@
       "point_policy": "household-v1",
       "queue_visibility": "immediately",
       "reminder_group_id": null
+    },
+    {
+      "id": "532eb05c-de79-4eaa-8ad7-99bcfd1c4d5f",
+      "kind": "chore",
+      "note": "",
+      "actor": "rina",
+      "state": "completed",
+      "title": "Tryptophobia-inducing mold on the sides of the sink \ud83e\udd2e\ud83e\udd2e\ud83e\udd2e\ud83e\udd2e",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 2,
+      "status": "completed",
+      "icon_id": "dishes",
+      "version": 1,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": null,
+      "projected": false,
+      "requester": "rina",
+      "completion": {
+        "completed_at": "2026-11-13T06:13:00+00:00",
+        "contributors": [
+          "rina"
+        ]
+      },
+      "created_at": "2026-11-13T06:14:01.761292+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": null,
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
+    },
+    {
+      "id": "5252a248-90a0-4a16-85d8-b3a0eb7a8fe4",
+      "kind": "chore",
+      "note": "",
+      "actor": "rohil",
+      "state": "completed",
+      "title": "Sweep corridor",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 1,
+      "status": "completed",
+      "icon_id": "sweep",
+      "version": 1,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": "sweep-corridor",
+      "projected": false,
+      "requester": "rohil",
+      "completion": {
+        "completed_at": "2026-11-13T06:34:00+00:00",
+        "contributors": [
+          "rohil"
+        ]
+      },
+      "created_at": "2026-11-13T06:34:45.884093+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "sweeping-v2",
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
     }
   ],
   "history": [
+    {
+      "id": "5252a248-90a0-4a16-85d8-b3a0eb7a8fe4",
+      "kind": "chore",
+      "note": "",
+      "actor": "rohil",
+      "state": "completed",
+      "title": "Sweep corridor",
+      "action": "create",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 1,
+      "icon_id": "sweep",
+      "version": 1,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": "sweep-corridor",
+      "requester": "rohil",
+      "completion": {
+        "completed_at": "2026-11-13T06:34:00+00:00",
+        "contributors": [
+          "rohil"
+        ]
+      },
+      "created_at": "2026-11-13T06:34:45.884093+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "change_note": "",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": "sweeping-v2",
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
+    },
+    {
+      "id": "532eb05c-de79-4eaa-8ad7-99bcfd1c4d5f",
+      "kind": "chore",
+      "note": "",
+      "actor": "rina",
+      "state": "completed",
+      "title": "Tryptophobia-inducing mold on the sides of the sink \ud83e\udd2e\ud83e\udd2e\ud83e\udd2e\ud83e\udd2e",
+      "action": "create",
+      "due_at": null,
+      "due_on": null,
+      "pinned": false,
+      "points": 2,
+      "icon_id": "dishes",
+      "version": 1,
+      "assignee": null,
+      "due_time": null,
+      "cycle_end": null,
+      "preset_id": null,
+      "requester": "rina",
+      "completion": {
+        "completed_at": "2026-11-13T06:13:00+00:00",
+        "contributors": [
+          "rina"
+        ]
+      },
+      "created_at": "2026-11-13T06:14:01.761292+00:00",
+      "expires_at": null,
+      "expires_on": null,
+      "routine_id": null,
+      "change_note": "",
+      "cycle_start": null,
+      "expires_time": null,
+      "point_policy": null,
+      "queue_visibility": "immediately",
+      "reminder_group_id": null
+    },
     {
       "id": "fd2c8f60-949d-49f3-a376-6f59e8544825",
       "kind": "chore",
@@ -7445,227 +7589,22 @@
     }
   ],
   "local_day": "2026-11-13",
-  "updated_at": "2026-11-13T05:56:26.062542+00:00",
-  "exported_at": "2026-11-13T05:56:26.062542+00:00",
+  "updated_at": "2026-11-13T07:13:10.482049+00:00",
+  "exported_at": "2026-11-13T07:13:10.482049+00:00",
   "leaderboard": [
     {
       "rank": 1,
-      "units": 141.5,
-      "member": "michal",
-      "period": "all",
-      "entries": [
-        {
-          "id": "fe9deac2-e3db-44f8-a2a2-dc15b2eead6c",
-          "title": "Sweep kitchen + living room",
-          "units": 24.0,
-          "member": "michal",
-          "completed_at": "2026-11-06T03:43:00+00:00"
-        },
-        {
-          "id": "2c7a7534-ca39-4bd4-8257-f02e75f20583",
-          "title": "Fix trash can",
-          "units": 12.0,
-          "member": "michal",
-          "completed_at": "2026-11-03T16:08:54.586145+00:00"
-        },
-        {
-          "id": "639fc899-0c4a-45d3-8be6-3c918a8d124d",
-          "title": "Sweep kitchen + living room",
-          "units": 24.0,
-          "member": "michal",
-          "completed_at": "2026-11-03T03:39:00+00:00"
-        },
-        {
-          "id": "605d27a3-9827-4e25-8fc3-d9b587a56f98",
-          "title": "Pick up bananas",
-          "units": 6.0,
-          "member": "michal",
-          "completed_at": "2026-11-03T00:30:00+00:00"
-        },
-        {
-          "id": "af58c7f2-743c-486d-960f-f2f7c88d6ab2",
-          "title": "Unloading Dishwasher",
-          "units": 6.0,
-          "member": "michal",
-          "completed_at": "2026-11-02T16:00:00+00:00"
-        },
-        {
-          "id": "59b8543b-9f7b-422a-86f8-5e638f1ef08d",
-          "title": "Start dishwasher",
-          "units": 1.5,
-          "member": "michal",
-          "completed_at": "2026-11-02T15:27:00+00:00"
-        },
-        {
-          "id": "f09544a4-27db-494e-a056-3eeacfabe062",
-          "title": "Unload dishwasher",
-          "units": 6.0,
-          "member": "michal",
-          "completed_at": "2026-10-31T05:03:00+00:00"
-        },
-        {
-          "id": "44ef02a4-9975-4836-bfff-c9f84e95998d",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "michal",
-          "completed_at": "2026-10-29T01:57:06.519246+00:00"
-        },
-        {
-          "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-10-26:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
-          "title": "Put in new trash bag",
-          "units": 6.0,
-          "member": "michal",
-          "completed_at": "2026-10-27T02:10:53.590361+00:00"
-        },
-        {
-          "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-10-26:1a7bbd79-0488-4b94-825d-6843207f75dc",
-          "title": "Take out the trash",
-          "units": 6.0,
-          "member": "michal",
-          "completed_at": "2026-10-27T02:10:51.535946+00:00"
-        },
-        {
-          "id": "447f4ade-b773-47c8-b934-71581983b70e",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "michal",
-          "completed_at": "2026-10-22T22:40:00+00:00"
-        },
-        {
-          "id": "5eb86ff6-f87c-4172-92cf-0abfda0db45d",
-          "title": "Call and/or text landlord about heating issue",
-          "units": 12.0,
-          "member": "michal",
-          "completed_at": "2026-10-20T17:22:00+00:00"
-        },
-        {
-          "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
-          "title": "Grocery pick up",
-          "units": 12.0,
-          "member": "michal",
-          "completed_at": "2026-10-20T15:38:00+00:00"
-        },
-        {
-          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
-          "title": "Bring bins back",
-          "units": 2.0,
-          "member": "michal",
-          "completed_at": "2026-10-20T15:36:00+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 1,
-      "units": 141.5,
-      "member": "rohil",
-      "period": "all",
-      "entries": [
-        {
-          "id": "3bc543a9-00ec-40ae-8cfe-8e3ef44b6843",
-          "title": "Collect bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-12T21:30:00+00:00"
-        },
-        {
-          "id": "d1191cbf-6e72-4bd9-8fef-112c1c0cf69f",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-09T19:50:00+00:00"
-        },
-        {
-          "id": "884ac189-123e-4604-a290-dad07e7fd87a",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-06T20:16:00+00:00"
-        },
-        {
-          "id": "a9d2b51e-9845-40d3-a450-0ac7a2847cf5",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-05T21:31:00+00:00"
-        },
-        {
-          "id": "046ac3bc-cfff-47a7-ace6-e20a83d7d084",
-          "title": "Empty dishwasher",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-11-05T02:27:00+00:00"
-        },
-        {
-          "id": "605d27a3-9827-4e25-8fc3-d9b587a56f98",
-          "title": "Pick up bananas",
-          "units": 6.0,
-          "member": "rohil",
-          "completed_at": "2026-11-03T00:30:00+00:00"
-        },
-        {
-          "id": "af58c7f2-743c-486d-960f-f2f7c88d6ab2",
-          "title": "Unloading Dishwasher",
-          "units": 6.0,
-          "member": "rohil",
-          "completed_at": "2026-11-02T16:00:00+00:00"
-        },
-        {
-          "id": "59b8543b-9f7b-422a-86f8-5e638f1ef08d",
-          "title": "Start dishwasher",
-          "units": 1.5,
-          "member": "rohil",
-          "completed_at": "2026-11-02T15:27:00+00:00"
-        },
-        {
-          "id": "f80563df-b704-4173-8d9c-601a7519b602",
-          "title": "Bring back baked ziti leftovers",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-10-30T21:34:00+00:00"
-        },
-        {
-          "id": "a57b6ddf-8652-41ea-8be6-3521f457f368",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-10-26T23:00:00+00:00"
-        },
-        {
-          "id": "78d695c6-3705-4420-8ba6-cd63c7fa390e",
-          "title": "Bring thai curry back",
-          "units": 24.0,
-          "member": "rohil",
-          "completed_at": "2026-10-24T17:36:00+00:00"
-        },
-        {
-          "id": "952286c6-8a12-4606-ac1b-f47ca92ff2b8",
-          "title": "Contact landlord about heating",
-          "units": 6.0,
-          "member": "rohil",
-          "completed_at": "2026-10-23T01:03:18.27562+00:00"
-        },
-        {
-          "id": "31aed63b-53a9-4435-8df5-83abd586818d",
-          "title": "Pick up bananas",
-          "units": 12.0,
-          "member": "rohil",
-          "completed_at": "2026-10-20T19:18:00+00:00"
-        },
-        {
-          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
-          "title": "Bring bins back",
-          "units": 2.0,
-          "member": "rohil",
-          "completed_at": "2026-10-20T15:36:00+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 3,
-      "units": 137.0,
+      "units": 161.0,
       "member": "rina",
       "period": "all",
       "entries": [
+        {
+          "id": "532eb05c-de79-4eaa-8ad7-99bcfd1c4d5f",
+          "title": "Tryptophobia-inducing mold on the sides of the sink \ud83e\udd2e\ud83e\udd2e\ud83e\udd2e\ud83e\udd2e",
+          "units": 24.0,
+          "member": "rina",
+          "completed_at": "2026-11-13T06:13:00+00:00"
+        },
         {
           "id": "8a965858-ba79-4813-b695-927f654ce6e5",
           "title": "Empty dishwasher",
@@ -7809,39 +7748,123 @@
       ]
     },
     {
-      "rank": 4,
-      "units": 18.0,
-      "member": "ohm",
+      "rank": 2,
+      "units": 153.5,
+      "member": "rohil",
       "period": "all",
       "entries": [
         {
-          "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-09:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
+          "id": "5252a248-90a0-4a16-85d8-b3a0eb7a8fe4",
+          "title": "Sweep corridor",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-13T06:34:00+00:00"
+        },
+        {
+          "id": "3bc543a9-00ec-40ae-8cfe-8e3ef44b6843",
+          "title": "Collect bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-12T21:30:00+00:00"
+        },
+        {
+          "id": "d1191cbf-6e72-4bd9-8fef-112c1c0cf69f",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-09T19:50:00+00:00"
+        },
+        {
+          "id": "884ac189-123e-4604-a290-dad07e7fd87a",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-06T20:16:00+00:00"
+        },
+        {
+          "id": "a9d2b51e-9845-40d3-a450-0ac7a2847cf5",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-05T21:31:00+00:00"
+        },
+        {
+          "id": "046ac3bc-cfff-47a7-ace6-e20a83d7d084",
+          "title": "Empty dishwasher",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-05T02:27:00+00:00"
+        },
+        {
+          "id": "605d27a3-9827-4e25-8fc3-d9b587a56f98",
+          "title": "Pick up bananas",
+          "units": 6.0,
+          "member": "rohil",
+          "completed_at": "2026-11-03T00:30:00+00:00"
+        },
+        {
+          "id": "af58c7f2-743c-486d-960f-f2f7c88d6ab2",
+          "title": "Unloading Dishwasher",
+          "units": 6.0,
+          "member": "rohil",
+          "completed_at": "2026-11-02T16:00:00+00:00"
+        },
+        {
+          "id": "59b8543b-9f7b-422a-86f8-5e638f1ef08d",
+          "title": "Start dishwasher",
+          "units": 1.5,
+          "member": "rohil",
+          "completed_at": "2026-11-02T15:27:00+00:00"
+        },
+        {
+          "id": "f80563df-b704-4173-8d9c-601a7519b602",
+          "title": "Bring back baked ziti leftovers",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-10-30T21:34:00+00:00"
+        },
+        {
+          "id": "a57b6ddf-8652-41ea-8be6-3521f457f368",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-10-26T23:00:00+00:00"
+        },
+        {
+          "id": "78d695c6-3705-4420-8ba6-cd63c7fa390e",
+          "title": "Bring thai curry back",
+          "units": 24.0,
+          "member": "rohil",
+          "completed_at": "2026-10-24T17:36:00+00:00"
+        },
+        {
+          "id": "952286c6-8a12-4606-ac1b-f47ca92ff2b8",
+          "title": "Contact landlord about heating",
+          "units": 6.0,
+          "member": "rohil",
+          "completed_at": "2026-10-23T01:03:18.27562+00:00"
+        },
+        {
+          "id": "31aed63b-53a9-4435-8df5-83abd586818d",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-10-20T19:18:00+00:00"
+        },
+        {
+          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
           "title": "Bring bins back",
-          "units": 6.0,
-          "member": "ohm",
-          "completed_at": "2026-11-10T22:56:00+00:00"
-        },
-        {
-          "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-02:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
-          "title": "Put in new trash bag",
-          "units": 6.0,
-          "member": "ohm",
-          "completed_at": "2026-11-03T01:49:00+00:00"
-        },
-        {
-          "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-02:1a7bbd79-0488-4b94-825d-6843207f75dc",
-          "title": "Take out the trash",
-          "units": 6.0,
-          "member": "ohm",
-          "completed_at": "2026-11-03T01:48:00+00:00"
+          "units": 2.0,
+          "member": "rohil",
+          "completed_at": "2026-10-20T15:36:00+00:00"
         }
       ]
     },
     {
-      "rank": 1,
-      "units": 73.5,
+      "rank": 3,
+      "units": 141.5,
       "member": "michal",
-      "period": "month",
+      "period": "all",
       "entries": [
         {
           "id": "fe9deac2-e3db-44f8-a2a2-dc15b2eead6c",
@@ -7884,15 +7907,107 @@
           "units": 1.5,
           "member": "michal",
           "completed_at": "2026-11-02T15:27:00+00:00"
+        },
+        {
+          "id": "f09544a4-27db-494e-a056-3eeacfabe062",
+          "title": "Unload dishwasher",
+          "units": 6.0,
+          "member": "michal",
+          "completed_at": "2026-10-31T05:03:00+00:00"
+        },
+        {
+          "id": "44ef02a4-9975-4836-bfff-c9f84e95998d",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "michal",
+          "completed_at": "2026-10-29T01:57:06.519246+00:00"
+        },
+        {
+          "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-10-26:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+          "title": "Put in new trash bag",
+          "units": 6.0,
+          "member": "michal",
+          "completed_at": "2026-10-27T02:10:53.590361+00:00"
+        },
+        {
+          "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-10-26:1a7bbd79-0488-4b94-825d-6843207f75dc",
+          "title": "Take out the trash",
+          "units": 6.0,
+          "member": "michal",
+          "completed_at": "2026-10-27T02:10:51.535946+00:00"
+        },
+        {
+          "id": "447f4ade-b773-47c8-b934-71581983b70e",
+          "title": "Pick up bananas",
+          "units": 12.0,
+          "member": "michal",
+          "completed_at": "2026-10-22T22:40:00+00:00"
+        },
+        {
+          "id": "5eb86ff6-f87c-4172-92cf-0abfda0db45d",
+          "title": "Call and/or text landlord about heating issue",
+          "units": 12.0,
+          "member": "michal",
+          "completed_at": "2026-10-20T17:22:00+00:00"
+        },
+        {
+          "id": "5b6e1603-085c-464e-b2cf-c16ea87fe47c",
+          "title": "Grocery pick up",
+          "units": 12.0,
+          "member": "michal",
+          "completed_at": "2026-10-20T15:38:00+00:00"
+        },
+        {
+          "id": "b6413549-73dd-4a59-8bfd-8d2db3aa589d",
+          "title": "Bring bins back",
+          "units": 2.0,
+          "member": "michal",
+          "completed_at": "2026-10-20T15:36:00+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "units": 18.0,
+      "member": "ohm",
+      "period": "all",
+      "entries": [
+        {
+          "id": "41526915-8c8f-41d9-8340-dc5980c8ce00:2026-11-09:94996806-a96a-47d7-a54a-c5e67e1a0bdf",
+          "title": "Bring bins back",
+          "units": 6.0,
+          "member": "ohm",
+          "completed_at": "2026-11-10T22:56:00+00:00"
+        },
+        {
+          "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-02:c136b2d1-4cc0-4cf8-9ca4-a2195c32fcff",
+          "title": "Put in new trash bag",
+          "units": 6.0,
+          "member": "ohm",
+          "completed_at": "2026-11-03T01:49:00+00:00"
+        },
+        {
+          "id": "10986bd6-79a1-4a69-b799-e4938953c007:2026-11-02:1a7bbd79-0488-4b94-825d-6843207f75dc",
+          "title": "Take out the trash",
+          "units": 6.0,
+          "member": "ohm",
+          "completed_at": "2026-11-03T01:48:00+00:00"
         }
       ]
     },
     {
       "rank": 1,
-      "units": 73.5,
+      "units": 85.5,
       "member": "rohil",
       "period": "month",
       "entries": [
+        {
+          "id": "5252a248-90a0-4a16-85d8-b3a0eb7a8fe4",
+          "title": "Sweep corridor",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-13T06:34:00+00:00"
+        },
         {
           "id": "3bc543a9-00ec-40ae-8cfe-8e3ef44b6843",
           "title": "Collect bananas",
@@ -7952,11 +8067,18 @@
       ]
     },
     {
-      "rank": 3,
-      "units": 51.0,
+      "rank": 2,
+      "units": 75.0,
       "member": "rina",
       "period": "month",
       "entries": [
+        {
+          "id": "532eb05c-de79-4eaa-8ad7-99bcfd1c4d5f",
+          "title": "Tryptophobia-inducing mold on the sides of the sink \ud83e\udd2e\ud83e\udd2e\ud83e\udd2e\ud83e\udd2e",
+          "units": 24.0,
+          "member": "rina",
+          "completed_at": "2026-11-13T06:13:00+00:00"
+        },
         {
           "id": "8a965858-ba79-4813-b695-927f654ce6e5",
           "title": "Empty dishwasher",
@@ -8016,6 +8138,56 @@
       ]
     },
     {
+      "rank": 3,
+      "units": 73.5,
+      "member": "michal",
+      "period": "month",
+      "entries": [
+        {
+          "id": "fe9deac2-e3db-44f8-a2a2-dc15b2eead6c",
+          "title": "Sweep kitchen + living room",
+          "units": 24.0,
+          "member": "michal",
+          "completed_at": "2026-11-06T03:43:00+00:00"
+        },
+        {
+          "id": "2c7a7534-ca39-4bd4-8257-f02e75f20583",
+          "title": "Fix trash can",
+          "units": 12.0,
+          "member": "michal",
+          "completed_at": "2026-11-03T16:08:54.586145+00:00"
+        },
+        {
+          "id": "639fc899-0c4a-45d3-8be6-3c918a8d124d",
+          "title": "Sweep kitchen + living room",
+          "units": 24.0,
+          "member": "michal",
+          "completed_at": "2026-11-03T03:39:00+00:00"
+        },
+        {
+          "id": "605d27a3-9827-4e25-8fc3-d9b587a56f98",
+          "title": "Pick up bananas",
+          "units": 6.0,
+          "member": "michal",
+          "completed_at": "2026-11-03T00:30:00+00:00"
+        },
+        {
+          "id": "af58c7f2-743c-486d-960f-f2f7c88d6ab2",
+          "title": "Unloading Dishwasher",
+          "units": 6.0,
+          "member": "michal",
+          "completed_at": "2026-11-02T16:00:00+00:00"
+        },
+        {
+          "id": "59b8543b-9f7b-422a-86f8-5e638f1ef08d",
+          "title": "Start dishwasher",
+          "units": 1.5,
+          "member": "michal",
+          "completed_at": "2026-11-02T15:27:00+00:00"
+        }
+      ]
+    },
+    {
       "rank": 4,
       "units": 18.0,
       "member": "ohm",
@@ -8046,10 +8218,17 @@
     },
     {
       "rank": 1,
-      "units": 27.0,
+      "units": 51.0,
       "member": "rina",
       "period": "week",
       "entries": [
+        {
+          "id": "532eb05c-de79-4eaa-8ad7-99bcfd1c4d5f",
+          "title": "Tryptophobia-inducing mold on the sides of the sink \ud83e\udd2e\ud83e\udd2e\ud83e\udd2e\ud83e\udd2e",
+          "units": 24.0,
+          "member": "rina",
+          "completed_at": "2026-11-13T06:13:00+00:00"
+        },
         {
           "id": "8a965858-ba79-4813-b695-927f654ce6e5",
           "title": "Empty dishwasher",
@@ -8082,10 +8261,17 @@
     },
     {
       "rank": 2,
-      "units": 24.0,
+      "units": 36.0,
       "member": "rohil",
       "period": "week",
       "entries": [
+        {
+          "id": "5252a248-90a0-4a16-85d8-b3a0eb7a8fe4",
+          "title": "Sweep corridor",
+          "units": 12.0,
+          "member": "rohil",
+          "completed_at": "2026-11-13T06:34:00+00:00"
+        },
         {
           "id": "3bc543a9-00ec-40ae-8cfe-8e3ef44b6843",
           "title": "Collect bananas",
