@@ -65,16 +65,16 @@ test('v2 preserves pinned attempts and keeps roommates on the same pack during r
  }finally{await db.close();}
 });
 
-test('curated size v9 preserves the shared v3 rollout-day attempt and advances on a fresh day',async()=>{
+test('curated size v10 preserves the shared v3 rollout-day attempt and advances on a fresh day',async()=>{
  const db=await openDatabase();try{
-  const p={game:'how-much-ish',player:'michal'},first=await callRpc(db,'trivia_start',{p});assert.equal(first.version,9);
+  const p={game:'how-much-ish',player:'michal'},first=await callRpc(db,'trivia_start',{p});assert.equal(first.version,10);
   await db.query('UPDATE ledger_private.trivia_attempts SET version=3,slot=0 WHERE id=$1',[first.id]);
   const old=await callRpc(db,'trivia_start',{p});assert.equal(old.id,first.id);assert.equal(old.version,3);
   const roommate=await callRpc(db,'trivia_start',{p:{...p,player:'rina'}});assert.equal(roommate.version,3);assert.equal(roommate.questions[0].id,old.questions[0].id);
   const q=(await db.query('SELECT questions->0 AS q FROM ledger_private.trivia_packs WHERE game=$1 AND slot=$2 AND version=3',[p.game,old.slot])).rows[0].q;
   const answered=await callRpc(db,'trivia_action',{p:{id:old.id,player:p.player,index:0,action:'answer',answer:q.answer}});assert.equal(answered.score,200);
   await db.exec('UPDATE ledger_private.trivia_attempts SET day=day-1');
-  const fresh=await callRpc(db,'trivia_start',{p});assert.equal(fresh.version,9);assert.notEqual(fresh.id,old.id);assert.equal(fresh.questions[0].answer,undefined);
+  const fresh=await callRpc(db,'trivia_start',{p});assert.equal(fresh.version,10);assert.notEqual(fresh.id,old.id);assert.equal(fresh.questions[0].answer,undefined);
  }finally{await db.close();}
 });
 test('word boards score groups, persist progress and make retries idempotent',async()=>{

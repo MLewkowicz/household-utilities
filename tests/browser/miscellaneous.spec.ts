@@ -21,7 +21,7 @@ test('name-first expenses, custom shares, icons, history and pair repayments sta
  const card=page.locator(`[data-entry-id="${entry.id}"]`);
  await expect(card.locator('h3')).toHaveText('Paper towels <b>for home</b>');await expect(card.locator('h3 b')).toHaveCount(0);
  await expect(page.locator('#misc-balances .member-rina')).toContainText('$18.00');
- const other=await browser.newPage();await other.goto('http://127.0.0.1:4174/#miscellaneous');
+ const other=await browser.newPage();await other.goto(new URL('/#miscellaneous',page.url()).href);
  await expect(other.locator(`[data-entry-id="${entry.id}"]`)).toBeVisible();await other.close();
  await expand(card);await card.getByRole('button',{name:/^Edit /}).click();await page.locator('[data-participant=rohil]').click();
  await page.getByText('Custom amounts',{exact:true}).click();

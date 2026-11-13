@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
-for(const game of ['before-or-after','passport-puzzle'])test(`${game} imports expand practice without third-party requests`,async({page})=>{
- const external:string[]=[];page.on('request',r=>{if(/^https?:/.test(r.url())&&!r.url().startsWith('http://127.0.0.1:4174/'))external.push(r.url());});
+for(const game of ['before-or-after','passport-puzzle'])test(`${game} imports expand practice without third-party requests`,async({page,baseURL})=>{
+ const external:string[]=[];page.on('request',r=>{if(/^https?:/.test(r.url())&&!r.url().startsWith(baseURL+'/'))external.push(r.url());});
  await page.addInitScript(()=>localStorage.removeItem('household-person'));
  await page.setViewportSize({width:390,height:844});await page.goto('/?webgl=0#games/'+game);
  await expect(page.getByRole('button',{name:'Submit'})).toBeVisible();

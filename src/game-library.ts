@@ -24,12 +24,12 @@ function withEarlierPractice(game:string,entries:CalendarEntry[]){
  }
  return previous?[{entry:'legacy',day:null,starter:null,complete:previous.state.attempt.complete,started:true,score:previous.state.attempt.score},...entries]:entries;
 }
-export function starterEntries(game:string):CalendarEntry[]{return Array.from({length:10},(_,i)=>{const entry=`starter-${i+1}`,saved=readLocal<ArchiveBoard>(prefix(game)+entry);return {entry,day:null,starter:i+1,complete:!!saved?.state.attempt.complete,started:!!saved,score:saved?.state.attempt.score||0};});}
+export function starterEntries(game:string):CalendarEntry[]{const ids=Array.from({length:10},(_,i)=>`starter-${i+1}`);if(game==='how-much-ish')for(const category of ['classic','pop-culture','geography'])for(let i=1;i<=10;i++)ids.push(`size-${category}-${i}`);return ids.map(entry=>{const i=Number(entry.split('-').at(-1))-1,saved=readLocal<ArchiveBoard>(prefix(game)+entry);return {entry,day:null,starter:i+1,complete:!!saved?.state.attempt.complete,started:!!saved,score:saved?.state.attempt.score||0};});}
 export async function loadLibrary(game:string){
  const player=identity||'guest';
  if(player==='guest')return withEarlierPractice(game,starterEntries(game));
  try{const result=await rpc<{entries:CalendarEntry[];day:string}>('game_library',{p:{game,player}});writeLocal(prefix(game,player)+'entries',result.entries);return withEarlierPractice(game,result.entries.map(e=>{const pending=readLocal<ArchiveBoard>(prefix(game,player)+e.entry);return pending?.dirty?{...e,complete:pending.state.attempt.complete,started:true,score:pending.state.attempt.score}:e;}));}
- catch{const cached=readLocal<CalendarEntry[]>(prefix(game,player)+'entries');return withEarlierPractice(game,cached||starterEntries(game));}
+ catch{const cached=readLocal<CalendarEntry[]>(prefix(game,player)+'entries');return withEarlierPractice(game,cached?[...cached,...starterEntries(game).filter(e=>!cached.some(c=>c.entry===e.entry))]:starterEntries(game));}
 }
 /** Ten deterministic starter boards. No random redraw when an entry is revisited. */
 export function starterDeck(game:string,entry:string,bank:Question[]){
@@ -39,7 +39,7 @@ export function starterDeck(game:string,entry:string,bank:Question[]){
   const countries=[...groups.values()],slot=Math.max(0,Number(entry.slice(8))-1);
   return Array.from({length:5},(_,i)=>{const index=slot*5+i,questions=countries[index%countries.length];return questions[Math.floor(index/countries.length)%questions.length];});
  }
- const count=['before-or-after','clue-cascade','sudoku','crossword'].includes(game)?1:5,slot=Number(entry.slice(8))-1;
+ const count=['before-or-after','clue-cascade','sudoku','crossword'].includes(game)?1:5,slot=Number(entry.split('-').at(-1))-1;
  return Array.from({length:count},(_,i)=>bank[(slot*(count===5?(bank.length>=50?5:3):1)+i)%bank.length]);
 }
 export async function openArchive(game:string,entry:string,bank:()=>Promise<Question[]>):Promise<ArchiveBoard>{
@@ -49,7 +49,7 @@ export async function openArchive(game:string,entry:string,bank:()=>Promise<Ques
   try{const remote=await rpc<ArchiveBoard>('game_archive',{p:{game,player,entry}});
    if(local?.dirty){if(local.revision===remote.revision)return local;if(JSON.stringify(local.state)===JSON.stringify(remote.state)){writeLocal(key,remote);return remote;}writeLocal(key+':unsynced',local);}
    writeLocal(key,remote);return remote;
-  }catch(error){if(local)return local;if(!entry.startsWith('starter-'))throw error;}
+  }catch(error){if(local)return local;if(!entry.startsWith('starter-')&&!(game==='how-much-ish'&&/^size-(classic|pop-culture|geography)-(10|[1-9])$/.test(entry)))throw error;}
  }
  if(local)return local;
  const state:SavedBoard={attempt:{id:`archive:${game}:${entry}`,game,player,day:entry,questions:starterDeck(game,entry,await bank()),answers:[],hints:{},score:0,complete:false},drafts:{}};

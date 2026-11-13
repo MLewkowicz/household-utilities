@@ -12,7 +12,7 @@ type Standing={player:string;score:number;rank?:number;days?:number;elapsed_ms?:
 const challenges={name:'Name countries',find:'Find countries',urban:'Cities',route:'Border Trail',places:'Cities · previous catalog',cities:'Capital dots · previous game',capitals:'Name capitals · previous game'};
 type Challenge=keyof typeof challenges;
 const legacy=['places','cities','capitals'];
-let initialized=false,lastRoute='',period:'day'|'week'='day',challenge:Challenge='name',region:Region='World',scope:CountryScope='countries';
+let initialized=false,lastRoute='',pendingFocus='',period:'day'|'week'='day',challenge:Challenge='name',region:Region='World',scope:CountryScope='countries';
 let geoRows:GeoScore[]=[];
 const requests=new Map<GameId,number>(),boards=new Map<GameId,{category:string;rows:Standing[]}>();
 const active=()=>leaderboardFocus(location.hash)!==null&&!$('#games-page').hidden;
@@ -32,6 +32,8 @@ function initialize(){
   remember();syncGeoFilters();void refreshBoard('geography');
  });
  $('#leaderboards-page').addEventListener('click',e=>{const game=(e.target as Element).closest<HTMLElement>('[data-refresh-board]')?.dataset.refreshBoard as GameId|undefined;if(game)void refreshBoard(game);});
+ for(const event of ['wheel','touchstart','pointerdown','keydown'])$('#leaderboards-page').addEventListener(event,()=>{pendingFocus='';},{passive:true});
+ window.addEventListener('hashchange',()=>{if(leaderboardFocus(location.hash)===null){lastRoute='';pendingFocus='';}});
  onIdentityChange(()=>{if(active())refreshLeaderboards();});
 }
 function syncPeriod(){
@@ -84,7 +86,15 @@ export function refreshLeaderboards(){
   if(parts[5]==='countries'||parts[5]==='expanded')scope=parts[5];remember();
  }
  syncPeriod();syncGeoFilters();$<HTMLSelectElement>('#leaderboards-jump').value=focus;
- for(const g of GAMES)void refreshBoard(g.id);
- if(changed){if(focus){const card=$('#leaderboard-'+focus);card.scrollIntoView({block:'start'});card.focus({preventScroll:true});}else $('#leaderboards-page').scrollTop=0;}
+ const loading=GAMES.map(g=>refreshBoard(g.id));
+ if(changed){
+  const route=location.hash;pendingFocus=route;
+  if(focus){
+   const card=$('#leaderboard-'+focus);card.scrollIntoView({block:'start'});card.focus({preventScroll:true});
+   // Podiums above this card change height as they load. Keep a linked game in view
+   // unless the visitor has already started interacting with the page.
+   void Promise.allSettled(loading).then(()=>{if(active()&&location.hash===route&&pendingFocus===route)card.scrollIntoView({block:'start'});});
+  }else $('#leaderboards-page').scrollTop=0;
+ }
 }
 export function exportLeaderboards(){download(Object.fromEntries(boards),'household-leaderboards');}

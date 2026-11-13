@@ -40,7 +40,7 @@ test('expanded World contains Antarctica, which is never a separate region optio
 test('competitive results persist once and appear on the shared region leaderboard',async({page})=>{
  await open(page);await start(page,'Micronesia','competitive');await expect(page.locator('#geo-clock')).toHaveText('5:00');await pick(page,'PLW');await expect(page.locator('#geo-assistance')).toBeHidden();await submit(page,'Palau');await pick(page,'NRU');for(let i=0;i<3;i++)await submit(page,'Japan');
  await expect(page.locator('#geo-result')).toContainText('25 points');await expect(page.locator('#geo-answer-form')).toBeHidden();await page.locator('#geo-result a').click();await expect(page.locator('#geo-score-status')).toHaveText('Shared household scores');await expect(page.locator('#geo-score-list')).toContainText('Michal');await expect(page.locator('#geo-score-list')).toContainText('25');await expect(page.locator('#geo-surface')).toBeHidden();
- await page.getByText('Change challenge',{exact:true}).click();await page.locator('#geo-score-scope').selectOption('expanded');await expect(page.locator('#geo-score-list')).toContainText('No completed rounds');await page.locator('#geo-score-scope').selectOption('countries');await page.reload();await ready(page);await expect(page.locator('#geo-score-list')).toContainText('Michal');
+ await page.locator('#geo-score-scope').selectOption('expanded');await expect(page.locator('#geo-score-list')).toContainText('No completed rounds');await page.locator('#geo-score-scope').selectOption('countries');await page.reload();await ready(page);await expect(page.locator('#geo-score-list')).toContainText('Michal');
  const local=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-geography-scores-v1')||'[]'));expect(local).toHaveLength(1);expect(local[0].pending).toBe(false);
 });
 
@@ -91,7 +91,7 @@ test('find competition advances after every guess and saves to its own leaderboa
  await pick(page,order[1]);await expect(page.locator('#geo-correct')).toHaveText('1');expect((await state()).findTarget).toBe(order[2]);
  await pick(page,order[1]);await expect(page.locator('#geo-result')).toContainText('50 points');expect((await state()).missed).toEqual([order[0],order[2]]);
  await page.locator('#geo-result a').click();await expect(page.locator('#geo-score-challenge')).toHaveValue('find');await expect(page.locator('#geo-score-status')).toHaveText('Shared household scores');await expect(page.locator('#geo-score-list')).toContainText('50');
- await page.getByText('Change challenge',{exact:true}).click();await page.locator('#geo-score-challenge').selectOption('name');await expect(page.locator('#geo-score-list')).not.toContainText('1/3');
+ await page.locator('#geo-score-challenge').selectOption('name');await expect(page.locator('#geo-score-list')).not.toContainText('1/3');
 });
 
 test('find competition ignores map drags and counts an empty-map click as one miss',async({page})=>{

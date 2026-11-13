@@ -73,7 +73,7 @@ test('real service worker registers locally without caching or requesting permis
  await page.goto('/#chores');await openNotifications(page);
  await expect(page.locator('#push-message')).toHaveText('');
  const state=await page.evaluate(async()=>({scope:(await navigator.serviceWorker.ready).scope,permission:Notification.permission,caches:await caches.keys()}));
- expect(state.scope).toBe('http://127.0.0.1:4174/');expect(state.permission).toBe('default');expect(state.caches).toEqual([]);
+ expect(state.scope).toBe(new URL('/',page.url()).href);expect(state.permission).toBe('default');expect(state.caches).toEqual([]);
 });
 test('notification links open bill details and handle missing items gracefully',async({page})=>{
  const data=await (await page.request.post('/rest/v1/rpc/utilities_dashboard',{headers:{apikey:'local-public'},data:{}})).json();

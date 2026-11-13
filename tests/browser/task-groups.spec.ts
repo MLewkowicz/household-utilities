@@ -31,9 +31,9 @@ test('held tiles move neighbors before drop, cancel safely and save cross-group 
  await expect.poll(async()=>(await rpc(page,'personal_tasks',{member:'ohm'})).tasks.find((t:any)=>t.id===a.id).group_name).toBe('Destination');const saved=(await rpc(page,'personal_tasks',{member:'ohm'}));expect(saved.history.filter((t:any)=>t.id===a.id&&t.action==='group')).toHaveLength(1);await page.reload();await expect(page.locator('[data-task-group=Destination]')).toContainText('Drag project A');
  await mkdir('.local/face-review',{recursive:true});for(const width of [320,390,1280]){await page.setViewportSize({width,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.screenshot({path:`.local/face-review/grouped-tasks-${width}.png`,fullPage:true});}
 });
-test('touch scroll remains native before a hold; held touch drag persists without completing a task',async({browser,page})=>{
+test('touch scroll remains native before a hold; held touch drag persists without completing a task',async({browser,page,baseURL})=>{
  const a=await create(page,'Touch A','Touch group'),b=await create(page,'Touch B','Touch group');await orderPair(page,a,b);
- const context=await browser.newContext({baseURL:'http://127.0.0.1:4174',...devices['Pixel 7'],viewport:{width:390,height:844}});const phone=await context.newPage();await open(phone);const session=await context.newCDPSession(phone);
+ const context=await browser.newContext({baseURL,...devices['Pixel 7'],viewport:{width:390,height:844}});const phone=await context.newPage();await open(phone);const session=await context.newCDPSession(phone);
  const touch=async(type:string,x:number,y:number)=>session.send('Input.dispatchTouchEvent',{type,touchPoints:type==='touchEnd'?[]:[{x,y}]});
  await entry(phone,b.id).locator('h3').scrollIntoViewIfNeeded();let r=(await entry(phone,b.id).locator('h3').boundingBox())!;const scroll=await phone.evaluate(()=>scrollY);
  await touch('touchStart',r.x+15,r.y+10);await touch('touchMove',r.x+15,r.y-70);await touch('touchEnd',0,0);await expect(phone.locator('.task-drag-preview')).toHaveCount(0);await expect.poll(()=>phone.evaluate(()=>scrollY)).toBeGreaterThan(scroll);
@@ -82,9 +82,9 @@ test('group rename keeps failed drafts, rejects conflicts, and fits narrow scree
  await mkdir('.local/group-rename-review',{recursive:true});for(const width of [320,390,1280]){await page.setViewportSize({width,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.locator(`[data-task-group="${next}"]`).scrollIntoViewIfNeeded();expect(await page.locator('#todo-lane-personal').evaluate(el=>el.scrollWidth<=el.clientWidth)).toBeTruthy();await page.screenshot({path:`.local/group-rename-review/rename-${width}.png`});}
 });
 
-test('touch holds survive small finger movement and capture transfer, while cancellation restores the order',async({browser,page})=>{
+test('touch holds survive small finger movement and capture transfer, while cancellation restores the order',async({browser,page,baseURL})=>{
  const a=await create(page,'Finger movement A','Finger movement'),b=await create(page,'Finger movement B','Finger movement');await orderPair(page,a,b);
- const context=await browser.newContext({baseURL:'http://127.0.0.1:4174',...devices['Pixel 7'],viewport:{width:390,height:844}}),phone=await context.newPage();await open(phone);
+ const context=await browser.newContext({baseURL,...devices['Pixel 7'],viewport:{width:390,height:844}}),phone=await context.newPage();await open(phone);
  const session=await context.newCDPSession(phone),touch=async(type:string,x=0,y=0)=>session.send('Input.dispatchTouchEvent',{type,touchPoints:type==='touchEnd'||type==='touchCancel'?[]:[{x,y}]});
  for(const [selector,jitter] of [['h3',2],['.todo-face',5]] as const){
   const section=phone.locator('[data-task-group="Finger movement"]');await entry(phone,a.id).scrollIntoViewIfNeeded();

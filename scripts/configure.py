@@ -139,6 +139,7 @@ def main():
             ("047_size_editorial.sql", "ledger_private.size_editorial_version()"),
             ("048_route_capabilities.sql", "ledger_private.route_capabilities_version()"),
             ("049_bidirectional_routes.sql", "ledger_private.route_bidirectional_version()"),
+            ("050_size_categories.sql", "ledger_private.size_categories_version()"),
             ("051_active_puzzle_clocks.sql", "ledger_private.active_puzzle_clocks_version()"),
         ]:
             installed = request(base + "/database/query", token, {"query": f"SELECT to_regprocedure('{signature}')::text AS fn"})

@@ -13,7 +13,7 @@ test('planet selection uses rotation, keyboard and links without loading the glo
  await page.getByRole('button',{name:'Previous game'}).click();await expect(scene).toHaveAttribute('data-selected','geography');
  const box=(await scene.boundingBox())!;await page.mouse.move(box.x+box.width*.6,box.y+box.height*.7);await page.mouse.down();await page.mouse.move(box.x+box.width*.6-90,box.y+box.height*.7,{steps:8});await page.mouse.up();await expect(scene).toHaveAttribute('data-selected','odd-one-out');
  await page.getByRole('button',{name:'How Much-ish?'}).click();await expect(page).toHaveURL(/#games\/how-much-ish$/);
- await page.getByRole('button',{name:'Practice',exact:true}).click();await expect(page.locator('.scale-stage')).toBeVisible();await page.getByRole('slider').focus();await page.keyboard.press('End');await expect(page.getByRole('slider')).toHaveAttribute('aria-valuenow','1.4');await page.getByRole('button',{name:'Lock it in',exact:false}).click();await expect(page.locator('.scale-correct')).toBeVisible();
+ await page.getByRole('button',{name:'Practice',exact:true}).click();await expect(page.locator('.scale-stage')).toBeVisible();await page.getByRole('slider').focus();await page.keyboard.press('End');await expect(page.getByRole('slider')).toHaveAttribute('aria-valuenow','20');await page.getByRole('button',{name:'Check size',exact:false}).click();await expect(page.locator('.scale-correct')).toBeVisible();
  await page.getByRole('link',{name:'Games',exact:true}).click();await page.getByRole('button',{name:'Play Geography',exact:true}).click();await expect(page.locator('#geo-map')).toBeVisible();
 });
 test('monument renderer selects a planet with reduced motion and survives context loss',async({page})=>{
@@ -28,7 +28,7 @@ test('all five games have distinct boards and review a practice question',async(
  if(game==='passport-puzzle'){await expect(page.getByRole('img',{name:'Country outline'})).toBeVisible();await page.getByRole('button',{name:/Reveal clue/}).click();await expect(page.locator('.passport-evidence li')).toHaveCount(2);await page.locator('#trivia-guess').fill('test');}
  if(game==='clue-cascade'){await expect(page.locator('.word-tile')).toHaveCount(16);const a=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-trivia-v3:guest:clue-cascade:practice')!));for(const g of a.questions[0].groups){for(const word of g.words)await page.getByRole('button',{name:word,exact:true}).click();await page.getByRole('button',{name:'Submit group',exact:true}).click();}await expect(page.locator('.trivia-feedback')).toContainText('All four');continue;}
  if(game==='before-or-after'){await expect(page.locator('.timeline-art svg')).toHaveCount(5);await expect(page.locator('.timeline-date')).toHaveCount(0);await page.locator('.timeline-tile').first().focus();await page.keyboard.press('Space');await page.keyboard.press('ArrowRight');await page.keyboard.press('Space');}
- await page.getByRole('button',{name:game==='how-much-ish'?'Lock it in':'Submit',exact:false}).click();await expect(page.locator(game==='before-or-after'?'.timeline-comparison':'.trivia-feedback')).toBeVisible();
+ await page.getByRole('button',{name:game==='how-much-ish'?'Check size':'Submit',exact:false}).click();await expect(page.locator(game==='before-or-after'?'.timeline-comparison':'.trivia-feedback')).toBeVisible();
  if(game==='before-or-after')await expect(page.locator('.timeline-date')).toHaveCount(5);
  }expect(errors).toEqual([]);
 });
@@ -46,8 +46,8 @@ test('leaving a slow leaderboard cannot overwrite or break the game board',async
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
  let release=()=>{};const held=new Promise<void>(resolve=>{release=resolve;});
  await page.route('**/utilities_trivia_scores',async route=>{await held;await route.continue();});
- await page.goto('/?webgl=0#games/clue-cascade');await page.getByRole('link',{name:'Scores'}).click();await expect(page.locator('#trivia-standings')).toContainText('Loading');
- await page.getByRole('link',{name:'Back to Common Ground'}).click();await page.getByRole('button',{name:'Practice',exact:true}).click();release();
+ await page.goto('/?webgl=0#games/leaderboards/clue-cascade');await expect(page.locator('[data-standings=clue-cascade]')).toContainText('Loading');
+ await page.getByRole('link',{name:'Play Common Ground'}).click();await page.getByRole('button',{name:'Practice',exact:true}).click();release();
  await expect(page.locator('.word-grid')).toBeVisible();await page.waitForTimeout(300);expect(errors).toEqual([]);
 });
 
@@ -64,9 +64,9 @@ test('Common Ground keeps daily progress after reload and locks after four misse
  await page.getByRole('button',{name:'See result'}).click();await expect(page.locator('.game-result h2')).toHaveText('250 / 1,000');
 });
 test('measured profiles preserve equal pixels per metre on both axes',async({page})=>{
- await page.goto('/?webgl=0#games/how-much-ish');await page.getByRole('button',{name:'Practice',exact:true}).click();await page.locator('[data-archive-entry=starter-5]').click();await page.getByRole('slider').focus();await page.keyboard.press('End');
- const spans=await page.locator('.scale-object > svg').evaluateAll(svgs=>svgs.map(svg=>{const g=svg.querySelector<SVGGraphicsElement>('.profile-shape')!,b=g.getBBox(),m=g.getScreenCTM()!;return (svg.getAttribute('data-axis')==='height'?b.height:b.width)*m.a;}));expect(spans[1]/spans[0]).toBeCloseTo(1.4,4);
- await page.getByRole('button',{name:'Lock it in',exact:false}).click();await page.getByText('Measurements & artwork',{exact:true}).click();await expect(page.locator('.size-credits a')).not.toHaveCount(0);
+ await page.goto('/?webgl=0#games/how-much-ish');await page.getByRole('button',{name:'Practice',exact:true}).click();await page.locator('[data-archive-entry=size-classic-5]').click();await page.getByRole('slider').focus();await page.keyboard.press('End');
+ const spans=await page.locator('.scale-object > svg').evaluateAll(svgs=>svgs.map(svg=>{const g=svg.querySelector<SVGGraphicsElement>('.profile-shape')!,b=g.getBBox(),m=g.getScreenCTM()!;return (svg.getAttribute('data-axis')==='height'?b.height:b.width)*m.a;}));expect(spans[1]/spans[0]).toBeCloseTo(20,2);
+ await page.getByRole('button',{name:'Check size',exact:false}).click();await page.getByText('Measurements & artwork',{exact:true}).click();await expect(page.locator('.size-credits a')).not.toHaveCount(0);
 });
 
 test('celestial parallax pauses with the hub and reduced motion stops the animation loop',async({page})=>{

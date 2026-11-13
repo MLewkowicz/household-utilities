@@ -17,12 +17,12 @@ test('cards launch immediately, aim at their screen position and remain usable o
 test('direct silhouette resizing supports mouse, keyboard and persisted progress',async({page})=>{
  await page.goto('/?webgl=0#games/how-much-ish');const target=page.getByRole('slider');await expect(target).toBeVisible();await expect(page.locator('input[type=range]')).toHaveCount(0);
  const initial=Number(await target.getAttribute('aria-valuenow'));const b=(await target.boundingBox())!;
- await page.mouse.move(b.x+b.width/2,b.y+b.height-50);await page.mouse.down();await page.mouse.move(b.x+b.width/2,b.y+b.height-140,{steps:8});await page.mouse.up();const dragged=Number(await target.getAttribute('aria-valuenow'));expect(dragged).toBeGreaterThan(initial);
+ await page.mouse.move(b.x+b.width/2,b.y+b.height/2);await page.mouse.down();await page.mouse.move(b.x+b.width/2,b.y+b.height/2-90,{steps:8});await page.mouse.up();const dragged=Number(await target.getAttribute('aria-valuenow'));expect(dragged).toBeGreaterThan(initial);
  await target.focus();await page.keyboard.press('ArrowLeft');const keyed=Number(await target.getAttribute('aria-valuenow'));expect(keyed).toBeLessThan(dragged);
- await page.reload();await expect(target).toHaveAttribute('aria-valuenow',String(keyed));await page.getByRole('button',{name:/Lock it in/}).click();await expect(page.locator('.scale-correct')).toBeVisible();
+ await page.reload();await expect(target).toHaveAttribute('aria-valuenow',String(keyed));await page.getByRole('button',{name:/Check size/}).click();await expect(page.locator('.scale-correct')).toBeVisible();
 });
-test('touch resize changes the target without scrolling the board',async({browser})=>{
- const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});const page=await context.newPage();await page.goto('http://127.0.0.1:4174/?webgl=0#games/how-much-ish');const target=page.getByRole('slider');await expect(target).toBeVisible();const b=(await target.boundingBox())!,session=await context.newCDPSession(page),x=b.x+b.width/2,y=b.y+b.height-30;
+test('touch resize changes the target without scrolling the board',async({browser,baseURL})=>{
+ const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});const page=await context.newPage();await page.goto(baseURL+'/?webgl=0#games/how-much-ish');const target=page.getByRole('slider');await expect(target).toBeVisible();const b=(await target.boundingBox())!,session=await context.newCDPSession(page),x=b.x+b.width/2,y=b.y+b.height/2;
  await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y,id:1}]});await session.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x,y:y-90,id:1}]});await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});expect(Number(await target.getAttribute('aria-valuenow'))).toBeGreaterThan(1);expect(await page.locator('#trivia-page').evaluate(el=>el.scrollTop)).toBe(0);await context.close();
 });
 test('review reuses the rotating globe and exposes expandable country stories',async({page})=>{
