@@ -3,6 +3,17 @@ import type {Question} from './trivia-model';
 export type GridClue={number:number;row:number;col:number;direction:'across'|'down';length:number;text:string};
 export type PuzzleGrid={size:number;givens:string;clues:GridClue[]};
 export function gridCells(clue:GridClue,size:number){return Array.from({length:clue.length},(_,i)=>(clue.row+(clue.direction==='down'?i:0))*size+clue.col+(clue.direction==='across'?i:0));}
+/** Finish the current entry, then the remaining entries in this direction, then crossings. */
+export function nextCrosswordCell(grid:PuzzleGrid,value:string,cell:number,direction:GridClue['direction']){
+ const entries=[...grid.clues].sort((a,b)=>Number(a.direction==='down')-Number(b.direction==='down')||a.number-b.number);
+ const active=entries.find(c=>c.direction===direction&&gridCells(c,grid.size).includes(cell))||entries.find(c=>gridCells(c,grid.size).includes(cell));
+ if(!active)return {cell,direction};
+ const cells=gridCells(active,grid.size),index=cells.indexOf(cell);
+ for(let step=1;step<=cells.length;step++){const next=cells[(index+step)%cells.length];if(value[next]===' ')return {cell:next,direction:active.direction};}
+ const entry=entries.indexOf(active);
+ for(let step=1;step<entries.length;step++){const next=entries[(entry+step)%entries.length],empty=gridCells(next,grid.size).find(i=>value[i]===' ');if(empty!==undefined)return {cell:empty,direction:next.direction};}
+ return {cell,direction:active.direction};
+}
 export function validSudoku(value:string){
  if(!/^[1-9]{81}$/.test(value))return false;
  for(let n=0;n<9;n++)for(const cells of [Array.from({length:9},(_,i)=>n*9+i),Array.from({length:9},(_,i)=>i*9+n),Array.from({length:9},(_,i)=>(Math.floor(n/3)*3+Math.floor(i/3))*9+n%3*3+i%3)])if(new Set(cells.map(i=>value[i])).size!==9)return false;
@@ -40,7 +51,7 @@ export function mountGrid(host:HTMLElement,q:Question,initial:string,locked:bool
   if(locked||g.givens[cell]!==' ')return;
   undo.push({value,notes:{...notes}});if(undo.length>150)undo.shift();
   if(pencil&&sudoku&&char!==' '){const current=notes[cell]||'';notes[cell]=current.includes(char)?current.replace(char,''):[...current,char].sort().join('');}
-  else{value=value.slice(0,cell)+char+value.slice(cell+1);delete notes[cell];onChange(value);if(!sudoku&&char!==' ')advance();}
+  else{value=value.slice(0,cell)+char+value.slice(cell+1);delete notes[cell];onChange(value);if(!sudoku&&char!==' '){const next=nextCrosswordCell(g,value,cell,direction);cell=next.cell;direction=next.direction;}}
   paint(true);
  }
  host.addEventListener('click',e=>{

@@ -1,11 +1,29 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
 import atlas from '../src/geography-data.json';
 import {globeCities,cityPrompt} from '../src/globe-cities';
 import {newRound,inRound,roundLocations,prepareFindTarget,answerLocation,restoreRound,type Country} from '../src/geography';
-import {createRoute,stepRoute,restoreRoute,shortestRoute,routePuzzles,neighbors} from '../src/geography-route';
+import {createRoute,stepRoute,restoreRoute,shortestRoute,routePuzzles,practiceRoutePuzzles,routePuzzle,routeGuessLimit,neighbors} from '../src/geography-route';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
 const countries=atlas as Country[];
+test('route capability repair allows public metadata without exposing private game tables',async()=>{
+ const db=await openDatabase();try{
+  const before=await db.query('SELECT * FROM ledger_private.geography_route_puzzles ORDER BY id');
+  // Reproduce the installed 046 definition before applying the additive repair.
+  await db.exec("CREATE OR REPLACE FUNCTION public.utilities_geography_route_capabilities() RETURNS jsonb LANGUAGE sql STABLE SET search_path='' AS $$ SELECT jsonb_build_object('version',2,'puzzles',(SELECT count(*) FROM ledger_private.geography_route_puzzles),'global_routes',true);$$;");
+  await assert.rejects(callRpc(db,'geography_route_capabilities'),/permission denied/);
+  const repair=await readFile(new URL('../supabase/migrations/048_route_capabilities.sql',import.meta.url),'utf8');
+  await db.exec(repair);await db.exec(repair);
+  for(const role of ['anon','authenticated'])await db.transaction(async tx=>{
+   await tx.exec(`SET LOCAL ROLE ${role}`);
+   const result=await tx.query('SELECT public.utilities_geography_route_capabilities() AS capabilities');
+   assert.deepEqual(result.rows[0].capabilities,{version:2,puzzles:108,global_routes:true});
+  });
+  assert.deepEqual((await db.query('SELECT * FROM ledger_private.geography_route_puzzles ORDER BY id')).rows,before.rows);
+  await assert.rejects(db.transaction(async tx=>{await tx.exec('SET LOCAL ROLE anon');await tx.query('SELECT * FROM ledger_private.geography_route_puzzles');}),/permission denied/);
+ }finally{await db.close();}
+});
 test('city catalog keeps urban centers and removes satellite clusters with population context',()=>{
  const polish=Object.values(globeCities).filter(c=>c.countryId==='POL');
  assert.deepEqual(polish.map(c=>c.id),['POL','POL_KRAKOW','POL_GDANSK','POL_LODZ','POL_KATOWICE']);
@@ -28,29 +46,35 @@ test('city questions and saved progress distinguish multiple cities in the same 
  const ranked=newRound('Europe',0,0,'countries','competitive-cities');ranked.findOrder=[krakow.id,warsaw.id];prepareFindTarget(ranked,countries,1000);assert.equal(answerLocation(ranked,warsaw,countries,2000)?.correct,false);assert.deepEqual(ranked.missed,[krakow.id]);assert.equal(ranked.correct.length,0);
  const oldRanked=restoreRound({...ranked,cityVersion:undefined},countries)!;assert.notEqual(oldRanked.id,ranked.id);assert.equal(oldRanked.cityVersion,3);assert.equal(oldRanked.mistakes,0);
 });
-test('route catalog has symmetric land borders and all shortest paths are valid',()=>{
+test('global routes interleave continents and respect playable connections',()=>{
  for(const [a,ns] of Object.entries(neighbors))for(const b of ns)assert.ok(neighbors[b].includes(a),a+'-'+b);
- for(const p of routePuzzles){assert.equal(shortestRoute(p.start,p.end).length-1,p.minimum);assert.equal(p.solution[0],p.start);assert.equal(p.solution.at(-1),p.end);let r=createRoute(p);for(const id of p.solution.slice(1))r=stepRoute(r,id);assert.equal(r.won,true);assert.equal(r.score,1000);assert.deepEqual(restoreRoute(r),r);}
- assert.ok(neighbors.BWA.includes('ZMB'));assert.ok(neighbors.ITA.includes('VAT'));assert.ok(!neighbors.FRA.includes('BRA'));assert.ok(!neighbors.POL.includes('RUS'));assert.equal(shortestRoute('JPN','CHN').length,0);
+ assert.equal(practiceRoutePuzzles.length,60);assert.ok(practiceRoutePuzzles.some(p=>p.minimum>12));
+ assert.ok(new Set(practiceRoutePuzzles.slice(0,10).flatMap(p=>[p.start,p.end]).map(id=>countries.find(c=>c.id===id)!.continent)).size>=5);
+ for(const p of practiceRoutePuzzles){assert.equal(shortestRoute(p.start,p.end).length-1,p.minimum);assert.equal(p.solution[0],p.start);assert.equal(p.solution.at(-1),p.end);let r=createRoute(p);for(const id of p.solution.slice(1,-1))r=stepRoute(r,id);assert.equal(r.won,true,p.id+'');assert.equal(r.score,1000);assert.deepEqual(restoreRoute(r),r);}
+ assert.ok(neighbors.BWA.includes('ZMB'));assert.ok(neighbors.ITA.includes('VAT'));assert.ok(neighbors.FRA.includes('GBR'));assert.ok(neighbors.DNK.includes('SWE'));assert.ok(!neighbors.FRA.includes('BRA'));assert.ok(!neighbors.POL.includes('RUS'));assert.ok(!neighbors.TUR.includes('AZE'));assert.ok(!neighbors.AGO.includes('COG'));assert.equal(shortestRoute('JPN','CHN').length,0);
 });
-test('routes accept alternatives, reveal only valid tiles, charge detours and survive restoration',()=>{
- const p=routePuzzles[0];assert.equal(p.start,'PRT');let r=createRoute(p);assert.deepEqual(r.discovered,[p.start,p.end]);r=stepRoute(r,'JPN');assert.equal(r.mistakes,1);assert.ok(!r.discovered.includes('JPN'));r=stepRoute(r,'ESP');r=stepRoute(r,'back');assert.equal(r.steps,2);assert.deepEqual(r.path,['PRT']);assert.ok(r.discovered.includes('ESP'));
- for(const id of ['ESP','FRA','BEL','DEU','POL'])r=stepRoute(r,id);assert.ok(r.won);assert.equal(r.score,Math.max(0,1000-(r.steps-p.minimum)*100-100));assert.deepEqual(restoreRoute(r),r);assert.equal(stepRoute(r,'JPN'),r);assert.equal(restoreRoute({...r,path:['PRT','JPN']}),undefined);
- let lost=createRoute(p);for(let i=0;i<5;i++)lost=stepRoute(lost,'JPN');assert.ok(lost.complete);assert.equal(lost.won,false);assert.equal(lost.score,0);
+test('routes allow unordered guesses, reject repeats/backtracking and fill the endpoint automatically',()=>{
+ const p=routePuzzle(createRoute(routePuzzles[0]));let r=createRoute(p);r=stepRoute(r,'JPN');assert.equal(r.mistakes,1);assert.ok(r.discovered.includes('JPN'));r=stepRoute(r,'ESP');
+ for(const repeat of ['back','PRT','POL','ESP','JPN'])assert.equal(stepRoute(r,repeat),r);
+ for(const id of p.solution.slice(2,-1))r=stepRoute(r,id);assert.ok(r.won);assert.equal(r.steps,p.minimum);assert.equal(r.score,900);assert.deepEqual(restoreRoute(r),r);assert.equal(stepRoute(r,'JPN'),r);assert.equal(restoreRoute({...r,path:['PRT','JPN']}),undefined);
+ let unordered=createRoute(p);for(const id of p.solution.slice(1,-1).reverse())unordered=stepRoute(unordered,id);assert.ok(unordered.won);assert.equal(unordered.score,975);assert.equal(unordered.feedback![0].quality,'useful');
+ let lost=createRoute(p);const islands=['JPN','AUS','NZL','ISL','MDG','CUB','FJI','MLT','NRU','KIR'];for(const id of islands.slice(0,routeGuessLimit(p)))lost=stepRoute(lost,id);assert.ok(lost.complete);assert.equal(lost.won,false);assert.equal(lost.score,0);
 });
-test('daily trails share a puzzle, validate each border and make retries idempotent',async()=>{
+test('daily trails match practice rules, keep retries idempotent and share one global puzzle',async()=>{
  const db=await openDatabase();try{
   const start=(player:string)=>callRpc(db,'geography_route_start',{p:{player}}),act=(s:any,choice:string)=>callRpc(db,'geography_route_action',{p:{id:s.id,player:s.player,revision:s.revision,choice}});
-  let a=await start('michal');const b=await start('rina');assert.equal(a.puzzle_id,b.puzzle_id);assert.deepEqual(await start('michal'),a);const puzzle=routePuzzles.find(p=>p.id===a.puzzle_id)!;
+  let a=await start('michal');const b=await start('rina');assert.equal(a.puzzle_id,b.puzzle_id);assert.deepEqual(await start('michal'),a);const puzzle=routePuzzles.find(p=>p.id===a.puzzle_id)!;assert.ok(puzzle.id>=48);
   await assert.rejects(start('guest'),/household player/);await assert.rejects(callRpc(db,'geography_route_action',{p:{id:a.id,player:'rina',revision:0,choice:'JPN'}}),/not found/);
   await assert.rejects(callRpc(db,'geography_route_action',{p:{id:a.id,player:a.player,revision:20,choice:'JPN'}}),/Refresh/);
-  const before=a;a=await act(a,'JPN');assert.equal(a.mistakes,1);assert.deepEqual(await act(before,'JPN'),a);assert.deepEqual(a.discovered,[puzzle.start,puzzle.end]);assert.equal((await callRpc(db,'geography_route_scores')).length,0);
-  a=await act(a,puzzle.solution[1]);assert.ok(a.discovered.includes(puzzle.solution[1]));a=await act(a,'back');assert.equal(a.steps,2);assert.ok(a.discovered.includes(puzzle.solution[1]));
-  for(const id of puzzle.solution.slice(1))a=await act(a,id);assert.ok(a.complete&&a.won);assert.equal(a.score,700);assert.deepEqual(await start('michal'),a);assert.deepEqual(await act(a,'JPN'),a);
-  const scores=await callRpc(db,'geography_route_scores');assert.equal(scores.length,1);assert.equal(scores[0].score,700);assert.equal(scores[0].path,undefined);
+  let practice=createRoute(puzzle);const before=a;
+  for(const choice of ['JPN',puzzle.solution[1],'back',puzzle.solution[1],puzzle.end,...puzzle.solution.slice(2,-1)]){
+   a=await act(a,choice);practice=stepRoute(practice,choice);for(const key of ['path','discovered','steps','mistakes','complete','won','score','feedback','guesses'])assert.deepEqual(a[key],practice[key],key+' '+choice);
+  }
+  assert.deepEqual(await act(before,'JPN'),a);assert.ok(a.complete&&a.won);assert.equal(a.score,900);assert.deepEqual(await start('michal'),a);assert.deepEqual(await act(a,'JPN'),a);
+  const scores=await callRpc(db,'geography_route_scores');assert.equal(scores.length,1);assert.equal(scores[0].score,900);assert.equal(scores[0].path,undefined);
   const lost=await act(b,'give-up');assert.equal(lost.score,0);assert.ok(lost.complete&&!lost.won);
   const edges=await db.query('SELECT a,b FROM ledger_private.geography_route_edges');assert.equal(edges.rows.length,Object.values(neighbors).reduce((n,x)=>n+x.length,0)/2);for(const e of edges.rows)assert.ok(neighbors[e.a].includes(e.b));
-  const saved=await db.query('SELECT * FROM ledger_private.geography_route_puzzles ORDER BY id');assert.deepEqual(saved.rows,routePuzzles.map(p=>({id:p.id,start:p.start,finish:p.end,minimum:p.minimum,solution:p.solution})));
+  const saved=await db.query('SELECT id,start,finish,minimum,solution FROM ledger_private.geography_route_puzzles ORDER BY id');assert.deepEqual(saved.rows,routePuzzles.map(p=>({id:p.id,start:p.start,finish:p.end,minimum:p.minimum,solution:p.solution})));
   await assert.rejects(db.transaction(async tx=>{await tx.exec('SET LOCAL ROLE anon');await tx.query('SELECT * FROM ledger_private.geography_routes');}),/permission denied/);
  }finally{await db.close();}
 });

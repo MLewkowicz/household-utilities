@@ -20,8 +20,9 @@ export async function initGames(){
  const viewport=$('#observatory-scene');let drag:{id:number;x:number;start:number;moved:boolean}|undefined;
  function cancelDrag(){const d=drag;drag=undefined;if(d&&viewport.hasPointerCapture(d.id))viewport.releasePointerCapture(d.id);if(d)scene?.setAngle(turn*step);}
  viewport.addEventListener('pointerdown',e=>{if(drag||!e.isPrimary||(e.target as Element).closest('button')||e.button!==0||!sceneVisible())return;drag={id:e.pointerId,x:e.clientX,start:turn,moved:false};viewport.setPointerCapture(e.pointerId);});
- viewport.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;if(e.pointerType==='mouse'&&e.buttons===0){cancelDrag();return;}const dx=e.clientX-drag.x;if(Math.abs(dx)>8)drag.moved=true;if(drag.moved)scene?.setAngle((drag.start+dx/90)*step,true);});
- viewport.addEventListener('pointerup',e=>{if(!drag||e.pointerId!==drag.id)return;const d=drag;drag=undefined;if(viewport.hasPointerCapture(d.id))viewport.releasePointerCapture(d.id);const delta=(e.clientX-d.x)/90;choose(d.moved?d.start+Math.sign(delta)*Math.max(1,Math.round(Math.abs(delta))):d.start);});
+ // Match the house: dragging left advances, dragging right goes back.
+ viewport.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;if(e.pointerType==='mouse'&&e.buttons===0){cancelDrag();return;}const dx=e.clientX-drag.x;if(Math.abs(dx)>8)drag.moved=true;if(drag.moved)scene?.setAngle((drag.start-dx/90)*step,true);});
+ viewport.addEventListener('pointerup',e=>{if(!drag||e.pointerId!==drag.id)return;const d=drag;drag=undefined;if(viewport.hasPointerCapture(d.id))viewport.releasePointerCapture(d.id);const delta=(d.x-e.clientX)/90;choose(d.moved?d.start+Math.sign(delta)*Math.max(1,Math.round(Math.abs(delta))):d.start);});
  viewport.addEventListener('pointercancel',e=>{if(e.pointerId===drag?.id)cancelDrag();});
  viewport.addEventListener('lostpointercapture',e=>{if(e.target===viewport&&e.pointerId===drag?.id)cancelDrag();});
  window.addEventListener('blur',cancelDrag);window.addEventListener('hashchange',()=>{cancelDrag();$('#games-page').querySelectorAll<HTMLDialogElement>('dialog[open]').forEach(dialog=>dialog.close());});

@@ -39,7 +39,7 @@ test('personal shelves isolate people, preserve missed and completed dailies, an
  const db=await openDatabase();try{
   const player='michal',game='before-or-after',p={player,game,entry:'starter-1'};
   const shelf=await callRpc(db,'game_library',{p});assert.equal(shelf.entries.filter((e:any)=>e.starter).length,10);
-  const photos=await json('src/size-photo-assets.json'),practice=await json('src/trivia/how-much-ish.json'),dailyPhotos=(await db.query("SELECT questions FROM ledger_private.trivia_packs WHERE game='how-much-ish' AND version=7")).rows.flatMap((row:any)=>row.questions);assert.equal(dailyPhotos.length,900);const photoIds=new Set(dailyPhotos.map((q:any)=>q.id));assert.ok(practice.every((q:any)=>!photoIds.has(q.id)));const objects=new Set<string>();for(const q of [...practice,...dailyPhotos])for(const item of [q.reference,q.target]){assert.ok(item.shape.startsWith('photo:'));const id=item.shape.slice(6);assert.ok(photos[id]);objects.add(id);}assert.equal(objects.size,59);
+  const photos=await json('src/size-photo-assets.json'),practice=await json('src/trivia/how-much-ish.json'),dailyPhotos=(await db.query("SELECT questions FROM ledger_private.trivia_packs WHERE game='how-much-ish' AND version=7")).rows.flatMap((row:any)=>row.questions);assert.equal(dailyPhotos.length,900);const photoIds=new Set(dailyPhotos.map((q:any)=>q.id));assert.ok(practice.every((q:any)=>!photoIds.has(q.id)));const objects=new Set<string>();for(const q of dailyPhotos)for(const item of [q.reference,q.target]){assert.ok(item.shape.startsWith('photo:'));const id=item.shape.slice(6);assert.ok(photos[id]);objects.add(id);}assert.equal(objects.size,59);assert.ok(practice.some((q:any)=>q.target.name==='Death Star I'&&q.reference.name==='Earth'));const newDaily=(await db.query("SELECT questions FROM ledger_private.trivia_packs WHERE game='how-much-ish' AND version=9")).rows.flatMap((row:any)=>row.questions);for(const q of [...practice,...newDaily]){assert.ok(Number(q.answer)>=q.bounds[0]&&Number(q.answer)<=q.bounds[1]);assert.doesNotMatch(q.target.name+' '+q.reference.name,/wire|pliers|Nintendo|AKG|Steinway|iPhone/i);}
   const packs=await db.query('SELECT game,count(DISTINCT questions) AS n FROM ledger_private.game_starter_packs GROUP BY game');for(const row of packs.rows)assert.equal(Number(row.n),10,row.game);
   const opened=await callRpc(db,'game_archive',{p});assert.equal(opened.revision,0);assert.ok(opened.state.attempt.questions[0].answer);
   const saved=structuredClone(opened.state);saved.drafts['0']=saved.attempt.questions[0].answer;
@@ -55,7 +55,7 @@ test('personal shelves isolate people, preserve missed and completed dailies, an
   const past=(await db.query("SELECT day::text FROM ledger_private.trivia_attempts WHERE player='michal'")).rows[0].day;
   const old=await callRpc(db,'game_archive',{p:{...p,entry:past}});assert.equal(old.state.attempt.questions[0].version,2);assert.equal(old.state.attempt.complete,false);
   assert.equal((await db.query('SELECT count(*) AS n FROM ledger_private.trivia_attempts')).rows[0].n,1);
-  const geo=await callRpc(db,'game_archive',{p:{player,game:'geography',entry:'starter-2'}});assert.equal(geo.state.attempt.puzzle_id,1);assert.equal(geo.state.attempt.complete,false);
+  const geo=await callRpc(db,'game_archive',{p:{player,game:'geography',entry:'starter-2'}});assert.equal(geo.state.attempt.puzzle_id,49);assert.equal(geo.state.attempt.complete,false);
   await callRpc(db,'game_archive_save',{p:{player,game:'geography',entry:'starter-2',revision:0,state:geo.state}});
  }finally{await db.close();}
 });
@@ -70,5 +70,19 @@ test('daily grid boards hide solutions, allow correction, and award a locked com
    assert.deepEqual(await callRpc(db,'trivia_action',{p:{...p,answer:pack[0].answer}}),done);
   }
   const status=await callRpc(db,'game_daily_status',{p:{player:'ohm'}});assert.equal(status.games.filter((g:any)=>g.complete).length,2);
+ }finally{await db.close();}
+});
+test('timed grid results use authoritative clocks, freeze on retry and rank faster solves first',async()=>{
+ const db=await openDatabase();try{
+  for(const game of ['sudoku','crossword']){
+   for(const [player,seconds] of [['michal',300],['rina',90]] as const){
+    const a=await callRpc(db,'trivia_start',{p:{game,player}});assert.ok(a.started_at);assert.equal((await callRpc(db,'trivia_start',{p:{game,player}})).started_at,a.started_at);
+    await db.query("UPDATE ledger_private.trivia_attempts SET started_at=clock_timestamp()-$2*interval '1 second' WHERE id=$1",[a.id,seconds]);
+    const q=(await db.query('SELECT questions->0 AS q FROM ledger_private.trivia_packs WHERE game=$1 AND version=$2 AND slot=$3',[game,a.version,a.slot])).rows[0].q;
+    const p={id:a.id,player,index:0,action:'answer',answer:q.answer,elapsed_ms:1};
+    const done=await callRpc(db,'trivia_action',{p});assert.ok(done.elapsed_ms>=seconds*1000);assert.ok(done.elapsed_ms<(seconds+5)*1000);assert.ok(done.finished_at);assert.deepEqual(await callRpc(db,'trivia_action',{p}),done);
+   }
+   for(const period of ['day','week']){const scores=await callRpc(db,'trivia_scores',{p:{game,period}});assert.equal(scores[0].player,'rina');assert.equal(scores[0].rank,1);assert.equal(scores[1].rank,2);assert.equal(scores[1].score,1000);}
+  }
  }finally{await db.close();}
 });

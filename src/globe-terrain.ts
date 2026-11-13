@@ -63,9 +63,9 @@ export async function createGlobeTerrain(renderer:T.WebGLRenderer,countries:Coun
  const material=new T.MeshStandardMaterial({map:color,normalMap:normal,normalMapType:T.ObjectSpaceNormalMap,roughness:.92,metalness:0});
  material.onBeforeCompile=shader=>{
   Object.assign(shader.uniforms,detail.uniforms);shader.uniforms.quizOverlay={value:overlay};shader.uniforms.landCover={value:cover};
-  shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nuniform sampler2D quizOverlay;\nuniform sampler2D landCover;\n'+detail.declarations).replace('#include <map_fragment>','#include <map_fragment>\n'+detail.colorShader+'\nvec4 coverColor=texture2D(landCover,vMapUv);diffuseColor.rgb=mix(diffuseColor.rgb,coverColor.rgb,coverColor.a);\nvec4 quizColor=texture2D(quizOverlay,vMapUv);\ndiffuseColor.rgb=mix(diffuseColor.rgb,quizColor.rgb,quizColor.a);').replace('#include <normal_fragment_maps>','#include <normal_fragment_maps>\n'+detail.normalShader);
+  shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nuniform sampler2D quizOverlay;\nuniform sampler2D landCover;\n'+detail.declarations).replace('#include <map_fragment>','#include <map_fragment>\n'+detail.colorShader+'\nvec4 coverColor=texture2D(landCover,vMapUv);\n'+detail.coverShader+'\ndiffuseColor.rgb=mix(diffuseColor.rgb,coverColor.rgb,coverColor.a);\nvec4 quizColor=texture2D(quizOverlay,vMapUv);\ndiffuseColor.rgb=mix(diffuseColor.rgb,quizColor.rgb,quizColor.a);').replace('#include <normal_fragment_maps>','#include <normal_fragment_maps>\n'+detail.normalShader);
  };
- material.customProgramCacheKey=()=>'globe-terrain-cover-v3';
+ material.customProgramCacheKey=()=>'globe-terrain-cover-v4';
  const paperTexture=new T.DataTexture(new Uint8Array([231,222,199,255]),1,1);paperTexture.colorSpace=T.SRGBColorSpace;paperTexture.needsUpdate=true;
  const paperMaterial=new T.MeshStandardMaterial({map:paperTexture,roughness:1,metalness:0});
  paperMaterial.onBeforeCompile=shader=>{

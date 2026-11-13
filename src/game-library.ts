@@ -53,7 +53,7 @@ export async function openArchive(game:string,entry:string,bank:()=>Promise<Ques
  }
  if(local)return local;
  const state:SavedBoard={attempt:{id:`archive:${game}:${entry}`,game,player,day:entry,questions:starterDeck(game,entry,await bank()),answers:[],hints:{},score:0,complete:false},drafts:{}};
- if(game==='geography'){const {createRoute,routePuzzles}=await import('./geography-route');state.attempt={...state.attempt,...createRoute(routePuzzles[(Number(entry.slice(8))-1)%routePuzzles.length]),questions:[]};}
+ if(game==='geography'){const {createRoute,practiceRoutePuzzles}=await import('./geography-route');state.attempt={...state.attempt,...createRoute(practiceRoutePuzzles[(Number(entry.slice(8))-1)%practiceRoutePuzzles.length]),questions:[]};}
  const result={state,revision:0};writeLocal(key,result);return result;
 }
 const saving=new Map<string,Promise<void>>();
@@ -76,3 +76,10 @@ export function calendarMarkup(entries:CalendarEntry[],selected:string){return `
  return `<button type="button" data-archive-entry="${esc(e.entry)}" class="calendar-day ${e.complete?'is-complete':e.started?'is-started':''}" aria-pressed="${e.entry===selected}" aria-label="${esc(e.day||(e.entry==='legacy'?'Earlier practice saved on this device':'Practice '+e.starter))} · ${e.complete?'completed':e.started?'in progress':'unplayed'}"><small>${month}</small><b>${number}</b><span>${e.complete?'✓':e.started?'·':''}</span></button>`;
  }).join('')}</div></nav>`;}
 export function updateCalendar(entries:CalendarEntry[],entry:string,attempt:Attempt){const current=entries.find(e=>e.entry===entry);if(current)Object.assign(current,{complete:attempt.complete,started:true,score:attempt.score});}
+/** Scroll only the archive strip; scrollIntoView also moves the board/page. */
+export function centerArchive(host:HTMLElement){
+ const strip=host.querySelector<HTMLElement>('.calendar-stack'),selected=strip?.querySelector<HTMLElement>('[aria-pressed="true"]');
+ if(!strip||!selected)return;
+ const parent=strip.getBoundingClientRect(),tile=selected.getBoundingClientRect();
+ strip.scrollLeft+=tile.left-parent.left-(parent.width-tile.width)/2;
+}

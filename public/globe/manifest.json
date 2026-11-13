@@ -879,6 +879,420 @@
       "bytes": 1183840,
       "width": 4096,
       "height": 2048
+    },
+    "detail-0-0-cover-c09ba34559f2.webp": {
+      "sha256": "c09ba34559f2cb0af7a9cec929967612d89d8cee5b707b0fce838d41d26692f3",
+      "bytes": 132704,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-1-0-cover-634a8780bbdf.webp": {
+      "sha256": "634a8780bbdfac5d2e4fd439502f8298b8ac718cf5021c2a44de63356d3a22e3",
+      "bytes": 301140,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-2-0-cover-29b0306102d7.webp": {
+      "sha256": "29b0306102d7369d7576a6c4fe8aa54c63a2198f45848f31c7ed5ee9638fb3f4",
+      "bytes": 202798,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-3-0-cover-f1ab6b035089.webp": {
+      "sha256": "f1ab6b0350898471741e3ff573941483396327ebcae178573f2e589e53ca02b0",
+      "bytes": 147536,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-4-0-cover-e20b2525cde0.webp": {
+      "sha256": "e20b2525cde062d449f114b02fcd70e591ca05efa9056e8fc06a11abd8b36882",
+      "bytes": 109804,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-5-0-cover-b5dea9cd3938.webp": {
+      "sha256": "b5dea9cd39386d3765092c6c9ed9f9d8751a6813064c818f2d0e0f895122a78f",
+      "bytes": 74784,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-6-0-cover-99de6b3d253a.webp": {
+      "sha256": "99de6b3d253a23bd87f9cb02bd2a940595869336ded53f62289652b87b68267c",
+      "bytes": 218902,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-7-0-cover-baa4f6c1c845.webp": {
+      "sha256": "baa4f6c1c845edc8ad714e3ebd26574aeb03833bd4cf98c449c5ea1a9f1692a6",
+      "bytes": 305592,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-8-0-cover-ff01e0ae1bc3.webp": {
+      "sha256": "ff01e0ae1bc3417731ac4cb7a65a40ff05321696ef6cc3c1c063c97c4dd07c5c",
+      "bytes": 297466,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-9-0-cover-c1ef18a81670.webp": {
+      "sha256": "c1ef18a816703188e8fdc25435b5132c9a721bc12f7e8d81cb816afdccce4d37",
+      "bytes": 380508,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-10-0-cover-acda89abf2cb.webp": {
+      "sha256": "acda89abf2cb1279ce176febb7f3f63d67599184c31b30f50ddae9dad87f7919",
+      "bytes": 295178,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-11-0-cover-eee35031a903.webp": {
+      "sha256": "eee35031a903ea5673ac1bb07d9e1473cd8eef158b779c4864092c7374de0e52",
+      "bytes": 176910,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-0-1-cover-a7192a0908ef.webp": {
+      "sha256": "a7192a0908efeb11d0d237805e0c2178423bc5b96f4876c6b760160939f2f614",
+      "bytes": 42266,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-1-1-cover-4e6063ee2479.webp": {
+      "sha256": "4e6063ee2479bbfe6ecaac5b0239f62a460daa2768a14146f3436a93cdf39a8f",
+      "bytes": 228476,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-2-1-cover-5cb94d495d28.webp": {
+      "sha256": "5cb94d495d285ec4f3b414455aca5d2627be979665d08f8bd3dc83f39d4c45dd",
+      "bytes": 790174,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-3-1-cover-e2a29b596e2f.webp": {
+      "sha256": "e2a29b596e2fccde904942048d43c7190b2e56e5a5bec67baec009d7ba380c6f",
+      "bytes": 670226,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-4-1-cover-3dcfa36ca256.webp": {
+      "sha256": "3dcfa36ca256695b31e8337b6109cd205c22c823f300177f71f57ad6e07ebc38",
+      "bytes": 42258,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-5-1-cover-66ccca34288b.webp": {
+      "sha256": "66ccca34288bbe08620e8d53994147b7fbd8815cb8c228456c38f7f7f8c0d85c",
+      "bytes": 187418,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-6-1-cover-5eb6420abe06.webp": {
+      "sha256": "5eb6420abe06e5111454a6e1bd98da630b0db6cb299d8e3abf574a5edb79742d",
+      "bytes": 778576,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-7-1-cover-06262defb02e.webp": {
+      "sha256": "06262defb02e0a760564a8be27227f97ec97539c077503aa84cdc62f4f2027d6",
+      "bytes": 795336,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-8-1-cover-8904628899fa.webp": {
+      "sha256": "8904628899fa4fbbc187f95ef98dca0f036cbf9441da85309472b139e5444844",
+      "bytes": 800386,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-9-1-cover-a75f23ab6a7b.webp": {
+      "sha256": "a75f23ab6a7b6252a9cf931e68fd62bb15f4dc96d4d68391f78300ac948d9891",
+      "bytes": 828168,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-10-1-cover-e8c58501ff72.webp": {
+      "sha256": "e8c58501ff724c0bea74dfae8355296138e09df32c6d57c42c63632f4876ad7e",
+      "bytes": 527432,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-11-1-cover-e4fb5033eb87.webp": {
+      "sha256": "e4fb5033eb87074c4bb85b3a3120410257df5a4b64c741a3d91fdf0c1a584dd0",
+      "bytes": 55538,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-0-2-cover-fc02262a37f2.webp": {
+      "sha256": "fc02262a37f27d1d25222e84de1de7bc2744ff4d40b99ebc0ad371c000d463bc",
+      "bytes": 9262,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-2-2-cover-08529899ec94.webp": {
+      "sha256": "08529899ec940b316bb8f463e16b80976f7ad6e5576158075ed32c4ad81b64a3",
+      "bytes": 170000,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-3-2-cover-9109c59a6005.webp": {
+      "sha256": "9109c59a60057e3ad5fa69ea57b2883f21a13b59e2f07673cf1677973e58afbf",
+      "bytes": 302970,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-4-2-cover-65926364fb0f.webp": {
+      "sha256": "65926364fb0fb5a352646faa622006fe5bd5fbe0fa5a16f63cb04ba663bb1af3",
+      "bytes": 50814,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-5-2-cover-abfc211dbb90.webp": {
+      "sha256": "abfc211dbb90a3d7e50eac6cd47d8e6ecc31ad6224f20296aa69847dd6ee3ce6",
+      "bytes": 207976,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-6-2-cover-3794ec447f4f.webp": {
+      "sha256": "3794ec447f4f84bfffe0b2eb741ece8a6c962ac6370afc0ee284367a54c84457",
+      "bytes": 382080,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-7-2-cover-60bb1a4a1572.webp": {
+      "sha256": "60bb1a4a15720b4b3c65b98d3b742317793565eeaf306638234388b4ab0ff153",
+      "bytes": 387246,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-8-2-cover-56c2247f319a.webp": {
+      "sha256": "56c2247f319ad303ed36e1f8ece2cb7843b6ab9d93d8688973b82b3740fd85ae",
+      "bytes": 252414,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-9-2-cover-7027edc5b5eb.webp": {
+      "sha256": "7027edc5b5eb9357798b733bcb221079c4dd2578e24356e619a6e056e378d8c0",
+      "bytes": 611112,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-10-2-cover-6d66ba0d54fa.webp": {
+      "sha256": "6d66ba0d54fabd7c7b106aff77806b7a08226931f97a441f9f9f0cef7f9f72bb",
+      "bytes": 77546,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-11-2-cover-539a7658db41.webp": {
+      "sha256": "539a7658db414acdbfdb0ee555f233cdcd336301801412c5821f81bc84311dd2",
+      "bytes": 10066,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-0-3-cover-f62ff2e81c0c.webp": {
+      "sha256": "f62ff2e81c0c4750e255057b8b6035781fe8b73356f57041872faf3d40c5d08e",
+      "bytes": 13456,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-1-3-cover-336d299b7b45.webp": {
+      "sha256": "336d299b7b45ee75b61ce8e2c57219803806f00d0ae195a0afda3065066ccb1c",
+      "bytes": 10508,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-2-3-cover-538e899464ab.webp": {
+      "sha256": "538e899464ab672a45d988864f7e93c9d0befaf66b27744273eea4564e6d0a10",
+      "bytes": 7246,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-3-3-cover-818494e6a43e.webp": {
+      "sha256": "818494e6a43e41c2cd285bc0e367391df2a7c333dbb5aa3cdc5186f8aaf5f440",
+      "bytes": 387882,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-4-3-cover-f385fe87b1ca.webp": {
+      "sha256": "f385fe87b1ca24f844cfff588d9a873375dacbd3c8820060acfb658df3828eab",
+      "bytes": 620402,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-5-3-cover-bdea42cc9014.webp": {
+      "sha256": "bdea42cc90140e5ee7d577f3c9ec12a24243e9b53de146916dd44a460bf10cb1",
+      "bytes": 6660,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-6-3-cover-8ec557e6492b.webp": {
+      "sha256": "8ec557e6492b4c7016ef201a588db44cc3cf48ec7520dace0b814530f3939473",
+      "bytes": 356510,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-7-3-cover-7fbfb96b40ce.webp": {
+      "sha256": "7fbfb96b40ce6f49b9145551dfb0b5a2981345d5e52826ecdb4ec26c209d6e08",
+      "bytes": 233704,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-8-3-cover-e5401aec12a4.webp": {
+      "sha256": "e5401aec12a4c5079653609e12b5baf46fcb2d61f3acfc26e27d0ea05f21beec",
+      "bytes": 6880,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-9-3-cover-fda6edce1d53.webp": {
+      "sha256": "fda6edce1d53a37f15b7255dc4e752d6b6dc6c3fef79444a5b3503d2aa35506c",
+      "bytes": 132654,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-10-3-cover-06ddb05f2847.webp": {
+      "sha256": "06ddb05f2847846840d78fc695a127634a99ac1879c3b151070534e4c0378da7",
+      "bytes": 391426,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-11-3-cover-5e2f0bdb65bd.webp": {
+      "sha256": "5e2f0bdb65bd9df7dfcae2f54e77c5ce2fb3f1099121c88a8804e34b4321835f",
+      "bytes": 67026,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-0-4-cover-34c352ef6602.webp": {
+      "sha256": "34c352ef660240d1a8aeb66f7dd29db114f9f1d0d4c002f07937e6fe2598661f",
+      "bytes": 6976,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-3-4-cover-ead4d52f91cd.webp": {
+      "sha256": "ead4d52f91cdf38bc84e523ffcac97619d2ac8e09d5a522ebc09c8c4750ca9a9",
+      "bytes": 236376,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-4-4-cover-1a26c083d74d.webp": {
+      "sha256": "1a26c083d74d65ecb5d8d25f717133cab5e54be1d6273f1a856d206dccf4cd0b",
+      "bytes": 57278,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-5-4-cover-09e7e6961659.webp": {
+      "sha256": "09e7e6961659c595d4615fa2046542f9ca3549bedf97ac34b4c1cb2f23f0d46f",
+      "bytes": 6378,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-6-4-cover-cfd6eae47629.webp": {
+      "sha256": "cfd6eae47629d422bc59c262b129ed27d47a9cf186b20a52980a74b167097fbd",
+      "bytes": 41600,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-7-4-cover-3225ae113000.webp": {
+      "sha256": "3225ae11300023f40341ae708ef4abbc4320179c6a0355fece90a3269e7ea0b3",
+      "bytes": 9504,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-8-4-cover-568e85e5a6b6.webp": {
+      "sha256": "568e85e5a6b60a80c0c901d19b25fb452e33f980402a12fd01c0d7666ae90130",
+      "bytes": 7804,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-9-4-cover-6b27f267f66d.webp": {
+      "sha256": "6b27f267f66d23fd581ba18ad8e5be59367b1b8a12b696d6a85330910348370b",
+      "bytes": 24932,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-10-4-cover-2a2e2ac51332.webp": {
+      "sha256": "2a2e2ac5133233db35c709e65cc700f5f710aba02eb1577467425de3a6712be7",
+      "bytes": 133024,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-11-4-cover-cfdde947982e.webp": {
+      "sha256": "cfdde947982e4908dbc73fa0fd40c7d8260487d790b5684c9fc11ab4f792c363",
+      "bytes": 71878,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-0-5-cover-f643b177279d.webp": {
+      "sha256": "f643b177279d9f9a4379a881a23c456fa023d0446d6e22b6193a953c00d6fcae",
+      "bytes": 71526,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-1-5-cover-d797f0e7d27c.webp": {
+      "sha256": "d797f0e7d27c41ba3cffc1d21205b4f21b642767157412fa22a764d246ef189b",
+      "bytes": 190480,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-2-5-cover-2c03b14d1cfb.webp": {
+      "sha256": "2c03b14d1cfbe94452be9047039dfc86f6e7c64a4154f488cf99ae75f33b2edd",
+      "bytes": 208148,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-3-5-cover-8f8dd1c6f12c.webp": {
+      "sha256": "8f8dd1c6f12c61e6bf11708a333480f3aff515ca830f58da2ecf33446f50f902",
+      "bytes": 258194,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-4-5-cover-4148482bbb00.webp": {
+      "sha256": "4148482bbb001513f95138618993c3ae708ef62d7b0df57b62d931a7ec6b19b1",
+      "bytes": 105058,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-5-5-cover-8a0d10cbc905.webp": {
+      "sha256": "8a0d10cbc90500bc5db4a207e5940e375a9e21038baee3b3726ca63c548a8a97",
+      "bytes": 195810,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-6-5-cover-e297ee901765.webp": {
+      "sha256": "e297ee901765c0530622a16c02668e731cadb69850df7ac6b57ea8c3ddb5fa58",
+      "bytes": 169114,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-7-5-cover-abb51794bfc3.webp": {
+      "sha256": "abb51794bfc37c2d5b0498c98e231b650295354c463d47840affeff7263152b4",
+      "bytes": 209332,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-8-5-cover-a840b26c9bab.webp": {
+      "sha256": "a840b26c9babf28ad3e2b6455b99ad9a79b0cd1171c7e011fbb71b0020f41acc",
+      "bytes": 229088,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-9-5-cover-f2347b3e22f8.webp": {
+      "sha256": "f2347b3e22f83669d3d2fdc51ffbf0eec7a3ebefc04377d74fc6db2e035c0c2f",
+      "bytes": 159088,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-10-5-cover-8c736928185e.webp": {
+      "sha256": "8c736928185ea7ae6bc128192092520d4f465b69416e09320cffb3e7d0800859",
+      "bytes": 198288,
+      "width": 1804,
+      "height": 1804
+    },
+    "detail-11-5-cover-2e9ad07f8640.webp": {
+      "sha256": "2e9ad07f8640b13abb9baf15bd2a3c99c54bb5d02bac5f566025fc6809ce6fd0",
+      "bytes": 194932,
+      "width": 1804,
+      "height": 1804
     }
   },
   "detailSource": "https://coastwatch.pfeg.noaa.gov/erddap/griddap/etopo180.nc?altitude%5B(-90):1:(90)%5D%5B(-180):1:(180)%5D",
@@ -894,7 +1308,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-0-0-color-f090859c39ba.webp",
-      "normal": "detail-0-0-normal-4393cbaa4368.webp"
+      "normal": "detail-0-0-normal-4393cbaa4368.webp",
+      "cover": "detail-0-0-cover-c09ba34559f2.webp"
     },
     "1-0": {
       "west": -150,
@@ -903,7 +1318,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-1-0-color-3a6bd7f86987.webp",
-      "normal": "detail-1-0-normal-4133b8a8efba.webp"
+      "normal": "detail-1-0-normal-4133b8a8efba.webp",
+      "cover": "detail-1-0-cover-634a8780bbdf.webp"
     },
     "2-0": {
       "west": -120,
@@ -912,7 +1328,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-2-0-color-7d639577b885.webp",
-      "normal": "detail-2-0-normal-3a20f179eaca.webp"
+      "normal": "detail-2-0-normal-3a20f179eaca.webp",
+      "cover": "detail-2-0-cover-29b0306102d7.webp"
     },
     "3-0": {
       "west": -90,
@@ -921,7 +1338,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-3-0-color-7bd1855d718c.webp",
-      "normal": "detail-3-0-normal-eb959c1daf9d.webp"
+      "normal": "detail-3-0-normal-eb959c1daf9d.webp",
+      "cover": "detail-3-0-cover-f1ab6b035089.webp"
     },
     "4-0": {
       "west": -60,
@@ -930,7 +1348,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-4-0-color-deeb02664ecc.webp",
-      "normal": "detail-4-0-normal-903ac790e906.webp"
+      "normal": "detail-4-0-normal-903ac790e906.webp",
+      "cover": "detail-4-0-cover-e20b2525cde0.webp"
     },
     "5-0": {
       "west": -30,
@@ -939,7 +1358,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-5-0-color-4853186e2de4.webp",
-      "normal": "detail-5-0-normal-a6e9e207c188.webp"
+      "normal": "detail-5-0-normal-a6e9e207c188.webp",
+      "cover": "detail-5-0-cover-b5dea9cd3938.webp"
     },
     "6-0": {
       "west": 0,
@@ -948,7 +1368,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-6-0-color-50f18db6573c.webp",
-      "normal": "detail-6-0-normal-34428e093a4d.webp"
+      "normal": "detail-6-0-normal-34428e093a4d.webp",
+      "cover": "detail-6-0-cover-99de6b3d253a.webp"
     },
     "7-0": {
       "west": 30,
@@ -957,7 +1378,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-7-0-color-05429a5aeca7.webp",
-      "normal": "detail-7-0-normal-8d270f9731e7.webp"
+      "normal": "detail-7-0-normal-8d270f9731e7.webp",
+      "cover": "detail-7-0-cover-baa4f6c1c845.webp"
     },
     "8-0": {
       "west": 60,
@@ -966,7 +1388,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-8-0-color-90f1a60096b5.webp",
-      "normal": "detail-8-0-normal-77ebd491a03d.webp"
+      "normal": "detail-8-0-normal-77ebd491a03d.webp",
+      "cover": "detail-8-0-cover-ff01e0ae1bc3.webp"
     },
     "9-0": {
       "west": 90,
@@ -975,7 +1398,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-9-0-color-c49d5fdec212.webp",
-      "normal": "detail-9-0-normal-e6f0d31087dd.webp"
+      "normal": "detail-9-0-normal-e6f0d31087dd.webp",
+      "cover": "detail-9-0-cover-c1ef18a81670.webp"
     },
     "10-0": {
       "west": 120,
@@ -984,7 +1408,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-10-0-color-655eac8c3974.webp",
-      "normal": "detail-10-0-normal-2c59bb5313f5.webp"
+      "normal": "detail-10-0-normal-2c59bb5313f5.webp",
+      "cover": "detail-10-0-cover-acda89abf2cb.webp"
     },
     "11-0": {
       "west": 150,
@@ -993,7 +1418,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-11-0-color-98e9c3e9d96d.webp",
-      "normal": "detail-11-0-normal-503d80e45931.webp"
+      "normal": "detail-11-0-normal-503d80e45931.webp",
+      "cover": "detail-11-0-cover-eee35031a903.webp"
     },
     "0-1": {
       "west": -180,
@@ -1002,7 +1428,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-0-1-color-1dd746705325.webp",
-      "normal": "detail-0-1-normal-ff15768caa05.webp"
+      "normal": "detail-0-1-normal-ff15768caa05.webp",
+      "cover": "detail-0-1-cover-a7192a0908ef.webp"
     },
     "1-1": {
       "west": -150,
@@ -1011,7 +1438,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-1-1-color-fde2b85b9306.webp",
-      "normal": "detail-1-1-normal-bd4df3b895f6.webp"
+      "normal": "detail-1-1-normal-bd4df3b895f6.webp",
+      "cover": "detail-1-1-cover-4e6063ee2479.webp"
     },
     "2-1": {
       "west": -120,
@@ -1020,7 +1448,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-2-1-color-b2955f1c0960.webp",
-      "normal": "detail-2-1-normal-57710c9b5dbb.webp"
+      "normal": "detail-2-1-normal-57710c9b5dbb.webp",
+      "cover": "detail-2-1-cover-5cb94d495d28.webp"
     },
     "3-1": {
       "west": -90,
@@ -1029,7 +1458,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-3-1-color-79a5bb967032.webp",
-      "normal": "detail-3-1-normal-eea13ab0f70b.webp"
+      "normal": "detail-3-1-normal-eea13ab0f70b.webp",
+      "cover": "detail-3-1-cover-e2a29b596e2f.webp"
     },
     "4-1": {
       "west": -60,
@@ -1038,7 +1468,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-4-1-color-38f6d2cf9d1f.webp",
-      "normal": "detail-4-1-normal-e7fbf9990f0d.webp"
+      "normal": "detail-4-1-normal-e7fbf9990f0d.webp",
+      "cover": "detail-4-1-cover-3dcfa36ca256.webp"
     },
     "5-1": {
       "west": -30,
@@ -1047,7 +1478,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-5-1-color-3d815caeb5de.webp",
-      "normal": "detail-5-1-normal-23b3931f48f1.webp"
+      "normal": "detail-5-1-normal-23b3931f48f1.webp",
+      "cover": "detail-5-1-cover-66ccca34288b.webp"
     },
     "6-1": {
       "west": 0,
@@ -1056,7 +1488,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-6-1-color-4603079ceba2.webp",
-      "normal": "detail-6-1-normal-51050c9e047d.webp"
+      "normal": "detail-6-1-normal-51050c9e047d.webp",
+      "cover": "detail-6-1-cover-5eb6420abe06.webp"
     },
     "7-1": {
       "west": 30,
@@ -1065,7 +1498,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-7-1-color-edfc8fc576c1.webp",
-      "normal": "detail-7-1-normal-39127f49bd3b.webp"
+      "normal": "detail-7-1-normal-39127f49bd3b.webp",
+      "cover": "detail-7-1-cover-06262defb02e.webp"
     },
     "8-1": {
       "west": 60,
@@ -1074,7 +1508,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-8-1-color-5828d642da36.webp",
-      "normal": "detail-8-1-normal-5945c1036619.webp"
+      "normal": "detail-8-1-normal-5945c1036619.webp",
+      "cover": "detail-8-1-cover-8904628899fa.webp"
     },
     "9-1": {
       "west": 90,
@@ -1083,7 +1518,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-9-1-color-54742c81e898.webp",
-      "normal": "detail-9-1-normal-701e93f088df.webp"
+      "normal": "detail-9-1-normal-701e93f088df.webp",
+      "cover": "detail-9-1-cover-a75f23ab6a7b.webp"
     },
     "10-1": {
       "west": 120,
@@ -1092,7 +1528,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-10-1-color-cdb8f7a06107.webp",
-      "normal": "detail-10-1-normal-52edd0da2bf0.webp"
+      "normal": "detail-10-1-normal-52edd0da2bf0.webp",
+      "cover": "detail-10-1-cover-e8c58501ff72.webp"
     },
     "11-1": {
       "west": 150,
@@ -1101,7 +1538,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-11-1-color-4fffbf1893c3.webp",
-      "normal": "detail-11-1-normal-08fbe8bd9c14.webp"
+      "normal": "detail-11-1-normal-08fbe8bd9c14.webp",
+      "cover": "detail-11-1-cover-e4fb5033eb87.webp"
     },
     "0-2": {
       "west": -180,
@@ -1110,7 +1548,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-0-2-color-a7d28919e9f9.webp",
-      "normal": "detail-0-2-normal-406b31fec500.webp"
+      "normal": "detail-0-2-normal-406b31fec500.webp",
+      "cover": "detail-0-2-cover-fc02262a37f2.webp"
     },
     "2-2": {
       "west": -120,
@@ -1119,7 +1558,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-2-2-color-162a0dc00d6c.webp",
-      "normal": "detail-2-2-normal-55a20a6e310c.webp"
+      "normal": "detail-2-2-normal-55a20a6e310c.webp",
+      "cover": "detail-2-2-cover-08529899ec94.webp"
     },
     "3-2": {
       "west": -90,
@@ -1128,7 +1568,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-3-2-color-3b1de5cebac4.webp",
-      "normal": "detail-3-2-normal-f6716b5d4610.webp"
+      "normal": "detail-3-2-normal-f6716b5d4610.webp",
+      "cover": "detail-3-2-cover-9109c59a6005.webp"
     },
     "4-2": {
       "west": -60,
@@ -1137,7 +1578,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-4-2-color-74c6acbb7015.webp",
-      "normal": "detail-4-2-normal-80769fd6b795.webp"
+      "normal": "detail-4-2-normal-80769fd6b795.webp",
+      "cover": "detail-4-2-cover-65926364fb0f.webp"
     },
     "5-2": {
       "west": -30,
@@ -1146,7 +1588,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-5-2-color-8842aa86b271.webp",
-      "normal": "detail-5-2-normal-26f43c25f81f.webp"
+      "normal": "detail-5-2-normal-26f43c25f81f.webp",
+      "cover": "detail-5-2-cover-abfc211dbb90.webp"
     },
     "6-2": {
       "west": 0,
@@ -1155,7 +1598,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-6-2-color-5b88831818bc.webp",
-      "normal": "detail-6-2-normal-969138e5fc6b.webp"
+      "normal": "detail-6-2-normal-969138e5fc6b.webp",
+      "cover": "detail-6-2-cover-3794ec447f4f.webp"
     },
     "7-2": {
       "west": 30,
@@ -1164,7 +1608,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-7-2-color-28bf280c286d.webp",
-      "normal": "detail-7-2-normal-d5cfac04e651.webp"
+      "normal": "detail-7-2-normal-d5cfac04e651.webp",
+      "cover": "detail-7-2-cover-60bb1a4a1572.webp"
     },
     "8-2": {
       "west": 60,
@@ -1173,7 +1618,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-8-2-color-1b2f49a7ac78.webp",
-      "normal": "detail-8-2-normal-ee723340418b.webp"
+      "normal": "detail-8-2-normal-ee723340418b.webp",
+      "cover": "detail-8-2-cover-56c2247f319a.webp"
     },
     "9-2": {
       "west": 90,
@@ -1182,7 +1628,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-9-2-color-ad300ac82d6b.webp",
-      "normal": "detail-9-2-normal-a4ba96ce2ad0.webp"
+      "normal": "detail-9-2-normal-a4ba96ce2ad0.webp",
+      "cover": "detail-9-2-cover-7027edc5b5eb.webp"
     },
     "10-2": {
       "west": 120,
@@ -1191,7 +1638,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-10-2-color-de1d115c57ac.webp",
-      "normal": "detail-10-2-normal-745d6882a582.webp"
+      "normal": "detail-10-2-normal-745d6882a582.webp",
+      "cover": "detail-10-2-cover-6d66ba0d54fa.webp"
     },
     "11-2": {
       "west": 150,
@@ -1200,7 +1648,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-11-2-color-07327d95ff11.webp",
-      "normal": "detail-11-2-normal-06bdfc56fe39.webp"
+      "normal": "detail-11-2-normal-06bdfc56fe39.webp",
+      "cover": "detail-11-2-cover-539a7658db41.webp"
     },
     "0-3": {
       "west": -180,
@@ -1209,7 +1658,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-0-3-color-a9b238e2c622.webp",
-      "normal": "detail-0-3-normal-8304d3ee3af2.webp"
+      "normal": "detail-0-3-normal-8304d3ee3af2.webp",
+      "cover": "detail-0-3-cover-f62ff2e81c0c.webp"
     },
     "1-3": {
       "west": -150,
@@ -1218,7 +1668,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-1-3-color-0bfa2e91368b.webp",
-      "normal": "detail-1-3-normal-160e5fba884e.webp"
+      "normal": "detail-1-3-normal-160e5fba884e.webp",
+      "cover": "detail-1-3-cover-336d299b7b45.webp"
     },
     "2-3": {
       "west": -120,
@@ -1227,7 +1678,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-2-3-color-af53274d8d12.webp",
-      "normal": "detail-2-3-normal-ffc6f1dea39e.webp"
+      "normal": "detail-2-3-normal-ffc6f1dea39e.webp",
+      "cover": "detail-2-3-cover-538e899464ab.webp"
     },
     "3-3": {
       "west": -90,
@@ -1236,7 +1688,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-3-3-color-edf0b25a1ba2.webp",
-      "normal": "detail-3-3-normal-19bdc1ecdcc6.webp"
+      "normal": "detail-3-3-normal-19bdc1ecdcc6.webp",
+      "cover": "detail-3-3-cover-818494e6a43e.webp"
     },
     "4-3": {
       "west": -60,
@@ -1245,7 +1698,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-4-3-color-03789eafbaa9.webp",
-      "normal": "detail-4-3-normal-fac51f13c137.webp"
+      "normal": "detail-4-3-normal-fac51f13c137.webp",
+      "cover": "detail-4-3-cover-f385fe87b1ca.webp"
     },
     "5-3": {
       "west": -30,
@@ -1254,7 +1708,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-5-3-color-dcba78b29923.webp",
-      "normal": "detail-5-3-normal-4a80b8f1923f.webp"
+      "normal": "detail-5-3-normal-4a80b8f1923f.webp",
+      "cover": "detail-5-3-cover-bdea42cc9014.webp"
     },
     "6-3": {
       "west": 0,
@@ -1263,7 +1718,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-6-3-color-7879eb518888.webp",
-      "normal": "detail-6-3-normal-36c73ba86d44.webp"
+      "normal": "detail-6-3-normal-36c73ba86d44.webp",
+      "cover": "detail-6-3-cover-8ec557e6492b.webp"
     },
     "7-3": {
       "west": 30,
@@ -1272,7 +1728,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-7-3-color-55e411708893.webp",
-      "normal": "detail-7-3-normal-26d28bf98dc0.webp"
+      "normal": "detail-7-3-normal-26d28bf98dc0.webp",
+      "cover": "detail-7-3-cover-7fbfb96b40ce.webp"
     },
     "8-3": {
       "west": 60,
@@ -1281,7 +1738,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-8-3-color-b65fafc17f13.webp",
-      "normal": "detail-8-3-normal-c61760adbf5c.webp"
+      "normal": "detail-8-3-normal-c61760adbf5c.webp",
+      "cover": "detail-8-3-cover-e5401aec12a4.webp"
     },
     "9-3": {
       "west": 90,
@@ -1290,7 +1748,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-9-3-color-55c4b83dd8d1.webp",
-      "normal": "detail-9-3-normal-db3870d3e3ba.webp"
+      "normal": "detail-9-3-normal-db3870d3e3ba.webp",
+      "cover": "detail-9-3-cover-fda6edce1d53.webp"
     },
     "10-3": {
       "west": 120,
@@ -1299,7 +1758,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-10-3-color-a6f601c62275.webp",
-      "normal": "detail-10-3-normal-d2f526f6c4fd.webp"
+      "normal": "detail-10-3-normal-d2f526f6c4fd.webp",
+      "cover": "detail-10-3-cover-06ddb05f2847.webp"
     },
     "11-3": {
       "west": 150,
@@ -1308,7 +1768,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-11-3-color-1acfec7fa80a.webp",
-      "normal": "detail-11-3-normal-3c277a513343.webp"
+      "normal": "detail-11-3-normal-3c277a513343.webp",
+      "cover": "detail-11-3-cover-5e2f0bdb65bd.webp"
     },
     "0-4": {
       "west": -180,
@@ -1317,7 +1778,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-0-4-color-b175e6a6125c.webp",
-      "normal": "detail-0-4-normal-47d3ed6f6bb3.webp"
+      "normal": "detail-0-4-normal-47d3ed6f6bb3.webp",
+      "cover": "detail-0-4-cover-34c352ef6602.webp"
     },
     "3-4": {
       "west": -90,
@@ -1326,7 +1788,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-3-4-color-e178425a7b45.webp",
-      "normal": "detail-3-4-normal-8c290cd9efea.webp"
+      "normal": "detail-3-4-normal-8c290cd9efea.webp",
+      "cover": "detail-3-4-cover-ead4d52f91cd.webp"
     },
     "4-4": {
       "west": -60,
@@ -1335,7 +1798,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-4-4-color-c6e4b605d8b1.webp",
-      "normal": "detail-4-4-normal-3a39ea445fd2.webp"
+      "normal": "detail-4-4-normal-3a39ea445fd2.webp",
+      "cover": "detail-4-4-cover-1a26c083d74d.webp"
     },
     "5-4": {
       "west": -30,
@@ -1344,7 +1808,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-5-4-color-390ccf677ba3.webp",
-      "normal": "detail-5-4-normal-225348f66582.webp"
+      "normal": "detail-5-4-normal-225348f66582.webp",
+      "cover": "detail-5-4-cover-09e7e6961659.webp"
     },
     "6-4": {
       "west": 0,
@@ -1353,7 +1818,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-6-4-color-518acdb85402.webp",
-      "normal": "detail-6-4-normal-9fc6e3eec7ce.webp"
+      "normal": "detail-6-4-normal-9fc6e3eec7ce.webp",
+      "cover": "detail-6-4-cover-cfd6eae47629.webp"
     },
     "7-4": {
       "west": 30,
@@ -1362,7 +1828,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-7-4-color-1b2feb18c5c6.webp",
-      "normal": "detail-7-4-normal-9d64de13b66d.webp"
+      "normal": "detail-7-4-normal-9d64de13b66d.webp",
+      "cover": "detail-7-4-cover-3225ae113000.webp"
     },
     "8-4": {
       "west": 60,
@@ -1371,7 +1838,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-8-4-color-28fa1abbde0d.webp",
-      "normal": "detail-8-4-normal-cec72dae1e9f.webp"
+      "normal": "detail-8-4-normal-cec72dae1e9f.webp",
+      "cover": "detail-8-4-cover-568e85e5a6b6.webp"
     },
     "9-4": {
       "west": 90,
@@ -1380,7 +1848,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-9-4-color-d4df42a711ac.webp",
-      "normal": "detail-9-4-normal-202ddeb69f78.webp"
+      "normal": "detail-9-4-normal-202ddeb69f78.webp",
+      "cover": "detail-9-4-cover-6b27f267f66d.webp"
     },
     "10-4": {
       "west": 120,
@@ -1389,7 +1858,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-10-4-color-4856c4e7a7c1.webp",
-      "normal": "detail-10-4-normal-74a91f397014.webp"
+      "normal": "detail-10-4-normal-74a91f397014.webp",
+      "cover": "detail-10-4-cover-2a2e2ac51332.webp"
     },
     "11-4": {
       "west": 150,
@@ -1398,7 +1868,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-11-4-color-5bda93f59a94.webp",
-      "normal": "detail-11-4-normal-a3cd266f8f0d.webp"
+      "normal": "detail-11-4-normal-a3cd266f8f0d.webp",
+      "cover": "detail-11-4-cover-cfdde947982e.webp"
     },
     "0-5": {
       "west": -180,
@@ -1407,7 +1878,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-0-5-color-39a6be16ee49.webp",
-      "normal": "detail-0-5-normal-e9b5296fc5fd.webp"
+      "normal": "detail-0-5-normal-e9b5296fc5fd.webp",
+      "cover": "detail-0-5-cover-f643b177279d.webp"
     },
     "1-5": {
       "west": -150,
@@ -1416,7 +1888,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-1-5-color-ee410099caf2.webp",
-      "normal": "detail-1-5-normal-e9782c71a186.webp"
+      "normal": "detail-1-5-normal-e9782c71a186.webp",
+      "cover": "detail-1-5-cover-d797f0e7d27c.webp"
     },
     "2-5": {
       "west": -120,
@@ -1425,7 +1898,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-2-5-color-d548b98b57d1.webp",
-      "normal": "detail-2-5-normal-cbca42d389e2.webp"
+      "normal": "detail-2-5-normal-cbca42d389e2.webp",
+      "cover": "detail-2-5-cover-2c03b14d1cfb.webp"
     },
     "3-5": {
       "west": -90,
@@ -1434,7 +1908,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-3-5-color-e99e3938dbf1.webp",
-      "normal": "detail-3-5-normal-132907859989.webp"
+      "normal": "detail-3-5-normal-132907859989.webp",
+      "cover": "detail-3-5-cover-8f8dd1c6f12c.webp"
     },
     "4-5": {
       "west": -60,
@@ -1443,7 +1918,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-4-5-color-27f99a5235ef.webp",
-      "normal": "detail-4-5-normal-cccc53f54f12.webp"
+      "normal": "detail-4-5-normal-cccc53f54f12.webp",
+      "cover": "detail-4-5-cover-4148482bbb00.webp"
     },
     "5-5": {
       "west": -30,
@@ -1452,7 +1928,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-5-5-color-db7841b44a28.webp",
-      "normal": "detail-5-5-normal-14ee6454de76.webp"
+      "normal": "detail-5-5-normal-14ee6454de76.webp",
+      "cover": "detail-5-5-cover-8a0d10cbc905.webp"
     },
     "6-5": {
       "west": 0,
@@ -1461,7 +1938,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-6-5-color-61555017b9bc.webp",
-      "normal": "detail-6-5-normal-5a27e09c8c96.webp"
+      "normal": "detail-6-5-normal-5a27e09c8c96.webp",
+      "cover": "detail-6-5-cover-e297ee901765.webp"
     },
     "7-5": {
       "west": 30,
@@ -1470,7 +1948,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-7-5-color-1544e72044cf.webp",
-      "normal": "detail-7-5-normal-a43521d380c2.webp"
+      "normal": "detail-7-5-normal-a43521d380c2.webp",
+      "cover": "detail-7-5-cover-abb51794bfc3.webp"
     },
     "8-5": {
       "west": 60,
@@ -1479,7 +1958,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-8-5-color-95b3b1c80db2.webp",
-      "normal": "detail-8-5-normal-992965c4799d.webp"
+      "normal": "detail-8-5-normal-992965c4799d.webp",
+      "cover": "detail-8-5-cover-a840b26c9bab.webp"
     },
     "9-5": {
       "west": 90,
@@ -1488,7 +1968,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-9-5-color-c7a689b9b2d9.webp",
-      "normal": "detail-9-5-normal-f52a571cdcbc.webp"
+      "normal": "detail-9-5-normal-f52a571cdcbc.webp",
+      "cover": "detail-9-5-cover-f2347b3e22f8.webp"
     },
     "10-5": {
       "west": 120,
@@ -1497,7 +1978,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-10-5-color-df54df7d21aa.webp",
-      "normal": "detail-10-5-normal-30cb152e41ab.webp"
+      "normal": "detail-10-5-normal-30cb152e41ab.webp",
+      "cover": "detail-10-5-cover-8c736928185e.webp"
     },
     "11-5": {
       "west": 150,
@@ -1506,7 +1988,8 @@
       "gutter": 2,
       "pixels": 1800,
       "color": "detail-11-5-color-8eba16cabd8e.webp",
-      "normal": "detail-11-5-normal-b172cf82edfd.webp"
+      "normal": "detail-11-5-normal-b172cf82edfd.webp",
+      "cover": "detail-11-5-cover-2e9ad07f8640.webp"
     }
   },
   "landCover": {
@@ -1516,6 +1999,10 @@
     "rivers": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_50m_rivers_lake_centerlines.geojson",
     "lakes": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_50m_lakes.geojson",
     "riverFeatures": 359,
-    "license": "Public domain"
+    "license": "Public domain",
+    "detailSamples": [
+      21600,
+      10800
+    ]
   }
 }

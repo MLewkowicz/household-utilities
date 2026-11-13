@@ -1,1 +1,1352 @@
-[{"id":"photo-size-v7-1","version":7,"kind":"scale","prompt":"Resize the nintendo switch to match its real size.","target":{"name":"Nintendo Switch","dimension":"width with Joy-Con","shape":"photo:switch"},"reference":{"name":"Bicycle master-link pliers","dimension":"reference overall length","shape":"photo:pliers","measure":"17 cm · reference overall length"},"bounds":[0.02,50],"answer":1.40588235,"explanation":"Nintendo Switch: 0.239 m (width with Joy-Con). Bicycle master-link pliers: 0.17 m (reference overall length). Ratio: 1.41×.\nOriginal Nintendo Switch: 239 mm wide with Joy-Con attached.\nA 17 cm pliers reference; tool models differ.","sources":["https://www.nintendo.com/us/gaming-systems/switch/tech-specs/","https://commons.wikimedia.org/wiki/File:Master_link_pliers.png","https://commons.wikimedia.org/wiki/File:Nintendo-Switch-wJoyCons-BlRd-Standing-FL.png","https://commons.wikimedia.org/wiki/File:Master_link_pliers.png"]},{"id":"photo-size-v7-2","version":7,"kind":"scale","prompt":"Resize the european badger to match its real size.","target":{"name":"European badger","dimension":"reference head-and-body length","shape":"photo:badger"},"reference":{"name":"Road roller","dimension":"reference overall length","shape":"photo:road-roller","measure":"5 m · reference overall length"},"bounds":[0.02,50],"answer":0.15,"explanation":"European badger: 0.75 m (reference head-and-body length). Road roller: 5 m (reference overall length). Ratio: 0.15×.\nA 75 cm adult reference, excluding the tail. Adults vary in size.\nA five-metre road-roller reference; construction machines come in many sizes.","sources":["https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/animals/mammals/badger/","https://commons.wikimedia.org/wiki/File:Road_roller.png","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Badger.png","https://commons.wikimedia.org/wiki/File:Road_roller.png"]},{"id":"photo-size-v7-3","version":7,"kind":"scale","prompt":"Resize the wire stripper to match its real size.","target":{"name":"Wire stripper","dimension":"reference overall length","shape":"photo:wire-stripper"},"reference":{"name":"AKG C214 microphone","dimension":"microphone height","shape":"photo:akg-microphone","measure":"16 cm · microphone height"},"bounds":[0.02,50],"answer":1.0625,"explanation":"Wire stripper: 0.17 m (reference overall length). AKG C214 microphone: 0.16 m (microphone height). Ratio: 1.06×.\nA 17 cm hand-tool reference. The photograph supplies the outline, not a scale calibration.\nC214 microphone height: 160 mm, without a stand.","sources":["https://commons.wikimedia.org/wiki/File:Wire_stripper.png","https://www.akg.com/Microphones/Condenser%20Microphones/C214.html","https://commons.wikimedia.org/wiki/File:Wire_stripper.png","https://commons.wikimedia.org/wiki/File:AKG_C214_Condenser_microphone.png"]},{"id":"photo-size-v7-4","version":7,"kind":"scale","prompt":"Resize the sunglasses to match its real size.","target":{"name":"Sunglasses","dimension":"reference front width","shape":"photo:sunglasses"},"reference":{"name":"Original Nintendo DS","dimension":"console width","shape":"photo:nintendo-ds","measure":"14.87 cm · console width"},"bounds":[0.02,50],"answer":0.94149294,"explanation":"Sunglasses: 0.14 m (reference front width). Original Nintendo DS: 0.1487 m (console width). Ratio: 0.94×.\nA 14 cm front-width reference, not the length of the folding arms.\nOriginal DS width: 148.7 mm.","sources":["https://commons.wikimedia.org/wiki/File:Sunglasses-1_retouch.png","https://en.wikipedia.org/wiki/Nintendo_DS","https://commons.wikimedia.org/wiki/File:Sunglasses-1_retouch.png","https://commons.wikimedia.org/wiki/File:Nintendo-DS-Fat-Blue.png"]},{"id":"photo-size-v7-5","version":7,"kind":"scale","prompt":"Resize the ledlenser t7m flashlight to match its real size.","target":{"name":"Ledlenser T7M flashlight","dimension":"overall length","shape":"photo:flashlight"},"reference":{"name":"Kick scooter","dimension":"reference handlebar height","shape":"photo:skateboard","measure":"1 m · reference handlebar height"},"bounds":[0.02,50],"answer":0.131,"explanation":"Ledlenser T7M flashlight: 0.131 m (overall length). Kick scooter: 1 m (reference handlebar height). Ratio: 0.13×.\nT7M overall length: 131 mm.\nA one-metre handlebar-height reference. Adjustable scooters can be set lower.","sources":["https://www.ledlenser.my/product/flashlights/t7m/","https://www.stigasports.com/","https://commons.wikimedia.org/wiki/File:LED_LENSER_T7M_LED_flashlight.png","https://commons.wikimedia.org/wiki/File:Stiga_Route_200_S.png"]},{"id":"photo-size-v7-6","version":7,"kind":"scale","prompt":"Resize the game boy micro to match its real size.","target":{"name":"Game Boy Micro","dimension":"console width","shape":"photo:gameboy-micro"},"reference":{"name":"Billiard chalk cube","dimension":"reference cube width","shape":"photo:chalk","measure":"2.5 cm · reference cube width"},"bounds":[0.02,50],"answer":4.04,"explanation":"Game Boy Micro: 0.101 m (console width). Billiard chalk cube: 0.025 m (reference cube width). Ratio: 4.04×.\nThe Micro is 101 mm wide.\nA 2.5 cm chalk-cube reference.","sources":["https://en.wikipedia.org/wiki/Game_Boy_Micro","https://commons.wikimedia.org/wiki/File:Billiard_chalk_20050724.png","https://commons.wikimedia.org/wiki/File:Game-Boy-Micro.png","https://commons.wikimedia.org/wiki/File:Billiard_chalk_20050724.png"]},{"id":"photo-size-v7-7","version":7,"kind":"scale","prompt":"Resize the f tuba to match its real size.","target":{"name":"F tuba","dimension":"reference standing height","shape":"photo:tuba"},"reference":{"name":"Concrete mixer truck","dimension":"reference overall length","shape":"photo:cement-truck","measure":"9 m · reference overall length"},"bounds":[0.02,50],"answer":0.1,"explanation":"F tuba: 0.9 m (reference standing height). Concrete mixer truck: 9 m (reference overall length). Ratio: 0.10×.\nA 90 cm standing-height reference. Tubas vary substantially by pitch and design.\nA nine-metre mixer-truck reference. Chassis and mixer configuration affect exact length.","sources":["https://www.yamaha.com/en/musical_instrument_guide/tuba/structure/","https://commons.wikimedia.org/wiki/File:Red_cement_mixer_truck.png","https://commons.wikimedia.org/wiki/File:Viennese_six-valve_bass_tuba_in_F(made_by_Jungwirth)_Transparent.png","https://commons.wikimedia.org/wiki/File:Red_cement_mixer_truck.png"]},{"id":"photo-size-v7-8","version":7,"kind":"scale","prompt":"Resize the olympus e-pl1 to match its real size.","target":{"name":"Olympus E-PL1","dimension":"camera body width","shape":"photo:olympus"},"reference":{"name":"Full-size violin","dimension":"typical overall length","shape":"photo:violin","measure":"59 cm · typical overall length"},"bounds":[0.02,50],"answer":0.19423729,"explanation":"Olympus E-PL1: 0.1146 m (camera body width). Full-size violin: 0.59 m (typical overall length). Ratio: 0.19×.\nE-PL1 body width: 114.6 mm.\nA full-size violin is about 59 cm overall. The bow is excluded.","sources":["https://en.wikipedia.org/wiki/Olympus_PEN_E-PL1","https://www.yamaha.com/en/musical_instrument_guide/violin/structure/","https://commons.wikimedia.org/wiki/File:Olympus_E-PL1.png","https://commons.wikimedia.org/wiki/File:Violin_VL100_(cropped).png"]},{"id":"photo-size-v7-9","version":7,"kind":"scale","prompt":"Resize the broccoli head to match its real size.","target":{"name":"Broccoli head","dimension":"reference overall height","shape":"photo:broccoli"},"reference":{"name":"2010 Mac mini","dimension":"enclosure width","shape":"photo:mac-mini","measure":"19.7 cm · enclosure width"},"bounds":[0.02,50],"answer":1.01522843,"explanation":"Broccoli head: 0.2 m (reference overall height). 2010 Mac mini: 0.197 m (enclosure width). Ratio: 1.02×.\nA 20 cm broccoli reference including its stalk.\nThis Mac mini generation has a 19.7 cm square footprint.","sources":["https://commons.wikimedia.org/wiki/File:Broccoli.png","https://support.apple.com/en-us/112588","https://commons.wikimedia.org/wiki/File:Broccoli.png","https://commons.wikimedia.org/wiki/File:Mac_mini_server.png"]},{"id":"photo-size-v7-10","version":7,"kind":"scale","prompt":"Resize the bicycle chain tool to match its real size.","target":{"name":"Bicycle chain tool","dimension":"reference overall height","shape":"photo:chain-tool"},"reference":{"name":"Commodore 128","dimension":"keyboard-computer width","shape":"photo:keyboard","measure":"43 cm · keyboard-computer width"},"bounds":[0.02,50],"answer":0.18604651,"explanation":"Bicycle chain tool: 0.08 m (reference overall height). Commodore 128: 0.43 m (keyboard-computer width). Ratio: 0.19×.\nAn 8 cm portable chain-tool reference, excluding the length of any loose chain.\nA 43 cm wide keyboard-computer reference.","sources":["https://commons.wikimedia.org/wiki/File:Chain_tool.png","https://en.wikipedia.org/wiki/Commodore_128","https://commons.wikimedia.org/wiki/File:Chain_tool.png","https://commons.wikimedia.org/wiki/File:Commodore-128.png"]},{"id":"photo-size-v7-11","version":7,"kind":"scale","prompt":"Resize the open umbrella to match its real size.","target":{"name":"Open umbrella","dimension":"reference canopy width","shape":"photo:umbrella"},"reference":{"name":"Rolls-Royce Phantom III","dimension":"reference coachwork length","shape":"photo:rolls-royce","measure":"5.79 m · reference coachwork length"},"bounds":[0.02,50],"answer":0.17271157,"explanation":"Open umbrella: 1 m (reference canopy width). Rolls-Royce Phantom III: 5.79 m (reference coachwork length). Ratio: 0.17×.\nA one-metre canopy-width reference. Umbrella models vary.\nA 5.79 m coachwork reference; bodies were made by different coachbuilders.","sources":["https://commons.wikimedia.org/wiki/File:Umbrella.png","https://en.wikipedia.org/wiki/Rolls-Royce_Phantom_III","https://commons.wikimedia.org/wiki/File:Umbrella.png","https://commons.wikimedia.org/wiki/File:Rolls_Royce_Phantom_III_1936_transparent.png"]},{"id":"photo-size-v7-12","version":7,"kind":"scale","prompt":"Resize the atari portfolio to match its real size.","target":{"name":"Atari Portfolio","dimension":"computer width","shape":"photo:calculator"},"reference":{"name":"Tennis ball","dimension":"reference ball diameter","shape":"photo:tennis-ball","measure":"6.7 cm · reference ball diameter"},"bounds":[0.02,50],"answer":2.98507463,"explanation":"Atari Portfolio: 0.2 m (computer width). Tennis ball: 0.067 m (reference ball diameter). Ratio: 2.99×.\nThe pocket computer is about 20 cm wide.\nA 6.7 cm diameter reference, within the standard ball-size range.","sources":["https://en.wikipedia.org/wiki/Atari_Portfolio","https://www.itftennis.com/en/about-us/tennis-tech/approved-balls/","https://commons.wikimedia.org/wiki/File:Atari-Portfolio-Computer.png","https://commons.wikimedia.org/wiki/File:Tennisball2.png"]},{"id":"photo-size-v7-13","version":7,"kind":"scale","prompt":"Resize the land tortoise to match its real size.","target":{"name":"Land tortoise","dimension":"reference overall length","shape":"photo:tortoise"},"reference":{"name":"Sega Nomad","dimension":"console width","shape":"photo:sega-nomad","measure":"18.5 cm · console width"},"bounds":[0.02,50],"answer":1.62162162,"explanation":"Land tortoise: 0.3 m (reference overall length). Sega Nomad: 0.185 m (console width). Ratio: 1.62×.\nA 30 cm overall-length reference including the head and legs. Species and poses vary.\nThe Nomad is approximately 18.5 cm wide.","sources":["https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Tortoise.png","https://en.wikipedia.org/wiki/Genesis_Nomad","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Tortoise.png","https://commons.wikimedia.org/wiki/File:Sega-Nomad-Front_(rotated).png"]},{"id":"photo-size-v7-14","version":7,"kind":"scale","prompt":"Resize the soprano recorder to match its real size.","target":{"name":"Soprano recorder","dimension":"reference length","shape":"photo:recorder"},"reference":{"name":"Drywall screw","dimension":"reference screw length","shape":"photo:screw","measure":"3.5 cm · reference screw length"},"bounds":[0.02,50],"answer":9.14285714,"explanation":"Soprano recorder: 0.32 m (reference length). Drywall screw: 0.035 m (reference screw length). Ratio: 9.14×.\nA 32 cm soprano recorder reference; recorders come in many sizes.\nA 35 mm drywall-screw reference; this is one selected size, not a universal screw length.","sources":["https://www.yamaha.com/en/musical_instrument_guide/recorder/structure/","https://commons.wikimedia.org/wiki/File:Drywall_screw.png","https://commons.wikimedia.org/wiki/File:Yamaha_Soprano_Recorder_YRS-61.png","https://commons.wikimedia.org/wiki/File:Drywall_screw.png"]},{"id":"photo-size-v7-15","version":7,"kind":"scale","prompt":"Resize the dreamcast vmu to match its real size.","target":{"name":"Dreamcast VMU","dimension":"unit height","shape":"photo:dreamcast-vmu"},"reference":{"name":"Climbing hammer","dimension":"reference overall length","shape":"photo:climbing-hammer","measure":"30 cm · reference overall length"},"bounds":[0.02,50],"answer":0.26666667,"explanation":"Dreamcast VMU: 0.08 m (unit height). Climbing hammer: 0.3 m (reference overall length). Ratio: 0.27×.\nThe Visual Memory Unit is about 80 mm high.\nA 30 cm hand-tool reference.","sources":["https://en.wikipedia.org/wiki/VMU","https://commons.wikimedia.org/wiki/File:Climbing_hammer.png","https://commons.wikimedia.org/wiki/File:Sega-Dreamcast-VMU.png","https://commons.wikimedia.org/wiki/File:Climbing_hammer.png"]},{"id":"photo-size-v7-16","version":7,"kind":"scale","prompt":"Resize the nes controller to match its real size.","target":{"name":"NES controller","dimension":"body width","shape":"photo:nes-controller"},"reference":{"name":"Peacock butterfly","dimension":"reference wingspan","shape":"photo:peacock-butterfly","measure":"6.5 cm · reference wingspan"},"bounds":[0.02,50],"answer":1.89230769,"explanation":"NES controller: 0.123 m (body width). Peacock butterfly: 0.065 m (reference wingspan). Ratio: 1.89×.\nA 123 mm controller body reference; the cable is excluded.\nA 65 mm wingspan reference with the wings spread.","sources":["https://en.wikipedia.org/wiki/Nintendo_Entertainment_System","https://butterfly-conservation.org/butterflies/peacock","https://commons.wikimedia.org/wiki/File:Nintendo-Entertainment-System-NES-Controller-FL.png","https://commons.wikimedia.org/wiki/File:Aglais_io_-_3150.png"]},{"id":"photo-size-v7-17","version":7,"kind":"scale","prompt":"Resize the sewing needle to match its real size.","target":{"name":"Sewing needle","dimension":"reference end-to-end length","shape":"photo:needle"},"reference":{"name":"Apple","dimension":"reference fruit width","shape":"photo:apple","measure":"8 cm · reference fruit width"},"bounds":[0.02,50],"answer":0.5,"explanation":"Sewing needle: 0.04 m (reference end-to-end length). Apple: 0.08 m (reference fruit width). Ratio: 0.50×.\nA 4 cm reference needle. Sewing needles come in multiple lengths.\nAn 8 cm wide reference apple; real apples vary by cultivar and growing conditions.","sources":["https://commons.wikimedia.org/wiki/File:Sewing_needle.png","https://commons.wikimedia.org/wiki/File:Apple_in_lightbox.png","https://commons.wikimedia.org/wiki/File:Sewing_needle.png","https://commons.wikimedia.org/wiki/File:Apple_in_lightbox.png"]},{"id":"photo-size-v7-18","version":7,"kind":"scale","prompt":"Resize the game boy advance to match its real size.","target":{"name":"Game Boy Advance","dimension":"console width","shape":"photo:gba"},"reference":{"name":"Size-7 basketball","dimension":"nominal diameter","shape":"photo:basketball","measure":"23.9 cm · nominal diameter"},"bounds":[0.02,50],"answer":0.60460251,"explanation":"Game Boy Advance: 0.1445 m (console width). Size-7 basketball: 0.239 m (nominal diameter). Ratio: 0.60×.\nOriginal model: 144.5 mm wide; cartridges are excluded from the width.\nA nominal diameter of 23.9 cm, corresponding to about 75 cm circumference.","sources":["https://en.wikipedia.org/wiki/Game_Boy_Advance","https://www.fiba.basketball/en/official-basketball-rules","https://commons.wikimedia.org/wiki/File:GameBoyAdvance-transparent.png","https://commons.wikimedia.org/wiki/File:Isolated_basketball.png"]},{"id":"photo-size-v7-19","version":7,"kind":"scale","prompt":"Resize the xd-picture card to match its real size.","target":{"name":"xD-Picture Card","dimension":"card width","shape":"photo:xd-card"},"reference":{"name":"Disposable razor","dimension":"reference overall length","shape":"photo:razor","measure":"10 cm · reference overall length"},"bounds":[0.02,50],"answer":0.25,"explanation":"xD-Picture Card: 0.025 m (card width). Disposable razor: 0.1 m (reference overall length). Ratio: 0.25×.\nThe memory card is 25 mm wide and 20 mm high.\nA 10 cm razor reference, measured end to end.","sources":["https://en.wikipedia.org/wiki/XD-Picture_Card","https://commons.wikimedia.org/wiki/File:Razor.png","https://commons.wikimedia.org/wiki/File:XD_card_16M_Fujifilm_front.png","https://commons.wikimedia.org/wiki/File:Razor.png"]},{"id":"photo-size-v7-20","version":7,"kind":"scale","prompt":"Resize the full-size electric guitar to match its real size.","target":{"name":"Full-size electric guitar","dimension":"reference overall length","shape":"photo:guitar"},"reference":{"name":"Nikon D90","dimension":"camera body width","shape":"photo:nikon-d90","measure":"13.2 cm · camera body width"},"bounds":[0.02,50],"answer":7.57575758,"explanation":"Full-size electric guitar: 1 m (reference overall length). Nikon D90: 0.132 m (camera body width). Ratio: 7.58×.\nA one-metre reference guitar. Overall length varies by model; this is not its string scale length.\nD90 body width: 132 mm. Lens and strap are not part of the width measurement.","sources":["https://www.fender.com/articles/instruments/what-is-scale-length","https://www.nikon.com/company/news/2008/0827_d90_01/","https://commons.wikimedia.org/wiki/File:Guitar_3.png","https://commons.wikimedia.org/wiki/File:Nikon_D90.png"]},{"id":"photo-size-v7-21","version":7,"kind":"scale","prompt":"Resize the media remote control to match its real size.","target":{"name":"Media remote control","dimension":"reference overall length","shape":"photo:remote"},"reference":{"name":"Plains zebra","dimension":"reference head-and-body length","shape":"photo:zebra","measure":"2.4 m · reference head-and-body length"},"bounds":[0.02,50],"answer":0.06041667,"explanation":"Media remote control: 0.145 m (reference overall length). Plains zebra: 2.4 m (reference head-and-body length). Ratio: 0.06×.\nA 14.5 cm reference remote, measured end to end.\nA 2.4 m head-and-body reference; the tail is not part of this measurement.","sources":["https://www.playstation.com/en-us/accessories/media-remote/","https://animals.sandiegozoo.org/animals/zebra","https://commons.wikimedia.org/wiki/File:PlayStation_5_Media_Remote_-_front.png","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Zebra.png"]},{"id":"photo-size-v7-22","version":7,"kind":"scale","prompt":"Resize the dualshock 2 controller to match its real size.","target":{"name":"DualShock 2 controller","dimension":"reference controller width","shape":"photo:controller"},"reference":{"name":"Coffee bean","dimension":"reference long-axis length","shape":"photo:coffee-bean","measure":"1 cm · reference long-axis length"},"bounds":[0.02,50],"answer":15.7,"explanation":"DualShock 2 controller: 0.157 m (reference controller width). Coffee bean: 0.01 m (reference long-axis length). Ratio: 15.70×.\nA 15.7 cm controller-body width reference, excluding the cable.\nA 10 mm roasted-coffee-bean reference.","sources":["https://en.wikipedia.org/wiki/DualShock","https://commons.wikimedia.org/wiki/File:Coffee_bean_transparent.png","https://commons.wikimedia.org/wiki/File:PlayStation2-DualShock2.png","https://commons.wikimedia.org/wiki/File:Coffee_bean_transparent.png"]},{"id":"photo-size-v7-23","version":7,"kind":"scale","prompt":"Resize the adult male giraffe to match its real size.","target":{"name":"Adult male giraffe","dimension":"upper adult height","shape":"photo:giraffe"},"reference":{"name":"Concert flute","dimension":"typical assembled length","shape":"photo:flute","measure":"67 cm · typical assembled length"},"bounds":[0.02,50],"answer":8.20895522,"explanation":"Adult male giraffe: 5.5 m (upper adult height). Concert flute: 0.67 m (typical assembled length). Ratio: 8.21×.\nAn adult male can reach about 5.5 m tall. Individuals and poses vary.\nA reference concert flute about 67 cm long; model and footjoint affect length.","sources":["https://animals.sandiegozoo.org/animals/giraffe","https://www.yamaha.com/en/musical_instrument_guide/flute/structure/","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Giraffa.png","https://commons.wikimedia.org/wiki/File:Yamaha_Flute_YFL-874W.png"]},{"id":"photo-size-v7-24","version":7,"kind":"scale","prompt":"Resize the game boy advance sp to match its real size.","target":{"name":"Game Boy Advance SP","dimension":"console width","shape":"photo:gba-sp"},"reference":{"name":"Small scissors","dimension":"reference end-to-end length","shape":"photo:scissors","measure":"14 cm · reference end-to-end length"},"bounds":[0.02,50],"answer":0.60428571,"explanation":"Game Boy Advance SP: 0.0846 m (console width). Small scissors: 0.14 m (reference end-to-end length). Ratio: 0.60×.\nThe SP is 84.6 mm wide, whether open or closed.\nA 14 cm household-scissors reference, measured from handle end to blade tip.","sources":["https://en.wikipedia.org/wiki/Game_Boy_Advance_SP","https://commons.wikimedia.org/wiki/File:Small_pair_of_blue_scissors.png","https://commons.wikimedia.org/wiki/File:Game-Boy-Advance-SP-Mk2.png","https://commons.wikimedia.org/wiki/File:Small_pair_of_blue_scissors.png"]},{"id":"photo-size-v7-25","version":7,"kind":"scale","prompt":"Resize the three-cup moka pot to match its real size.","target":{"name":"Three-cup moka pot","dimension":"reference height","shape":"photo:coffee-pot"},"reference":{"name":"Chameleon","dimension":"reference overall length","shape":"photo:chameleon","measure":"30 cm · reference overall length"},"bounds":[0.02,50],"answer":0.53333333,"explanation":"Three-cup moka pot: 0.16 m (reference height). Chameleon: 0.3 m (reference overall length). Ratio: 0.53×.\nA roughly 16 cm three-cup reference. Moka pots are sold in many capacities.\nA 30 cm reference specimen including the tail. Chameleon species vary widely.","sources":["https://www.bialetti.com/ee_en/moka-express.html","https://animals.sandiegozoo.org/animals/chameleon","https://commons.wikimedia.org/wiki/File:Moka_Express_sideview.png","https://commons.wikimedia.org/wiki/File:ChameleonCutOut.png"]},{"id":"photo-size-v7-26","version":7,"kind":"scale","prompt":"Resize the sony a5000 to match its real size.","target":{"name":"Sony a5000","dimension":"camera body width","shape":"photo:sony-camera"},"reference":{"name":"Avocado","dimension":"reference fruit length","shape":"photo:avocado","measure":"14 cm · reference fruit length"},"bounds":[0.02,50],"answer":0.78285714,"explanation":"Sony a5000: 0.1096 m (camera body width). Avocado: 0.14 m (reference fruit length). Ratio: 0.78×.\nSony a5000 body width: 109.6 mm.\nA 14 cm reference avocado. Fruit sizes vary considerably.","sources":["https://www.sony.com/electronics/interchangeable-lens-cameras/ilce-5000-kit/specifications","https://commons.wikimedia.org/wiki/File:Avocado.png","https://commons.wikimedia.org/wiki/File:Sony_A5000_white.png","https://commons.wikimedia.org/wiki/File:Avocado.png"]},{"id":"photo-size-v7-27","version":7,"kind":"scale","prompt":"Resize the iphone 3g to match its real size.","target":{"name":"iPhone 3G","dimension":"phone height","shape":"photo:iphone3g"},"reference":{"name":"Seven-spot ladybird","dimension":"reference body length","shape":"photo:ladybird","measure":"0.7 cm · reference body length"},"bounds":[0.02,50],"answer":16.5,"explanation":"iPhone 3G: 0.1155 m (phone height). Seven-spot ladybird: 0.007 m (reference body length). Ratio: 16.50×.\niPhone 3G height: 115.5 mm.\nA 7 mm adult reference, excluding legs and antennae.","sources":["https://devimages.apple.com/programs/ipod/dimensions/iPhone-3G-dimensions.pdf","https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/beetles/7-spot-ladybird","https://commons.wikimedia.org/wiki/File:IPhone_3G.png","https://commons.wikimedia.org/wiki/File:Coccinella-septempunctata--Trp-1.png"]},{"id":"photo-size-v7-28","version":7,"kind":"scale","prompt":"Resize the game boy color to match its real size.","target":{"name":"Game Boy Color","dimension":"console height","shape":"photo:gameboy-color"},"reference":{"name":"Climbing hammer","dimension":"reference overall length","shape":"photo:climbing-hammer","measure":"30 cm · reference overall length"},"bounds":[0.02,50],"answer":0.445,"explanation":"Game Boy Color: 0.1335 m (console height). Climbing hammer: 0.3 m (reference overall length). Ratio: 0.45×.\nThe Game Boy Color is 133.5 mm high.\nA 30 cm hand-tool reference.","sources":["https://en.wikipedia.org/wiki/Game_Boy_Color","https://commons.wikimedia.org/wiki/File:Climbing_hammer.png","https://commons.wikimedia.org/wiki/File:Nintendo-Game-Boy-Color-FL.png","https://commons.wikimedia.org/wiki/File:Climbing_hammer.png"]},{"id":"photo-size-v7-29","version":7,"kind":"scale","prompt":"Resize the kick scooter to match its real size.","target":{"name":"Kick scooter","dimension":"reference handlebar height","shape":"photo:skateboard"},"reference":{"name":"BlackBerry Q10","dimension":"phone height","shape":"photo:blackberry","measure":"11.96 cm · phone height"},"bounds":[0.02,50],"answer":8.36120401,"explanation":"Kick scooter: 1 m (reference handlebar height). BlackBerry Q10: 0.1196 m (phone height). Ratio: 8.36×.\nA one-metre handlebar-height reference. Adjustable scooters can be set lower.\nBlackBerry Q10 height: 119.6 mm.","sources":["https://www.stigasports.com/","https://en.wikipedia.org/wiki/BlackBerry_Q10","https://commons.wikimedia.org/wiki/File:Stiga_Route_200_S.png","https://commons.wikimedia.org/wiki/File:Blackberry-Q10-transparent.png"]},{"id":"photo-size-v7-30","version":7,"kind":"scale","prompt":"Resize the open umbrella to match its real size.","target":{"name":"Open umbrella","dimension":"reference canopy width","shape":"photo:umbrella"},"reference":{"name":"Honda S2000","dimension":"vehicle length","shape":"photo:honda-s2000","measure":"4.135 m · vehicle length"},"bounds":[0.02,50],"answer":0.24183797,"explanation":"Open umbrella: 1 m (reference canopy width). Honda S2000: 4.135 m (vehicle length). Ratio: 0.24×.\nA one-metre canopy-width reference. Umbrella models vary.\n2005 S2000 overall length: 4.135 m.","sources":["https://commons.wikimedia.org/wiki/File:Umbrella.png","https://en.wikipedia.org/wiki/Honda_S2000","https://commons.wikimedia.org/wiki/File:Umbrella.png","https://commons.wikimedia.org/wiki/File:HondaS2000-004.png"]},{"id":"photo-size-v7-31","version":7,"kind":"scale","prompt":"Resize the computer mouse to match its real size.","target":{"name":"Computer mouse","dimension":"reference body length","shape":"photo:sega-mouse"},"reference":{"name":"Full-size violin","dimension":"typical overall length","shape":"photo:violin","measure":"59 cm · typical overall length"},"bounds":[0.02,50],"answer":0.18644068,"explanation":"Computer mouse: 0.11 m (reference body length). Full-size violin: 0.59 m (typical overall length). Ratio: 0.19×.\nAn 11 cm computer-mouse body reference; the cable is excluded.\nA full-size violin is about 59 cm overall. The bow is excluded.","sources":["https://commons.wikimedia.org/wiki/File:Sega-Dreamcast-Mouse-BR.png","https://www.yamaha.com/en/musical_instrument_guide/violin/structure/","https://commons.wikimedia.org/wiki/File:Sega-Dreamcast-Mouse-BR.png","https://commons.wikimedia.org/wiki/File:Violin_VL100_(cropped).png"]},{"id":"photo-size-v7-32","version":7,"kind":"scale","prompt":"Resize the f tuba to match its real size.","target":{"name":"F tuba","dimension":"reference standing height","shape":"photo:tuba"},"reference":{"name":"City transit bus","dimension":"40-foot bus length","shape":"photo:bus","measure":"12.2 m · 40-foot bus length"},"bounds":[0.02,50],"answer":0.07377049,"explanation":"F tuba: 0.9 m (reference standing height). City transit bus: 12.2 m (40-foot bus length). Ratio: 0.07×.\nA 90 cm standing-height reference. Tubas vary substantially by pitch and design.\nA nominal 40-foot (12.2 m) transit-bus reference; bumpers and model year affect exact length.","sources":["https://www.yamaha.com/en/musical_instrument_guide/tuba/structure/","https://www.gillig.com/low-floor","https://commons.wikimedia.org/wiki/File:Viennese_six-valve_bass_tuba_in_F(made_by_Jungwirth)_Transparent.png","https://commons.wikimedia.org/wiki/File:Transparent_Santa_Cruz_Metro_bus_0222.png"]},{"id":"photo-size-v7-33","version":7,"kind":"scale","prompt":"Resize the land tortoise to match its real size.","target":{"name":"Land tortoise","dimension":"reference overall length","shape":"photo:tortoise"},"reference":{"name":"Road roller","dimension":"reference overall length","shape":"photo:road-roller","measure":"5 m · reference overall length"},"bounds":[0.02,50],"answer":0.06,"explanation":"Land tortoise: 0.3 m (reference overall length). Road roller: 5 m (reference overall length). Ratio: 0.06×.\nA 30 cm overall-length reference including the head and legs. Species and poses vary.\nA five-metre road-roller reference; construction machines come in many sizes.","sources":["https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Tortoise.png","https://commons.wikimedia.org/wiki/File:Road_roller.png","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Tortoise.png","https://commons.wikimedia.org/wiki/File:Road_roller.png"]},{"id":"photo-size-v7-34","version":7,"kind":"scale","prompt":"Resize the game boy advance to match its real size.","target":{"name":"Game Boy Advance","dimension":"console width","shape":"photo:gba"},"reference":{"name":"Sunglasses","dimension":"reference front width","shape":"photo:sunglasses","measure":"14 cm · reference front width"},"bounds":[0.02,50],"answer":1.03214286,"explanation":"Game Boy Advance: 0.1445 m (console width). Sunglasses: 0.14 m (reference front width). Ratio: 1.03×.\nOriginal model: 144.5 mm wide; cartridges are excluded from the width.\nA 14 cm front-width reference, not the length of the folding arms.","sources":["https://en.wikipedia.org/wiki/Game_Boy_Advance","https://commons.wikimedia.org/wiki/File:Sunglasses-1_retouch.png","https://commons.wikimedia.org/wiki/File:GameBoyAdvance-transparent.png","https://commons.wikimedia.org/wiki/File:Sunglasses-1_retouch.png"]},{"id":"photo-size-v7-35","version":7,"kind":"scale","prompt":"Resize the drywall screw to match its real size.","target":{"name":"Drywall screw","dimension":"reference screw length","shape":"photo:screw"},"reference":{"name":"Original Nintendo DS","dimension":"console width","shape":"photo:nintendo-ds","measure":"14.87 cm · console width"},"bounds":[0.02,50],"answer":0.23537323,"explanation":"Drywall screw: 0.035 m (reference screw length). Original Nintendo DS: 0.1487 m (console width). Ratio: 0.24×.\nA 35 mm drywall-screw reference; this is one selected size, not a universal screw length.\nOriginal DS width: 148.7 mm.","sources":["https://commons.wikimedia.org/wiki/File:Drywall_screw.png","https://en.wikipedia.org/wiki/Nintendo_DS","https://commons.wikimedia.org/wiki/File:Drywall_screw.png","https://commons.wikimedia.org/wiki/File:Nintendo-DS-Fat-Blue.png"]},{"id":"photo-size-v7-36","version":7,"kind":"scale","prompt":"Resize the small scissors to match its real size.","target":{"name":"Small scissors","dimension":"reference end-to-end length","shape":"photo:scissors"},"reference":{"name":"European badger","dimension":"reference head-and-body length","shape":"photo:badger","measure":"75 cm · reference head-and-body length"},"bounds":[0.02,50],"answer":0.18666667,"explanation":"Small scissors: 0.14 m (reference end-to-end length). European badger: 0.75 m (reference head-and-body length). Ratio: 0.19×.\nA 14 cm household-scissors reference, measured from handle end to blade tip.\nA 75 cm adult reference, excluding the tail. Adults vary in size.","sources":["https://commons.wikimedia.org/wiki/File:Small_pair_of_blue_scissors.png","https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/animals/mammals/badger/","https://commons.wikimedia.org/wiki/File:Small_pair_of_blue_scissors.png","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Badger.png"]},{"id":"photo-size-v7-37","version":7,"kind":"scale","prompt":"Resize the chameleon to match its real size.","target":{"name":"Chameleon","dimension":"reference overall length","shape":"photo:chameleon"},"reference":{"name":"Atari Portfolio","dimension":"computer width","shape":"photo:calculator","measure":"20 cm · computer width"},"bounds":[0.02,50],"answer":1.5,"explanation":"Chameleon: 0.3 m (reference overall length). Atari Portfolio: 0.2 m (computer width). Ratio: 1.50×.\nA 30 cm reference specimen including the tail. Chameleon species vary widely.\nThe pocket computer is about 20 cm wide.","sources":["https://animals.sandiegozoo.org/animals/chameleon","https://en.wikipedia.org/wiki/Atari_Portfolio","https://commons.wikimedia.org/wiki/File:ChameleonCutOut.png","https://commons.wikimedia.org/wiki/File:Atari-Portfolio-Computer.png"]},{"id":"photo-size-v7-38","version":7,"kind":"scale","prompt":"Resize the bicycle chain tool to match its real size.","target":{"name":"Bicycle chain tool","dimension":"reference overall height","shape":"photo:chain-tool"},"reference":{"name":"Dreamcast VMU","dimension":"unit height","shape":"photo:dreamcast-vmu","measure":"8 cm · unit height"},"bounds":[0.02,50],"answer":1,"explanation":"Bicycle chain tool: 0.08 m (reference overall height). Dreamcast VMU: 0.08 m (unit height). Ratio: 1.00×.\nAn 8 cm portable chain-tool reference, excluding the length of any loose chain.\nThe Visual Memory Unit is about 80 mm high.","sources":["https://commons.wikimedia.org/wiki/File:Chain_tool.png","https://en.wikipedia.org/wiki/VMU","https://commons.wikimedia.org/wiki/File:Chain_tool.png","https://commons.wikimedia.org/wiki/File:Sega-Dreamcast-VMU.png"]},{"id":"photo-size-v7-39","version":7,"kind":"scale","prompt":"Resize the olympus e-pl1 to match its real size.","target":{"name":"Olympus E-PL1","dimension":"camera body width","shape":"photo:olympus"},"reference":{"name":"Broccoli head","dimension":"reference overall height","shape":"photo:broccoli","measure":"20 cm · reference overall height"},"bounds":[0.02,50],"answer":0.573,"explanation":"Olympus E-PL1: 0.1146 m (camera body width). Broccoli head: 0.2 m (reference overall height). Ratio: 0.57×.\nE-PL1 body width: 114.6 mm.\nA 20 cm broccoli reference including its stalk.","sources":["https://en.wikipedia.org/wiki/Olympus_PEN_E-PL1","https://commons.wikimedia.org/wiki/File:Broccoli.png","https://commons.wikimedia.org/wiki/File:Olympus_E-PL1.png","https://commons.wikimedia.org/wiki/File:Broccoli.png"]},{"id":"photo-size-v7-40","version":7,"kind":"scale","prompt":"Resize the apple to match its real size.","target":{"name":"Apple","dimension":"reference fruit width","shape":"photo:apple"},"reference":{"name":"Three-cup moka pot","dimension":"reference height","shape":"photo:coffee-pot","measure":"16 cm · reference height"},"bounds":[0.02,50],"answer":0.5,"explanation":"Apple: 0.08 m (reference fruit width). Three-cup moka pot: 0.16 m (reference height). Ratio: 0.50×.\nAn 8 cm wide reference apple; real apples vary by cultivar and growing conditions.\nA roughly 16 cm three-cup reference. Moka pots are sold in many capacities.","sources":["https://commons.wikimedia.org/wiki/File:Apple_in_lightbox.png","https://www.bialetti.com/ee_en/moka-express.html","https://commons.wikimedia.org/wiki/File:Apple_in_lightbox.png","https://commons.wikimedia.org/wiki/File:Moka_Express_sideview.png"]},{"id":"photo-size-v7-41","version":7,"kind":"scale","prompt":"Resize the peacock butterfly to match its real size.","target":{"name":"Peacock butterfly","dimension":"reference wingspan","shape":"photo:peacock-butterfly"},"reference":{"name":"2010 Mac mini","dimension":"enclosure width","shape":"photo:mac-mini","measure":"19.7 cm · enclosure width"},"bounds":[0.02,50],"answer":0.32994924,"explanation":"Peacock butterfly: 0.065 m (reference wingspan). 2010 Mac mini: 0.197 m (enclosure width). Ratio: 0.33×.\nA 65 mm wingspan reference with the wings spread.\nThis Mac mini generation has a 19.7 cm square footprint.","sources":["https://butterfly-conservation.org/butterflies/peacock","https://support.apple.com/en-us/112588","https://commons.wikimedia.org/wiki/File:Aglais_io_-_3150.png","https://commons.wikimedia.org/wiki/File:Mac_mini_server.png"]},{"id":"photo-size-v7-42","version":7,"kind":"scale","prompt":"Resize the avocado to match its real size.","target":{"name":"Avocado","dimension":"reference fruit length","shape":"photo:avocado"},"reference":{"name":"Tennis ball","dimension":"reference ball diameter","shape":"photo:tennis-ball","measure":"6.7 cm · reference ball diameter"},"bounds":[0.02,50],"answer":2.08955224,"explanation":"Avocado: 0.14 m (reference fruit length). Tennis ball: 0.067 m (reference ball diameter). Ratio: 2.09×.\nA 14 cm reference avocado. Fruit sizes vary considerably.\nA 6.7 cm diameter reference, within the standard ball-size range.","sources":["https://commons.wikimedia.org/wiki/File:Avocado.png","https://www.itftennis.com/en/about-us/tennis-tech/approved-balls/","https://commons.wikimedia.org/wiki/File:Avocado.png","https://commons.wikimedia.org/wiki/File:Tennisball2.png"]},{"id":"photo-size-v7-43","version":7,"kind":"scale","prompt":"Resize the plains zebra to match its real size.","target":{"name":"Plains zebra","dimension":"reference head-and-body length","shape":"photo:zebra"},"reference":{"name":"Game Boy Color","dimension":"console height","shape":"photo:gameboy-color","measure":"13.35 cm · console height"},"bounds":[0.02,50],"answer":17.97752809,"explanation":"Plains zebra: 2.4 m (reference head-and-body length). Game Boy Color: 0.1335 m (console height). Ratio: 17.98×.\nA 2.4 m head-and-body reference; the tail is not part of this measurement.\nThe Game Boy Color is 133.5 mm high.","sources":["https://animals.sandiegozoo.org/animals/zebra","https://en.wikipedia.org/wiki/Game_Boy_Color","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Zebra.png","https://commons.wikimedia.org/wiki/File:Nintendo-Game-Boy-Color-FL.png"]},{"id":"photo-size-v7-44","version":7,"kind":"scale","prompt":"Resize the coffee bean to match its real size.","target":{"name":"Coffee bean","dimension":"reference long-axis length","shape":"photo:coffee-bean"},"reference":{"name":"Ledlenser T7M flashlight","dimension":"overall length","shape":"photo:flashlight","measure":"13.1 cm · overall length"},"bounds":[0.02,50],"answer":0.07633588,"explanation":"Coffee bean: 0.01 m (reference long-axis length). Ledlenser T7M flashlight: 0.131 m (overall length). Ratio: 0.08×.\nA 10 mm roasted-coffee-bean reference.\nT7M overall length: 131 mm.","sources":["https://commons.wikimedia.org/wiki/File:Coffee_bean_transparent.png","https://www.ledlenser.my/product/flashlights/t7m/","https://commons.wikimedia.org/wiki/File:Coffee_bean_transparent.png","https://commons.wikimedia.org/wiki/File:LED_LENSER_T7M_LED_flashlight.png"]},{"id":"photo-size-v7-45","version":7,"kind":"scale","prompt":"Resize the rolls-royce phantom iii to match its real size.","target":{"name":"Rolls-Royce Phantom III","dimension":"reference coachwork length","shape":"photo:rolls-royce"},"reference":{"name":"Commodore 128","dimension":"keyboard-computer width","shape":"photo:keyboard","measure":"43 cm · keyboard-computer width"},"bounds":[0.02,50],"answer":13.46511628,"explanation":"Rolls-Royce Phantom III: 5.79 m (reference coachwork length). Commodore 128: 0.43 m (keyboard-computer width). Ratio: 13.47×.\nA 5.79 m coachwork reference; bodies were made by different coachbuilders.\nA 43 cm wide keyboard-computer reference.","sources":["https://en.wikipedia.org/wiki/Rolls-Royce_Phantom_III","https://en.wikipedia.org/wiki/Commodore_128","https://commons.wikimedia.org/wiki/File:Rolls_Royce_Phantom_III_1936_transparent.png","https://commons.wikimedia.org/wiki/File:Commodore-128.png"]},{"id":"photo-size-v7-46","version":7,"kind":"scale","prompt":"Resize the nintendo switch to match its real size.","target":{"name":"Nintendo Switch","dimension":"width with Joy-Con","shape":"photo:switch"},"reference":{"name":"Wire stripper","dimension":"reference overall length","shape":"photo:wire-stripper","measure":"17 cm · reference overall length"},"bounds":[0.02,50],"answer":1.40588235,"explanation":"Nintendo Switch: 0.239 m (width with Joy-Con). Wire stripper: 0.17 m (reference overall length). Ratio: 1.41×.\nOriginal Nintendo Switch: 239 mm wide with Joy-Con attached.\nA 17 cm hand-tool reference. The photograph supplies the outline, not a scale calibration.","sources":["https://www.nintendo.com/us/gaming-systems/switch/tech-specs/","https://commons.wikimedia.org/wiki/File:Wire_stripper.png","https://commons.wikimedia.org/wiki/File:Nintendo-Switch-wJoyCons-BlRd-Standing-FL.png","https://commons.wikimedia.org/wiki/File:Wire_stripper.png"]},{"id":"photo-size-v7-47","version":7,"kind":"scale","prompt":"Resize the billiard chalk cube to match its real size.","target":{"name":"Billiard chalk cube","dimension":"reference cube width","shape":"photo:chalk"},"reference":{"name":"Sony a5000","dimension":"camera body width","shape":"photo:sony-camera","measure":"10.96 cm · camera body width"},"bounds":[0.02,50],"answer":0.22810219,"explanation":"Billiard chalk cube: 0.025 m (reference cube width). Sony a5000: 0.1096 m (camera body width). Ratio: 0.23×.\nA 2.5 cm chalk-cube reference.\nSony a5000 body width: 109.6 mm.","sources":["https://commons.wikimedia.org/wiki/File:Billiard_chalk_20050724.png","https://www.sony.com/electronics/interchangeable-lens-cameras/ilce-5000-kit/specifications","https://commons.wikimedia.org/wiki/File:Billiard_chalk_20050724.png","https://commons.wikimedia.org/wiki/File:Sony_A5000_white.png"]},{"id":"photo-size-v7-48","version":7,"kind":"scale","prompt":"Resize the nes controller to match its real size.","target":{"name":"NES controller","dimension":"body width","shape":"photo:nes-controller"},"reference":{"name":"Soprano recorder","dimension":"reference length","shape":"photo:recorder","measure":"32 cm · reference length"},"bounds":[0.02,50],"answer":0.384375,"explanation":"NES controller: 0.123 m (body width). Soprano recorder: 0.32 m (reference length). Ratio: 0.38×.\nA 123 mm controller body reference; the cable is excluded.\nA 32 cm soprano recorder reference; recorders come in many sizes.","sources":["https://en.wikipedia.org/wiki/Nintendo_Entertainment_System","https://www.yamaha.com/en/musical_instrument_guide/recorder/structure/","https://commons.wikimedia.org/wiki/File:Nintendo-Entertainment-System-NES-Controller-FL.png","https://commons.wikimedia.org/wiki/File:Yamaha_Soprano_Recorder_YRS-61.png"]},{"id":"photo-size-v7-49","version":7,"kind":"scale","prompt":"Resize the blackberry q10 to match its real size.","target":{"name":"BlackBerry Q10","dimension":"phone height","shape":"photo:blackberry"},"reference":{"name":"Concert flute","dimension":"typical assembled length","shape":"photo:flute","measure":"67 cm · typical assembled length"},"bounds":[0.02,50],"answer":0.17850746,"explanation":"BlackBerry Q10: 0.1196 m (phone height). Concert flute: 0.67 m (typical assembled length). Ratio: 0.18×.\nBlackBerry Q10 height: 119.6 mm.\nA reference concert flute about 67 cm long; model and footjoint affect length.","sources":["https://en.wikipedia.org/wiki/BlackBerry_Q10","https://www.yamaha.com/en/musical_instrument_guide/flute/structure/","https://commons.wikimedia.org/wiki/File:Blackberry-Q10-transparent.png","https://commons.wikimedia.org/wiki/File:Yamaha_Flute_YFL-874W.png"]},{"id":"photo-size-v7-50","version":7,"kind":"scale","prompt":"Resize the disposable razor to match its real size.","target":{"name":"Disposable razor","dimension":"reference overall length","shape":"photo:razor"},"reference":{"name":"Bicycle master-link pliers","dimension":"reference overall length","shape":"photo:pliers","measure":"17 cm · reference overall length"},"bounds":[0.02,50],"answer":0.58823529,"explanation":"Disposable razor: 0.1 m (reference overall length). Bicycle master-link pliers: 0.17 m (reference overall length). Ratio: 0.59×.\nA 10 cm razor reference, measured end to end.\nA 17 cm pliers reference; tool models differ.","sources":["https://commons.wikimedia.org/wiki/File:Razor.png","https://commons.wikimedia.org/wiki/File:Master_link_pliers.png","https://commons.wikimedia.org/wiki/File:Razor.png","https://commons.wikimedia.org/wiki/File:Master_link_pliers.png"]},{"id":"photo-size-v7-51","version":7,"kind":"scale","prompt":"Resize the adult male giraffe to match its real size.","target":{"name":"Adult male giraffe","dimension":"upper adult height","shape":"photo:giraffe"},"reference":{"name":"Full-size electric guitar","dimension":"reference overall length","shape":"photo:guitar","measure":"1 m · reference overall length"},"bounds":[0.02,50],"answer":5.5,"explanation":"Adult male giraffe: 5.5 m (upper adult height). Full-size electric guitar: 1 m (reference overall length). Ratio: 5.50×.\nAn adult male can reach about 5.5 m tall. Individuals and poses vary.\nA one-metre reference guitar. Overall length varies by model; this is not its string scale length.","sources":["https://animals.sandiegozoo.org/animals/giraffe","https://www.fender.com/articles/instruments/what-is-scale-length","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Giraffa.png","https://commons.wikimedia.org/wiki/File:Guitar_3.png"]},{"id":"photo-size-v7-52","version":7,"kind":"scale","prompt":"Resize the seven-spot ladybird to match its real size.","target":{"name":"Seven-spot ladybird","dimension":"reference body length","shape":"photo:ladybird"},"reference":{"name":"Game Boy Micro","dimension":"console width","shape":"photo:gameboy-micro","measure":"10.1 cm · console width"},"bounds":[0.02,50],"answer":0.06930693,"explanation":"Seven-spot ladybird: 0.007 m (reference body length). Game Boy Micro: 0.101 m (console width). Ratio: 0.07×.\nA 7 mm adult reference, excluding legs and antennae.\nThe Micro is 101 mm wide.","sources":["https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/beetles/7-spot-ladybird","https://en.wikipedia.org/wiki/Game_Boy_Micro","https://commons.wikimedia.org/wiki/File:Coccinella-septempunctata--Trp-1.png","https://commons.wikimedia.org/wiki/File:Game-Boy-Micro.png"]},{"id":"photo-size-v7-53","version":7,"kind":"scale","prompt":"Resize the size-7 basketball to match its real size.","target":{"name":"Size-7 basketball","dimension":"nominal diameter","shape":"photo:basketball"},"reference":{"name":"AKG C214 microphone","dimension":"microphone height","shape":"photo:akg-microphone","measure":"16 cm · microphone height"},"bounds":[0.02,50],"answer":1.49375,"explanation":"Size-7 basketball: 0.239 m (nominal diameter). AKG C214 microphone: 0.16 m (microphone height). Ratio: 1.49×.\nA nominal diameter of 23.9 cm, corresponding to about 75 cm circumference.\nC214 microphone height: 160 mm, without a stand.","sources":["https://www.fiba.basketball/en/official-basketball-rules","https://www.akg.com/Microphones/Condenser%20Microphones/C214.html","https://commons.wikimedia.org/wiki/File:Isolated_basketball.png","https://commons.wikimedia.org/wiki/File:AKG_C214_Condenser_microphone.png"]},{"id":"photo-size-v7-54","version":7,"kind":"scale","prompt":"Resize the game boy advance sp to match its real size.","target":{"name":"Game Boy Advance SP","dimension":"console width","shape":"photo:gba-sp"},"reference":{"name":"Sewing needle","dimension":"reference end-to-end length","shape":"photo:needle","measure":"4 cm · reference end-to-end length"},"bounds":[0.02,50],"answer":2.115,"explanation":"Game Boy Advance SP: 0.0846 m (console width). Sewing needle: 0.04 m (reference end-to-end length). Ratio: 2.11×.\nThe SP is 84.6 mm wide, whether open or closed.\nA 4 cm reference needle. Sewing needles come in multiple lengths.","sources":["https://en.wikipedia.org/wiki/Game_Boy_Advance_SP","https://commons.wikimedia.org/wiki/File:Sewing_needle.png","https://commons.wikimedia.org/wiki/File:Game-Boy-Advance-SP-Mk2.png","https://commons.wikimedia.org/wiki/File:Sewing_needle.png"]},{"id":"photo-size-v7-55","version":7,"kind":"scale","prompt":"Resize the sunglasses to match its real size.","target":{"name":"Sunglasses","dimension":"reference front width","shape":"photo:sunglasses"},"reference":{"name":"iPhone 3G","dimension":"phone height","shape":"photo:iphone3g","measure":"11.55 cm · phone height"},"bounds":[0.02,50],"answer":1.21212121,"explanation":"Sunglasses: 0.14 m (reference front width). iPhone 3G: 0.1155 m (phone height). Ratio: 1.21×.\nA 14 cm front-width reference, not the length of the folding arms.\niPhone 3G height: 115.5 mm.","sources":["https://commons.wikimedia.org/wiki/File:Sunglasses-1_retouch.png","https://devimages.apple.com/programs/ipod/dimensions/iPhone-3G-dimensions.pdf","https://commons.wikimedia.org/wiki/File:Sunglasses-1_retouch.png","https://commons.wikimedia.org/wiki/File:IPhone_3G.png"]},{"id":"photo-size-v7-56","version":7,"kind":"scale","prompt":"Resize the drywall screw to match its real size.","target":{"name":"Drywall screw","dimension":"reference screw length","shape":"photo:screw"},"reference":{"name":"xD-Picture Card","dimension":"card width","shape":"photo:xd-card","measure":"2.5 cm · card width"},"bounds":[0.02,50],"answer":1.4,"explanation":"Drywall screw: 0.035 m (reference screw length). xD-Picture Card: 0.025 m (card width). Ratio: 1.40×.\nA 35 mm drywall-screw reference; this is one selected size, not a universal screw length.\nThe memory card is 25 mm wide and 20 mm high.","sources":["https://commons.wikimedia.org/wiki/File:Drywall_screw.png","https://en.wikipedia.org/wiki/XD-Picture_Card","https://commons.wikimedia.org/wiki/File:Drywall_screw.png","https://commons.wikimedia.org/wiki/File:XD_card_16M_Fujifilm_front.png"]},{"id":"photo-size-v7-57","version":7,"kind":"scale","prompt":"Resize the sega nomad to match its real size.","target":{"name":"Sega Nomad","dimension":"console width","shape":"photo:sega-nomad"},"reference":{"name":"Apple","dimension":"reference fruit width","shape":"photo:apple","measure":"8 cm · reference fruit width"},"bounds":[0.02,50],"answer":2.3125,"explanation":"Sega Nomad: 0.185 m (console width). Apple: 0.08 m (reference fruit width). Ratio: 2.31×.\nThe Nomad is approximately 18.5 cm wide.\nAn 8 cm wide reference apple; real apples vary by cultivar and growing conditions.","sources":["https://en.wikipedia.org/wiki/Genesis_Nomad","https://commons.wikimedia.org/wiki/File:Apple_in_lightbox.png","https://commons.wikimedia.org/wiki/File:Sega-Nomad-Front_(rotated).png","https://commons.wikimedia.org/wiki/File:Apple_in_lightbox.png"]},{"id":"photo-size-v7-58","version":7,"kind":"scale","prompt":"Resize the nikon d90 to match its real size.","target":{"name":"Nikon D90","dimension":"camera body width","shape":"photo:nikon-d90"},"reference":{"name":"Climbing hammer","dimension":"reference overall length","shape":"photo:climbing-hammer","measure":"30 cm · reference overall length"},"bounds":[0.02,50],"answer":0.44,"explanation":"Nikon D90: 0.132 m (camera body width). Climbing hammer: 0.3 m (reference overall length). Ratio: 0.44×.\nD90 body width: 132 mm. Lens and strap are not part of the width measurement.\nA 30 cm hand-tool reference.","sources":["https://www.nikon.com/company/news/2008/0827_d90_01/","https://commons.wikimedia.org/wiki/File:Climbing_hammer.png","https://commons.wikimedia.org/wiki/File:Nikon_D90.png","https://commons.wikimedia.org/wiki/File:Climbing_hammer.png"]},{"id":"photo-size-v7-59","version":7,"kind":"scale","prompt":"Resize the concrete mixer truck to match its real size.","target":{"name":"Concrete mixer truck","dimension":"reference overall length","shape":"photo:cement-truck"},"reference":{"name":"European badger","dimension":"reference head-and-body length","shape":"photo:badger","measure":"75 cm · reference head-and-body length"},"bounds":[0.02,50],"answer":12,"explanation":"Concrete mixer truck: 9 m (reference overall length). European badger: 0.75 m (reference head-and-body length). Ratio: 12.00×.\nA nine-metre mixer-truck reference. Chassis and mixer configuration affect exact length.\nA 75 cm adult reference, excluding the tail. Adults vary in size.","sources":["https://commons.wikimedia.org/wiki/File:Red_cement_mixer_truck.png","https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/animals/mammals/badger/","https://commons.wikimedia.org/wiki/File:Red_cement_mixer_truck.png","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Badger.png"]},{"id":"photo-size-v7-60","version":7,"kind":"scale","prompt":"Resize the media remote control to match its real size.","target":{"name":"Media remote control","dimension":"reference overall length","shape":"photo:remote"},"reference":{"name":"Small scissors","dimension":"reference end-to-end length","shape":"photo:scissors","measure":"14 cm · reference end-to-end length"},"bounds":[0.02,50],"answer":1.03571429,"explanation":"Media remote control: 0.145 m (reference overall length). Small scissors: 0.14 m (reference end-to-end length). Ratio: 1.04×.\nA 14.5 cm reference remote, measured end to end.\nA 14 cm household-scissors reference, measured from handle end to blade tip.","sources":["https://www.playstation.com/en-us/accessories/media-remote/","https://commons.wikimedia.org/wiki/File:Small_pair_of_blue_scissors.png","https://commons.wikimedia.org/wiki/File:PlayStation_5_Media_Remote_-_front.png","https://commons.wikimedia.org/wiki/File:Small_pair_of_blue_scissors.png"]},{"id":"photo-size-v7-61","version":7,"kind":"scale","prompt":"Resize the honda s2000 to match its real size.","target":{"name":"Honda S2000","dimension":"vehicle length","shape":"photo:honda-s2000"},"reference":{"name":"Commodore 128","dimension":"keyboard-computer width","shape":"photo:keyboard","measure":"43 cm · keyboard-computer width"},"bounds":[0.02,50],"answer":9.61627907,"explanation":"Honda S2000: 4.135 m (vehicle length). Commodore 128: 0.43 m (keyboard-computer width). Ratio: 9.62×.\n2005 S2000 overall length: 4.135 m.\nA 43 cm wide keyboard-computer reference.","sources":["https://en.wikipedia.org/wiki/Honda_S2000","https://en.wikipedia.org/wiki/Commodore_128","https://commons.wikimedia.org/wiki/File:HondaS2000-004.png","https://commons.wikimedia.org/wiki/File:Commodore-128.png"]},{"id":"photo-size-v7-62","version":7,"kind":"scale","prompt":"Resize the peacock butterfly to match its real size.","target":{"name":"Peacock butterfly","dimension":"reference wingspan","shape":"photo:peacock-butterfly"},"reference":{"name":"Computer mouse","dimension":"reference body length","shape":"photo:sega-mouse","measure":"11 cm · reference body length"},"bounds":[0.02,50],"answer":0.59090909,"explanation":"Peacock butterfly: 0.065 m (reference wingspan). Computer mouse: 0.11 m (reference body length). Ratio: 0.59×.\nA 65 mm wingspan reference with the wings spread.\nAn 11 cm computer-mouse body reference; the cable is excluded.","sources":["https://butterfly-conservation.org/butterflies/peacock","https://commons.wikimedia.org/wiki/File:Sega-Dreamcast-Mouse-BR.png","https://commons.wikimedia.org/wiki/File:Aglais_io_-_3150.png","https://commons.wikimedia.org/wiki/File:Sega-Dreamcast-Mouse-BR.png"]},{"id":"photo-size-v7-63","version":7,"kind":"scale","prompt":"Resize the disposable razor to match its real size.","target":{"name":"Disposable razor","dimension":"reference overall length","shape":"photo:razor"},"reference":{"name":"DualShock 2 controller","dimension":"reference controller width","shape":"photo:controller","measure":"15.7 cm · reference controller width"},"bounds":[0.02,50],"answer":0.63694268,"explanation":"Disposable razor: 0.1 m (reference overall length). DualShock 2 controller: 0.157 m (reference controller width). Ratio: 0.64×.\nA 10 cm razor reference, measured end to end.\nA 15.7 cm controller-body width reference, excluding the cable.","sources":["https://commons.wikimedia.org/wiki/File:Razor.png","https://en.wikipedia.org/wiki/DualShock","https://commons.wikimedia.org/wiki/File:Razor.png","https://commons.wikimedia.org/wiki/File:PlayStation2-DualShock2.png"]},{"id":"photo-size-v7-64","version":7,"kind":"scale","prompt":"Resize the kick scooter to match its real size.","target":{"name":"Kick scooter","dimension":"reference handlebar height","shape":"photo:skateboard"},"reference":{"name":"City transit bus","dimension":"40-foot bus length","shape":"photo:bus","measure":"12.2 m · 40-foot bus length"},"bounds":[0.02,50],"answer":0.08196721,"explanation":"Kick scooter: 1 m (reference handlebar height). City transit bus: 12.2 m (40-foot bus length). Ratio: 0.08×.\nA one-metre handlebar-height reference. Adjustable scooters can be set lower.\nA nominal 40-foot (12.2 m) transit-bus reference; bumpers and model year affect exact length.","sources":["https://www.stigasports.com/","https://www.gillig.com/low-floor","https://commons.wikimedia.org/wiki/File:Stiga_Route_200_S.png","https://commons.wikimedia.org/wiki/File:Transparent_Santa_Cruz_Metro_bus_0222.png"]},{"id":"photo-size-v7-65","version":7,"kind":"scale","prompt":"Resize the full-size violin to match its real size.","target":{"name":"Full-size violin","dimension":"typical overall length","shape":"photo:violin"},"reference":{"name":"Game Boy Advance SP","dimension":"console width","shape":"photo:gba-sp","measure":"8.46 cm · console width"},"bounds":[0.02,50],"answer":6.97399527,"explanation":"Full-size violin: 0.59 m (typical overall length). Game Boy Advance SP: 0.0846 m (console width). Ratio: 6.97×.\nA full-size violin is about 59 cm overall. The bow is excluded.\nThe SP is 84.6 mm wide, whether open or closed.","sources":["https://www.yamaha.com/en/musical_instrument_guide/violin/structure/","https://en.wikipedia.org/wiki/Game_Boy_Advance_SP","https://commons.wikimedia.org/wiki/File:Violin_VL100_(cropped).png","https://commons.wikimedia.org/wiki/File:Game-Boy-Advance-SP-Mk2.png"]},{"id":"photo-size-v7-66","version":7,"kind":"scale","prompt":"Resize the road roller to match its real size.","target":{"name":"Road roller","dimension":"reference overall length","shape":"photo:road-roller"},"reference":{"name":"Open umbrella","dimension":"reference canopy width","shape":"photo:umbrella","measure":"1 m · reference canopy width"},"bounds":[0.02,50],"answer":5,"explanation":"Road roller: 5 m (reference overall length). Open umbrella: 1 m (reference canopy width). Ratio: 5.00×.\nA five-metre road-roller reference; construction machines come in many sizes.\nA one-metre canopy-width reference. Umbrella models vary.","sources":["https://commons.wikimedia.org/wiki/File:Road_roller.png","https://commons.wikimedia.org/wiki/File:Umbrella.png","https://commons.wikimedia.org/wiki/File:Road_roller.png","https://commons.wikimedia.org/wiki/File:Umbrella.png"]},{"id":"photo-size-v7-67","version":7,"kind":"scale","prompt":"Resize the f tuba to match its real size.","target":{"name":"F tuba","dimension":"reference standing height","shape":"photo:tuba"},"reference":{"name":"Size-7 basketball","dimension":"nominal diameter","shape":"photo:basketball","measure":"23.9 cm · nominal diameter"},"bounds":[0.02,50],"answer":3.76569038,"explanation":"F tuba: 0.9 m (reference standing height). Size-7 basketball: 0.239 m (nominal diameter). Ratio: 3.77×.\nA 90 cm standing-height reference. Tubas vary substantially by pitch and design.\nA nominal diameter of 23.9 cm, corresponding to about 75 cm circumference.","sources":["https://www.yamaha.com/en/musical_instrument_guide/tuba/structure/","https://www.fiba.basketball/en/official-basketball-rules","https://commons.wikimedia.org/wiki/File:Viennese_six-valve_bass_tuba_in_F(made_by_Jungwirth)_Transparent.png","https://commons.wikimedia.org/wiki/File:Isolated_basketball.png"]},{"id":"photo-size-v7-68","version":7,"kind":"scale","prompt":"Resize the chameleon to match its real size.","target":{"name":"Chameleon","dimension":"reference overall length","shape":"photo:chameleon"},"reference":{"name":"Dreamcast VMU","dimension":"unit height","shape":"photo:dreamcast-vmu","measure":"8 cm · unit height"},"bounds":[0.02,50],"answer":3.75,"explanation":"Chameleon: 0.3 m (reference overall length). Dreamcast VMU: 0.08 m (unit height). Ratio: 3.75×.\nA 30 cm reference specimen including the tail. Chameleon species vary widely.\nThe Visual Memory Unit is about 80 mm high.","sources":["https://animals.sandiegozoo.org/animals/chameleon","https://en.wikipedia.org/wiki/VMU","https://commons.wikimedia.org/wiki/File:ChameleonCutOut.png","https://commons.wikimedia.org/wiki/File:Sega-Dreamcast-VMU.png"]},{"id":"photo-size-v7-69","version":7,"kind":"scale","prompt":"Resize the original nintendo ds to match its real size.","target":{"name":"Original Nintendo DS","dimension":"console width","shape":"photo:nintendo-ds"},"reference":{"name":"Plains zebra","dimension":"reference head-and-body length","shape":"photo:zebra","measure":"2.4 m · reference head-and-body length"},"bounds":[0.02,50],"answer":0.06195833,"explanation":"Original Nintendo DS: 0.1487 m (console width). Plains zebra: 2.4 m (reference head-and-body length). Ratio: 0.06×.\nOriginal DS width: 148.7 mm.\nA 2.4 m head-and-body reference; the tail is not part of this measurement.","sources":["https://en.wikipedia.org/wiki/Nintendo_DS","https://animals.sandiegozoo.org/animals/zebra","https://commons.wikimedia.org/wiki/File:Nintendo-DS-Fat-Blue.png","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Zebra.png"]},{"id":"photo-size-v7-70","version":7,"kind":"scale","prompt":"Resize the broccoli head to match its real size.","target":{"name":"Broccoli head","dimension":"reference overall height","shape":"photo:broccoli"},"reference":{"name":"iPhone 3G","dimension":"phone height","shape":"photo:iphone3g","measure":"11.55 cm · phone height"},"bounds":[0.02,50],"answer":1.73160173,"explanation":"Broccoli head: 0.2 m (reference overall height). iPhone 3G: 0.1155 m (phone height). Ratio: 1.73×.\nA 20 cm broccoli reference including its stalk.\niPhone 3G height: 115.5 mm.","sources":["https://commons.wikimedia.org/wiki/File:Broccoli.png","https://devimages.apple.com/programs/ipod/dimensions/iPhone-3G-dimensions.pdf","https://commons.wikimedia.org/wiki/File:Broccoli.png","https://commons.wikimedia.org/wiki/File:IPhone_3G.png"]},{"id":"photo-size-v7-71","version":7,"kind":"scale","prompt":"Resize the bicycle master-link pliers to match its real size.","target":{"name":"Bicycle master-link pliers","dimension":"reference overall length","shape":"photo:pliers"},"reference":{"name":"Three-cup moka pot","dimension":"reference height","shape":"photo:coffee-pot","measure":"16 cm · reference height"},"bounds":[0.02,50],"answer":1.0625,"explanation":"Bicycle master-link pliers: 0.17 m (reference overall length). Three-cup moka pot: 0.16 m (reference height). Ratio: 1.06×.\nA 17 cm pliers reference; tool models differ.\nA roughly 16 cm three-cup reference. Moka pots are sold in many capacities.","sources":["https://commons.wikimedia.org/wiki/File:Master_link_pliers.png","https://www.bialetti.com/ee_en/moka-express.html","https://commons.wikimedia.org/wiki/File:Master_link_pliers.png","https://commons.wikimedia.org/wiki/File:Moka_Express_sideview.png"]},{"id":"photo-size-v7-72","version":7,"kind":"scale","prompt":"Resize the bicycle chain tool to match its real size.","target":{"name":"Bicycle chain tool","dimension":"reference overall height","shape":"photo:chain-tool"},"reference":{"name":"Concert flute","dimension":"typical assembled length","shape":"photo:flute","measure":"67 cm · typical assembled length"},"bounds":[0.02,50],"answer":0.11940299,"explanation":"Bicycle chain tool: 0.08 m (reference overall height). Concert flute: 0.67 m (typical assembled length). Ratio: 0.12×.\nAn 8 cm portable chain-tool reference, excluding the length of any loose chain.\nA reference concert flute about 67 cm long; model and footjoint affect length.","sources":["https://commons.wikimedia.org/wiki/File:Chain_tool.png","https://www.yamaha.com/en/musical_instrument_guide/flute/structure/","https://commons.wikimedia.org/wiki/File:Chain_tool.png","https://commons.wikimedia.org/wiki/File:Yamaha_Flute_YFL-874W.png"]},{"id":"photo-size-v7-73","version":7,"kind":"scale","prompt":"Resize the game boy advance to match its real size.","target":{"name":"Game Boy Advance","dimension":"console width","shape":"photo:gba"},"reference":{"name":"Sewing needle","dimension":"reference end-to-end length","shape":"photo:needle","measure":"4 cm · reference end-to-end length"},"bounds":[0.02,50],"answer":3.6125,"explanation":"Game Boy Advance: 0.1445 m (console width). Sewing needle: 0.04 m (reference end-to-end length). Ratio: 3.61×.\nOriginal model: 144.5 mm wide; cartridges are excluded from the width.\nA 4 cm reference needle. Sewing needles come in multiple lengths.","sources":["https://en.wikipedia.org/wiki/Game_Boy_Advance","https://commons.wikimedia.org/wiki/File:Sewing_needle.png","https://commons.wikimedia.org/wiki/File:GameBoyAdvance-transparent.png","https://commons.wikimedia.org/wiki/File:Sewing_needle.png"]},{"id":"photo-size-v7-74","version":7,"kind":"scale","prompt":"Resize the billiard chalk cube to match its real size.","target":{"name":"Billiard chalk cube","dimension":"reference cube width","shape":"photo:chalk"},"reference":{"name":"Avocado","dimension":"reference fruit length","shape":"photo:avocado","measure":"14 cm · reference fruit length"},"bounds":[0.02,50],"answer":0.17857143,"explanation":"Billiard chalk cube: 0.025 m (reference cube width). Avocado: 0.14 m (reference fruit length). Ratio: 0.18×.\nA 2.5 cm chalk-cube reference.\nA 14 cm reference avocado. Fruit sizes vary considerably.","sources":["https://commons.wikimedia.org/wiki/File:Billiard_chalk_20050724.png","https://commons.wikimedia.org/wiki/File:Avocado.png","https://commons.wikimedia.org/wiki/File:Billiard_chalk_20050724.png","https://commons.wikimedia.org/wiki/File:Avocado.png"]},{"id":"photo-size-v7-75","version":7,"kind":"scale","prompt":"Resize the coffee bean to match its real size.","target":{"name":"Coffee bean","dimension":"reference long-axis length","shape":"photo:coffee-bean"},"reference":{"name":"BlackBerry Q10","dimension":"phone height","shape":"photo:blackberry","measure":"11.96 cm · phone height"},"bounds":[0.02,50],"answer":0.08361204,"explanation":"Coffee bean: 0.01 m (reference long-axis length). BlackBerry Q10: 0.1196 m (phone height). Ratio: 0.08×.\nA 10 mm roasted-coffee-bean reference.\nBlackBerry Q10 height: 119.6 mm.","sources":["https://commons.wikimedia.org/wiki/File:Coffee_bean_transparent.png","https://en.wikipedia.org/wiki/BlackBerry_Q10","https://commons.wikimedia.org/wiki/File:Coffee_bean_transparent.png","https://commons.wikimedia.org/wiki/File:Blackberry-Q10-transparent.png"]},{"id":"photo-size-v7-76","version":7,"kind":"scale","prompt":"Resize the xd-picture card to match its real size.","target":{"name":"xD-Picture Card","dimension":"card width","shape":"photo:xd-card"},"reference":{"name":"Tennis ball","dimension":"reference ball diameter","shape":"photo:tennis-ball","measure":"6.7 cm · reference ball diameter"},"bounds":[0.02,50],"answer":0.37313433,"explanation":"xD-Picture Card: 0.025 m (card width). Tennis ball: 0.067 m (reference ball diameter). Ratio: 0.37×.\nThe memory card is 25 mm wide and 20 mm high.\nA 6.7 cm diameter reference, within the standard ball-size range.","sources":["https://en.wikipedia.org/wiki/XD-Picture_Card","https://www.itftennis.com/en/about-us/tennis-tech/approved-balls/","https://commons.wikimedia.org/wiki/File:XD_card_16M_Fujifilm_front.png","https://commons.wikimedia.org/wiki/File:Tennisball2.png"]},{"id":"photo-size-v7-77","version":7,"kind":"scale","prompt":"Resize the full-size electric guitar to match its real size.","target":{"name":"Full-size electric guitar","dimension":"reference overall length","shape":"photo:guitar"},"reference":{"name":"Nintendo Switch","dimension":"width with Joy-Con","shape":"photo:switch","measure":"23.9 cm · width with Joy-Con"},"bounds":[0.02,50],"answer":4.18410042,"explanation":"Full-size electric guitar: 1 m (reference overall length). Nintendo Switch: 0.239 m (width with Joy-Con). Ratio: 4.18×.\nA one-metre reference guitar. Overall length varies by model; this is not its string scale length.\nOriginal Nintendo Switch: 239 mm wide with Joy-Con attached.","sources":["https://www.fender.com/articles/instruments/what-is-scale-length","https://www.nintendo.com/us/gaming-systems/switch/tech-specs/","https://commons.wikimedia.org/wiki/File:Guitar_3.png","https://commons.wikimedia.org/wiki/File:Nintendo-Switch-wJoyCons-BlRd-Standing-FL.png"]},{"id":"photo-size-v7-78","version":7,"kind":"scale","prompt":"Resize the ledlenser t7m flashlight to match its real size.","target":{"name":"Ledlenser T7M flashlight","dimension":"overall length","shape":"photo:flashlight"},"reference":{"name":"Nikon D90","dimension":"camera body width","shape":"photo:nikon-d90","measure":"13.2 cm · camera body width"},"bounds":[0.02,50],"answer":0.99242424,"explanation":"Ledlenser T7M flashlight: 0.131 m (overall length). Nikon D90: 0.132 m (camera body width). Ratio: 0.99×.\nT7M overall length: 131 mm.\nD90 body width: 132 mm. Lens and strap are not part of the width measurement.","sources":["https://www.ledlenser.my/product/flashlights/t7m/","https://www.nikon.com/company/news/2008/0827_d90_01/","https://commons.wikimedia.org/wiki/File:LED_LENSER_T7M_LED_flashlight.png","https://commons.wikimedia.org/wiki/File:Nikon_D90.png"]},{"id":"photo-size-v7-79","version":7,"kind":"scale","prompt":"Resize the sega nomad to match its real size.","target":{"name":"Sega Nomad","dimension":"console width","shape":"photo:sega-nomad"},"reference":{"name":"Wire stripper","dimension":"reference overall length","shape":"photo:wire-stripper","measure":"17 cm · reference overall length"},"bounds":[0.02,50],"answer":1.08823529,"explanation":"Sega Nomad: 0.185 m (console width). Wire stripper: 0.17 m (reference overall length). Ratio: 1.09×.\nThe Nomad is approximately 18.5 cm wide.\nA 17 cm hand-tool reference. The photograph supplies the outline, not a scale calibration.","sources":["https://en.wikipedia.org/wiki/Genesis_Nomad","https://commons.wikimedia.org/wiki/File:Wire_stripper.png","https://commons.wikimedia.org/wiki/File:Sega-Nomad-Front_(rotated).png","https://commons.wikimedia.org/wiki/File:Wire_stripper.png"]},{"id":"photo-size-v7-80","version":7,"kind":"scale","prompt":"Resize the soprano recorder to match its real size.","target":{"name":"Soprano recorder","dimension":"reference length","shape":"photo:recorder"},"reference":{"name":"Sony a5000","dimension":"camera body width","shape":"photo:sony-camera","measure":"10.96 cm · camera body width"},"bounds":[0.02,50],"answer":2.91970803,"explanation":"Soprano recorder: 0.32 m (reference length). Sony a5000: 0.1096 m (camera body width). Ratio: 2.92×.\nA 32 cm soprano recorder reference; recorders come in many sizes.\nSony a5000 body width: 109.6 mm.","sources":["https://www.yamaha.com/en/musical_instrument_guide/recorder/structure/","https://www.sony.com/electronics/interchangeable-lens-cameras/ilce-5000-kit/specifications","https://commons.wikimedia.org/wiki/File:Yamaha_Soprano_Recorder_YRS-61.png","https://commons.wikimedia.org/wiki/File:Sony_A5000_white.png"]},{"id":"photo-size-v7-81","version":7,"kind":"scale","prompt":"Resize the land tortoise to match its real size.","target":{"name":"Land tortoise","dimension":"reference overall length","shape":"photo:tortoise"},"reference":{"name":"Honda S2000","dimension":"vehicle length","shape":"photo:honda-s2000","measure":"4.135 m · vehicle length"},"bounds":[0.02,50],"answer":0.07255139,"explanation":"Land tortoise: 0.3 m (reference overall length). Honda S2000: 4.135 m (vehicle length). Ratio: 0.07×.\nA 30 cm overall-length reference including the head and legs. Species and poses vary.\n2005 S2000 overall length: 4.135 m.","sources":["https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Tortoise.png","https://en.wikipedia.org/wiki/Honda_S2000","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Tortoise.png","https://commons.wikimedia.org/wiki/File:HondaS2000-004.png"]},{"id":"photo-size-v7-82","version":7,"kind":"scale","prompt":"Resize the seven-spot ladybird to match its real size.","target":{"name":"Seven-spot ladybird","dimension":"reference body length","shape":"photo:ladybird"},"reference":{"name":"Olympus E-PL1","dimension":"camera body width","shape":"photo:olympus","measure":"11.46 cm · camera body width"},"bounds":[0.02,50],"answer":0.06108202,"explanation":"Seven-spot ladybird: 0.007 m (reference body length). Olympus E-PL1: 0.1146 m (camera body width). Ratio: 0.06×.\nA 7 mm adult reference, excluding legs and antennae.\nE-PL1 body width: 114.6 mm.","sources":["https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/beetles/7-spot-ladybird","https://en.wikipedia.org/wiki/Olympus_PEN_E-PL1","https://commons.wikimedia.org/wiki/File:Coccinella-septempunctata--Trp-1.png","https://commons.wikimedia.org/wiki/File:Olympus_E-PL1.png"]},{"id":"photo-size-v7-83","version":7,"kind":"scale","prompt":"Resize the adult male giraffe to match its real size.","target":{"name":"Adult male giraffe","dimension":"upper adult height","shape":"photo:giraffe"},"reference":{"name":"Rolls-Royce Phantom III","dimension":"reference coachwork length","shape":"photo:rolls-royce","measure":"5.79 m · reference coachwork length"},"bounds":[0.02,50],"answer":0.94991364,"explanation":"Adult male giraffe: 5.5 m (upper adult height). Rolls-Royce Phantom III: 5.79 m (reference coachwork length). Ratio: 0.95×.\nAn adult male can reach about 5.5 m tall. Individuals and poses vary.\nA 5.79 m coachwork reference; bodies were made by different coachbuilders.","sources":["https://animals.sandiegozoo.org/animals/giraffe","https://en.wikipedia.org/wiki/Rolls-Royce_Phantom_III","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Giraffa.png","https://commons.wikimedia.org/wiki/File:Rolls_Royce_Phantom_III_1936_transparent.png"]},{"id":"photo-size-v7-84","version":7,"kind":"scale","prompt":"Resize the nes controller to match its real size.","target":{"name":"NES controller","dimension":"body width","shape":"photo:nes-controller"},"reference":{"name":"European badger","dimension":"reference head-and-body length","shape":"photo:badger","measure":"75 cm · reference head-and-body length"},"bounds":[0.02,50],"answer":0.164,"explanation":"NES controller: 0.123 m (body width). European badger: 0.75 m (reference head-and-body length). Ratio: 0.16×.\nA 123 mm controller body reference; the cable is excluded.\nA 75 cm adult reference, excluding the tail. Adults vary in size.","sources":["https://en.wikipedia.org/wiki/Nintendo_Entertainment_System","https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/animals/mammals/badger/","https://commons.wikimedia.org/wiki/File:Nintendo-Entertainment-System-NES-Controller-FL.png","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Badger.png"]},{"id":"photo-size-v7-85","version":7,"kind":"scale","prompt":"Resize the game boy micro to match its real size.","target":{"name":"Game Boy Micro","dimension":"console width","shape":"photo:gameboy-micro"},"reference":{"name":"Chameleon","dimension":"reference overall length","shape":"photo:chameleon","measure":"30 cm · reference overall length"},"bounds":[0.02,50],"answer":0.33666667,"explanation":"Game Boy Micro: 0.101 m (console width). Chameleon: 0.3 m (reference overall length). Ratio: 0.34×.\nThe Micro is 101 mm wide.\nA 30 cm reference specimen including the tail. Chameleon species vary widely.","sources":["https://en.wikipedia.org/wiki/Game_Boy_Micro","https://animals.sandiegozoo.org/animals/chameleon","https://commons.wikimedia.org/wiki/File:Game-Boy-Micro.png","https://commons.wikimedia.org/wiki/File:ChameleonCutOut.png"]},{"id":"photo-size-v7-86","version":7,"kind":"scale","prompt":"Resize the avocado to match its real size.","target":{"name":"Avocado","dimension":"reference fruit length","shape":"photo:avocado"},"reference":{"name":"AKG C214 microphone","dimension":"microphone height","shape":"photo:akg-microphone","measure":"16 cm · microphone height"},"bounds":[0.02,50],"answer":0.875,"explanation":"Avocado: 0.14 m (reference fruit length). AKG C214 microphone: 0.16 m (microphone height). Ratio: 0.88×.\nA 14 cm reference avocado. Fruit sizes vary considerably.\nC214 microphone height: 160 mm, without a stand.","sources":["https://commons.wikimedia.org/wiki/File:Avocado.png","https://www.akg.com/Microphones/Condenser%20Microphones/C214.html","https://commons.wikimedia.org/wiki/File:Avocado.png","https://commons.wikimedia.org/wiki/File:AKG_C214_Condenser_microphone.png"]},{"id":"photo-size-v7-87","version":7,"kind":"scale","prompt":"Resize the game boy color to match its real size.","target":{"name":"Game Boy Color","dimension":"console height","shape":"photo:gameboy-color"},"reference":{"name":"F tuba","dimension":"reference standing height","shape":"photo:tuba","measure":"90 cm · reference standing height"},"bounds":[0.02,50],"answer":0.14833333,"explanation":"Game Boy Color: 0.1335 m (console height). F tuba: 0.9 m (reference standing height). Ratio: 0.15×.\nThe Game Boy Color is 133.5 mm high.\nA 90 cm standing-height reference. Tubas vary substantially by pitch and design.","sources":["https://en.wikipedia.org/wiki/Game_Boy_Color","https://www.yamaha.com/en/musical_instrument_guide/tuba/structure/","https://commons.wikimedia.org/wiki/File:Nintendo-Game-Boy-Color-FL.png","https://commons.wikimedia.org/wiki/File:Viennese_six-valve_bass_tuba_in_F(made_by_Jungwirth)_Transparent.png"]},{"id":"photo-size-v7-88","version":7,"kind":"scale","prompt":"Resize the billiard chalk cube to match its real size.","target":{"name":"Billiard chalk cube","dimension":"reference cube width","shape":"photo:chalk"},"reference":{"name":"Atari Portfolio","dimension":"computer width","shape":"photo:calculator","measure":"20 cm · computer width"},"bounds":[0.02,50],"answer":0.125,"explanation":"Billiard chalk cube: 0.025 m (reference cube width). Atari Portfolio: 0.2 m (computer width). Ratio: 0.13×.\nA 2.5 cm chalk-cube reference.\nThe pocket computer is about 20 cm wide.","sources":["https://commons.wikimedia.org/wiki/File:Billiard_chalk_20050724.png","https://en.wikipedia.org/wiki/Atari_Portfolio","https://commons.wikimedia.org/wiki/File:Billiard_chalk_20050724.png","https://commons.wikimedia.org/wiki/File:Atari-Portfolio-Computer.png"]},{"id":"photo-size-v7-89","version":7,"kind":"scale","prompt":"Resize the media remote control to match its real size.","target":{"name":"Media remote control","dimension":"reference overall length","shape":"photo:remote"},"reference":{"name":"Full-size violin","dimension":"typical overall length","shape":"photo:violin","measure":"59 cm · typical overall length"},"bounds":[0.02,50],"answer":0.24576271,"explanation":"Media remote control: 0.145 m (reference overall length). Full-size violin: 0.59 m (typical overall length). Ratio: 0.25×.\nA 14.5 cm reference remote, measured end to end.\nA full-size violin is about 59 cm overall. The bow is excluded.","sources":["https://www.playstation.com/en-us/accessories/media-remote/","https://www.yamaha.com/en/musical_instrument_guide/violin/structure/","https://commons.wikimedia.org/wiki/File:PlayStation_5_Media_Remote_-_front.png","https://commons.wikimedia.org/wiki/File:Violin_VL100_(cropped).png"]},{"id":"photo-size-v7-90","version":7,"kind":"scale","prompt":"Resize the concrete mixer truck to match its real size.","target":{"name":"Concrete mixer truck","dimension":"reference overall length","shape":"photo:cement-truck"},"reference":{"name":"Kick scooter","dimension":"reference handlebar height","shape":"photo:skateboard","measure":"1 m · reference handlebar height"},"bounds":[0.02,50],"answer":9,"explanation":"Concrete mixer truck: 9 m (reference overall length). Kick scooter: 1 m (reference handlebar height). Ratio: 9.00×.\nA nine-metre mixer-truck reference. Chassis and mixer configuration affect exact length.\nA one-metre handlebar-height reference. Adjustable scooters can be set lower.","sources":["https://commons.wikimedia.org/wiki/File:Red_cement_mixer_truck.png","https://www.stigasports.com/","https://commons.wikimedia.org/wiki/File:Red_cement_mixer_truck.png","https://commons.wikimedia.org/wiki/File:Stiga_Route_200_S.png"]},{"id":"photo-size-v7-91","version":7,"kind":"scale","prompt":"Resize the full-size electric guitar to match its real size.","target":{"name":"Full-size electric guitar","dimension":"reference overall length","shape":"photo:guitar"},"reference":{"name":"DualShock 2 controller","dimension":"reference controller width","shape":"photo:controller","measure":"15.7 cm · reference controller width"},"bounds":[0.02,50],"answer":6.36942675,"explanation":"Full-size electric guitar: 1 m (reference overall length). DualShock 2 controller: 0.157 m (reference controller width). Ratio: 6.37×.\nA one-metre reference guitar. Overall length varies by model; this is not its string scale length.\nA 15.7 cm controller-body width reference, excluding the cable.","sources":["https://www.fender.com/articles/instruments/what-is-scale-length","https://en.wikipedia.org/wiki/DualShock","https://commons.wikimedia.org/wiki/File:Guitar_3.png","https://commons.wikimedia.org/wiki/File:PlayStation2-DualShock2.png"]},{"id":"photo-size-v7-92","version":7,"kind":"scale","prompt":"Resize the 2010 mac mini to match its real size.","target":{"name":"2010 Mac mini","dimension":"enclosure width","shape":"photo:mac-mini"},"reference":{"name":"Wire stripper","dimension":"reference overall length","shape":"photo:wire-stripper","measure":"17 cm · reference overall length"},"bounds":[0.02,50],"answer":1.15882353,"explanation":"2010 Mac mini: 0.197 m (enclosure width). Wire stripper: 0.17 m (reference overall length). Ratio: 1.16×.\nThis Mac mini generation has a 19.7 cm square footprint.\nA 17 cm hand-tool reference. The photograph supplies the outline, not a scale calibration.","sources":["https://support.apple.com/en-us/112588","https://commons.wikimedia.org/wiki/File:Wire_stripper.png","https://commons.wikimedia.org/wiki/File:Mac_mini_server.png","https://commons.wikimedia.org/wiki/File:Wire_stripper.png"]},{"id":"photo-size-v7-93","version":7,"kind":"scale","prompt":"Resize the computer mouse to match its real size.","target":{"name":"Computer mouse","dimension":"reference body length","shape":"photo:sega-mouse"},"reference":{"name":"Apple","dimension":"reference fruit width","shape":"photo:apple","measure":"8 cm · reference fruit width"},"bounds":[0.02,50],"answer":1.375,"explanation":"Computer mouse: 0.11 m (reference body length). Apple: 0.08 m (reference fruit width). Ratio: 1.38×.\nAn 11 cm computer-mouse body reference; the cable is excluded.\nAn 8 cm wide reference apple; real apples vary by cultivar and growing conditions.","sources":["https://commons.wikimedia.org/wiki/File:Sega-Dreamcast-Mouse-BR.png","https://commons.wikimedia.org/wiki/File:Apple_in_lightbox.png","https://commons.wikimedia.org/wiki/File:Sega-Dreamcast-Mouse-BR.png","https://commons.wikimedia.org/wiki/File:Apple_in_lightbox.png"]},{"id":"photo-size-v7-94","version":7,"kind":"scale","prompt":"Resize the city transit bus to match its real size.","target":{"name":"City transit bus","dimension":"40-foot bus length","shape":"photo:bus"},"reference":{"name":"Open umbrella","dimension":"reference canopy width","shape":"photo:umbrella","measure":"1 m · reference canopy width"},"bounds":[0.02,50],"answer":12.2,"explanation":"City transit bus: 12.2 m (40-foot bus length). Open umbrella: 1 m (reference canopy width). Ratio: 12.20×.\nA nominal 40-foot (12.2 m) transit-bus reference; bumpers and model year affect exact length.\nA one-metre canopy-width reference. Umbrella models vary.","sources":["https://www.gillig.com/low-floor","https://commons.wikimedia.org/wiki/File:Umbrella.png","https://commons.wikimedia.org/wiki/File:Transparent_Santa_Cruz_Metro_bus_0222.png","https://commons.wikimedia.org/wiki/File:Umbrella.png"]},{"id":"photo-size-v7-95","version":7,"kind":"scale","prompt":"Resize the climbing hammer to match its real size.","target":{"name":"Climbing hammer","dimension":"reference overall length","shape":"photo:climbing-hammer"},"reference":{"name":"Olympus E-PL1","dimension":"camera body width","shape":"photo:olympus","measure":"11.46 cm · camera body width"},"bounds":[0.02,50],"answer":2.61780105,"explanation":"Climbing hammer: 0.3 m (reference overall length). Olympus E-PL1: 0.1146 m (camera body width). Ratio: 2.62×.\nA 30 cm hand-tool reference.\nE-PL1 body width: 114.6 mm.","sources":["https://commons.wikimedia.org/wiki/File:Climbing_hammer.png","https://en.wikipedia.org/wiki/Olympus_PEN_E-PL1","https://commons.wikimedia.org/wiki/File:Climbing_hammer.png","https://commons.wikimedia.org/wiki/File:Olympus_E-PL1.png"]},{"id":"photo-size-v7-96","version":7,"kind":"scale","prompt":"Resize the game boy advance sp to match its real size.","target":{"name":"Game Boy Advance SP","dimension":"console width","shape":"photo:gba-sp"},"reference":{"name":"Sunglasses","dimension":"reference front width","shape":"photo:sunglasses","measure":"14 cm · reference front width"},"bounds":[0.02,50],"answer":0.60428571,"explanation":"Game Boy Advance SP: 0.0846 m (console width). Sunglasses: 0.14 m (reference front width). Ratio: 0.60×.\nThe SP is 84.6 mm wide, whether open or closed.\nA 14 cm front-width reference, not the length of the folding arms.","sources":["https://en.wikipedia.org/wiki/Game_Boy_Advance_SP","https://commons.wikimedia.org/wiki/File:Sunglasses-1_retouch.png","https://commons.wikimedia.org/wiki/File:Game-Boy-Advance-SP-Mk2.png","https://commons.wikimedia.org/wiki/File:Sunglasses-1_retouch.png"]},{"id":"photo-size-v7-97","version":7,"kind":"scale","prompt":"Resize the land tortoise to match its real size.","target":{"name":"Land tortoise","dimension":"reference overall length","shape":"photo:tortoise"},"reference":{"name":"Three-cup moka pot","dimension":"reference height","shape":"photo:coffee-pot","measure":"16 cm · reference height"},"bounds":[0.02,50],"answer":1.875,"explanation":"Land tortoise: 0.3 m (reference overall length). Three-cup moka pot: 0.16 m (reference height). Ratio: 1.88×.\nA 30 cm overall-length reference including the head and legs. Species and poses vary.\nA roughly 16 cm three-cup reference. Moka pots are sold in many capacities.","sources":["https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Tortoise.png","https://www.bialetti.com/ee_en/moka-express.html","https://commons.wikimedia.org/wiki/File:Animals_png_set_by_mossi889-d4uye4q_-_Tortoise.png","https://commons.wikimedia.org/wiki/File:Moka_Express_sideview.png"]},{"id":"photo-size-v7-98","version":7,"kind":"scale","prompt":"Resize the sega nomad to match its real size.","target":{"name":"Sega Nomad","dimension":"console width","shape":"photo:sega-nomad"},"reference":{"name":"Broccoli head","dimension":"reference overall height","shape":"photo:broccoli","measure":"20 cm · reference overall height"},"bounds":[0.02,50],"answer":0.925,"explanation":"Sega Nomad: 0.185 m (console width). Broccoli head: 0.2 m (reference overall height). Ratio: 0.92×.\nThe Nomad is approximately 18.5 cm wide.\nA 20 cm broccoli reference including its stalk.","sources":["https://en.wikipedia.org/wiki/Genesis_Nomad","https://commons.wikimedia.org/wiki/File:Broccoli.png","https://commons.wikimedia.org/wiki/File:Sega-Nomad-Front_(rotated).png","https://commons.wikimedia.org/wiki/File:Broccoli.png"]},{"id":"photo-size-v7-99","version":7,"kind":"scale","prompt":"Resize the bicycle master-link pliers to match its real size.","target":{"name":"Bicycle master-link pliers","dimension":"reference overall length","shape":"photo:pliers"},"reference":{"name":"Dreamcast VMU","dimension":"unit height","shape":"photo:dreamcast-vmu","measure":"8 cm · unit height"},"bounds":[0.02,50],"answer":2.125,"explanation":"Bicycle master-link pliers: 0.17 m (reference overall length). Dreamcast VMU: 0.08 m (unit height). Ratio: 2.13×.\nA 17 cm pliers reference; tool models differ.\nThe Visual Memory Unit is about 80 mm high.","sources":["https://commons.wikimedia.org/wiki/File:Master_link_pliers.png","https://en.wikipedia.org/wiki/VMU","https://commons.wikimedia.org/wiki/File:Master_link_pliers.png","https://commons.wikimedia.org/wiki/File:Sega-Dreamcast-VMU.png"]},{"id":"photo-size-v7-100","version":7,"kind":"scale","prompt":"Resize the small scissors to match its real size.","target":{"name":"Small scissors","dimension":"reference end-to-end length","shape":"photo:scissors"},"reference":{"name":"Size-7 basketball","dimension":"nominal diameter","shape":"photo:basketball","measure":"23.9 cm · nominal diameter"},"bounds":[0.02,50],"answer":0.58577406,"explanation":"Small scissors: 0.14 m (reference end-to-end length). Size-7 basketball: 0.239 m (nominal diameter). Ratio: 0.59×.\nA 14 cm household-scissors reference, measured from handle end to blade tip.\nA nominal diameter of 23.9 cm, corresponding to about 75 cm circumference.","sources":["https://commons.wikimedia.org/wiki/File:Small_pair_of_blue_scissors.png","https://www.fiba.basketball/en/official-basketball-rules","https://commons.wikimedia.org/wiki/File:Small_pair_of_blue_scissors.png","https://commons.wikimedia.org/wiki/File:Isolated_basketball.png"]}]
+[
+  {
+    "id": "size-v9-0",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Death Star I?",
+    "target": {
+      "name": "Death Star I",
+      "dimension": "equatorial diameter",
+      "shape": "sourced:death-star"
+    },
+    "reference": {
+      "name": "Earth",
+      "dimension": "equatorial diameter",
+      "shape": "sourced:earth",
+      "measure": "1.2756e+07 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.012543117,
+    "explanation": "Death Star I: 160000 m (equatorial diameter). Earth: 1.2756e+07 m (equatorial diameter).\nThe first Death Star in A New Hope: the current official reference gives a diameter of 160 km. Fictional.\nEarth\u2019s equatorial diameter is about 12,756 km.",
+    "sources": [
+      "https://www.starwars.com/news/star-wars-inside-intel-the-death-star",
+      "https://science.nasa.gov/earth/facts/"
+    ]
+  },
+  {
+    "id": "size-v9-1",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is AT-AT walker?",
+    "target": {
+      "name": "AT-AT walker",
+      "dimension": "height",
+      "shape": "sourced:at-at"
+    },
+    "reference": {
+      "name": "Eiffel Tower",
+      "dimension": "height, antenna included",
+      "shape": "sourced:eiffel-tower",
+      "measure": "330 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.0681818182,
+    "explanation": "AT-AT walker: 22.5 m (height). Eiffel Tower: 330 m (height, antenna included).\nThe original Imperial AT-AT stands 22.5 m tall. Fictional.\nThe Eiffel Tower is 330 m tall including its antenna.",
+    "sources": [
+      "https://www.starwars.com/databank/at-at-walker",
+      "https://www.toureiffel.paris/en/the-monument/key-figures"
+    ]
+  },
+  {
+    "id": "size-v9-2",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Antarctic blue whale?",
+    "target": {
+      "name": "Antarctic blue whale",
+      "dimension": "upper adult length",
+      "shape": "sourced:blue-whale"
+    },
+    "reference": {
+      "name": "Millennium Falcon",
+      "dimension": "overall length",
+      "shape": "sourced:falcon",
+      "measure": "34.75 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.964028777,
+    "explanation": "Antarctic blue whale: 33.5 m (upper adult length). Millennium Falcon: 34.75 m (overall length).\nAntarctic blue whales can reach about 110 ft (33.5 m); other populations are smaller.\nThe Millennium Falcon is 34.75 m long in the official databank. Fictional; shown from above.",
+    "sources": [
+      "https://www.fisheries.noaa.gov/species/blue-whale",
+      "https://www.starwars.com/databank/millennium-falcon"
+    ]
+  },
+  {
+    "id": "size-v9-3",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Tyrannosaurus rex?",
+    "target": {
+      "name": "Tyrannosaurus rex",
+      "dimension": "adult length",
+      "shape": "sourced:t-rex"
+    },
+    "reference": {
+      "name": "Bus",
+      "dimension": "reference length",
+      "shape": "sourced:school-bus",
+      "measure": "12 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 1.0,
+    "explanation": "Tyrannosaurus rex: 12 m (adult length). Bus: 12 m (reference length).\nAMNH gives an adult T. rex length of about 12 m.\nThe bus is a fixed 12 m reference; vehicle models have different lengths.",
+    "sources": [
+      "https://www.amnh.org/exhibitions/dinosaurs-ancient-fossils/theropod-biomechanics/the-problem-of-size",
+      "Reference chosen for comparison: a 12 m bus."
+    ]
+  },
+  {
+    "id": "size-v9-4",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Banana?",
+    "target": {
+      "name": "Banana",
+      "dimension": "reference length",
+      "shape": "sourced:banana"
+    },
+    "reference": {
+      "name": "Person",
+      "dimension": "reference height",
+      "shape": "sourced:human",
+      "measure": "1.75 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.1028571429,
+    "explanation": "Banana: 0.18 m (reference length). Person: 1.75 m (reference height).\nAn 18 cm banana reference. Real bananas vary.\nThe person is a fixed 1.75 m reference, not a claim about average human height.",
+    "sources": [
+      "Reference chosen for comparison: an 18 cm banana.",
+      "Reference chosen for comparison: a 1.75 m person."
+    ]
+  },
+  {
+    "id": "size-v9-5",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is The Moon?",
+    "target": {
+      "name": "The Moon",
+      "dimension": "mean diameter",
+      "shape": "sourced:moon"
+    },
+    "reference": {
+      "name": "Earth",
+      "dimension": "equatorial diameter",
+      "shape": "sourced:earth",
+      "measure": "1.2756e+07 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.2724051427,
+    "explanation": "The Moon: 3.4748e+06 m (mean diameter). Earth: 1.2756e+07 m (equatorial diameter).\nThe Moon\u2019s mean diameter is about 3,474.8 km.\nEarth\u2019s equatorial diameter is about 12,756 km.",
+    "sources": [
+      "https://science.nasa.gov/wp-content/uploads/2023/05/ladee-press-kit-08292013.pdf",
+      "https://science.nasa.gov/earth/facts/"
+    ]
+  },
+  {
+    "id": "size-v9-6",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Saturn V?",
+    "target": {
+      "name": "Saturn V",
+      "dimension": "height with Apollo spacecraft",
+      "shape": "sourced:saturn-v"
+    },
+    "reference": {
+      "name": "Eiffel Tower",
+      "dimension": "height, antenna included",
+      "shape": "sourced:eiffel-tower",
+      "measure": "330 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.3351515152,
+    "explanation": "Saturn V: 110.6 m (height with Apollo spacecraft). Eiffel Tower: 330 m (height, antenna included).\nNASA lists the complete Apollo\u2013Saturn V at 363 ft (110.6 m).\nThe Eiffel Tower is 330 m tall including its antenna.",
+    "sources": [
+      "https://www.nasa.gov/wp-content/uploads/2015/03/167718main_early_years.pdf",
+      "https://www.toureiffel.paris/en/the-monument/key-figures"
+    ]
+  },
+  {
+    "id": "size-v9-7",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Person?",
+    "target": {
+      "name": "Person",
+      "dimension": "reference height",
+      "shape": "sourced:human"
+    },
+    "reference": {
+      "name": "AT-AT walker",
+      "dimension": "height",
+      "shape": "sourced:at-at",
+      "measure": "22.5 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.0777777778,
+    "explanation": "Person: 1.75 m (reference height). AT-AT walker: 22.5 m (height).\nThe person is a fixed 1.75 m reference, not a claim about average human height.\nThe original Imperial AT-AT stands 22.5 m tall. Fictional.",
+    "sources": [
+      "Reference chosen for comparison: a 1.75 m person.",
+      "https://www.starwars.com/databank/at-at-walker"
+    ]
+  },
+  {
+    "id": "size-v9-8",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Millennium Falcon?",
+    "target": {
+      "name": "Millennium Falcon",
+      "dimension": "overall length",
+      "shape": "sourced:falcon"
+    },
+    "reference": {
+      "name": "International Space Station",
+      "dimension": "end-to-end span",
+      "shape": "sourced:iss",
+      "measure": "109 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.3188073394,
+    "explanation": "Millennium Falcon: 34.75 m (overall length). International Space Station: 109 m (end-to-end span).\nThe Millennium Falcon is 34.75 m long in the official databank. Fictional; shown from above.\nNASA gives the station an end-to-end span of about 109 m. The diagram is a simplified plan view.",
+    "sources": [
+      "https://www.starwars.com/databank/millennium-falcon",
+      "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/"
+    ]
+  },
+  {
+    "id": "size-v9-9",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Imperial Star Destroyer?",
+    "target": {
+      "name": "Imperial Star Destroyer",
+      "dimension": "length",
+      "shape": "sourced:star-destroyer"
+    },
+    "reference": {
+      "name": "Darth Vader\u2019s Executor",
+      "dimension": "length",
+      "shape": "sourced:executor",
+      "measure": "19000 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.0842105263,
+    "explanation": "Imperial Star Destroyer: 1600 m (length). Darth Vader\u2019s Executor: 19000 m (length).\nThe classic Imperial Star Destroyer is 1,600 m long. Fictional; shown from above.\nThe Executor Super Star Destroyer is 19 km long. Fictional; shown from above.",
+    "sources": [
+      "https://www.starwars.com/databank/imperial-star-destroyer/",
+      "https://www.starwars.com/databank/executor"
+    ]
+  },
+  {
+    "id": "size-v9-10",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Male giraffe?",
+    "target": {
+      "name": "Male giraffe",
+      "dimension": "upper adult height",
+      "shape": "sourced:giraffe"
+    },
+    "reference": {
+      "name": "AT-AT walker",
+      "dimension": "height",
+      "shape": "sourced:at-at",
+      "measure": "22.5 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.2444444444,
+    "explanation": "Male giraffe: 5.5 m (upper adult height). AT-AT walker: 22.5 m (height).\nMale giraffes can reach about 5.5 m tall.\nThe original Imperial AT-AT stands 22.5 m tall. Fictional.",
+    "sources": [
+      "https://animals.sandiegozoo.org/animals/giraffe",
+      "https://www.starwars.com/databank/at-at-walker"
+    ]
+  },
+  {
+    "id": "size-v9-11",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Golf ball?",
+    "target": {
+      "name": "Golf ball",
+      "dimension": "minimum permitted diameter",
+      "shape": "sourced:golf-ball"
+    },
+    "reference": {
+      "name": "Banana",
+      "dimension": "reference length",
+      "shape": "sourced:banana",
+      "measure": "0.18 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.2370555556,
+    "explanation": "Golf ball: 0.04267 m (minimum permitted diameter). Banana: 0.18 m (reference length).\nThe equipment rules set a minimum diameter of 42.67 mm. This board uses that minimum.\nAn 18 cm banana reference. Real bananas vary.",
+    "sources": [
+      "https://www.randa.org/roe/the-rules-of-equipment/part-4-conformance-of-balls",
+      "Reference chosen for comparison: an 18 cm banana."
+    ]
+  },
+  {
+    "id": "size-v9-12",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Statue of Liberty?",
+    "target": {
+      "name": "Statue of Liberty",
+      "dimension": "height, pedestal included",
+      "shape": "sourced:statue-of-liberty"
+    },
+    "reference": {
+      "name": "Saturn V",
+      "dimension": "height with Apollo spacecraft",
+      "shape": "sourced:saturn-v",
+      "measure": "110.6 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.8407775769,
+    "explanation": "Statue of Liberty: 92.99 m (height, pedestal included). Saturn V: 110.6 m (height with Apollo spacecraft).\nThe full monument measures 92.99 m from ground to torch, including the pedestal. The statue alone is 46.05 m.\nNASA lists the complete Apollo\u2013Saturn V at 363 ft (110.6 m).",
+    "sources": [
+      "https://www.nps.gov/stli/learn/historyculture/statue-statistics.htm",
+      "https://www.nasa.gov/wp-content/uploads/2015/03/167718main_early_years.pdf"
+    ]
+  },
+  {
+    "id": "size-v9-13",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Mars?",
+    "target": {
+      "name": "Mars",
+      "dimension": "equatorial diameter",
+      "shape": "sourced:mars"
+    },
+    "reference": {
+      "name": "Earth",
+      "dimension": "equatorial diameter",
+      "shape": "sourced:earth",
+      "measure": "1.2756e+07 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.5324553151,
+    "explanation": "Mars: 6.792e+06 m (equatorial diameter). Earth: 1.2756e+07 m (equatorial diameter).\nMars\u2019s equatorial diameter is about 6,792 km.\nEarth\u2019s equatorial diameter is about 12,756 km.",
+    "sources": [
+      "https://science.nasa.gov/solar-system/planets/planet-sizes-and-locations-in-our-solar-system/",
+      "https://science.nasa.gov/earth/facts/"
+    ]
+  },
+  {
+    "id": "size-v9-14",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Antarctic blue whale?",
+    "target": {
+      "name": "Antarctic blue whale",
+      "dimension": "upper adult length",
+      "shape": "sourced:blue-whale"
+    },
+    "reference": {
+      "name": "Airbus A380",
+      "dimension": "overall aircraft length",
+      "shape": "sourced:a380",
+      "measure": "72.7 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.4607977992,
+    "explanation": "Antarctic blue whale: 33.5 m (upper adult length). Airbus A380: 72.7 m (overall aircraft length).\nAntarctic blue whales can reach about 110 ft (33.5 m); other populations are smaller.\nAirbus gives the A380 an overall length of 72.7 m. This is a side profile, not its wingspan.",
+    "sources": [
+      "https://www.fisheries.noaa.gov/species/blue-whale",
+      "https://www.airbus.com/sites/g/files/jlcbta136/files/2025-01/airbus-a380-facts-and-figures-february-2022.pdf"
+    ]
+  },
+  {
+    "id": "size-v9-15",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Darth Vader\u2019s Executor?",
+    "target": {
+      "name": "Darth Vader\u2019s Executor",
+      "dimension": "length",
+      "shape": "sourced:executor"
+    },
+    "reference": {
+      "name": "Death Star I",
+      "dimension": "equatorial diameter",
+      "shape": "sourced:death-star",
+      "measure": "160000 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.11875,
+    "explanation": "Darth Vader\u2019s Executor: 19000 m (length). Death Star I: 160000 m (equatorial diameter).\nThe Executor Super Star Destroyer is 19 km long. Fictional; shown from above.\nThe first Death Star in A New Hope: the current official reference gives a diameter of 160 km. Fictional.",
+    "sources": [
+      "https://www.starwars.com/databank/executor",
+      "https://www.starwars.com/news/star-wars-inside-intel-the-death-star"
+    ]
+  },
+  {
+    "id": "size-v9-16",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is AT-AT walker?",
+    "target": {
+      "name": "AT-AT walker",
+      "dimension": "height",
+      "shape": "sourced:at-at"
+    },
+    "reference": {
+      "name": "Statue of Liberty",
+      "dimension": "height, pedestal included",
+      "shape": "sourced:statue-of-liberty",
+      "measure": "92.99 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.2419615012,
+    "explanation": "AT-AT walker: 22.5 m (height). Statue of Liberty: 92.99 m (height, pedestal included).\nThe original Imperial AT-AT stands 22.5 m tall. Fictional.\nThe full monument measures 92.99 m from ground to torch, including the pedestal. The statue alone is 46.05 m.",
+    "sources": [
+      "https://www.starwars.com/databank/at-at-walker",
+      "https://www.nps.gov/stli/learn/historyculture/statue-statistics.htm"
+    ]
+  },
+  {
+    "id": "size-v9-17",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Tyrannosaurus rex?",
+    "target": {
+      "name": "Tyrannosaurus rex",
+      "dimension": "adult length",
+      "shape": "sourced:t-rex"
+    },
+    "reference": {
+      "name": "Millennium Falcon",
+      "dimension": "overall length",
+      "shape": "sourced:falcon",
+      "measure": "34.75 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.345323741,
+    "explanation": "Tyrannosaurus rex: 12 m (adult length). Millennium Falcon: 34.75 m (overall length).\nAMNH gives an adult T. rex length of about 12 m.\nThe Millennium Falcon is 34.75 m long in the official databank. Fictional; shown from above.",
+    "sources": [
+      "https://www.amnh.org/exhibitions/dinosaurs-ancient-fossils/theropod-biomechanics/the-problem-of-size",
+      "https://www.starwars.com/databank/millennium-falcon"
+    ]
+  },
+  {
+    "id": "size-v9-18",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is US quarter?",
+    "target": {
+      "name": "US quarter",
+      "dimension": "coin diameter",
+      "shape": "sourced:quarter"
+    },
+    "reference": {
+      "name": "US dollar note",
+      "dimension": "approximate note length",
+      "shape": "sourced:dollar-note",
+      "measure": "0.156 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.1555128205,
+    "explanation": "US quarter: 0.02426 m (coin diameter). US dollar note: 0.156 m (approximate note length).\nA US quarter has a diameter of 24.26 mm. The profile represents the coin\u2019s outline.\nModern US currency notes are approximately 6.14 inches long, or 15.6 cm.",
+    "sources": [
+      "https://www.usmint.gov/learn/coins-and-medals/circulating-coins/coin-specifications",
+      "https://www.federalreserve.gov/aboutthefed/chapter-1-balance-sheet.htm"
+    ]
+  },
+  {
+    "id": "size-v9-19",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is African elephant?",
+    "target": {
+      "name": "African elephant",
+      "dimension": "upper adult length",
+      "shape": "sourced:african-elephant"
+    },
+    "reference": {
+      "name": "Bus",
+      "dimension": "reference length",
+      "shape": "sourced:school-bus",
+      "measure": "12 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.6083333333,
+    "explanation": "African elephant: 7.3 m (upper adult length). Bus: 12 m (reference length).\nWWF gives a length range of 19\u201324 ft (5.8\u20137.3 m). This board uses the upper end, with the trunk hanging down.\nThe bus is a fixed 12 m reference; vehicle models have different lengths.",
+    "sources": [
+      "https://www.worldwildlife.org/species/elephant/african-elephant/",
+      "Reference chosen for comparison: a 12 m bus."
+    ]
+  },
+  {
+    "id": "size-v9-20",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is AT-AT walker?",
+    "target": {
+      "name": "AT-AT walker",
+      "dimension": "height",
+      "shape": "sourced:at-at"
+    },
+    "reference": {
+      "name": "Humpback whale",
+      "dimension": "upper adult length",
+      "shape": "sourced:humpback-whale",
+      "measure": "18.3 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 1.2295081967,
+    "explanation": "AT-AT walker: 22.5 m (height). Humpback whale: 18.3 m (upper adult length).\nThe original Imperial AT-AT stands 22.5 m tall. Fictional.\nHumpbacks can reach about 60 ft (18.3 m).",
+    "sources": [
+      "https://www.starwars.com/databank/at-at-walker",
+      "https://www.fisheries.noaa.gov/species/humpback-whale"
+    ]
+  },
+  {
+    "id": "size-v9-21",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Tyrannosaurus rex?",
+    "target": {
+      "name": "Tyrannosaurus rex",
+      "dimension": "adult length",
+      "shape": "sourced:t-rex"
+    },
+    "reference": {
+      "name": "Saturn V",
+      "dimension": "height with Apollo spacecraft",
+      "shape": "sourced:saturn-v",
+      "measure": "110.6 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.1084990958,
+    "explanation": "Tyrannosaurus rex: 12 m (adult length). Saturn V: 110.6 m (height with Apollo spacecraft).\nAMNH gives an adult T. rex length of about 12 m.\nNASA lists the complete Apollo\u2013Saturn V at 363 ft (110.6 m).",
+    "sources": [
+      "https://www.amnh.org/exhibitions/dinosaurs-ancient-fossils/theropod-biomechanics/the-problem-of-size",
+      "https://www.nasa.gov/wp-content/uploads/2015/03/167718main_early_years.pdf"
+    ]
+  },
+  {
+    "id": "size-v9-22",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is US dollar note?",
+    "target": {
+      "name": "US dollar note",
+      "dimension": "approximate note length",
+      "shape": "sourced:dollar-note"
+    },
+    "reference": {
+      "name": "Male giraffe",
+      "dimension": "upper adult height",
+      "shape": "sourced:giraffe",
+      "measure": "5.5 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.0283636364,
+    "explanation": "US dollar note: 0.156 m (approximate note length). Male giraffe: 5.5 m (upper adult height).\nModern US currency notes are approximately 6.14 inches long, or 15.6 cm.\nMale giraffes can reach about 5.5 m tall.",
+    "sources": [
+      "https://www.federalreserve.gov/aboutthefed/chapter-1-balance-sheet.htm",
+      "https://animals.sandiegozoo.org/animals/giraffe"
+    ]
+  },
+  {
+    "id": "size-v9-23",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is African elephant?",
+    "target": {
+      "name": "African elephant",
+      "dimension": "upper adult length",
+      "shape": "sourced:african-elephant"
+    },
+    "reference": {
+      "name": "Statue of Liberty",
+      "dimension": "height, pedestal included",
+      "shape": "sourced:statue-of-liberty",
+      "measure": "92.99 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.0785030648,
+    "explanation": "African elephant: 7.3 m (upper adult length). Statue of Liberty: 92.99 m (height, pedestal included).\nWWF gives a length range of 19\u201324 ft (5.8\u20137.3 m). This board uses the upper end, with the trunk hanging down.\nThe full monument measures 92.99 m from ground to torch, including the pedestal. The statue alone is 46.05 m.",
+    "sources": [
+      "https://www.worldwildlife.org/species/elephant/african-elephant/",
+      "https://www.nps.gov/stli/learn/historyculture/statue-statistics.htm"
+    ]
+  },
+  {
+    "id": "size-v9-24",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Gateway Arch?",
+    "target": {
+      "name": "Gateway Arch",
+      "dimension": "height above ground",
+      "shape": "sourced:gateway-arch"
+    },
+    "reference": {
+      "name": "Imperial Star Destroyer",
+      "dimension": "length",
+      "shape": "sourced:star-destroyer",
+      "measure": "1600 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.12,
+    "explanation": "Gateway Arch: 192 m (height above ground). Imperial Star Destroyer: 1600 m (length).\nThe arch is about 192 m tall and approximately the same width from leg to leg.\nThe classic Imperial Star Destroyer is 1,600 m long. Fictional; shown from above.",
+    "sources": [
+      "https://www.nps.gov/jeff/faqs.htm",
+      "https://www.starwars.com/databank/imperial-star-destroyer/"
+    ]
+  },
+  {
+    "id": "size-v9-25",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Person?",
+    "target": {
+      "name": "Person",
+      "dimension": "reference height",
+      "shape": "sourced:human"
+    },
+    "reference": {
+      "name": "Hubble telescope",
+      "dimension": "body length",
+      "shape": "sourced:hubble",
+      "measure": "13.2 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.1325757576,
+    "explanation": "Person: 1.75 m (reference height). Hubble telescope: 13.2 m (body length).\nThe person is a fixed 1.75 m reference, not a claim about average human height.\nHubble is about 13.2 m long; solar panels extend to either side of its body.",
+    "sources": [
+      "Reference chosen for comparison: a 1.75 m person.",
+      "https://science.nasa.gov/mission/hubble/observatory/design/"
+    ]
+  },
+  {
+    "id": "size-v9-26",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Bus?",
+    "target": {
+      "name": "Bus",
+      "dimension": "reference length",
+      "shape": "sourced:school-bus"
+    },
+    "reference": {
+      "name": "Millennium Falcon",
+      "dimension": "overall length",
+      "shape": "sourced:falcon",
+      "measure": "34.75 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.345323741,
+    "explanation": "Bus: 12 m (reference length). Millennium Falcon: 34.75 m (overall length).\nThe bus is a fixed 12 m reference; vehicle models have different lengths.\nThe Millennium Falcon is 34.75 m long in the official databank. Fictional; shown from above.",
+    "sources": [
+      "Reference chosen for comparison: a 12 m bus.",
+      "https://www.starwars.com/databank/millennium-falcon"
+    ]
+  },
+  {
+    "id": "size-v9-27",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is US dollar note?",
+    "target": {
+      "name": "US dollar note",
+      "dimension": "approximate note length",
+      "shape": "sourced:dollar-note"
+    },
+    "reference": {
+      "name": "Polar bear",
+      "dimension": "upper usual body length",
+      "shape": "sourced:polar-bear",
+      "measure": "2.7 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.0577777778,
+    "explanation": "US dollar note: 0.156 m (approximate note length). Polar bear: 2.7 m (upper usual body length).\nModern US currency notes are approximately 6.14 inches long, or 15.6 cm.\nSan Diego Zoo gives a usual head-and-body length of 1.8\u20132.7 m. This board uses 2.7 m; the small tail is not part of that measurement.",
+    "sources": [
+      "https://www.federalreserve.gov/aboutthefed/chapter-1-balance-sheet.htm",
+      "https://animals.sandiegozoo.org/animals/polar-bear"
+    ]
+  },
+  {
+    "id": "size-v9-28",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Death Star I?",
+    "target": {
+      "name": "Death Star I",
+      "dimension": "equatorial diameter",
+      "shape": "sourced:death-star"
+    },
+    "reference": {
+      "name": "Mars",
+      "dimension": "equatorial diameter",
+      "shape": "sourced:mars",
+      "measure": "6.792e+06 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.023557126,
+    "explanation": "Death Star I: 160000 m (equatorial diameter). Mars: 6.792e+06 m (equatorial diameter).\nThe first Death Star in A New Hope: the current official reference gives a diameter of 160 km. Fictional.\nMars\u2019s equatorial diameter is about 6,792 km.",
+    "sources": [
+      "https://www.starwars.com/news/star-wars-inside-intel-the-death-star",
+      "https://science.nasa.gov/solar-system/planets/planet-sizes-and-locations-in-our-solar-system/"
+    ]
+  },
+  {
+    "id": "size-v9-29",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Banana?",
+    "target": {
+      "name": "Banana",
+      "dimension": "reference length",
+      "shape": "sourced:banana"
+    },
+    "reference": {
+      "name": "African elephant",
+      "dimension": "upper adult length",
+      "shape": "sourced:african-elephant",
+      "measure": "7.3 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.0246575342,
+    "explanation": "Banana: 0.18 m (reference length). African elephant: 7.3 m (upper adult length).\nAn 18 cm banana reference. Real bananas vary.\nWWF gives a length range of 19\u201324 ft (5.8\u20137.3 m). This board uses the upper end, with the trunk hanging down.",
+    "sources": [
+      "Reference chosen for comparison: an 18 cm banana.",
+      "https://www.worldwildlife.org/species/elephant/african-elephant/"
+    ]
+  },
+  {
+    "id": "size-v9-30",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is AT-AT walker?",
+    "target": {
+      "name": "AT-AT walker",
+      "dimension": "height",
+      "shape": "sourced:at-at"
+    },
+    "reference": {
+      "name": "Washington Monument",
+      "dimension": "rounded monument height",
+      "shape": "sourced:washington-monument",
+      "measure": "169 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.1331360947,
+    "explanation": "AT-AT walker: 22.5 m (height). Washington Monument: 169 m (rounded monument height).\nThe original Imperial AT-AT stands 22.5 m tall. Fictional.\nThe National Park Service rounds the obelisk\u2019s height to 169 m in this educational reference.",
+    "sources": [
+      "https://www.starwars.com/databank/at-at-walker",
+      "https://www.nps.gov/articles/000/upload/Build-Your-Own-Washington-Monument-Activity.pdf"
+    ]
+  },
+  {
+    "id": "size-v9-31",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Person?",
+    "target": {
+      "name": "Person",
+      "dimension": "reference height",
+      "shape": "sourced:human"
+    },
+    "reference": {
+      "name": "Humpback whale",
+      "dimension": "upper adult length",
+      "shape": "sourced:humpback-whale",
+      "measure": "18.3 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.0956284153,
+    "explanation": "Person: 1.75 m (reference height). Humpback whale: 18.3 m (upper adult length).\nThe person is a fixed 1.75 m reference, not a claim about average human height.\nHumpbacks can reach about 60 ft (18.3 m).",
+    "sources": [
+      "Reference chosen for comparison: a 1.75 m person.",
+      "https://www.fisheries.noaa.gov/species/humpback-whale"
+    ]
+  },
+  {
+    "id": "size-v9-32",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Airbus A380?",
+    "target": {
+      "name": "Airbus A380",
+      "dimension": "overall aircraft length",
+      "shape": "sourced:a380"
+    },
+    "reference": {
+      "name": "Eiffel Tower",
+      "dimension": "height, antenna included",
+      "shape": "sourced:eiffel-tower",
+      "measure": "330 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.2203030303,
+    "explanation": "Airbus A380: 72.7 m (overall aircraft length). Eiffel Tower: 330 m (height, antenna included).\nAirbus gives the A380 an overall length of 72.7 m. This is a side profile, not its wingspan.\nThe Eiffel Tower is 330 m tall including its antenna.",
+    "sources": [
+      "https://www.airbus.com/sites/g/files/jlcbta136/files/2025-01/airbus-a380-facts-and-figures-february-2022.pdf",
+      "https://www.toureiffel.paris/en/the-monument/key-figures"
+    ]
+  },
+  {
+    "id": "size-v9-33",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Male giraffe?",
+    "target": {
+      "name": "Male giraffe",
+      "dimension": "upper adult height",
+      "shape": "sourced:giraffe"
+    },
+    "reference": {
+      "name": "Gateway Arch",
+      "dimension": "height above ground",
+      "shape": "sourced:gateway-arch",
+      "measure": "192 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.0286458333,
+    "explanation": "Male giraffe: 5.5 m (upper adult height). Gateway Arch: 192 m (height above ground).\nMale giraffes can reach about 5.5 m tall.\nThe arch is about 192 m tall and approximately the same width from leg to leg.",
+    "sources": [
+      "https://animals.sandiegozoo.org/animals/giraffe",
+      "https://www.nps.gov/jeff/faqs.htm"
+    ]
+  },
+  {
+    "id": "size-v9-34",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Millennium Falcon?",
+    "target": {
+      "name": "Millennium Falcon",
+      "dimension": "overall length",
+      "shape": "sourced:falcon"
+    },
+    "reference": {
+      "name": "Airbus A380",
+      "dimension": "overall aircraft length",
+      "shape": "sourced:a380",
+      "measure": "72.7 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.4779917469,
+    "explanation": "Millennium Falcon: 34.75 m (overall length). Airbus A380: 72.7 m (overall aircraft length).\nThe Millennium Falcon is 34.75 m long in the official databank. Fictional; shown from above.\nAirbus gives the A380 an overall length of 72.7 m. This is a side profile, not its wingspan.",
+    "sources": [
+      "https://www.starwars.com/databank/millennium-falcon",
+      "https://www.airbus.com/sites/g/files/jlcbta136/files/2025-01/airbus-a380-facts-and-figures-february-2022.pdf"
+    ]
+  },
+  {
+    "id": "size-v9-35",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Door?",
+    "target": {
+      "name": "Door",
+      "dimension": "reference height",
+      "shape": "sourced:door"
+    },
+    "reference": {
+      "name": "Hippopotamus",
+      "dimension": "upper adult length",
+      "shape": "sourced:hippopotamus",
+      "measure": "5 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.4,
+    "explanation": "Door: 2 m (reference height). Hippopotamus: 5 m (upper adult length).\nA two-metre door reference; doors vary.\nHippos measure about 3.3\u20135 m long. This board uses the upper end.",
+    "sources": [
+      "Reference chosen for comparison: a two-metre door.",
+      "https://animals.sandiegozoo.org/animals/hippo"
+    ]
+  },
+  {
+    "id": "size-v9-36",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Person?",
+    "target": {
+      "name": "Person",
+      "dimension": "reference height",
+      "shape": "sourced:human"
+    },
+    "reference": {
+      "name": "Male giraffe",
+      "dimension": "upper adult height",
+      "shape": "sourced:giraffe",
+      "measure": "5.5 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.3181818182,
+    "explanation": "Person: 1.75 m (reference height). Male giraffe: 5.5 m (upper adult height).\nThe person is a fixed 1.75 m reference, not a claim about average human height.\nMale giraffes can reach about 5.5 m tall.",
+    "sources": [
+      "Reference chosen for comparison: a 1.75 m person.",
+      "https://animals.sandiegozoo.org/animals/giraffe"
+    ]
+  },
+  {
+    "id": "size-v9-37",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Humpback whale?",
+    "target": {
+      "name": "Humpback whale",
+      "dimension": "upper adult length",
+      "shape": "sourced:humpback-whale"
+    },
+    "reference": {
+      "name": "Saturn V",
+      "dimension": "height with Apollo spacecraft",
+      "shape": "sourced:saturn-v",
+      "measure": "110.6 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.1654611212,
+    "explanation": "Humpback whale: 18.3 m (upper adult length). Saturn V: 110.6 m (height with Apollo spacecraft).\nHumpbacks can reach about 60 ft (18.3 m).\nNASA lists the complete Apollo\u2013Saturn V at 363 ft (110.6 m).",
+    "sources": [
+      "https://www.fisheries.noaa.gov/species/humpback-whale",
+      "https://www.nasa.gov/wp-content/uploads/2015/03/167718main_early_years.pdf"
+    ]
+  },
+  {
+    "id": "size-v9-38",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is White rhinoceros?",
+    "target": {
+      "name": "White rhinoceros",
+      "dimension": "upper adult length",
+      "shape": "sourced:rhinoceros"
+    },
+    "reference": {
+      "name": "Doubles tennis court",
+      "dimension": "baseline-to-baseline length",
+      "shape": "sourced:tennis-court",
+      "measure": "23.77 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.1682793437,
+    "explanation": "White rhinoceros: 4 m (upper adult length). Doubles tennis court: 23.77 m (baseline-to-baseline length).\nWhite rhinos are about 3.7\u20134 m long. This board uses the upper end.\nThe playing court is 23.77 m long. Run-off space beyond the lines is excluded.",
+    "sources": [
+      "https://animals.sandiegozoo.org/animals/rhinoceros",
+      "https://www.itftennis.com/media/7221/2024-rules-of-tennis-english.pdf"
+    ]
+  },
+  {
+    "id": "size-v9-39",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Male lion?",
+    "target": {
+      "name": "Male lion",
+      "dimension": "large adult length, tail included",
+      "shape": "sourced:lion"
+    },
+    "reference": {
+      "name": "Hubble telescope",
+      "dimension": "body length",
+      "shape": "sourced:hubble",
+      "measure": "13.2 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.2689393939,
+    "explanation": "Male lion: 3.55 m (large adult length, tail included). Hubble telescope: 13.2 m (body length).\nA large male has up to 2.5 m of head and body, plus up to 1.05 m of tail; this illustrative upper-end total is 3.55 m.\nHubble is about 13.2 m long; solar panels extend to either side of its body.",
+    "sources": [
+      "https://animals.sandiegozoo.org/animals/lion",
+      "https://science.nasa.gov/mission/hubble/observatory/design/"
+    ]
+  },
+  {
+    "id": "size-v9-40",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Antarctic blue whale?",
+    "target": {
+      "name": "Antarctic blue whale",
+      "dimension": "upper adult length",
+      "shape": "sourced:blue-whale"
+    },
+    "reference": {
+      "name": "Gateway Arch",
+      "dimension": "height above ground",
+      "shape": "sourced:gateway-arch",
+      "measure": "192 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.1744791667,
+    "explanation": "Antarctic blue whale: 33.5 m (upper adult length). Gateway Arch: 192 m (height above ground).\nAntarctic blue whales can reach about 110 ft (33.5 m); other populations are smaller.\nThe arch is about 192 m tall and approximately the same width from leg to leg.",
+    "sources": [
+      "https://www.fisheries.noaa.gov/species/blue-whale",
+      "https://www.nps.gov/jeff/faqs.htm"
+    ]
+  },
+  {
+    "id": "size-v9-41",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Polar bear?",
+    "target": {
+      "name": "Polar bear",
+      "dimension": "upper usual body length",
+      "shape": "sourced:polar-bear"
+    },
+    "reference": {
+      "name": "Millennium Falcon",
+      "dimension": "overall length",
+      "shape": "sourced:falcon",
+      "measure": "34.75 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.0776978417,
+    "explanation": "Polar bear: 2.7 m (upper usual body length). Millennium Falcon: 34.75 m (overall length).\nSan Diego Zoo gives a usual head-and-body length of 1.8\u20132.7 m. This board uses 2.7 m; the small tail is not part of that measurement.\nThe Millennium Falcon is 34.75 m long in the official databank. Fictional; shown from above.",
+    "sources": [
+      "https://animals.sandiegozoo.org/animals/polar-bear",
+      "https://www.starwars.com/databank/millennium-falcon"
+    ]
+  },
+  {
+    "id": "size-v9-42",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Humpback whale?",
+    "target": {
+      "name": "Humpback whale",
+      "dimension": "upper adult length",
+      "shape": "sourced:humpback-whale"
+    },
+    "reference": {
+      "name": "Eiffel Tower",
+      "dimension": "height, antenna included",
+      "shape": "sourced:eiffel-tower",
+      "measure": "330 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.0554545455,
+    "explanation": "Humpback whale: 18.3 m (upper adult length). Eiffel Tower: 330 m (height, antenna included).\nHumpbacks can reach about 60 ft (18.3 m).\nThe Eiffel Tower is 330 m tall including its antenna.",
+    "sources": [
+      "https://www.fisheries.noaa.gov/species/humpback-whale",
+      "https://www.toureiffel.paris/en/the-monument/key-figures"
+    ]
+  },
+  {
+    "id": "size-v9-43",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Polar bear?",
+    "target": {
+      "name": "Polar bear",
+      "dimension": "upper usual body length",
+      "shape": "sourced:polar-bear"
+    },
+    "reference": {
+      "name": "AT-AT walker",
+      "dimension": "height",
+      "shape": "sourced:at-at",
+      "measure": "22.5 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.12,
+    "explanation": "Polar bear: 2.7 m (upper usual body length). AT-AT walker: 22.5 m (height).\nSan Diego Zoo gives a usual head-and-body length of 1.8\u20132.7 m. This board uses 2.7 m; the small tail is not part of that measurement.\nThe original Imperial AT-AT stands 22.5 m tall. Fictional.",
+    "sources": [
+      "https://animals.sandiegozoo.org/animals/polar-bear",
+      "https://www.starwars.com/databank/at-at-walker"
+    ]
+  },
+  {
+    "id": "size-v9-44",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Gateway Arch?",
+    "target": {
+      "name": "Gateway Arch",
+      "dimension": "height above ground",
+      "shape": "sourced:gateway-arch"
+    },
+    "reference": {
+      "name": "Eiffel Tower",
+      "dimension": "height, antenna included",
+      "shape": "sourced:eiffel-tower",
+      "measure": "330 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.5818181818,
+    "explanation": "Gateway Arch: 192 m (height above ground). Eiffel Tower: 330 m (height, antenna included).\nThe arch is about 192 m tall and approximately the same width from leg to leg.\nThe Eiffel Tower is 330 m tall including its antenna.",
+    "sources": [
+      "https://www.nps.gov/jeff/faqs.htm",
+      "https://www.toureiffel.paris/en/the-monument/key-figures"
+    ]
+  },
+  {
+    "id": "size-v9-45",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Hubble telescope?",
+    "target": {
+      "name": "Hubble telescope",
+      "dimension": "body length",
+      "shape": "sourced:hubble"
+    },
+    "reference": {
+      "name": "Humpback whale",
+      "dimension": "upper adult length",
+      "shape": "sourced:humpback-whale",
+      "measure": "18.3 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.7213114754,
+    "explanation": "Hubble telescope: 13.2 m (body length). Humpback whale: 18.3 m (upper adult length).\nHubble is about 13.2 m long; solar panels extend to either side of its body.\nHumpbacks can reach about 60 ft (18.3 m).",
+    "sources": [
+      "https://science.nasa.gov/mission/hubble/observatory/design/",
+      "https://www.fisheries.noaa.gov/species/humpback-whale"
+    ]
+  },
+  {
+    "id": "size-v9-46",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Person?",
+    "target": {
+      "name": "Person",
+      "dimension": "reference height",
+      "shape": "sourced:human"
+    },
+    "reference": {
+      "name": "Antarctic blue whale",
+      "dimension": "upper adult length",
+      "shape": "sourced:blue-whale",
+      "measure": "33.5 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.052238806,
+    "explanation": "Person: 1.75 m (reference height). Antarctic blue whale: 33.5 m (upper adult length).\nThe person is a fixed 1.75 m reference, not a claim about average human height.\nAntarctic blue whales can reach about 110 ft (33.5 m); other populations are smaller.",
+    "sources": [
+      "Reference chosen for comparison: a 1.75 m person.",
+      "https://www.fisheries.noaa.gov/species/blue-whale"
+    ]
+  },
+  {
+    "id": "size-v9-47",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is US dollar note?",
+    "target": {
+      "name": "US dollar note",
+      "dimension": "approximate note length",
+      "shape": "sourced:dollar-note"
+    },
+    "reference": {
+      "name": "African elephant",
+      "dimension": "upper adult length",
+      "shape": "sourced:african-elephant",
+      "measure": "7.3 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.021369863,
+    "explanation": "US dollar note: 0.156 m (approximate note length). African elephant: 7.3 m (upper adult length).\nModern US currency notes are approximately 6.14 inches long, or 15.6 cm.\nWWF gives a length range of 19\u201324 ft (5.8\u20137.3 m). This board uses the upper end, with the trunk hanging down.",
+    "sources": [
+      "https://www.federalreserve.gov/aboutthefed/chapter-1-balance-sheet.htm",
+      "https://www.worldwildlife.org/species/elephant/african-elephant/"
+    ]
+  },
+  {
+    "id": "size-v9-48",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Male lion?",
+    "target": {
+      "name": "Male lion",
+      "dimension": "large adult length, tail included",
+      "shape": "sourced:lion"
+    },
+    "reference": {
+      "name": "Saturn V",
+      "dimension": "height with Apollo spacecraft",
+      "shape": "sourced:saturn-v",
+      "measure": "110.6 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.0320976492,
+    "explanation": "Male lion: 3.55 m (large adult length, tail included). Saturn V: 110.6 m (height with Apollo spacecraft).\nA large male has up to 2.5 m of head and body, plus up to 1.05 m of tail; this illustrative upper-end total is 3.55 m.\nNASA lists the complete Apollo\u2013Saturn V at 363 ft (110.6 m).",
+    "sources": [
+      "https://animals.sandiegozoo.org/animals/lion",
+      "https://www.nasa.gov/wp-content/uploads/2015/03/167718main_early_years.pdf"
+    ]
+  },
+  {
+    "id": "size-v9-49",
+    "version": 9,
+    "kind": "scale",
+    "prompt": "How big is Millennium Falcon?",
+    "target": {
+      "name": "Millennium Falcon",
+      "dimension": "overall length",
+      "shape": "sourced:falcon"
+    },
+    "reference": {
+      "name": "Washington Monument",
+      "dimension": "rounded monument height",
+      "shape": "sourced:washington-monument",
+      "measure": "169 m"
+    },
+    "bounds": [
+      0.002,
+      1.4
+    ],
+    "answer": 0.2056213018,
+    "explanation": "Millennium Falcon: 34.75 m (overall length). Washington Monument: 169 m (rounded monument height).\nThe Millennium Falcon is 34.75 m long in the official databank. Fictional; shown from above.\nThe National Park Service rounds the obelisk\u2019s height to 169 m in this educational reference.",
+    "sources": [
+      "https://www.starwars.com/databank/millennium-falcon",
+      "https://www.nps.gov/articles/000/upload/Build-Your-Own-Washington-Monument-Activity.pdf"
+    ]
+  }
+]

@@ -7,10 +7,10 @@ export async function copyGlobeAssets(){
  const expected=['manifest.json',...Object.keys(manifest.files)].sort();
  if(JSON.stringify((await readdir(root)).sort())!==JSON.stringify(expected))throw new Error('Unlisted globe asset');
  await mkdir('dist/globe',{recursive:true});
- const required=[...Object.values(manifest.textures),...Object.values(manifest.detailTiles||{}).flatMap(t=>[t.color,t.normal])].sort();
+ const required=[...Object.values(manifest.textures),...Object.values(manifest.detailTiles||{}).flatMap(t=>[t.color,t.normal,t.cover])].sort();
  if(required.join()!==Object.keys(manifest.files).sort().join())throw new Error('Unlisted globe texture');
  for(const [file,info] of Object.entries(manifest.files)){
-  if(!/^(?:(?:color|cover|normal)-[248]k|detail-\d+-\d+-(?:color|normal))-[a-f0-9]{12}\.webp$/.test(file))throw new Error('Invalid globe texture');
+  if(!/^(?:(?:color|cover|normal)-[248]k|detail-\d+-\d+-(?:color|cover|normal))-[a-f0-9]{12}\.webp$/.test(file))throw new Error('Invalid globe texture');
   const bytes=await readFile(`${root}/${file}`),hash=createHash('sha256').update(bytes).digest('hex');
   if(hash!==info.sha256||bytes.length!==info.bytes||!file.includes(hash.slice(0,12)))throw new Error(`Globe checksum mismatch: ${file}`);
   if(bytes.subarray(0,4).toString()!=='RIFF'||bytes.subarray(8,12).toString()!=='WEBP')throw new Error('Invalid globe WebP');

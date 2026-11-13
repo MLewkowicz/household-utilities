@@ -72,16 +72,16 @@ test('catalog import is private, atomic and idempotent; refreshes preserve today
   const revision=structuredClone(release);revision.games[0].packs[0][0].prompt='Arrange these moments chronologically.';
   const broken=structuredClone(revision);broken.games[1].packs.at(-1).pop();
   await assert.rejects(importRelease(db,broken),/Incomplete pack/);
-  assert.equal((await db.query('SELECT max(version) AS v FROM ledger_private.trivia_packs')).rows[0].v,8);
-  assert.deepEqual(await importRelease(db,revision),{version:9,changed:true,packs:270});
-  assert.deepEqual(await importRelease(db,revision),{version:9,changed:false});
+  assert.equal((await db.query('SELECT max(version) AS v FROM ledger_private.trivia_packs')).rows[0].v,9);
+  assert.deepEqual(await importRelease(db,revision),{version:10,changed:true,packs:270});
+  assert.deepEqual(await importRelease(db,revision),{version:10,changed:false});
   const stale=structuredClone(revision);stale.catalog.fetchedAt='2000-01-01T00:00:00Z';stale.games[0].packs[0][0].prompt='Old candidate';await assert.rejects(importRelease(db,stale),/Stale catalog/);
   const resumed=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'michal'}});assert.deepEqual(resumed,initial);
   const roommate=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'rina'}});assert.equal(roommate.version,8);assert.equal(roommate.slot,initial.slot);assert.deepEqual(roommate.questions,initial.questions);
   const pack=(await db.query('SELECT questions FROM ledger_private.trivia_packs WHERE game=$1 AND version=$2 AND slot=$3',[initial.game,initial.version,initial.slot])).rows[0].questions;
   const answer=pack[0].answer;const finished=await callRpc(db,'trivia_action',{p:{id:initial.id,player:'michal',index:0,action:'answer',answer}});assert.equal(finished.score,1000);
   await db.exec('UPDATE ledger_private.trivia_attempts SET day=day-1');
-  const next=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'michal'}});assert.equal(next.version,9);assert.notEqual(next.id,initial.id);
+  const next=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'michal'}});assert.equal(next.version,10);assert.notEqual(next.id,initial.id);
   assert.equal((await db.query('SELECT answers FROM ledger_private.trivia_attempts WHERE id=$1',[initial.id])).rows[0].answers[0].points,1000);
   // Resume an old 14-slot cohort even when the new rotation uses 180 days.
   await db.exec('DELETE FROM ledger_private.trivia_attempts');
@@ -91,6 +91,6 @@ test('catalog import is private, atomic and idempotent; refreshes preserve today
   // Freeze a later day inside this disposable database to exercise slots beyond fourteen.
   const definition=(await db.query("SELECT pg_get_functiondef('public.utilities_trivia_start(jsonb)'::regprocedure) AS sql")).rows[0].sql;
   await db.exec(definition.replace("(now() AT TIME ZONE 'America/New_York')::date","DATE '2027-03-01'"));
-  const later=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'ohm'}});assert.equal(later.slot,112);assert.equal(later.version,9);
+  const later=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'ohm'}});assert.equal(later.slot,112);assert.equal(later.version,10);
  }finally{await db.close();}
 });

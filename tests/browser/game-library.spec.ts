@@ -26,12 +26,11 @@ test('Sudoku notes, undo, correction and completion work on a phone',async({page
  for(let i=0;i<81;i++)if(q.grid.givens[i]===' '){await page.locator(`[data-cell="${i}"]`).click();await page.keyboard.press(q.answer[i]);}
  await page.getByRole('button',{name:'Submit',exact:false}).click();await expect(page.locator('[data-archive-entry="starter-1"]')).toHaveClass(/is-complete/);
 });
-test('photo silhouettes use alpha masks and the floating icons have the requested order',async({page})=>{
- await page.goto('/?webgl=0#games/how-much-ish');await expect(page.locator('.size-photo-silhouette')).toHaveCount(2);
- await expect(page.locator('.size-photo-silhouette mask image').first()).toHaveAttribute('href',/^size-photos\//);
- const mask=await page.locator('.size-photo-silhouette mask').first().evaluate(el=>getComputedStyle(el).maskType);expect(mask).toBe('alpha');
+test('curated comparisons have familiar profiles, no written dimensions and stable reference size',async({page})=>{
+ await page.goto('/?webgl=0#games/how-much-ish');await expect(page.locator('.scale-labels')).toContainText('Death Star I');await expect(page.locator('.scale-labels')).toContainText('Earth');
+ await expect(page.locator('.scale-labels')).not.toContainText(/diameter|height|width|×|km|metres/);await expect(page.locator('.scale-precision')).toHaveCount(0);
+ const reference=page.locator('.reference > svg'),target=page.getByRole('slider'),before=await reference.boundingBox();await target.focus();await page.keyboard.press('End');expect((await reference.boundingBox())!.width).toBe(before!.width);await page.keyboard.press('Home');expect((await reference.boundingBox())!.width).toBe(before!.width);
  const links=page.locator('.game-floating-nav>a');await expect(links.nth(0)).toHaveAttribute('href','#games');await expect(links.nth(1)).toHaveAttribute('data-game-return','');
- await expect(page.locator('#trivia-player')).toHaveCount(0);await expect(page.locator('input[type=range]')).toHaveCount(0);
 });
 test('city review labels and population work without the Explore control',async({page})=>{
  await page.goto('/?webgl=0#games/geography/review');await expect(page.locator('#geo-review-controls')).toBeVisible();
@@ -63,4 +62,17 @@ test('standings show four proportional bars, Bitmoji and tied crowns',async({pag
 test('starting another practice trail advances beyond the completed calendar entry',async({page})=>{
  await page.goto('/?webgl=0#games/geography');await page.getByRole('button',{name:'Trail archive'}).click();await page.locator('.geo-route-rules summary').click();await page.locator('#geo-route-give-up').click();
  await expect(page.locator('[data-archive-entry=starter-1]')).toHaveClass(/is-complete/);await page.locator('#geo-play-again').click();await page.locator('#geo-new-round').click();await expect(page.locator('[data-archive-entry=starter-2]')).toHaveAttribute('aria-pressed','true');await expect(page.locator('#geo-result')).toBeHidden();
+});
+test('selecting an archive entry centers it across loading, editing and reload',async({page})=>{
+ await page.setViewportSize({width:390,height:844});await page.goto('/?webgl=0#games/crossword');
+ const tile=page.locator('[data-archive-entry=starter-6]');await tile.click();await expect(tile).toHaveAttribute('aria-pressed','true');
+ const centered=()=>page.locator('.calendar-stack:visible').evaluate(el=>{const selected=el.querySelector('[aria-pressed=true]')!.getBoundingClientRect(),box=el.getBoundingClientRect();return Math.abs(selected.x+selected.width/2-box.x-box.width/2);});
+ await expect.poll(centered).toBeLessThan(5);await page.locator('.puzzle-cell').first().click();await page.keyboard.type('A');await page.reload();await expect.poll(centered).toBeLessThan(5);
+ await page.goto('/?webgl=0#games/geography');await page.getByRole('button',{name:'Trail archive'}).click();await page.locator('#geo-trail-calendar [data-archive-entry=starter-6]').click();await expect.poll(centered).toBeLessThan(5);
+});
+test('crossword automatically moves into the next unfinished row and timer survives reload',async({page})=>{
+ await page.clock.install();await page.goto('/?webgl=0#games/crossword');const q=originalCrossword[0],first=q.grid.clues.find((c:any)=>c.direction==='across'),next=q.grid.clues.find((c:any)=>c.direction==='across'&&c.number>first.number);
+ const index=first.row*q.grid.size+first.col;await page.locator('.crossword-clues summary').click();await page.locator(`[data-clue-number="${first.number}"][data-direction=across]`).click();await page.keyboard.type(q.answer.slice(index,index+first.length));
+ await expect(page.locator(`[data-cell="${next.row*q.grid.size+next.col}"]`)).toBeFocused();await page.clock.fastForward(65000);await expect(page.locator('[data-puzzle-clock]')).toHaveText('1:05');
+ await page.reload();await expect(page.locator('[data-puzzle-clock]')).toHaveText('1:05');
 });

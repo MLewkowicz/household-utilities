@@ -6,7 +6,7 @@ import {scoreAnswer,normalize,type Question} from '../src/trivia-model';
 const games=['odd-one-out','passport-puzzle','clue-cascade','before-or-after','how-much-ish'];
 test('practice and daily content are disjoint, complete, sourced and scoreable',async()=>{
  const packs=[...JSON.parse(await readFile('scripts/trivia/daily-packs.json','utf8')).filter(p=>!['clue-cascade','how-much-ish'].includes(p.game)),...JSON.parse(await readFile('scripts/trivia/daily-packs-v3.json','utf8')).filter(p=>p.game!=='how-much-ish'),...JSON.parse(await readFile('scripts/trivia/daily-packs-v4.json','utf8'))];
- for(const game of games){const daily=packs.filter(p=>p.game===game);assert.equal(daily.length,14);const bank:Question[]=JSON.parse(await readFile(`src/trivia/${game}.json`,'utf8'));assert.equal(bank.length,game==='passport-puzzle'?27:game==='how-much-ish'?100:game==='clue-cascade'?12:game==='before-or-after'?4:20);const ids=new Set(daily.flatMap(p=>p.questions.map(q=>q.id)));assert.ok(bank.every(q=>!ids.has(q.id)));
+ for(const game of games){const daily=packs.filter(p=>p.game===game);assert.equal(daily.length,14);const bank:Question[]=JSON.parse(await readFile(`src/trivia/${game}.json`,'utf8'));assert.equal(bank.length,game==='passport-puzzle'?27:game==='how-much-ish'?50:game==='clue-cascade'?12:game==='before-or-after'?4:20);const ids=new Set(daily.flatMap(p=>p.questions.map(q=>q.id)));assert.ok(bank.every(q=>!ids.has(q.id)));
  for(const q of [...bank,...daily.flatMap(p=>p.questions)] as Question[]){assert.ok(q.sources?.length);assert.ok(q.explanation);assert.equal(scoreAnswer(q,q.answer!),q.kind==='timeline'||q.kind==='groups'?1000:200);if(q.kind==='scale'){assert.ok(Number(q.answer)>=q.bounds![0]&&Number(q.answer)<=q.bounds![1]);assert.equal(scoreAnswer(q,Number(q.answer)*2),100);assert.equal(scoreAnswer(q,Number(q.answer)/2),100);}if(q.kind==='clues')assert.equal(scoreAnswer(q,q.answer!,3),50);}}
  assert.equal(normalize('Côte d’Ivoire'),'cotedivoire');
 });
@@ -61,20 +61,20 @@ test('v2 preserves pinned attempts and keeps roommates on the same pack during r
   const next=await callRpc(db,'trivia_start',{p:{game:'odd-one-out',player:'rina'}});assert.equal(next.version,1);assert.equal(next.questions[0].id,resumed.questions[0].id);
   await db.exec('UPDATE ledger_private.trivia_attempts SET day=day-1');
   const fresh=await callRpc(db,'trivia_start',{p:{game:'odd-one-out',player:'ohm'}});assert.equal(fresh.version,2);assert.notEqual(fresh.questions[0].id,resumed.questions[0].id);
-  assert.equal((await callRpc(db,'trivia_capabilities')).version,6);
+  assert.equal((await callRpc(db,'trivia_capabilities')).version,7);
  }finally{await db.close();}
 });
 
-test('photo size v7 preserves the shared v3 rollout-day attempt and advances on a fresh day',async()=>{
+test('curated size v9 preserves the shared v3 rollout-day attempt and advances on a fresh day',async()=>{
  const db=await openDatabase();try{
-  const p={game:'how-much-ish',player:'michal'},first=await callRpc(db,'trivia_start',{p});assert.equal(first.version,7);
-  await db.query('UPDATE ledger_private.trivia_attempts SET version=3 WHERE id=$1',[first.id]);
+  const p={game:'how-much-ish',player:'michal'},first=await callRpc(db,'trivia_start',{p});assert.equal(first.version,9);
+  await db.query('UPDATE ledger_private.trivia_attempts SET version=3,slot=0 WHERE id=$1',[first.id]);
   const old=await callRpc(db,'trivia_start',{p});assert.equal(old.id,first.id);assert.equal(old.version,3);
   const roommate=await callRpc(db,'trivia_start',{p:{...p,player:'rina'}});assert.equal(roommate.version,3);assert.equal(roommate.questions[0].id,old.questions[0].id);
-  const q=(await db.query('SELECT questions->0 AS q FROM ledger_private.trivia_packs WHERE game=$1 AND slot=$2 AND version=3',[p.game,first.slot])).rows[0].q;
+  const q=(await db.query('SELECT questions->0 AS q FROM ledger_private.trivia_packs WHERE game=$1 AND slot=$2 AND version=3',[p.game,old.slot])).rows[0].q;
   const answered=await callRpc(db,'trivia_action',{p:{id:old.id,player:p.player,index:0,action:'answer',answer:q.answer}});assert.equal(answered.score,200);
   await db.exec('UPDATE ledger_private.trivia_attempts SET day=day-1');
-  const fresh=await callRpc(db,'trivia_start',{p});assert.equal(fresh.version,7);assert.notEqual(fresh.id,old.id);assert.equal(fresh.questions[0].answer,undefined);
+  const fresh=await callRpc(db,'trivia_start',{p});assert.equal(fresh.version,9);assert.notEqual(fresh.id,old.id);assert.equal(fresh.questions[0].answer,undefined);
  }finally{await db.close();}
 });
 test('word boards score groups, persist progress and make retries idempotent',async()=>{

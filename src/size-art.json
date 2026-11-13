@@ -367,5 +367,115 @@
       "width": 100,
       "height": 100
     }
+  },
+  "earth": {
+    "art": "<g transform=\"matrix(1 0 0 1 0 0)\"><circle cx=\"50\" cy=\"50\" r=\"50\"/><path d=\"M27 8 17 21 27 31 22 42 36 50 44 70 38 88M61 3 56 17 69 27 65 40 80 49 76 65 85 75\" fill=\"none\" stroke=\"var(--game-paper,#f7f0db)\" stroke-width=\"3\"/></g>",
+    "axis": "length",
+    "source": "https://science.nasa.gov/earth/facts/",
+    "author": "Household",
+    "license": "CC0",
+    "bounds": {
+      "width": 100,
+      "height": 100
+    }
+  },
+  "moon": {
+    "art": "<g transform=\"matrix(1 0 0 1 0 0)\"><circle cx=\"50\" cy=\"50\" r=\"50\"/><g fill=\"none\" stroke=\"var(--game-paper,#f7f0db)\" stroke-width=\"2\"><circle cx=\"28\" cy=\"32\" r=\"10\"/><circle cx=\"68\" cy=\"64\" r=\"16\"/><circle cx=\"70\" cy=\"24\" r=\"6\"/></g></g>",
+    "axis": "length",
+    "source": "https://science.nasa.gov/wp-content/uploads/2023/05/ladee-press-kit-08292013.pdf",
+    "author": "Household",
+    "license": "CC0",
+    "bounds": {
+      "width": 100,
+      "height": 100
+    }
+  },
+  "mars": {
+    "art": "<g transform=\"matrix(1 0 0 1 0 0)\"><circle cx=\"50\" cy=\"50\" r=\"50\"/><path d=\"m15 52 20 5 17-9 28 11\" fill=\"none\" stroke=\"var(--game-paper,#f7f0db)\" stroke-width=\"3\"/></g>",
+    "axis": "length",
+    "source": "https://science.nasa.gov/solar-system/planets/planet-sizes-and-locations-in-our-solar-system/",
+    "author": "Household",
+    "license": "CC0",
+    "bounds": {
+      "width": 100,
+      "height": 100
+    }
+  },
+  "death-star": {
+    "art": "<g transform=\"matrix(1 0 0 1 0 0)\"><circle cx=\"50\" cy=\"50\" r=\"50\"/><path d=\"M1 50H99\" fill=\"none\" stroke=\"var(--game-paper,#f7f0db)\" stroke-width=\"2\"/><circle cx=\"65\" cy=\"29\" r=\"14\" fill=\"none\" stroke=\"var(--game-paper,#f7f0db)\" stroke-width=\"3\"/></g>",
+    "axis": "length",
+    "source": "https://www.starwars.com/news/star-wars-inside-intel-the-death-star",
+    "author": "Household",
+    "license": "CC0",
+    "bounds": {
+      "width": 100,
+      "height": 100
+    }
+  },
+  "falcon": {
+    "art": "<g transform=\"matrix(1.0277246991244047 0 0 1.0277246991244047 7.105427357601002e-15 0.048306910749204235)\"><path d=\"M0 50 29 28Q54 5 78 26L87 18 96 24 88 35Q108 63 85 86Q56 109 28 85L0 72 29 62 29 58Z\"/></g>",
+    "axis": "length",
+    "source": "https://www.starwars.com/databank/millennium-falcon",
+    "author": "Household",
+    "license": "CC0",
+    "bounds": {
+      "width": 99.99999999999999,
+      "height": 83.53145501548188
+    }
+  },
+  "at-at": {
+    "art": "<g transform=\"matrix(1 0 0 1 -1 0)\"><path d=\"M13 0H64L72 9V16L89 19 96 27 94 36H78L68 28H60V39L64 59 70 94H75V100H60L54 64 50 42H46L39 64 38 94H44V100H29L30 61 32 40H25L21 64 17 94H22V100H7L11 61 14 38 6 27V8Z\"/></g>",
+    "axis": "height",
+    "source": "https://www.starwars.com/databank/at-at-walker",
+    "author": "Household",
+    "license": "CC0",
+    "bounds": {
+      "width": 90,
+      "height": 100
+    }
+  },
+  "star-destroyer": {
+    "art": "<g transform=\"matrix(1 0 0 1 0 0)\"><path d=\"M0 65 100 30V100Z\"/><path d=\"M62 52H87V80H62Z\" fill=\"none\" stroke=\"var(--game-paper,#f7f0db)\" stroke-width=\"2\"/></g>",
+    "axis": "length",
+    "source": "https://www.starwars.com/databank/imperial-star-destroyer/",
+    "author": "Household",
+    "license": "CC0",
+    "bounds": {
+      "width": 100,
+      "height": 70
+    }
+  },
+  "executor": {
+    "art": "<g transform=\"matrix(1 0 0 1 0 0)\"><path d=\"M0 73 100 46 90 73 100 100Z\"/><path d=\"M42 73 83 60 78 73 83 86Z\" fill=\"none\" stroke=\"var(--game-paper,#f7f0db)\" stroke-width=\"2\"/></g>",
+    "axis": "length",
+    "source": "https://www.starwars.com/databank/executor",
+    "author": "Household",
+    "license": "CC0",
+    "bounds": {
+      "width": 100,
+      "height": 54
+    }
+  },
+  "banana": {
+    "art": "<g transform=\"matrix(1 0 0 1 0 4.490570068359375)\"><path d=\"M0 26Q14 83 81 61L91 54 100 58 96 70Q38 122 9 68Z\"/></g>",
+    "axis": "length",
+    "source": "Reference chosen for comparison: an 18 cm banana.",
+    "author": "Household",
+    "license": "CC0",
+    "bounds": {
+      "width": 100,
+      "height": 69.50942993164062
+    }
+  },
+  "door": {
+    "art": "<g transform=\"matrix(1 0 0 1 0 0)\"><path d=\"M25 0H75V100H25Z\"/><circle cx=\"65\" cy=\"53\" r=\"3\" fill=\"var(--game-paper,#f7f0db)\"/></g>",
+    "axis": "height",
+    "source": "Reference chosen for comparison: a two-metre door.",
+    "author": "Household",
+    "license": "CC0",
+    "bounds": {
+      "width": 50,
+      "height": 100
+    }
   }
 }

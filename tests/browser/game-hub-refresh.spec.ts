@@ -19,7 +19,7 @@ test('direct silhouette resizing supports mouse, keyboard and persisted progress
  const initial=Number(await target.getAttribute('aria-valuenow'));const b=(await target.boundingBox())!;
  await page.mouse.move(b.x+b.width/2,b.y+b.height-50);await page.mouse.down();await page.mouse.move(b.x+b.width/2,b.y+b.height-140,{steps:8});await page.mouse.up();const dragged=Number(await target.getAttribute('aria-valuenow'));expect(dragged).toBeGreaterThan(initial);
  await target.focus();await page.keyboard.press('ArrowLeft');const keyed=Number(await target.getAttribute('aria-valuenow'));expect(keyed).toBeLessThan(dragged);
- await page.reload();await expect(target).toHaveAttribute('aria-valuenow',String(keyed));await page.getByRole('button',{name:/Submit/}).click();await expect(page.locator('.scale-correct')).toBeVisible();
+ await page.reload();await expect(target).toHaveAttribute('aria-valuenow',String(keyed));await page.getByRole('button',{name:/Lock it in/}).click();await expect(page.locator('.scale-correct')).toBeVisible();
 });
 test('touch resize changes the target without scrolling the board',async({browser})=>{
  const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});const page=await context.newPage();await page.goto('http://127.0.0.1:4174/?webgl=0#games/how-much-ish');const target=page.getByRole('slider');await expect(target).toBeVisible();const b=(await target.boundingBox())!,session=await context.newCDPSession(page),x=b.x+b.width/2,y=b.y+b.height-30;
@@ -60,5 +60,16 @@ test('steering follows the pointer immediately and reverses across the card seam
  const b=(await page.locator('#observatory-scene').boundingBox())!,x=b.x+b.width*.5,y=b.y+b.height*.65;
  await page.mouse.move(x,y);await page.mouse.down();
  for(const delta of [45,85,-45,-85,30]){await page.mouse.move(x+delta,y,{steps:2});await expect.poll(()=>page.evaluate(()=>{const d=(window as any).__observatoryDiagnostics();return d.dragging?Math.abs(d.angle-d.target):10;})).toBeLessThan(.001);}
- await page.mouse.up();await expect(page.locator('#observatory-scene')).toHaveAttribute('data-selected','odd-one-out');
+ await page.mouse.up();await expect(page.locator('#observatory-scene')).toHaveAttribute('data-selected','crossword');
+});
+
+test('observatory drag direction matches house navigation and the next/previous controls',async({page})=>{
+ await page.goto('/?webgl=0#games');const scene=page.locator('#observatory-scene');await expect(scene).toHaveAttribute('data-selected','geography');
+ const b=(await scene.boundingBox())!,x=b.x+b.width/2,y=b.y+b.height*.65;
+ await page.mouse.move(x,y);await page.mouse.down();await page.mouse.move(x-90,y,{steps:6});await page.mouse.up();await expect(scene).toHaveAttribute('data-selected','odd-one-out');
+ await page.getByRole('button',{name:'Previous game',exact:true}).click();await expect(scene).toHaveAttribute('data-selected','geography');
+ await scene.focus();await page.keyboard.press('ArrowRight');await expect(scene).toHaveAttribute('data-selected','odd-one-out');
+ await page.mouse.move(x,y);await page.mouse.down();await page.mouse.move(x+90,y,{steps:6});await page.mouse.up();await expect(scene).toHaveAttribute('data-selected','geography');
+ await page.getByRole('button',{name:'Next game',exact:true}).click();await expect(scene).toHaveAttribute('data-selected','odd-one-out');
+ await scene.focus();await page.keyboard.press('ArrowLeft');await expect(scene).toHaveAttribute('data-selected','geography');
 });
