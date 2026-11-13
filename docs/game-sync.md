@@ -23,7 +23,7 @@ Source data can still contain mistakes. Adding a subject means reviewing both it
 
 ## Install a daily release
 
-Online imports require migrations 040 and 041 in addition to earlier migrations. The current client also needs 042–048 for archives, grid games, size questions, contextual Passport clues and public release metadata. Local disposable databases apply them automatically. Migration 040 adds variable-length rotations and a service-role-only import RPC; 041 installs the frozen initial catalog. The initial seed authoring script refuses to overwrite 041. Migration 045 installs the reviewed Passport replacement and updates its starters. Its authoring script also refuses to overwrite the migration. Subsequent refreshes append releases through the RPC and do not rewrite SQL history.
+Online imports require migrations 040 and 041 in addition to earlier migrations. The current client also needs 042–049 for archives, grid games, size questions, contextual Passport clues, public release metadata and bidirectional trails. Local disposable databases apply them automatically. Migration 040 adds variable-length rotations and a service-role-only import RPC; 041 installs the frozen initial catalog. The initial seed authoring script refuses to overwrite 041. Migration 045 installs the reviewed Passport replacement and updates its starters. Its authoring script also refuses to overwrite the migration. Subsequent refreshes append releases through the RPC and do not rewrite SQL history.
 
 ```sh
 # Supply these through your environment or secret manager; do not commit values.

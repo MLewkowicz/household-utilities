@@ -10,9 +10,11 @@ run('npm',['run','check']);run('npm',['test']);
 run('uv',['run','--frozen','python','-m','unittest','discover','-s','tests','-p','test_*.py']);
 run('node',['scripts/check-release-schema.mjs']);
 run('uv',['run','--frozen','python','scripts/export_ledgers.py']);
-run('npm',['run','build']);run('npm',['run','test:browser']);run('uv',['run','--frozen','python','scripts/check_privacy.py']);
+run('npm',['run','build']);
 const user=JSON.parse(run('gh',['api','user'],{capture:true}));
 const repo=`${user.login}/household-utilities`;
+run('node',['scripts/retain-release-assets.mjs','--from',`https://${user.login.toLowerCase()}.github.io/household-utilities/`,'--bootstrap-archives']);
+run('npm',['run','test:browser']);run('uv',['run','--frozen','python','scripts/check_privacy.py']);
 if(!existsSync('.git'))run('git',['init','-b','main']);
 const files=['.gitignore','.github','README.md','HANDOFF.md','ROADMAP.md','docs','package.json','package-lock.json','pyproject.toml','uv.lock','tsconfig.json','playwright.config.ts','config.public.json','src','public','scripts','tests','supabase','data',...readdirSync('.').filter(f=>f.endsWith('.sh'))];
 run('git',['add','--',...files]);
@@ -29,6 +31,8 @@ if(!succeeds('gh',['repo','view',repo])) {
 }
 run('gh',['auth','setup-git']);
 if(!succeeds('gh',['api',`repos/${repo}/pages`]))run('gh',['api',`repos/${repo}/pages`,'--method','POST','-f','build_type=workflow']);
-run('git',['push','-u','origin','main']);
+// Publish the checkout that passed the checks, including an isolated worktree.
+// A normal fast-forward push rejects any concurrent changes on remote main.
+run('git',['push','origin','HEAD:main']);
 console.log(`Publication queued. Site: https://${user.login.toLowerCase()}.github.io/household-utilities/`);
 console.log(`Follow progress: gh run list --repo ${repo} --limit 3`);

@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import atlas from '../src/geography-data.json';
 import {globeCities,cityPrompt} from '../src/globe-cities';
 import {newRound,inRound,roundLocations,prepareFindTarget,answerLocation,restoreRound,type Country} from '../src/geography';
-import {createRoute,stepRoute,restoreRoute,shortestRoute,routePuzzles,practiceRoutePuzzles,routePuzzle,routeGuessLimit,neighbors} from '../src/geography-route';
+import {createRoute,stepRoute,restoreRoute,shortestRoute,routePuzzles,practiceRoutePuzzles,routePuzzle,routeGuessLimit,routeBranches,neighbors} from '../src/geography-route';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
 const countries=atlas as Country[];
 test('route capability repair allows public metadata without exposing private game tables',async()=>{
@@ -57,8 +57,19 @@ test('routes allow unordered guesses, reject repeats/backtracking and fill the e
  const p=routePuzzle(createRoute(routePuzzles[0]));let r=createRoute(p);r=stepRoute(r,'JPN');assert.equal(r.mistakes,1);assert.ok(r.discovered.includes('JPN'));r=stepRoute(r,'ESP');
  for(const repeat of ['back','PRT','POL','ESP','JPN'])assert.equal(stepRoute(r,repeat),r);
  for(const id of p.solution.slice(2,-1))r=stepRoute(r,id);assert.ok(r.won);assert.equal(r.steps,p.minimum);assert.equal(r.score,900);assert.deepEqual(restoreRoute(r),r);assert.equal(stepRoute(r,'JPN'),r);assert.equal(restoreRoute({...r,path:['PRT','JPN']}),undefined);
- let unordered=createRoute(p);for(const id of p.solution.slice(1,-1).reverse())unordered=stepRoute(unordered,id);assert.ok(unordered.won);assert.equal(unordered.score,975);assert.equal(unordered.feedback![0].quality,'useful');
+ let unordered=createRoute(p);for(const id of [p.solution[2],p.solution[1],...p.solution.slice(3,-1)])unordered=stepRoute(unordered,id);assert.ok(unordered.won);assert.equal(unordered.score,975);assert.equal(unordered.feedback![0].quality,'useful');
  let lost=createRoute(p);const islands=['JPN','AUS','NZL','ISL','MDG','CUB','FJI','MLT','NRU','KIR'];for(const id of islands.slice(0,routeGuessLimit(p)))lost=stepRoute(lost,id);assert.ok(lost.complete);assert.equal(lost.won,false);assert.equal(lost.score,0);
+});
+test('every global route can start at either endpoint with equal scoring and visible progress',()=>{
+ for(const p of practiceRoutePuzzles){
+  let reverse=createRoute(p);const guesses=p.solution.slice(1,-1).reverse();
+  for(const [index,id] of guesses.entries()){
+   reverse=stepRoute(reverse,id);assert.equal(reverse.notice,'connected',`${p.id}: ${id}`);
+   assert.deepEqual(restoreRoute(reverse),reverse);
+   if(!index)assert.ok(routeBranches(reverse).some(path=>path[0]===p.end&&path.includes(id)));
+  }
+  assert.ok(reverse.won);assert.equal(reverse.score,1000);
+ }
 });
 test('daily trails match practice rules, keep retries idempotent and share one global puzzle',async()=>{
  const db=await openDatabase();try{
@@ -72,7 +83,12 @@ test('daily trails match practice rules, keep retries idempotent and share one g
   }
   assert.deepEqual(await act(before,'JPN'),a);assert.ok(a.complete&&a.won);assert.equal(a.score,900);assert.deepEqual(await start('michal'),a);assert.deepEqual(await act(a,'JPN'),a);
   const scores=await callRpc(db,'geography_route_scores');assert.equal(scores.length,1);assert.equal(scores[0].score,900);assert.equal(scores[0].path,undefined);
-  const lost=await act(b,'give-up');assert.equal(lost.score,0);assert.ok(lost.complete&&!lost.won);
+  let reverse=b,reversePractice=createRoute(puzzle);for(const choice of puzzle.solution.slice(1,-1).reverse()){
+   reverse=await act(reverse,choice);reversePractice=stepRoute(reversePractice,choice);
+   for(const key of ['path','score','notice','feedback','complete'])assert.deepEqual(reverse[key],reversePractice[key],key+' reverse '+choice);
+  }assert.equal(reverse.score,1000);assert.deepEqual(await act(reverse,'give-up'),reverse);
+  assert.equal((await callRpc(db,'geography_route_capabilities')).bidirectional,true);
+  const lost=await act(await start('ohm'),'give-up');assert.equal(lost.score,0);assert.ok(lost.complete&&!lost.won);
   const edges=await db.query('SELECT a,b FROM ledger_private.geography_route_edges');assert.equal(edges.rows.length,Object.values(neighbors).reduce((n,x)=>n+x.length,0)/2);for(const e of edges.rows)assert.ok(neighbors[e.a].includes(e.b));
   const saved=await db.query('SELECT id,start,finish,minimum,solution FROM ledger_private.geography_route_puzzles ORDER BY id');assert.deepEqual(saved.rows,routePuzzles.map(p=>({id:p.id,start:p.start,finish:p.end,minimum:p.minimum,solution:p.solution})));
   await assert.rejects(db.transaction(async tx=>{await tx.exec('SET LOCAL ROLE anon');await tx.query('SELECT * FROM ledger_private.geography_routes');}),/permission denied/);

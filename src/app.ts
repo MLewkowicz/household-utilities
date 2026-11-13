@@ -10,6 +10,7 @@ import {sectionFromHash,type Section,type Feature} from './house-navigation';
 import {bindSectionScroll} from './section-scroll';
 import {mountSkyPortal} from './sky-portal';
 import {mountGameNavigation} from './game-navigation';
+import {isModuleLoadError} from './module-loading';
 
 type Route=Feature;
 type Page={refresh:()=>Promise<void>;export:()=>void;focus?:(id:string)=>boolean};
@@ -67,7 +68,10 @@ async function refresh(maxAge=0){
   if(item){if(!page.focus?.(item))missingNotification();url.hash=location.hash;url.searchParams.delete('notice');history.replaceState(null,'',url);}
   // The active page never waits for the background badge request.
   void refreshBadge();
- }catch(error){toast('Could not load this section. '+(error as Error).message,{label:'Retry',run:()=>void refresh()});}
+ }catch(error){
+  if(isModuleLoadError(error))toast('This page couldn’t finish loading. Reload the site to try again.',{label:'Reload',run:()=>location.reload()});
+  else toast('Could not load this section. '+(error as Error).message,{label:'Retry',run:()=>void refresh()});
+ }
  finally{if(version===routeVersion){$('#main').setAttribute('aria-busy','false');$('#refresh').removeAttribute('disabled');}}
 }
 // Home has To-dos below it, loaded only as that content enters the viewport.

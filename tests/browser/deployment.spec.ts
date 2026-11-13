@@ -1,8 +1,33 @@
 import {setTheme} from './settings';
 import { test, expect } from '@playwright/test';
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
+import { readFile,mkdtemp,mkdir,writeFile,rm } from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {createReleaseManifest,retainReleaseAssets} from '../../scripts/release-assets.mjs';
 import type { AddressInfo } from 'node:net';
+
+test('an open tab can load an old lazy module after deployment without losing an unsaved draft',async({page,context})=>{
+ const root=await mkdtemp(join(tmpdir(),'open-tab-release-')),old=join(root,'old'),next=join(root,'next');await mkdir(old);await mkdir(next);let directory=old;const requests:string[]=[];
+ const html=(entry:string)=>`<input aria-label="Draft"><button>Open section</button><output></output><script type="module" src="./${entry}"></script>`;
+ await writeFile(join(old,'index.html'),html('app-AAAAAAAA.js'));await writeFile(join(old,'app-AAAAAAAA.js'),'document.querySelector("button").onclick=async()=>{const m=await import("./chunk-BBBBBBBB.js");document.querySelector("output").textContent=m.value;}');await writeFile(join(old,'chunk-BBBBBBBB.js'),'export {value} from "./chunk-CCCCCCCC.js"');await writeFile(join(old,'chunk-CCCCCCCC.js'),'export const value="old section loaded"');await createReleaseManifest(old);
+ await writeFile(join(next,'index.html'),html('app-DDDDDDDD.js'));await writeFile(join(next,'app-DDDDDDDD.js'),'document.querySelector("output").textContent="new release";');await createReleaseManifest(next);
+ const server=createServer(async(req,res)=>{const name=new URL(req.url!,'http://localhost').pathname.slice(1)||'index.html';requests.push(name);try{const data=await readFile(join(directory,name));res.writeHead(200,{'content-type':name.endsWith('.js')?'application/javascript':name.endsWith('.json')?'application/json':'text/html','cache-control':name.endsWith('.js')?'max-age=600':'no-store'});res.end(data);}catch{res.writeHead(404);res.end();}});
+ await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));const base=new URL(`http://127.0.0.1:${(server.address() as AddressInfo).port}/`);
+ try{
+  await page.goto(String(base));await page.getByRole('textbox',{name:'Draft'}).fill('Keep this unsaved draft');
+  expect(requests).not.toContain('chunk-BBBBBBBB.js');await retainReleaseAssets(next,base);directory=next;requests.length=0;
+  await page.getByRole('button',{name:'Open section'}).click();await expect(page.locator('output')).toHaveText('old section loaded');await expect(page.getByRole('textbox',{name:'Draft'})).toHaveValue('Keep this unsaved draft');expect(requests).toContain('chunk-BBBBBBBB.js');expect(requests).toContain('chunk-CCCCCCCC.js');expect(requests).not.toContain('index.html');
+  const fresh=await context.newPage();await fresh.goto(String(base));await expect(fresh.locator('output')).toHaveText('new release');await fresh.close();
+ }finally{await page.close();server.closeAllConnections();await new Promise<void>(resolve=>server.close(()=>resolve()));await rm(root,{recursive:true,force:true});}
+});
+
+test('a failed dynamic import offers Reload and recovers after the missing file is restored',async({page})=>{
+ const html=await readFile('dist/index.html','utf8'),routes=JSON.parse(/const routes=(\{.*?\}),loaded=/.exec(html)![1]),module=routes.events[0].slice(2);
+ await page.route(`**/${module}`,route=>route.fulfill({status:404,contentType:'text/html',body:'Not found'}));
+ await page.goto('/?webgl=0#events');await expect(page.locator('#toast')).toContainText('Reload the site');await expect(page.locator('#toast').getByRole('button',{name:'Retry'})).toHaveCount(0);
+ await page.unroute(`**/${module}`);await page.locator('#toast').getByRole('button',{name:'Reload',exact:true}).click();await expect(page.locator('#events-status')).toHaveText('Up to date');await expect(page.locator('#main')).toHaveAttribute('aria-busy','false');
+});
 
 test('a returning visitor gets working navigation and themes after a deployment', async ({ page }) => {
   const html = await readFile('dist/index.html', 'utf8');

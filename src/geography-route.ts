@@ -21,6 +21,18 @@ export function remainingRoute(start:string,end:string,guesses:string[]){
  return {missing:Infinity,path:[]};
 }
 export function routeGuessLimit(puzzle:RoutePuzzle){const n=puzzle.minimum-1;return n+(n<=3?4:n<=6?5:n<=9?6:n<=12?7:8);}
+function connectedBranches(path:string[],guesses:string[]){
+ const known=new Set([path[0],path.at(-1),...guesses]);
+ return [path,[...path].reverse()].map(sequence=>{const branch:string[]=[];for(const id of sequence){if(!known.has(id))break;branch.push(id);}return branch;});
+}
+export function routeBranches(round:RouteRound){
+ if(round.won||round.rules_version!==2)return [round.path];
+ const puzzle=routePuzzle(round),guesses=round.guesses||[];
+ return connectedBranches(remainingRoute(puzzle.start,puzzle.end,guesses).path,guesses);
+}
+function orderedRoute(puzzle:RoutePuzzle,guesses:string[]){
+ return [[puzzle.start,...guesses,puzzle.end],[puzzle.end,...guesses,puzzle.start]].some(path=>path.every((id,i)=>!i||neighbors[path[i-1]]?.includes(id)));
+}
 export function stepRoute(round:RouteRound,choice:string):RouteRound{
  if(round.complete)return round;
  const puzzle=routePuzzle({...round,rules_version:2}),guesses=round.guesses||round.path.filter(id=>id!==puzzle.start&&id!==puzzle.end);
@@ -35,11 +47,11 @@ export function stepRoute(round:RouteRound,choice:string):RouteRound{
  if(!next.path.length)next.path=[puzzle.start];
  const useful=after.missing<before.missing;
  const via=remainingRoute(puzzle.start,choice,next.guesses!).missing+remainingRoute(choice,puzzle.end,next.guesses!).missing;
- const quality:RouteFeedback['quality']=useful?(next.path.includes(choice)?'connected':'useful'):via<=after.missing+1?'detour':'miss';
+ const quality:RouteFeedback['quality']=useful?(connectedBranches(after.path,next.guesses!).some(branch=>branch.includes(choice))?'connected':'useful'):via<=after.missing+1?'detour':'miss';
  next.feedback!.push({country:choice,quality});next.notice=quality;
  next.discovered=[...new Set([...next.discovered,choice])];if(!useful)next.mistakes++;
  next.won=after.missing===0;next.complete=next.won||next.steps>=routeGuessLimit(puzzle);
- next.score=next.won?Math.max(0,1000-100*Math.max(0,next.steps-(puzzle.minimum-1))-(next.feedback!.some(f=>f.quality!=='connected')&&next.steps===puzzle.minimum-1?25:0)):0;
+ next.score=next.won?Math.max(0,1000-100*Math.max(0,next.steps-(puzzle.minimum-1))-(!orderedRoute(puzzle,next.guesses!)&&next.steps===puzzle.minimum-1?25:0)):0;
  return next;
 }
 export function restoreRoute(value:unknown):RouteRound|undefined{

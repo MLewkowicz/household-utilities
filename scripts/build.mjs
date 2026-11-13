@@ -4,6 +4,7 @@ import { mkdir, copyFile, readdir, rm, readFile, writeFile, rename } from 'node:
 import {copyAvatarAssets} from './avatar-assets.mjs';
 import {copySizePhotos} from './size-photo-assets.mjs';
 import {copyGlobeAssets} from './globe-assets.mjs';
+import {createReleaseManifest} from './release-assets.mjs';
 const gameCardAssets=Object.values(JSON.parse(await readFile('src/game-card-assets.json','utf8')));
 for(const file of gameCardAssets){
  const match=/^game-card-[a-z-]+-([a-f0-9]{12})\.webp$/.exec(file);
@@ -55,4 +56,5 @@ await copyFile('data/bulletin.json','dist/bulletin.json');
 await copyFile('data/events.json','dist/events.json');
 await copyFile('data/personal-tasks.json','dist/personal-tasks.json');
 await writeFile('dist/.nojekyll','');
+await createReleaseManifest('dist');
 console.log('Built dashboard assets.');

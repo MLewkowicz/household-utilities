@@ -7413,9 +7413,9 @@
       "interval_weeks": 1
     }
   ],
-  "local_day": "2026-11-12",
-  "updated_at": "2026-11-13T03:24:51.163543+00:00",
-  "exported_at": "2026-11-13T03:24:51.163543+00:00",
+  "local_day": "2026-11-13",
+  "updated_at": "2026-11-13T05:27:36.722182+00:00",
+  "exported_at": "2026-11-13T05:27:36.722182+00:00",
   "leaderboard": [
     {
       "rank": 1,
@@ -8666,7 +8666,7 @@
       "occurrence_root": "10986bd6-79a1-4a69-b799-e4938953c007"
     }
   ],
-  "projection_until": "2027-02-04",
+  "projection_until": "2027-02-05",
   "point_adjustments": [
     {
       "id": "2b8a273b382a2742ed12fe2a37fb5668",
