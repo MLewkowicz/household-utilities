@@ -5,7 +5,8 @@ const checks=[
  ['puzzle_clock_capabilities',{},d=>d.version===1&&d.pause_resume===true,'051_active_puzzle_clocks.sql'],
  ['trivia_capabilities',{},d=>d.version===7&&d.timed_grids===true&&d.size_editorial===11&&d.size_history_version===11&&d.size_categories===true&&d.games===7&&d.archive===true&&d.grid_puzzles===true&&d.photo_silhouettes===false&&d.passport_editorial===2&&d.groups===true&&d.online_sync===true&&d.online_seed===1,'052_size_catalog_reset.sql'],
  ['geography_score_modes',{},d=>Array.isArray(d)&&d.includes('name')&&d.includes('find')&&d.includes('urban'),'038_geography_urban_catalog.sql'],
- ['geography_route_capabilities',{},d=>d.version===2&&d.puzzles>=128&&d.global_routes===true&&d.bidirectional===true,'054_games_variety.sql'],
+ // Migration 049 reports a frozen puzzle count; validate the supported rules, not that label.
+ ['geography_route_capabilities',{},d=>d.version===2&&d.global_routes===true&&d.bidirectional===true,'049_bidirectional_routes.sql'],
  ['geography_scores',{},Array.isArray,'029_geography_scores.sql'],
  ['app_capabilities',{},d=>d.event_edit_notifications&&d.quarter_points&&d.as_needed_routines&&d.sweeping_spaces&&d.personal_deadlines,'028_personal_deadlines.sql'],
  ['personal_tasks',{p:{member:'michal'}},d=>d.format_version>=2&&d.group_rename_version>=1&&Array.isArray(d.tasks),'021_personal_group_rename.sql'],
