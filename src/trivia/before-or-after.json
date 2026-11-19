@@ -1,220 +1,552 @@
 [
   {
+    "id": "timeline-variety-0",
+    "version": 11,
     "kind": "timeline",
     "prompt": "Put these moments in order.",
     "cards": [
       {
-        "id": "event-55",
-        "label": "Sony releases the first Discman",
-        "art": "disc"
+        "id": "Q7817",
+        "label": "World Health Organization is founded",
+        "art": "clock"
       },
       {
-        "id": "event-63",
-        "label": "Nintendo starts making playing cards",
-        "art": "cards"
+        "id": "Q99236",
+        "label": "Millau Viaduct is inaugurated",
+        "art": "tower"
       },
       {
-        "id": "event-67",
-        "label": "The transistor is demonstrated at Bell Labs",
-        "art": "science"
+        "id": "Q124354",
+        "label": "Bauhaus is founded",
+        "art": "clock"
       },
       {
-        "id": "event-62",
-        "label": "The Famicom launches in Japan",
-        "art": "game"
+        "id": "Q9188",
+        "label": "Empire State Building is inaugurated",
+        "art": "tower"
       },
       {
-        "id": "event-51",
-        "label": "The Nintendo 64 launches in Japan",
-        "art": "game"
+        "id": "Q7350",
+        "label": "Panama Canal is inaugurated",
+        "art": "tower"
       }
     ],
     "answer": [
-      "event-63",
-      "event-67",
-      "event-62",
-      "event-55",
-      "event-51"
+      "Q7350",
+      "Q124354",
+      "Q9188",
+      "Q7817",
+      "Q99236"
     ],
     "reveal": {
-      "event-55": 1984,
-      "event-63": 1889,
-      "event-67": 1947,
-      "event-62": 1983,
-      "event-51": 1996
+      "Q7817": 1948,
+      "Q99236": 2004,
+      "Q124354": 1919,
+      "Q9188": 1931,
+      "Q7350": 1914
     },
-    "explanation": "1889 · Nintendo starts making playing cards\n1947 · The transistor is demonstrated at Bell Labs\n1983 · The Famicom launches in Japan\n1984 · Sony releases the first Discman\n1996 · The Nintendo 64 launches in Japan",
+    "explanation": "1914 · Panama Canal is inaugurated\n1919 · Bauhaus is founded\n1931 · Empire State Building is inaugurated\n1948 · World Health Organization is founded\n2004 · Millau Viaduct is inaugurated",
     "sources": [
-      "https://www.computerhistory.org/timeline/1947/",
-      "https://www.nintendo.com/en-gb/Hardware/Nintendo-History/Nintendo-History-625945.html",
-      "https://www.sony.com/en/SonyInfo/CorporateInfo/History/sonyhistory-d.html"
-    ],
-    "id": "before-or-after-v2-15",
-    "version": 2
+      "https://www.wikidata.org/wiki/Q7817",
+      "https://www.wikidata.org/wiki/Q99236",
+      "https://www.wikidata.org/wiki/Q124354",
+      "https://www.wikidata.org/wiki/Q9188",
+      "https://www.wikidata.org/wiki/Q7350"
+    ]
   },
   {
+    "id": "timeline-variety-1",
+    "version": 11,
     "kind": "timeline",
     "prompt": "Put these moments in order.",
     "cards": [
       {
-        "id": "event-66",
-        "label": "The first photograph of a black hole is released",
-        "art": "camera"
+        "id": "Q19024",
+        "label": "Boston Tea Party takes place",
+        "art": "clock"
       },
       {
-        "id": "event-57",
-        "label": "The first commercial microwave ovens are marketed",
-        "art": "microwave"
+        "id": "Q184213",
+        "label": "Akashi Kaikyo Bridge is inaugurated",
+        "art": "tower"
       },
       {
-        "id": "event-52",
-        "label": "Rontgen discovers X-rays",
-        "art": "science"
+        "id": "Q179199",
+        "label": "Guggenheim Museum Bilbao is inaugurated",
+        "art": "tower"
       },
       {
-        "id": "event-58",
-        "label": "The first compact discs go on sale in Japan",
-        "art": "disc"
+        "id": "Q927194",
+        "label": "Polish Round Table talks begin",
+        "art": "clock"
       },
       {
-        "id": "event-64",
-        "label": "The CD-ROM format is introduced",
-        "art": "disc"
+        "id": "Q43280",
+        "label": "Oslo Opera House is inaugurated",
+        "art": "tower"
       }
     ],
     "answer": [
-      "event-52",
-      "event-57",
-      "event-58",
-      "event-64",
-      "event-66"
+      "Q19024",
+      "Q927194",
+      "Q179199",
+      "Q184213",
+      "Q43280"
     ],
     "reveal": {
-      "event-64": 1985,
-      "event-57": 1947,
-      "event-58": 1982,
-      "event-66": 2019,
-      "event-52": 1895
+      "Q19024": 1773,
+      "Q184213": 1998,
+      "Q179199": 1997,
+      "Q927194": 1989,
+      "Q43280": 2008
     },
-    "explanation": "1895 · Rontgen discovers X-rays\n1947 · The first commercial microwave ovens are marketed\n1982 · The first compact discs go on sale in Japan\n1985 · The CD-ROM format is introduced\n2019 · The first photograph of a black hole is released",
+    "explanation": "1773 · Boston Tea Party takes place\n1989 · Polish Round Table talks begin\n1997 · Guggenheim Museum Bilbao is inaugurated\n1998 · Akashi Kaikyo Bridge is inaugurated\n2008 · Oslo Opera House is inaugurated",
     "sources": [
-      "https://invention.si.edu/invention-stories/recognize-unusual",
-      "https://www.computerhistory.org/timeline/1985/",
-      "https://www.nasa.gov/universe/black-holes/black-hole-image-makes-history-nasa-telescopes-coordinate-observations/",
-      "https://www.nobelprize.org/prizes/physics/1901/rontgen/biographical/",
-      "https://www.sony.com/en/SonyInfo/CorporateInfo/History/sonyhistory-d.html"
-    ],
-    "id": "before-or-after-v2-16",
-    "version": 2
+      "https://www.wikidata.org/wiki/Q19024",
+      "https://www.wikidata.org/wiki/Q184213",
+      "https://www.wikidata.org/wiki/Q179199",
+      "https://www.wikidata.org/wiki/Q927194",
+      "https://www.wikidata.org/wiki/Q43280"
+    ]
   },
   {
+    "id": "timeline-variety-2",
+    "version": 11,
     "kind": "timeline",
     "prompt": "Put these moments in order.",
     "cards": [
       {
-        "id": "event-61",
-        "label": "The first Intel 4004 microprocessor is announced",
-        "art": "chip"
+        "id": "Q249367",
+        "label": "Montgomery bus boycott begins",
+        "art": "clock"
       },
       {
-        "id": "event-68",
-        "label": "The first Raspberry Pi goes on sale",
-        "art": "computer"
+        "id": "Q5317",
+        "label": "Space Needle is inaugurated",
+        "art": "tower"
       },
       {
-        "id": "event-50",
-        "label": "YouTube launches",
-        "art": "film"
+        "id": "Q6534",
+        "label": "French Revolution begins",
+        "art": "clock"
       },
       {
-        "id": "event-60",
-        "label": "The Mosaic web browser is released",
-        "art": "computer"
+        "id": "Q8736",
+        "label": "Treaty of Versailles takes place",
+        "art": "clock"
       },
       {
-        "id": "event-54",
-        "label": "The first ISS module launches",
-        "art": "rocket"
+        "id": "Q42944",
+        "label": "CERN is founded",
+        "art": "clock"
       }
     ],
     "answer": [
-      "event-61",
-      "event-60",
-      "event-54",
-      "event-50",
-      "event-68"
+      "Q6534",
+      "Q8736",
+      "Q42944",
+      "Q249367",
+      "Q5317"
     ],
     "reveal": {
-      "event-60": 1993,
-      "event-50": 2005,
-      "event-54": 1998,
-      "event-68": 2012,
-      "event-61": 1971
+      "Q249367": 1955,
+      "Q5317": 1962,
+      "Q6534": 1789,
+      "Q8736": 1919,
+      "Q42944": 1954
     },
-    "explanation": "1971 · The first Intel 4004 microprocessor is announced\n1993 · The Mosaic web browser is released\n1998 · The first ISS module launches\n2005 · YouTube launches\n2012 · The first Raspberry Pi goes on sale",
+    "explanation": "1789 · French Revolution begins\n1919 · Treaty of Versailles takes place\n1954 · CERN is founded\n1955 · Montgomery bus boycott begins\n1962 · Space Needle is inaugurated",
     "sources": [
-      "https://www.computerhistory.org/timeline/1971/",
-      "https://www.computerhistory.org/timeline/1993/",
-      "https://www.computerhistory.org/timeline/2005/",
-      "https://www.computerhistory.org/timeline/2012/",
-      "https://www.nasa.gov/international-space-station/space-station-assembly/"
-    ],
-    "id": "before-or-after-v2-17",
-    "version": 2
+      "https://www.wikidata.org/wiki/Q249367",
+      "https://www.wikidata.org/wiki/Q5317",
+      "https://www.wikidata.org/wiki/Q6534",
+      "https://www.wikidata.org/wiki/Q8736",
+      "https://www.wikidata.org/wiki/Q42944"
+    ]
   },
   {
+    "id": "timeline-variety-3",
+    "version": 11,
     "kind": "timeline",
     "prompt": "Put these moments in order.",
     "cards": [
       {
-        "id": "event-59",
-        "label": "Fleming observes penicillin’s antibacterial effect",
-        "art": "science"
+        "id": "Q129864",
+        "label": "The Indian Rebellion begins",
+        "art": "clock"
       },
       {
-        "id": "event-53",
-        "label": "The first Xbox launches",
-        "art": "game"
+        "id": "Q3797766",
+        "label": "Coronation of Elizabeth II takes place",
+        "art": "clock"
       },
       {
-        "id": "event-56",
-        "label": "Google is incorporated",
-        "art": "computer"
+        "id": "Q42262",
+        "label": "European Space Agency is founded",
+        "art": "clock"
       },
       {
-        "id": "event-69",
-        "label": "Nintendo DS launches in North America",
-        "art": "game"
+        "id": "Q42970",
+        "label": "Amnesty International is founded",
+        "art": "clock"
       },
       {
-        "id": "event-65",
-        "label": "The first modern Olympic Games open",
-        "art": "ball"
+        "id": "Q7809",
+        "label": "UNESCO is founded",
+        "art": "clock"
       }
     ],
     "answer": [
-      "event-65",
-      "event-59",
-      "event-56",
-      "event-53",
-      "event-69"
+      "Q129864",
+      "Q7809",
+      "Q3797766",
+      "Q42970",
+      "Q42262"
     ],
     "reveal": {
-      "event-69": 2004,
-      "event-53": 2001,
-      "event-65": 1896,
-      "event-59": 1928,
-      "event-56": 1998
+      "Q129864": 1857,
+      "Q3797766": 1953,
+      "Q42262": 1975,
+      "Q42970": 1961,
+      "Q7809": 1945
     },
-    "explanation": "1896 · The first modern Olympic Games open\n1928 · Fleming observes penicillin’s antibacterial effect\n1998 · Google is incorporated\n2001 · The first Xbox launches\n2004 · Nintendo DS launches in North America",
+    "explanation": "1857 · The Indian Rebellion begins\n1945 · UNESCO is founded\n1953 · Coronation of Elizabeth II takes place\n1961 · Amnesty International is founded\n1975 · European Space Agency is founded",
     "sources": [
-      "https://news.xbox.com/en-us/2021/11/15/celebrate-20-years-of-play-together/",
-      "https://www.computerhistory.org/timeline/1998/",
-      "https://www.nintendo.com/en-gb/Hardware/Nintendo-History/Nintendo-History-625945.html",
-      "https://www.nobelprize.org/prizes/medicine/1945/fleming/biographical/",
-      "https://www.olympics.com/en/olympic-games/athens-1896"
+      "https://www.wikidata.org/wiki/Q129864",
+      "https://www.wikidata.org/wiki/Q3797766",
+      "https://www.wikidata.org/wiki/Q42262",
+      "https://www.wikidata.org/wiki/Q42970",
+      "https://www.wikidata.org/wiki/Q7809"
+    ]
+  },
+  {
+    "id": "timeline-variety-4",
+    "version": 11,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q48314",
+        "label": "Battle of Waterloo takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q180901",
+        "label": "Atomium is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q126065",
+        "label": "Iranian Revolution begins",
+        "art": "clock"
+      },
+      {
+        "id": "Q45178",
+        "label": "Sydney Opera House is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q689128",
+        "label": "Haitian Revolution begins",
+        "art": "clock"
+      }
     ],
-    "id": "before-or-after-v2-18",
-    "version": 2
+    "answer": [
+      "Q689128",
+      "Q48314",
+      "Q180901",
+      "Q45178",
+      "Q126065"
+    ],
+    "reveal": {
+      "Q48314": 1815,
+      "Q180901": 1958,
+      "Q126065": 1978,
+      "Q45178": 1973,
+      "Q689128": 1791
+    },
+    "explanation": "1791 · Haitian Revolution begins\n1815 · Battle of Waterloo takes place\n1958 · Atomium is inaugurated\n1973 · Sydney Opera House is inaugurated\n1978 · Iranian Revolution begins",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q48314",
+      "https://www.wikidata.org/wiki/Q180901",
+      "https://www.wikidata.org/wiki/Q126065",
+      "https://www.wikidata.org/wiki/Q45178",
+      "https://www.wikidata.org/wiki/Q689128"
+    ]
+  },
+  {
+    "id": "timeline-variety-5",
+    "version": 11,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q3176133",
+        "label": "Louvre Abu Dhabi is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q8707",
+        "label": "Meiji Restoration begins",
+        "art": "clock"
+      },
+      {
+        "id": "Q134883",
+        "label": "CN Tower is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q12495",
+        "label": "Burj Khalifa is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q1781959",
+        "label": "Nobel Foundation is founded",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q8707",
+      "Q1781959",
+      "Q134883",
+      "Q12495",
+      "Q3176133"
+    ],
+    "reveal": {
+      "Q3176133": 2017,
+      "Q8707": 1868,
+      "Q134883": 1976,
+      "Q12495": 2010,
+      "Q1781959": 1900
+    },
+    "explanation": "1868 · Meiji Restoration begins\n1900 · Nobel Foundation is founded\n1976 · CN Tower is inaugurated\n2010 · Burj Khalifa is inaugurated\n2017 · Louvre Abu Dhabi is inaugurated",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q3176133",
+      "https://www.wikidata.org/wiki/Q8707",
+      "https://www.wikidata.org/wiki/Q134883",
+      "https://www.wikidata.org/wiki/Q12495",
+      "https://www.wikidata.org/wiki/Q1781959"
+    ]
+  },
+  {
+    "id": "timeline-variety-6",
+    "version": 11,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q252612",
+        "label": "First Continental Congress takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q167186",
+        "label": "National Geographic Society is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q23548",
+        "label": "NASA is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q7178",
+        "label": "International Red Cross and Red Crescent Movement is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q6539",
+        "label": "Storming of the Bastille takes place",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q252612",
+      "Q6539",
+      "Q7178",
+      "Q167186",
+      "Q23548"
+    ],
+    "reveal": {
+      "Q252612": 1774,
+      "Q167186": 1888,
+      "Q23548": 1958,
+      "Q7178": 1863,
+      "Q6539": 1789
+    },
+    "explanation": "1774 · First Continental Congress takes place\n1789 · Storming of the Bastille takes place\n1863 · International Red Cross and Red Crescent Movement is founded\n1888 · National Geographic Society is founded\n1958 · NASA is founded",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q252612",
+      "https://www.wikidata.org/wiki/Q167186",
+      "https://www.wikidata.org/wiki/Q23548",
+      "https://www.wikidata.org/wiki/Q7178",
+      "https://www.wikidata.org/wiki/Q6539"
+    ]
+  },
+  {
+    "id": "timeline-variety-7",
+    "version": 11,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q1065",
+        "label": "United Nations is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q243",
+        "label": "Eiffel Tower is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q125006",
+        "label": "Brooklyn Bridge is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q131626",
+        "label": "Smithsonian Institution is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q49330",
+        "label": "Médecins Sans Frontières is founded",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q131626",
+      "Q125006",
+      "Q243",
+      "Q1065",
+      "Q49330"
+    ],
+    "reveal": {
+      "Q1065": 1945,
+      "Q243": 1889,
+      "Q125006": 1883,
+      "Q131626": 1846,
+      "Q49330": 1971
+    },
+    "explanation": "1846 · Smithsonian Institution is founded\n1883 · Brooklyn Bridge is inaugurated\n1889 · Eiffel Tower is inaugurated\n1945 · United Nations is founded\n1971 · Médecins Sans Frontières is founded",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q1065",
+      "https://www.wikidata.org/wiki/Q243",
+      "https://www.wikidata.org/wiki/Q125006",
+      "https://www.wikidata.org/wiki/Q131626",
+      "https://www.wikidata.org/wiki/Q49330"
+    ]
+  },
+  {
+    "id": "timeline-variety-8",
+    "version": 11,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q123885",
+        "label": "The Royal Society is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q193375",
+        "label": "Tate Modern is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q239344",
+        "label": "Salt March takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q10257",
+        "label": "Channel Tunnel is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q40970",
+        "label": "International Olympic Committee is founded",
+        "art": "clock"
+      }
+    ],
+    "answer": [
+      "Q123885",
+      "Q40970",
+      "Q239344",
+      "Q10257",
+      "Q193375"
+    ],
+    "reveal": {
+      "Q123885": 1660,
+      "Q193375": 2000,
+      "Q239344": 1930,
+      "Q10257": 1994,
+      "Q40970": 1894
+    },
+    "explanation": "1660 · The Royal Society is founded\n1894 · International Olympic Committee is founded\n1930 · Salt March takes place\n1994 · Channel Tunnel is inaugurated\n2000 · Tate Modern is inaugurated",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q123885",
+      "https://www.wikidata.org/wiki/Q193375",
+      "https://www.wikidata.org/wiki/Q239344",
+      "https://www.wikidata.org/wiki/Q10257",
+      "https://www.wikidata.org/wiki/Q40970"
+    ]
+  },
+  {
+    "id": "timeline-variety-9",
+    "version": 11,
+    "kind": "timeline",
+    "prompt": "Put these moments in order.",
+    "cards": [
+      {
+        "id": "Q193740",
+        "label": "Live Aid takes place",
+        "art": "clock"
+      },
+      {
+        "id": "Q44440",
+        "label": "Golden Gate Bridge is inaugurated",
+        "art": "tower"
+      },
+      {
+        "id": "Q182817",
+        "label": "Velvet Revolution begins",
+        "art": "clock"
+      },
+      {
+        "id": "Q81307",
+        "label": "Greenpeace is founded",
+        "art": "clock"
+      },
+      {
+        "id": "Q83125",
+        "label": "Tower Bridge is inaugurated",
+        "art": "tower"
+      }
+    ],
+    "answer": [
+      "Q83125",
+      "Q44440",
+      "Q81307",
+      "Q193740",
+      "Q182817"
+    ],
+    "reveal": {
+      "Q193740": 1985,
+      "Q44440": 1937,
+      "Q182817": 1989,
+      "Q81307": 1971,
+      "Q83125": 1894
+    },
+    "explanation": "1894 · Tower Bridge is inaugurated\n1937 · Golden Gate Bridge is inaugurated\n1971 · Greenpeace is founded\n1985 · Live Aid takes place\n1989 · Velvet Revolution begins",
+    "sources": [
+      "https://www.wikidata.org/wiki/Q193740",
+      "https://www.wikidata.org/wiki/Q44440",
+      "https://www.wikidata.org/wiki/Q182817",
+      "https://www.wikidata.org/wiki/Q81307",
+      "https://www.wikidata.org/wiki/Q83125"
+    ]
   }
 ]

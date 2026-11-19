@@ -358,5 +358,725 @@
     ],
     "id": "odd-one-out-v2-72",
     "version": 2
+  },
+  {
+    "id": "odd-variety-0",
+    "version": 11,
+    "kind": "choice",
+    "tag": "String instruments",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Cello",
+      "Violin",
+      "Viola",
+      "Oboe"
+    ],
+    "answer": "Oboe",
+    "explanation": "The oboe is a woodwind; the others are bowed string instruments.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-1",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Chess pieces",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Checker",
+      "Rook",
+      "Knight",
+      "Bishop"
+    ],
+    "answer": "Checker",
+    "explanation": "A checker is a piece in draughts, not chess.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-2",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Roman numerals",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Z",
+      "X",
+      "D",
+      "L"
+    ],
+    "answer": "Z",
+    "explanation": "X, L and D are Roman numerals; Z is not.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-3",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Polygons",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Pentagon",
+      "Sphere",
+      "Triangle",
+      "Hexagon"
+    ],
+    "answer": "Sphere",
+    "explanation": "A sphere is a three-dimensional solid; the others are polygons.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-4",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Metric prefixes",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Kilo",
+      "Dozen",
+      "Centi",
+      "Milli"
+    ],
+    "answer": "Dozen",
+    "explanation": "The others are metric prefixes; dozen means twelve.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-5",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Keyboard instruments",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Trombone",
+      "Piano",
+      "Harpsichord",
+      "Organ"
+    ],
+    "answer": "Trombone",
+    "explanation": "A trombone uses a slide, not a keyboard.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-6",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Chemical symbols",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Au",
+      "Fe",
+      "Na",
+      "Hz"
+    ],
+    "answer": "Hz",
+    "explanation": "Hz is the unit hertz; the others are chemical element symbols.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-7",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Programming languages",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Ruby",
+      "Python",
+      "Java",
+      "HTML"
+    ],
+    "answer": "HTML",
+    "explanation": "HTML is a markup language; the others are programming languages.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-8",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Punctuation",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Comma",
+      "Colon",
+      "Vowel",
+      "Semicolon"
+    ],
+    "answer": "Vowel",
+    "explanation": "A vowel is a speech sound or letter, not punctuation.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-9",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Greek letters",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Ampersand",
+      "Alpha",
+      "Omega",
+      "Delta"
+    ],
+    "answer": "Ampersand",
+    "explanation": "An ampersand is a symbol for and, not a Greek letter.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-10",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Mammals that lay eggs",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Short-beaked echidna",
+      "Western long-beaked echidna",
+      "Platypus",
+      "Wombat"
+    ],
+    "answer": "Wombat",
+    "explanation": "A wombat gives birth to live young; the others are egg-laying monotremes.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-11",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Units of length",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Litre",
+      "Metre",
+      "Inch",
+      "Furlong"
+    ],
+    "answer": "Litre",
+    "explanation": "A litre measures volume; the others measure length.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-12",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Units of time",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Minute",
+      "Knot",
+      "Second",
+      "Hour"
+    ],
+    "answer": "Knot",
+    "explanation": "A knot measures speed; the others measure time.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-13",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Percussion",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Clarinet",
+      "Timpani",
+      "Snare drum",
+      "Xylophone"
+    ],
+    "answer": "Clarinet",
+    "explanation": "A clarinet is a woodwind; the others are percussion instruments.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-14",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Card suits",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Crowns",
+      "Clubs",
+      "Hearts",
+      "Diamonds"
+    ],
+    "answer": "Crowns",
+    "explanation": "Crowns is not one of the four standard French card suits.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-15",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Olympic swimming strokes",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Backstroke",
+      "Breaststroke",
+      "Butterfly",
+      "Dog paddle"
+    ],
+    "answer": "Dog paddle",
+    "explanation": "Dog paddle is not an Olympic competition stroke.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-16",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Perfect squares",
+    "prompt": "Find the outsider.",
+    "options": [
+      "49",
+      "35",
+      "16",
+      "25"
+    ],
+    "answer": "35",
+    "explanation": "35 is not the square of an integer.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-17",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Prime numbers",
+    "prompt": "Find the outsider.",
+    "options": [
+      "27",
+      "23",
+      "17",
+      "31"
+    ],
+    "answer": "27",
+    "explanation": "27 equals 3 × 9; the others are prime.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-18",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Powers of two",
+    "prompt": "Find the outsider.",
+    "options": [
+      "96",
+      "8",
+      "128",
+      "32"
+    ],
+    "answer": "96",
+    "explanation": "96 is not an integer power of two.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-19",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Palindromes",
+    "prompt": "Find the outsider.",
+    "options": [
+      "RIVER",
+      "CIVIC",
+      "RADAR",
+      "LEVEL"
+    ],
+    "answer": "RIVER",
+    "explanation": "RIVER does not read the same backward.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-20",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Silent initial letters",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Wrist",
+      "Gnome",
+      "Drum",
+      "Knee"
+    ],
+    "answer": "Drum",
+    "explanation": "The first letter is silent in the other three words.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-21",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Irregular plurals",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Geese",
+      "Teeth",
+      "Books",
+      "Mice"
+    ],
+    "answer": "Books",
+    "explanation": "Books takes the regular -s plural.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-22",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Past tense",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Swam",
+      "Went",
+      "Sing",
+      "Wrote"
+    ],
+    "answer": "Sing",
+    "explanation": "Sing is present tense; the others are past tense.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-23",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Conifer trees",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Fir",
+      "Pine",
+      "Spruce",
+      "Maple"
+    ],
+    "answer": "Maple",
+    "explanation": "Maple is a broadleaf tree, not a conifer.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-24",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Legumes",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Almond",
+      "Peanut",
+      "Lentil",
+      "Chickpea"
+    ],
+    "answer": "Almond",
+    "explanation": "Almond is not a legume.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-25",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Alliums",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Garlic",
+      "Carrot",
+      "Leek",
+      "Onion"
+    ],
+    "answer": "Carrot",
+    "explanation": "Carrot is not in the genus Allium.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-26",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Brass instruments",
+    "prompt": "Find the outsider.",
+    "options": [
+      "French horn",
+      "Tuba",
+      "Trumpet",
+      "Bassoon"
+    ],
+    "answer": "Bassoon",
+    "explanation": "The bassoon is a woodwind.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-27",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Musical tempos",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Crescendo",
+      "Allegro",
+      "Adagio",
+      "Presto"
+    ],
+    "answer": "Crescendo",
+    "explanation": "Crescendo means getting louder; the others describe tempo.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-28",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Painting media",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Oil paint",
+      "Watercolour",
+      "Chisel",
+      "Gouache"
+    ],
+    "answer": "Chisel",
+    "explanation": "A chisel is a carving tool, not a painting medium.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-29",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Printmaking",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Lithography",
+      "Woodcut",
+      "Etching",
+      "Ballet"
+    ],
+    "answer": "Ballet",
+    "explanation": "Ballet is a performing art, not a printmaking technique.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-30",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Literary forms",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Haiku",
+      "Symphony",
+      "Limerick",
+      "Sonnet"
+    ],
+    "answer": "Symphony",
+    "explanation": "A symphony is a musical composition; the others are poetic forms.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-31",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Photography controls",
+    "prompt": "Find the outsider.",
+    "options": [
+      "ISO",
+      "Aperture",
+      "Shutter speed",
+      "Kerning"
+    ],
+    "answer": "Kerning",
+    "explanation": "Kerning adjusts space between letters in typography.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-32",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Geometry",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Denominator",
+      "Diameter",
+      "Circumference",
+      "Radius"
+    ],
+    "answer": "Denominator",
+    "explanation": "Denominator names the bottom part of a fraction, not a circle measurement.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-33",
+    "version": 11,
+    "kind": "choice",
+    "tag": "SI base units",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Newton",
+      "Ampere",
+      "Mole",
+      "Kelvin"
+    ],
+    "answer": "Newton",
+    "explanation": "The newton is a derived SI unit; the others are base units.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-34",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Computer storage",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Flash drive",
+      "Monitor",
+      "SSD",
+      "Hard disk"
+    ],
+    "answer": "Monitor",
+    "explanation": "A monitor displays output; the others store data.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-35",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Web browsers",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Safari",
+      "Firefox",
+      "PostgreSQL",
+      "Chrome"
+    ],
+    "answer": "PostgreSQL",
+    "explanation": "PostgreSQL is a database system.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-36",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Editing marks",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Italic",
+      "Bold",
+      "Megabyte",
+      "Underline"
+    ],
+    "answer": "Megabyte",
+    "explanation": "A megabyte is a data unit, not text formatting.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-37",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Dance forms",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Sonata",
+      "Tango",
+      "Waltz",
+      "Salsa"
+    ],
+    "answer": "Sonata",
+    "explanation": "A sonata is a musical composition, not a dance form.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-38",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Board game actions",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Checkmate",
+      "En passant",
+      "Castling",
+      "Touchdown"
+    ],
+    "answer": "Touchdown",
+    "explanation": "Touchdown is a football term; the others belong to chess.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
+  },
+  {
+    "id": "odd-variety-39",
+    "version": 11,
+    "kind": "choice",
+    "tag": "Knitting",
+    "prompt": "Find the outsider.",
+    "options": [
+      "Purl",
+      "Cast on",
+      "Bind off",
+      "Sauté"
+    ],
+    "answer": "Sauté",
+    "explanation": "Sauté is a cooking technique, not a knitting operation.",
+    "sources": [
+      "Original category puzzle; the explanation states the classification rule."
+    ]
   }
 ]

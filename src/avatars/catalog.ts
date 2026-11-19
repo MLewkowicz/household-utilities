@@ -26,15 +26,15 @@ export const AVATAR_ASSETS = {
   },
   "ohm": {
     "name": "Ohm",
-    "happy128": "ohm-happy128-109112d7f0bf.webp",
-    "happy256": "ohm-happy256-08e7efd0ce01.webp",
-    "happy512": "ohm-happy512-75c95dd1d9cb.webp",
-    "faceplate": "ohm-faceplate-0926a261bddf.webp",
-    "neutral": "ohm-neutral-f9890211a576.webp",
-    "annoyed": "ohm-annoyed-bd6b93985d89.webp",
-    "angry": "ohm-angry-623499811381.webp",
-    "grateful": "ohm-grateful-583840d74c9a.webp",
-    "loving": "ohm-loving-40415a0f2afe.webp"
+    "happy128": "ohm-happy128-8d339e845c16.webp",
+    "happy256": "ohm-happy256-26b05331b7ff.webp",
+    "happy512": "ohm-happy512-0910e63d90b2.webp",
+    "faceplate": "ohm-faceplate-4e8863e06595.webp",
+    "neutral": "ohm-neutral-6a3a3a8b1f79.webp",
+    "annoyed": "ohm-annoyed-1ad24b28aa13.webp",
+    "angry": "ohm-angry-da21d88640c4.webp",
+    "grateful": "ohm-grateful-3a13df900a58.webp",
+    "loving": "ohm-loving-b184add6bbed.webp"
   },
   "rohil": {
     "name": "Rohil",

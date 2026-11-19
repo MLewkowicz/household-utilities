@@ -2660,6 +2660,267 @@
         "PER",
         "CHL"
       ]
+    },
+    {
+      "id": 108,
+      "start": "ESP",
+      "end": "ITA",
+      "region": "World",
+      "minimum": 2,
+      "solution": [
+        "ESP",
+        "FRA",
+        "ITA"
+      ]
+    },
+    {
+      "id": 109,
+      "start": "EST",
+      "end": "ITA",
+      "region": "World",
+      "minimum": 5,
+      "solution": [
+        "EST",
+        "RUS",
+        "UKR",
+        "HUN",
+        "AUT",
+        "ITA"
+      ]
+    },
+    {
+      "id": 110,
+      "start": "THA",
+      "end": "VNM",
+      "region": "World",
+      "minimum": 2,
+      "solution": [
+        "THA",
+        "KHM",
+        "VNM"
+      ]
+    },
+    {
+      "id": 111,
+      "start": "KEN",
+      "end": "ZAF",
+      "region": "World",
+      "minimum": 3,
+      "solution": [
+        "KEN",
+        "TZA",
+        "MOZ",
+        "ZAF"
+      ]
+    },
+    {
+      "id": 112,
+      "start": "VEN",
+      "end": "URY",
+      "region": "World",
+      "minimum": 2,
+      "solution": [
+        "VEN",
+        "BRA",
+        "URY"
+      ]
+    },
+    {
+      "id": 113,
+      "start": "GHA",
+      "end": "GAB",
+      "region": "World",
+      "minimum": 5,
+      "solution": [
+        "GHA",
+        "BFA",
+        "BEN",
+        "NGA",
+        "CMR",
+        "GAB"
+      ]
+    },
+    {
+      "id": 114,
+      "start": "DEU",
+      "end": "ALB",
+      "region": "World",
+      "minimum": 5,
+      "solution": [
+        "DEU",
+        "AUT",
+        "HUN",
+        "HRV",
+        "MNE",
+        "ALB"
+      ]
+    },
+    {
+      "id": 115,
+      "start": "IRN",
+      "end": "JOR",
+      "region": "World",
+      "minimum": 2,
+      "solution": [
+        "IRN",
+        "IRQ",
+        "JOR"
+      ]
+    },
+    {
+      "id": 116,
+      "start": "KAZ",
+      "end": "NPL",
+      "region": "World",
+      "minimum": 2,
+      "solution": [
+        "KAZ",
+        "CHN",
+        "NPL"
+      ]
+    },
+    {
+      "id": 117,
+      "start": "SEN",
+      "end": "NGA",
+      "region": "World",
+      "minimum": 3,
+      "solution": [
+        "SEN",
+        "MLI",
+        "NER",
+        "NGA"
+      ]
+    },
+    {
+      "id": 118,
+      "start": "FRA",
+      "end": "HRV",
+      "region": "World",
+      "minimum": 3,
+      "solution": [
+        "FRA",
+        "ITA",
+        "SVN",
+        "HRV"
+      ]
+    },
+    {
+      "id": 119,
+      "start": "ROU",
+      "end": "EST",
+      "region": "World",
+      "minimum": 3,
+      "solution": [
+        "ROU",
+        "UKR",
+        "RUS",
+        "EST"
+      ]
+    },
+    {
+      "id": 120,
+      "start": "KHM",
+      "end": "NPL",
+      "region": "World",
+      "minimum": 3,
+      "solution": [
+        "KHM",
+        "LAO",
+        "CHN",
+        "NPL"
+      ]
+    },
+    {
+      "id": 121,
+      "start": "TZA",
+      "end": "BWA",
+      "region": "World",
+      "minimum": 2,
+      "solution": [
+        "TZA",
+        "ZMB",
+        "BWA"
+      ]
+    },
+    {
+      "id": 122,
+      "start": "ECU",
+      "end": "PRY",
+      "region": "World",
+      "minimum": 3,
+      "solution": [
+        "ECU",
+        "COL",
+        "BRA",
+        "PRY"
+      ]
+    },
+    {
+      "id": 123,
+      "start": "CIV",
+      "end": "CMR",
+      "region": "World",
+      "minimum": 4,
+      "solution": [
+        "CIV",
+        "BFA",
+        "BEN",
+        "NGA",
+        "CMR"
+      ]
+    },
+    {
+      "id": 124,
+      "start": "NLD",
+      "end": "SVK",
+      "region": "World",
+      "minimum": 3,
+      "solution": [
+        "NLD",
+        "DEU",
+        "AUT",
+        "SVK"
+      ]
+    },
+    {
+      "id": 125,
+      "start": "OMN",
+      "end": "LBN",
+      "region": "World",
+      "minimum": 4,
+      "solution": [
+        "OMN",
+        "SAU",
+        "IRQ",
+        "SYR",
+        "LBN"
+      ]
+    },
+    {
+      "id": 126,
+      "start": "KGZ",
+      "end": "IND",
+      "region": "World",
+      "minimum": 2,
+      "solution": [
+        "KGZ",
+        "CHN",
+        "IND"
+      ]
+    },
+    {
+      "id": 127,
+      "start": "GNB",
+      "end": "NER",
+      "region": "World",
+      "minimum": 3,
+      "solution": [
+        "GNB",
+        "GIN",
+        "MLI",
+        "NER"
+      ]
     }
   ],
   "legacyNeighbors": {

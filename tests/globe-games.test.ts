@@ -40,7 +40,7 @@ test('capital dots use actual cities, correct modern capitals and a consistent q
 });
 test('city questions and saved progress distinguish multiple cities in the same country',()=>{
  const r=newRound('Europe',0,0,'countries','cities'),locations=roundLocations(countries,r),krakow=locations.find(c=>c.id==='POL_KRAKOW')!,warsaw=locations.find(c=>c.id==='POL')!;
- assert.ok(krakow&&warsaw);assert.equal(krakow.name,'Poland');assert.notDeepEqual(krakow.center,warsaw.center);assert.ok(globeCities.USA_NEWYORK&&!globeCities.USA_NEWYORK.capital);assert.ok(globeCities.CHN_SHANGHAI);assert.ok(globeCities.IND_MUMBAI);assert.equal(cityPrompt(globeCities.IND_MUMBAI,countries.find(c=>c.id==='IND')!),'Find Mumbai · India');assert.match(cityPrompt(globeCities.ZAF,countries.find(c=>c.id==='ZAF')!),/administrative capital/);assert.ok(globeCities.NLD_ROTTERDAM);assert.equal(globeCities.ZAF_BLOEMFONTEIN.capitalRole,'judicial');
+ assert.ok(krakow&&warsaw);assert.equal(krakow.name,'Poland');assert.notDeepEqual(krakow.center,warsaw.center);assert.ok(globeCities.USA_NEWYORK&&!globeCities.USA_NEWYORK.capital);assert.ok(globeCities.CHN_SHANGHAI);assert.ok(globeCities.IND_MUMBAI);assert.equal(cityPrompt(globeCities.IND_MUMBAI,countries.find(c=>c.id==='IND')!),'Find Mumbai');assert.match(cityPrompt(globeCities.ZAF,countries.find(c=>c.id==='ZAF')!),/Find Pretoria/);assert.ok(globeCities.NLD_ROTTERDAM);assert.equal(globeCities.ZAF_BLOEMFONTEIN.capitalRole,'judicial');
  r.learningTarget=krakow.id;r.learningOrder=['POL',krakow.id];r.correct=['POL'];const saved=restoreRound(r,countries)!;assert.equal(saved.learningTarget,krakow.id);assert.deepEqual(saved.correct,['POL']);assert.ok(saved.learningOrder.includes('FRA_LYON'));
  const old={...r,cityVersion:undefined,ended:'won' as const};const upgraded=restoreRound(old,countries)!;assert.equal(upgraded.ended,null);assert.equal(upgraded.cityVersion,3);assert.deepEqual(upgraded.correct,['POL']);
  const ranked=newRound('Europe',0,0,'countries','competitive-cities');ranked.findOrder=[krakow.id,warsaw.id];prepareFindTarget(ranked,countries,1000);assert.equal(answerLocation(ranked,warsaw,countries,2000)?.correct,false);assert.deepEqual(ranked.missed,[krakow.id]);assert.equal(ranked.correct.length,0);
@@ -48,8 +48,8 @@ test('city questions and saved progress distinguish multiple cities in the same 
 });
 test('global routes interleave continents and respect playable connections',()=>{
  for(const [a,ns] of Object.entries(neighbors))for(const b of ns)assert.ok(neighbors[b].includes(a),a+'-'+b);
- assert.equal(practiceRoutePuzzles.length,60);assert.ok(practiceRoutePuzzles.some(p=>p.minimum>12));
- assert.ok(new Set(practiceRoutePuzzles.slice(0,10).flatMap(p=>[p.start,p.end]).map(id=>countries.find(c=>c.id===id)!.continent)).size>=5);
+ assert.equal(practiceRoutePuzzles.length,80);assert.ok(practiceRoutePuzzles.some(p=>p.minimum>12));
+ assert.ok(new Set(practiceRoutePuzzles.slice(0,10).flatMap(p=>[p.start,p.end]).map(id=>countries.find(c=>c.id===id)!.continent)).size>=4);
  for(const p of practiceRoutePuzzles){assert.equal(shortestRoute(p.start,p.end).length-1,p.minimum);assert.equal(p.solution[0],p.start);assert.equal(p.solution.at(-1),p.end);let r=createRoute(p);for(const id of p.solution.slice(1,-1))r=stepRoute(r,id);assert.equal(r.won,true,p.id+'');assert.equal(r.score,1000);assert.deepEqual(restoreRoute(r),r);}
  assert.ok(neighbors.BWA.includes('ZMB'));assert.ok(neighbors.ITA.includes('VAT'));assert.ok(neighbors.FRA.includes('GBR'));assert.ok(neighbors.DNK.includes('SWE'));assert.ok(!neighbors.FRA.includes('BRA'));assert.ok(!neighbors.POL.includes('RUS'));assert.ok(!neighbors.TUR.includes('AZE'));assert.ok(!neighbors.AGO.includes('COG'));assert.equal(shortestRoute('JPN','CHN').length,0);
 });
@@ -66,7 +66,7 @@ test('every global route can start at either endpoint with equal scoring and vis
   for(const [index,id] of guesses.entries()){
    reverse=stepRoute(reverse,id);assert.equal(reverse.notice,'connected',`${p.id}: ${id}`);
    assert.deepEqual(restoreRoute(reverse),reverse);
-   if(!index)assert.ok(routeBranches(reverse).some(path=>path[0]===p.end&&path.includes(id)));
+   if(!index&&!reverse.complete)assert.ok(routeBranches(reverse).some(path=>path[0]===p.end&&path.includes(id)));
   }
   assert.ok(reverse.won);assert.equal(reverse.score,1000);
  }

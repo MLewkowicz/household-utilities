@@ -5,7 +5,7 @@ export type RouteRound={puzzle_id:number;path:string[];discovered:string[];steps
 export const routePuzzles:RoutePuzzle[]=data.puzzles;
 export const neighbors:Record<string,string[]>=data.neighbors;
 export function routePuzzle(round:RouteRound){const p=routePuzzles.find(p=>p.id===round.puzzle_id)!;if(p&&p.id<48&&round.rules_version===2){const solution=shortestRoute(p.start,p.end);return {...p,minimum:solution.length-1,solution};}return p;}
-export const practiceRoutePuzzles=routePuzzles.filter(p=>p.id>=48);
+export const practiceRoutePuzzles=[...routePuzzles.filter(p=>p.id>=108),...routePuzzles.filter(p=>p.id>=48&&p.id<108)];
 export const createRoute=(puzzle:RoutePuzzle):RouteRound=>({puzzle_id:puzzle.id,path:[puzzle.start],discovered:[puzzle.start,puzzle.end],steps:0,mistakes:0,revision:0,complete:false,won:false,score:0,notice:'',guesses:[],feedback:[],rules_version:2});
 export function shortestRoute(start:string,end:string){return remainingRoute(start,end,[]).path;}
 /** Minimize missing countries first, then crossings. Guessed countries and endpoints cost zero. */

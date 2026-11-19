@@ -54,7 +54,7 @@ test('personal shelves isolate people, preserve missed and completed dailies, an
   const past=(await db.query("SELECT day::text FROM ledger_private.trivia_attempts WHERE player='michal'")).rows[0].day;
   const old=await callRpc(db,'game_archive',{p:{...p,entry:past}});assert.equal(old.state.attempt.questions[0].version,2);assert.equal(old.state.attempt.complete,false);
   assert.equal((await db.query('SELECT count(*) AS n FROM ledger_private.trivia_attempts')).rows[0].n,1);
-  const geo=await callRpc(db,'game_archive',{p:{player,game:'geography',entry:'starter-2'}});assert.equal(geo.state.attempt.puzzle_id,49);assert.equal(geo.state.attempt.complete,false);
+  const geo=await callRpc(db,'game_archive',{p:{player,game:'geography',entry:'starter-2'}});assert.equal(geo.state.attempt.puzzle_id,109);assert.equal(geo.state.attempt.complete,false);
   await callRpc(db,'game_archive_save',{p:{player,game:'geography',entry:'starter-2',revision:0,state:geo.state}});
  }finally{await db.close();}
 });

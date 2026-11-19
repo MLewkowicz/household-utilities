@@ -45,7 +45,7 @@ export function starterDeck(game:string,entry:string,bank:Question[]){
   return Array.from({length:5},(_,i)=>{const index=slot*5+i,questions=countries[index%countries.length];return questions[Math.floor(index/countries.length)%questions.length];});
  }
  const count=['before-or-after','clue-cascade','sudoku','crossword'].includes(game)?1:5,slot=Number(entry.split('-').at(-1))-1;
- return Array.from({length:count},(_,i)=>bank[(slot*(count===5?(bank.length>=50?5:3):1)+i)%bank.length]);
+ return Array.from({length:count},(_,i)=>bank[(slot*count+i)%bank.length]);
 }
 export async function openArchive(game:string,entry:string,bank:()=>Promise<Question[]>):Promise<ArchiveBoard>{
  const player=identity||'guest',key=prefix(game,player)+entry,local=readLocal<ArchiveBoard>(key);

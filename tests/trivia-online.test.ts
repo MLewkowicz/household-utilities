@@ -66,7 +66,7 @@ test('catalog import is private, atomic and idempotent; refreshes preserve today
   const {release}=await generated();
   const versionBefore=(await db.query('SELECT max(version) AS v FROM ledger_private.trivia_packs')).rows[0].v;
   const importedVersion=versionBefore+1;
-  const initial=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'michal'}});assert.equal(initial.version,8);
+  const initial=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'michal'}});assert.equal(initial.version,versionBefore);
   assert.ok(initial.questions.every((q:any)=>!q.answer&&!q.reveal&&!q.sources));
   assert.equal((await importRelease(db,release)).changed,false);
   await assert.rejects(importRelease(db,release,'anon'),/permission denied/);
@@ -79,7 +79,7 @@ test('catalog import is private, atomic and idempotent; refreshes preserve today
   assert.deepEqual(await importRelease(db,revision),{version:importedVersion,changed:false});
   const stale=structuredClone(revision);stale.catalog.fetchedAt='2000-01-01T00:00:00Z';stale.games[0].packs[0][0].prompt='Old candidate';await assert.rejects(importRelease(db,stale),/Stale catalog/);
   const resumed=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'michal'}});assert.deepEqual(resumed,initial);
-  const roommate=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'rina'}});assert.equal(roommate.version,8);assert.equal(roommate.slot,initial.slot);assert.deepEqual(roommate.questions,initial.questions);
+  const roommate=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'rina'}});assert.equal(roommate.version,initial.version);assert.equal(roommate.slot,initial.slot);assert.deepEqual(roommate.questions,initial.questions);
   const pack=(await db.query('SELECT questions FROM ledger_private.trivia_packs WHERE game=$1 AND version=$2 AND slot=$3',[initial.game,initial.version,initial.slot])).rows[0].questions;
   const answer=pack[0].answer;const finished=await callRpc(db,'trivia_action',{p:{id:initial.id,player:'michal',index:0,action:'answer',answer}});assert.equal(finished.score,1000);
   await db.exec('UPDATE ledger_private.trivia_attempts SET day=day-1');

@@ -98,7 +98,7 @@ function timelineBoards(events,count,namespace){
   for(let tries=0;tries<100;tries++){
    chosen=[];
    const candidates=shuffle(events,rng).sort((a,b)=>usage.get(a.id)-usage.get(b.id));
-   for(const e of candidates){if(chosen.some(c=>c.year===e.year)||chosen.filter(c=>c.art===e.art).length>=2)continue;chosen.push(e);if(chosen.length===5)break;}
+   for(const e of candidates){if(chosen.some(c=>c.year===e.year)||chosen.filter(c=>c.art===e.art).length>=(e.art==='clock'?3:2)||(['book','rocket'].includes(e.art)&&(i%3!==1||chosen.some(c=>['book','rocket'].includes(c.art)))))continue;chosen.push(e);if(chosen.length===5)break;}
    if(chosen.length!==5)throw new Error('Insufficient date/topic diversity for a timeline');
    const signature=chosen.map(e=>e.id).sort().join('|');
    if(!signatures.has(signature)){signatures.add(signature);break;}

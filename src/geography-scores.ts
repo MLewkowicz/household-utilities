@@ -26,3 +26,12 @@ export async function loadScores(){
  try{await syncScores();const shared=await rpc<GeoScore[]>('geography_scores');const remoteIds=new Set(shared.map(s=>s.id));return {rows:[...shared,...local().filter(s=>!remoteIds.has(s.id))],shared:true};}
  catch{return {rows:local(),shared:false};}
 }
+export function localHistoryScores(region:Region,scope:CountryScope,challenge:ScoreChallenge,period:string,day:string,guestOnly=false){
+ const dates=(s:GeoScore)=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(s.finished_at));
+ const days=new Map<string,GeoScore>();
+ for(const s of local().filter(s=>(!guestOnly||s.player==='guest')&&s.region===region&&s.scope===scope&&(s.challenge||'name')===challenge&&(period==='all'||dates(s)===day)).sort(compareScores)){
+  const key=s.player+':'+dates(s);if(!days.has(key))days.set(key,s);
+ }
+ const players=[...new Set([...days.values()].map(s=>s.player))];
+ return players.map(player=>{const rows=[...days.values()].filter(s=>s.player===player),avg=(key:'score'|'elapsed_ms')=>Math.round(rows.reduce((n,s)=>n+s[key],0)/rows.length*100)/100;return {player,score:avg('score'),days:rows.length,elapsed_ms:avg('elapsed_ms')};});
+}
