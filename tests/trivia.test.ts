@@ -54,7 +54,8 @@ test('v2 boards carry their own visual content and practice timelines never expo
 test('v2 preserves pinned attempts and keeps roommates on the same pack during rollout',async()=>{
  const db=await openDatabase();try{
   const first=await callRpc(db,'trivia_start',{p:{game:'odd-one-out',player:'michal'}});assert.match(first.questions[0].id,/^odd-editorial-/);
-  await db.query('UPDATE ledger_private.trivia_attempts SET version=1 WHERE id=$1',[first.id]);
+  const legacySlot=first.slot%14;
+  await db.query('UPDATE ledger_private.trivia_attempts SET version=1,slot=$2 WHERE id=$1',[first.id,legacySlot]);
   const before=(await db.query('SELECT questions FROM ledger_private.trivia_packs WHERE game=$1 AND slot=$2 AND version=1',['odd-one-out',first.slot])).rows[0].questions;
   const resumed=await callRpc(db,'trivia_start',{p:{game:'odd-one-out',player:'michal'}});assert.equal(resumed.id,first.id);assert.equal(resumed.version,1);assert.equal(resumed.questions[0].id,before[0].id);
   const answered=await callRpc(db,'trivia_action',{p:{id:first.id,player:'michal',index:0,action:'answer',answer:before[0].answer}});assert.equal(answered.score,200);

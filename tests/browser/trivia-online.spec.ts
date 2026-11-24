@@ -6,7 +6,7 @@ for(const game of ['before-or-after','passport-puzzle'])test(`${game} imports ex
  await expect(page.getByRole('button',{name:'Submit'})).toBeVisible();
  if(game==='before-or-after'){await page.locator('[data-archive-entry=starter-5]').click();await expect(page.locator('[data-archive-entry=starter-5]')).toHaveAttribute('aria-pressed','true');}
  const attempt=await page.evaluate(game=>JSON.parse(localStorage.getItem(`household-trivia-v2:guest:${game}:practice`)! ),game);
- expect(attempt.questions.every((q:any)=>q.version===5)).toBe(true);
+ expect(attempt.questions.every((q:any)=>q.version===(game==='before-or-after'?11:5))).toBe(true);
  if(game==='passport-puzzle'){expect(new Set(attempt.questions.map((q:any)=>q.answer)).size).toBe(5);expect(attempt.questions.every((q:any)=>q.id.startsWith('passport-culture-'))).toBe(true);}
  await page.reload();await expect(page.getByRole('button',{name:'Submit'})).toBeVisible();
  const resumed=await page.evaluate(game=>JSON.parse(localStorage.getItem(`household-trivia-v2:guest:${game}:practice`)! ),game);expect(resumed.questions).toEqual(attempt.questions);

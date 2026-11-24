@@ -12,7 +12,7 @@ try{
  const headers={'Content-Type':'application/json',apikey:key};
  if(key.startsWith('eyJ'))headers.Authorization=`Bearer ${key}`;
  const response=await fetch(`${url}/rest/v1/rpc/utilities_trivia_import`,{method:'POST',headers,body:JSON.stringify({p}),signal:AbortSignal.timeout(60000)});
- if(!response.ok)throw new Error(`Catalog install failed (HTTP ${response.status}). Check migration 040 and service-role credentials; the prior catalog remains active.`);
+ if(!response.ok)throw new Error(`Catalog install failed (HTTP ${response.status}). Check migration 055 and service-role credentials; the prior catalog remains active.`);
  const result=await response.json();
  if(!Number.isInteger(result.version)||typeof result.changed!=='boolean')throw new Error('Unexpected install response. Retry safely to confirm the result.');
  console.log(result.changed?`Installed catalog v${result.version}: ${result.packs} daily packs. Existing attempts retain their questions.`:`Catalog v${result.version} is already installed; no changes.`);

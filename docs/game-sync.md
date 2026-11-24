@@ -1,50 +1,29 @@
 # Online game catalog
 
-The first online integration uses selected Wikidata facts to build our own Before or After and Passport Puzzle challenges. It does not mirror another game's daily answers. Wikidata's structured data is [CC0](https://www.wikidata.org/wiki/Wikidata:Data_access); no API key is needed to read it.
+Before or After has 180 daily boards drawn from 104 reviewed events. The 99 primary-source milestones in `scripts/trivia/editorial/milestones.tsv` record the specific event, year, topic, and source. Five additional dates are checked against Wikidata. Each board has five different years, five distinct milestone types, and at least four topics. The scheduler checks the seam between the last day and the first. An event cannot appear twice in fourteen consecutive days. At most one card in seven days can be a bridge opening, book publication, or astronomical discovery.
 
-The current catalog contains 167 dated events and 204 reviewed country clues across 68 countries. Passport emphasizes recognizable culture, sport, historical figures and major events: Uruguay hosting and winning the first World Cup, LEGO in Denmark, and Parasite in South Korea. Two contextual clues precede the region and capital hints. Bare old-town names no longer generate new questions. It generates 180 different daily timelines and 90 different five-country daily boards, replacing those games' fourteen-day rotations. Facts recur in different combinations: these are 270 boards, not 270 sets of entirely new facts. The timeline bank balances topics and event usage and never places two events from the same year together. Country boards contain five different destinations. Forty online practice timelines supplement the original timeline bank. Passport uses 27 contextual practice questions across nine destinations, combined into ten five-country starter boards; the daily pool covers the other 59 destinations. Daily and practice use separate imported events and destination groups.
+Common Ground has 30 original four-group boards. Odd One Out has 30 five-round boards, each mixing sound, spelling, phrases, mechanisms, and everyday connections. Both banks are in `scripts/trivia/editorial/`. Word puzzles ship as reviewed releases. Passport continues to use the existing 204 reviewed clues for 68 countries. The games' practice starters and saved plays are independent of these daily packs.
 
-Odd One Out, Common Ground and Geography's Border Trail retain their curated daily catalogs. Word-group puzzles need editorial construction; measurements need explicitly defined dimensions and suitable artwork. Neither is automatically generated from generic trivia questions.
+## Weekly fetch and validation
 
-## Fetch and inspect
-
-Load the repository runtime, then run:
+The Monday GitHub job at 09:23 UTC and manual workflow runs execute:
 
 ```sh
 source scripts/runtime.sh
 npm run games:sync
 ```
 
-This fetches selected public subjects in batches, validates dates and locations, and writes a candidate to ignored `.local/game-sync/`. It makes no database writes. `report.json` summarizes coverage, board counts and a content hash; `catalog.json` includes source item IDs, revisions and rejected records with reasons. `release.json` is the validated daily payload; the two game JSON files are practice candidates. A six-hour local response cache reduces repeated upstream calls during editing. Expired cache entries are not used as a fallback for failed requests. `npm run games:sync -- --offline` reproduces the committed catalog without network access.
+The sync reads published Wikidata entity JSON to check the five dates against their reviewed properties. For each Passport clue it requests the English sitelink from the Wikibase REST API and records the item revision. This replaces title searches and full claim downloads for unused landmarks. Primary-source timeline wording and years are editorial inputs. Changes to a selected date or sitelink require review. A failed fetch leaves the installed release available.
 
-`online/seeds.json` under `scripts/trivia/` selects relevant subjects and assigns explicit date meanings: launch, discovery, inauguration, publication, founding, or the start of an event. The importer fetches facts, rather than extracting Wikipedia prose or copying someone else's questions. It rejects missing/ambiguous date claims, coarse precision, uncertainty qualifiers, unsupported calendars, current/future years, and conflicting country locations. First publication uses the earliest supported publication year, which can include serial publication. Known edition/discovery/founding ambiguities are excluded or checked against a reviewed date. `dateCheckSources` records the independent sources for those checks. The current run rejects 39 subjects or uses them only in another mode.
+The job saves a 30-day artifact. Successful runs contain `release.json`, the checked Wikidata snapshot, and a report with the content hash and counts. On failure, `failure.json` records the last completed item and available request diagnostics, including status, error code and retry delay. To rebuild locally from the committed facts, run `npm run games:sync -- --offline`.
 
-Source data can still contain mistakes. Adding a subject means reviewing both its relevance and what its date property actually represents; don't remove exclusions simply to increase counts. Labels are authored from the selection manifest so upstream label changes cannot inject arbitrary wording into cards. Country clue wording is authored in `online/passport-facts.tsv`, with resolved Wikidata subjects and revisions recorded in the snapshot. The sync does not invent prose from upstream labels or descriptions. Editors review each subject’s connection to the destination and the meaning of the claim; resolving a Wikidata item alone is not fact verification. Country outlines, capital names and region hints come from our pinned local atlas. The old landmark records remain as provenance but do not generate Passport clues. The sync does not update geography populations, borders, or historical prose.
+## Installing reviewed releases
 
-## Install a daily release
+Migration 055 installs all three rotations atomically and extends the service-role import RPC with the editorial envelope. Timeline links may point to Wikidata items or exact reviewed primary-source URLs. Passport accepts Wikidata item URLs. Extend the SQL and JavaScript source lists together when adding a primary source. Practice and archived attempts retain their stored questions. A household that already started today's game keeps its pinned version and slot.
 
-Online imports require migrations 040 and 041 in addition to earlier migrations. The current client also needs 042–051 for archives, grid games, size questions, contextual Passport clues, public release metadata, bidirectional trails and paused grid clocks. Local disposable databases apply them automatically. Migration 040 adds variable-length rotations and a service-role-only import RPC; 041 installs the frozen initial catalog. The initial seed authoring script refuses to overwrite 041. Migration 045 installs the reviewed Passport replacement and updates its starters. Its authoring script also refuses to overwrite the migration. Subsequent refreshes append releases through the RPC and do not rewrite SQL history.
+For this edition, the migration was authored from the validated release using `node scripts/trivia/editorial/prepare-release.mjs <release.json> <new-migration.sql>`. It refuses to overwrite an existing migration. Review and install through the normal additive database release process. For subsequent editions, use a new migration and update its edition markers.
 
-```sh
-# Supply these through your environment or secret manager; do not commit values.
-# SUPABASE_URL: target project URL
-# SUPABASE_SECRET_KEY: target project's secret/service-role key
-npm run games:sync:install -- .local/game-sync/release.json
-```
-
-The installer deliberately does not read `.env.local`. Anonymous browser credentials cannot import content. Import validation and inserts run in one transaction; incomplete payloads leave the previous release intact. Identical content is a no-op even if upstream revision numbers or fetch timestamps have changed. Each new release gets a fresh version. Existing questions and completed answers are never rewritten.
-
-The first player to start a game pins both its slot and version for the whole household that New York calendar day. A midday refresh therefore cannot give roommates different challenges. The following day selects from the newest release's full rotation. Failed refreshes leave the previous catalog available. Playing does not contact Wikidata; daily games still require our database connection and personal practice progress syncs through the archive, with a local fallback.
-
-## Weekly refresh
-
-`.github/workflows/game-catalog.yml` fetches and validates every Monday at 09:23 UTC, and supports manual runs. It saves a 30-day workflow artifact. Installation is off until the repository variable `GAMES_ONLINE_SYNC` is set to `true`, the `SUPABASE_URL` variable is set, and the `SUPABASE_SECRET_KEY` Actions secret is supplied. Apply the migrations before enabling installation. No workflow or live database was activated as part of the local implementation.
-
-The scheduled job has read-only repository permissions and does not commit code or deploy the website. Database imports update daily games without a client release. Practice banks are bundled for offline play; refreshing those requires reviewing the generated practice files and including them in a normal website release (`passport-puzzle.json` and `before-or-after-online.json`). Updating the ten database starters also requires a new additive migration so existing progress remains readable. Normal builds and tests use the committed snapshot and do not depend on a third-party service.
-
-## Verification
-
-`tests/trivia-online.test.ts` covers rate limits and maxlag, rejected dates, deterministic boards, separate daily/practice facts, database permissions, atomic rollback, idempotent imports, rollout-day consistency, old fourteen-slot cohorts, and retained scores. The existing game tests also exercise imported daily scoring and answer hiding. The import RPC only accepts the two supported game types; a future provider or game integration needs an explicit adapter and validation rules.
+The weekly workflow installs online timelines and Passport only when the repository variable `GAMES_ONLINE_SYNC` is `true`, with `SUPABASE_URL` and `SUPABASE_SECRET_KEY` supplied. The equivalent manual install is `npm run games:sync:install -- .local/game-sync/release.json`. The installer reads those two credentials from its environment. Identical question payloads are idempotent across revision or fetch-time changes. Existing frozen migrations retain their original format.
 
 ## Connections archive research
 

@@ -25,7 +25,7 @@ test('all five games have distinct boards and review a practice question',async(
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));for(const game of ['odd-one-out','passport-puzzle','clue-cascade','before-or-after','how-much-ish']){
  await page.goto('/?webgl=0#games/'+game);await page.getByRole('button',{name:'Practice',exact:true}).click();
  if(game==='odd-one-out'){await expect(page.locator('.trivia-choice')).toHaveCount(4);await page.locator('.trivia-choice').first().click();}
- if(game==='passport-puzzle'){await expect(page.getByRole('img',{name:'Country outline'})).toBeVisible();await page.getByRole('button',{name:/Reveal clue/}).click();await expect(page.locator('.passport-evidence li')).toHaveCount(2);await page.locator('#trivia-guess').fill('test');}
+ if(game==='passport-puzzle'){await expect(page.getByRole('img',{name:'Country outline'})).toBeVisible();await page.getByRole('button',{name:/Reveal clue/}).click();await expect(page.locator('.passport-evidence li')).toHaveCount(1);const answer=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-trivia-v2:guest:passport-puzzle:practice')!).questions[0].answer);await page.locator('#trivia-guess').fill(answer);}
  if(game==='clue-cascade'){await expect(page.locator('.word-tile')).toHaveCount(16);const a=await page.evaluate(()=>JSON.parse(localStorage.getItem('household-trivia-v3:guest:clue-cascade:practice')!));for(const g of a.questions[0].groups){for(const word of g.words)await page.getByRole('button',{name:word,exact:true}).click();await page.getByRole('button',{name:'Submit group',exact:true}).click();}await expect(page.locator('.trivia-feedback')).toContainText('All four');continue;}
  if(game==='before-or-after'){await expect(page.locator('.timeline-art svg')).toHaveCount(5);await expect(page.locator('.timeline-date')).toHaveCount(0);await page.locator('.timeline-tile').first().focus();await page.keyboard.press('Space');await page.keyboard.press('ArrowRight');await page.keyboard.press('Space');}
  await page.getByRole('button',{name:game==='how-much-ish'?'Check size':'Submit',exact:false}).click();await expect(page.locator(game==='before-or-after'?'.timeline-comparison':'.trivia-feedback')).toBeVisible();
@@ -53,9 +53,10 @@ test('leaving a slow leaderboard cannot overwrite or break the game board',async
 
 test('Common Ground keeps daily progress after reload and locks after four misses',async({page})=>{
  await page.setViewportSize({width:360,height:800});await page.addInitScript(()=>localStorage.setItem('household-person','ohm'));await page.goto('/?webgl=0#games/clue-cascade');
- const {readFileSync}=await import('node:fs');const packs=JSON.parse(readFileSync('scripts/trivia/daily-packs-v3.json','utf8'));
+ const {wordPacks}=await import('../../scripts/trivia/editorial/word-games.mjs');
+ const packs=(await wordPacks())['clue-cascade'];
  const a=await page.evaluate(async()=>{const config=(window as any).UTILITIES_CONFIG;return fetch(config.url+'/rest/v1/rpc/utilities_trivia_start',{method:'POST',headers:{'Content-Type':'application/json',apikey:config.key},body:JSON.stringify({p:{game:'clue-cascade',player:'ohm'}})}).then(r=>r.json());});
- const q=packs.find(p=>p.game==='clue-cascade'&&p.slot===a.slot).questions[0];
+ const q=packs[a.slot][0];expect(q.id).toBe(a.questions[0].id);
  const select=async(words:string[])=>{for(const w of words)await page.getByRole('button',{name:w,exact:true}).click();await page.getByRole('button',{name:'Submit group',exact:true}).click();};
  await select(q.groups[0].words);await expect(page.locator('.group-solved .group-row')).toHaveCount(1);await expect(page.locator('.word-tile')).toHaveCount(12);
  await page.reload();await expect(page.locator('.group-solved')).toContainText(q.groups[0].label);await expect(page.locator('.trivia-progress')).toContainText('250 pts');

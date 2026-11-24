@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
 import {eventYear,buildRelease,validateRelease,passportFacts} from '../scripts/trivia/online/catalog.mjs';
+import {wordPacks} from '../scripts/trivia/editorial/word-games.mjs';
 import {readItem} from '../scripts/trivia/online/live.mjs';
 import {reviewedEvents} from '../scripts/trivia/editorial/timelines.mjs';
 import {scoreAnswer,type Question} from '../src/trivia-model';
@@ -113,5 +114,20 @@ test('catalog import is private, atomic and idempotent; refreshes preserve today
   const definition=(await db.query("SELECT pg_get_functiondef('ledger_private.trivia_start_before_size_reset(jsonb)'::regprocedure) AS sql")).rows[0].sql;
   await db.exec(definition.replace("(now() AT TIME ZONE 'America/New_York')::date","DATE '2027-03-01'"));
   const later=await callRpc(db,'trivia_start',{p:{game:'before-or-after',player:'ohm'}});assert.equal(later.slot,112);assert.equal(later.version,importedVersion);
+ }finally{await db.close();}
+});
+
+test('installed word rotations match the reviewed originals in every slot',async()=>{
+ const db=await openDatabase();
+ try{
+  for(const [game,expected] of Object.entries(await wordPacks())){
+   const {rows}=await db.query('SELECT questions FROM ledger_private.trivia_packs WHERE game=$1 AND version=(SELECT max(version) FROM ledger_private.trivia_packs WHERE game=$1) ORDER BY slot',[game]);
+   assert.deepEqual(rows.map(r=>r.questions),expected);
+   assert.equal(rows.length,30);
+   for(const {questions} of rows){
+    if(game==='odd-one-out')assert.equal(new Set(questions.map((q:Question)=>q.tag)).size,5);
+    for(const q of questions)assert.equal(scoreAnswer(q,q.answer),game==='clue-cascade'?1000:200);
+   }
+  }
  }finally{await db.close();}
 });

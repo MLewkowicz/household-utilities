@@ -24,7 +24,7 @@ importer=importer.slice(0,header)+` IF NOT (
 `+importer.slice(end);
 importer=importer.replace(' IF EXISTS(SELECT 1 FROM ledger_private.trivia_catalog_releases',` IF p->>'schema'='1' THEN RAISE EXCEPTION 'Build a reviewed editorial candidate before installing new content';END IF;
  IF EXISTS(SELECT 1 FROM ledger_private.trivia_catalog_releases`);
-importer=importer.replace("WHERE s !~ '^https://www[.]wikidata[.]org/wiki/Q[0-9]+$'", "WHERE s IS NULL OR (s !~ '^https://www[.]wikidata[.]org/wiki/Q[0-9]+$' AND NOT (game='before-or-after' AND ledger_private.editorial_source(s)))");
+importer=importer.replace("WHERE s !~ '^https://www[.]wikidata[.]org/wiki/Q[0-9]+$'", ()=>"WHERE s IS NULL OR (s !~ '^https://www[.]wikidata[.]org/wiki/Q[0-9]+$' AND NOT (game='before-or-after' AND ledger_private.editorial_source(s)))");
 
 const packs=await wordPacks();
 const inserts=[];
