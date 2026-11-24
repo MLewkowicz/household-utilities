@@ -16,9 +16,12 @@ async function cachedFetch(url,options){
  if(response.ok){const data=await response.clone().json();if(data.entities&&!data.error)await atomicJSON(path,{at:Date.now(),data});}
  return response;
 }
+const diagnostics={lastCompletedBatch:null,requests:[]};
 try{
  const seeds=await readJSON(new URL('online/seeds.json',import.meta.url));
- const catalog=offline?await readJSON(new URL('online/catalog.json',import.meta.url)):await fetchCatalog(seeds,{onProgress:console.log,fetcher:cachedFetch});
+ const catalog=offline?await readJSON(new URL('online/catalog.json',import.meta.url)):await fetchCatalog(seeds,{deadline:Date.now()+8*60_000,
+  onProgress(message){diagnostics.lastCompletedBatch=message;console.log(message);},
+  onRequest(detail){diagnostics.requests.push(detail);console.log(JSON.stringify(detail));},fetcher:cachedFetch});
  const built=buildRelease(catalog,await readJSON(new URL('src/geography-data.json',root)));
  await mkdir(out,{recursive:true});
  await atomicJSON(new URL('catalog.json',out),catalog);
@@ -27,4 +30,4 @@ try{
  for(const [game,bank] of Object.entries(built.practice))await atomicJSON(new URL(`${game}.json`,out),bank);
  await writeFile(new URL('README.txt',out),`Validated Wikidata catalog candidate\n${JSON.stringify(built.summary,null,2)}\n\nExisting attempts and catalogs have not been changed.\nInstall with: npm run games:sync:install -- .local/game-sync/release.json\nThat command requires SUPABASE_URL and SUPABASE_SECRET_KEY and writes only through the service-role catalog import RPC.\n`);
  console.log(JSON.stringify(built.summary,null,2));console.log('Candidate saved to .local/game-sync/. No database writes.');
-}catch(error){console.error(error.message);process.exitCode=1;}
+}catch(error){await atomicJSON(new URL('failure.json',out),{...diagnostics,error:error.message});console.error(error.message);process.exitCode=1;}

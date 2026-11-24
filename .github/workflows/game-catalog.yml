@@ -20,6 +20,7 @@ jobs:
       - name: Fetch and validate selected public facts
         run: npm run games:sync
       - name: Save catalog and validation report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: game-catalog

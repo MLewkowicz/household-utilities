@@ -28,7 +28,7 @@ test('online fetch respects rate limits and maxlag; malformed or exhausted respo
  assert.equal(result.Q1.id,'Q1');assert.equal(requests,3);assert.deepEqual(waits,[3000,4000]);
  await assert.rejects(wikidata({ids:'Q1'},{fetcher:async()=>Response.json({bad:true}),sleep:async()=>{}}),/invalid response/);
  let retries=0;await assert.rejects(wikidata({ids:'Q1'},{fetcher:async()=>{retries++;return new Response('',{status:503});},sleep:async()=>{}}),/unavailable/);assert.equal(retries,4);
- await assert.rejects(wikidata({ids:'Q1'},{fetcher:async()=>new Response('',{status:429,headers:{'retry-after':'120'}}),sleep:async()=>{assert.fail('Must not retry early');}}),/longer pause/);
+ await assert.rejects(wikidata({ids:'Q1'},{fetcher:async()=>new Response('',{status:429,headers:{'retry-after':'900'}}),sleep:async()=>{assert.fail('Must not retry early');}}),/longer pause/);
 });
 test('synced boards are deterministic, scoreable, varied and keep practice facts out of daily',async()=>{
  const a=await generated(),b=await generated();assert.deepEqual(a,b);

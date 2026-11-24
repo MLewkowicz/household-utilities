@@ -26,39 +26,43 @@ export function eventYear(entity,property,currentYear=new Date().getUTCFullYear(
  return property==='P577'?Math.min(...years):new Set(years).size===1?years[0]:null;
 }
 
-export async function wikidata(params,{fetcher=fetch,sleep=delay}={}){
+export async function wikidata(params,{fetcher=fetch,sleep=delay,onRequest=()=>{},deadline=Date.now()+8*60_000}={}){
  const url=new URL(API);url.search=new URLSearchParams({action:'wbgetentities',format:'json',languages:'en',maxlag:'5',...params});
  for(let attempt=0;attempt<4;attempt++){
-  let response,data;
+  let response,data,failure;
   try{
    response=await fetcher(url,{headers:{'User-Agent':UA,Accept:'application/json'},signal:AbortSignal.timeout(30000)});
    if(response.ok)data=await response.json();
-  }catch(error){if(attempt===3)throw new Error('Wikidata request failed; existing catalog retained.',{cause:error});}
-  const retry=!response||response.status===429||response.status>=500||['maxlag','ratelimited'].includes(data?.error?.code);
-  if(!retry){if(!response.ok||data?.error||!data?.entities)throw new Error(`Wikidata returned an invalid response (${response.status}); existing catalog retained.`);return data.entities;}
-  if(attempt===3)throw new Error('Wikidata is unavailable or rate limited; existing catalog retained.');
+  }catch(error){failure=error.cause?.code||error.name;}
+  const retry=!!failure||!response||response.status===429||response.status>=500||['maxlag','ratelimited'].includes(data?.error?.code);
+  if(!retry && response.ok && data?.entities && !data.error)return data.entities;
   const header=response?.headers.get('retry-after');
   const seconds=header?(Number.isFinite(Number(header))?Number(header):(Date.parse(header)-Date.now())/1000):0;
-  // A long Retry-After ends this run instead of retrying before the provider permits it.
-  if(seconds>60)throw new Error('Wikidata requested a longer pause; retry on the next scheduled run.');
-  await sleep(Math.max(2000*2**attempt,Math.max(0,seconds||0)*1000));
+  const delayMs=Math.max(2000*2**attempt,(seconds||0)*1000);
+  const detail={attempt:attempt+1,batchSize:(params.titles||params.ids).split('|').length,status:response?.status,code:data?.error?.code||failure,retryDelayMs:delayMs};
+  await onRequest(detail);
+  if(!retry)throw new Error(`Wikidata returned an invalid response: ${JSON.stringify(detail)}`);
+  if(attempt===3)throw new Error(`Wikidata unavailable: ${JSON.stringify(detail)}`);
+  if(Date.now()+delayMs+30000>=deadline)throw new Error('Wikidata requested a longer pause than the remaining job budget.');
+  await sleep(delayMs);
  }
 }
 
 export async function fetchCatalog(seeds,options={}){
  const titles=[...new Set([...seeds.timeline.flatMap(g=>g.titles),...Object.values(seeds.landmarks).flat(),...passportFacts.map(f=>f.title)])];
  const entities=new Map(),all=new Map();
- for(let i=0;i<titles.length;i+=40){
-  const batch=await wikidata({sites:'enwiki',titles:titles.slice(i,i+40).join('|'),props:'info|labels|claims|sitelinks',sitefilter:'enwiki'},options);
+ for(let i=0;i<titles.length;i+=10){
+  const batch=await wikidata({sites:'enwiki',titles:titles.slice(i,i+10).join('|'),props:'info|labels|claims|sitelinks',sitefilter:'enwiki'},options);
   for(const e of Object.values(batch))if(e.id?.startsWith('Q')){all.set(e.id,e);if(e.sitelinks?.enwiki)entities.set(normalize(e.sitelinks.enwiki.title),e);}
-  options.onProgress?.(`Fetched ${Math.min(i+40,titles.length)}/${titles.length} selected subjects`);
-  if(i+40<titles.length)await (options.sleep||delay)(300);
+  options.onProgress?.(`Fetched ${Math.min(i+10,titles.length)}/${titles.length} selected subjects`);
+  if(i+10<titles.length)await (options.sleep||delay)(300);
  }
  const countryIds=[...new Set([...all.values()].flatMap(e=>claims(e,'P17').map(c=>value(c)?.id).filter(Boolean)))];
  const countries=new Map();
- for(let i=0;i<countryIds.length;i+=40){
-  const batch=await wikidata({ids:countryIds.slice(i,i+40).join('|'),props:'info|labels|claims'},options);
+ for(let i=0;i<countryIds.length;i+=10){
+  const batch=await wikidata({ids:countryIds.slice(i,i+10).join('|'),props:'info|claims'},options);
   for(const e of Object.values(batch))countries.set(e.id,e);
+  options.onProgress?.(`Fetched ${Math.min(i+10,countryIds.length)}/${countryIds.length} country records`);
  }
  const catalog={schema:1,provider:'Wikidata',license:'CC0-1.0',fetchedAt:new Date().toISOString(),events:[],places:[],passportFacts:[],rejected:[]};
  const provenance=e=>({id:e.id,revision:e.lastrevid,source:`https://www.wikidata.org/wiki/${e.id}`});
