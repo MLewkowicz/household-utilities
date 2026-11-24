@@ -1,10 +1,10 @@
 import {createHash} from 'node:crypto';
 import {readFile, mkdir, writeFile, rename} from 'node:fs/promises';
+import {readItem} from './live.mjs';
 import {setTimeout as delay} from 'node:timers/promises';
 
 export const passportFacts=(await readFile(new URL('passport-facts.tsv',import.meta.url),'utf8')).trim().split('\n').map(line=>{const [country,title,text]=line.split('|');if(!/^[A-Z]{3}$/.test(country)||!title||!text||text.length>220)throw new Error('Invalid reviewed passport fact');return {country,title,text};});
-const API='https://www.wikidata.org/w/api.php';
-const UA='HouseholdUtilities/1.0 (educational game catalog; https://github.com/MLewkowicz/household-utilities)';
+const selections=(await readFile(new URL('../editorial/wikidata.tsv',import.meta.url),'utf8')).trim().split('\n').map(row=>row.split('|'));
 const normalize=s=>s.replaceAll('_',' ').toLowerCase();
 const hash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const claims=(entity,property)=>(entity.claims?.[property]||[]).filter(c=>c.rank!=='deprecated'&&c.mainsnak?.snaktype==='value');
@@ -26,70 +26,30 @@ export function eventYear(entity,property,currentYear=new Date().getUTCFullYear(
  return property==='P577'?Math.min(...years):new Set(years).size===1?years[0]:null;
 }
 
-export async function wikidata(params,{fetcher=fetch,sleep=delay,onRequest=()=>{},deadline=Date.now()+8*60_000}={}){
- const url=new URL(API);url.search=new URLSearchParams({action:'wbgetentities',format:'json',languages:'en',maxlag:'5',...params});
- for(let attempt=0;attempt<4;attempt++){
-  let response,data,failure;
-  try{
-   response=await fetcher(url,{headers:{'User-Agent':UA,Accept:'application/json'},signal:AbortSignal.timeout(30000)});
-   if(response.ok)data=await response.json();
-  }catch(error){failure=error.cause?.code||error.name;}
-  const retry=!!failure||!response||response.status===429||response.status>=500||['maxlag','ratelimited'].includes(data?.error?.code);
-  if(!retry && response.ok && data?.entities && !data.error)return data.entities;
-  const header=response?.headers.get('retry-after');
-  const seconds=header?(Number.isFinite(Number(header))?Number(header):(Date.parse(header)-Date.now())/1000):0;
-  const delayMs=Math.max(2000*2**attempt,(seconds||0)*1000);
-  const detail={attempt:attempt+1,batchSize:(params.titles||params.ids).split('|').length,status:response?.status,code:data?.error?.code||failure,retryDelayMs:delayMs};
-  await onRequest(detail);
-  if(!retry)throw new Error(`Wikidata returned an invalid response: ${JSON.stringify(detail)}`);
-  if(attempt===3)throw new Error(`Wikidata unavailable: ${JSON.stringify(detail)}`);
-  if(Date.now()+delayMs+30000>=deadline)throw new Error('Wikidata requested a longer pause than the remaining job budget.');
-  await sleep(delayMs);
+export async function fetchCatalog(snapshot,options={}){
+ const catalog={...snapshot,fetchedAt:new Date().toISOString(),events:[],places:[],passportFacts:[],rejected:[]};
+ const oldEvents=new Map(snapshot.events.map(e=>[e.id,e]));
+ const oldFacts=new Map(snapshot.passportFacts.map(f=>[f.title,f]));
+ const pause=options.sleep||delay;
+ for(const [id] of selections){
+  const event=oldEvents.get(id);
+  const {data}=await readItem(`https://www.wikidata.org/wiki/Special:EntityData/${id}.json`,options);
+  const entity=data.entities?.[id];
+  if(!entity?.lastrevid||eventYear(entity,event.property)!==event.year)throw new Error(`Review changed timeline date for ${id}`);
+  catalog.events.push({...event,revision:entity.lastrevid});
+  options.onProgress?.(`Verified timeline item ${id} (${catalog.events.length}/${selections.length})`);
+  await pause(350);
  }
-}
-
-export async function fetchCatalog(seeds,options={}){
- const titles=[...new Set([...seeds.timeline.flatMap(g=>g.titles),...Object.values(seeds.landmarks).flat(),...passportFacts.map(f=>f.title)])];
- const entities=new Map(),all=new Map();
- for(let i=0;i<titles.length;i+=10){
-  const batch=await wikidata({sites:'enwiki',titles:titles.slice(i,i+10).join('|'),props:'info|labels|claims|sitelinks',sitefilter:'enwiki'},options);
-  for(const e of Object.values(batch))if(e.id?.startsWith('Q')){all.set(e.id,e);if(e.sitelinks?.enwiki)entities.set(normalize(e.sitelinks.enwiki.title),e);}
-  options.onProgress?.(`Fetched ${Math.min(i+10,titles.length)}/${titles.length} selected subjects`);
-  if(i+10<titles.length)await (options.sleep||delay)(300);
+ for(const fact of passportFacts){
+  const old=oldFacts.get(fact.title);
+  if(!old)throw new Error(`Review item ID for ${fact.title}`);
+  const {data,etag}=await readItem(`https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/${old.id}/sitelinks/enwiki`,options);
+  const revision=Number(/"(\d+)"/.exec(etag)?.[1]);
+  if(!revision||normalize(data.title||'')!==normalize(fact.title))throw new Error(`Review changed Passport sitelink for ${old.id}: ${data.title}`);
+  catalog.passportFacts.push({...old,...fact,revision});
+  options.onProgress?.(`Verified Passport item ${old.id} (${catalog.passportFacts.length}/${passportFacts.length})`);
+  await pause(350);
  }
- const countryIds=[...new Set([...all.values()].flatMap(e=>claims(e,'P17').map(c=>value(c)?.id).filter(Boolean)))];
- const countries=new Map();
- for(let i=0;i<countryIds.length;i+=10){
-  const batch=await wikidata({ids:countryIds.slice(i,i+10).join('|'),props:'info|claims'},options);
-  for(const e of Object.values(batch))countries.set(e.id,e);
-  options.onProgress?.(`Fetched ${Math.min(i+10,countryIds.length)}/${countryIds.length} country records`);
- }
- const catalog={schema:1,provider:'Wikidata',license:'CC0-1.0',fetchedAt:new Date().toISOString(),events:[],places:[],passportFacts:[],rejected:[]};
- const provenance=e=>({id:e.id,revision:e.lastrevid,source:`https://www.wikidata.org/wiki/${e.id}`});
- const seen=new Set();
- for(const group of seeds.timeline)for(const title of group.titles){
-  if(seeds.excluded?.[title]){catalog.rejected.push({title,reason:seeds.excluded[title]});continue;}
-  const e=entities.get(normalize(title));const year=e&&eventYear(e,group.property);
-  if(!year||seen.has(e.id)||seeds.dateChecks?.[title]&&seeds.dateChecks[title]!==year){catalog.rejected.push({title,reason:!e?'No exact linked item':!year?'Missing, ambiguous or imprecise date':seeds.dateChecks?.[title]&&seeds.dateChecks[title]!==year?'Disagrees with reviewed date':'Duplicate event'});continue;}
-  seen.add(e.id);
-  const label=(seeds.labels?.[title]||title).replace(/ \([^)]*\)$/,'');
-  if(!label||label.length>110)throw new Error(`Missing or oversized label: ${title}`);
-  catalog.events.push({...provenance(e),property:group.property,label:`${label} ${seeds.verbs?.[title]||group.verb}`,year,art:group.art});
- }
- for(const [iso,names] of Object.entries(seeds.landmarks))for(const title of names){
-  const e=entities.get(normalize(title));
-  // Only unqualified current single-country locations are accepted. Cross-border and
-  // historical ownership claims cannot silently turn into a country answer.
-  const current=e&&claims(e,'P17').filter(c=>!c.qualifiers?.P582);
-  const ids=current&&[...new Set(current.map(c=>value(c)?.id))];
-  const country=ids?.length===1&&countries.get(ids[0]);
-  const codes=country?claims(country,'P298').map(value):[];
-  if(!e||!codes?.includes(iso)){catalog.rejected.push({title,reason:'Country missing, ambiguous or differs from selected destination'});continue;}
-  catalog.places.push({...provenance(e),countryRevision:country.lastrevid,country:iso,countryId:country.id,label:e.labels?.en?.value||title});
- }
- for(const fact of passportFacts){const e=entities.get(normalize(fact.title));if(!e){catalog.rejected.push({title:fact.title,reason:'Reviewed clue subject could not be resolved'});continue;}catalog.passportFacts.push({...fact,...provenance(e)});}
- catalog.events.sort((a,b)=>a.id.localeCompare(b.id));catalog.places.sort((a,b)=>a.id.localeCompare(b.id));
- if(catalog.events.length<80||new Set(catalog.places.map(p=>p.country)).size<40)throw new Error('Source coverage dropped below the minimum; existing catalog retained.');
  return catalog;
 }
 
