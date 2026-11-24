@@ -6,12 +6,15 @@ const headers={'User-Agent':'HouseholdUtilities/1.1 (https://github.com/MLewkowi
 // A single reviewed ID per request keeps the payload and failure location explicit.
 export async function readItem(url,{fetcher=fetch,sleep=delay,onRequest=()=>{},deadline=Date.now()+8*60_000}={}){
  for(let attempt=1;attempt<=4;attempt++){
+  if(Date.now()+20000>=deadline)throw new Error(`Wikidata deadline reached before ${url}`);
   let response,code;
   try{
    response=await fetcher(url,{headers,signal:AbortSignal.timeout(20000)});
-   if(response.ok)return {data:await response.json(),etag:response.headers.get('etag')};
+   const data=await response.json().catch(()=>null);
+   if(response.ok&&data&&!data.error)return {data,etag:response.headers.get('etag')};
+   code=data?.error?.code||data?.code||(response.ok?'invalid-json':undefined);
   }catch(error){code=error.cause?.code||error.name;}
-  const retry=!!code||response.status===429||response.status>=500;
+  const retry=!response||response.status===429||response.status>=500||['maxlag','ratelimited'].includes(code);
   const value=response?.headers.get('retry-after');
   const retryAfter=value && (Number.isFinite(Number(value))?Number(value)*1000:Date.parse(value)-Date.now());
   const retryDelayMs=Math.max(2000*2**(attempt-1),retryAfter||0);

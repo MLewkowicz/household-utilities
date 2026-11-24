@@ -2,7 +2,9 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {openDatabase,callRpc} from '../scripts/database.mjs';
-import {eventYear,wikidata,buildRelease,validateRelease,passportFacts} from '../scripts/trivia/online/catalog.mjs';
+import {eventYear,buildRelease,validateRelease,passportFacts} from '../scripts/trivia/online/catalog.mjs';
+import {readItem} from '../scripts/trivia/online/live.mjs';
+import {reviewedEvents} from '../scripts/trivia/editorial/timelines.mjs';
 import {scoreAnswer,type Question} from '../src/trivia-model';
 const json=async(file:string)=>JSON.parse(await readFile(file,'utf8'));
 const generated=async()=>buildRelease(await json('scripts/trivia/online/catalog.json'),await json('src/geography-data.json'));
@@ -23,18 +25,29 @@ test('online dates reject uncertainty, conflict, future years and unsupported ca
 });
 test('online fetch respects rate limits and maxlag; malformed or exhausted responses fail closed',async()=>{
  const waits:number[]=[],responses=[new Response('',{status:429,headers:{'retry-after':'3'}}),Response.json({error:{code:'maxlag'}}),Response.json({entities:{Q1:{id:'Q1'}}})];
- let requests=0;
- const result=await wikidata({ids:'Q1'},{fetcher:async(url:URL,options:any)=>{assert.equal(url.searchParams.get('maxlag'),'5');assert.ok(options.headers['User-Agent']);requests++;return responses.shift()!;},sleep:async(ms:number)=>{waits.push(ms);}});
- assert.equal(result.Q1.id,'Q1');assert.equal(requests,3);assert.deepEqual(waits,[3000,4000]);
- await assert.rejects(wikidata({ids:'Q1'},{fetcher:async()=>Response.json({bad:true}),sleep:async()=>{}}),/invalid response/);
- let retries=0;await assert.rejects(wikidata({ids:'Q1'},{fetcher:async()=>{retries++;return new Response('',{status:503});},sleep:async()=>{}}),/unavailable/);assert.equal(retries,4);
- await assert.rejects(wikidata({ids:'Q1'},{fetcher:async()=>new Response('',{status:429,headers:{'retry-after':'900'}}),sleep:async()=>{assert.fail('Must not retry early');}}),/longer pause/);
+ const url='https://www.wikidata.org/wiki/Special:EntityData/Q1.json';
+ const failures:any[]=[];
+ const result=await readItem(url,{fetcher:async(_url:any,options:any)=>{assert.ok(options.headers['User-Agent']);return responses.shift()!;},sleep:async(ms:number)=>{waits.push(ms);},onRequest:(detail:any)=>failures.push(detail)});
+ assert.equal(result.data.entities.Q1.id,'Q1');assert.deepEqual(waits,[3000,4000]);
+ assert.equal(failures[0].status,429);assert.equal(failures[1].code,'maxlag');
+ await assert.rejects(readItem(url,{fetcher:async()=>new Response('bad'),sleep:async()=>{}}),/invalid-json/);
+ let retries=0;await assert.rejects(readItem(url,{fetcher:async()=>{retries++;return new Response('',{status:503});},sleep:async()=>{}}),/request failed/);assert.equal(retries,4);
+ await assert.rejects(readItem(url,{fetcher:async()=>new Response('',{status:429,headers:{'retry-after':'900'}}),sleep:async()=>{assert.fail('Must not retry early');}}),/longer pause/);
 });
 test('synced boards are deterministic, scoreable, varied and keep practice facts out of daily',async()=>{
  const a=await generated(),b=await generated();assert.deepEqual(a,b);
  assert.equal(a.release.games[0].packs.length,180);assert.equal(a.release.games[1].packs.length,90);
  const events=new Set(a.release.games[0].packs.flatMap((p:any)=>p[0].cards.map((c:any)=>c.id)));
  for(const q of a.practice['before-or-after'])assert.ok(q.cards.every((c:any)=>!events.has(c.id)));
+ const reviewed=new Map<string,any>(reviewedEvents(await json('scripts/trivia/online/catalog.json')).map(e=>[e.id,e]));
+ const days=a.release.games[0].packs.map(([q]:any)=>q.answer.map((id:string)=>reviewed.get(id)));
+ assert.equal(events.size,reviewed.size);
+ for(let i=0;i<days.length;i++){
+  const window=(n:number)=>Array.from({length:n},(_,j)=>days[(i+j)%days.length]).flat();
+  assert.equal(new Set(window(14).map(e=>e.id)).size,70);
+  assert.ok(window(7).filter(e=>['bridge','publication','astronomy'].includes(e.type)).length<=1);
+  assert.ok(new Set(days[i].map((e:any)=>e.topic)).size>=4);
+ }
  const dailyCountries=new Set(a.release.games[1].packs.flatMap((p:any)=>p.map((q:any)=>q.answer)));
  for(const q of a.practice['passport-puzzle'])assert.ok(!dailyCountries.has(q.answer));
  for(const g of a.release.games)for(const pack of g.packs){
@@ -71,7 +84,13 @@ test('catalog import is private, atomic and idempotent; refreshes preserve today
   assert.equal((await importRelease(db,release)).changed,false);
   await assert.rejects(importRelease(db,release,'anon'),/permission denied/);
   await assert.rejects(importRelease(db,release,'authenticated'),/permission denied/);
-  const revision=structuredClone(release);revision.games[0].packs[0][0].prompt='Arrange these moments chronologically.';
+  const revision=structuredClone(release);revision.catalog.fetchedAt=new Date().toISOString();revision.games[0].packs[0][0].prompt='Arrange these moments chronologically.';
+  for(const index of [0,1]){
+   const forged=structuredClone(revision);
+   forged.games[index].packs[0][0].sources=[index===0?'https://example.com/unreviewed':release.games[0].packs.flat().flatMap((q:any)=>q.sources).find((s:string)=>!s.includes('wikidata.org'))];
+   assert.throws(()=>validateRelease(forged),/provenance/);
+   await assert.rejects(importRelease(db,forged),/Invalid question sources/);
+  }
   const broken=structuredClone(revision);broken.games[1].packs.at(-1).pop();
   await assert.rejects(importRelease(db,broken),/Incomplete pack/);
   assert.equal((await db.query('SELECT max(version) AS v FROM ledger_private.trivia_packs')).rows[0].v,versionBefore);

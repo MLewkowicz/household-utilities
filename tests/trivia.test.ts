@@ -53,14 +53,14 @@ test('v2 boards carry their own visual content and practice timelines never expo
 });
 test('v2 preserves pinned attempts and keeps roommates on the same pack during rollout',async()=>{
  const db=await openDatabase();try{
-  const first=await callRpc(db,'trivia_start',{p:{game:'odd-one-out',player:'michal'}});assert.equal(first.version,2);
+  const first=await callRpc(db,'trivia_start',{p:{game:'odd-one-out',player:'michal'}});assert.match(first.questions[0].id,/^odd-editorial-/);
   await db.query('UPDATE ledger_private.trivia_attempts SET version=1 WHERE id=$1',[first.id]);
   const before=(await db.query('SELECT questions FROM ledger_private.trivia_packs WHERE game=$1 AND slot=$2 AND version=1',['odd-one-out',first.slot])).rows[0].questions;
   const resumed=await callRpc(db,'trivia_start',{p:{game:'odd-one-out',player:'michal'}});assert.equal(resumed.id,first.id);assert.equal(resumed.version,1);assert.equal(resumed.questions[0].id,before[0].id);
   const answered=await callRpc(db,'trivia_action',{p:{id:first.id,player:'michal',index:0,action:'answer',answer:before[0].answer}});assert.equal(answered.score,200);
   const next=await callRpc(db,'trivia_start',{p:{game:'odd-one-out',player:'rina'}});assert.equal(next.version,1);assert.equal(next.questions[0].id,resumed.questions[0].id);
   await db.exec('UPDATE ledger_private.trivia_attempts SET day=day-1');
-  const fresh=await callRpc(db,'trivia_start',{p:{game:'odd-one-out',player:'ohm'}});assert.equal(fresh.version,2);assert.notEqual(fresh.questions[0].id,resumed.questions[0].id);
+  const fresh=await callRpc(db,'trivia_start',{p:{game:'odd-one-out',player:'ohm'}});assert.equal(fresh.version,first.version);assert.notEqual(fresh.questions[0].id,resumed.questions[0].id);
   assert.equal((await callRpc(db,'trivia_capabilities')).version,7);
  }finally{await db.close();}
 });
@@ -68,7 +68,7 @@ test('v2 preserves pinned attempts and keeps roommates on the same pack during r
 test('word boards score groups, persist progress and make retries idempotent',async()=>{
  const {emptyGroups,guessGroup}=await import('../src/group-puzzle');
  const db=await openDatabase();try{
-  let a=await callRpc(db,'trivia_start',{p:{game:'clue-cascade',player:'michal'}});assert.equal(a.version,3);assert.equal(a.questions.length,1);assert.equal(a.questions[0].words.length,16);assert.equal(a.questions[0].groups,undefined);
+  let a=await callRpc(db,'trivia_start',{p:{game:'clue-cascade',player:'michal'}});assert.match(a.questions[0].id,/^ground-editorial-/);assert.equal(a.questions.length,1);assert.equal(a.questions[0].words.length,16);assert.equal(a.questions[0].groups,undefined);
   const q=(await db.query('SELECT questions->0 AS q FROM ledger_private.trivia_packs WHERE game=$1 AND slot=$2 AND version=$3',[a.game,a.slot,a.version])).rows[0].q;
   const send=(answer:unknown)=>callRpc(db,'trivia_action',{p:{id:a.id,player:a.player,index:0,action:'group',answer}});
   await assert.rejects(send(['not a word','x','y','z']),/four remaining/);
