@@ -1,0 +1,159 @@
+# Listen closely
+Bass,Bow,Wind|Flute|The first three have two pronunciations. Think of a bass fish, a bow to an audience, and winding a clock. Flute keeps its sound.
+Knight,Knot,Kneel|Kelp|Kelp lets you hear its initial K. The other three start with a silent K.
+Blue,Flu,Queue|Sew|Blue, flu and queue end with the sound in “shoe.” Sew rhymes with “go.”
+Sun,Flower,Pair|Cactus|Say them aloud and you can hear son, flour and pear. Cactus has no everyday twin that sounds the same.
+Wrapped,Rapt,Rapped|Rapid|The first three sound exactly alike. Rapid adds a second syllable.
+Choir,Chorus,Chaos|Chime|The first three start with a K sound. Chime starts like “cheese.”
+Phone,Phantom,Photo|Piano|Only piano starts with a P sound. The ph in the others makes an F.
+Dough,Though,Toe|Through|Through rhymes with “blue.” The other three rhyme with “go.”
+Rain,Rein,Reign|Ruin|The first three sound alike. Ruin has a second syllable.
+Dime,Climb,Thyme|Timber|Dime, climb and thyme rhyme. Timber starts with the short vowel in “him.”
+Cell,Cede,Cent|Celtic knot|The C starts like S in cell, cede and cent. In Celtic knot it starts like K.
+Comb,Lamb,Thumb|Amber|Amber sounds its B. The B at the end of the other three is silent.
+Hour,Heir,Honor|Heron|Heron sounds its initial H. The other three start with a vowel sound.
+Pear,Pair,Pare|Peer|Peer rhymes with “near.” The other three sound alike.
+Read,Lead,Tear|Bead|Read can rhyme with bed or seed, lead with bed or seed, and tear with air or ear. Bead keeps one pronunciation.
+Cough,Trough,Off|Bough|Bough rhymes with “cow.” The other three end with an F sound.
+Cease,Geese,Fleece|Cheese|Cheese ends with a Z sound. The others end with a hiss.
+Hymn,Autumn,Column|Cabin|Only cabin sounds its final N.
+Dogs,Bugs,Pigs|Cats|All four are plurals. The final S buzzes like Z in dogs, bugs and pigs, but hisses in cats.
+Eight,Weight,Freight|Height|Height rhymes with “light.” The others rhyme with “late.”
+Baked,Hopped,Kissed|Played|The -ed ending sounds like T in the first three. In played it sounds like D.
+Gnat,Gnaw,Gnome|Globe|Globe lets you hear the G. In the other three the first sound is N.
+Scene,Scent,Science|Scale|Scale begins with the sounds S and K. The others begin with just S before a vowel sound.
+Raise,Rays,Raze|Race|Race ends with an S sound. The other three sound alike.
+Island,Aisle,Debris|Iris|The S disappears when you say island, aisle or debris. You hear it at the end of iris.
+Swan,Swim,Sweep|Sword|Only sword silences its W.
+Bread,Thread,Spread|Bead|Bead rhymes with “seed.” The others rhyme with “head.”
+Chef,Chute,Chic|Chew|The first three start like “shoe.” Chew starts like “chair.”
+Nation,Station,Motion|Question|In question the ending sounds like “chun.” The other three end in “shun.”
+Two,Too,To|Tow|In careful pronunciation, to, too and two sound alike. Tow rhymes with go.
+
+# Look at the letters
+Listen,Silent,Tinsel|Tingle|You can rearrange LISTEN into SILENT or TINSEL. TINGLE brings in a G.
+Level,Civic,Radar|Lever|Level, civic and radar read alike from either end. Lever changes when reversed.
+Bored,Robed,Orbed|Probed|The first three rearrange the same five letters. Probed adds a P.
+Almost,Chintz,Ghost|Guest|The letters of almost, chintz and ghost run forward in alphabet order. Guest goes backward from U to E.
+Bookkeeper,Balloon,Coffee|Cocoa|Cocoa repeats letters, but never side by side. Each of the others contains consecutive twins.
+One,Once,Won|Only|One, once and won begin with a W sound. Only starts with a vowel sound.
+Stressed,Drawer,Deliver|Pepper|Reverse them to get desserts, reward and reviled. Reversing pepper gives reppep.
+Stone,Notes,Tones|Nests|Stone, notes and tones use precisely the same letters. Nests trades the O for a second S.
+Deed,Noon,Peep|Loop|Deed, noon and peep have matching letters at both ends and twins in the middle. Loop has only the middle pair.
+Rhythm,Glyph,Crypt|Cryptic|Only cryptic contains one of A, E, I, O or U.
+Typewriter,Poet,Quiet|Pilot|Typewriter, poet and quiet use only the top letter row of a US QWERTY keyboard. Pilot needs L.
+Salad,Flask,Lads|Sage|On a US QWERTY keyboard, salad, flask and lads stay on the middle letter row. Sage reaches up for E.
+Stew,Pots,Snug|Tuna|Reverse stew, pots and snug to get wets, stop and guns. Reversing tuna gives anut.
+Heart,Earth,Hater|Heard|Heart, earth and hater shuffle the same letters. Heard swaps T for D.
+One,Two,Six|Five|One, two and six are written with three letters. Five takes four.
+Onion,Union,Pinion|Opinion|Onion, union and pinion have one letter I each. Opinion has two.
+Kiosk,Kayak,Knack|Knockout|Kiosk, kayak and knack begin and end in K. Knockout ends in T.
+Cooperate,Bookcase,Reenter|Repaint|Cooperate, bookcase and reenter put two identical vowels side by side. Repaint has two different vowels together.
+Star,Rats,Arts|Oars|Star, rats and arts rearrange the same four letters. Oars needs an O.
+Triangle,Integral,Altering|Tangling|The first three are anagrams of TRIANGLE. Tangling uses a second N and drops letters the others need.
+Bee,See,Tee|Tree|Remove the initial letter from bee, see and tee and you are left with EE. Tree leaves REE.
+STOP,POTS,TOPS|POSTER|The first three use the four letters on a stop sign exactly once. Poster adds E and R.
+Three,Seven,Eight|Nine|Three, seven and eight each have five letters. Nine has four.
+Uncle,Under,Until|Unity|Uncle, under and until start with the letters UN and the sound in “up.” Unity starts with a Y sound.
+Racecar,Rotator,Reviver|Revival|The first three are seven-letter palindromes. Revival reads differently backward.
+Brake,Baker,Break|Bleak|Brake, baker and break shuffle A, B, E, K and R. Bleak uses L.
+Sequoia,Education,Automobile|Automaton|The first three contain all five standard vowel letters. Automaton has no E or I.
+Moon,Food,Pool|Foot|All have double O, but only foot uses the vowel in “put.”
+Mississippi,Tennessee,Illinois|Iowa|The first three state names contain a doubled consonant. Iowa has no doubled letters.
+Notebook,Handbag,Sunset|Carpet|Note and book, hand and bag, sun and set each retain their meanings in the compound. A carpet is unrelated to cars or pets.
+
+# Find the phrase
+Bath,Breath,Conclusion|Shower|You can draw a bath, draw breath and draw a conclusion. You take a shower.
+Jam,Light,Report|Weather|Traffic jam, traffic light and traffic report all begin with traffic. Weather report puts weather in front of report.
+Sitter,Teeth,Steps|Stroller|Babysitter, baby teeth and baby steps begin with baby. In a stroller the baby is the passenger.
+Mark,Case,Worm|Chapter|Bookmark, bookcase and bookworm all begin with book. A chapter goes inside one.
+Flag,Stakes,Alarm|Curtain call|Raise a flag, raise the stakes, raise the alarm. A curtain call is taken.
+Chord,Match,Deal|Melody|You strike a chord, a match or a deal. You play a melody.
+Egg,Code,Joke|Toast|Crack an egg, crack a code, crack a joke. Toast takes a different verb.
+Bow,Walk,Word|Arrow|Crossbow, crosswalk and crossword begin with cross. An arrow goes in the bow.
+Trail,Clip,Towel|Pen|Paper trail, paper clip and paper towel all begin with paper. A pen writes on it.
+Line,Clock,Card|Shift|Punch line, punch clock and punch card start with punch. A shift is what the clock records.
+Lace,Horn,Box|Sock|Shoelace, shoehorn and shoebox start with shoe. A sock goes inside a shoe.
+Flake,Globe,Plow|Blizzard|Snowflake, snow globe and snowplow start with snow. A blizzard is a snowstorm.
+Drum,Drop,Wax|Nose|Eardrum, eardrop and earwax start with ear. Nose is another body part.
+Brush,Comb,Net|Braid|Hairbrush, hair comb and hairnet begin with hair. A braid is a hairstyle.
+Tip,Print,Nail|Knuckle|Fingertip, fingerprint and fingernail are standard compounds. A knuckle is a joint in a finger.
+Bell,Mat,Knob|Porch|Doorbell, doormat and doorknob begin with door. A porch may lead to a door.
+Bird,Green,Light|Roof|Birdhouse, greenhouse and lighthouse end in house. A roof sits on one.
+Bake,Sleep,Charge|Extra|Overbake, oversleep and overcharge all mean doing something to excess. Extra describes the excess itself.
+Moon,Tea,Flash|Battery|Moonlight, tealight and flashlight end in light. A battery powers a flashlight.
+Writer,Town,Story|Phantom|Ghostwriter, ghost town and ghost story all start with ghost. Phantom is another word for a ghost.
+Brush,Paste,Pick|Molar|Toothbrush, toothpaste and toothpick start with tooth. A molar is a tooth.
+Skate,Surf,Key|Piano|Skateboard, surfboard and keyboard end in board. A piano has a keyboard.
+Cup,Pan,Cheese|Icing|Cupcake, pancake and cheesecake end in cake. Icing goes on a cake.
+Table,Zone,Capsule|Calendar|Timetable, time zone and time capsule begin with time. A calendar tracks dates.
+Flip,Comic,Phone|Page|Flip book, comic book and phone book end in book. A page goes inside one.
+Hammer,Drum,Anvil|Screwdriver|All except a screwdriver have an ear connection: the hammer and anvil are middle-ear bones, and the eardrum vibrates with sound.
+Coffee,End,Pool|Sofa|Coffee table, end table and pool table end in table. A sofa can stand beside one.
+Foot,Volley,Basket|Net|Football, volleyball and basketball end in ball. The last two sports use a net.
+Snow,Meat,Eye|Socket|Snowball, meatball and eyeball end in ball. An eyeball sits in a socket.
+Drill,Fly,Works|Smoke|Fire drill, firefly and fireworks all start with fire. Smoke is something a fire produces.
+
+# Follow the mechanism
+Piano,Typewriter,Accordion|Violin|The first three have keys you press. A violinist changes pitch directly on the strings.
+Sand timer,Drip clock,Candle clock|Sundial|The first three measure an interval as a supply of sand, water or wax runs down. A sundial uses the Sun’s position.
+Record,Potter's wheel,Turntable|Loom|The first three spin around a central axis during use. A loom interlaces threads.
+Zipper,Gear,Comb|Brush|A zipper, gear and comb have teeth. A brush has bristles.
+Piston,Bicycle pump,Syringe|Pinwheel|The first three move a close-fitting part back and forth in a cylinder. A pinwheel spins.
+Thermos,Cooler,Tea cozy|Kettle|The first three slow heat transfer. A kettle is used to heat water.
+Periscope,Kaleidoscope,Rearview mirror|Magnifying glass|The first three use reflection. A simple magnifying glass bends transmitted light through a lens.
+Camera,Eye,Projector|Loudspeaker|The first three can use a lens to focus light. A loudspeaker moves air to produce sound.
+Pendulum,Metronome,Playground swing|Ferris wheel|The first three can swing back and forth. A Ferris wheel carries its seats all the way around.
+Corkscrew,Jar lid,Bolt|Nail|The first three use a spiral or screw thread. An ordinary smooth nail goes straight in.
+Oar,Pry bar,Seesaw|Pulley|Oars in oarlocks, pry bars and seesaws act as levers. A pulley redirects a line around a wheel.
+Sail,Kite,Windsock|Hand fan|A sail, a kite and a windsock respond to moving air. A hand fan makes air move.
+Accordion,Bellows,Bicycle pump|Sponge|The first three push air out by squeezing an air chamber. A wet sponge releases liquid held in pores.
+Candle,Oil lamp,Campfire|Glow stick|The first three give light by burning fuel. A glow stick mixes chemicals without a flame.
+Guitar,Violin,Harp|Flute|The first three make their sound with vibrating strings. A flute sets a column of air vibrating.
+Spring scale,Beam balance,Weighbridge|Measuring jug|The first three are used to weigh things. A marked jug measures volume.
+Strainer,Tea infuser,French press|Teapot|The first three contain a screen or perforations to separate solids from liquid. A plain teapot can simply pour.
+Escalator,Conveyor belt,Treadmill|Elevator|The first three circulate a continuous moving surface. An elevator car travels back and forth.
+Whisk,Fork,Hand mixer|Rolling pin|The first three can beat air into eggs. A rolling pin flattens dough.
+Dial lock,Key lock,Combination padlock|Doorbell|The first three restrict access. A doorbell signals that someone wants access.
+Refrigerator,Air conditioner,Freezer|Toaster|The first three move heat from one place to another using a refrigeration cycle. A toaster heats a resistive element.
+Balloon,Bladder,Bellows|Bucket|The first three have flexible walls that can expand or collapse around air. A bucket keeps its shape.
+Sundial,Hourglass,Water clock|Compass|The first three mark time. A compass needle indicates direction.
+Braid,Rope,Cable|Chain|The first three can be made by twisting or interlacing strands. A chain joins individual links.
+Ratchet,Turnstile,Check valve|Hinge|The first three can enforce one-way motion. A plain hinge swings back as well as forward.
+Snowshoe,Ski,Wide tire|Stiletto heel|The first three spread weight over a wider surface. A stiletto concentrates it in a small point.
+Latch,Clasp,Buckle|Hinge|The first three fasten something shut or together. A hinge allows it to pivot.
+Pencil sharpener,Hand-cranked drill,Pepper mill|Stapler|The first three can work by turning a handle or body. A stapler drives and bends a fastener.
+Ladle,Spoon,Scoop|Spatula|The first three have a bowl that can hold liquid. A flat spatula lifts or turns food.
+Bell,Triangle,Cymbal|Snare drum|The first three make their characteristic sound by vibrating their metal bodies. A snare drum is played on a stretched head.
+
+# Spot the connection
+Tennis,Volleyball,Badminton|Squash|The first three send play over a net between opponents. Squash players share a wall.
+Bishop,Rook,Queen|Knight|On an empty chessboard the first three can cross several squares in a straight line. A knight moves in an L.
+Peach,Cherry,Plum|Pear|Peaches, cherries and plums each enclose a single stone. A pear has a core with several seeds.
+Echo,Reflection,Photocopy|Shadow|The first three return or reproduce a pattern. A shadow is the area where light is blocked.
+Viola,Cello,Double bass|Piccolo|The first three are bowed string instruments in an orchestra. A piccolo is a woodwind.
+Bagel,Pretzel,Croissant|Pancake|The first three are normally baked. A pancake cooks on a griddle.
+Octopus,Spider,Scorpion|Ant|Octopuses have eight arms, spiders and scorpions eight legs. An ant has six legs.
+Spade,Heart,Club|Crown|The first three are suits in a standard French-suited deck. Crown is not a suit in that deck.
+Gouda,Brie,Cheddar|Kefir|Milk is made into all four. Kefir is a fermented drink; the others are cheeses.
+Ballet,Opera,Play|Encore|The first three are types of staged work. An encore is an extra performance after the planned ending.
+Ruby,Sapphire,Amethyst|Pearl|The first three gemstones are minerals. A natural pearl forms inside a mollusk.
+Oyster,Mussel,Scallop|Squid|Oysters, mussels and scallops have two hinged shells. A squid is a cephalopod.
+Paperback,Hardback,Audiobook|Bookmark|The first three are formats in which a book can be published. A bookmark tracks a reader's place.
+Soprano,Alto,Tenor|Solo|The first three describe singing ranges. Solo describes how many performers take a part.
+Bun,Patty,Pickle|Skewer|The first three may be eaten as parts of a burger. A skewer holds food together.
+Hail,Sleet,Snow|Fog|The first three fall as precipitation. Fog hangs near the ground as tiny droplets or ice crystals.
+Brook,Creek,Stream|Pond|The first three name flowing water. A pond is a body of standing water.
+Meter,Yard,Fathom|Knot|The first three measure length. A knot measures speed at sea.
+Zest,Juice,Pulp|Pip|Zest, juice and pulp from a lemon all commonly go into food or drinks. A pip is its seed.
+Subway,Funicular,Tram|Trolleybus|The first three can run on rails. A trolleybus runs on road tires while drawing electricity overhead.
+Album,Single,EP|Setlist|The first three can be released as recorded music. A setlist orders the songs to perform at a show.
+Checkmate,Stalemate,Resignation|Castling|The first three end a chess game. Castling is a move during play.
+Puck,Shuttlecock,Ball|Racket|The first three are objects players send across the playing area. A racket is held to strike one.
+Cinnamon,Clove,Black pepper|Salt|The first three seasonings come from plants. Table salt is a mineral.
+Baguette,Brioche,Ciabatta|Polenta|The first three are breads. Polenta is made by cooking cornmeal, often into a porridge.
+Square,Rhombus,Rectangle|Pentagon|The first three shapes have four sides. A pentagon has five.
+Atlas,Gazetteer,Globe|Compass|The first three depict places or list them by name. A compass indicates direction at your location.
+Accordion fold,Gatefold,Trifold|Perforation|The first three describe ways to fold paper. A perforation provides a line for tearing.
+Manatee,Dolphin,Porpoise|Shark|The first three breathe air through lungs. A shark takes oxygen from water with gills.
+Bat,Seal,Whale|Penguin|Bats, seals and whales nurse their young. Penguins are birds.
