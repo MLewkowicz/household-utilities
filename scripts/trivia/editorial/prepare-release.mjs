@@ -8,6 +8,7 @@ const [candidate,target]=process.argv.slice(2);
 if(!candidate||!target)throw new Error('Usage: node prepare-release.mjs release.json new-migration.sql');
 const release=JSON.parse(await readFile(candidate,'utf8'));
 validateRelease(release);
+if(release.schema!==2)throw new Error('Expected a reviewed editorial release');
 const quote=s=>"'"+s.replaceAll("'","''")+"'";
 const json=v=>quote(JSON.stringify(v))+'::jsonb';
 

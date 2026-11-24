@@ -103,7 +103,9 @@ export function buildRelease(catalog,atlas){
  return {release,practice:{'before-or-after':practiceTimeline,'passport-puzzle':practicePassport},summary:{events:dailyEvents.length,dailyEvents:dailyEvents.length,practiceEvents:new Set(practiceTimeline.flatMap(q=>q.answer)).size,passportFacts:catalog.passportFacts.length,countries:byCountry.size,countryClues:passport.length,practiceCountryClues:practicePassport.length,timelineDays:180,passportDays:90,contentHash:hash(release.games)}};
 }
 export function validateRelease(p){
- if(p.schema!==2||p.provider!=='household-editorial'||p.catalog?.wikidataLicense!=='CC0-1.0'||p.games?.length!==2)throw new Error('Invalid release envelope');
+ const editorial=p.schema===2&&p.provider==='household-editorial'&&p.catalog?.wikidataLicense==='CC0-1.0';
+ const legacy=p.schema===1&&p.provider==='wikidata'&&p.catalog?.license==='CC0-1.0';
+ if((!editorial&&!legacy)||p.games?.length!==2)throw new Error('Invalid release envelope');
  for(const g of p.games){
   if(!['before-or-after','passport-puzzle'].includes(g.game)||g.packs.length<30||g.packs.length>366)throw new Error('Invalid game or pack count');
   const signatures=new Set();
@@ -111,7 +113,7 @@ export function validateRelease(p){
    if(pack.length!==(g.game==='before-or-after'?1:5))throw new Error('Incomplete board');
    const signature=pack.map(q=>q.id).sort().join('|');if(signatures.has(signature))throw new Error('Duplicate board');signatures.add(signature);
    for(const q of pack){
-    if(!q.id||q.version!==5||!q.explanation||!Array.isArray(q.sources)||!q.sources.length||q.sources.some(s=>!(g.game==='before-or-after'&&primarySources.has(s))&&!/^https:\/\/www.wikidata.org\/wiki\/Q\d+$/.test(s)))throw new Error('Missing question provenance');
+    if(!q.id||q.version!==5||!q.explanation||!Array.isArray(q.sources)||!q.sources.length||q.sources.some(s=>!(editorial&&g.game==='before-or-after'&&primarySources.has(s))&&!/^https:\/\/www.wikidata.org\/wiki\/Q\d+$/.test(s)))throw new Error('Missing question provenance');
     if(g.game==='before-or-after'){
      if(q.kind!=='timeline'||q.cards.length!==5||new Set(q.cards.map(c=>c.id)).size!==5||new Set(Object.values(q.reveal)).size!==5||q.answer.length!==5||q.answer.some((id,i)=>!q.cards.some(c=>c.id===id)||!Number.isInteger(q.reveal[id])||i&&q.reveal[q.answer[i-1]]>=q.reveal[id]))throw new Error('Invalid chronological answer');
     }else if(q.kind!=='clues'||q.clues.length!==4||!q.answer||!/^M[\d., MLZ-]+$/.test(q.outline.path)||!q.outline.viewBox)throw new Error('Invalid country question');
