@@ -27,7 +27,7 @@ export function reviewedEvents(catalog){
 }
 
 const limited=new Set(['bridge','publication','astronomy']);
-export function dailyTimelines(events,count,namespace,shuffle){
+function schedule(events,count,shuffle){
  const use=new Map(events.map(e=>[e.id,0])),days=[],signatures=new Set();
  for(let day=0;day<count;day++){
   const excluded=new Set();
@@ -54,11 +54,19 @@ export function dailyTimelines(events,count,namespace,shuffle){
    }
    const signature=chosen.map(e=>e.id).sort().join('|');
    if(chosen.length===5&&!signatures.has(signature)){signatures.add(signature);break;}
-   if(attempt===99)throw new Error(`Unable to build a varied timeline at slot ${day}`);
+   if(attempt===99)return null;
   }
   days.push(chosen);
   for(const e of chosen)use.set(e.id,use.get(e.id)+1);
  }
+ return days;
+}
+export function dailyTimelines(events,count,namespace,shuffle){
+ // A greedy pass can paint the final fortnight into a corner. Try a fresh
+ // deterministic ordering and only publish a complete circular calendar.
+ let days;
+ for(let pass=0;pass<40&&!days;pass++)days=schedule(events,count,shuffle);
+ if(!days)throw new Error('Insufficient timeline diversity to close the calendar');
  return days.map((day,i)=>{
   const order=[...day].sort((a,b)=>a.year-b.year);
   const cards=shuffle(day).map(({id,label,art})=>({id,label,art}));
